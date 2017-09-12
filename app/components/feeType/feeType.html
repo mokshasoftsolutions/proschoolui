@@ -1,0 +1,220 @@
+
+    <section class="content-header">
+      <h1>
+        <i class="fa fa-money"></i>
+        Fee Collection
+        <small>Fee Type</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li>Fee Collection</li>
+        <li class="active">Fee Type</li>
+      </ol>
+    </section>
+    <!-- /.Content Header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <!-- Select Criteria -->
+
+            <div class="box box-default">
+              <div class="box-header with-border">
+                  <i class="fa fa-search" aria-hidden="true"></i> 
+                  <h3 class="box-title">Select Criteria</h3>
+              </div>
+              <!-- /.box-header -->
+               <form name="feeType" >
+              <div class="box-body">
+               
+                <div class="row">
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Fee Category</label>
+                      <select class="form-control select2" style="width: 100%;" name="FeeCatogery" ng-model="data.fee_catogery">
+                        <option selected="selected">--Select--</option>
+                        <option>Annual Fee</option>
+                        <option>Monthly Fee</option>
+                        <option>Quarterly Fee</option>
+                        <option>Half-yearly Fee</option>
+                        <option>Extra Fee</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Fee Type</label>
+                      <input type="text" class="form-control" name="FeeType" ng-model="data.fee_type" placeholder="Enter ...">
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="box-footer">
+                  <button type="submit" ng-click="addFeeType(data);" class="btn btn-primary pull-right">Add</button>
+              </div>
+               </form>
+            </div>
+    
+    <!-- Content List -->
+        <div class="box box-default">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-list"></i> Fee Type List</a></li>
+                </ul>
+            </div>
+           
+          <div class="box-body">  
+            <div class="tab-content">
+              <div class="tab-pane table-responsive no-padding active" id="tab_1">
+                <table class="table table-striped">
+                  <thead>
+                   <tr>
+                    <th>Sl. No</th>
+                    <th>Fee Type</th>
+                    <th>Fee Category</th>
+                    <th class="pull-right">Action</th>
+                   </tr>
+                  </thead>
+                 <tbody>
+                   <tr>
+                    <td>1</td>
+                    <td>Academic Fee</td>
+                    <td>Annual Fee</td>
+                    <td class="pull-right">
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Edit">
+                        <i class="fa fa-pencil"></i>
+                      </a>
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Delete">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                      </a>
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>2</td>
+                    <td>Academic Fee</td>
+                    <td>Annual Fee</td>
+                    <td class="pull-right">
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Edit">
+                        <i class="fa fa-pencil"></i>
+                      </a>
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Delete">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                      </a>
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>3</td>
+                    <td>Academic Fee</td>
+                    <td>Annual Fee</td>
+                    <td class="pull-right">
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Edit">
+                        <i class="fa fa-pencil"></i>
+                      </a>
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Delete">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                      </a>
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>4</td>
+                    <td>Academic Fee</td>
+                    <td>Annual Fee</td>
+                    <td class="pull-right">
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Edit">
+                        <i class="fa fa-pencil"></i>
+                      </a>
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Delete">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                      </a>
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>5</td>
+                    <td>Academic Fee</td>
+                    <td>Annual Fee</td>
+                    <td class="pull-right">
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Edit">
+                        <i class="fa fa-pencil"></i>
+                      </a>
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Delete">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                      </a>
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>6</td>
+                    <td>Academic Fee</td>
+                    <td>Annual Fee</td>
+                    <td class="pull-right">
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Edit">
+                        <i class="fa fa-pencil"></i>
+                      </a>
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Delete">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                      </a>
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>7</td>
+                    <td>Academic Fee</td>
+                    <td>Annual Fee</td>
+                    <td class="pull-right">
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Edit">
+                        <i class="fa fa-pencil"></i>
+                      </a>
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Delete">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                      </a>
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>8</td>
+                    <td>Academic Fee</td>
+                    <td>Annual Fee</td>
+                    <td class="pull-right">
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Edit">
+                        <i class="fa fa-pencil"></i>
+                      </a>
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Delete">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                      </a>
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>9</td>
+                    <td>Academic Fee</td>
+                    <td>Annual Fee</td>
+                    <td class="pull-right">
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Edit">
+                        <i class="fa fa-pencil"></i>
+                      </a>
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Delete">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                      </a>
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>10</td>
+                    <td>Academic Fee</td>
+                    <td>Annual Fee</td>
+                    <td class="pull-right">
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Edit">
+                        <i class="fa fa-pencil"></i>
+                      </a>
+                      <a href="" class="btn btn-default btn-xs" data-toggle="tooltip" title="Delete">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                      </a>
+                    </td>
+                   </tr>
+                   
+                 </tbody>
+                </table>
+              </div>                       
+            </div>
+          </div>
+        </div>
+    </section>
+  
