@@ -1,14 +1,14 @@
 angular.module('school_erp')
 .factory('globalServices',['$http','$rootScope', function($http, $rootScope){
     var globalServices = {};
-    // globalServices.globalValue = {
-    //     baseURL: 'http://ec2-52-40-213-254.us-west-2.compute.amazonaws.com:4005/',
+     globalServices.globalValue = {
+         baseURL: 'http://ec2-52-40-213-254.us-west-2.compute.amazonaws.com:4005/',
       
-    //     schoolID: '',
-    //     role:'admin'
-    // };
-    globalServices.globalValue ={
-        baseURL:'http://192.168.1.15:4005/'
+         schoolID: '',
+         role:'admin'
+     };
+    /* globalServices.globalValue ={
+        baseURL:'http://192.168.1.15:4005/' */
     }
 
     globalServices.fetchRoleAuth = function(roles){
