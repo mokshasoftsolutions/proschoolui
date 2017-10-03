@@ -7,9 +7,9 @@ angular.module('school_erp')
          schoolID: '',
          role:'admin'
      };
-    /* globalServices.globalValue ={
-        baseURL:'http://192.168.1.15:4005/' */
-    }
+    //globalServices.globalValue ={
+    //    baseURL:'http://192.168.1.15:4005/'
+    //}
 
     globalServices.fetchRoleAuth = function(roles){
         var i = 0;
