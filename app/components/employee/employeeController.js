@@ -20,6 +20,7 @@ angular.module('school_erp')
             $scope.employee = angular.copy($scope.employeeData[value]);
             $scope.employee_id = $scope.employee.employee_id;
             console.log($scope.employee_id);
+            
             var EmployeeDetails = {
                 gender: $scope.employee.gender,
                 job_category: $scope.employee.job_category,
