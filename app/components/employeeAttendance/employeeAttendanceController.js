@@ -16,8 +16,7 @@ angular.module('school_erp')
             var Attendance = {
                 session: "morning",
                 status: status
-
-            }
+                }
             employeeServices.setAttendance(Attendance, employee.employee_id)
                 .success(function(data, status) {
 
@@ -82,19 +81,40 @@ angular.module('school_erp')
             })
 
             if (filterBox.length == 0) {
-                $scope.attendanceBox.forEach(function(element) {
-                    var obj = {
-                        employee_id: element.employee_id,
-                        status: element.status
+                // $scope.attendanceBox.forEach(function(element) {
+                //     var obj = {
+                //         employee_id: element.employee_id,
+                //         status: element.status
+                //     }
+                //     $scope.sendAttendanceHolder.push(obj);
+
+                // });
+
+                 angular.forEach($scope.attendanceBox,function(value,key){
+                   var obj = {
+                         employee_id: value.employee_id,
+                        status: value.status
                     }
                     $scope.sendAttendanceHolder.push(obj);
+                    })
 
+                employeeServices.setBulkAttendance($scope.sendAttendanceHolder).success(function(data, status) {
+                   $scope.sendAttendanceHolder=[];
+                   ngDialog.open({
+                    template: '<p> Attendance Updated Successful</p>',
+                    plain: true
                 });
-
-                employeeServices.setBulkAttendance($scope.sendAttendanceHolder);
+                })
+                .error(function(data, success) {
+                    $scope.sendAttendanceHolder=[];
+                    ngDialog.open({
+                    template: '<p> Attendance Updated Failed</p>',
+                    plain: true
+                });
+                })
             } else {
                 ngDialog.open({
-                    template: '<p> Few students are not marked properly</p>',
+                    template: '<p> Few Employees are not marked properly</p>',
                     plain: true
                 });
             }

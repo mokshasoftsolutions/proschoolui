@@ -15,7 +15,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         copy: {
             boot: { cwd: '', src: path.src.boot, dest: 'build', expand: true },
-            css: { cwd: '', src: ['dist/css/*.min.css', 'dist/css/skins/_all-skins.min.css', 'dist/css/custom.css'], dest: 'build', expand: true },
+            css: { cwd: '', src: ['dist/css/*.min.css', 'dist/css/skins/_all-skins.min.css', 'dist/css/custom.css','dist/css/gsdk-bootstrap-wizard.css'], dest: 'build', expand: true },
             img: { cwd: '', src: ['dist/img/**/*.*', 'dist/login/**/*.*'], dest: 'build', expand: true },
             //  html:{ cwd: '', src: ['pages/**/*.html'], dest: 'build', expand: true},                     
             plugins: { cwd: '', src: path.src.external_css, dest: 'build', expand: true },

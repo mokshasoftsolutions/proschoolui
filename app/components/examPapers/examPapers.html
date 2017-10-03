@@ -29,22 +29,22 @@
     <!-- /.box-header -->
     <div class="box-body">
       <div class="row">
-        <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
+        <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
           <div class="form-group">
             <label>Class</label>
-            <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId">
-                        <option selected="selected">--Select--</option>
-                        <option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>
+            <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId" ng-options="classData.class_id as classData.name for classData in classDatanew ">
+                        <!--<option selected="selected">--Select--</option>
+                        <option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
                       </select>
           </div>
         </div>
 
-        <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
+        <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
           <div class="form-group">
             <label>Section</label>
-            <select class="form-control select2" style="width: 100%;" ng-model="secId">
-                       <option selected="selected">--Select--</option>
-                        <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>
+            <select class="form-control select2" ng-change="getSubjects(secId);getExamPapersbySectionAndSchedule(examScheduleId,secId)" style="width: 100%;" ng-model="secId" ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
+                       <!--<option selected="selected">--Select--</option>
+                        <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
                       </select>
           </div>
         </div>
@@ -52,11 +52,8 @@
         <div class="col-md-4" ng-if="showRole(['admin','teacher','parent'])">
           <div class="form-group">
             <label>Select Exam Schedule</label>
-            <select data-ng-change="populateExams()" class="form-control select2" style="width: 100%;" ng-model="examScheduleId">
-                        <option selected="selected">--Select--</option>
-                        <option ng-repeat="exam in examSchedule " value="{{exam.exam_sch_id}}">{{exam.exam_title}}</option>
-        
-                      </select>
+            <select data-ng-change="getExamPapersbySectionAndSchedule(examScheduleId,secId)" name="examschedule" class="form-control select2" style="width: 100%;" ng-model="examScheduleId" ng-options="examSh.exam_sch_id as examSh.exam_title for examSh in examSchedule ">
+            </select>
           </div>
         </div>
 
@@ -71,15 +68,13 @@
         <i class="fa fa-plus-square" aria-hidden="true"></i>
         <h3 class="box-title">Add Exam Paper</h3>
       </div>
-      <form name="examPapers" ng-submit="examPapers.$valid && addExamPapers(data)" novalidate>
+      <form name="examPapers" ng-submit="examPapers.$valid && addExamPapers(data,data.subjectId,examScheduleId,classId,secId)" novalidate>
         <div class="row">
           <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
             <div class="form-group">
               <label>Select Subject</label>
-              <select data-ng-change="populateExams()" class="form-control select2" ng-model="data.subject_name" style="width: 100%;">
-                            <option selected="selected">--Select--</option>
-                            <option ng-repeat="subject in subjectsData" value="{{subject.name}}">{{subject.name}}</option>
-                        </select>
+              <select   class="form-control select2" name="subjects" ng-model="data.subjectId" style="width: 100%;" ng-options="subjectD.subject_id as subjectD.name for subjectD in subjectsData ">
+                  </select>
             </div>
           </div>
           <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
@@ -170,7 +165,7 @@
                 <th>Exam Date</th>
                 <th>Start Time</th>
                 <th> End Time</th>
-                <th class="pull-right" ng-if="showRole(['admin'])">Action</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -186,7 +181,7 @@
                 <td><span editable-text="exam.date" e-name="editdata.date" onaftersave="EditExamPapers($index)" e-form="rowform" e-required>{{exam.date || 'empty' }}</span></td>
                 <td><span editable-text="exam.start_time" e-name="editdata.start_time" onaftersave="EditExamPapers($index)" e-form="rowform" e-required>{{exam.start_time || 'empty' }}</span></td>
                 <td><span editable-text="exam.end_time" e-name="editdata.end_time" onaftersave="EditExamPapers($index)" e-form="rowform" e-required>{{exam.end_time || 'empty' }}</span></td>
-                <td class="pull-right" ng-if="showRole(['admin'])">
+                <td >
                   <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == exam">
                     <button type="submit" ng-click="EditExamPapers($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">Save</button>
                     <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">Cancel</button>
@@ -208,3 +203,103 @@
 </section>
 
 
+<!--Edit values modal Starts here-->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <form name="employeeDetails" ng-submit="addEmployee(data)" novalidate>
+        <div class="modal-header">
+          <h3>Edit Exam Paper</h3>
+        </div>
+        <div class="modal-body">
+
+          <!-- /.box-header -->
+          <!-- /.box-header -->
+          <form name="examPapers" ng-submit="addExamPapers(data)" novalidate>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Select Subject</label>
+                  <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">--Select--</option>
+                            <option>Subject 1</option>
+                            <option>Subject 2</option>
+                            <option>Subject 3</option>
+                            <option>Subject 4</option>
+                            <option>Subject 5</option>
+                            <option>Subject 6</option>
+                            <option>Subject 7</option>
+                            <option>Subject 8</option>
+                        </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Paper Title</label>
+                  <input type="text" class="form-control" ng-model="data.exam_paper_title" placeholder="Enter ...">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Max Marks</label>
+                  <input type="text" class="form-control" placeholder="Enter ...">
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Exam Date</label>
+                  <div class="input-group date">
+                    <div class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="dd-MM-yyyy" style="z-index:999">
+                      <input class="form-control" name="startDate" type="text" ng-model="data.date" ng-readonly="true" placeholder="Enter ..."
+                        required/>
+                    </datepicker>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Start Time</label>
+                  <div class="input-group">
+                    <input type="text" ng-model="data.satrt_time" class="form-control timepicker">
+                    <div class="input-group-addon">
+                      <i class="fa fa-clock-o"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>End Time</label>
+                  <div class="input-group">
+                    <input type="text" ng-model="data.end_time" class="form-control timepicker">
+                    <div class="input-group-addon">
+                      <i class="fa fa-clock-o"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Add Paper</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+
+    </div>
+
+    </form>
+  </div>
+</div>
+</div>

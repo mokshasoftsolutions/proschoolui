@@ -64,7 +64,7 @@
               </div>  
               
               <div class="table-responsive mailbox-messages">
-                <table class="table table-bordered table-hover table-condensed">
+              <table export-table class="table rwd-table table-striped">
                   <thead>
                     <tr>
                       <th>#</th>  
@@ -80,13 +80,13 @@
                       <td><span editable-text="vehicle.vehicle_code" e-name="editdata.vehicle_code" onaftersave="EditVehicle($index)" e-form="rowform" e-required>{{vehicle.vehicle_code || 'empty' }}</span></td>                      
                       <td class="pull-right">
                         <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == vehicle">
-                          <button type="submit" ng-click="EditVehicle($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">Save</button>
-                          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">Cancel</button>
+                          <button type="submit" ng-click="EditVehicle($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
+                          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
                         </form>
 
                         <div class="buttons" ng-show="!rowform.$visible">
-                          <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">Edit</button>
-                          <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteVehicle($index)" ng-confirm-click="Are you sure you want to delete this item?">Delete</button>
+                          <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
+                          <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteVehicle($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
                           <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
                         </div>
                       </td>  

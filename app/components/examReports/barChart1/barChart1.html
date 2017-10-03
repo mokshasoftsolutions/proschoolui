@@ -47,7 +47,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Select Exam Schedule</label>
-                        <select  class="form-control select2" style="width: 100%;" ng-model="examScheduleId">
+                        <select ng-change="getExamPapers(examScheduleId,secId);" class="form-control select2" style="width: 100%;" ng-model="examScheduleId">
                         <option selected="selected">--Select--</option>
                         <option ng-repeat="exam in examSchedule " value="{{exam.exam_sch_id}}">{{exam.exam_title}}</option>
                         
@@ -57,14 +57,14 @@
                  <div class="col-md-4">
                       <div class="form-group" >
                         <label>Paper Title</label>
-                        <select  ng-change="getExamMarks(paperId)" class="form-control select2" style="width: 100%;" ng-model="paperId">
+                        <select class="form-control select2" style="width: 100%;" ng-model="paperId">
                             <option selected="selected">--Select--</option>
                             <option ng-repeat="paper in papers " value="{{paper.exam_paper_id}}">{{paper.exam_paper_title}}</option>
                             
                         </select>
                       </div>
                     </div>
-                <div class="col-md-4">
+                <!--<div class="col-md-4">
                     <div class="form-group">
                         <label>Select Subject</label>
                         <select ng-change="getExamMarks(paperId)" class="form-control select2" data-ng-change="populatePapers(subjectId)"
@@ -73,14 +73,14 @@
                              <option ng-repeat="subject in subjectsData" value="{{subject.subject_id}}">{{subject.name}}</option>
                         </select>
                     </div>
-                </div>
+                </div>-->
 
                 
 
 
 
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary pull-right">Select</button>
+                    <button  ng-click="getExamMarks(paperId)" class="btn btn-primary pull-right">Select</button>
                      <li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>
                 </div>
 

@@ -30,12 +30,12 @@ angular.module('school_erp')
     //                 })
     //     };
 
-    // NoticeBoardServices.DeleteNoticeBoard = function(message_id){
-    //        return $http({
-    //                 method: 'DELETE',
-    //                 url: globalServices.globalValue.baseURL + 'api/delete_assignments/'+assignment_id,
-    //             })
-    //   };
+    NoticeBoardServices.DeleteNoticeBoard = function(message_id){
+           return $http({
+                    method: 'DELETE',
+                    url: globalServices.globalValue.baseURL + 'api/delete_notice_board/'+message_id,
+                })
+      };
 
        return NoticeBoardServices;
     }]);  

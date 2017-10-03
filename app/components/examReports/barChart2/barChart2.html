@@ -55,21 +55,12 @@
                     </div>
                 </div>
 
-                <!--<div class="col-md-4">
-                    <div class="form-group">
-                        <label>Paper Title</label>
-                        <select ng-change="getEvaluation(paperId ,studentId)" class="form-control select2" style="width: 100%;" ng-model="paperId">
-                            <option selected="selected">--Select--</option>
-                            <option ng-repeat="paper in papers " value="{{paper.exam_paper_id}}">{{paper.exam_paper_title}}</option>
-                            
-                        </select>
-                    </div>
-                </div>-->
+              
 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Select Student</label>
-                        <select ng-change="getEvaluation(paperId ,studentId)" class="form-control select2" style="width: 100%;" ng-model="studentId">
+                        <select class="form-control select2" style="width: 100%;" ng-model="studentId">
                             <option selected="selected">--Select--</option>
       
                             <option ng-repeat="student in students " value="{{student.student_id}}">{{student.first_name}} {{student.last_name}}</option>
@@ -77,7 +68,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <button type="submit" ng-click="getDataWithService()" class="btn btn-primary pull-right">Select</button>
+                    <button ng-click="getExamMarks(examScheduleId,studentId);" class="btn btn-primary pull-right">Select</button>
                     <li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>
                 </div>
                 <!--<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels"> chart-series="series"

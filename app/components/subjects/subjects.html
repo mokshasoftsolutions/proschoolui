@@ -16,14 +16,14 @@
     <!-- Select Criteria -->
 
     <div class="box box-default" ng-if="showRole(['admin','teacher'])">
-        <div class="box-header with-border" ng-if="showRole(['admin','teacher'])">
+        <!--<div class="box-header with-border" ng-if="showRole(['admin','teacher'])">
             <i class="fa fa-search" aria-hidden="true"></i>
             <h3 class="box-title">Select Criteria</h3>
-        </div>
+        </div>-->
         <!-- /.box-header -->
         <div class="box-body">
             <div class="row">
-                <div class="col-md-6" ng-if="showRole(['admin','teacher'])">
+                <div class="col-md-6" ng-show="showRole(['admin','teacher'])">
                     <div class="form-group">
                         <label>Select Class</label>
                         <select class="form-control select2" ng-options="class.class_id as class.name for class in classData" data-ng-change="populateSections(classId)"
@@ -33,10 +33,10 @@
                     </div>
                 </div>
 
-                <div class="col-md-6" ng-if="showRole(['admin','teacher'])">
+                <div class="col-md-6" ng-show="showRole(['admin','teacher'])">
                     <div class="form-group">
                         <label>Select Section</label>
-                        <select data-ng-change="getSubjects(secId)" ng-options="sec.section_id as sec.name for sec in secData" class="form-control select2"
+                        <select ng-options="sec.section_id as sec.name for sec in secData" class="form-control select2"
                             style="width: 100%;" ng-model="secId">
                       </select>
                     </div>
@@ -45,7 +45,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12" ng-if="showRole(['admin','teacher'])">
-                    <button type="submit" class="btn btn-primary pull-right">Select</button>
+                    <button ng-click="getSubjects(secId)" class="btn btn-primary pull-right">Select</button>
                 </div>
             </div>
 
@@ -55,7 +55,7 @@
             </div>
             <form name="subjects" ng-submit="subjects.$valid && addSubjects(data)" novalidate>
                 <div class="row">
-                    <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
+                    <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
                         <div class="form-group" ng-class="{'has-error': subjects.$submitted  && subjects.subjectName.$pristine}">
                             <label>Subject Name</label>
                             <input type="text" name="subjectName" class="form-control" ng-model="data.name" placeholder="Enter ..." required>
@@ -106,14 +106,14 @@
         <div class="box-body">
             <div class="tab-content">
                 <div class="tab-pane table-responsive no-padding active" id="tab_1">
-                    <table export-table class="table table-bordered table-hover table-condensed">
+                   <table export-table class="table rwd-table table-striped">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Subject Name</th>
                                 <!--<th>Subject Code</th>-->
                                 <!--<th>Subject Type</th>-->
-                                <th class="pull-right" ng-if="showRole(['admin'])">Action</th>
+                                <th class="pull-right" >Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -122,15 +122,15 @@
                                 <td><span editable-text="subjects.name" e-name="subjects.name" onaftersave="EditSubjects($index)" e-form="rowform" e-required>{{subjects.name || 'empty' }}</span></td>
                                 <!--<td>{{subjects.subject_id}} </td>-->
                                 <!--<td>{{subjects._id}}</td>-->
-                                <td class="pull-right" ng-if="showRole(['admin'])">
+                                <td class="pull-right" >
                                   <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == subjects">
-                                    <button type="submit" ng-click="EditSubjects($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">Save</button>
-                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">Cancel</button>
+                                    <button type="submit" ng-click="EditSubjects($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
+                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
                                   </form>
 
                                   <div class="buttons" ng-show="!rowform.$visible">
-                                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">Edit</button>
-                                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteSubjects($index)" ng-confirm-click="Are you sure you want to delete this item?">Delete</button>
+                                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
+                                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteSubjects($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
                                   </div>
                                 </td>

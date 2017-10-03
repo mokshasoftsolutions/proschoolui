@@ -61,14 +61,14 @@
                     <form name="TimeTable" ng-submit="TimeTable.$valid && addTimeTable(data)" novalidate>
                         <div class="box-body">
                             <div class="row">
-                                <div class="col-md-3" ng-if="showRole(['admin'])" ng-class="{'has-error': Book.$submitted  && Book.selectSubject.$pristine}">
+                                <div class="col-md-4" ng-class="{'has-error': Book.$submitted  && Book.selectSubject.$pristine}">
                             <label>Select Subject</label>
                             <select data-ng-change="getChapters(subId)" name="selectSubject" class="form-control select2" ng-model="subId" style="width: 100%;">
                         <option selected="selected">--Select--</option>
                         <option ng-repeat="sub in subData" value="{{sub.subject_id}}">{{sub.name}}</option>
                       </select>
                         </div>
-                                <div class="col-md-3" ng-if="showRole(['admin'])">
+                                <div class="col-md-4">
                                     <div class="form-group" ng-class="{'has-error': TimeTable.$submitted && TimeTable.day.$invalid && TimeTable.day.$pristine}">
                                         <label>Day</label>
                                         <select ng-change="getMonth(select_month)" name="day" class="form-control select2" style="width: 100%;" ng-model="data.select_day">
@@ -77,18 +77,10 @@
                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-3" ng-if="showRole(['admin'])">
-                                    <div class="form-group" ng-class="{'has-error': TimeTable.$submitted && TimeTable.RoomNo.$invalid && TimeTable.RoomNo.$pristine}">
-                                        <label>Room No</label>
-
-                                        <!--<input class="form-control" name="inwardDate" type="text" ng-model="data.inward_date" ng-readonly="true" placeholder="Enter ..."
-                                                required/>-->
-                                        <input type="text" name="RoomNo" class="form-control" ng-model="data.room_no" placeholder="Enter ...">
-                                    </div>
-                                </div>
+                                
                                 <!--</div>
                             <div class="row">-->
-                                <div class="col-md-3" ng-if="showRole(['admin'])">
+                                <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
                                     <div class="form-group" ng-class="{'has-error': TimeTable.$submitted && TimeTable.startTime.$invalid && TimeTable.startTime.$pristine}">
                                         <label>Time</label>
                                         <div class="input-group">
@@ -315,7 +307,7 @@
                                 <td class="text text-center">
                                     <strong class="text-blue">{{timetable.data.saturday }}</strong>
                                 </td>
-                                <td><strong class="text-blue">{{timetable.data.sunday}}</strong></td>
+                                <td class="text text-center"><strong class="text-blue">{{timetable.data.sunday}}</strong></td>
                                  </tr>
                                 <!--<td class="text text-center">
                                     <strong class="text-blue">{{timetable.day == "monday"?  timetable.name : "--" }}</strong>

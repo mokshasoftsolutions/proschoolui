@@ -1,9 +1,11 @@
 angular.module('school_erp')
-    .controller("studentController", ['$http', '$scope', '$rootScope', 'studentServices', 'globalServices','ngDialog', function ($http, $scope, $rootScope, studentServices, globalServices,ngDialog) {
+    .controller("studentController", ['$http', '$scope', '$rootScope', 'studentServices', 'globalServices', 'ngDialog', function ($http, $scope, $rootScope, studentServices, globalServices, ngDialog) {
         $scope.studentData = [];
         //$scope.editdata= [];
+        $scope.gender = [{ name: "Male", id: 1 }, { name: "Female", id: 2 }];
 
-
+        $scope.category = [{ type: "General", id: 1 }, { type: "OBC", id: 2 }, { type: "Minority", id: 3 }];
+        
         globalServices.getClass()
             .success(function (data, status) {
                 $scope.classData = data.school_classes;// Api list-name

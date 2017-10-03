@@ -1,32 +1,187 @@
 angular.module('school_erp')
-    .controller("dashboardController", ['$http', '$scope', '$compile', 'chaptersServices', 'globalServices', 'subjectsServices', 'classWiseServices', 'NoticeBoardServices', 'schoolEventsServices', 'addVehicleServices', 'barChartOneService', 'ngDialog', '$rootScope', function ($http, $scope, $compile, chaptersServices, globalServices, subjectsServices, classWiseServices, NoticeBoardServices, schoolEventsServices, addVehicleServices, barChartOneService, ngDialog, $rootScope) {
+    .controller("dashboardController", ['$http', '$scope', '$compile', 'chaptersServices', 'employeeServices', 'globalServices', 'subjectsServices', 'classWiseServices', 'NoticeBoardServices', 'schoolEventsServices', 'addVehicleServices', 'barChartOneService', 'donutChartOneService', 'ngDialog', '$rootScope', function ($http, $scope, $compile, chaptersServices, employeeServices, globalServices, subjectsServices, classWiseServices, NoticeBoardServices, schoolEventsServices, addVehicleServices, barChartOneService, donutChartOneService, ngDialog, $rootScope) {
 
+        $scope.evalData = [];
         $scope.data = [];
-        globalServices.getClass()
-            .success(function (data, status) {
-                $scope.classData = data.school_classes;// Api list-name
-                $scope.classId = $scope.classData[0].class_id;
-                $scope.populateSections($scope.classId)
+        $scope.employeeAttendance = [];
+        $scope.select_date = new Date().toDateString();
+        $scope.initialLoadAttendence = false;
 
-            })
-            .error(function (data, success) {
-            })
+        $scope.getClassesInitalLoad = function () {
+            globalServices.getClass()
+                .success(function (data, status) {
+                    $scope.classDatanew = data.school_classes; // Api list-name
+                    $scope.classId = data.school_classes[0].class_id;
 
+                    $scope.populateSections($scope.classId);
+                })
+                .error(function (data, success) { })
+        }
         $scope.populateSections = function (classId) {
-            $scope.secId = [];
             globalServices.getSections(classId)
                 .success(function (data, status) {
-                    $scope.secData = data.class_sections;// Api list-name
-                    $scope.secId = $scope.secData[0].section_id;
-                    $scope.populateSubjects($scope.secId);
+                    $scope.secData = data.class_sections; // Api list-name
+                    $scope.secId = data.class_sections[0].section_id;
+                    $scope.getTimeTable($scope.secId); 
+                    if ($scope.initialLoadAttendence == false) {
+                        $scope.getAttendence($scope.select_date, $scope.classId, $scope.secId);
+                    }
 
+                    // $scope.getAttendence($scope.classId,$scope.secId);
 
                 })
-                .error(function (data, success) {
-
-                    $scope.populateSubjects($scope.secId);
-                })
+                .error(function (data, success) { })
         }
+
+        // Role based Display
+        $scope.showRole = function (role) {
+            return globalServices.fetchRoleAuth(role);
+        }
+
+
+        // $scope.getDate = function (select_date) {
+
+        //     $scope.date1 = $scope.select_date
+        //     console.log($scope.date1);
+
+        //     $scope.getAttendence($scope.date1, $scope.classId, $scope.secId);
+        //     console.log($scope.date1);
+        // }
+
+        // Attendence Reports
+        $scope.getAttendence = function (date, classId, secId) {
+            $scope.initialLoadAttendence = true;
+            var arrPresent = new Array();
+            var arrAbsent = new Array();
+            var arrLeave = new Array();
+            $scope.attData = [];
+
+            donutChartOneService.getAttendence(date, classId, secId)
+                .success(function (data, status) {
+                    $scope.attData = data.donutchart;
+                    console.log(JSON.stringify(data));
+                    // console.log($scope.examData);
+                    //$scope.chartdata = [[], [], []];
+
+                    if ($scope.attData == 0) {
+                        // array empty or does not exist
+                        $scope.chartdata = [
+                            [],
+                            [],
+                            []
+                        ];
+                        if ($scope.chartdata) {
+                            // ngDialog.open({
+                            //     template: '<p>Report is not available.</p>',
+                            //     plain: true
+                            // });
+                            // $window.alert("report not availabel");
+                        }
+                        console.log("report not available")
+                    }
+
+
+                    $scope.array = $.map($scope.attData, function (item) {
+                        console.log(item);
+                        //$scope.item=null;
+                        if (item.status == "Present") {
+                            arrPresent.push(item.status);
+
+                            $scope.data1 = [];
+                            for (var i = 0; i < arrPresent.length; i++) {
+                                $scope.data1.push(arrPresent[i]);
+                            }
+                            console.log($scope.data1);
+                            $scope.present = ($scope.data1).length;
+                            console.log($scope.present);
+                        } else if (item.status == "Absent") {
+
+                            arrAbsent.push(item.status);
+
+                            $scope.label1 = [];
+                            for (var j = 0; j < arrAbsent.length; j++) {
+                                $scope.label1.push(arrAbsent[j]);
+
+                            }
+                            console.log($scope.label1);
+                            $scope.absent = ($scope.label1).length;
+                            console.log($scope.absent);
+
+
+                        } else if (item.status == "On Leave") {
+
+                            arrLeave.push(item.status);
+
+                            $scope.leave1 = [];
+                            for (var k = 0; k < arrLeave.length; k++) {
+                                $scope.leave1.push(arrLeave[k]);
+
+                            }
+                            console.log($scope.leave1);
+                            $scope.leave = ($scope.leave1).length;
+                            console.log($scope.leave);
+                        }
+                        $scope.chartdata = [
+                            [$scope.present],
+                            [$scope.absent],
+                            [$scope.leave]
+                        ];
+                        return;
+                    });
+
+                    $scope.myJson = {
+                        type: "ring",
+                        title: {
+                            text: 'Attendance Report'
+                        },
+                        plot: {
+                            slice: 60,
+                            detach: false,
+                            tooltip: {
+                                fontSize: 16,
+                                anchor: 'c',
+                                x: '50%',
+                                y: '48%',
+                                sticky: true,
+                                backgroundColor: 'none',
+                                text: '<span style="color:%color">%t</span><br><span style="color:%color">%v</span>'
+                            }
+                        },
+                        legend: {
+                            verticalAlign: "bottom",
+                            align: "center"
+                        },
+                        series: [{
+                            //values : [50],
+                            text: "present"
+                        },
+                        {
+                            //values : [35],
+                            text: "absent"
+                        },
+                        {
+                            //values : [20],
+                            text: "leave"
+                        }
+                        ]
+                    };
+
+                })
+                .error(function (data, success) { })
+        }
+
+        if ($rootScope.role == 'parent') {
+
+            $scope.secId = $rootScope.student.section;
+            // $scope.populateSubjects($scope.secId);
+
+
+        } else {
+            $scope.getClassesInitalLoad();
+        }
+
+
+
 
         $scope.populateSubjects = function (secId) {
             $scope.subData = [];
@@ -45,6 +200,11 @@ angular.module('school_erp')
         $scope.showRole = function (role) {
             return globalServices.fetchRoleAuth(role);
         }
+
+
+
+
+
 
         //TimeTable
 
@@ -74,7 +234,7 @@ angular.module('school_erp')
                                     dataObj.data.tuesday = valuesub.name;
                                 } else if (valuesub.day == "wednesday") {
                                     dataObj.data.wednesday = valuesub.name;
-                                } else if (valuesub.day == "thursday") {
+                                } else if (valuesub.day == "thrusday") {
                                     dataObj.data.thursday = valuesub.name;
                                 } else if (valuesub.day == "friday") {
                                     dataObj.data.friday = valuesub.name;
@@ -107,7 +267,7 @@ angular.module('school_erp')
                 })
         }
 
-        // Attendence Reports
+
 
         var arrData = new Array();
         var arrLabels = new Array();
@@ -282,246 +442,295 @@ angular.module('school_erp')
         //Route GeoLocation
 
 
-        var mapOptions = {
-            zoom: 5,
-            center: new google.maps.LatLng(17.745875, 83.314301),
-            mapTypeId: google.maps.MapTypeId.TERRAIN
-        }
+        // var mapOptions = {
+        //     zoom: 5,
+        //     center: new google.maps.LatLng(17.745875, 83.314301),
+        //     mapTypeId: google.maps.MapTypeId.TERRAIN
+        // }
 
-        $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        // $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-        $scope.markers = [];
-        var image = {
-            url: 'school_bus.png',
+        // $scope.markers = [];
+        // var image = {
+        //     url: 'school_bus.png',
 
-            scaledSize: new google.maps.Size(40, 40), // scaled size
-            origin: new google.maps.Point(0, 0), // origin
-            anchor: new google.maps.Point(0, 0) // anchor
+        //     scaledSize: new google.maps.Size(40, 40), // scaled size
+        //     origin: new google.maps.Point(0, 0), // origin
+        //     anchor: new google.maps.Point(0, 0) // anchor
+
+        // };
+        // infowindow = new google.maps.InfoWindow();
+
+        // var createMarker = function (lat, lng, id, address) {
+
+        //     var marker = new google.maps.Marker({
+        //         map: $scope.map,
+        //         position: new google.maps.LatLng(lat, lng),
+        //         animation: google.maps.Animation.DROP,
+        //         icon: image,
+        //         title: "Bus Id: " + id + ",   address: " + address
+
+        //     });
+        //     // marker.content = '<div class="infoWindowContent">' + infowindow.address + '</div>';
+        //     google.maps.event.addListener(marker, 'click', function () {
+        //         infowindow.setContent('<h2>' + marker.title + '</h2>');
+        //         infowindow.open($scope.map, marker);
+        //     });
+
+        //     $scope.map.setZoom(18);
+        //     $scope.map.panTo(marker.position);
+        //     $scope.markers.push(marker);
+
+        // }
+        // //some google api
+        // //$http({ method: 'GET', url: "http://maps.google.com/maps/api/geocode/json?address=Canada&sensor=true&region=USA" }).
+        // //traccar api's
+        // $http({ method: 'GET', url: "http://192.168.1.26:2016/netcomp/getAllDevicesDetails" }).
+        // //$http.post("http://192.168.1.26:2016/netcomp/getDeviceCodeDetails", { deviceCode: $scope.code }, { headers: { 'Content-type': 'application/json' } }).
+
+        //     success(function (data, status) {
+        //         $scope.status = status;
+        //         $scope.JSONdata = data;
+        //         console.log(JSON.stringify(data));
+        //         //for POST
+        //         // $scope.latitude = data.positions.latitude;
+        //         // $scope.longitude = data.positions.longitude;
+        //         // $scope.id = data.positions.deviceId;
+        //         // $scope.address = data.positions.address;
+        //         //for GET
+        //         // $scope.latitude = data[0].docPickUpAddress;
+        //         // $scope.longitude = data[0].avAddress;
+        //         //some google api data
+        //         //$scope.latitude=data.results[0].geometry.location.lat;
+        //         //$scope.longitude=data.results[0].geometry.location.lng;
+        //         console.log($scope.latitude);
+        //         console.log($scope.longitude);
+        //         createMarker($scope.latitude, $scope.longitude, $scope.id, $scope.address);
+        //         //createInfoWindow($scope.id, $scope.address);
+        //     }).
+        //     error(function (data, status) {
+        //         $scope.JSONdata = data || "Request failed";
+        //         $scope.status = status;
+        //         console.log($scope.data + $scope.status);
+        //     });
+
+
+        // Map Settings //
+        $scope.initialise = function () {
+
+            var mapOptions = {
+                center: new google.maps.LatLng(17.745875, 83.314301),
+                zoom: 16,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+            //   // Geo Location /
+            //     navigator.geolocation.getCurrentPosition(function(pos) {
+            //         map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+            //         var myLocation = new google.maps.Marker({
+            //             position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+            //             map: map,
+            //             animation: google.maps.Animation.DROP,
+            //             title: "My Location"
+            //         });
+            //     });
+            $scope.map = map;
+            // Additional Markers //
+            $scope.markers = [];
+            var image = {
+                url: 'dist/img/school_bus.png',
+                // This marker is 20 pixels wide by 32 pixels high.
+                scaleSize: new google.maps.Size(40, 60),
+                // The origin for this image is (0, 0).
+                origin: new google.maps.Point(0, 0),
+                // The anchor for this image is the base of the flagpole at (0, 32).
+                anchor: new google.maps.Point(0, 32)
+            };
+            var infoWindow = new google.maps.InfoWindow();
+            var createMarker = function (info) {
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(info.latitude, info.longitude),
+                    map: $scope.map,
+                    icon: image,
+                    animation: google.maps.Animation.DROP,
+                    title: info.address
+                });
+                marker.content = '<div class="infoWindowContent"><h2>Bus Id : ' + info.deviceId + '</h2></div>';
+                google.maps.event.addListener(marker, 'click', function () {
+                    infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+                    infoWindow.open($scope.map, marker);
+                });
+                $scope.map.setZoom(20);
+                $scope.map.panTo(marker.position)
+                $scope.markers.push(marker);
+            }
+            $http({ method: 'GET', url: "http://192.168.1.26:2016/netcomp/getAllDevicesDetails" }).
+                //$http.get("http://192.168.1.10:2016/netcomp/getAllPositionsDetails",{headers: { 'Content-type': 'application/json'}}).
+
+                success(function (data, status) {
+                    $scope.status = status;   
+                    $scope.JSONdata = data;
+                    console.log(JSON.stringify(data));
+
+                    $scope.locations = data;
+                    console.log($scope.locations);
+                    for (i = 0; i < $scope.locations.length; i++) {
+                        createMarker($scope.locations[i][0]);
+                    }
+                }).
+                error(function (data, status) {
+                    $scope.JSONdata = data || "Request failed";
+                    $scope.status = status;
+                    console.log($scope.data + $scope.status);
+                });
+            //static data loop
+            // for (i = 0; i < locations.length; i++){
+            //     createMarker(locations[i]);
+            // }
 
         };
-        infowindow = new google.maps.InfoWindow();
+        google.maps.event.addDomListener(document.getElementById("map"), 'load', $scope.initialise());
 
-        var createMarker = function (lat, lng, id, address) {
 
-            var marker = new google.maps.Marker({
-                map: $scope.map,
-                position: new google.maps.LatLng(lat, lng),
-                animation: google.maps.Animation.DROP,
-                icon: image,
-                title: "Bus Id: " + id + ",   address: " + address
+        // Online Notice Board
 
-            });
-            // marker.content = '<div class="infoWindowContent">' + infowindow.address + '</div>';
-            google.maps.event.addListener(marker, 'click', function () {
-                infowindow.setContent('<h2>' + marker.title + '</h2>');
-                infowindow.open($scope.map, marker);
-            });
-
-            $scope.map.setZoom(18);
-            $scope.map.panTo(marker.position);
-            $scope.markers.push(marker);
-
-        }
-        //some google api
-        //$http({ method: 'GET', url: "http://maps.google.com/maps/api/geocode/json?address=Canada&sensor=true&region=USA" }).
-        //traccar api's
-        //$http({ method: 'GET', url: "http://192.168.1.13:3000/api/users" }).
-        $http.post("http://192.168.1.11:2016/netcomp/getDeviceCodeDetails", { deviceCode: $scope.code }, { headers: { 'Content-type': 'application/json' } }).
-
-            success(function (data, status) {
-                $scope.status = status;
-                $scope.JSONdata = data;
+        NoticeBoardServices.getNoticeBoard()
+            .success(function (data, status) {
+                $scope.NoticeBoardData = data.messages;
                 console.log(JSON.stringify(data));
-                //for POST
-                $scope.latitude = data.positions.latitude;
-                $scope.longitude = data.positions.longitude;
-                $scope.id = data.positions.deviceId;
-                $scope.address = data.positions.address;
-                //for GET
-                // $scope.latitude = data[0].docPickUpAddress;
-                // $scope.longitude = data[0].avAddress;
-                //some google api data
-                //$scope.latitude=data.results[0].geometry.location.lat;
-                //$scope.longitude=data.results[0].geometry.location.lng;
-                console.log($scope.latitude);
-                console.log($scope.longitude);
-                createMarker($scope.latitude, $scope.longitude, $scope.id, $scope.address);
-                //createInfoWindow($scope.id, $scope.address);
-            }).
-            error(function (data, status) {
-                $scope.JSONdata = data || "Request failed";
-                $scope.status = status;
-                console.log($scope.data + $scope.status);
-            });
- 
-// Online Notice Board
+                console.log($scope.NoticeBoardData);
+            })
+            .error(function (data, success) {
+            })
 
-NoticeBoardServices.getNoticeBoard()
-    .success(function (data, status) {
-        $scope.NoticeBoardData = data.messages;
-        console.log(JSON.stringify(data));
-        console.log($scope.NoticeBoardData);
-    })
-    .error(function (data, success) {
-    })
+        //School Events
+        schoolEventsServices.getEvents()
+            .success(function (data, status) {
+                // console.log(JSON.stringify(data));
+                // $scope.eventData = data.school_events;
 
-//School Events
-schoolEventsServices.getEvents()
-    .success(function (data, status) {
-        // console.log(JSON.stringify(data));
-        // $scope.eventData = data.school_events;
-
-        angular.forEach(data.school_events, function (value, key) {
+                angular.forEach(data.school_events, function (value, key) {
 
 
-            $scope.eventsData.push({
-                title: value.event_title,
-                start: new Date(value.date),
-                end: new Date(value.date),
-                className: value.description,
-                allDay: false
-            });
-        })
-    })
-    .error(function (data, success) {
-    })
+                    $scope.eventsData.push({
+                        title: value.event_title,
+                        start: new Date(value.date),
+                        end: new Date(value.date),
+                        className: value.description,
+                        allDay: false
+                    });
+                })
+            })
+            .error(function (data, success) {
+            })
 
-$scope.eventsData = [];
+        $scope.eventsData = [];
 
-var date = new Date();
-var d = date.getDate();
-var m = date.getMonth();
-var y = date.getFullYear();
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
 
-$scope.changeTo = 'Hungarian';
-
-$scope.eventsF = function (start, end, timezone, callback) {
-
-    callback($scope.eventsData);
-};
-
-/* alert on eventClick */
-$scope.alertOnEventClick = function (date, jsEvent, view) {
-    $scope.alertMessage = (date.title + ' was clicked ');
-};
-/* alert on Drop */
-$scope.alertOnDrop = function (event, delta, revertFunc, jsEvent, ui, view) {
-    $scope.alertMessage = ('Event Droped to make dayDelta ' + delta);
-};
-/* alert on Resize */
-$scope.alertOnResize = function (event, delta, revertFunc, jsEvent, ui, view) {
-    $scope.alertMessage = ('Event Resized to make dayDelta ' + delta);
-};
-/* add and removes an event source of choice */
-$scope.addRemoveEventSource = function (sources, source) {
-    var canAdd = 0;
-    angular.forEach(sources, function (value, key) {
-        if (sources[key] === source) {
-            sources.splice(key, 1);
-            canAdd = 1;
-        }
-    });
-    if (canAdd === 0) {
-        sources.push(source);
-    }
-};
-/* remove event */
-$scope.remove = function (index) {
-    $scope.eventsData.splice(index, 1);
-};
-/* Change View */
-$scope.changeView = function (view, calendar) {
-    uiCalendarConfig.calendars[calendar].fullCalendar('changeView', view);
-};
-/* Change View */
-$scope.renderCalender = function (calendar) {
-    if (uiCalendarConfig.calendars[calendar]) {
-        uiCalendarConfig.calendars[calendar].fullCalendar('render');
-    }
-};
-/* Render Tooltip */
-$scope.eventRender = function (event, element, view) {
-    element.attr({
-        'tooltip': event.title,
-        'tooltip-append-to-body': true
-    });
-    $compile(element)($scope);
-};
-/* config object */
-$scope.uiConfig = {
-    calendar: {
-        height: 450,
-        editable: true,
-        header: {
-            left: 'title',
-            center: '',
-            right: 'today prev,next'
-        },
-        eventClick: $scope.alertOnEventClick,
-        eventDrop: $scope.alertOnDrop,
-        eventResize: $scope.alertOnResize,
-        eventRender: $scope.eventRender
-    }
-};
-
-$scope.changeLang = function () {
-    if ($scope.changeTo === 'Hungarian') {
-        $scope.uiConfig.calendar.dayNames = ["Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"];
-        $scope.uiConfig.calendar.dayNamesShort = ["Vas", "Hét", "Kedd", "Sze", "Csüt", "Pén", "Szo"];
-        $scope.changeTo = 'English';
-    } else {
-        $scope.uiConfig.calendar.dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        $scope.uiConfig.calendar.dayNamesShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
         $scope.changeTo = 'Hungarian';
-    }
-};
-/* event sources array*/
-$scope.eventSources = [$scope.eventsData];
-console.log($scope.eventsData);
-$scope.eventSources2 = [$scope.eventsF, $scope.eventsData];
+
+        $scope.eventsF = function (start, end, timezone, callback) {
+
+            callback($scope.eventsData);
+        };
+
+        /* alert on eventClick */
+        $scope.alertOnEventClick = function (date, jsEvent, view) {
+            $scope.alertMessage = (date.title + ' was clicked ');
+        };
+        /* alert on Drop */
+        $scope.alertOnDrop = function (event, delta, revertFunc, jsEvent, ui, view) {
+            $scope.alertMessage = ('Event Droped to make dayDelta ' + delta);
+        };
+        /* alert on Resize */
+        $scope.alertOnResize = function (event, delta, revertFunc, jsEvent, ui, view) {
+            $scope.alertMessage = ('Event Resized to make dayDelta ' + delta);
+        };
+        /* add and removes an event source of choice */
+        $scope.addRemoveEventSource = function (sources, source) {
+            var canAdd = 0;
+            angular.forEach(sources, function (value, key) {
+                if (sources[key] === source) {
+                    sources.splice(key, 1);
+                    canAdd = 1;
+                }
+            });
+            if (canAdd === 0) {
+                sources.push(source);
+            }
+        };
+        /* remove event */
+        $scope.remove = function (index) {
+            $scope.eventsData.splice(index, 1);
+        };
+        /* Change View */
+        $scope.changeView = function (view, calendar) {
+            uiCalendarConfig.calendars[calendar].fullCalendar('changeView', view);
+        };
+        /* Change View */
+        $scope.renderCalender = function (calendar) {
+            if (uiCalendarConfig.calendars[calendar]) {
+                uiCalendarConfig.calendars[calendar].fullCalendar('render');
+            }
+        };
+        /* Render Tooltip */
+        $scope.eventRender = function (event, element, view) {
+            element.attr({
+                'tooltip': event.title,
+                'tooltip-append-to-body': true
+            });
+            $compile(element)($scope);
+        };
+        /* config object */
+        $scope.uiConfig = {
+            calendar: {
+                height: 450,
+                editable: true,
+                header: {
+                    left: 'title',
+                    center: '',
+                    right: 'today prev,next'
+                },
+                eventClick: $scope.alertOnEventClick,
+                eventDrop: $scope.alertOnDrop,
+                eventResize: $scope.alertOnResize,
+                eventRender: $scope.eventRender
+            }
+        };
+
+        $scope.changeLang = function () {
+            if ($scope.changeTo === 'Hungarian') {
+                $scope.uiConfig.calendar.dayNames = ["Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"];
+                $scope.uiConfig.calendar.dayNamesShort = ["Vas", "Hét", "Kedd", "Sze", "Csüt", "Pén", "Szo"];
+                $scope.changeTo = 'English';
+            } else {
+                $scope.uiConfig.calendar.dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                $scope.uiConfig.calendar.dayNamesShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+                $scope.changeTo = 'Hungarian';
+            }
+        };
+        /* event sources array*/
+        $scope.eventSources = [$scope.eventsData];
+        console.log($scope.eventsData);
+        $scope.eventSources2 = [$scope.eventsF, $scope.eventsData];
+
+
+        // For employee attendece
+        employeeServices.getEmployeeAttendence()
+            .success(function (data, status) {
+                console.log("message");
+                console.log(JSON.stringify(data));
+                $scope.employeeAttendance = data.emp_attendance;
+                $scope.attendanceBox = [];
+
+            })
+            .error(function (data, success) { })
 
 
 
 
-
-
-$scope.chartdata = [[70], [20], [10]];
-$scope.chartdata1 = [[30], [50], [20]];
-$scope.myJson = {
-    type: "ring",
-    title: {
-        text: 'Attendance Report'
-    },
-    plot: {
-        slice: 60,
-        detach: false,
-        tooltip: {
-            fontSize: 16,
-            anchor: 'c',
-            x: '50%',
-            y: '48%',
-            sticky: true,
-            backgroundColor: 'none',
-            text: '<span style="color:%color">%t</span><br><span style="color:%color">%v</span>'
-        }
-    },
-    legend: {
-        verticalAlign: "bottom",
-        align: "center"
-    },
-    series: [
-        {
-            //  values : [50],
-            text: "present"
-        },
-        {
-            // values : [35],
-            text: "absent"
-        },
-        {
-            //  values : [20],
-            text: "leave"
-        }
-    ]
-};
     }])

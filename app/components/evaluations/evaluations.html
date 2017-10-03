@@ -32,9 +32,9 @@
         <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
           <div class="form-group">
             <label>Select Class</label>
-            <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId">
-                        <option selected="selected">--Select--</option>
-                       <option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>
+            <select class="form-control select2" data-ng-change="populateSections(data.classId)" style="width: 100%;" ng-model="data.classId" ng-options="class.class_id as class.name  for class in classDatanew">
+                       
+                       <!--<option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
                       </select>
           </div>
         </div>
@@ -42,20 +42,20 @@
         <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
           <div class="form-group">
             <label>Select Section</label>
-            <select ng-change="getStudentValue(secId)" class="form-control select2" style="width: 100%;" ng-model="secId">
-                        <option selected="selected">--Select--</option>
-                       <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>
+            <select class="form-control select2" ng-change="populateStudentValue(data.secId);getExamPapers(data.examSchedule_name,data.secId);" style="width: 100%;" name="section" ng-model="data.secId" ng-options="sec.section_id as sec.name  for sec in secData">
+<!--                      
+                       <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
                         
                       </select>
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group" ng-if="showRole(['admin','teacher'])">
-            <label>Select Student</label>
-            <select ng-change="getEvaluation(paperId ,studentId)" class="form-control select2" data-ng-change="getStudentValue(secId)" style="width: 100%;" ng-model="studentId">
-                            <option selected="selected">--Select--</option>
+            <label>Select Student  </label>
+            <select class="form-control select2" style="width: 100%;" name="studentId" ng-change="getEvaluation(data.studentId,data.examSchedule_name)" ng-model="data.studentId" ng-options="student.student_id as student.first_name+' '+student.last_name for student in students ">
+                            <!--<option selected="selected">--Select--</option>
       
-                            <option ng-repeat="student in students " value="{{student.student_id}}">{{student.first_name}} {{student.last_name}}</option>
+                            <option ng-repeat="student in students " value="{{student.student_id}}">{{student.first_name}} {{student.last_name}}</option>-->
                         </select>
           </div>
         </div>
@@ -67,7 +67,7 @@
       </div>
       <div class="row">
         <div class="col-md-12" ng-if="showRole(['admin','teacher','parent'])">
-          <button type="submit" class="btn btn-primary pull-right">Select</button>
+          <button type="button" ng-click="" class="btn btn-primary pull-right">Select</button>
         </div>
       </div>
 
@@ -76,35 +76,34 @@
         <h3 class="box-title">Add Marks</h3>
       </div>
       <form name="evaluations" ng-submit="evaluations.$valid && addEvaluation(data)" novalidate>
-        
+
         <div class="row">
-          <div class="col-md-4" ng-if="showRole(['admin','teacher','parent'])">
-            <div class="form-group"  ng-class="{'has-error': evaluations.$submitted  && evaluations.Subject.$pristine}">
+          <!--<div class="col-md-4" ng-if="showRole(['admin','teacher','parent'])">
+            <div class="form-group" ng-class="{'has-error': evaluations.$submitted  && evaluations.Subject.$pristine}">
               <label>Select Subject</label>
               <select ng-change="getEvaluation(paperId ,studentId)" class="form-control select2" data-ng-change="populatePapers(subjectId)"
-                style="width: 100%;" name="Subject" ng-model="data.subject_name">
-                            <option selected="selected">--Select--</option>
-                             <option ng-repeat="subject in subjectsData" value="{{subject.name}}">{{subject.name}}</option>
+                style="width: 100%;" name="Subject" ng-model="data.subject_name" ng-options="subData.subject_id as subData.name for subData in subjectsData ">
+                            
                         </select>
             </div>
-          </div>
+          </div>-->
           <div class="col-md-4" ng-if="showRole(['admin','teacher','parent'])">
-            <div class="form-group"  ng-class="{'has-error': evaluations.$submitted  && evaluations.examSchedule.$pristine}">
+            <div class="form-group" ng-class="{'has-error': evaluations.$submitted  && evaluations.examSchedule.$pristine}">
               <label>Select Exam Schedule</label>
-              <select class="form-control select2" style="width: 100%;" ng-model="data.examSchedule_name" name="examSchedule">
-                        <option selected="selected">--Select--</option>
-                        <option ng-repeat="exam in examSchedule " value="{{exam.exam_title}}">{{exam.exam_title}}</option>
+              <select class="form-control select2" ng-change="getExamPapers(data.examSchedule_name,data.secId)" style="width: 100%;" ng-model="data.examSchedule_name" name="examSchedule" ng-options="examSch.exam_sch_id as examSch.exam_title for examSch in examSchedule ">
+                        <!--<option selected="selected">--Select--</option>
+                        <option ng-repeat="exam in examSchedule " value="{{exam.exam_title}}">{{exam.exam_title}}</option>-->
                         
                       </select>
             </div>
           </div>
 
-          <div class="col-md-4"  ng-if="showRole(['admin','teacher','parent'])">
-            <div class="form-group"  ng-class="{'has-error': evaluations.$submitted  && evaluations.paperId.$pristine}">
-              <label>Paper Title</label>
-              <select ng-change="getEvaluation(paperId ,studentId)" class="form-control select2" style="width: 100%;" name="paperId" ng-model="data.paper_name">
-                            <option selected="selected">--Select--</option>
-                            <option ng-repeat="paper in papers " value="{{paper.exam_paper_title}}">{{paper.exam_paper_title}}</option>
+          <div class="col-md-4" ng-if="showRole(['admin','teacher','parent'])">
+            <div class="form-group" ng-class="{'has-error': evaluations.$submitted  && evaluations.paperId.$pristine}">
+              <label>Paper Title </label>
+              <select  class="form-control select2" style="width: 100%;" name="paperId" ng-model="data.paper_name" ng-options="paper.exam_paper_id as paper.exam_paper_title for paper in papers ">
+                            <!--<option value="">--Select--</option>
+                            <option ng-repeat="paper in papers " value="{{paper.exam_paper_id}}">{{paper.exam_paper_title}}</option>-->
                             
                         </select>
             </div>
@@ -173,12 +172,12 @@
                 <th>#</th>
                 <th>Student</th>
                 <th>Examination Title</th>
-                <th>Subject</th>
+                <!--<th>Subject</th>-->
                 <th>Paper Title</th>
                 <th>Marks obtained</th>
                 <th>Percentage</th>
                 <th>Conduct</th>
-                <th class="pull-right" ng-if="showRole(['admin'])">Action</th>
+                <th class="pull-right">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -187,11 +186,11 @@
                 <td>
                   <!--<span editable-text="evaluations.student_name" e-name="evaluations.student_name" onaftersave="EditEvaluation($index)"
                     e-form="rowform" e-required>-->
-                    {{evaluations.first_name || 'empty'}} {{evaluations.last_name || 'empty'}}</td>
-                <td><span editable-text="evaluations.examschedule_name" e-name="evaluations.exam_paper_title" onaftersave="EditEvaluation($index)"
+                  {{evaluations.first_name || 'empty'}} {{evaluations.last_name || 'empty'}}</td>
+                <td><span editable-text="evaluations.exam_paper_title" e-name="evaluations.exam_paper_title" onaftersave="EditEvaluation($index)"
                     e-form="rowform" e-required>{{evaluations.examschedule_name || 'empty' }}</span></td>
-                <td><span editable-text="evaluations.subject_name" e-name="evaluations.exam_paper_title" onaftersave="EditEvaluation($index)"
-                    e-form="rowform" e-required>{{evaluations.subject_name || 'empty' }}</span></td>
+                <!--<td><span editable-text="evaluations.examschedule_name" e-name="evaluations.exam_paper_title" onaftersave="EditEvaluation($index)"
+                    e-form="rowform" e-required>{{evaluations.subject_name || 'empty' }}</span></td>-->
                 <td><span editable-text="evaluations.paper_name" e-name="evaluations.exam_paper_title" onaftersave="EditEvaluation($index)"
                     e-form="rowform" e-required>{{evaluations.paper_name || 'empty' }}</span></td>
                 <td><span editable-text="evaluations.marks" e-name="evaluations.marks" onaftersave="EditEvaluation($index)" e-form="rowform"
@@ -200,7 +199,7 @@
                     e-form="rowform" e-required>{{evaluations.percentage || 'empty' }}</span></td>
                 <td><span editable-text="evaluations.conduct" e-name="evaluations.conduct" onaftersave="EditEvaluation($index)"
                     e-form="rowform" e-required>{{evaluations.conduct || 'empty' }}</span></td>
-                <td class="pull-right" ng-if="showRole(['admin'])">
+                <td class="pull-right">
                   <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == evaluations">
                     <button type="submit" ng-click="EditEvaluation($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">Save</button>
                     <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">Cancel</button>
@@ -221,3 +220,59 @@
   </div>
 </section>
 
+
+<!--Edit values modal Starts here-->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <form name="employeeDetails" ng-submit="addEmployee(data)" novalidate>
+        <div class="modal-header">
+          <h3>Edit Marks</h3>
+        </div>
+        <div class="modal-body">
+
+          <!-- /.box-header -->
+          <!-- /.box-header -->
+          <form name="evaluations" ng-submit="evaluations.$valid && addEvaluations(data)" novalidate>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group" ng-class="{'has-error': evaluations.$submitted  && evaluations.marksObtained.$pristine}">
+                  <label>Marks obtained</label>
+                  <input name="marksObtained" type="text" class="form-control" placeholder="Enter ..." required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Marks Percentage</label>
+                  <input type="text" class="form-control" placeholder="Enter ...">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Conduct</label>
+                  <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">--Select--</option>
+                            <option>Poor</option>
+                            <option>Below Average</option>
+                            <option>Average</option>
+                            <option>Above Average</option>
+                            <option>Good</option>
+                            <option>Excellent</option>
+                        </select>
+                </div>
+              </div>
+
+            </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Add Marks</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+        </form>
+    </div>
+
+    </form>
+  </div>
+</div>
+</div>

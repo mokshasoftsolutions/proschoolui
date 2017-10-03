@@ -31,21 +31,24 @@ angular.module('school_erp')
                 requireLogin: true
             }
         })
-        .state('main.parentDashboard', { // login Page
-            url: "dashboard",
-            templateUrl: "app/components/parentDashboard/parentDashboard.html",
-            controller: "parentDashboardController",
-            data: {
-                requireLogin: true
-            }
-        })
+         
+
+        // .state('main.parentDashboard', { // login Page
+        //     url: "dashboard",
+        //     templateUrl: "app/components/parentDashboard/parentDashboard.html",
+        //     controller: "parentDashboardController",
+        //     data: {
+        //         requireLogin: true
+        //     }
+        // })
         .state('main.studentProfile', { // login Page
-            url: "dashboard",
+            url: "student/studentProfile",
             templateUrl: "app/components/studentProfile/studentProfile.html",
             controller: "studentProfileController",
             data: {
                 requireLogin: true
             }
+            
         })
         .state('main.studentAdmission', { // login Page
             url: "studentInfo/studentAdmission",
@@ -62,6 +65,9 @@ angular.module('school_erp')
             data: {
                 requireLogin: true
             }
+            // views:{
+            //     '':{templateUrl:"app/components/student/studentProfile/studentProfile.html"}
+            // }
         })
         // .state('main.studentDetails', { // login Page
         //     url: "studentInfo/studentDetails",
@@ -91,6 +97,15 @@ angular.module('school_erp')
                 requireLogin: true
             }
         })
+        .state('main.attendenceListEmployee', { // login Page
+            url: "attendance/attendenceList",
+            templateUrl: "app/components/attendenceListEmployee/attendenceListEmployee.html",
+            controller: "attendanceListEmployeeController",
+            data: {
+                requireLogin: true
+            }
+        })
+
         .state('main.studentAttendance', { // login Page
             url: "attendance/studentAttendance",
             templateUrl: "app/components/studentAttendance/studentAttendance.html",
@@ -99,22 +114,31 @@ angular.module('school_erp')
                 requireLogin: true
             }
         })
-        .state('main.attendenceReports1', { // login Page
-            url: "attendance/attendenceReports/Report1",
-            templateUrl: "app/components/attendenceReports/Report1/report1.html",
-            controller: "reportOneController",
+        .state('main.attendenceListStudent', { // login Page
+            url: "attendance/attendenceList",
+            templateUrl: "app/components/attendenceList/attendenceList.html",
+            controller: "attendanceListController",
             data: {
                 requireLogin: true
             }
         })
-        .state('main.attendenceReports2', { // login Page
-            url: "attendance/attendenceReports/Report2",
-            templateUrl: "app/components/attendenceReports/Report2/report2.html",
-            controller: "reportTwoController",
+
+        .state('main.attendenceReport', { // login Page
+            url: "attendance/attendenceReport",
+            templateUrl: "app/components/attendenceReports/attendenceReport.html",
+            controller: "attendanceReportController",
             data: {
                 requireLogin: true
             }
         })
+        // .state('main.attendenceReports2', { // login Page
+        //     url: "attendance/attendenceReports/Report2",
+        //     templateUrl: "app/components/attendenceReports/Report2/report2.html",
+        //     controller: "reportTwoController",
+        //     data: {
+        //         requireLogin: true
+        //     }
+        // })
 
 
         .state('main.subjects', { // login Page
@@ -231,24 +255,7 @@ angular.module('school_erp')
          .state('main.feeType', { // login Page
             url: "fee/feeType",
             templateUrl: "app/components/feeType/feeType.html",
-            controller: "feeTypeController",
-            data: {
-                requireLogin: true
-            }
-        })
-
-        .state('main.collectFee2', { // login Page
-            url: "fee/collectFee2",
-            templateUrl: "app/components/collectFee/collectFee2.html",
-            controller: "addBookController",
-            data: {
-                requireLogin: true
-            }
-        })
-         .state('main.collectFee', { // login Page
-            url: "fee/collectFee",
-            templateUrl: "app/components/collectFee/collectFee.html",
-            controller: "addBookController",
+           controller: "feeTypeController",
             data: {
                 requireLogin: true
             }
@@ -256,11 +263,31 @@ angular.module('school_erp')
         .state('main.feeMaster', { // login Page
             url: "fee/feeMaster",
             templateUrl: "app/components/feeMaster/feeMaster.html",
-            controller: "addBookController",
+            controller: "feeMasterController",
             data: {
                 requireLogin: true
             }
         })
+
+        .state('main.collectFee', { // login Page
+            url: "fee/collectFee",
+            templateUrl: "app/components/collectFee/collectFee.html",
+            controller: "collectFeeController",
+            data: {
+                requireLogin: true
+            }
+        })
+
+        .state('main.collectFee2', { // login Page
+            url: "fee/collectFee2",
+            templateUrl: "app/components/collectFee2/collectFee2.html",
+            controller: "collectFee2Controller",
+            data: {
+                requireLogin: true
+            }
+        })
+         
+        
         .state('main.addBook', { // login Page
             url: "library/addBook",
             templateUrl: "app/components/addBook/addBook.html",
@@ -322,6 +349,15 @@ angular.module('school_erp')
             url: "/login_page",
             templateUrl: "app/components/login_page/loginPage.html",
             controller: "loginController",
+            data: {
+                requireLogin: false
+            }
+        })
+         .state('registration_page', { // login Page
+
+            url: "/registration_page",
+            templateUrl: "app/components/registration/register.html",
+            controller: "registrationController",
             data: {
                 requireLogin: false
             }

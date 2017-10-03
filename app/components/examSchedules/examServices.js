@@ -45,13 +45,20 @@ angular.module('school_erp')
                     url: globalServices.globalValue.baseURL + 'api/exams/'+examSubject+'/'+exSchedule
                 })
     };
-     examServices.setExamPapers = function(dataValue, examSubject, exSchedule){
+    examServices.getExamPapersbySectionAndSchedule = function( exSchedule,section){
+            console.log(exSchedule+'/'+section);
+        return $http({
+                    method: 'GET',
+                    url: globalServices.globalValue.baseURL + 'api/examsbysectionid/'+exSchedule+'/'+section
+                })
+    };
+     examServices.setExamPapers = function(dataValue, examSubject, exSchedule,classId,sectionId){
          console.log(dataValue);
         return $http({
                     method: 'POST',
-                    url: globalServices.globalValue.baseURL + 'api/exams/'+examSubject+'/'+exSchedule,
-                    data: $.param(dataValue),
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
+                    url: globalServices.globalValue.baseURL + 'api/exams/'+examSubject+'/'+exSchedule+'/'+classId+'/'+sectionId,
+                    data:  dataValue,
+                    headers: { 'Content-Type': 'application/json'},
                 })
       };
 
@@ -74,20 +81,20 @@ angular.module('school_erp')
       };
 
 
-        examServices.getEvaluation = function(examPaper,student,subjectId,examScheduleId){
-            console.log(examPaper+'/'+student);
+        examServices.getEvaluation = function(student,scheduleId){
+            
         return $http({
                     method: 'GET',
-                    url: globalServices.globalValue.baseURL + 'api/exam_eval/'+examPaper+'/'+student+'/'+subjectId+'/'+examScheduleId
+                    url: globalServices.globalValue.baseURL + 'api/exam_eval/'+student+'/'+scheduleId
                 })
     };
-     examServices.setEvaluation = function(dataValue, examPaper, student,subjectId,examScheduleId){
+     examServices.setEvaluation = function(dataValue, exam_sch_id,exam_paper_id,student_id,section_id,class_id){
          console.log(dataValue);
         return $http({
                     method: 'POST',
-                    url: globalServices.globalValue.baseURL + 'api/exam_eval/'+examPaper+'/'+student+'/'+subjectId+'/'+examScheduleId,
-                    data: $.param(dataValue),
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
+                    url: globalServices.globalValue.baseURL + 'api/exam_eval/'+exam_sch_id+"/"+exam_paper_id+'/'+student_id+'/'+section_id+'/'+class_id,
+                    data:dataValue,
+                    headers: { 'Content-Type': 'application/json'},
                 })
       };
 

@@ -51,6 +51,7 @@ angular.module('school_erp')
             $scope.chapterData = [];
             chaptersServices.getChapters(subId)
                 .success(function (data, status) {
+                    console.log(JSON.stringify(data));
                     console.log(subId)
                     $scope.chapterData = data[subId + ""];
                     $scope.chapterId = $scope.chapterData[0].lession_id;
@@ -84,7 +85,7 @@ angular.module('school_erp')
             //console.log($scope.chapterId + "lesson");
             var assignDetails = {
                 assignment_title: $scope.data.assignment_title,
-                chapter_name: $scope.data.chapter_name,
+               // chapter_name: $scope.data.chapter_name,
                 due_date: $scope.data.due_date,
                 description: $scope.data.description
             }

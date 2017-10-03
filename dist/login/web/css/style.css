@@ -234,11 +234,14 @@ img {
 /*end reset*/
 
 body {
+     width: 100%;
+     height: auto;
     text-align: center;
     font-family: 'Philosopher', sans-serif;
-    background: url(../images/school2.png) no-repeat !important;
+ background: url(../images/school2.png) no-repeat !important;
     background-size: cover !important;
     position: relative;
+   
 }
 
 .center-container {

@@ -2,6 +2,11 @@ angular.module('school_erp')
     .controller("employeeController", ['$http', '$scope', '$rootScope', 'employeeServices','ngDialog','globalServices', function ($http, $scope, $rootScope, employeeServices,ngDialog,globalServices) {
         $scope.employeeData = [];
         $scope.editdata = [];
+
+        $scope.gender=[{ name:"Male",id:"male"},{name:"Female",id:"female"}];
+
+        $scope.employeeType=[{type:"Teaching",id:"teaching"},{type:"Non-Teaching",id:"non-teaching"},{type:"Administrative",id:"administrative"}];
+
         employeeServices.getEmployee()
             .success(function (data, status) {
                 $scope.employeeData = data.employee;

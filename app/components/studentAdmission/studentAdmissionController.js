@@ -4,8 +4,9 @@ angular.module('school_erp')
         $scope.data = [];  
         BusRouteServices.getBusRoute()
         .success(function(data, status){
-            $scope.busRoutes = data.bus_routes;
-            $scope.routeId = $scope.busRoutes[0].route_id;
+            console.log(JSON.stringify(data));
+            $scope.busRoutes = data.Bus_Route;
+            $scope.routeId = $scope.busRoutes[0].bus_route_id;
         })
         .error(function(data,success){
         })

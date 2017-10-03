@@ -62,6 +62,8 @@ angular.module('school_erp')
                 })
         }
 
+       
+
 
         $scope.students = [];
 
@@ -109,22 +111,31 @@ angular.module('school_erp')
              var filterBox = dataB.filter(function(data){
                 return data.status == 'none';
             })
-
+            console.log($scope.attendanceBox);
             if (filterBox.length == 0) {
-                $scope.attendanceBox.forEach(function(element) {
-                    var obj = {
-                        student_id: element.student_id,
-                        status: element.status
+                // $scope.attendanceBox.forEach(function(element) {
+                //     var obj = {
+                //         student_id: element.student_id,
+                //         status: element.status
+                //     }
+                //     $scope.sendAttendanceHolder.push(obj);
+
+                // });
+                angular.forEach($scope.attendanceBox,function(value,key){
+                   var obj = {
+                        student_id: value.student_id,
+                        status: value.status
                     }
                     $scope.sendAttendanceHolder.push(obj);
-
-                });
-                // console.log($scope.sendAttendanceHolder);
+                    })
+                console.log($scope.sendAttendanceHolder);
                 studentServices.setBulkAttendance($scope.sendAttendanceHolder, $scope.classId, $scope.secId)
                 .success(function(data, status) {
-                   
+                   $scope.sendAttendanceHolder=[];
                 })
-                .error(function(data, success) {})
+                .error(function(data, success) {
+                    $scope.sendAttendanceHolder=[];
+                })
             } else {
                 ngDialog.open({
                     template: '<p> Few students are not marked properly</p>',

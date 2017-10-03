@@ -3,6 +3,27 @@ angular.module('school_erp')
         $scope.feeTypeData = [];
         $scope.data = [];
        
+
+      $scope.fee_catogery = [{
+                name: "Annual Fee",
+                id: 1
+            },
+            {
+                name: "Monthly Fee",
+                id: 2
+            },
+            {
+                name: "Quarterly Fee",
+                id: 3
+            },
+            {
+                name: "Half-yearly Fee",
+                id: 4
+            },
+            {
+                name: "Extra Fee",
+                id: 5
+            }];
         // Role based Display
         $scope.showRole = function (role) {
             return globalServices.fetchRoleAuth(role);
@@ -13,8 +34,8 @@ angular.module('school_erp')
         $scope.getFeeType = function () {
             feeTypeServices.getFeeType()
                 .success(function (data, status) {
-                    console.log(subId)
-                    $scope.feeTypeData = data;
+                   // console.log(subId)
+                    $scope.feeTypeData = data.feetypes;
                     console.log(JSON.stringify(data))
 
                 })
@@ -25,7 +46,7 @@ angular.module('school_erp')
         $scope.addFeeType = function (data) {
             console.log("message");
             var FeeDetails = {
-                fee_catogery: $scope.data.fee_catogery,
+                fee_category: $scope.data.fee_catogery,
                 fee_type: $scope.data.fee_type
                
             }
@@ -47,63 +68,60 @@ angular.module('school_erp')
 
         }
 
-        // $scope.EditFeeType = function (value, chapter) {
+        $scope.EditFeeType = function (value, feeType) {
 
-        //     console.log("messsage");
-        //     $scope.chapter = angular.copy($scope.chaptersData[value]);
-        //     console.log($scope.chapter);
-        //      $scope.chapter_id = $scope.chapter.lession_id;
-        //     console.log($scope.chapter_id);
-        //     var ChapterDetails = {
-        //         title: $scope.chapter.title,
-        //         chapter_code: $scope.chapter.chapter_code,
-             
-        //         description: $scope.chapter.description,
-        //         no_of_topics: $scope.chapter.no_of_topics,
-        //     }
-        //     console.log(ChapterDetails);
+            console.log("messsage");
+            $scope.feeType = angular.copy($scope.feeTypeData[value]);
            
-        //     $scope.addEditFeeType(ChapterDetails ,$scope.chapter_id);
-        // }
-        // $scope.addEditFeeType = function (ChapterDetails ,chapter_id) {
-        //     chaptersServices.EditFeeType(ChapterDetails ,chapter_id)
-        //         .success(function (data, status) {
-        //             // ngDialog.open({
-        //             //     template: '<p>Station is Edited Successfully.</p>',
-        //             //     plain: true
-        //             // });
-        //             $scope.editdata = [];
-        //             $scope.getFeeType($scope.subId);
-        //         })
-        //         .error(function (data, success) {
-        //             ngDialog.open({
-        //                 template: '<p>Some Error Occured!</p>',
-        //                 plain: true
-        //             });
-        //         })
+             $scope.fee_types_id = $scope.feeType.fee_types_id;
+            console.log($scope.fee_types_id);
+            var FeeDetails = {
+                fee_category: $scope.feeType.fee_category,
+                fee_type: $scope.feeType.fee_type
+               
+            }
+           
+            $scope.addEditFeeType(FeeDetails ,$scope.fee_types_id);
+        }
+        $scope.addEditFeeType = function (FeeDetails ,fee_types_id) {
+            feeTypeServices.EditFeeType(FeeDetails ,fee_types_id)
+                .success(function (data, status) {
+                    // ngDialog.open({
+                    //     template: '<p>Station is Edited Successfully.</p>',
+                    //     plain: true
+                    // });
+                    $scope.editdata = [];
+                    $scope.getFeeType();
+                })
+                .error(function (data, success) {
+                    ngDialog.open({
+                        template: '<p>Some Error Occured!</p>',
+                        plain: true
+                    });
+                })
 
-        // }
+        }
 
-        // $scope.DeleteFeeType = function (value) {
-        //     $scope.editdata = angular.copy($scope.chaptersData[value]);
-        //     $scope.chapter_id = $scope.editdata.lession_id;
-        //     console.log($scope.chapter_id);
-        //     chaptersServices.DeleteFeeType($scope.chapter_id)
-        //         .success(function (data, status) {
-        //             ngDialog.open({
-        //                 template: '<p>Chapter is Deleted Successfully.</p>',
-        //                 plain: true
-        //             });
-        //             $scope.editdata = [];
-        //              $scope.getFeeType($scope.subId);
-        //         })
-        //         .error(function (data, success) {
-        //             ngDialog.open({
-        //                 template: '<p>Some Error Occured!</p>',
-        //                 plain: true
-        //             });
-        //         })
-        // }
+        $scope.DeleteFeeType = function (value) {
+            $scope.editdata = angular.copy($scope.feeTypeData[value]);
+            $scope.fee_types_id = $scope.editdata.fee_types_id;
+            console.log($scope.fee_types_id);
+            feeTypeServices.DeleteFeeType($scope.fee_types_id)
+                .success(function (data, status) {
+                    ngDialog.open({
+                        template: '<p>Chapter is Deleted Successfully.</p>',
+                        plain: true
+                    });
+                    $scope.editdata = [];
+                     $scope.getFeeType();
+                })
+                .error(function (data, success) {
+                    ngDialog.open({
+                        template: '<p>Some Error Occured!</p>',
+                        plain: true
+                    });
+                })
+        }
 
 
         $scope.selectedFile = null;

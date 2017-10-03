@@ -1,0 +1,123 @@
+<section class="content-header">
+  <h1>
+    <i class="fa fa-money"></i> Fee Collection
+    <small>Fee Master</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li>Fee Collection</li>
+    <li class="active">Fee Master</li>
+  </ol>
+</section>
+<!-- /.Content Header -->
+
+<!-- Main content -->
+<section class="content">
+  <!-- Select Criteria -->
+
+  <div class="box box-default">
+    <!--<div class="box-header with-border">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <h3 class="box-title">Select Criteria</h3>
+    </div>-->
+    <!-- /.box-header -->
+     <form name="feeMaster">
+    <div class="box-body">
+      <div class="row">
+
+        <div class="col-md-4" >
+          <div class="form-group">
+            <label>Class</label>
+            <select class="form-control select2" ng-options="class.name as class.name for class in classData"
+              style="width: 100%;" ng-model="data.class_name">
+                        <!--<option ng-repeat="class in classData" value="{{class.class_id}}">{{class.name}}</option>-->
+                      </select>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Fee Type</label>
+            <select class="form-control select2" style="width: 100%;" ng-options="type.fee_type as type.fee_type for type in feeTypeData"
+              ng-model="data.fee_type">
+              
+                      </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label> Amount</label>
+            <input type="text" class="form-control" ng-model="data.amount" placeholder="Enter ...">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box-footer">
+      <button type="submit" ng-click="addFeeMaster(data);" class="btn btn-primary pull-right">Add Fee</button>
+    </div>
+  </div>
+  </form>
+
+
+  <!-- Content List -->
+  <div class="box box-default">
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-list"></i> Fee List</a></li>
+      </ul>
+    </div>
+
+    <div class="box-body">
+      <div class="tab-content">
+        <div class="tab-pane table-responsive no-padding active" id="tab_1">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Sl. No</th>
+                <th>Class</th>
+                <th>Fee Type</th>
+                <th>Fee Category</th>
+                <th>Amount</th>
+                <th class="pull-right">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+               <tr ng-repeat="feeMaster in feeMasterData" class="editable-row">
+                <td>
+                  {{$index+1}}
+                </td>
+                 <td class="select-td">
+                  <span editable-select="feeMaster.class_name" e-name="class_name" e-form="rowform" onaftersave="EditFeeMaster($index)" e-selectpicker e-ng-options="class.name as class.name for class in classData">
+                                                    {{ feeMaster.class_name}}</span>
+                </td>
+                <td class="select-td">
+                  <span editable-select="feeMaster.fee_type" e-name="fee_type" e-form="rowform" onaftersave="EditFeeMaster($index)" e-selectpicker e-ng-options="type.fee_type as type.fee_type for type in feeTypeData">
+                                                    {{ feeMaster.fee_type}}</span>
+                </td>
+                <td><a href="">{{feeMaster.fee_doc[0].fee_category}}</a></td>
+                <td>
+                  <span editable-text="feeMaster.fee_amount" e-name="fee_amount" onaftersave="EditFeeMaster($index)" e-form="rowform" e-required>{{feeMaster.fee_amount || 'empty' }}</span>
+                </td>
+               
+                <td class="pull-right">
+                  <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == feeMaster">
+                    <button type="submit" ng-click="EditFeeMaster($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
+                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
+                  </form>
+
+                  <div class="buttons" ng-show="!rowform.$visible">
+                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
+                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteFeeMaster($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
+                  </div>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

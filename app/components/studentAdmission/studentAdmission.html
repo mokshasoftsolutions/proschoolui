@@ -32,14 +32,14 @@
           <div class="col-md-3">
             <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted && studentAdmission.admissionNo.$invalid && studentAdmission.admissionNo.$pristine}">
               <label>Admission No</label>
-              <input type="text" name="admissionNo" ng-model="data.admissionNo" class="form-control" placeholder="Enter ..." required>
+              <input type="text" name="admissionNo" ng-model="data.admission_no" class="form-control" placeholder="Enter ..." required>
             </div>
           </div>
 
           <div class="col-md-3">
             <div class="form-group">
               <label>Roll No</label>
-              <input type="text" class="form-control" placeholder="Enter ...">
+              <input type="text" class="form-control" placeholder="Enter ..." ng-model="data.roll_no">
             </div>
           </div>
 
@@ -295,7 +295,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>Aadhaar No</label>
-              <input type="text" ng-model="data.Aadhaar_no" class="form-control" placeholder="Enter ...">
+              <input type="text" ng-model="data.aadhar_no" class="form-control" placeholder="Enter ...">
             </div>
           </div>
 

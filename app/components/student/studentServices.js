@@ -19,7 +19,12 @@ angular.module('school_erp')
             })
         };
 
-
+        studentServices.getStudentById = function (student_id) {
+            return $http({
+                method: 'GET',
+                url: globalServices.globalValue.baseURL + 'api/studentsdetails/' + student_id
+            })
+        };
         //   studentServices.setParent = function(parentDetails,studentId){       
         //     return $http({
         //                 method: 'POST',
@@ -54,36 +59,70 @@ angular.module('school_erp')
             })
         };
 
+        studentServices.getStudentsAttendance = function (classSecValue) {
+            return $http({
+                method: 'GET',
+                url: globalServices.globalValue.baseURL + 'api/students/' + classSecValue
+            })
+        };
 
+        studentServices.getAttendenceByDay = function (select_date, class_id, section_id) {
+            return $http({
+                method: 'GET',
+                //url: "http://192.168.1.6:4005/api/examevaluationlistbystudentid/263/456"
+                url: globalServices.globalValue.baseURL + 'api/attendancechartbydate/' + select_date + '/' + class_id + '/' + section_id
+            })
+        };
+
+        studentServices.getAttendenceByMonth = function (month, studentId) {
+            return $http({
+                method: 'GET',
+                // url: "http://192.168.1.13:4005/api/examevaluation/3/2347/34/45"
+                url: globalServices.globalValue.baseURL + 'api/attendancechartbymonth/' + month + '/' + studentId
+            })
+        };
         studentServices.setBulkAttendance = function (dataValue, classVal, section) {
             var test = {
-                "employees": dataValue,
+                "students": dataValue,
             };
             console.log(dataValue);
             return $http({
                 method: 'POST',
                 url: globalServices.globalValue.baseURL + 'api/attendancebulk/' + classVal + '/' + section + '/' + 'SCH-9271',
-                data: $.param(test),
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                data: test,
+                headers: { 'Content-Type': 'application/json' },
             })
         };
+
+        // studentServices.setBulkAttendance = function (dataValue, classVal, section) {
+        //     var test = {
+        //         "employees": dataValue,
+        //     };
+        //     console.log(dataValue);
+        //     return $http({
+        //         method: 'POST',
+        //         url: globalServices.globalValue.baseURL + 'api/attendancebulk/' + classVal + '/' + section + '/' + 'SCH-9271',
+        //         data: $.param(test),
+        //         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        //     })
+        // };
 
         studentServices.EditStudent = function (dataValue, student_id) {
             console.log(dataValue);
             return $http({
-                    method: 'PUT',
-                    //url: globalServices.globalValue.baseURL + 'book_edit/:book_id/:name/:value',
-                    url: globalServices.globalValue.baseURL + 'api/edit_students/'+student_id,
-                    data: $.param(dataValue),
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                method: 'PUT',
+                //url: globalServices.globalValue.baseURL + 'book_edit/:book_id/:name/:value',
+                url: globalServices.globalValue.baseURL + 'api/edit_students/' + student_id,
+                data: $.param(dataValue),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             })
         };
 
-        studentServices.DeleteStudent = function(student_id){
-           return $http({
-                    method: 'DELETE',
-                    url: globalServices.globalValue.baseURL + 'api/delete_student/'+student_id,
-                })
+        studentServices.DeleteStudent = function (student_id) {
+            return $http({
+                method: 'DELETE',
+                url: globalServices.globalValue.baseURL + 'api/delete_student/' + student_id,
+            })
         };
 
 

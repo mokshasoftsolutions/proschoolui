@@ -101,7 +101,7 @@ angular.module('school_erp')
                               dataObj.data.tuesday = valuesub.name;
                             }else if(valuesub.day == "wednesday"){
                                 dataObj.data.wednesday = valuesub.name;
-                            }else if(valuesub.day == "thursday"){
+                            }else if(valuesub.day == "thrusday"){
                                 dataObj.data.thursday = valuesub.name;
                             }else if(valuesub.day == "friday"){
                                 dataObj.data.friday = valuesub.name;

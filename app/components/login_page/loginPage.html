@@ -1,11 +1,11 @@
-
+<!--<div class="modalContainer" ng-style="{'background-image':'url({{image[0].url}})'}">-->
 <link rel="stylesheet" href="../../../dist/login/web/css/style.css" type="text/css" media="all" />
 
 
 <link rel="stylesheet" href="../../../dist/login/web/css/font-awesome.css">
 
 
-<div>
+<!--<div>
     <div class="center-container">
 
         
@@ -45,12 +45,129 @@
      
         <div class="footer"> </div>
      
-</div>
+</div>-->
 
-<script type="text/javascript" src="../../../dist/login/web/js/jquery-2.1.4.min.js"></script>
+<body class="hold-transition login-page">
+    <div class="login-box">
+
+        <!-- /.login-logo -->
+        <div class="login-box-body" style="height:390px;margin-top:160px;background-color:#00918d;">
+            <div class="login-logo">
+                <h2 style="color:white">PROSchool Login</h2>
+            </div>
+            <!--<p class="login-box-msg">Sign in to start your session</p>-->
+            <!--<div class="sub-main-w3">
+                <form name="loginform" ng-submit="loginform.$valid && login(datab)" novalidate>
+                    <input ng-class="{'has-error': loginform.$submitted  && loginform.username.$pristine}" ng-model="datab.username" name="username"
+                        placeholder="E-mail" name="mail" type="email" required="">
+                    <span class="icon1"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <input ng-class="{'has-error': loginform.$submitted  && loginform.passsword.$pristine}" ng-model="datab.password" name="passsword"
+                        placeholder="Password" name="Password" type="password" required="">
+                    <span class="icon2"><i class="fa fa-unlock" aria-hidden="true"></i></span>
+                    <div class="rem-w3">
+                        <span class="check-w3"><input type="checkbox" />Remember Me</span>
+                        <a href="#">Forgot Password?</a>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="container container-fluid">
+
+
+
+                    </div>
+                    <input type="submit" value="Login">
+
+                </form>
+                <a href="../../../dist/login/web/query.html"> <button id="queryid" > Query</button></a>
+            </div>-->
+
+            <form name=loginform ng-submit="loginform.$valid && login(datab)" novalidate>
+                <div class="form-group has-feedback">
+                    <input class="form-control" ng-class="{'has-error': loginform.$submitted  && loginform.username.$pristine}" ng-model="datab.username"
+                        name="username" placeholder="E-mail" name="mail" type="email" required="">
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input class="form-control" ng-class="{'has-error': loginform.$submitted  && loginform.passsword.$pristine}" ng-model="datab.password"
+                        name="passsword" placeholder="Password" name="Password" type="password" required="">
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <!--<div class="col-xs-8">
+          <div class="checkbox icheck">
+           
+               <span class="check-w3"><input type="checkbox" />Remember Me</span>
+            
+         
+          </div>
+          <a href="">Forgot Password?</a>
+        </div>-->
+                    <div class="rem-w3">
+                        <span style="margin-left:40px" class="check-w3"><input  type="checkbox" />Remember Me</span>
+                        <a href="#" style="color:white;">Forgot Password?</a>
+                        <div class="clear"></div>
+
+
+                        
+                    </div>
+                    <div class="col-xs-6">
+                        <ul>
+                            <!---->
+                            <li><button type="submit" class="btn btn-primary btn-block btn-flat" style="width:223px;margin-left:49px;background-color: rgba(3, 200, 244, 0.69);">Sign In</button></li>
+                            <!--<li> <a href="../../../dist/login/web/query.html"> <button  class="btn btn-primary btn-block btn-flat"> Query</button></a></li>-->
+                        </ul>
+                    </div>
+                </div>
+            </form>
+
+            <div class="col-xs-6">
+                <ul>
+
+                    <li> <a href="../../../dist/login/web/query.html"> <button style="margin-top:2px;margin-left:34px;width:224px;background-color: rgba(3, 200, 244, 0.69);" class="btn btn-primary btn-block btn-flat"> Query</button></a></li>
+                </ul>
+            </div>
+
+            <!--<div class="social-auth-links text-center">
+      <p>- OR -</p>
+      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
+        Facebook</a>
+      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
+        Google+</a>
+    </div>-->
+            <!-- /.social-auth-links -->
+
+            <!--<a href="#">I forgot my password</a><br>
+            <a href="register.html" class="text-center">Register a new membership</a>-->
+
+        </div>
+        <!-- /.login-box-body -->
+
+
+    </div>
+    <!-- /.login-box -->
+
+    <!-- jQuery 3 -->
+    <!--<script src="../../bower_components/jquery/dist/jquery.min.js"></script>-->
+    <!-- Bootstrap 3.3.7 -->
+    <!--<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->
+    <!-- iCheck -->
+    <!--<script src="../../plugins/iCheck/icheck.min.js"></script>-->
+   
+    <!--<script>
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+        });
+    </script>-->
+</body>
+ <script type="text/javascript" src="../../../dist/login/web/js/jquery-2.1.4.min.js"></script>
+
 
 <!-- //js -->
-  <!-- <span><button type="button" class="btn btn-lg" id="adminbtn">Admin</span>
+<!-- <span><button type="button" class="btn btn-lg" id="adminbtn">Admin</span>
 								<span><button type="button" class="btn btn-lg" id="teacherbtn">Teacher</span>
 								<span><button type="button" class="btn btn-lg" id="parentbtn">Parent</span> 
 								 -->
+<!--</div>-->

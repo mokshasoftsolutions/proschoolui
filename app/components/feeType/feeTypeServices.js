@@ -5,7 +5,7 @@ angular.module('school_erp')
     feeTypeServices.getFeeType = function(){
         return $http({
                     method: 'GET',
-                    url: globalServices.globalValue.baseURL + 'api/feetypes/SCH-9271'
+                    url: globalServices.globalValue.baseURL + 'api/fee_types/SCH-9271'
                 })
     };
 
@@ -13,31 +13,31 @@ angular.module('school_erp')
          console.log(dataValue);
         return $http({
                     method: 'POST',
-                    url: globalServices.globalValue.baseURL + 'api/feetypes/SCH-9271',
+                    url: globalServices.globalValue.baseURL + 'api/fee_types/SCH-9271',
                     data: $.param(dataValue),
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
                 })
       };
 
-    //   feeTypeServices.EditChapters = function(dataValue,lesson_id){
-    //         console.log(dataValue);
-    //          console.log("hello");
-    //         return $http({
-    //                     method: 'PUT',
-    //                     url: globalServices.globalValue.baseURL + 'api/edit_course_work/'+lesson_id,
+      feeTypeServices.EditFeeType = function(dataValue,fee_types_id){
+            console.log(dataValue);
+             console.log("hello");
+            return $http({
+                        method: 'PUT',
+                        url: globalServices.globalValue.baseURL + 'api/edit_fee_types/'+fee_types_id,
                         
-    //                     data: $.param(dataValue),
-    //                     headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
-    //                 })
-    //     };
+                        data: $.param(dataValue),
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
+                    })
+        };
 
-    //   feeTypeServices.DeleteChapters = function(lesson_id){
+      feeTypeServices.DeleteFeeType = function(fee_types_id){
          
-    //        return $http({
-    //                 method: 'DELETE',
-    //                 url: globalServices.globalValue.baseURL + 'api/delete_course_work/'+lesson_id,
-    //             })
-    //   };
+           return $http({
+                    method: 'DELETE',
+                    url: globalServices.globalValue.baseURL + 'api/delete_fee_types/'+fee_types_id,
+                })
+      };
 
        return feeTypeServices;
     }]);  

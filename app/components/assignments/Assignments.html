@@ -15,9 +15,9 @@
   <!-- Select Criteria -->
 
   <div class="box box-default">
-    <div class="box-header with-border" ng-if="showRole(['admin','teacher'])">
-      <i class="fa fa-search" aria-hidden="true"></i>
-      <h3 class="box-title">Select Criteria</h3>
+    <div class="box-header with-border" ng-show="showRole(['admin','teacher'])">
+      <!--<i class="fa fa-search" aria-hidden="true"></i>
+      <h3 class="box-title">Select Criteria</h3>-->
       <ul class="panel-controls">
         <li> <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)"
           /></li>
@@ -28,7 +28,7 @@
     <!-- /.box-header -->
     <div class="box-body">
       <div class="row">
-        <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
+        <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
           <div class="form-group">
             <label>Class</label>
             <select class="form-control select2" ng-options="class.class_id as class.name for class in classData" data-ng-change="populateSections(classId)"
@@ -38,7 +38,7 @@
           </div>
         </div>
 
-        <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
+        <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
           <div class="form-group">
             <label>Section</label>
             <select data-ng-change="populateSubjects(secId)" ng-options="sec.section_id as sec.name for sec in secData" class="form-control select2"
@@ -47,7 +47,7 @@
           </div>
         </div>
 
-        <div class="col-md-4" ng-if="showRole(['admin','teacher','parent'])">
+        <div class="col-md-4" ng-show="showRole(['admin','teacher','parent'])">
           <div class="form-group">
             <label>Select Subject</label>
             <select data-ng-change="populateChapters(subId)" ng-options="sub.subject_id as sub.name for sub in subData" class="form-control select2"
@@ -55,6 +55,17 @@
                         </select>
           </div>
         </div>
+         <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
+            <div class="form-group">
+              <label>Select Chapter </label>
+             
+                      </select>
+                      <select data-ng-change="getAssignments(secId,chapterId)" class="form-control select2" ng-model="chapterId" style="width: 100%;">
+                            <option selected="selected">--Select--</option>
+                            <option ng-repeat="chapter in chapterData" value="{{chapter.lession_id}}">{{chapter.title}}</option>
+                        </select>
+            </div>
+          </div>
 
       </div>
       <div class="row">
@@ -63,33 +74,21 @@
         </div>
       </div>
 
-      <div class="box-header with-border" ng-if="showRole(['admin','teacher'])">
+      <div class="box-header with-border" ng-show="showRole(['admin','teacher'])">
         <i class="fa fa-plus-square" aria-hidden="true"></i>
         <h3 class="box-title">Add Assignments</h3>
       </div>
-      {{chapterIdVal}}
+    
       <form name="Assignments" ng-submit="Assignments.$valid && addAssignments(data)" novalidate>
         <div class="row">
-          <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
+          <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
             <div class="form-group" ng-class="{'has-error': Assignments.$submitted  && Assignments.assignmentTitle.$pristine}">
               <label>Assignment Title</label>
               <input type="text" name="assignmentTitle" ng-model="data.assignment_title" class="form-control" placeholder="Enter ..." required>
             </div>
           </div>
-          <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
-            <div class="form-group">
-              <label>Select Chapter </label>
-              <!--<select class="form-control select2" ng-change="getAssignments()" ng-options="chapter.title as chapter.title for chapter in chapterData"
-                ng-model="chapter_name" style="width: 100%;">
-                
-                      </select>-->
-                      <select data-ng-change="getAssignments()" class="form-control select2" ng-model="data.chapter_name" style="width: 100%;">
-                            <option selected="selected">--Select--</option>
-                            <option ng-repeat="chapter in chapterData" value="{{chapter.title}}">{{chapter.title}}</option>
-                        </select>
-            </div>
-          </div>
-          <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
+         
+          <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
             <div class="form-group">
               <label>Due Date</label>
               <div class="input-group date" ng-class="{'has-error': Assignments.$submitted  && Assignments.dueDate.$pristine}">
@@ -104,9 +103,9 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6" ng-if="showRole(['admin','teacher'])">
+        <!--</div>
+        <div class="row">-->
+          <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
             <div class="form-group" ng-class="{'has-error': Assignments.$submitted  && Assignments.description.$pristine}">
               <label>Description</label>
               <textarea class="form-control" name="description" ng-model="data.description" rows="3" placeholder="Enter ..." required></textarea>
@@ -147,7 +146,7 @@
     <div class="box-body">
       <div class="tab-content">
         <div class="tab-pane table-responsive no-padding active" id="tab_1">
-          <table export-table class="table table-bordered table-hover table-condensed">
+           <table export-table class="table rwd-table table-striped">
             <thead>
               <tr>
                 <th>#</th>
@@ -155,7 +154,7 @@
                 <th>Chapter Name</th>
                 <th>Due Date</th>
                 <th>Description</th>
-                <th class="pull-right" ng-if="showRole(['admin'])">Action</th>
+                <th class="pull-right" >Action</th>
               </tr>
             </thead>
             <tbody>
@@ -163,22 +162,22 @@
                 <td>{{$index+1}}</td>
                 <td><span editable-text="assignment.assignment_title" e-name="assignment.assignment_title" onaftersave="EditAssignments($index)" e-form="rowform" e-required>{{assignment.assignment_title || 'empty' }}</span></td>
                 <!--<td><span editable-text="assignment.chapter_name" e-name="assignment.chapter_name" onaftersave="EditAssignments($index)" e-form="rowform" e-required>{{assignment.chapter_name || 'empty' }}</span></td>-->
-                <td class="select-td">
-                                                    <span editable-select="assignment.chapter_name" e-name="chapter_name" e-form="rowform" e-selectpicker e-ng-options="chapter.title as chapter.title for chapter in chapterData">
-                {{ assignment.chapter_name}}
-              </span>
+                <td><a href="">
+                                                    <!--<span editable-select="assignment.chapter_name" e-name="chapter_name" e-form="rowform" e-selectpicker e-ng-options="chapter.title as chapter.title for chapter in chapterData">-->
+                {{ assignment.chapter_doc[0].title}}</a>
+              <!--</span>-->
                                                 </td>
                 <td><span editable-text="assignment.due_date" e-name="assignment.due_date" onaftersave="EditAssignments($index)" e-form="rowform" e-required>{{assignment.due_date || 'empty' }}</span></td>
                 <td><span editable-text="assignment.description" e-name="assignment.description" onaftersave="EditAssignments($index)" e-form="rowform" e-required>{{assignment.description || 'empty' }}</span></td>
-                <td class="pull-right" ng-if="showRole(['admin'])">
+                <td class="pull-right" >
                   <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == assignment">
-                    <button type="submit" ng-click="EditAssignments($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">Save</button>
-                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">Cancel</button>
+                    <button type="submit" ng-click="EditAssignments($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
+                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
                   </form>
 
                   <div class="buttons" ng-show="!rowform.$visible">
-                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">Edit</button>
-                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteAssignments($index)" ng-confirm-click="Are you sure you want to delete this item?">Delete</button>
+                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
+                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteAssignments($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
                     <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
                   </div>
                 </td>

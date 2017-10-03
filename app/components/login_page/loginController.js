@@ -1,6 +1,8 @@
 angular.module('school_erp')
     .controller("loginController", ['$http', '$scope', '$rootScope', 'authService', '$state', 'ngDialog', '$window', function($http, $scope, $rootScope, authService, $state, ngDialog, $window) {
         $scope.datab = [];
+        // $scope.image=[{
+        //    "url": "dist/img/school2.png"}]
 
         $scope.login = function(data) {
             var dataValue = {

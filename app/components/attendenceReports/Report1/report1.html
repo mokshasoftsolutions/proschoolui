@@ -27,9 +27,9 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Select Class</label>
-                        <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId">
-                        <option selected="selected">--Select--</option>
-                       <option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>
+                        <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId" ng-options="classData.class_id as classData.name for classData in classDatanew ">
+                        <!--<option selected="selected">--Select--</option>
+                       <option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
                       </select>
                     </div>
                 </div>
@@ -37,9 +37,9 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Select Section</label>
-                        <select class="form-control select2" style="width: 100%;" ng-model="secId">
-                        <option selected="selected">--Select--</option>
-                       <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>
+                        <select class="form-control select2" style="width: 100%;" ng-model="secId" ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
+                        <!--<option selected="selected">--Select--</option>
+                       <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
                         
                       </select>
                     </div>
@@ -74,8 +74,8 @@
                                 <i class="fa fa-calendar"></i>
                             </div>
                             <!--<input type="text"  ng-model="data.due_date" class="form-control pull-right" id="datepicker">-->
-                            <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="MM-dd-yyyy" style="z-index:999">
-                                <input class="form-control" data-ng-change=getDate(select_date); name="selectDate" type="text" ng-model="select_date" ng-readonly="true"
+                            <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="yyyy-MM-dd" style="z-index:999">
+                                <input class="form-control"   name="selectDate" type="text" ng-model="select_date" ng-readonly="true"
                                     placeholder="Enter ..." required/>
                             </datepicker>
                         </div>
@@ -84,7 +84,7 @@
 
 
                 <div class="col-md-12">
-                    <button type="submit" ng-click="getAttendence()" class="btn btn-primary pull-right">Select</button>
+                    <button type="submit" ng-click="getAttendence(select_date,classId,secId)" class="btn btn-primary pull-right">Select</button>
                     <li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>
                 </div>
 

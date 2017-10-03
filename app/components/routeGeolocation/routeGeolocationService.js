@@ -2,10 +2,11 @@ angular.module('school_erp')
 .factory('routeGeoLocationServices',['$http', 'globalServices', function($http, globalServices){
     var routeGeoLocationServices = {};
 
-    routeGeoLocationServices.getNoticeBoard = function() {
+     routeGeoLocationServices.getGeolocation = function(vehicle_code) {
             return $http({
                 method: 'GET',
-                url: globalServices.globalValue.baseURL + 'api/noticeboard/SCH-9271'
+                url: "http://192.168.1.4:2016/api/netcomp/getAllDevicesDetails"+vehicle_code
+                //url: globalServices.globalValue.baseURL + 'api/noticeboard/SCH-9271'
             })
         };
 

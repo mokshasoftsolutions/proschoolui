@@ -1,12 +1,12 @@
 <section class="content-header">
     <h1>
-        <i class="fa fa-calendar-check-o"></i> Attendance
-        <small>Students</small>
+        <i class="fa fa-calendar-check-o"></i> Student Attendance
+        <small>Attendance</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Attendance</li>
-        <li class="active">Student Attendance</li>
+        <li>Student Attendance</li>
+        <li class="active">Attendance</li>
     </ol>
 </section>
 <!-- /.Content Header -->
@@ -17,13 +17,13 @@
 
     <div class="box box-default">
         <div class="box-header with-border">
-            <i class="fa fa-search" aria-hidden="true"></i>
-            <h3 class="box-title">Select Criteria</h3>
+            <!--<i class="fa fa-search" aria-hidden="true"></i>
+            <h3 class="box-title">Select Criteria</h3>-->
         </div>
         <!-- /.box-header -->
         <div class="box-body">
             <div class="row">
-                <div class="col-md-3">
+                <!--<div class="col-md-3">
                     <div class="form-group">
                         <label>Batch Year</label>
                         <select class="form-control select2" style="width: 100%;">
@@ -32,9 +32,9 @@
                         <option>2018-2019</option>
                       </select>
                     </div>
-                </div>
+                </div>-->
 
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label>Class</label>
                         <select class="form-control select2" ng-options="class.class_id as class.name for class in classDatanew" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId">
@@ -42,7 +42,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label>Section</label>
                         <select class="form-control select2" ng-options="sec.section_id as sec.name for sec in secData" data-ng-change="getStudents(secId)" style="width: 100%;" ng-model="secId">                    
@@ -51,10 +51,10 @@
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label>Search by keyword</label>
-                        <input type="text" name="search_text" class="form-control" placeholder="Search...">
+                        <input type="text" ng-model="searchStudent" name="search_text" class="form-control" placeholder="Search...">
                     </div>
                 </div>
 
@@ -107,15 +107,14 @@
                                     </div>
                                     <span class="selection">All</span>
                                 </th>
-                                <th>Admission No</th>
                                 <th>Roll No</th>
                                 <th>Name</th>
                                 <th>Attendance
                                     <select ng-if="check" class="select2" style="font-weight:normal;margin-left:15px;" ng-change="markAttendance(attendVal)" ng-model="attendVal">
-                                  <option selected="selected">--Select--</option>
+                                  <option value="" selected="selected">--Select--</option>
                                   <option value="Present">Present</option>
-                                  <option value="Late with excuse">Late with excuse</option>
-                                  <option value="Late">Late</option>
+                                  <!--<option value="Late with excuse">Late with excuse</option>
+                                  <option value="Late">Late</option>-->
                                   <option value="Absent">Absent</option>
                                   <option value="On Leave">On Leave</option>
                                 </select>
@@ -128,7 +127,7 @@
                         </thead>
                         <tbody>
 
-                            <tr ng-repeat="student in attendanceBox">
+                            <tr ng-repeat="student in attendanceBox | filter:searchStudent">
 
                                 <td>{{$index+1}}</td>
                                 <td>
@@ -137,7 +136,6 @@
                                         <label for="squaredFour{{$index}}"></label>
                                     </div>
                                 </td>
-                                <td>{{student.admission_no}}</td>
                                 <td>{{student.roll_no}}</td>
                                 <td>{{student.first_name}} {{student.last_name}}</td>
                                 <td>

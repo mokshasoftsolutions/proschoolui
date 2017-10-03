@@ -1,0 +1,192 @@
+<section class="content-header">
+  <h1>
+    <i class="fa fa-money"></i> Fee Collection
+    <small>Collect Fees</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li>Fee Collection</li>
+    <li class="active">Collect Fees</li>
+  </ol>
+</section>
+<!-- /.Content Header -->
+
+<!-- Main content -->
+<section class="content">
+  <!-- Select Criteria -->
+
+  <div class="box box-default">
+    <div class="box-header with-border">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <h3 class="box-title">Select Criteria</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+      <div class="row">
+
+
+        <div class="col-md-4">
+          <label>Select Class</label>
+          <select data-ng-change="populateSections(classId)" name="selectSubject" class="form-control select2" ng-model="classId" style="width: 100%;">
+                        <option selected="selected">--Select--</option>
+                        <option ng-repeat="class in classData" value="{{class.class_id}}">{{class.name}}</option>
+                      </select>
+        </div>
+        <div class="col-md-4">
+          <label>Select Section</label>
+          <select data-ng-change="populateSubjects(secId)" name="selectSubject" class="form-control select2" ng-model="secId" style="width: 100%;">
+                        <option selected="selected">--Select--</option>
+                        <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>
+                      </select>
+        </div>
+
+
+
+        <!--<div class="col-md-4">
+                    <div class="form-group">
+                      <label>Search by keyword</label>
+                      <input type="text" name="search_text" class="form-control" placeholder="Search...">
+                    </div>
+                  </div>-->
+
+      </div>
+    </div>
+
+    <div class="box-footer">
+      <button type="submit" ng-click="getStudentValue(secId)" class="btn btn-primary pull-right">Search</button>
+    </div>
+  </div>
+
+  <!-- Content List -->
+  <div class="box box-default">
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-list"></i> List  View</a></li>
+      </ul>
+    </div>
+
+    <div class="box-body">
+      <div class="tab-content">
+        <div class="tab-pane table-responsive no-padding active" id="tab_1">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Student Name</th>
+                <th>Class</th>
+                <th>Section</th>
+                <th>Roll No</th>
+                <th>Father Name</th>
+                <th>Mobile No</th>
+                <th class="pull-right">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="student in studentData">
+                <td>{{$index+1}}</td>
+                <td>{{student.first_name}} {{student.last_name}}</td>
+                <td>{{student.school_classes[0].name}}</td>
+                <td>{{student.sections[0].name}}</td>
+                <td>{{student.roll_no}}</td>
+                <td> {{student.parents[0].parent_name }}</td>
+                <td>{{student.parents[0].parent_contact}}</td>
+                <td class="pull-right">
+                  <a class="btn btn-primary btn-xs" ng-click="getStudent($index)" data-toggle="modal" data-target="#myModal" title data-original-title> Collect Fees
+                      </a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Edit values modal Starts here-->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <form name="feeDetails"  novalidate>
+        <div class="modal-header">
+          <h3>Collect Fee</h3>
+        </div>
+        <div class="modal-body">
+
+          <!-- /.box-header -->
+          <!-- /.box-header -->
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Date </label>
+                  <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="dd-MM-yyyy" style="z-index:999">
+                    <input class="form-control" name="Date" type="text" ng-model="data.date" ng-readonly="true" placeholder="Enter ..." required/>
+                  </datepicker>
+                </div>
+              </div>
+
+              <!--<div class="col-md-4">
+                <div class="form-group">
+                  <label>Fee Category</label>
+                  <select class="form-control select2" style="width: 100%;" name="FeeCatogery" ng-model="data.fee_catogery" ng-options="fee.fee_category as fee.fee_category for fee in feeTypeData">
+                       
+                      </select>
+                </div>
+              </div>-->
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Fee Type</label>
+                  <select class="form-control select2" style="width: 100%;" ng-options="type.fee_type as type.fee_type for type in feeTypeData"
+                    ng-model="data.fee_type">
+              
+                      </select>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Payment Mode</label>
+                  <select class="form-control select2" style="width: 100%;" ng-model="data.payment_mode">
+                        <option selected="selected">--Select--</option>
+                        <option>Cash</option>
+                        <option>Cheque</option>
+                        <option>paytm</option>
+                      </select>
+                </div>
+              </div>
+
+              <!--<div class="col-md-4">
+                <div class="form-group">
+                  <label>Amount</label>
+                  <input type="text" class="form-control" placeholder="Enter ..." ng-model="data.amount">
+                </div>
+              </div>-->
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Fine</label>
+                  <input type="text" class="form-control" placeholder="Enter ..." ng-model="data.fine">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Discount</label>
+                  <input type="text" class="form-control" placeholder="Enter ..." ng-model="data.discount">
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" ng-click="addFee(data,$index)" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -28,27 +28,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-      <div class="row">
-        <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
-          <div class="form-group">
-            <label>Select Class</label>
-            <select name="class" class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId">
-                        <option selected="selected">--Select--</option>
-                        <option ng-repeat="class in classData" value="{{class.class_id}}">{{class.name}}</option>
-                      </select>
-          </div>
-        </div>
-
-        <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
-          <div class="form-group">
-            <label>Select Section</label>
-            <select data-ng-change="populateExams(secId)" class="form-control select2" name="section" style="width: 100%;" ng-model="secId">
-                       <option selected="selected">--Select--</option>
-                        <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>
-                      </select>
-          </div>
-        </div>
-      </div>
+      
       <div class="row">
         <div class="col-md-12" ng-if="showRole(['admin')">
           <button type="submit" class="btn btn-primary pull-right">Select</button>
@@ -130,7 +110,7 @@
                 <th>Examination Title</th>
                 <th>Start Date</th>
                 <!--<th>Due Date</th>-->
-                <th class="pull-right" ng-if="showRole(['admin'])">Action</th>
+                <th class="pull-right">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -139,7 +119,7 @@
                 <td><span editable-text="exam.exam_title" e-name="editdata.exam_title" onaftersave="EditExamSchedule($index)" e-form="rowform" e-required>{{exam.exam_title || 'empty' }}</span></td>
                 <td><span editable-text="exam.from_date" e-name="editdata.from_date" onaftersave="EditExamSchedule($index)" e-form="rowform" e-required>{{exam.from_date || 'empty' }}</span></td>
                 <!--<td>{{exam.exam_classes}}</td>  -->
-                <td class="pull-right" ng-if="showRole(['admin'])">
+                <td class="pull-right">
                   <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == exam">
                     <button type="submit" ng-click="EditExamSchedule($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">Save</button>
                     <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">Cancel</button>
@@ -159,3 +139,72 @@
     </div>
   </div>
 </section>
+<!--Edit values modal Starts here-->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h3>Edit Schedule</h3>
+      </div>
+      <form name="examScheduleEdit" ng-submit="EditExamSchedule(editdata)" novalidate>
+
+        <div class="modal-body">
+
+          <!-- /.box-header -->
+          <!-- /.box-header -->
+
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Examination Title</label>
+                <input type="text" class="form-control" ng-model="editdata.exam_title" placeholder="Enter ...">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Start Date</label>
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <!--<input type="text" class="form-control pull-right" ng-model="data.exam_classes" id="datepicker">-->
+                  <datepicker date-format="dd-MM-yyyy" style="z-index:999">
+                    <input class="form-control" name="startDate" type="text" ng-readonly="true" ng-model="editdata.from_date" placeholder="Enter ..."
+                      required/>
+                  </datepicker>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Due Date</label>
+
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <!--<input type="text" class="form-control pull-right" ng-model="data.from_date" id="datepicker">-->
+                  <datepicker date-format="dd-MM-yyyy" style="z-index:999">
+                    <input class="form-control" name="startDate" type="text" ng-model="editdata." ng-readonly="true" placeholder="Enter ..."
+                      required/>
+                  </datepicker>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Edit Schedule</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+
+  </div>
+</div>
+</div>

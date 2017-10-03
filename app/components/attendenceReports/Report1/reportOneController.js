@@ -1,49 +1,57 @@
 angular.module('school_erp')
-    .controller("reportOneController", ['$http', '$scope','$rootScope', '$window', 'globalServices', 'examServices', 'subjectsServices', 'studentServices', 'donutChartOneService', 'ngDialog', function ($http, $scope,$rootScope,$window, globalServices, examServices, subjectsServices, studentServices, donutChartOneService, ngDialog) {
+    .controller("reportOneController", ['$http', '$scope', '$rootScope', '$window', 'globalServices', 'examServices', 'subjectsServices', 'studentServices', 'donutChartOneService', 'ngDialog', function ($http, $scope, $rootScope, $window, globalServices, examServices, subjectsServices, studentServices, donutChartOneService, ngDialog) {
         $scope.evalData = [];
         $scope.data = [];
- $scope.getClassesInitalLoad = function () {
-        globalServices.getClass()
-            .success(function (data, status) {
-                $scope.classDatanew = data.school_classes;// Api list-name
-                $scope.classId = $scope.classDatanew[0].class_id;
-                console.log($scope.classId);
-                $scope.populateSections($scope.classId);
-            })
-            .error(function (data, success) {
-            })
- }
+        $scope.select_date = "2017-09-12";
+        $scope.initialLoadAttendence = false;
+
+        $scope.getClassesInitalLoad = function () {
+            globalServices.getClass()
+                .success(function (data, status) {
+                    $scope.classDatanew = data.school_classes; // Api list-name
+                    $scope.classId = data.school_classes[0].class_id;
+               
+                    $scope.populateSections($scope.classId);
+                })
+                .error(function (data, success) {})
+        }
         $scope.populateSections = function (classId) {
             globalServices.getSections(classId)
                 .success(function (data, status) {
-                    $scope.secData = data.class_sections;// Api list-name
-                    $scope.secId = $scope.secData[0].section_id;
-                    console.log($scope.secId);
-                    // $scope.getAttendence($scope.date1,$scope.classId,$scope.secId);
+                    $scope.secData = data.class_sections; // Api list-name
+                    $scope.secId = data.class_sections[0].section_id;
+                if($scope.initialLoadAttendence == false){
+                     $scope.getAttendence($scope.select_date, $scope.classId, $scope.secId);
+                }
+                    
                     // $scope.getAttendence($scope.classId,$scope.secId);
 
                 })
-                .error(function (data, success) {
-                })
+                .error(function (data, success) {})
         }
 
-         // Role based Display
+        // Role based Display
         $scope.showRole = function (role) {
             return globalServices.fetchRoleAuth(role);
         }
 
 
-        $scope.getDate = function (select_date) {
-            $scope.date1 = $scope.select_date
-            $scope.getAttendence($scope.date1, $scope.classId, $scope.secId);
-            console.log($scope.date1);
-        }
+        // $scope.getDate = function (select_date) {
+         
+        //     $scope.date1 = $scope.select_date
+        //     console.log($scope.date1);
+          
+        //     $scope.getAttendence($scope.date1, $scope.classId, $scope.secId);
+        //     console.log($scope.date1);
+        // }
 
         $scope.getAttendence = function (date, classId, secId) {
+            $scope.initialLoadAttendence = true;
             var arrPresent = new Array();
             var arrAbsent = new Array();
             var arrLeave = new Array();
             $scope.attData = [];
+            
             donutChartOneService.getAttendence(date, classId, secId)
                 .success(function (data, status) {
                     $scope.attData = data.donutchart;
@@ -53,7 +61,11 @@ angular.module('school_erp')
 
                     if ($scope.attData == 0) {
                         // array empty or does not exist
-                        $scope.chartdata = [[], [], []];
+                        $scope.chartdata = [
+                            [],
+                            [],
+                            []
+                        ];
                         if ($scope.chartdata) {
                             ngDialog.open({
                                 template: '<p>Report is not available.</p>',
@@ -78,8 +90,7 @@ angular.module('school_erp')
                             console.log($scope.data1);
                             $scope.present = ($scope.data1).length;
                             console.log($scope.present);
-                        }
-                        else if (item.status == "Absent") {
+                        } else if (item.status == "Absent") {
 
                             arrAbsent.push(item.status);
 
@@ -93,8 +104,7 @@ angular.module('school_erp')
                             console.log($scope.absent);
 
 
-                        }
-                        else if (item.status == "On Leave") {
+                        } else if (item.status == "On Leave") {
 
                             arrLeave.push(item.status);
 
@@ -107,7 +117,11 @@ angular.module('school_erp')
                             $scope.leave = ($scope.leave1).length;
                             console.log($scope.leave);
                         }
-                        $scope.chartdata = [[$scope.present], [$scope.absent], [$scope.leave]];
+                        $scope.chartdata = [
+                            [$scope.present],
+                            [$scope.absent],
+                            [$scope.leave]
+                        ];
                         return;
                     });
 
@@ -133,8 +147,7 @@ angular.module('school_erp')
                             verticalAlign: "bottom",
                             align: "center"
                         },
-                        series: [
-                            {
+                        series: [{
                                 //values : [50],
                                 text: "present"
                             },
@@ -150,15 +163,14 @@ angular.module('school_erp')
                     };
 
                 })
-                .error(function (data, success) {
-                })
+                .error(function (data, success) {})
         }
 
         if ($rootScope.role == 'parent') {
 
             $scope.secId = $rootScope.student.section;
-           // $scope.populateSubjects($scope.secId);
-          
+            // $scope.populateSubjects($scope.secId);
+
 
         } else {
             $scope.getClassesInitalLoad();

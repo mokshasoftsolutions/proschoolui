@@ -26,7 +26,7 @@
 
       <div class="panel-body">
         <!--//pdf-save-content="idOneGraph"-->
-        <table export-table class="table table-bordered table-hover table-condensed" style="width: 100%; margin-top: 20px">
+        <table export-table class="table rwd-table table-striped" style="width: 100%; margin-top: 22px">
           <thead>
             <tr>
               <th>#</th>
@@ -37,7 +37,7 @@
               <th>Quantity</th>
               <th>Rack Number</th>
               <th>Inward Date</th>
-              <th class="pull-right" ng-if="showRole(['admin'])">Action</th>
+              <th class="pull-right" >Action</th>
             </tr>
           </thead>
           <tr ng-repeat="books in data" class="editable-row">
@@ -59,15 +59,15 @@
             <td><span editable-text="books.inward_date" e-name="editdata.inward_date" onaftersave="EditBook($index)" e-form="rowform"
                 e-required>{{books.inward_date || 'empty' }}</span></td>
 
-            <td class="pull-right" ng-if="showRole(['admin'])">
+            <td class="pull-right" >
               <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == books">
-                <button type="submit" ng-click="EditBook($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">Save</button>
-                <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">Cancel</button>
+                <button type="submit" ng-click="EditBook($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
+                <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
               </form>
 
               <div class="buttons" ng-show="!rowform.$visible">
-                <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">Edit</button>
-                <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBook($index)" ng-confirm-click="Are you sure you want to delete this item?">Delete</button>
+                <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
+                <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBook($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
               </div>
             </td>

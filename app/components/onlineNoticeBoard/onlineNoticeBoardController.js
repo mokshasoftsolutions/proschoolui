@@ -1,14 +1,17 @@
 angular.module('school_erp')
-    .controller("noticeboardController", ['$http', '$scope', '$rootScope', 'globalServices', 'NoticeBoardServices', 'ngDialog', function ($http, $scope, $rootScope, globalServices, NoticeBoardServices, ngDialog) {
+    .controller("noticeboardController", ['$http', '$scope','$filter','$rootScope', 'globalServices', 'NoticeBoardServices', 'ngDialog', function ($http, $scope, $filter,$rootScope, globalServices, NoticeBoardServices, ngDialog) {
         $scope.NoticeBoardData = [];
         $scope.editdata = [];
 
 
         NoticeBoardServices.getNoticeBoard()
             .success(function (data, status) {
+                 console.log(JSON.stringify(data));
                 $scope.NoticeBoardData = data.messages;
-                console.log(JSON.stringify(data));
+               
                 console.log($scope.NoticeBoardData);
+                 $scope.message_id = $scope.NoticeBoardData[0].messages_id;
+            console.log($scope.message_id);
             })
             .error(function (data, success) {
             })
@@ -20,8 +23,10 @@ angular.module('school_erp')
             var NoticeBoardDetails = {
                 subject: $scope.data.subject,
                 messages: $scope.data.message,
-                date: new Date().toDateString()
+                date: new Date().toDateString(),
+                time:$filter('date')(new Date(), 'HH:mm')
             }
+            console.log(NoticeBoardDetails);
             NoticeBoardServices.setNoticeBoard(NoticeBoardDetails)
                 .success(function (data, status) {
                     ngDialog.open({
@@ -46,49 +51,49 @@ angular.module('school_erp')
                 })
         }
 
-        $scope.EditNoticeBoard = function (value, noticeboard) {
+        // $scope.EditNoticeBoard = function (value, noticeboard) {
 
-            console.log("messsage");
-            $scope.noticeboard = angular.copy($scope.NoticeBoardData[value]);
-            $scope.message_id = $scope.noticeboard.message_id;
-            console.log($scope.message_id);
-            var NoticeBoardDetails = {
-                subject: $scope.noticeboard.subject,
-                messages: $scope.noticeboard.messages,
-                date: $scope.noticeboard.date,
-            }
-            console.log(NoticeBoardDetails);
+        //     console.log("messsage");
+        //     $scope.noticeboard = angular.copy($scope.NoticeBoardData[value]);
+        //     $scope.message_id = $scope.noticeboard.message_id;
+        //     console.log($scope.message_id);
+        //     var NoticeBoardDetails = {
+        //         subject: $scope.noticeboard.subject,
+        //         messages: $scope.noticeboard.messages,
+        //         date: $scope.noticeboard.date,
+        //     }
+        //     console.log(NoticeBoardDetails);
 
-            $scope.addEditEmployee(NoticeBoardDetails, $scope.message_id);
-        }
+        //     $scope.addEditEmployee(NoticeBoardDetails, $scope.message_id);
+        // }
 
-        $scope.addEditNoticeBoard = function (NoticeBoardDetails, message_id) {
-            NoticeBoardServices.EditNoticeBoard(NoticeBoardDetails, message_id)
-                .success(function (data, status) {
-                    // ngDialog.open({
-                    //     template: '<p>Station is Edited Successfully.</p>',
-                    //     plain: true
-                    // });
-                    $scope.editdata = [];
-                    NoticeBoardServices.getNoticeBoard()
-                        .success(function (data, status) {
-                            $scope.NoticeBoardData = data.noticeboard;
-                        })
-                        .error(function (data, success) {
-                        })
-                })
-                .error(function (data, success) {
-                    ngDialog.open({
-                        template: '<p>Some Error Occured!</p>',
-                        plain: true
-                    });
-                })
+        // $scope.addEditNoticeBoard = function (NoticeBoardDetails, message_id) {
+        //     NoticeBoardServices.EditNoticeBoard(NoticeBoardDetails, message_id)
+        //         .success(function (data, status) {
+        //             // ngDialog.open({
+        //             //     template: '<p>Station is Edited Successfully.</p>',
+        //             //     plain: true
+        //             // });
+        //             $scope.editdata = [];
+        //             NoticeBoardServices.getNoticeBoard()
+        //                 .success(function (data, status) {
+        //                     $scope.NoticeBoardData = data.noticeboard;
+        //                 })
+        //                 .error(function (data, success) {
+        //                 })
+        //         })
+        //         .error(function (data, success) {
+        //             ngDialog.open({
+        //                 template: '<p>Some Error Occured!</p>',
+        //                 plain: true
+        //             });
+        //         })
 
-        }
+        // }
 
         $scope.DeleteNoticeBoard = function (value) {
             $scope.editdata = angular.copy($scope.NoticeBoardData[value]);
-            $scope.message_id = $scope.editdata.message_id;
+            $scope.message_id = $scope.editdata.messages_id;
             console.log($scope.message_id);
             NoticeBoardServices.DeleteNoticeBoard($scope.message_id)
                 .success(function (data, status) {
@@ -96,10 +101,10 @@ angular.module('school_erp')
                         template: '<p>Notice is Deleted Successfully.</p>',
                         plain: true
                     });
-                    $scope.editdata = [];
+                    //$scope.editdata = [];
                     NoticeBoardServices.getNoticeBoard()
                         .success(function (data, status) {
-                            $scope.NoticeBoardData = data.noticeboard;
+                            $scope.NoticeBoardData = data.messages;
                         })
                         .error(function (data, success) {
                         })

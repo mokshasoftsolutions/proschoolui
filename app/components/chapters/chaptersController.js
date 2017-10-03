@@ -55,11 +55,12 @@ angular.module('school_erp')
             $scope.subId = subId;
             chaptersServices.getChapters(subId)
                 .success(function (data, status) {
+                     console.log(JSON.stringify(data))
                     // console.log(subId)
                     // console.log($scope.subId);
                     $scope.chaptersData = data[subId + ""];
                     console.log($scope.chaptersData);
-                    // console.log(JSON.stringify(data))
+                   
 
                 })
                 .error(function (data, success) {});

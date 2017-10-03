@@ -23,7 +23,7 @@
         <!-- /.box-header -->
         <div class="box-body">
             <div class="row">
-                <div class="col-md-3">
+                <!--<div class="col-md-3">
                     <div class="form-group">
                         <label>Batch Year</label>
                         <select class="form-control select2" style="width: 100%;">
@@ -32,13 +32,13 @@
                         <option>2018-2019</option>
                       </select>
                     </div>
-                </div>
+                </div>-->
 
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label>Employee Type</label>
                         <select ng-model="search.job_category" class="form-control select2" style="width: 100%;">
-                        <option value="" selected="selected">--Select--</option>
+                        <option value="" selected="selected">--All--</option>
                         <option value="teaching">Teaching</option>
                         <option value="non-teaching">Non-Teaching</option>
                         <option value="administrative">Administrative</option>
@@ -46,21 +46,21 @@
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label>Gender</label>
                         <select ng-model="search.gender" class="form-control select2" style="width: 100%;">
-                        <option value="" selected="selected">--Select--</option>
+                        <option value="" selected="selected">--All--</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                       </select>
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label>Search by keyword</label>
-                        <input ng-model="search.last_name" type="text" name="search_text" class="form-control" placeholder="Search...">
+                        <input ng-model="search.first_name" type="text" name="search_text" class="form-control" placeholder="Search...">
                     </div>
                 </div>
 
@@ -117,10 +117,10 @@
                                 <th>Name</th>
                                 <th>Attendance
                                     <select ng-if="check" class="select2" style="font-weight:normal;margin-left:15px;" ng-change="markAttendance(attendVal)" ng-model="attendVal">
-                                  <option selected="selected">--Select--</option>
+                                  <option value="" selected="selected">--Select--</option>
                                   <option value="Present">Present</option>
-                                  <option value="Late with excuse">Late with excuse</option>
-                                  <option value="Late">Late</option>
+                                  <!--<option value="Late with excuse">Late with excuse</option>
+                                  <option value="Late">Late</option>-->
                                   <option value="Absent">Absent</option>
                                   <option value="On Leave">On Leave</option>
                                 </select>
@@ -130,7 +130,7 @@
                         </thead>
                         <tbody>
 
-                            <tr ng-repeat="employee in attendanceBox | filter:search:true">
+                            <tr ng-repeat="employee in attendanceBox | filter:{first_name :search.first_name,job_category:search.job_category,gender:search.gender}">
                                 <td>{{$index+1}}</td>
                                 <td>
                                     <div class="squaredFour">
@@ -146,14 +146,14 @@
                                         <input ng-change="attn(student,attend)" type="radio" ng-model="employee.status" value="Present" id="attendencetype+{{$index}}" name="attendencetype+{{$index}}">
                                         <label for="inlineRadio1"> Present </label>
                                     </div>
-                                    <div class="radio radio-info radio-inline">
+                                    <!--<div class="radio radio-info radio-inline">
                                         <input ng-change="attn(student,attend)" type="radio" ng-model="employee.status" value="Late with excuse" name="attendencetype+{{$index}}">
                                         <label for="inlineRadio1"> Late with excuse </label>
                                     </div>
                                     <div class="radio radio-info radio-inline">
                                         <input ng-change="attn(student,attend)" type="radio" ng-model="employee.status" value="Late" name="attendencetype+{{$index}}">
                                         <label for="inlineRadio1"> Late </label>
-                                    </div>
+                                    </div>-->
                                     <div class="radio radio-info radio-inline">
                                         <input ng-change="attn(student,attend)" type="radio" ng-model="employee.status" value="Absent" name="attendencetype+{{$index}}">
                                         <label for="inlineRadio1"> Absent </label>

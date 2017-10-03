@@ -1,8 +1,10 @@
 angular.module('school_erp')
     .controller("assignSbjectsController", ['$http', '$scope', 'assignServices', 'ngDialog', 'globalServices', 'subjectsServices', 'employeeServices', function ($http, $scope, assignServices, ngDialog, globalServices, subjectsServices, employeeServices) {
         $scope.employeeData = [];
+        $scope.teacherData = [];
+        $scope.subjects = [];
         $scope.data = {};
-      //  $scope.teachId = '';
+        //  $scope.teachId = '';
         // employeeServices.getEmployee()
         // .success(function(data, status){
         //     $scope.employeeData = data.employee;
@@ -20,10 +22,12 @@ angular.module('school_erp')
             })
 
         $scope.populateSections = function (classId) {
+            $scope.secData = [];
             globalServices.getSections(classId)
                 .success(function (data, status) {
                     $scope.secData = data.class_sections;// Api list-name
                     $scope.secId = $scope.secData[0].section_id;
+                    $scope.getTeacher($scope.secId);
                     $scope.getSubjects($scope.secId);
                 })
                 .error(function (data, success) {
@@ -52,34 +56,63 @@ angular.module('school_erp')
             });
         };
 
+        var arrTeacher = new Array();
         employeeServices.getEmployee()
             .success(function (data, status) {
-                console.log(JSON.stringify(data));
+             //   console.log(JSON.stringify(data));
                 $scope.employeeData = data.employee;
+
+                $scope.array = $.map($scope.employeeData, function (item) {
+                    //console.log(item);
+                    //$scope.item=null;
+                    if (item.job_category == "teaching") {
+                        var id = item.employee_id;
+                        var name = item.first_name + ' ' + item.last_name;
+                        console.log(name);
+                        console.log(id);
+                        arrTeacher.push(name);
+                        // arrTeacher.push(id);
+
+                        $scope.teachers = [];
+                        for (var i = 0; i < arrTeacher.length; i++) {
+                            $scope.teachers.push(arrTeacher[i]);
+                        }
+                        console.log("message");
+                        console.log($scope.teachers);
+                        // $scope.present = ($scope.data1).length;
+                        // console.log($scope.present);
+                    }
+                    return;
+                });
+
+
+                // $scope.empType=$scope.employeeData[0].job_category;
+                // console.log($scope.empType);
             })
             .error(function (data, success) {
             })
 
         $scope.addTeacher = function (data) {
-           // console.log(data);
+            console.log("message");
 
 
             var teacherDetails = {
+                section_id: $scope.secId,
                 //employee_id:data.teachId.
                 //subject_id: $scope.data.subjectObj.subject_id,
-                subject_name:$scope.data.subjectObj,
-               // employee_id:$scope.data.teachId,
-                teacher_name:$scope.data.teachId
+                subject_name: $scope.data.subjectObj,
+                employee_id: $scope.data.teachId,
+                // teacher_name:$scope.data.teachId
 
 
             }
             console.log(teacherDetails);
 
 
-            assignServices.setTeacher(teacherDetails,$scope.secId)
+            assignServices.setTeacher(teacherDetails)
                 .success(function (data, status) {
                     ngDialog.open({
-                        template: '<p>ExamPapers are Added Successfully.</p>',
+                        template: '<p>Subjects are Added Successfully.</p>',
                         plain: true
                     });
                     $scope.data = [];
@@ -100,7 +133,8 @@ angular.module('school_erp')
                     $scope.teacherData = data.teachers;
 
                     console.log(JSON.stringify(data));
-                  //  console.log($scope.teacherData);
+                    // $scope.subjects = $scope.teacherData[0].subjects;
+                    //   console.log($scope.subjects);
                     //$scope.employeeData = data.employee;
                 })
                 .error(function (data, success) {
@@ -112,42 +146,42 @@ angular.module('school_erp')
             return globalServices.fetchRoleAuth(role);
         }
         //$scope.getSubjects();
-        $scope.EditAssignSubjects = function (value, teachers) {
+        // $scope.EditAssignSubjects = function (value, teachers) {
 
-            console.log("messsage");
-            $scope.teachers = angular.copy($scope.teacherData[value]);
-            console.log($scope.teachers);
-            $scope.teacher_id = $scope.teachers.teacher_id;
-            console.log($scope.teacher_id);
-            var TeacherDetails = {
-                title: $scope.teachers.subject_name,
-                chapter_code: $scope.teachers.teacher_id,
-                // subject_name: $scope.chapter.subject_name,
-                // description: $scope.chapter.description,
-                // no_of_topics: $scope.chapter.no_of_topics,
-            }
-            console.log(TeacherDetails);
+        //     console.log("messsage");
+        //     $scope.teachers = angular.copy($scope.teacherData[value]);
+        //     console.log($scope.teachers);
+        //     $scope.teacher_id = $scope.teachers.teacher_id;
+        //     console.log($scope.teacher_id);
+        //     var TeacherDetails = {
+        //         title: $scope.teachers.subject_name,
+        //         chapter_code: $scope.teachers.teacher_id,
+        //         // subject_name: $scope.chapter.subject_name,
+        //         // description: $scope.chapter.description,
+        //         // no_of_topics: $scope.chapter.no_of_topics,
+        //     }
+        //     console.log(TeacherDetails);
 
-            $scope.addEditAssignSubjects(TeacherDetails, $scope.teacher_id);
-        }
-        $scope.addEditAssignSubjects = function (TeacherDetails, teacher_id) {
-            assignServices.EditAssignSubject(TeacherDetails, teacher_id)
-                .success(function (data, status) {
-                    // ngDialog.open({
-                    //     template: '<p>Station is Edited Successfully.</p>',
-                    //     plain: true
-                    // });
-                    $scope.editdata = [];
-                    $scope.getTeacher();
-                })
-                .error(function (data, success) {
-                    ngDialog.open({
-                        template: '<p>Some Error Occured!</p>',
-                        plain: true
-                    });
-                })
+        //     $scope.addEditAssignSubjects(TeacherDetails, $scope.teacher_id);
+        // }
+        // $scope.addEditAssignSubjects = function (TeacherDetails, teacher_id) {
+        //     assignServices.EditAssignSubject(TeacherDetails, teacher_id)
+        //         .success(function (data, status) {
+        //             // ngDialog.open({
+        //             //     template: '<p>Station is Edited Successfully.</p>',
+        //             //     plain: true
+        //             // });
+        //             $scope.editdata = [];
+        //             $scope.getTeacher();
+        //         })
+        //         .error(function (data, success) {
+        //             ngDialog.open({
+        //                 template: '<p>Some Error Occured!</p>',
+        //                 plain: true
+        //             });
+        //         })
 
-        }
+        // }
 
         $scope.DeleteAssignSubject = function (value) {
             $scope.editdata = angular.copy($scope.teacherData[value]);
@@ -160,7 +194,7 @@ angular.module('school_erp')
                         plain: true
                     });
                     $scope.editdata = [];
-                    $scope.getTeacher();
+                    $scope.getTeacher($scope.secId);
                 })
                 .error(function (data, success) {
                     ngDialog.open({

@@ -1,14 +1,17 @@
 angular.module('school_erp')
-  .controller("routeGeoLocationController", ['$http', '$scope','addVehicleServices', function ($http, $scope,addVehicleServices) {
-    $scope.code = 900;
+  .controller("routeGeoLocationController", ['$http', '$scope', 'addVehicleServices', function ($http, $scope, addVehicleServices) {
+    // $scope.code = 900;
     addVehicleServices.getVehicle()
       .success(function (data, status) {
+        console.log(JSON.stringify(data));
         $scope.vehicles = data.vehicles;
+        $scope.vehicle_code = $scope.vehicles[0].vehicle_code;
+        console.log($scope.vehicle_code);
       })
       .error(function (data, success) {
       });
 
-    var mapOptions = { 
+    var mapOptions = {
       zoom: 5,
       center: new google.maps.LatLng(17.745875, 83.314301),
       mapTypeId: google.maps.MapTypeId.TERRAIN
@@ -48,11 +51,36 @@ angular.module('school_erp')
       $scope.markers.push(marker);
 
     }
+
+    $scope.getGeolocation = function (vehicle_code) {
+      routeGeoLocationServices.getGeolocation(vehicle_code)
+        .success(function (data, status) {
+          $scope.status = status;
+          $scope.JSONdata = data;
+          console.log(JSON.stringify(data));
+          //for POST
+          $scope.latitude = data.positions.latitude;
+          $scope.longitude = data.positions.longitude;
+          $scope.id = data.positions.deviceId;
+          $scope.address = data.positions.address;
+          //for GET
+          // $scope.latitude = data[0].docPickUpAddress;
+          // $scope.longitude = data[0].avAddress;
+          //some google api data
+          //$scope.latitude=data.results[0].geometry.location.lat;
+          //$scope.longitude=data.results[0].geometry.location.lng;
+          console.log($scope.latitude);
+          console.log($scope.longitude);
+          createMarker($scope.latitude, $scope.longitude, $scope.id, $scope.address);
+        })
+        .error(function (data, success) {
+        })
+    }
     //some google api
     //$http({ method: 'GET', url: "http://maps.google.com/maps/api/geocode/json?address=Canada&sensor=true&region=USA" }).
     //traccar api's
     $http({ method: 'GET', url: "http://192.168.1.4:2016/api/netcomp/getAllDevicesDetails" }).
-    //$http.post("http://192.168.1.4:2016/netcomp/getDeviceCodeDetails", { deviceCode: $scope.code }, { headers: { 'Content-type': 'application/json' } }).
+      //$http.post("http://192.168.1.4:2016/netcomp/getDeviceCodeDetails", { deviceCode: $scope.code }, { headers: { 'Content-type': 'application/json' } }).
 
       success(function (data, status) {
         $scope.status = status;
@@ -79,5 +107,6 @@ angular.module('school_erp')
         $scope.status = status;
         console.log($scope.data + $scope.status);
       });
+    $scope.getGeolocation($scope.vehicle_code);
   }])
 
