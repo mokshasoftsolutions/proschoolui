@@ -89,22 +89,7 @@ angular.module('school_erp')
                 requireLogin: true
             }
         })
-        .state('main.employeeAttendance', { // login Page
-            url: "employeeInfo/employeeAttendance",
-            templateUrl: "app/components/employeeAttendance/employeeAttendance.html",
-            controller: "employeeAttendanceController",
-            data: {
-                requireLogin: true
-            }
-        })
-        .state('main.attendenceListEmployee', { // login Page
-            url: "attendance/attendenceList",
-            templateUrl: "app/components/attendenceListEmployee/attendenceListEmployee.html",
-            controller: "attendanceListEmployeeController",
-            data: {
-                requireLogin: true
-            }
-        })
+
 
         .state('main.studentAttendance', { // login Page
             url: "attendance/studentAttendance",
@@ -115,7 +100,7 @@ angular.module('school_erp')
             }
         })
         .state('main.attendenceListStudent', { // login Page
-            url: "attendance/attendenceList",
+            url: "attendance/attendenceListStudent",
             templateUrl: "app/components/attendenceList/attendenceList.html",
             controller: "attendanceListController",
             data: {
@@ -123,14 +108,41 @@ angular.module('school_erp')
             }
         })
 
-        .state('main.attendenceReport', { // login Page
-            url: "attendance/attendenceReport",
+        .state('main.attendenceReportStudent', { // login Page
+            url: "attendance/attendenceReportStudent",
             templateUrl: "app/components/attendenceReports/attendenceReport.html",
             controller: "attendanceReportController",
             data: {
                 requireLogin: true
             }
         })
+
+        .state('main.employeeAttendance', { // login Page
+            url: "employeeInfo/employeeAttendance",
+            templateUrl: "app/components/employeeAttendance/employeeAttendance.html",
+            controller: "employeeAttendanceController",
+            data: {
+                requireLogin: true
+            }
+        })
+        .state('main.attendenceListEmployee', { // login Page
+            url: "attendance/attendenceListEmployee",
+            templateUrl: "app/components/attendenceListEmployee/attendenceListEmployee.html",
+            controller: "attendanceListEmployeeController",
+            data: {
+                requireLogin: true
+            }
+        })
+
+         .state('main.attendenceReportEmployee', { // login Page
+            url: "attendance/attendenceReportEmployee",
+            templateUrl: "app/components/attendenceReports/attendenceReport.html",
+            controller: "attendanceReportController",
+            data: {
+                requireLogin: true
+            }
+        })
+
         // .state('main.attendenceReports2', { // login Page
         //     url: "attendance/attendenceReports/Report2",
         //     templateUrl: "app/components/attendenceReports/Report2/report2.html",
