@@ -104,16 +104,16 @@
 
       <!-- Content List -->
       <div class="box box-default">
-        <div class="nav-tabs-custom">
-          <ul class="nav nav-tabs">
-            <li class="active"><a href="#paymentList" data-toggle="tab" aria-expanded="true"><i class="fa fa-list"></i> Payment List</a></li>
-            <li class=""><a href="#paid" data-toggle="tab" aria-expanded="true"><i class="fa fa-list"></i> Paid List</a></li>
-
-            <li class="btn btn-primary pull-right" ng-click="getStudent($index)" data-toggle="modal" data-target="#myModal" title data-original-title>
+         <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-target="#paymentList" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Payment List </a></li>
+                <li class=""><a data-target="#paidList" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Paid List </a></li>
+             <li class="btn btn-primary pull-right" ng-click="getStudent($index)" data-toggle="modal" data-target="#myModal" title data-original-title>
               Collect Fees
             </li>
-          </ul>
+            </ul>
         </div>
+       
 
         <div class="box-body">
           <div class="tab-content">
@@ -152,7 +152,7 @@
               </table>
             </div>
 
-            <div class="tab-pane no-padding" id="tab_2">
+            <div class="tab-pane no-padding" id="paidList">
               <table class="table table-striped">
                 <thead>
                   <tr>
