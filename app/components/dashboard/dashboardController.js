@@ -285,146 +285,146 @@ angular.module('school_erp')
 
 
 
- //Employee Attendance
+//  //Employee Attendance
 
-        //Employee Attendance List
+//         //Employee Attendance List
 
-        $scope.getAttendenceByDay = function (date) {
-            $scope.initialLoadAttendence = true;
+//         $scope.getAttendenceByDay = function (date) {
+//             $scope.initialLoadAttendence = true;
 
-            $scope.attData = [];
+//             $scope.attData = [];
 
-            studentServices.getAttendenceByDay(date)
-                .success(function (data, status) {
-                    $scope.attData = data.donutchart;
-                    console.log(JSON.stringify(data));
-                })
-                .error(function (data, success) { })
-        }
-
-
-        //Employee Attendance Report
-
-        $scope.getAttendenceByDay = function (date) {
-            $scope.initialLoadAttendence = true;
-            var arrPresent = new Array();
-            var arrAbsent = new Array();
-            var arrLeave = new Array();
-            $scope.attData = [];
-
-            studentServices.getAttendenceByDay(date)
-                .success(function (data, status) {
-                    $scope.attData = data.donutchart;
-                    console.log(JSON.stringify(data));
-                    // console.log($scope.examData);
-                    //$scope.chartdata = [[], [], []];
-
-                    if ($scope.attData == 0) {
-                        // array empty or does not exist
-                        $scope.chartdata = [
-                            [],
-                            [],
-                            []
-                        ];
-                        if ($scope.chartdata) {
-                            ngDialog.open({
-                                template: '<p>Report is not available.</p>',
-                                plain: true
-                            });
-                            // $window.alert("report not availabel");
-                        }
-                        console.log("report not available")
-                    }
+//             studentServices.getAttendenceByDay(date)
+//                 .success(function (data, status) {
+//                     $scope.attData = data.donutchart;
+//                     console.log(JSON.stringify(data));
+//                 })
+//                 .error(function (data, success) { })
+//         }
 
 
-                    $scope.array = $.map($scope.attData, function (item) {
-                        console.log(item);
-                        //$scope.item=null;
-                        if (item.status == "Present") {
-                            arrPresent.push(item.status);
+//         //Employee Attendance Report
 
-                            $scope.data1 = [];
-                            for (var i = 0; i < arrPresent.length; i++) {
-                                $scope.data1.push(arrPresent[i]);
-                            }
-                            console.log($scope.data1);
-                            $scope.present = ($scope.data1).length;
-                            console.log($scope.present);
-                        } else if (item.status == "Absent") {
+//         $scope.getAttendenceByDay = function (date) {
+//             $scope.initialLoadAttendence = true;
+//             var arrPresent = new Array();
+//             var arrAbsent = new Array();
+//             var arrLeave = new Array();
+//             $scope.attData = [];
 
-                            arrAbsent.push(item.status);
+//             studentServices.getAttendenceByDay(date)
+//                 .success(function (data, status) {
+//                     $scope.attData = data.donutchart;
+//                     console.log(JSON.stringify(data));
+//                     // console.log($scope.examData);
+//                     //$scope.chartdata = [[], [], []];
 
-                            $scope.label1 = [];
-                            for (var j = 0; j < arrAbsent.length; j++) {
-                                $scope.label1.push(arrAbsent[j]);
+//                     if ($scope.attData == 0) {
+//                         // array empty or does not exist
+//                         $scope.chartdata = [
+//                             [],
+//                             [],
+//                             []
+//                         ];
+//                         if ($scope.chartdata) {
+//                             ngDialog.open({
+//                                 template: '<p>Report is not available.</p>',
+//                                 plain: true
+//                             });
+//                             // $window.alert("report not availabel");
+//                         }
+//                         console.log("report not available")
+//                     }
 
-                            }
-                            console.log($scope.label1);
-                            $scope.absent = ($scope.label1).length;
-                            console.log($scope.absent);
+
+//                     $scope.array = $.map($scope.attData, function (item) {
+//                         console.log(item);
+//                         //$scope.item=null;
+//                         if (item.status == "Present") {
+//                             arrPresent.push(item.status);
+
+//                             $scope.data1 = [];
+//                             for (var i = 0; i < arrPresent.length; i++) {
+//                                 $scope.data1.push(arrPresent[i]);
+//                             }
+//                             console.log($scope.data1);
+//                             $scope.present = ($scope.data1).length;
+//                             console.log($scope.present);
+//                         } else if (item.status == "Absent") {
+
+//                             arrAbsent.push(item.status);
+
+//                             $scope.label1 = [];
+//                             for (var j = 0; j < arrAbsent.length; j++) {
+//                                 $scope.label1.push(arrAbsent[j]);
+
+//                             }
+//                             console.log($scope.label1);
+//                             $scope.absent = ($scope.label1).length;
+//                             console.log($scope.absent);
 
 
-                        } else if (item.status == "On Leave") {
+//                         } else if (item.status == "On Leave") {
 
-                            arrLeave.push(item.status);
+//                             arrLeave.push(item.status);
 
-                            $scope.leave1 = [];
-                            for (var k = 0; k < arrLeave.length; k++) {
-                                $scope.leave1.push(arrLeave[k]);
+//                             $scope.leave1 = [];
+//                             for (var k = 0; k < arrLeave.length; k++) {
+//                                 $scope.leave1.push(arrLeave[k]);
 
-                            }
-                            console.log($scope.leave1);
-                            $scope.leave = ($scope.leave1).length;
-                            console.log($scope.leave);
-                        }
-                        $scope.chartdata = [
-                            [$scope.present],
-                            [$scope.absent],
-                            [$scope.leave]
-                        ];
-                        return;
-                    });
+//                             }
+//                             console.log($scope.leave1);
+//                             $scope.leave = ($scope.leave1).length;
+//                             console.log($scope.leave);
+//                         }
+//                         $scope.chartdata = [
+//                             [$scope.present],
+//                             [$scope.absent],
+//                             [$scope.leave]
+//                         ];
+//                         return;
+//                     });
 
-                    $scope.myJson = {
-                        type: "ring",
-                        title: {
-                            text: 'Attendance Report'
-                        },
-                        plot: {
-                            slice: 60,
-                            detach: false,
-                            tooltip: {
-                                fontSize: 16,
-                                anchor: 'c',
-                                x: '50%',
-                                y: '48%',
-                                sticky: true,
-                                backgroundColor: 'none',
-                                text: '<span style="color:%color">%t</span><br><span style="color:%color">%v</span>'
-                            }
-                        },
-                        legend: {
-                            verticalAlign: "bottom",
-                            align: "center"
-                        },
-                        series: [{
-                            //values : [50],
-                            text: "present"
-                        },
-                        {
-                            //values : [35],
-                            text: "absent"
-                        },
-                        {
-                            //values : [20],
-                            text: "leave"
-                        }
-                        ]
-                    };
+//                     $scope.myJson = {
+//                         type: "ring",
+//                         title: {
+//                             text: 'Attendance Report'
+//                         },
+//                         plot: {
+//                             slice: 60,
+//                             detach: false,
+//                             tooltip: {
+//                                 fontSize: 16,
+//                                 anchor: 'c',
+//                                 x: '50%',
+//                                 y: '48%',
+//                                 sticky: true,
+//                                 backgroundColor: 'none',
+//                                 text: '<span style="color:%color">%t</span><br><span style="color:%color">%v</span>'
+//                             }
+//                         },
+//                         legend: {
+//                             verticalAlign: "bottom",
+//                             align: "center"
+//                         },
+//                         series: [{
+//                             //values : [50],
+//                             text: "present"
+//                         },
+//                         {
+//                             //values : [35],
+//                             text: "absent"
+//                         },
+//                         {
+//                             //values : [20],
+//                             text: "leave"
+//                         }
+//                         ]
+//                     };
 
-                })
-                .error(function (data, success) { })
-        }
+//                 })
+//                 .error(function (data, success) { })
+//         }
 
 
 
