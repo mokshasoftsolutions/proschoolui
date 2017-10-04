@@ -101,7 +101,7 @@ angular.module('school_erp')
         })
         .state('main.attendenceListStudent', { // login Page
             url: "attendance/attendenceListStudent",
-            templateUrl: "app/components/attendenceList/attendenceList.html",
+            templateUrl: "app/components/attendenceListStudent/attendenceList.html",
             controller: "attendanceListController",
             data: {
                 requireLogin: true
@@ -110,7 +110,7 @@ angular.module('school_erp')
 
         .state('main.attendenceReportStudent', { // login Page
             url: "attendance/attendenceReportStudent",
-            templateUrl: "app/components/attendenceReports/attendenceReport.html",
+            templateUrl: "app/components/attendenceReportStudent/attendenceReport.html",
             controller: "attendanceReportController",
             data: {
                 requireLogin: true
@@ -136,7 +136,7 @@ angular.module('school_erp')
 
          .state('main.attendenceReportEmployee', { // login Page
             url: "attendance/attendenceReportEmployee",
-            templateUrl: "app/components/attendenceReports/attendenceReport.html",
+            templateUrl: "app/components/attendenceReportEmployee/attendenceReport.html",
             controller: "attendanceReportController",
             data: {
                 requireLogin: true

@@ -37,8 +37,8 @@
         <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
           <div class="form-group">
             <label>Select Section</label>
-            <select class="form-control select2" ng-change="populateStudentValue(data.secId);getExamPapers(data.examSchedule_name,data.secId);"
-              style="width: 100%;" name="section" ng-model="data.secId" ng-options="sec.section_id as sec.name  for sec in secData">
+            <select class="form-control select2" ng-change="populateStudentValue(data.secId);" style="width: 100%;" name="section" ng-model="data.secId"
+              ng-options="sec.section_id as sec.name  for sec in secData">
 <!--                      
                        <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
                         
@@ -48,8 +48,7 @@
         <div class="col-md-4">
           <div class="form-group" ng-if="showRole(['admin','teacher'])">
             <label>Select Student  </label>
-            <select class="form-control select2" style="width: 100%;" name="studentId"
-              ng-model="data.studentId" ng-options="student.student_id as student.first_name+' '+student.last_name for student in students ">
+            <select class="form-control select2" style="width: 100%;" name="studentId" ng-model="data.studentId" ng-options="student.student_id as student.first_name+' '+student.last_name for student in students ">
                             <!--<option selected="selected">--Select--</option>
       
                             <option ng-repeat="student in students " value="{{student.student_id}}">{{student.first_name}} {{student.last_name}}</option>-->
@@ -64,7 +63,7 @@
       </div>
       <div class="row">
         <div class="col-md-12" ng-if="showRole(['admin','teacher','parent'])">
-          <button type="button" ng-click="$scope.getFee(data.studentId)" class="btn btn-primary pull-right">Select</button>
+          <button type="button" ng-click="getFee(data.studentId)" class="btn btn-primary pull-right">Select</button>
         </div>
       </div>
       <!--<div class="box-body">
@@ -103,53 +102,95 @@
       </div>
     </div>-->
 
-    <!-- Content List -->
-    <div class="box box-default">
-      <div class="nav-tabs-custom">
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-list"></i> Payment List</a></li>
-        </ul>
-      </div>
+      <!-- Content List -->
+      <div class="box box-default">
+        <div class="nav-tabs-custom">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#paymentList" data-toggle="tab" aria-expanded="true"><i class="fa fa-list"></i> Payment List</a></li>
+            <li class=""><a href="#paid" data-toggle="tab" aria-expanded="true"><i class="fa fa-list"></i> Paid List</a></li>
 
-      <div class="box-body">
-        <div class="tab-content">
-          <div class="tab-pane table-responsive no-padding active" id="tab_1">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th> #</th>
-                  <th>Fee Type</th>
-                  <th>Fee Category</th>
-                  <th>Payment Mode</th>
-                  <th>Amount</th>
-                  <th>Fine</th>
-                  <th>Discount</th>
-                  <th>Total</th>
-                  <th class="pull-right">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="collectFee in collectFeeData">
-                  <td>{{$index+1}}</td>
-                  <td>{{collectFee.feetype[0].fee_type}}</td>
-                  <td>{{collectFee.feetype[0].fee_category}}</td>
-                  <td>{{collectFee.payment_mode}}</td>
-                  <td>{{collectFee.feemaster[0].fee_amount}}</td>
-                  <td>{{collectFee.fine}}</td>
-                  <td>{{collectFee.discount}}</td>
-                  <td>{{(parseInt(collectFee.feemaster[0].fee_amount)+parseInt(collectFee.fine))-(parseInt(collectFee.discount))}}</td>
-                  <td class="pull-right">
+            <li class="btn btn-primary pull-right" ng-click="getStudent($index)" data-toggle="modal" data-target="#myModal" title data-original-title>
+              Collect Fees
+            </li>
+          </ul>
+        </div>
+
+        <div class="box-body">
+          <div class="tab-content">
+            <div class="tab-pane table-responsive no-padding active" id="paymentList">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th> #</th>
+                    <th>Fee Type</th>
+                    <th>Fee Category</th>
+                    <th>Payment Mode</th>
+                    <th>Amount</th>
+                    <th>Fine</th>
+                    <th>Discount</th>
+                    <th>Total</th>
+                    <!--<th class="pull-right">Action</th>-->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="collectFee in collectFeeData">
+                    <td>{{$index+1}}</td>
+                    <td>{{collectFee.feetype[0].fee_type}}</td>
+                    <td>{{collectFee.feetype[0].fee_category}}</td>
+                    <td>{{collectFee.payment_mode}}</td>
+                    <td>{{collectFee.feemaster[0].fee_amount}}</td>
+                    <td>{{collectFee.fine}}</td>
+                    <td>{{collectFee.discount}}</td>
+                    <td>{{(parseInt(collectFee.feemaster[0].fee_amount)+parseInt(collectFee.fine))-(parseInt(collectFee.discount))}}</td>
+                    <!--<td class="pull-right">
                     <a class="btn btn-primary btn-xs" ng-click="getStudent($index)" data-toggle="modal" data-target="#myModal" title data-original-title> Collect Fees
                   </a>
-                  </td>
-                </tr>
+                  </td>-->
+                  </tr>
 
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="tab-pane no-padding" id="tab_2">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th> #</th>
+                    <th>Fee Type</th>
+                    <th>Fee Category</th>
+                    <th>Payment Mode</th>
+                    <th>Amount</th>
+                    <th>Fine</th>
+                    <th>Discount</th>
+                    <th>Total</th>
+                    <!--<th class="pull-right">Action</th>-->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="collectFee in collectFeeData1">
+                    <td>{{$index+1}}</td>
+                    <td>{{collectFee.feetype[0].fee_type}}</td>
+                    <td>{{collectFee.feetype[0].fee_category}}</td>
+                    <td>{{collectFee.payment_mode}}</td>
+                    <td>{{collectFee.feemaster[0].fee_amount}}</td>
+                    <td>{{collectFee.fine}}</td>
+                    <td>{{collectFee.discount}}</td>
+                    <td>{{(parseInt(collectFee.feemaster[0].fee_amount)+parseInt(collectFee.fine))-(parseInt(collectFee.discount))}}</td>
+                    <!--<td class="pull-right">
+                    <a class="btn btn-primary btn-xs" ng-click="getStudent($index)" data-toggle="modal" data-target="#myModal" title data-original-title> Collect Fees
+                  </a>
+                  </td>-->
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
           </div>
         </div>
+
       </div>
-    </div>
 </section>
 <!--Edit values modal Starts here-->
 <div class="modal fade" id="myModal" role="dialog">
@@ -169,7 +210,7 @@
                 <div class="form-group">
                   <label>Date </label>
                   <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="dd-MM-yyyy" style="z-index:999">
-                    <input class="form-control" name="Date" type="text" ng-model="data.date" ng-readonly="true" placeholder="Enter ..." required/>
+                    <input class="form-control" name="Date" type="text" ng-model="value.date" ng-readonly="true" placeholder="Enter ..." required/>
                   </datepicker>
                 </div>
               </div>
@@ -187,7 +228,7 @@
                 <div class="form-group">
                   <label>Fee Type</label>
                   <select class="form-control select2" style="width: 100%;" ng-options="type.fee_type as type.fee_type for type in feeTypeData"
-                    ng-model="data.fee_type">
+                    ng-model="value.fee_type">
               
                       </select>
                 </div>
@@ -196,7 +237,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Payment Mode</label>
-                  <select class="form-control select2" style="width: 100%;" ng-model="data.payment_mode">
+                  <select class="form-control select2" style="width: 100%;" ng-model="value.payment_mode">
                         <option selected="selected">--Select--</option>
                         <option>Cash</option>
                         <option>Cheque</option>
@@ -215,13 +256,13 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Fine</label>
-                  <input type="text" class="form-control" placeholder="Enter ..." ng-model="data.fine">
+                  <input type="text" class="form-control" placeholder="Enter ..." ng-model="value.fine">
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Discount</label>
-                  <input type="text" class="form-control" placeholder="Enter ..." ng-model="data.discount">
+                  <input type="text" class="form-control" placeholder="Enter ..." ng-model="value.discount">
                 </div>
               </div>
 
@@ -231,7 +272,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="submit" ng-click="addFee(data,$index)" class="btn btn-primary">Submit</button>
+          <button type="submit" ng-click="addFee(value,data.studentId)" class="btn btn-primary">Submit</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         </div>
       </form>
