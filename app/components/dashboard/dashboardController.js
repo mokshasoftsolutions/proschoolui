@@ -883,15 +883,15 @@ angular.module('school_erp')
 
 
         // For employee attendece
-        employeeServices.getEmployeeAttendence()
-            .success(function (data, status) {
-                console.log("message");
-                console.log(JSON.stringify(data));
-                $scope.employeeAttendance = data.emp_attendance;
-                $scope.attendanceBox = [];
+        // employeeServices.getEmployeeAttendence()
+        //     .success(function (data, status) {
+        //         console.log("message");
+        //         console.log(JSON.stringify(data));
+        //         $scope.employeeAttendance = data.emp_attendance;
+        //         $scope.attendanceBox = [];
 
-            })
-            .error(function (data, success) { })
+        //     })
+        //     .error(function (data, success) { })
 
 
 
