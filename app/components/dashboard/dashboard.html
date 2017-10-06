@@ -15,820 +15,789 @@
 
 
 
- <section class="content">
-        <!-- BAR CHART -->
+<section class="content">
+  <!-- BAR CHART -->
 
-        <div class="box box-primary" style="background-color:#35879f;">
-          <div class="box-header with-border btn-primary">
-            <h3 class="box-title">Curiculum of the week </h3>
+  <div class="box box-primary" style="background-color:#35879f;">
+    <div class="box-header with-border btn-primary">
+      <i class="fa fa-inbox"></i>
+      <h3 class="box-title">Curriculum for the week</h3>
 
-            <div class="box-tools pull-right">
-              <button type="button" class="btn btn-info btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-info btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                               </button>
-              <button type="button" class="btn btn-danger btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            </div>
-          </div>
-          <div class="box-body chart-responsive">
-            <div class="chart" id="bar-chart" style="height: 400px;"></div>
-              <div class="box-body">
-            <!--<div class="box-header with-border">
+        <button type="button" class="btn btn-danger btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+      </div>
+    </div>
+    <div class="box-body chart-responsive">
+      <!--<div class="chart" id="bar-chart" style="height: 400px;"></div>-->
+      <div class="box-body">
+        <!--<div class="box-header with-border">
                     <h3 class="box-title">TimeTable List</h3>
                     </div>-->
-            
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Select Class</label>
-                <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId" ng-options="classData.class_id as classData.name for classData in classDatanew ">
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Select Class</label>
+              <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId" ng-options="classData.class_id as classData.name for classData in classDatanew ">
                      <option selected="selected">--Select--</option>
                           <!--<option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
                       </select>
-              </div>
             </div>
+          </div>
 
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Select Section</label>
-                <select class="form-control select2" ng-change="getTimeTable(secId)" style="width: 100%;" ng-model="secId"  ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Select Section</label>
+              <select class="form-control select2" ng-change="getTimeTable(secId)" style="width: 100%;" ng-model="secId" ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
                         <!--<option selected="selected">--Select--</option>
                        <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
                         
                       </select>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="form-group">
-                <button type="submit" ng-click="getTimeTable(secId)" class="btn btn-primary pull-right" style="margin-top: 8%;margin-right: 64%;">Select</button>
-                <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>-->
-              </div>
             </div>
           </div>
-            <table export-table class="table">
-              <thead>
-                <tr>
-                  <th>Time </th>
 
-                  <th class="text text-center">
-                    Monday
-                  </th>
-                  <th class="text text-center">
-                    Tuesday
-                  </th>
-                  <th class="text text-center">
-                    Wednesday
-                  </th>
-                  <th class="text text-center">
-                    Thursday
-                  </th>
-                  <th class="text text-center">
-                    Friday
-                  </th>
-                  <th class="text text-center">
-                    Saturday
-                  </th>
-                  <th class="text text-center">
-                    Sunday
-                  </th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr ng-repeat="timetable in timeTableData">
-                  <th>
-                    <div class="attachment-block clearfix" style="width:87px;">
-                      <strong class="text-blue" >{{timetable.start_time}}</strong>
-                      <!--<b class="text text-center">-</b>
-                                        <strong class="text-blue">{{timetable.end_time}}</strong>-->
-                    </div>
-                  </th>
-                  <td class="text text-center">
-                    <strong class="text-white">{{timetable.data.monday}}</strong>
-                  </td>
-                  <td class="text text-center">
-                    <strong class="text-white">{{timetable.data.tuesday}}</strong>
-                  </td>
-                  <td class="text text-center">
-                    <strong class="text-white">{{timetable.data.wednesday }}</strong>
-                  </td>
-                  <td class="text text-center">
-                    <strong class="text-white">{{timetable.data.thursday }}</strong>
-                  </td>
-                  <td class="text text-center">
-                    <strong class="text-white">{{timetable.data.friday}}</strong>
-                  </td>
-                  <td class="text text-center">
-                    <strong class="text-white">{{timetable.data.saturday }}</strong>
-                  </td>
-                  <td class="text text-center">
-                    <strong class="text-white">{{timetable.data.sunday}}</strong></td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="col-md-4">
+            <div class="form-group">
+              <button type="submit" ng-click="getTimeTable(secId)" class="btn btn-primary pull-right" style="margin-top: 8%;margin-right: 64%;">Select</button>
+              <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>-->
+            </div>
           </div>
-          </div>
-          <!-- /.box-body -->
         </div>
-        <!-- /.box -->
+        <table export-table class="table">
+          <thead>
+            <tr>
+              <th>Time </th>
 
+              <th class="text text-center">
+                Monday
+              </th>
+              <th class="text text-center">
+                Tuesday
+              </th>
+              <th class="text text-center">
+                Wednesday
+              </th>
+              <th class="text text-center">
+                Thursday
+              </th>
+              <th class="text text-center">
+                Friday
+              </th>
+              <th class="text text-center">
+                Saturday
+              </th>
+              <th class="text text-center">
+                Sunday
+              </th>
+            </tr>
+          </thead>
 
-
-
-
-        <div class="row">
-          <div class="col-md-6">
-            <!-- AREA CHART -->
-            <div class="box box-primary" >
-
-              <div class="box-header with-border btn-primary">
-                <h3 class="box-title">Student Attendance</h3>
-
-                <div class="box-tools pull-right">
-                  <button type="button" class="btn btn-info btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                  <button type="button" class="btn btn-danger btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          <tbody>
+            <tr ng-repeat="timetable in timeTableData">
+              <th>
+                <div class="attachment-block clearfix" style="width:87px;">
+                  <strong class="text-blue">{{timetable.start_time}}</strong>
+                  <!--<b class="text text-center">-</b>
+                                        <strong class="text-blue">{{timetable.end_time}}</strong>-->
                 </div>
-              </div>
+              </th>
+              <td class="text text-center">
+                <strong class="text-white">{{timetable.data.monday}}</strong>
+              </td>
+              <td class="text text-center">
+                <strong class="text-white">{{timetable.data.tuesday}}</strong>
+              </td>
+              <td class="text text-center">
+                <strong class="text-white">{{timetable.data.wednesday }}</strong>
+              </td>
+              <td class="text text-center">
+                <strong class="text-white">{{timetable.data.thursday }}</strong>
+              </td>
+              <td class="text text-center">
+                <strong class="text-white">{{timetable.data.friday}}</strong>
+              </td>
+              <td class="text text-center">
+                <strong class="text-white">{{timetable.data.saturday }}</strong>
+              </td>
+              <td class="text text-center">
+                <strong class="text-white">{{timetable.data.sunday}}</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
 
 
-              <div class="box-body chart-responsive">
-                <div class="chart chart-responsive" style="height: 400px;">
-                  <div class="nav-tabs-custom">
-                    <ul class="nav nav-tabs">
-                      <li class="active"><a data-target="#tab_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>Attendance List</a></li>
-                      <li class=""><a data-target="#tab_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Attendance Report</a></li>
-                    </ul>
-                  </div>
 
-                  <!--<div class="box-body">-->
-                  <div class="tab-content">
-                    <div class="tab-pane no-padding active" id="tab_1">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label>Select Class</label>
-                            <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId" ng-options="classData.class_id as classData.name for classData in classDatanew ">
+
+
+  <div class="row">
+    <div class="col-md-6">
+      <!-- AREA CHART -->
+      <div class="box box-primary">
+
+        <div class="box-header with-border btn-primary">
+          <h3 class="box-title">Student Attendance</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-info btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+            <button type="button" class="btn btn-danger btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+
+
+        <div class="box-body chart-responsive">
+          <div class="chart chart-responsive" style="height:410px;">
+            <div class="nav-tabs-custom">
+              <ul class="nav nav-tabs">
+                <li class="active"><a data-target="#tab_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>Attendance List</a></li>
+                <li class=""><a data-target="#tab_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Attendance Report</a></li>
+              </ul>
+            </div>
+
+            <!--<div class="box-body">-->
+            <div class="tab-content">
+              <div class="tab-pane no-padding active" id="tab_1">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Select Class</label>
+                      <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId" ng-options="classData.class_id as classData.name for classData in classDatanew ">
                        
                       </select>
-                          </div>
-                        </div>
+                    </div>
+                  </div>
 
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label>Select Section</label>
-                            <select class="form-control select2" style="width: 100%;" ng-model="secId" ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Select Section</label>
+                      <select class="form-control select2" style="width: 100%;" ng-model="secId" ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
                        
                         
                       </select>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <button style="margin-top:24px;" type="submit" ng-click="getAttendenceByDay(select_date,classId,secId)" class="btn btn-primary pull-right">Select</button>
-                          <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>-->
-                        </div>
-
-
-
-                      </div>
-
-                      <!--<div class="box-body">-->
-                      <!--<div class="row">-->
-                      <div class="tab-content">
-                        <div class="table-responsive mailbox-messages">
-
-                          <table class="table rwd-table table-striped">
-                            <thead>
-                              <tr>
-                                <th>#</th>
-                                <th>Addmission No</th>
-                                <th>Roll No</th>
-                                <th>Class</th>
-                                <th>Attendance</th>
-                                <!--<th class="pull-right">Action</th>-->
-                              </tr>
-                            </thead>
-                            <tbody>
-
-                              <tr>
-
-                                <td>1</td>
-                                <td>AD1</td>
-                                <td>R1</td>
-                                <td>class1</td>
-                                <td>present</td>
-
-                              </tr>
-                              <tr>
-
-                                <td>2</td>
-                                <td>AD1</td>
-                                <td>R1</td>
-                                <td>class1</td>
-                                <td>present</td>
-
-                              </tr>
-                              <tr>
-
-                                <td>3</td>
-                                <td>AD1</td>
-                                <td>R1</td>
-                                <td>class1</td>
-                                <td>present</td>
-
-                              </tr>
-                              <tr>
-
-                                <td>4</td>
-                                <td>AD1</td>
-                                <td>R1</td>
-                                <td>class1</td>
-                                <td>present</td>
-
-                              </tr>
-                              <tr ng-repeat="attendance in attData" class="editable-row">
-                                <!--<td>
-                                        {{$index+1}}
-                                      </td>-->
-                                <!--<td>{{attendance.student_id || 'empty' }}-->
-                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                <!--</td>-->
-                                <!--<td>
-                                        {{attendance.roll_no || 'empty' }}-->
-                                <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
-                                                    {{busRoute.vehicle_code}}</span>-->
-                                <!--</td>-->
-                                <!--<td>{{attendance.class_id || 'empty' }}-->
-                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                <!--</td>-->
-                                <!--<td>{{attendance.status || 'empty' }}-->
-                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                <!--</td>-->
-                                <!--<td class="pull-right">
-                                                    <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == busRoute">
-                                                        <button type="submit" ng-click="EditBusRoute($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
-                                                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
-                                                    </form>
-
-                                                    <div class="buttons" ng-show="!rowform.$visible">
-                                                        <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
-                                                        <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBusRoute($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                                        <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
-                                <!--</div>
-                                                </td>-->
-                              </tr>
-                            </tbody>
-                          </table>
-
-                          <!--</div>-->
-                          <!--</div>-->
-                        </div>
-                      </div>
-
-
-
                     </div>
-                    <div class="tab-pane no-padding" id="tab_2">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label>Select Class</label>
-                            <select class="form-control select2" name="classId" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId"
-                              ng-options="classData.class_id as classData.name for classData in classDatanew ">
+                  </div>
+                  <div class="col-md-4">
+                    <button style="margin-top:24px;" type="submit" ng-click="getAttendenceByDay(select_date,classId,secId)" class="btn btn-primary pull-right">Select</button>
+                    <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>-->
+                  </div>
+
+
+
+                </div>
+
+
+                <div class="tab-content">
+                  <div class="table-responsive mailbox-messages">
+
+                    <table class="table rwd-table table-striped">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Admission No</th>
+                          <th>Roll No</th>
+                          <th>Class</th>
+                          <th>Attendance</th>
+                          <!--<th class="pull-right">Action</th>-->
+                        </tr>
+                      </thead>
+                           
+                      <tbody>
+                        <tr ng-repeat="attendance in attData" class="editable-row">
+                          <td>
+                            {{$index+1}}
+                          </td>
+                          <td>{{attendance.student_id || 'empty' }}
+                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          </td>
+                          <td>
+                            {{attendance.roll_no || 'empty' }}
+                            <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
+                                                    {{busRoute.vehicle_code}}</span>-->
+                          </td>
+                          <td>{{attendance.class_id || 'empty' }}
+                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          </td>
+                          <td>{{attendance.status || 'empty' }}
+                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          </td>
+
+                        </tr>
+                      </tbody>
+                     
+                    </table>
+                  </div>
+                </div>
+
+
+
+              </div>
+              <div class="tab-pane no-padding" id="tab_2">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Select Class</label>
+                      <select class="form-control select2" name="classId" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId"
+                        ng-options="classData.class_id as classData.name for classData in classDatanew ">
                         <!--<option selected="selected">--Select--</option>
                        <option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
                       </select>
-                          </div>
-                        </div>
+                    </div>
+                  </div>
 
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label>Select Section</label>
-                            <select class="form-control select2" name="sectionId" data-ng-change="getStudentValue(secId)" style="width: 100%;" ng-model="secId"
-                              ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Select Section</label>
+                      <select class="form-control select2" name="sectionId" data-ng-change="getStudentValue(secId)" style="width: 100%;" ng-model="secId"
+                        ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
                         <!--<option selected="selected">--Select--</option>
                        <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
                         
                       </select>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <button style="margin-top:24px;" type="submit" ng-click="getAttendenceByDay(select_date,classId,secId)" class="btn btn-primary pull-right">Select</button>
-                          <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>-->
-                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <button style="margin-top:24px;" type="submit" ng-click="getAttendenceByDay(select_date,classId,secId)" class="btn btn-primary pull-right">Select</button>
+                    <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>-->
+                  </div>
 
-                        <!--<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels"> chart-series="series"
+                  <!--<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels"> chart-series="series"
                 </canvas>-->
 
-                      </div>
+                </div>
 
-                      <div class="box-body">
-                        <div class="row">
-                          <div class="tab-content">
-                            <div class="table-responsive mailbox-messages">
+                <div class="box-body">
+                  <div class="row">
+                    <div class="tab-content">
+                      <div class="table-responsive mailbox-messages">
+                        <div class="box " style="margin-top:-20px">
 
+                          <!--<div class="box-header with-border">
+                            <h3 class="box-title">Donut Chart</h3>
 
-                              <div class="box" style="margin-top:10px">
-                                <div class="box-header with-border">
-                                  <h3 class="box-title">Donut Chart</h3>
-
-                                  <div class="box-tools pull-right">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                               </button>
-                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                  </div>
-                                </div>
-                                <div class="box-body" pdf-save-content="idOneGraph">
-                                  <div class="chart" style="margin-left:130px">
-                                    <!--<div id='myChart'></div>-->
-                                    <zingchart id="myChart1" zc-values="chartdata1" zc-json="myJson1" zc-height=400 zc-width=100%></zingchart>
-                                  </div>
-                                </div>
+                              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                          </div>-->
+                          <div class="box-body" pdf-save-content="idOneGraph">
+                            <div class="chart" style="margin-left:-60px">
+                              <zingchart id="myChart" zc-values="chartdata" zc-json="myJson" zc-height=310 zc-width=600></zingchart>
+                            </div>
 
-                              </div>
+                          </div>
 
+                        </div>
+
+                        <!--<div class="box" style="margin-top:10px">
+                          <div class="box-header with-border">
+                            <h3 class="box-title">Donut Chart</h3>
+
+                            <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                              </button>
+                              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                             </div>
                           </div>
-                        </div>
-                      </div>
-
-                      <!--</div>-->
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-
-
-            <div class="box box-primary ">
-
-              <div class="box-header with-border btn-primary">
-                <h3 class="box-title">Bus Route</h3>
-
-                <div class="box-tools pull-right">
-                  <button type="button" class="btn btn-info btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                  <button type="button" class="btn btn-danger btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                </div>
-              </div>
-
-
-              <div class="box-body chart-responsive">
-                <div class="chart chart-responsive" style="height: 400px;">
-                  <div class="nav-tabs-custom">
-                    <ul class="nav nav-tabs">
-                      <li class="active"><a data-target="#bus_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>Bus List</a></li>
-                      <li class=""><a data-target="#bus_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>GeoLocation</a></li>
-                    </ul>
-                  </div>
-
-                  <!--<div class="box-body">-->
-                  <div class="tab-content">
-                    <div class="tab-pane no-padding active" id="bus_1">
-
-
-                      <!--<div class="box-body">-->
-                      <!--<div class="row">-->
-                      <div class="tab-content">
-                        <div class="table-responsive mailbox-messages">
-
-                          <table class="table rwd-table table-striped">
-                            <thead>
-                              <tr>
-                                <th>#</th>
-                                <th>Bus Route</th>
-                                <th>Bus code</th>
-                                <!--<th>Class</th>
-                                <th>Attendance</th>-->
-                                <!--<th class="pull-right">Action</th>-->
-                              </tr>
-                            </thead>
-                            <tbody>
-
-                              <tr>
-
-                                <td>1</td>
-                                <td>NAD</td>
-                                <td>VCL-1</td>
-                                <!--<td>class1</td>
-                                <td>present</td>-->
-
-                              </tr>
-                              <tr>
-
-                                <td>2</td>
-                                <td>MVP</td>
-                                <td>VCL-2</td>
-                                <!--<td>class1</td>
-                                <td>present</td>-->
-
-                              </tr>
-                              <tr>
-
-                                <td>3</td>
-                                <td>Complex</td>
-                                <td>VCL-3</td>
-                                <!--<td>class1</td>
-                                <td>present</td>-->
-
-                              </tr>
-                              <tr>
-
-                                <!--<td>4</td>
-                                <td>AD1</td>
-                                <td>R1</td>
-                                <td>class1</td>
-                                <td>present</td>-->
-
-                              </tr>
-                              <tr ng-repeat="attendance in attData" class="editable-row">
-                                <!--<td>
-                                        {{$index+1}}
-                                      </td>-->
-                                <!--<td>{{attendance.student_id || 'empty' }}-->
-                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                <!--</td>-->
-                                <!--<td>
-                                        {{attendance.roll_no || 'empty' }}-->
-                                <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
-                                                    {{busRoute.vehicle_code}}</span>-->
-                                <!--</td>-->
-                                <!--<td>{{attendance.class_id || 'empty' }}-->
-                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                <!--</td>-->
-                                <!--<td>{{attendance.status || 'empty' }}-->
-                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                <!--</td>-->
-                                <!--<td class="pull-right">
-                                                    <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == busRoute">
-                                                        <button type="submit" ng-click="EditBusRoute($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
-                                                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
-                                                    </form>
-
-                                                    <div class="buttons" ng-show="!rowform.$visible">
-                                                        <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
-                                                        <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBusRoute($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                                        <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
-                                <!--</div>
-                                                </td>-->
-                              </tr>
-                            </tbody>
-                          </table>
-
-                          <!--</div>-->
-                          <!--</div>-->
-                        </div>
-                      </div>
-
-
-
-                    </div>
-                    <div class="tab-pane no-padding" id="bus_2">
-
-
-                      <div class="box-body">
-                        <div class="row">
-                          <div class="tab-content">
-                            <div class="table-responsive mailbox-messages">
-
-
-                              <div class="box" style="margin-top:10px">
-                                <div class="box-header with-border">
-                                  <h3 class="box-title">Donut Chart</h3>
-
-                                  <div class="box-tools pull-right">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                              </button>
-                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                  </div>
-                                </div>
-                                <div class="box-body" pdf-save-content="idOneGraph">
-                                  <div class="chart" style="margin-left:130px">
-                                    <!--<div id='myChart'></div>-->
-                                    <zingchart id="myChart1" zc-values="chartdata1" zc-json="myJson1" zc-height=400 zc-width=100%></zingchart>
-                                  </div>
-                                </div>
-
-                              </div>
-
+                          <div class="box-body" pdf-save-content="idOneGraph">
+                            <div class="chart" style="margin-left:130px">
+                             
+                              <zingchart id="myChart1" zc-values="chartdata1" zc-json="myJson1" zc-height=400 zc-width=100%></zingchart>
                             </div>
                           </div>
-                        </div>
-                      </div>
 
-                      <!--</div>-->
+                        </div>-->
+
+                      </div>
                     </div>
                   </div>
                 </div>
+
+                <!--</div>-->
               </div>
-              <!-- /.box-body -->
             </div>
-
-
-
-
-            <div class="box box-primary">
-
-              <div class="box-header with-border btn-primary">
-                <h3 class="box-title">Events&NoticeBoard</h3>
-
-                <div class="box-tools pull-right">
-                  <button type="button" class="btn btn-info btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                  <button type="button" class="btn btn-danger btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                </div>
-              </div>
-
-
-              <div class="box-body chart-responsive">
-                <div class="chart chart-responsive" style="height: 400px;">
-                  <div class="nav-tabs-custom">
-                    <ul class="nav nav-tabs">
-                      <li class="active"><a data-target="#events_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>Events</a></li>
-                      <li class=""><a data-target="#noticeBoard_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>NoticeBoard</a></li>
-                    </ul>
-                  </div>
-
-                  <!--<div class="box-body">-->
-                  <div class="tab-content">
-                    <div class="tab-pane no-padding active" id="events_1">
-
-
-                      <!--<div class="box-body">-->
-                      <!--<div class="row">-->
-                      <div class="tab-content">
-                        <div class="table-responsive mailbox-messages">
-
-                          <table class="table rwd-table table-striped">
-                            <thead>
-                              <tr>
-                                <th>#</th>
-                                <th>Bus Route</th>
-                                <th>Bus code</th>
-                                <!--<th>Class</th>
-                                <th>Attendance</th>-->
-                                <!--<th class="pull-right">Action</th>-->
-                              </tr>
-                            </thead>
-                            <tbody>
-
-                              <tr>
-
-                                <td>1</td>
-                                <td>NAD</td>
-                                <td>VCL-1</td>
-                                <!--<td>class1</td>
-                                <td>present</td>-->
-
-                              </tr>
-                              <tr>
-
-                                <td>2</td>
-                                <td>MVP</td>
-                                <td>VCL-2</td>
-                                <!--<td>class1</td>
-                                <td>present</td>-->
-
-                              </tr>
-                              <tr>
-
-                                <td>3</td>
-                                <td>Complex</td>
-                                <td>VCL-3</td>
-                                <!--<td>class1</td>
-                                <td>present</td>-->
-
-                              </tr>
-                              <tr>
-
-                                <!--<td>4</td>
-                                <td>AD1</td>
-                                <td>R1</td>
-                                <td>class1</td>
-                                <td>present</td>-->
-
-                              </tr>
-                              <tr ng-repeat="attendance in attData" class="editable-row">
-                                <!--<td>
-                                        {{$index+1}}
-                                      </td>-->
-                                <!--<td>{{attendance.student_id || 'empty' }}-->
-                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                <!--</td>-->
-                                <!--<td>
-                                        {{attendance.roll_no || 'empty' }}-->
-                                <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
-                                                    {{busRoute.vehicle_code}}</span>-->
-                                <!--</td>-->
-                                <!--<td>{{attendance.class_id || 'empty' }}-->
-                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                <!--</td>-->
-                                <!--<td>{{attendance.status || 'empty' }}-->
-                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                <!--</td>-->
-                                <!--<td class="pull-right">
-                                                    <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == busRoute">
-                                                        <button type="submit" ng-click="EditBusRoute($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
-                                                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
-                                                    </form>
-
-                                                    <div class="buttons" ng-show="!rowform.$visible">
-                                                        <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
-                                                        <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBusRoute($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                                        <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
-                                <!--</div>
-                                                </td>-->
-                              </tr>
-                            </tbody>
-                          </table>
-
-                          <!--</div>-->
-                          <!--</div>-->
-                        </div>
-                      </div>
-
-
-
-                    </div>
-                    <div class="tab-pane no-padding" id="noticeBoard_2">
-
-
-                      <div class="box-body">
-                        <div class="row">
-                          <div class="tab-content">
-                            <div class="table-responsive mailbox-messages">
-
-
-                              <div class="box" style="margin-top:10px">
-                                <div class="box-header with-border">
-                                  <h3 class="box-title">Donut Chart</h3>
-
-                                  <div class="box-tools pull-right">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                              </button>
-                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                  </div>
-                                </div>
-                                <div class="box-body" pdf-save-content="idOneGraph">
-                                  <div class="chart" style="margin-left:130px">
-                                    <!--<div id='myChart'></div>-->
-                                    <zingchart id="myChart1" zc-values="chartdata1" zc-json="myJson1" zc-height=400 zc-width=100%></zingchart>
-                                  </div>
-                                </div>
-
-                              </div>
-
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!--</div>-->
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /.box-body -->
-            </div>
-
-           
-
-          
-           
-            <!-- /.box -->
           </div>
-          <!-- /.col (LEFT) -->
-          <div class="col-md-6">
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
 
 
+      <div class="box box-primary ">
 
-            <div class="box box-primary">
+        <div class="box-header with-border btn-primary">
+          <h3 class="box-title">Bus Route</h3>
 
-              <div class="box-header with-border btn-primary">
-                <h3 class="box-title">Employee Attendance</h3>
-
-                <div class="box-tools pull-right">
-                  <button type="button" class="btn btn-info btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-info btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
-                  <button type="button" class="btn btn-danger btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                </div>
-              </div>
+            <button type="button" class="btn btn-danger btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
 
 
-              <div class="box-body chart-responsive">
-                <div class="chart chart-responsive" style="height: 400px;">
-                  <div class="nav-tabs-custom">
-                    <ul class="nav nav-tabs">
-                      <li class="active"><a data-target="#list_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>Attendance List</a></li>
-                      <li class=""><a data-target="#report_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Attendance Report</a></li>
-                    </ul>
+        <div class="box-body chart-responsive">
+          <div class="chart chart-responsive" style="height: 400px;">
+            <div class="nav-tabs-custom">
+              <ul class="nav nav-tabs">
+                <li class="active"><a data-target="#bus_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>Bus List</a></li>
+                <li class=""><a data-target="#bus_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>GeoLocation</a></li>
+              </ul>
+            </div>
+
+            <!--<div class="box-body">-->
+            <div class="tab-content">
+              <div class="tab-pane no-padding active" id="bus_1">
+
+
+                <!--<div class="box-body">-->
+                <!--<div class="row">-->
+                <div class="tab-content">
+                  <div class="table-responsive mailbox-messages">
+
+                    <table class="table rwd-table table-striped">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Bus Route</th>
+                          <th>Bus code</th>
+                          <!--<th>Class</th>
+                                <th>Attendance</th>-->
+                          <!--<th class="pull-right">Action</th>-->
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        <tr>
+
+                          <td>1</td>
+                          <td>NAD</td>
+                          <td>VCL-1</td>
+                          <!--<td>class1</td>
+                                <td>present</td>-->
+
+                        </tr>
+                        <tr>
+
+                          <td>2</td>
+                          <td>MVP</td>
+                          <td>VCL-2</td>
+                          <!--<td>class1</td>
+                                <td>present</td>-->
+
+                        </tr>
+                        <tr>
+
+                          <td>3</td>
+                          <td>Complex</td>
+                          <td>VCL-3</td>
+                          <!--<td>class1</td>
+                                <td>present</td>-->
+
+                        </tr>
+                        <tr>
+
+                          <!--<td>4</td>
+                                <td>AD1</td>
+                                <td>R1</td>
+                                <td>class1</td>
+                                <td>present</td>-->
+
+                        </tr>
+                        <tr ng-repeat="attendance in attData" class="editable-row">
+                          <!--<td>
+                                        {{$index+1}}
+                                      </td>-->
+                          <!--<td>{{attendance.student_id || 'empty' }}-->
+                          <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          <!--</td>-->
+                          <!--<td>
+                                        {{attendance.roll_no || 'empty' }}-->
+                          <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
+                                                    {{busRoute.vehicle_code}}</span>-->
+                          <!--</td>-->
+                          <!--<td>{{attendance.class_id || 'empty' }}-->
+                          <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          <!--</td>-->
+                          <!--<td>{{attendance.status || 'empty' }}-->
+                          <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          <!--</td>-->
+                          <!--<td class="pull-right">
+                                                    <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == busRoute">
+                                                        <button type="submit" ng-click="EditBusRoute($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
+                                                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
+                                                    </form>
+
+                                                    <div class="buttons" ng-show="!rowform.$visible">
+                                                        <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
+                                                        <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBusRoute($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                        <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
+                          <!--</div>
+                                                </td>-->
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <!--</div>-->
+                    <!--</div>-->
                   </div>
+                </div>
 
-                  <!--<div class="box-body">-->
-                  <div class="tab-content">
-                    <div class="tab-pane no-padding active" id="list_1">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label>Select Class</label>
-                            <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId" ng-options="classData.class_id as classData.name for classData in classDatanew ">
+
+
+              </div>
+              <div class="tab-pane no-padding" id="bus_2">
+
+
+                <div class="box-body">
+                  <div class="row">
+                    <div class="tab-content">
+                      <div class="table-responsive mailbox-messages">
+
+
+                        <div class="box" style="margin-top:10px">
+                          <div class="box-header with-border">
+                            <h3 class="box-title">Donut Chart</h3>
+
+                            <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                              </button>
+                              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                          </div>
+                          <div class="box-body" pdf-save-content="idOneGraph">
+                            <div class="chart" style="margin-left:130px">
+                              <!--<div id='myChart'></div>-->
+                              <zingchart id="myChart1" zc-values="chartdata1" zc-json="myJson1" zc-height=400 zc-width=100%></zingchart>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!--</div>-->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.box-body -->
+      </div>
+
+
+
+
+      <div class="box box-primary">
+
+        <div class="box-header with-border btn-primary">
+          <h3 class="box-title">Events&NoticeBoard</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-info btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+            <button type="button" class="btn btn-danger btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+
+
+        <div class="box-body chart-responsive">
+          <div class="chart chart-responsive" style="height: 400px;">
+            <div class="nav-tabs-custom">
+              <ul class="nav nav-tabs">
+                <li class="active"><a data-target="#events_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>Events</a></li>
+                <li class=""><a data-target="#noticeBoard_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>NoticeBoard</a></li>
+              </ul>
+            </div>
+
+            <!--<div class="box-body">-->
+            <div class="tab-content">
+              <div class="tab-pane no-padding active" id="events_1">
+
+
+                <!--<div class="box-body">-->
+                <!--<div class="row">-->
+                <div class="tab-content">
+                  <div class="table-responsive mailbox-messages">
+
+                    <table class="table rwd-table table-striped">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Bus Route</th>
+                          <th>Bus code</th>
+                          <!--<th>Class</th>
+                                <th>Attendance</th>-->
+                          <!--<th class="pull-right">Action</th>-->
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        <tr>
+
+                          <td>1</td>
+                          <td>NAD</td>
+                          <td>VCL-1</td>
+                          <!--<td>class1</td>
+                                <td>present</td>-->
+
+                        </tr>
+                        <tr>
+
+                          <td>2</td>
+                          <td>MVP</td>
+                          <td>VCL-2</td>
+                          <!--<td>class1</td>
+                                <td>present</td>-->
+
+                        </tr>
+                        <tr>
+
+                          <td>3</td>
+                          <td>Complex</td>
+                          <td>VCL-3</td>
+                          <!--<td>class1</td>
+                                <td>present</td>-->
+
+                        </tr>
+                        <tr>
+
+                          <!--<td>4</td>
+                                <td>AD1</td>
+                                <td>R1</td>
+                                <td>class1</td>
+                                <td>present</td>-->
+
+                        </tr>
+                        <tr ng-repeat="attendance in attData" class="editable-row">
+                          <!--<td>
+                                        {{$index+1}}
+                                      </td>-->
+                          <!--<td>{{attendance.student_id || 'empty' }}-->
+                          <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          <!--</td>-->
+                          <!--<td>
+                                        {{attendance.roll_no || 'empty' }}-->
+                          <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
+                                                    {{busRoute.vehicle_code}}</span>-->
+                          <!--</td>-->
+                          <!--<td>{{attendance.class_id || 'empty' }}-->
+                          <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          <!--</td>-->
+                          <!--<td>{{attendance.status || 'empty' }}-->
+                          <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          <!--</td>-->
+                          <!--<td class="pull-right">
+                                                    <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == busRoute">
+                                                        <button type="submit" ng-click="EditBusRoute($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
+                                                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
+                                                    </form>
+
+                                                    <div class="buttons" ng-show="!rowform.$visible">
+                                                        <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
+                                                        <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBusRoute($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                        <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
+                          <!--</div>
+                                                </td>-->
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <!--</div>-->
+                    <!--</div>-->
+                  </div>
+                </div>
+
+
+
+              </div>
+              <div class="tab-pane no-padding" id="noticeBoard_2">
+
+
+                <div class="box-body">
+                  <div class="row">
+                    <div class="tab-content">
+                      <div class="table-responsive mailbox-messages">
+
+
+                        <div class="box" style="margin-top:10px">
+                          <div class="box-header with-border">
+                            <h3 class="box-title">Donut Chart</h3>
+
+                            <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                              </button>
+                              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                          </div>
+                          <div class="box-body" pdf-save-content="idOneGraph">
+                            <div class="chart" style="margin-left:130px">
+                              <!--<div id='myChart'></div>-->
+                              <zingchart id="myChart1" zc-values="chartdata1" zc-json="myJson1" zc-height=400 zc-width=100%></zingchart>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!--</div>-->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.box-body -->
+      </div>
+
+
+
+
+
+      <!-- /.box -->
+    </div>
+    <!-- /.col (LEFT) -->
+    <div class="col-md-6">
+
+
+
+      <div class="box box-primary">
+
+        <div class="box-header with-border btn-primary">
+          <h3 class="box-title">Employee Attendance</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-info btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+            <button type="button" class="btn btn-danger btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+
+
+        <div class="box-body chart-responsive">
+          <div class="chart chart-responsive" style="height: 410px;">
+            <div class="nav-tabs-custom">
+              <ul class="nav nav-tabs">
+                <li class="active"><a data-target="#list_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>Attendance List</a></li>
+                <li class=""><a data-target="#report_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Attendance Report</a></li>
+              </ul>
+            </div>
+
+            <!--<div class="box-body">-->
+            <div class="tab-content">
+              <div class="tab-pane no-padding active" id="list_1">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Select Class</label>
+                      <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId" ng-options="classData.class_id as classData.name for classData in classDatanew ">
                        
                       </select>
-                          </div>
-                        </div>
+                    </div>
+                  </div>
 
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label>Select Section</label>
-                            <select class="form-control select2" style="width: 100%;" ng-model="secId" ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Select Section</label>
+                      <select class="form-control select2" style="width: 100%;" ng-model="secId" ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
                        
                         
                       </select>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <button style="margin-top:24px;" type="submit" ng-click="getAttendenceByDay(select_date,classId,secId)" class="btn btn-primary pull-right">Select</button>
-                          <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>-->
-                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <button style="margin-top:24px;" type="submit" ng-click="getAttendenceByDay(select_date,classId,secId)" class="btn btn-primary pull-right">Select</button>
+                    <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>-->
+                  </div>
 
 
 
-                      </div>
+                </div>
 
-                      <!--<div class="box-body">-->
-                      <!--<div class="row">-->
-                      <div class="tab-content">
-                        <div class="table-responsive mailbox-messages">
+                <!--<div class="box-body">-->
+                <!--<div class="row">-->
+                <div class="tab-content">
+                  <div class="table-responsive mailbox-messages">
 
-                          <table class="table rwd-table table-striped">
-                            <thead>
-                              <tr>
-                                <th>#</th>
-                                <th>Addmission No</th>
-                                <th>Roll No</th>
-                                <th>Class</th>
-                                <th>Attendance</th>
-                                <!--<th class="pull-right">Action</th>-->
-                              </tr>
-                            </thead>
-                            <tbody>
+                    <table class="table rwd-table table-striped">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Addmission No</th>
+                          <th>Roll No</th>
+                          <th>Class</th>
+                          <th>Attendance</th>
+                          <!--<th class="pull-right">Action</th>-->
+                        </tr>
+                      </thead>
+                      <tbody>
 
-                              <tr>
+                        <tr>
 
-                                <td>1</td>
-                                <td>AD1</td>
-                                <td>R1</td>
-                                <td>class1</td>
-                                <td>present</td>
+                          <td>1</td>
+                          <td>AD1</td>
+                          <td>R1</td>
+                          <td>class1</td>
+                          <td>present</td>
 
-                              </tr>
-                              <tr>
+                        </tr>
+                        <tr>
 
-                                <td>2</td>
-                                <td>AD1</td>
-                                <td>R1</td>
-                                <td>class1</td>
-                                <td>present</td>
+                          <td>2</td>
+                          <td>AD1</td>
+                          <td>R1</td>
+                          <td>class1</td>
+                          <td>present</td>
 
-                              </tr>
-                              <tr>
+                        </tr>
+                        <tr>
 
-                                <td>3</td>
-                                <td>AD1</td>
-                                <td>R1</td>
-                                <td>class1</td>
-                                <td>present</td>
+                          <td>3</td>
+                          <td>AD1</td>
+                          <td>R1</td>
+                          <td>class1</td>
+                          <td>present</td>
 
-                              </tr>
-                              <tr>
+                        </tr>
+                        <tr>
 
-                                <td>4</td>
-                                <td>AD1</td>
-                                <td>R1</td>
-                                <td>class1</td>
-                                <td>present</td>
+                          <td>4</td>
+                          <td>AD1</td>
+                          <td>R1</td>
+                          <td>class1</td>
+                          <td>present</td>
 
-                              </tr>
-                              <tr ng-repeat="attendance in attData" class="editable-row">
-                                <!--<td>
+                        </tr>
+                        <tr ng-repeat="attendance in attData" class="editable-row">
+                          <!--<td>
                                         {{$index+1}}
                                       </td>-->
-                                <!--<td>{{attendance.student_id || 'empty' }}-->
-                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                <!--</td>-->
-                                <!--<td>
+                          <!--<td>{{attendance.student_id || 'empty' }}-->
+                          <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          <!--</td>-->
+                          <!--<td>
                                         {{attendance.roll_no || 'empty' }}-->
-                                <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
+                          <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
                                                     {{busRoute.vehicle_code}}</span>-->
-                                <!--</td>-->
-                                <!--<td>{{attendance.class_id || 'empty' }}-->
-                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                <!--</td>-->
-                                <!--<td>{{attendance.status || 'empty' }}-->
-                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                <!--</td>-->
-                                <!--<td class="pull-right">
+                          <!--</td>-->
+                          <!--<td>{{attendance.class_id || 'empty' }}-->
+                          <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          <!--</td>-->
+                          <!--<td>{{attendance.status || 'empty' }}-->
+                          <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          <!--</td>-->
+                          <!--<td class="pull-right">
                                                     <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == busRoute">
                                                         <button type="submit" ng-click="EditBusRoute($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
                                                         <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
@@ -838,219 +807,219 @@
                                                         <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
                                                         <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBusRoute($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                         <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
-                                <!--</div>
+                          <!--</div>
                                                 </td>-->
-                              </tr>
-                            </tbody>
-                          </table>
+                        </tr>
+                      </tbody>
+                    </table>
 
-                          <!--</div>-->
-                          <!--</div>-->
-                        </div>
-                      </div>
+                    <!--</div>-->
+                    <!--</div>-->
+                  </div>
+                </div>
 
 
 
-                    </div>
-                    <div class="tab-pane no-padding" id="report_2">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label>Select Class</label>
-                            <select class="form-control select2" name="classId" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId"
-                              ng-options="classData.class_id as classData.name for classData in classDatanew ">
+              </div>
+              <div class="tab-pane no-padding" id="report_2">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Select Class</label>
+                      <select class="form-control select2" name="classId" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId"
+                        ng-options="classData.class_id as classData.name for classData in classDatanew ">
                         <!--<option selected="selected">--Select--</option>
                        <option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
                       </select>
-                          </div>
-                        </div>
+                    </div>
+                  </div>
 
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label>Select Section</label>
-                            <select class="form-control select2" name="sectionId" data-ng-change="getStudentValue(secId)" style="width: 100%;" ng-model="secId"
-                              ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Select Section</label>
+                      <select class="form-control select2" name="sectionId" data-ng-change="getStudentValue(secId)" style="width: 100%;" ng-model="secId"
+                        ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
                         <!--<option selected="selected">--Select--</option>
                        <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
                         
                       </select>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <button style="margin-top:24px;" type="submit" ng-click="getAttendenceByDay(select_date,classId,secId)" class="btn btn-primary pull-right">Select</button>
-                          <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>-->
-                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <button style="margin-top:24px;" type="submit" ng-click="getAttendenceByDay(select_date,classId,secId)" class="btn btn-primary pull-right">Select</button>
+                    <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>-->
+                  </div>
 
-                        <!--<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels"> chart-series="series"
+                  <!--<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels"> chart-series="series"
                 </canvas>-->
 
-                      </div>
+                </div>
 
-                      <div class="box-body">
-                        <div class="row">
-                          <div class="tab-content">
-                            <div class="table-responsive mailbox-messages">
+                <div class="box-body">
+                  <div class="row">
+                    <div class="tab-content">
+                      <div class="table-responsive mailbox-messages">
 
 
-                              <div class="box " style="margin-top:10px">
-                                <div class="box-header with-border">
-                                  <h3 class="box-title">Donut Chart</h3>
+                        <div class="box " style="margin-top:10px">
+                          <div class="box-header with-border">
+                            <h3 class="box-title">Donut Chart</h3>
 
-                                  <div class="box-tools pull-right">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                               </button>
-                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                  </div>
-                                </div>
-                                <div class="box-body" pdf-save-content="idOneGraph">
-                                  <div class="chart" style="margin-left:130px">
-                                    <!--<div id='myChart'></div>-->
-                                    <zingchart id="myChart1" zc-values="chartdata1" zc-json="myJson1" zc-height=400 zc-width=100%></zingchart>
-                                  </div>
-                                </div>
-
-                              </div>
-
+                              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                             </div>
                           </div>
-                        </div>
-                      </div>
+                          <div class="box-body" pdf-save-content="idOneGraph">
+                            <div class="chart" style="margin-left:130px">
+                              <!--<div id='myChart'></div>-->
+                              <zingchart id="myChart1" zc-values="chartdata1" zc-json="myJson1" zc-height=400 zc-width=100%></zingchart>
+                            </div>
+                          </div>
 
-                      <!--</div>-->
+                        </div>
+
+                      </div>
                     </div>
                   </div>
                 </div>
+
+                <!--</div>-->
               </div>
-              <!-- /.box-body -->
+            </div>
+          </div>
+        </div>
+        <!-- /.box-body -->
+      </div>
+
+
+      <div class="box box-primary">
+
+        <div class="box-header with-border btn-primary">
+          <h3 class="box-title">Exam Reports</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-info btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+            <button type="button" class="btn btn-danger btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+
+
+        <div class="box-body chart-responsive">
+          <div class="chart chart-responsive" style="height: 400px;">
+            <div class="nav-tabs-custom">
+              <ul class="nav nav-tabs">
+                <li class="active"><a data-target="#exam_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>List</a></li>
+                <li class=""><a data-target="#exam_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Report</a></li>
+              </ul>
             </div>
 
-
-            <div class="box box-primary">
-
-              <div class="box-header with-border btn-primary">
-                <h3 class="box-title">Exam Reports</h3>
-
-                <div class="box-tools pull-right">
-                  <button type="button" class="btn btn-info btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                  <button type="button" class="btn btn-danger btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                </div>
-              </div>
-
-
-              <div class="box-body chart-responsive">
-                <div class="chart chart-responsive" style="height: 400px;">
-                  <div class="nav-tabs-custom">
-                    <ul class="nav nav-tabs">
-                      <li class="active"><a data-target="#exam_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>List</a></li>
-                      <li class=""><a data-target="#exam_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Report</a></li>
-                    </ul>
-                  </div>
-
-                  <!--<div class="box-body">-->
-                  <div class="tab-content">
-                    <div class="tab-pane no-padding active" id="exam_1">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label>Select Class</label>
-                            <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId" ng-options="classData.class_id as classData.name for classData in classDatanew ">
+            <!--<div class="box-body">-->
+            <div class="tab-content">
+              <div class="tab-pane no-padding active" id="exam_1">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Select Class</label>
+                      <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId" ng-options="classData.class_id as classData.name for classData in classDatanew ">
                        
                       </select>
-                          </div>
-                        </div>
+                    </div>
+                  </div>
 
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label>Select Section</label>
-                            <select class="form-control select2" style="width: 100%;" ng-model="secId" ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Select Section</label>
+                      <select class="form-control select2" style="width: 100%;" ng-model="secId" ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
                        
                         
                       </select>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <button style="margin-top:24px;" type="submit" ng-click="getAttendenceByDay(select_date,classId,secId)" class="btn btn-primary pull-right">Select</button>
-                          <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>-->
-                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <button style="margin-top:24px;" type="submit" ng-click="getAttendenceByDay(select_date,classId,secId)" class="btn btn-primary pull-right">Select</button>
+                    <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>-->
+                  </div>
 
 
 
-                      </div>
+                </div>
 
-                      <!--<div class="box-body">-->
-                      <!--<div class="row">-->
-                      <div class="tab-content">
-                        <div class="table-responsive mailbox-messages">
+                <!--<div class="box-body">-->
+                <!--<div class="row">-->
+                <div class="tab-content">
+                  <div class="table-responsive mailbox-messages">
 
-                          <table class="table rwd-table table-striped">
-                            <thead>
-                              <tr>
-                                <th>#</th>
-                                <th>Addmission No</th>
-                                <th>Roll No</th>
-                                <th>Class</th>
-                                <th>Attendance</th>
-                                <!--<th class="pull-right">Action</th>-->
-                              </tr>
-                            </thead>
-                            <tbody>
+                    <table class="table rwd-table table-striped">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Addmission No</th>
+                          <th>Roll No</th>
+                          <th>Class</th>
+                          <th>Attendance</th>
+                          <!--<th class="pull-right">Action</th>-->
+                        </tr>
+                      </thead>
+                      <tbody>
 
-                              <tr>
+                        <tr>
 
-                                <td>1</td>
-                                <td>AD1</td>
-                                <td>R1</td>
-                                <td>class1</td>
-                                <td>present</td>
+                          <td>1</td>
+                          <td>AD1</td>
+                          <td>R1</td>
+                          <td>class1</td>
+                          <td>present</td>
 
-                              </tr>
-                              <tr>
+                        </tr>
+                        <tr>
 
-                                <td>2</td>
-                                <td>AD1</td>
-                                <td>R1</td>
-                                <td>class1</td>
-                                <td>present</td>
+                          <td>2</td>
+                          <td>AD1</td>
+                          <td>R1</td>
+                          <td>class1</td>
+                          <td>present</td>
 
-                              </tr>
-                              <tr>
+                        </tr>
+                        <tr>
 
-                                <td>3</td>
-                                <td>AD1</td>
-                                <td>R1</td>
-                                <td>class1</td>
-                                <td>present</td>
+                          <td>3</td>
+                          <td>AD1</td>
+                          <td>R1</td>
+                          <td>class1</td>
+                          <td>present</td>
 
-                              </tr>
-                              <tr>
+                        </tr>
+                        <tr>
 
-                                <td>4</td>
-                                <td>AD1</td>
-                                <td>R1</td>
-                                <td>class1</td>
-                                <td>present</td>
+                          <td>4</td>
+                          <td>AD1</td>
+                          <td>R1</td>
+                          <td>class1</td>
+                          <td>present</td>
 
-                              </tr>
-                              <tr ng-repeat="attendance in attData" class="editable-row">
-                                <!--<td>
+                        </tr>
+                        <tr ng-repeat="attendance in attData" class="editable-row">
+                          <!--<td>
                                         {{$index+1}}
                                       </td>-->
-                                <!--<td>{{attendance.student_id || 'empty' }}-->
-                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                <!--</td>-->
-                                <!--<td>
+                          <!--<td>{{attendance.student_id || 'empty' }}-->
+                          <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          <!--</td>-->
+                          <!--<td>
                                         {{attendance.roll_no || 'empty' }}-->
-                                <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
+                          <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
                                                     {{busRoute.vehicle_code}}</span>-->
-                                <!--</td>-->
-                                <!--<td>{{attendance.class_id || 'empty' }}-->
-                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                <!--</td>-->
-                                <!--<td>{{attendance.status || 'empty' }}-->
-                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                <!--</td>-->
-                                <!--<td class="pull-right">
+                          <!--</td>-->
+                          <!--<td>{{attendance.class_id || 'empty' }}-->
+                          <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          <!--</td>-->
+                          <!--<td>{{attendance.status || 'empty' }}-->
+                          <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          <!--</td>-->
+                          <!--<td class="pull-right">
                                                     <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == busRoute">
                                                         <button type="submit" ng-click="EditBusRoute($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
                                                         <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
@@ -1060,195 +1029,195 @@
                                                         <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
                                                         <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBusRoute($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                         <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
-                                <!--</div>
+                          <!--</div>
                                                 </td>-->
-                              </tr>
-                            </tbody>
-                          </table>
+                        </tr>
+                      </tbody>
+                    </table>
 
-                          <!--</div>-->
-                          <!--</div>-->
-                        </div>
-                      </div>
+                    <!--</div>-->
+                    <!--</div>-->
+                  </div>
+                </div>
 
 
 
-                    </div>
-                    <div class="tab-pane no-padding" id="exam_2">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label>Select Class</label>
-                            <select class="form-control select2" name="classId" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId"
-                              ng-options="classData.class_id as classData.name for classData in classDatanew ">
+              </div>
+              <div class="tab-pane no-padding" id="exam_2">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Select Class</label>
+                      <select class="form-control select2" name="classId" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId"
+                        ng-options="classData.class_id as classData.name for classData in classDatanew ">
                         <!--<option selected="selected">--Select--</option>
                        <option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
                       </select>
-                          </div>
-                        </div>
+                    </div>
+                  </div>
 
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label>Select Section</label>
-                            <select class="form-control select2" name="sectionId" data-ng-change="getStudentValue(secId)" style="width: 100%;" ng-model="secId"
-                              ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Select Section</label>
+                      <select class="form-control select2" name="sectionId" data-ng-change="getStudentValue(secId)" style="width: 100%;" ng-model="secId"
+                        ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
                         <!--<option selected="selected">--Select--</option>
                        <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
                         
                       </select>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <button style="margin-top:24px;" type="submit" ng-click="getAttendenceByDay(select_date,classId,secId)" class="btn btn-primary pull-right">Select</button>
-                          <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>-->
-                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <button style="margin-top:24px;" type="submit" ng-click="getAttendenceByDay(select_date,classId,secId)" class="btn btn-primary pull-right">Select</button>
+                    <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>-->
+                  </div>
 
-                        <!--<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels"> chart-series="series"
+                  <!--<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels"> chart-series="series"
                 </canvas>-->
 
-                      </div>
+                </div>
 
-                      <div class="box-body">
-                        <div class="row">
-                          <div class="tab-content">
-                            <div class="table-responsive mailbox-messages">
+                <div class="box-body">
+                  <div class="row">
+                    <div class="tab-content">
+                      <div class="table-responsive mailbox-messages">
 
 
-                              <div class="box" style="margin-top:10px">
-                                <div class="box-header with-border ">
-                                  <h3 class="box-title">Donut Chart</h3>
+                        <div class="box" style="margin-top:10px">
+                          <div class="box-header with-border ">
+                            <h3 class="box-title">Donut Chart</h3>
 
-                                  <div class="box-tools pull-right">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                               </button>
-                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                  </div>
-                                </div>
-                                <div class="box-body" pdf-save-content="idOneGraph">
-                                  <div class="chart" style="margin-left:130px">
-                                    <!--<div id='myChart'></div>-->
-                                    <zingchart id="myChart1" zc-values="chartdata1" zc-json="myJson1" zc-height=400 zc-width=100%></zingchart>
-                                  </div>
-                                </div>
-
-                              </div>
-
+                              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                             </div>
                           </div>
-                        </div>
-                      </div>
+                          <div class="box-body" pdf-save-content="idOneGraph">
+                            <div class="chart" style="margin-left:130px">
+                              <!--<div id='myChart'></div>-->
+                              <zingchart id="myChart1" zc-values="chartdata1" zc-json="myJson1" zc-height=400 zc-width=100%></zingchart>
+                            </div>
+                          </div>
 
-                      <!--</div>-->
+                        </div>
+
+                      </div>
                     </div>
                   </div>
                 </div>
+
+                <!--</div>-->
               </div>
-              <!-- /.box-body -->
             </div>
-            <!-- /.box -->
+          </div>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
 
 
 
-            <div class="box box-primary">
+      <div class="box box-primary">
 
-              <div class="box-header with-border btn-primary">
-                <h3 class="box-title">Messages&TaskManager</h3>
+        <div class="box-header with-border btn-primary">
+          <h3 class="box-title">Messages&TaskManager</h3>
 
-                <div class="box-tools pull-right">
-                  <button type="button" class="btn btn-info btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-info btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
-                  <button type="button" class="btn btn-danger btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                </div>
-              </div>
+            <button type="button" class="btn btn-danger btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
 
 
-              <div class="box-body chart-responsive">
-                <div class="chart chart-responsive" style="height: 400px;">
-                  <div class="nav-tabs-custom">
-                    <ul class="nav nav-tabs">
-                      <li class="active"><a data-target="#messages" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>Messages</a></li>
-                      <li class=""><a data-target="#taskManager" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Task Manager</a></li>
-                    </ul>
-                  </div>
+        <div class="box-body chart-responsive">
+          <div class="chart chart-responsive" style="height: 400px;">
+            <div class="nav-tabs-custom">
+              <ul class="nav nav-tabs">
+                <li class="active"><a data-target="#messages" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>Messages</a></li>
+                <li class=""><a data-target="#taskManager" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Task Manager</a></li>
+              </ul>
+            </div>
 
-                  <!--<div class="box-body">-->
-                  <div class="tab-content">
-                    <div class="tab-pane no-padding active" id="messages">
+            <!--<div class="box-body">-->
+            <div class="tab-content">
+              <div class="tab-pane no-padding active" id="messages">
 
 
-                      <!--<div class="box-body">-->
-                      <!--<div class="row">-->
-                      <div class="tab-content">
-                        <div class="table-responsive mailbox-messages">
+                <!--<div class="box-body">-->
+                <!--<div class="row">-->
+                <div class="tab-content">
+                  <div class="table-responsive mailbox-messages">
 
-                          <table class="table rwd-table table-striped">
-                            <thead>
-                              <tr>
-                                <th>#</th>
-                                <th>Bus Route</th>
-                                <th>Bus code</th>
-                                <!--<th>Class</th>
+                    <table class="table rwd-table table-striped">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Bus Route</th>
+                          <th>Bus code</th>
+                          <!--<th>Class</th>
                                 <th>Attendance</th>-->
-                                <!--<th class="pull-right">Action</th>-->
-                              </tr>
-                            </thead>
-                            <tbody>
+                          <!--<th class="pull-right">Action</th>-->
+                        </tr>
+                      </thead>
+                      <tbody>
 
-                              <tr>
+                        <tr>
 
-                                <td>1</td>
-                                <td>NAD</td>
-                                <td>VCL-1</td>
-                                <!--<td>class1</td>
+                          <td>1</td>
+                          <td>NAD</td>
+                          <td>VCL-1</td>
+                          <!--<td>class1</td>
                                 <td>present</td>-->
 
-                              </tr>
-                              <tr>
+                        </tr>
+                        <tr>
 
-                                <td>2</td>
-                                <td>MVP</td>
-                                <td>VCL-2</td>
-                                <!--<td>class1</td>
+                          <td>2</td>
+                          <td>MVP</td>
+                          <td>VCL-2</td>
+                          <!--<td>class1</td>
                                 <td>present</td>-->
 
-                              </tr>
-                              <tr>
+                        </tr>
+                        <tr>
 
-                                <td>3</td>
-                                <td>Complex</td>
-                                <td>VCL-3</td>
-                                <!--<td>class1</td>
+                          <td>3</td>
+                          <td>Complex</td>
+                          <td>VCL-3</td>
+                          <!--<td>class1</td>
                                 <td>present</td>-->
 
-                              </tr>
-                              <tr>
+                        </tr>
+                        <tr>
 
-                                <!--<td>4</td>
+                          <!--<td>4</td>
                                 <td>AD1</td>
                                 <td>R1</td>
                                 <td>class1</td>
                                 <td>present</td>-->
 
-                              </tr>
-                              <tr ng-repeat="attendance in attData" class="editable-row">
-                                <!--<td>
+                        </tr>
+                        <tr ng-repeat="attendance in attData" class="editable-row">
+                          <!--<td>
                                         {{$index+1}}
                                       </td>-->
-                                <!--<td>{{attendance.student_id || 'empty' }}-->
-                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                <!--</td>-->
-                                <!--<td>
+                          <!--<td>{{attendance.student_id || 'empty' }}-->
+                          <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          <!--</td>-->
+                          <!--<td>
                                         {{attendance.roll_no || 'empty' }}-->
-                                <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
+                          <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
                                                     {{busRoute.vehicle_code}}</span>-->
-                                <!--</td>-->
-                                <!--<td>{{attendance.class_id || 'empty' }}-->
-                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                <!--</td>-->
-                                <!--<td>{{attendance.status || 'empty' }}-->
-                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                <!--</td>-->
-                                <!--<td class="pull-right">
+                          <!--</td>-->
+                          <!--<td>{{attendance.class_id || 'empty' }}-->
+                          <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          <!--</td>-->
+                          <!--<td>{{attendance.status || 'empty' }}-->
+                          <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          <!--</td>-->
+                          <!--<td class="pull-right">
                                                     <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == busRoute">
                                                         <button type="submit" ng-click="EditBusRoute($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
                                                         <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
@@ -1258,64 +1227,64 @@
                                                         <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
                                                         <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBusRoute($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                         <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
-                                <!--</div>
+                          <!--</div>
                                                 </td>-->
-                              </tr>
-                            </tbody>
-                          </table>
+                        </tr>
+                      </tbody>
+                    </table>
 
-                          <!--</div>-->
-                          <!--</div>-->
-                        </div>
-                      </div>
-
-
-
-                    </div>
-                    <div class="tab-pane no-padding" id="taskManager">
+                    <!--</div>-->
+                    <!--</div>-->
+                  </div>
+                </div>
 
 
-                      <div class="box-body">
-                        <div class="row">
-                          <div class="tab-content">
-                            <div class="table-responsive mailbox-messages">
+
+              </div>
+              <div class="tab-pane no-padding" id="taskManager">
 
 
-                              <div class="box" style="margin-top:10px">
-                                <div class="box-header with-border">
-                                  <h3 class="box-title">Donut Chart</h3>
+                <div class="box-body">
+                  <div class="row">
+                    <div class="tab-content">
+                      <div class="table-responsive mailbox-messages">
 
-                                  <div class="box-tools pull-right">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+
+                        <div class="box" style="margin-top:10px">
+                          <div class="box-header with-border">
+                            <h3 class="box-title">Donut Chart</h3>
+
+                            <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                               </button>
-                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                  </div>
-                                </div>
-                                <div class="box-body" pdf-save-content="idOneGraph">
-                                  <div class="chart" style="margin-left:130px">
-                                    <!--<div id='myChart'></div>-->
-                                    <zingchart id="myChart1" zc-values="chartdata1" zc-json="myJson1" zc-height=400 zc-width=100%></zingchart>
-                                  </div>
-                                </div>
-
-                              </div>
-
+                              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                             </div>
                           </div>
-                        </div>
-                      </div>
+                          <div class="box-body" pdf-save-content="idOneGraph">
+                            <div class="chart" style="margin-left:130px">
+                              <!--<div id='myChart'></div>-->
+                              <zingchart id="myChart1" zc-values="chartdata1" zc-json="myJson1" zc-height=400 zc-width=100%></zingchart>
+                            </div>
+                          </div>
 
-                      <!--</div>-->
+                        </div>
+
+                      </div>
                     </div>
                   </div>
                 </div>
+
+                <!--</div>-->
               </div>
-              <!-- /.box-body -->
             </div>
-    <!-- /.box -->
           </div>
-          </div>
- </section>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+  </div>
+</section>
 
 
 
@@ -1326,7 +1295,7 @@
 
 <section class="content">
 
-  <div class="row" >
+  <div class="row">
     <!-- Left col -->
     <section class="col-lg-7 connectedSortable">
       <!-- Custom tabs (Charts with tabs)-->
@@ -1348,36 +1317,36 @@
             <!--<div class="box-header with-border">
                     <h3 class="box-title">TimeTable List</h3>
                     </div>-->
-            
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Select Class</label>
-                <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId" ng-options="classData.class_id as classData.name for classData in classDatanew ">
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Select Class</label>
+                  <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId" ng-options="classData.class_id as classData.name for classData in classDatanew ">
                      <option selected="selected">--Select--</option>
                           <!--<option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
                       </select>
+                </div>
               </div>
-            </div>
 
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Select Section</label>
-                <select class="form-control select2" ng-change="getTimeTable(secId)" style="width: 100%;" ng-model="secId"  ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Select Section</label>
+                  <select class="form-control select2" ng-change="getTimeTable(secId)" style="width: 100%;" ng-model="secId" ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
                         <!--<option selected="selected">--Select--</option>
                        <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
                         
                       </select>
+                </div>
               </div>
-            </div>
 
-            <div class="col-md-4">
-              <div class="form-group">
-                <button type="submit" ng-click="getTimeTable(secId)" class="btn btn-primary pull-right" style="margin-top: 8%;margin-right: 64%;">Select</button>
-                <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>-->
+              <div class="col-md-4">
+                <div class="form-group">
+                  <button type="submit" ng-click="getTimeTable(secId)" class="btn btn-primary pull-right" style="margin-top: 8%;margin-right: 64%;">Select</button>
+                  <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>-->
+                </div>
               </div>
             </div>
-          </div>
             <table export-table class="table">
               <thead>
                 <tr>
@@ -1411,7 +1380,7 @@
                 <tr ng-repeat="timetable in timeTableData">
                   <th>
                     <div class="attachment-block clearfix" style="width:87px;">
-                      <strong class="text-blue" >{{timetable.start_time}}</strong>
+                      <strong class="text-blue">{{timetable.start_time}}</strong>
                       <!--<b class="text text-center">-</b>
                                         <strong class="text-blue">{{timetable.end_time}}</strong>-->
                     </div>
@@ -1444,8 +1413,8 @@
       </div>
     </section>
   </div>
-    
-<div class="row" >
+
+  <div class="row">
     <!-- Left col -->
     <section class="col-lg-7 connectedSortable">
       <!-- Chat box -->
@@ -1711,7 +1680,7 @@
     <section class="col-lg-5 connectedSortable">
 
       <!--Attendence-->
-      <div class="box box-solid"  style="background-color:#35879f">
+      <div class="box box-solid" style="background-color:#35879f">
         <div class="box-header">
 
 
@@ -1799,7 +1768,7 @@
 
 
         <!--Buses-->
-        <div class="box box-solid"  style="background-color:#f2b92f">
+        <div class="box box-solid" style="background-color:#f2b92f">
           <div class="box-header">
             <i class="fa fa-th  pull-left"></i>
             <h3 class="box-title">

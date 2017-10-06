@@ -85,7 +85,7 @@
                   <span editable-text="feeType.fee_type" e-name="fee_type" onaftersave="EditFeeType($index)" e-form="rowform" e-required>{{feeType.fee_type || 'empty' }}</span>
                 </td>
                
-                <td>
+                <td class="pull-right">
                   <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == feeType">
                     <button type="submit" ng-click="EditFeeType($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
                     <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>

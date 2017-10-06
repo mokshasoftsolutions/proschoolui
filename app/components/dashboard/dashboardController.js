@@ -1,5 +1,5 @@
 angular.module('school_erp')
-    .controller("dashboardController", ['$http', '$scope', '$compile', 'chaptersServices', 'employeeServices', 'globalServices', 'subjectsServices', 'classWiseServices', 'NoticeBoardServices', 'schoolEventsServices', 'addVehicleServices', 'barChartOneService', 'donutChartOneService', 'ngDialog', '$rootScope', function ($http, $scope, $compile, chaptersServices, employeeServices, globalServices, subjectsServices, classWiseServices, NoticeBoardServices, schoolEventsServices, addVehicleServices, barChartOneService, donutChartOneService, ngDialog, $rootScope) {
+    .controller("dashboardController", ['$http', '$scope', '$compile', 'studentServices', 'chaptersServices', 'employeeServices', 'globalServices', 'subjectsServices', 'classWiseServices', 'NoticeBoardServices', 'schoolEventsServices', 'addVehicleServices', 'barChartOneService', 'donutChartOneService', 'ngDialog', '$rootScope', function ($http, $scope, $compile, studentServices, chaptersServices, employeeServices, globalServices, subjectsServices, classWiseServices, NoticeBoardServices, schoolEventsServices, addVehicleServices, barChartOneService, donutChartOneService, ngDialog, $rootScope) {
 
         $scope.evalData = [];
         $scope.data = [];
@@ -22,12 +22,13 @@ angular.module('school_erp')
                 .success(function (data, status) {
                     $scope.secData = data.class_sections; // Api list-name
                     $scope.secId = data.class_sections[0].section_id;
-                    $scope.getTimeTable($scope.secId); 
+                    $scope.getTimeTable($scope.secId);
                     if ($scope.initialLoadAttendence == false) {
-                        $scope.getAttendence($scope.select_date, $scope.classId, $scope.secId);
+                        $scope.getAttendenceByDay($scope.select_date, $scope.classId, $scope.secId);
+                       // $scope.getAttendence($scope.select_date, $scope.classId, $scope.secId);
                     }
 
-                    // $scope.getAttendence($scope.classId,$scope.secId);
+                   
 
                 })
                 .error(function (data, success) { })
@@ -39,24 +40,135 @@ angular.module('school_erp')
         }
 
 
-        // $scope.getDate = function (select_date) {
+     
+       
+        if ($rootScope.role == 'parent') {
 
-        //     $scope.date1 = $scope.select_date
-        //     console.log($scope.date1);
+            $scope.secId = $rootScope.student.section;
+            $scope.populateSubjects($scope.secId);
 
-        //     $scope.getAttendence($scope.date1, $scope.classId, $scope.secId);
-        //     console.log($scope.date1);
-        // }
 
-        // Attendence Reports
-        $scope.getAttendence = function (date, classId, secId) {
+        } else {
+            $scope.getClassesInitalLoad();
+        }
+
+
+
+
+        $scope.populateSubjects = function (secId) {
+            $scope.subData = [];
+            subjectsServices.getSubjects(secId)
+                .success(function (data, status) {
+                    $scope.subData = data.subjects;
+                    // $scope.subId = $scope.subData[0].subject_id;
+                    $scope.subId = "SCH-9271-CL-21-SEC-26-SUB-13";
+                    //$scope.getChapters($scope.subId);
+                    //$scope.getTimeTable($scope.subId);
+                })
+                .error(function (data, success) {
+                });
+        }
+
+        $scope.showRole = function (role) {
+            return globalServices.fetchRoleAuth(role);
+        }
+
+
+
+
+
+
+
+
+        //TimeTable
+
+        $scope.getTimeTable = function (secId) {
+            classWiseServices.getTimeTable(secId)
+                .success(function (data, status) {
+                    $scope.timeTableData = [];
+
+                    var slots = [{ time: "09:30-10:30" },
+                    { time: "10:30-11:30" },
+                    { time: "11:30-12:30" },
+                    { time: "01:30-02:30" },
+                    { time: "02:30-03:30" },
+                    { time: "03:30-04:30" }]
+                    angular.forEach(slots, function (value, key) {
+                        var dataObj = {
+                            "start_time": value.time,
+                            "data": { "monday": "--", "tuesday": "--", "wednesday": "--", "thursday": "--", "friday": "--", "saturday": "--", "sunday": "--" },
+                        }
+                        angular.forEach(data.timetable, function (valuesub, keysub) {
+
+                            if (valuesub.start_time == value.time) {
+
+                                if (valuesub.day == "monday") {
+                                    dataObj.data.monday = valuesub.name;
+                                } else if (valuesub.day == "tuesday") {
+                                    dataObj.data.tuesday = valuesub.name;
+                                } else if (valuesub.day == "wednesday") {
+                                    dataObj.data.wednesday = valuesub.name;
+                                } else if (valuesub.day == "thrusday") {
+                                    dataObj.data.thursday = valuesub.name;
+                                } else if (valuesub.day == "friday") {
+                                    dataObj.data.friday = valuesub.name;
+                                } else if (valuesub.day == "saturday") {
+                                    dataObj.data.saturday = valuesub.name;
+                                } else if (valuesub.day == "sunday") {
+                                    dataObj.data.sunday = valuesub.name;
+                                } else {
+
+                                }
+
+                            }
+
+                        })
+
+
+                        $scope.timeTableData.push(dataObj);
+
+                    });
+
+
+                    $scope.timetables = data.timetable;
+
+
+                    $scope.id = $scope.timetables.id;
+
+                })
+                .error(function (data, success) {
+                })
+        }
+
+
+        //Student Attendance
+
+        //Student Attendance List
+
+        $scope.getAttendenceByDay = function (date, classId, secId) {
+            $scope.initialLoadAttendence = true;
+
+            $scope.attData = [];
+
+            studentServices.getAttendenceByDay(date, classId, secId)
+                .success(function (data, status) {
+                    $scope.attData = data.donutchart;
+                    console.log(JSON.stringify(data));
+                })
+                .error(function (data, success) { })
+        }
+
+
+        //Student Attendance Report
+
+        $scope.getAttendenceByDay = function (date, classId, secId) {
             $scope.initialLoadAttendence = true;
             var arrPresent = new Array();
             var arrAbsent = new Array();
             var arrLeave = new Array();
             $scope.attData = [];
 
-            donutChartOneService.getAttendence(date, classId, secId)
+            studentServices.getAttendenceByDay(date, classId, secId)
                 .success(function (data, status) {
                     $scope.attData = data.donutchart;
                     console.log(JSON.stringify(data));
@@ -71,10 +183,10 @@ angular.module('school_erp')
                             []
                         ];
                         if ($scope.chartdata) {
-                            // ngDialog.open({
-                            //     template: '<p>Report is not available.</p>',
-                            //     plain: true
-                            // });
+                            ngDialog.open({
+                                template: '<p>Report is not available.</p>',
+                                plain: true
+                            });
                             // $window.alert("report not availabel");
                         }
                         console.log("report not available")
@@ -170,102 +282,153 @@ angular.module('school_erp')
                 .error(function (data, success) { })
         }
 
-        if ($rootScope.role == 'parent') {
-
-            $scope.secId = $rootScope.student.section;
-            // $scope.populateSubjects($scope.secId);
-
-
-        } else {
-            $scope.getClassesInitalLoad();
-        }
 
 
 
+//  //Employee Attendance
 
-        $scope.populateSubjects = function (secId) {
-            $scope.subData = [];
-            subjectsServices.getSubjects(secId)
-                .success(function (data, status) {
-                    $scope.subData = data.subjects;
-                    // $scope.subId = $scope.subData[0].subject_id;
-                    $scope.subId = "SCH-9271-CL-21-SEC-26-SUB-13";
-                    //$scope.getChapters($scope.subId);
-                    $scope.getTimeTable($scope.subId);
-                })
-                .error(function (data, success) {
-                });
-        }
+//         //Employee Attendance List
 
-        $scope.showRole = function (role) {
-            return globalServices.fetchRoleAuth(role);
-        }
+//         $scope.getAttendenceByDay = function (date) {
+//             $scope.initialLoadAttendence = true;
+
+//             $scope.attData = [];
+
+//             studentServices.getAttendenceByDay(date)
+//                 .success(function (data, status) {
+//                     $scope.attData = data.donutchart;
+//                     console.log(JSON.stringify(data));
+//                 })
+//                 .error(function (data, success) { })
+//         }
 
 
+//         //Employee Attendance Report
+
+//         $scope.getAttendenceByDay = function (date) {
+//             $scope.initialLoadAttendence = true;
+//             var arrPresent = new Array();
+//             var arrAbsent = new Array();
+//             var arrLeave = new Array();
+//             $scope.attData = [];
+
+//             studentServices.getAttendenceByDay(date)
+//                 .success(function (data, status) {
+//                     $scope.attData = data.donutchart;
+//                     console.log(JSON.stringify(data));
+//                     // console.log($scope.examData);
+//                     //$scope.chartdata = [[], [], []];
+
+//                     if ($scope.attData == 0) {
+//                         // array empty or does not exist
+//                         $scope.chartdata = [
+//                             [],
+//                             [],
+//                             []
+//                         ];
+//                         if ($scope.chartdata) {
+//                             ngDialog.open({
+//                                 template: '<p>Report is not available.</p>',
+//                                 plain: true
+//                             });
+//                             // $window.alert("report not availabel");
+//                         }
+//                         console.log("report not available")
+//                     }
+
+
+//                     $scope.array = $.map($scope.attData, function (item) {
+//                         console.log(item);
+//                         //$scope.item=null;
+//                         if (item.status == "Present") {
+//                             arrPresent.push(item.status);
+
+//                             $scope.data1 = [];
+//                             for (var i = 0; i < arrPresent.length; i++) {
+//                                 $scope.data1.push(arrPresent[i]);
+//                             }
+//                             console.log($scope.data1);
+//                             $scope.present = ($scope.data1).length;
+//                             console.log($scope.present);
+//                         } else if (item.status == "Absent") {
+
+//                             arrAbsent.push(item.status);
+
+//                             $scope.label1 = [];
+//                             for (var j = 0; j < arrAbsent.length; j++) {
+//                                 $scope.label1.push(arrAbsent[j]);
+
+//                             }
+//                             console.log($scope.label1);
+//                             $scope.absent = ($scope.label1).length;
+//                             console.log($scope.absent);
+
+
+//                         } else if (item.status == "On Leave") {
+
+//                             arrLeave.push(item.status);
+
+//                             $scope.leave1 = [];
+//                             for (var k = 0; k < arrLeave.length; k++) {
+//                                 $scope.leave1.push(arrLeave[k]);
+
+//                             }
+//                             console.log($scope.leave1);
+//                             $scope.leave = ($scope.leave1).length;
+//                             console.log($scope.leave);
+//                         }
+//                         $scope.chartdata = [
+//                             [$scope.present],
+//                             [$scope.absent],
+//                             [$scope.leave]
+//                         ];
+//                         return;
+//                     });
+
+//                     $scope.myJson = {
+//                         type: "ring",
+//                         title: {
+//                             text: 'Attendance Report'
+//                         },
+//                         plot: {
+//                             slice: 60,
+//                             detach: false,
+//                             tooltip: {
+//                                 fontSize: 16,
+//                                 anchor: 'c',
+//                                 x: '50%',
+//                                 y: '48%',
+//                                 sticky: true,
+//                                 backgroundColor: 'none',
+//                                 text: '<span style="color:%color">%t</span><br><span style="color:%color">%v</span>'
+//                             }
+//                         },
+//                         legend: {
+//                             verticalAlign: "bottom",
+//                             align: "center"
+//                         },
+//                         series: [{
+//                             //values : [50],
+//                             text: "present"
+//                         },
+//                         {
+//                             //values : [35],
+//                             text: "absent"
+//                         },
+//                         {
+//                             //values : [20],
+//                             text: "leave"
+//                         }
+//                         ]
+//                     };
+
+//                 })
+//                 .error(function (data, success) { })
+//         }
 
 
 
 
-        //TimeTable
-
-        $scope.getTimeTable = function (secId) {
-            classWiseServices.getTimeTable(secId)
-                .success(function (data, status) {
-                    $scope.timeTableData = [];
-
-                    var slots = [{ time: "09:30-10:30" },
-                    { time: "10:30-11:30" },
-                    { time: "11:30-12:30" },
-                    { time: "01:30-02:30" },
-                    { time: "02:30-03:30" },
-                    { time: "03:30-04:30" }]
-                    angular.forEach(slots, function (value, key) {
-                        var dataObj = {
-                            "start_time": value.time,
-                            "data": { "monday": "--", "tuesday": "--", "wednesday": "--", "thursday": "--", "friday": "--", "saturday": "--", "sunday": "--" },
-                        }
-                        angular.forEach(data.timetable, function (valuesub, keysub) {
-
-                            if (valuesub.start_time == value.time) {
-
-                                if (valuesub.day == "monday") {
-                                    dataObj.data.monday = valuesub.name;
-                                } else if (valuesub.day == "tuesday") {
-                                    dataObj.data.tuesday = valuesub.name;
-                                } else if (valuesub.day == "wednesday") {
-                                    dataObj.data.wednesday = valuesub.name;
-                                } else if (valuesub.day == "thrusday") {
-                                    dataObj.data.thursday = valuesub.name;
-                                } else if (valuesub.day == "friday") {
-                                    dataObj.data.friday = valuesub.name;
-                                } else if (valuesub.day == "saturday") {
-                                    dataObj.data.saturday = valuesub.name;
-                                } else if (valuesub.day == "sunday") {
-                                    dataObj.data.sunday = valuesub.name;
-                                } else {
-
-                                }
-
-                            }
-
-                        })
-
-
-                        $scope.timeTableData.push(dataObj);
-
-                    });
-
-
-                    $scope.timetables = data.timetable;
-
-
-                    $scope.id = $scope.timetables.id;
-                    // $scope.studentId = $scope.students[0].student_id;
-                    //console.log($scope.studentId);
-                })
-                .error(function (data, success) {
-                })
-        }
 
 
 
@@ -568,7 +731,7 @@ angular.module('school_erp')
                 //$http.get("http://192.168.1.10:2016/netcomp/getAllPositionsDetails",{headers: { 'Content-type': 'application/json'}}).
 
                 success(function (data, status) {
-                    $scope.status = status;   
+                    $scope.status = status;
                     $scope.JSONdata = data;
                     console.log(JSON.stringify(data));
 
@@ -720,15 +883,15 @@ angular.module('school_erp')
 
 
         // For employee attendece
-        employeeServices.getEmployeeAttendence()
-            .success(function (data, status) {
-                console.log("message");
-                console.log(JSON.stringify(data));
-                $scope.employeeAttendance = data.emp_attendance;
-                $scope.attendanceBox = [];
+        // employeeServices.getEmployeeAttendence()
+        //     .success(function (data, status) {
+        //         console.log("message");
+        //         console.log(JSON.stringify(data));
+        //         $scope.employeeAttendance = data.emp_attendance;
+        //         $scope.attendanceBox = [];
 
-            })
-            .error(function (data, success) { })
+        //     })
+        //     .error(function (data, success) { })
 
 
 

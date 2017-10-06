@@ -110,16 +110,16 @@ angular.module('school_erp')
         }
         $scope.getFeeType();
 
-        collectFeeServices.getFeeTypes($scope.data.classId)
-            .success(function (data, status) {
-                //$scope.parseInt = parseInt;
-                // console.log(subId)
-                console.log(JSON.stringify(data))
-                $scope.collectFeeData = data.student_fee_deatils;
-                //  console.log(JSON.stringify(data))
+        // collectFeeServices.getFeeTypes($scope.data.classId)
+        //     .success(function (data, status) {
+        //         //$scope.parseInt = parseInt;
+        //         // console.log(subId)
+        //         console.log(JSON.stringify(data))
+        //         $scope.collectFeeData = data.student_fee_deatils;
+        //         //  console.log(JSON.stringify(data))
 
-            })
-            .error(function (data, success) { });
+        //     })
+        //     .error(function (data, success) { });
 
 
 
@@ -137,28 +137,29 @@ angular.module('school_erp')
         }
 
 
-        $scope.addFee = function (data, value) {
+        $scope.addFee = function (value,student_id) {
             console.log("message");
-            $scope.data = angular.copy($scope.collectFeeData[value]);
+            console.log(student_id);
+            //$scope.data = angular.copy($scope.collectFeeData[value]);
             //   $scope.student_id = $scope.data.student_id;
             // console.log($scope.student_id);
             var FeeDetails = {
-                date: $scope.data.date,
+                date: $scope.value.date,
 
-                fee_type: $scope.data.fee_type,
-                payment_mode: $scope.data.payment_mode,
-                fine: $scope.data.fine,
-                discount: $scope.data.discount
+                fee_type: $scope.value.fee_type,
+                payment_mode: $scope.value.payment_mode,
+                fine: $scope.value.fine,
+                discount: $scope.value.discount
 
             }
-            collectFeeServices.setFee(FeeDetails, $scope.student_id)
+            collectFeeServices.setFee(FeeDetails,student_id)
                 .success(function (data, status) {
                     ngDialog.open({
                         template: '<p>FeeType are Added Successfully.</p>',
                         plain: true
                     });
-                    $scope.data = [];
-                    // $scope.getFee();
+                    $scope.value = [];
+                 $scope.getFee(student_id);
                 })
                 .error(function (data, success) {
                     ngDialog.open({

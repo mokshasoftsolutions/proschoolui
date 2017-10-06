@@ -38,15 +38,27 @@ angular.module('school_erp')
         };
 
 
-        employeeService.setAttendance = function (dataValue, Attendance) {
+        // employeeService.setAttendance = function (dataValue, Attendance) {
+        //     console.log(dataValue);
+        //     return $http({
+        //         method: 'POST',
+        //         url: globalServices.globalValue.baseURL + 'api/employee_attendance/SCH-9271/' + Attendance,
+        //         data: $.param(dataValue),
+        //         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        //     })
+        // };
+
+
+         employeeService.setAttendance = function(dataValue, Attendance) {
             console.log(dataValue);
             return $http({
                 method: 'POST',
-                url: globalServices.globalValue.baseURL + 'api/employee_attendance/SCH-9271/' + Attendance,
+                url: globalServices.globalValue.baseURL + 'api/employee_attendance/' + Attendance,
                 data: $.param(dataValue),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             })
         };
+
 
         employeeService.setBulkAttendance = function (dataValue) {
             var test = {
@@ -56,24 +68,29 @@ angular.module('school_erp')
             return $http({
                 method: 'POST',
                 url: globalServices.globalValue.baseURL + 'api/employee_attendancebulk/SCH-9271',
-                data: $.param(test),
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                data: test,
+                headers: { 'Content-Type': 'application/json' },
             })
         };
-        employeeService.getEmployeeAttendence = function () {
-            return $http({
-                method: 'GET',
-                url: globalServices.globalValue.baseURL + 'api/employee_attendancebulk/SCH-9271'
-            })
-        };
+        // employeeService.setBulkAttendance = function (dataValue) {
+        //     var test = {
+        //         "employees": dataValue,
+        //     };
+        //     console.log(dataValue);
+        //     return $http({
+        //         method: 'POST',
+        //         url: globalServices.globalValue.baseURL + 'api/employee_attendancebulk/SCH-9271',
+        //         data: $.param(test),
+        //         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        //     })
+        // };
 
         employeeService.getEmployeeAttendenceByDay = function (date) {
             return $http({
                 method: 'GET',
-                url: globalServices.globalValue.baseURL + 'api/employee_attendance_status/'+date
+                url: globalServices.globalValue.baseURL + 'api/employee_attendance_by_date/' + date
             })
         };
-
 
         return employeeService;
 

@@ -16,31 +16,34 @@
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
                 <li class="active"><a data-target="#tab_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Report By Day </a></li>
-                <li class=""><a data-target="#tab_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Report By Month </a></li>
+                <!--<li class=""><a data-target="#tab_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Report By Month </a></li>-->
             </ul>
         </div>
 
         <div class="box-body">
             <div class="tab-content">
                 <div class="tab-pane no-padding active" id="tab_1">
-                    <div class="row">
+
+                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Select Class</label>
-                                <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId" ng-options="classData.class_id as classData.name for classData in classDatanew ">
-                        <!--<option selected="selected">--Select--</option>
-                       <option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
+                                <label>Employee Type</label>
+                                <select ng-model="search.job_category" class="form-control select2" style="width: 100%;">
+                        <option value="" selected="selected">--All--</option>
+                        <option value="teaching">Teaching</option>
+                        <option value="non-teaching">Non-Teaching</option>
+                        <option value="administrative">Administrative</option>
                       </select>
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Select Section</label>
-                                <select class="form-control select2" style="width: 100%;" ng-model="secId" ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
-                        <!--<option selected="selected">--Select--</option>
-                       <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
-                        
+                                <label>Gender</label>
+                                <select ng-model="search.gender" class="form-control select2" style="width: 100%;">
+                        <option value="" selected="selected">--All--</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
                       </select>
                             </div>
                         </div>
@@ -64,7 +67,7 @@
 
 
                         <div class="col-md-12">
-                            <button type="submit" ng-click="getAttendenceByDay(select_date,classId,secId)" class="btn btn-primary pull-right">Select</button>
+                            <button type="submit" ng-click="getAttendenceByDay(select_date)" class="btn btn-primary pull-right">Select</button>
                             <li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>
                         </div>
 
@@ -72,7 +75,7 @@
                 </canvas>-->
 
                     </div>
-
+                  
                     <div class="box-body">
                         <div class="row">
                             <div class="tab-content">
