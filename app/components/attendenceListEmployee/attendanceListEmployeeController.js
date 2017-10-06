@@ -22,7 +22,7 @@ angular.module('school_erp')
                 })
                 .error(function (data, success) { })
         }
-
+        $scope.getAttendenceByDay($scope.select_date);
 
 
 

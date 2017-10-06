@@ -285,22 +285,22 @@ angular.module('school_erp')
 
 
 
-//  //Employee Attendance
+ //Employee Attendance
 
-//         //Employee Attendance List
+        //Employee Attendance List
 
-//         $scope.getAttendenceByDay = function (date) {
-//             $scope.initialLoadAttendence = true;
+        $scope.getAttendenceByDay = function (date) {
+            $scope.initialLoadAttendence = true;
 
-//             $scope.attData = [];
+            $scope.attData = [];
 
-//             studentServices.getAttendenceByDay(date)
-//                 .success(function (data, status) {
-//                     $scope.attData = data.donutchart;
-//                     console.log(JSON.stringify(data));
-//                 })
-//                 .error(function (data, success) { })
-//         }
+            studentServices.getAttendenceByDay(date)
+                .success(function (data, status) {
+                    $scope.attData = data.donutchart;
+                    console.log(JSON.stringify(data));
+                })
+                .error(function (data, success) { })
+        }
 
 
 //         //Employee Attendance Report

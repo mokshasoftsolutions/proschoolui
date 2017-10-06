@@ -137,7 +137,7 @@ angular.module('school_erp')
          .state('main.attendenceReportEmployee', { // login Page
             url: "attendance/attendenceReportEmployee",
             templateUrl: "app/components/attendenceReportEmployee/attendenceReport.html",
-            controller: "attendanceReportController",
+            controller: "attendanceReportEmployeeController",
             data: {
                 requireLogin: true
             }

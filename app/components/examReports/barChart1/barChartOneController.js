@@ -8,7 +8,7 @@ angular.module('school_erp')
                 $scope.classDatanew = data.school_classes;// Api list-name
                 $scope.classId = $scope.classDatanew[0].class_id;
                 console.log($scope.classId);
-                //$scope.getExamSchedule();
+               
                 $scope.populateSections($scope.classId);
             })
             .error(function (data, success) {
@@ -69,7 +69,7 @@ angular.module('school_erp')
                     console.log(JSON.stringify($scope.examData));
 
 
-                    $scope.maxMarks = 100;
+                   
                     // $scope.chartdata1 = [30, 20, 40, 80, 50, 40, 30, 60];
                     // $scope.studata1 = ["stu1", "stu2", "stu3", "stu4", "stu5", "stu6", "stu7", "stu8"];
                     //console.log($scope.chartdata1);
@@ -84,6 +84,8 @@ angular.module('school_erp')
                         arrLabels.push(item.student_name);
                         $scope.data1 = [];
                         $scope.label1 = [];
+                         $scope.maxMarks =item.max_marks;
+                         console.log( $scope.maxMarks );
                         //$scope.data1.push(arrData.trim(""));
                         //  for (var j = 0; j < arrData.length; i++) {
                         //     $scope.data1.push(arrData[i]);
@@ -140,7 +142,7 @@ angular.module('school_erp')
                                     "item": {
                                         "font-color": "#7e7e7e"
                                     },
-                                    "values": "0:100",
+                                    "values": "0:"+$scope.maxMarks,
                                     "guide": {
                                         "visible": true
                                     },
