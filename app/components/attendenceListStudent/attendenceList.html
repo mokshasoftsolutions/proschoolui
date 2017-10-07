@@ -81,9 +81,11 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Addmission No</th>
+                                                <th>Name</th>
+                                                <th>Admission No</th>
                                                 <th>Roll No</th>
                                                 <th>Class</th>
+                                                <th>Gender</th>
                                                 <th>Attendance</th>
                                                 <!--<th class="pull-right">Action</th>-->
                                             </tr>
@@ -93,17 +95,19 @@
                                                 <td>
                                                     {{$index+1}}
                                                 </td>
-                                                <td>{{attendance.student_id || 'empty' }}
+                                                <td>{{attendance.first_name || 'empty' }} {{attendance.last_name || 'empty' }}
                                                     <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
                                                 </td>
                                                 <td>
-                                                    {{attendance.roll_no || 'empty' }}
+                                                    {{attendance.admission_no || 'empty' }}
                                                     <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
                                                     {{busRoute.vehicle_code}}</span>-->
                                                 </td>
-                                                <td>{{attendance.class_id || 'empty' }}
+                                                <td>{{attendance.roll_no || 'empty' }}
                                                     <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
                                                 </td>
+                                                <td>{{attendance.class_name || 'empty' }} ({{attendance.section_name || 'empty' }})</td>
+                                                <td>{{attendance.gender || 'empty' }}</td>
                                                 <td>{{attendance.status || 'empty' }}
                                                     <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
                                                 </td>

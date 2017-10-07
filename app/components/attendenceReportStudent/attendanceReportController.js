@@ -81,6 +81,7 @@ angular.module('school_erp')
                     $scope.array = $.map($scope.attData, function (item) {
                         console.log(item);
                         //$scope.item=null;
+                        if(item.date==true){
                         if (item.status == "Present") {
                             arrPresent.push(item.status);
 
@@ -117,6 +118,7 @@ angular.module('school_erp')
                             console.log($scope.leave1);
                             $scope.leave = ($scope.leave1).length;
                             console.log($scope.leave);
+                        }
                         }
                         $scope.chartdata = [
                             [$scope.present],

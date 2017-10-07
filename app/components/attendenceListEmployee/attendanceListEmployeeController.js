@@ -9,16 +9,32 @@ angular.module('school_erp')
 
 
         $scope.getAttendenceByDay = function (date) {
-            console.log("message");
-            console.log(date);
+            // console.log("message");
+            // console.log(date);
             $scope.initialLoadAttendence = true;
 
+            $scope.attDataEmp = [];
             $scope.attData = [];
-
             employeeServices.getEmployeeAttendenceByDay(date)
                 .success(function (data, status) {
-                    $scope.attData = data.donutchart;
-                    console.log(JSON.stringify(data));
+                    $scope.attDataEmp = data.donutchart;
+                    $scope.array = $.map($scope.attDataEmp, function (item) {
+
+                        if (item.date == true) {
+
+                            $scope.attData.push(item);
+                            console.log("message");
+                            console.log($scope.attData);
+
+
+                        }
+
+                        return;
+                    });
+
+
+
+                    // console.log(JSON.stringify(data));
                 })
                 .error(function (data, success) { })
         }

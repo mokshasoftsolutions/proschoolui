@@ -90,11 +90,28 @@ angular.module('school_erp')
             // var arrPresent = new Array();
             // var arrAbsent = new Array();
             // var arrLeave = new Array();
-            $scope.attData = [];
-
+            $scope.attDataStudent = [];
+            $scope.attData=[];
             studentServices.getAttendenceByDay(date, classId, secId)
                 .success(function (data, status) {
-                    $scope.attData = data.donutchart;
+                    $scope.attDataStudent = data.donutchart;
+
+                    $scope.array = $.map($scope.attDataStudent, function (item) {
+
+                        if (item.date == true) {
+
+                            $scope.attData.push(item);
+                            console.log("message");
+                            console.log($scope.attData);
+
+
+                        }
+
+                        return;
+                    });
+
+
+
                     console.log(JSON.stringify(data));
                 })
                 .error(function (data, success) { })
@@ -121,7 +138,7 @@ angular.module('school_erp')
 
         }
 
-         $scope.getAttendenceByMonth = function (month, studentId) {
+        $scope.getAttendenceByMonth = function (month, studentId) {
             // var arrPresent = new Array();
             // var arrAbsent = new Array();
             // var arrLeave = new Array();
@@ -130,7 +147,7 @@ angular.module('school_erp')
                 .success(function (data, status) {
                     $scope.attDataMonth = data.donutchart;
                     console.log(JSON.stringify(data));
-                    })
+                })
                 .error(function (data, success) { })
         }
 

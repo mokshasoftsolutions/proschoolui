@@ -38,42 +38,44 @@ angular.module('school_erp')
                     $scope.array = $.map($scope.attData, function (item) {
                         console.log(item);
                         //$scope.item=null;
-                        if (item.status == "Present") {
-                            arrPresent.push(item.status);
+                        if (item.date == true) {
+                            if (item.status == "Present") {
+                                arrPresent.push(item.status);
 
-                            $scope.data1 = [];
-                            for (var i = 0; i < arrPresent.length; i++) {
-                                $scope.data1.push(arrPresent[i]);
+                                $scope.data1 = [];
+                                for (var i = 0; i < arrPresent.length; i++) {
+                                    $scope.data1.push(arrPresent[i]);
+                                }
+                                console.log($scope.data1);
+                                $scope.present = ($scope.data1).length;
+                                console.log($scope.present);
+                            } else if (item.status == "Absent") {
+
+                                arrAbsent.push(item.status);
+
+                                $scope.label1 = [];
+                                for (var j = 0; j < arrAbsent.length; j++) {
+                                    $scope.label1.push(arrAbsent[j]);
+
+                                }
+                                console.log($scope.label1);
+                                $scope.absent = ($scope.label1).length;
+                                console.log($scope.absent);
+
+
+                            } else if (item.status == "On Leave") {
+
+                                arrLeave.push(item.status);
+
+                                $scope.leave1 = [];
+                                for (var k = 0; k < arrLeave.length; k++) {
+                                    $scope.leave1.push(arrLeave[k]);
+
+                                }
+                                console.log($scope.leave1);
+                                $scope.leave = ($scope.leave1).length;
+                                console.log($scope.leave);
                             }
-                            console.log($scope.data1);
-                            $scope.present = ($scope.data1).length;
-                            console.log($scope.present);
-                        } else if (item.status == "Absent") {
-
-                            arrAbsent.push(item.status);
-
-                            $scope.label1 = [];
-                            for (var j = 0; j < arrAbsent.length; j++) {
-                                $scope.label1.push(arrAbsent[j]);
-
-                            }
-                            console.log($scope.label1);
-                            $scope.absent = ($scope.label1).length;
-                            console.log($scope.absent);
-
-
-                        } else if (item.status == "On Leave") {
-
-                            arrLeave.push(item.status);
-
-                            $scope.leave1 = [];
-                            for (var k = 0; k < arrLeave.length; k++) {
-                                $scope.leave1.push(arrLeave[k]);
-
-                            }
-                            console.log($scope.leave1);
-                            $scope.leave = ($scope.leave1).length;
-                            console.log($scope.leave);
                         }
                         $scope.chartdata = [
                             [$scope.present],

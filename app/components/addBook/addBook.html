@@ -22,7 +22,11 @@
         <li> <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)"
           /></li>
         <li> <input type="button" value="Import" class="btn btn-primary" ng-click="handleFile()" /></li>
-
+{{msg}}
+        <!--<form id="uploadForm" enctype="multipart/form-data" action="upload" method="post">
+          <input type="file" name="file" />Upload
+          <input type="submit" value="Upload" name="submit" ng-click="save()">
+        </form>-->
       </ul>
 
     </div>
