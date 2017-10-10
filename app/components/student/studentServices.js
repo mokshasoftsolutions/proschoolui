@@ -124,7 +124,13 @@ angular.module('school_erp')
                 url: globalServices.globalValue.baseURL + 'api/delete_student/' + student_id,
             })
         };
-
+        studentServices.getParentListBySchool = function () {
+            return $http({
+                method: 'GET',
+                // url: "http://192.168.1.13:4005/api/examevaluation/3/2347/34/45"
+                url: globalServices.globalValue.baseURL + 'api/getparentlist/SCH-9271'
+            })
+        };
 
         return studentServices;
 

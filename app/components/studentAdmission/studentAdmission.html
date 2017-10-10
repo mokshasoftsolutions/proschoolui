@@ -18,9 +18,17 @@
 
       <h3 class="box-title">Student Admission</h3>
       <ul class="panel-controls">
+        <li><select name="class" class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId">
+                        <option selected="selected">--Select--</option>
+                        <option ng-repeat="class in classData" value="{{class.class_id}}">{{class.name}}</option>
+                      </select></li>
+         <li><select class="form-control select2" name="section" style="width: 100%;" ng-model="secId">
+                       <option selected="selected">--Select--</option>
+                        <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>
+                      </select></li>
         <li> <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)"
           /></li>
-        <li> <input type="button" value="Import" class="btn btn-primary" ng-click="handleFile()" /></li>
+        <li> <input type="button" value="Import" class="btn btn-primary" ng-click="handleFile(secId)" /></li>
 
       </ul>
     </div>
@@ -296,6 +304,56 @@
             <div class="form-group">
               <label>Aadhaar No</label>
               <input type="text" ng-model="data.aadhar_no" class="form-control" placeholder="Enter ...">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Create Parent Account</label>
+
+              <div class="radio">
+                        <label>
+                       <input style="position:relative;margin-left:0;" type="radio" name="parentAccount" value="true" ng-value="true"   ng-model="data.parentAccount" >
+                        Yes
+                        </label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                      <input style="position:relative;margin-left:0;" type="radio" name="parentAccount" value="false" ng-value="false"   ng-model="data.parentAccount"  >
+                        No
+                        </label>
+                      </div>
+             
+            </div>
+          </div>
+          <div class="col-md-4" ng-show="data.parentAccount == true">
+            <div class="form-group">
+              <label>Choose Account</label>
+              <div class="radio">
+                        <label>
+                       <input  type="radio" name="parentAccountCreate" value="true" ng-value="true"   ng-model="data.parentAccountCreate" >
+                        New
+                        </label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                      <input type="radio" name="parentAccountCreate" value="false" ng-value="false"   ng-model="data.parentAccountCreate"  >
+                        Existing
+                        </label>
+                      </div>
+              <!--<select   name="parentId"   ng-model="parentId" class="form-control"> 
+                <option>select</option>
+              </select>-->
+               
+            </div>
+          </div>
+          <div class="col-md-4" ng-show="data.parentAccountCreate == false">
+            <div class="form-group">
+              <label>Choose Account</label>
+              
+               <select   name="parentId" ng-model="data.parentId" class="form-control" ng-options="parent.parent_id as parent.parent_name for parent in parentsList "> 
+                
+              </select> 
+               
             </div>
           </div>
 

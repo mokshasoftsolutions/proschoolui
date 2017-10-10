@@ -1,5 +1,5 @@
 angular.module('school_erp')
-    .controller("attendanceListController", ['$http', '$scope', '$rootScope', '$window', 'globalServices', 'examServices', 'subjectsServices', 'studentServices', 'donutChartOneService', 'ngDialog', function ($http, $scope, $rootScope, $window, globalServices, examServices, subjectsServices, studentServices, donutChartOneService, ngDialog) {
+    .controller("attendanceListController", ['$http', '$scope', '$rootScope', '$window', 'globalServices', 'examServices', 'subjectsServices', 'studentServices','ngDialog', function ($http, $scope, $rootScope, $window, globalServices, examServices, subjectsServices, studentServices, ngDialog) {
 
         var d = new Date();
         var n = d.getMonth();
@@ -90,25 +90,25 @@ angular.module('school_erp')
             // var arrPresent = new Array();
             // var arrAbsent = new Array();
             // var arrLeave = new Array();
-            $scope.attDataStudent = [];
-            $scope.attData=[];
+            //$scope.attDataStudent = [];
+            $scope.attData = [];
             studentServices.getAttendenceByDay(date, classId, secId)
                 .success(function (data, status) {
-                    $scope.attDataStudent = data.donutchart;
+                    //$scope.attDataStudent = data.donutchart;
+                    $scope.attData = data.donutchart;
+                    // $scope.array = $.map($scope.attDataStudent, function (item) {
 
-                    $scope.array = $.map($scope.attDataStudent, function (item) {
+                    //     if (item.date == true) {
 
-                        if (item.date == true) {
-
-                            $scope.attData.push(item);
-                            console.log("message");
-                            console.log($scope.attData);
+                    //         $scope.attData.push(item);
+                    //         console.log("message");
+                    //         console.log($scope.attData);
 
 
-                        }
+                    //     }
 
-                        return;
-                    });
+                    //     return;
+                    // });
 
 
 
@@ -134,7 +134,7 @@ angular.module('school_erp')
         $scope.getMonth = function (select_month) {
             $scope.monthId = $scope.select_month;
             console.log($scope.monthId);
-            // $scope.getAttendenceByMonth($scope.monthId, $scope.studentId);
+             $scope.getAttendenceByMonth($scope.monthId, $scope.studentId);
 
         }
 

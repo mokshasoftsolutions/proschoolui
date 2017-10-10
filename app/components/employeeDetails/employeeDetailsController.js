@@ -1,5 +1,5 @@
 angular.module('school_erp')
-    .controller("employeeDetailsController", ['$http', '$scope', 'employeeServices', 'ngDialog', function ($http, $scope, employeeServices, ngDialog) {
+    .controller("employeeDetailsController", ['$http', '$scope', '$timeout', 'globalServices', 'employeeServices', 'ngDialog', function ($http, $scope, $timeout, globalServices, employeeServices, ngDialog) {
         $scope.employeeDetailsData = [];
         $scope.data = [];
         $scope.today1 = '01/01/1975';
@@ -22,10 +22,12 @@ angular.module('school_erp')
             }
             employeeServices.setEmployee(empDetails)
                 .success(function (data, status) {
-                    ngDialog.open({
-                        template: '<p>Employeee Added Successfully.</p>',
-                        plain: true
-                    });
+                    $timeout(function () {
+                        ngDialog.open({
+                            template: '<p>Employeee Added Successfully.</p>',
+                            plain: true
+                        });
+                    }, 300);
                     $scope.data = [];
                 })
                 .error(function (data, success) {
@@ -42,77 +44,88 @@ angular.module('school_erp')
 
         $scope.loadFile = function (files) {
 
+            console.log("messsage1");
             $scope.$apply(function () {
 
                 $scope.selectedFile = files[0];
-
+                // console.log(file);
             })
 
         }
 
         $scope.handleFile = function () {
-
+            console.log("messsage2");
             var file = $scope.selectedFile;
-
-            if (file) {
-
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-
-                    var data = e.target.result;
-
-                    var workbook = XLSX.read(data, { type: 'binary' });
-
-                    var first_sheet_name = workbook.SheetNames[0];
-
-                    var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);
-
-                    //console.log(excelData);  
-
-                    if (dataObjects.length > 0) {
+            console.log(file);
+            $scope.save(file);
 
 
-                        $scope.save(dataObjects);
+            // if (file) {
+
+            //     var reader = new FileReader();
+
+            //     reader.onload = function (e) {
+
+            //         var data = e.target.result;
+
+            //         var workbook = XLSX.read(data, { type: 'binary' });
+
+            //         var first_sheet_name = workbook.SheetNames[0];
+
+            //         var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);
+
+            //         //console.log(excelData);  
+
+            //         if (dataObjects.length > 0) {
 
 
-                    } else {
-                        $scope.msg = "Error : Something Wrong1 !";
-                    }
+            //             $scope.save(dataObjects);
 
-                }
 
-                reader.onerror = function (ex) {
+            //         } else {
+            //             $scope.msg = "Error : Something Wrong1 !";
+            //         }
 
-                }
+            //     }
 
-                reader.readAsBinaryString(file);
-            }
+            //     reader.onerror = function (ex) {
+
+            //     }
+
+            //     reader.readAsBinaryString(file);
+            // }
         }
 
 
-        $scope.save = function (data) {
-            console.log(JSON.stringify(data));
+        $scope.save = function (file) {
+            console.log("messsage3");
+            console.log(file);
 
-            $http({
-                method: "POST",
-                url: "globalServices.globalValue.baseURL + 'api/book/SCH-9271'",
-                data: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-
-            }).then(function (data) {
-                if (data.status) {
-                    $scope.msg = "Data has been inserted ! ";
-                }
-                else {
-                    $scope.msg = "Error : Something Wrong2";
-                }
-            }, function (error) {
-                $scope.msg = "Error : Something Wrong3";
+            var fd = new FormData();
+            fd.append('file', file);
+            // fd.append('data', 'string');
+            $http.post(globalServices.globalValue.baseURL + 'api/bulk_upload_employees/SCH-9271', fd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
             })
+                .success(function () {
+                    $timeout(function () {
+                        ngDialog.open({
+                            template: '<p>File Added Successfully.</p>',
+                            plain: true
+                        });
+                    }, 300);
 
+                })
+                .error(function () {
+                    ngDialog.open({
+                        template: '<p>Some Error Occured!.</p>',
+                        plain: true
+                    });
+                });
         }
+
+
+
 
     }])

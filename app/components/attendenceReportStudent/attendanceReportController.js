@@ -1,5 +1,5 @@
 angular.module('school_erp')
-    .controller("attendanceReportController", ['$http', '$scope', '$rootScope', '$window', 'globalServices', 'examServices', 'subjectsServices', 'studentServices', 'donutChartOneService', 'ngDialog', function ($http, $scope, $rootScope, $window, globalServices, examServices, subjectsServices, studentServices, donutChartOneService, ngDialog) {
+    .controller("attendanceReportController", ['$http', '$scope', '$rootScope', '$window', 'globalServices', 'examServices', 'subjectsServices', 'studentServices', 'ngDialog', function ($http, $scope, $rootScope, $window, globalServices, examServices, subjectsServices, studentServices, ngDialog) {
         $scope.evalData = [];
         $scope.data = [];
         $scope.select_date =new Date().toDateString();
@@ -81,7 +81,7 @@ angular.module('school_erp')
                     $scope.array = $.map($scope.attData, function (item) {
                         console.log(item);
                         //$scope.item=null;
-                        if(item.date==true){
+                        // if(item.date==true){
                         if (item.status == "Present") {
                             arrPresent.push(item.status);
 
@@ -118,7 +118,7 @@ angular.module('school_erp')
                             console.log($scope.leave1);
                             $scope.leave = ($scope.leave1).length;
                             console.log($scope.leave);
-                        }
+                        // }
                         }
                         $scope.chartdata = [
                             [$scope.present],

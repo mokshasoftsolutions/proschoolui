@@ -4,9 +4,8 @@ angular.module('school_erp')
         $scope.data = [];  
         BusRouteServices.getBusRoute()
         .success(function(data, status){
-            console.log(JSON.stringify(data));
-            $scope.busRoutes = data.Bus_Route;
-            $scope.routeId = $scope.busRoutes[0].bus_route_id;
+            $scope.busRoutes = data.bus_routes;
+            $scope.routeId = $scope.busRoutes[0].route_id;
         })
         .error(function(data,success){
         })
@@ -41,7 +40,14 @@ angular.module('school_erp')
             })
         }
 
-
+       studentServices.getParentListBySchool()
+        .success(function(data, status){
+            $scope.parentsList = data.parents;// Api list-name
+             
+            
+        })
+        .error(function(data,success){
+        })
        
 
         $scope.addStudent = function(data){
@@ -83,9 +89,13 @@ angular.module('school_erp')
                 gaurdian_contact: $scope.data.gaurdian_contact,
                 gaurdian_relation: $scope.data.gaurdian_relation,
                 gaurdian_address:$scope.data.gaurdian_address,
-                gaurdian_occupation: $scope.data.gaurdian_occupation
+                gaurdian_occupation: $scope.data.gaurdian_occupation,
+                parent_account_create:$scope.data.parentAccount ,
+                parent_account_new:$scope.data.parentAccountCreate,
+                parent_id:$scope.data.parentId
+
              }
-           
+        //    console.log(stdAdmission);
             studentServices.setStudent(stdAdmission, $scope.secId)   
             .success(function(data, status){
                 // $scope.addParent(data.id);
@@ -156,83 +166,89 @@ angular.module('school_erp')
 
 
 
-        $scope.selectedFile = null;
+          $scope.selectedFile = null;
         $scope.msg = "";
 
 
         $scope.loadFile = function (files) {
 
+            console.log("messsage1");
             $scope.$apply(function () {
 
                 $scope.selectedFile = files[0];
-
+                // console.log(file);
             })
 
         }
 
-        $scope.handleFile = function () {
-
+        $scope.handleFile = function (secId) {
+            console.log("messsage2");
             var file = $scope.selectedFile;
-
-            if (file) {
-
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-
-                    var data = e.target.result;
-
-                    var workbook = XLSX.read(data, { type: 'binary' });
-
-                    var first_sheet_name = workbook.SheetNames[0];
-
-                    var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);
-
-                    //console.log(excelData);  
-
-                    if (dataObjects.length > 0) {
+            console.log(file);
+            $scope.save(file,secId);
 
 
-                        $scope.save(dataObjects);
+            // if (file) {
+
+            //     var reader = new FileReader();
+
+            //     reader.onload = function (e) {
+
+            //         var data = e.target.result;
+
+            //         var workbook = XLSX.read(data, { type: 'binary' });
+
+            //         var first_sheet_name = workbook.SheetNames[0];
+
+            //         var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);
+
+            //         //console.log(excelData);  
+
+            //         if (dataObjects.length > 0) {
 
 
-                    } else {
-                        $scope.msg = "Error : Something Wrong1 !";
-                    }
+            //             $scope.save(dataObjects);
 
-                }
 
-                reader.onerror = function (ex) {
+            //         } else {
+            //             $scope.msg = "Error : Something Wrong1 !";
+            //         }
 
-                }
+            //     }
 
-                reader.readAsBinaryString(file);
-            }
+            //     reader.onerror = function (ex) {
+
+            //     }
+
+            //     reader.readAsBinaryString(file);
+            // }
         }
 
 
-        $scope.save = function (data) {
-            console.log(JSON.stringify(data));
+        $scope.save = function (file,secId) {
+            console.log("messsage3");
+            console.log(file);
 
-            $http({
-                method: "POST",
-                url: "globalServices.globalValue.baseURL + 'api/book/SCH-9271'",
-                data: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-
-            }).then(function (data) {
-                if (data.status) {
-                    $scope.msg = "Data has been inserted ! ";
-                }
-                else {
-                    $scope.msg = "Error : Something Wrong2";
-                }
-            }, function (error) {
-                $scope.msg = "Error : Something Wrong3";
+            var fd = new FormData();
+            fd.append('file', file);
+           // fd.append('secId', 'string');
+            $http.post(globalServices.globalValue.baseURL+'api/bulk_upload_students/'+secId, fd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
             })
+                .success(function () {
+                    ngDialog.open({
+                        template: '<p>File Added Successfully.</p>',
+                        plain: true
+                    });
 
+                })
+                .error(function () {
+                    ngDialog.open({
+                        template: '<p>Some Error Occured!.</p>',
+                        plain: true
+                    });
+                });
         }
 
 }])

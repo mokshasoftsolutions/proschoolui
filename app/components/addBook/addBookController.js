@@ -138,7 +138,7 @@ angular.module('school_erp')
             var fd = new FormData();
             fd.append('file', file);
            // fd.append('data', 'string');
-            $http.post('http://192.168.1.11:4005/api/upload_books/SCH-9271', fd, {
+            $http.post(globalServices.globalValue.baseURL+'api/upload_books/SCH-9271', fd, {
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }
             })
@@ -150,30 +150,13 @@ angular.module('school_erp')
 
                 })
                 .error(function () {
+                    ngDialog.open({
+                        template: '<p>Some Error Occured!.</p>',
+                        plain: true
+                    });
                 });
         }
-            //     $http({
-            //         method: "POST",
-            //         url: 'http://192.168.1.11:4005/api/upload_books/SCH-9271',
-            //         data: file,
-            //         transformRequest: angular.identity,
-            //         headers: {
-            //             'Content-Type': 'undefined'
-            //         }
-
-            //     }).then(function (data) {
-            //         if (data.status) {
-            //             $scope.msg = "Data has been inserted ! ";
-            //         }
-            //         else {
-            //             $scope.msg = "Error : Something Wrong2";
-            //         }
-            //     }, function (error) {
-            //         $scope.msg = "Error : Something Wrong3";
-            //     })
-
-            // }
-
+           
 
 
 
