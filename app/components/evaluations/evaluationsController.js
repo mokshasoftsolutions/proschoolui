@@ -2,6 +2,7 @@
      .controller("evaluationsController", ['$http', '$scope', 'globalServices', 'examServices', 'subjectsServices', 'studentServices', 'ngDialog', function ($http, $scope, globalServices, examServices, subjectsServices, studentServices, ngDialog) {
          $scope.evalData = [];
          $scope.data = {};
+         $scope.conduct=[{type:"Poor",id:"Poor"},{type:"Below Average",id:"Below Average"},{type:"Average",id:"Average"},{type:"Above Average",id:"Above Average"},{type:"Good",id:"Good"},{type:"Excellent",id:"Excellent"}];
          globalServices.getClass()
              .success(function (data, status) {
                  $scope.classDatanew = data.school_classes; // Api list-name
@@ -126,7 +127,7 @@
 
          $scope.DeleteEvaluation = function (value) {
              $scope.editdata = angular.copy($scope.evalData[value]);
-             $scope.paper_result_id = $scope.editdata.paper_result_id;
+             $scope.paper_result_id = $scope.editdata.exam_paper_id;
              console.log($scope.paper_result_id);
              examServices.DeleteEvaluation($scope.paper_result_id)
                  .success(function (data, status) {
@@ -149,7 +150,7 @@
 
              console.log("messsage");
              $scope.evaluations = angular.copy($scope.evalData[value]);
-             $scope.paper_result_id = $scope.evaluations.paper_result_id;
+             $scope.paper_result_id = $scope.evaluations.exam_paper_id;
              console.log($scope.paper_result_id);
              var EvaluationsDetails = {
                  student_name: $scope.evaluations.student_name,
@@ -169,10 +170,10 @@
          $scope.addEditEvaluation = function (EvaluationsDetails, paper_result_id) {
              examServices.EditEvaluation(EvaluationsDetails, paper_result_id)
                  .success(function (data, status) {
-                     // ngDialog.open({
-                     //     template: '<p>Station is Edited Successfully.</p>',
-                     //     plain: true
-                     // });
+                    //  ngDialog.open({
+                    //      template: '<p>Station is Edited Successfully.</p>',
+                    //      plain: true
+                    //  });
                      $scope.editdata = [];
                      $scope.getEvaluation($scope.data.studentId, $scope.data.examSchedule_name);
                  })

@@ -32,7 +32,8 @@
         <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
           <div class="form-group">
             <label>Select Class</label>
-            <select class="form-control select2" data-ng-change="populateSections(data.classId)" style="width: 100%;" ng-model="data.classId" ng-options="class.class_id as class.name  for class in classDatanew">
+            <select class="form-control select2" data-ng-change="populateSections(data.classId)" style="width: 100%;" ng-model="data.classId"
+              ng-options="class.class_id as class.name  for class in classDatanew">
                        
                        <!--<option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
                       </select>
@@ -42,7 +43,8 @@
         <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
           <div class="form-group">
             <label>Select Section</label>
-            <select class="form-control select2" ng-change="populateStudentValue(data.secId);getExamPapers(data.examSchedule_name,data.secId);" style="width: 100%;" name="section" ng-model="data.secId" ng-options="sec.section_id as sec.name  for sec in secData">
+            <select class="form-control select2" ng-change="populateStudentValue(data.secId);getExamPapers(data.examSchedule_name,data.secId);"
+              style="width: 100%;" name="section" ng-model="data.secId" ng-options="sec.section_id as sec.name  for sec in secData">
 <!--                      
                        <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
                         
@@ -52,7 +54,8 @@
         <div class="col-md-4">
           <div class="form-group" ng-if="showRole(['admin','teacher'])">
             <label>Select Student  </label>
-            <select class="form-control select2" style="width: 100%;" name="studentId" ng-change="getEvaluation(data.studentId,data.examSchedule_name)" ng-model="data.studentId" ng-options="student.student_id as student.first_name+' '+student.last_name for student in students ">
+            <select class="form-control select2" style="width: 100%;" name="studentId" ng-change="getEvaluation(data.studentId,data.examSchedule_name)"
+              ng-model="data.studentId" ng-options="student.student_id as student.first_name+' '+student.last_name for student in students ">
                             <!--<option selected="selected">--Select--</option>
       
                             <option ng-repeat="student in students " value="{{student.student_id}}">{{student.first_name}} {{student.last_name}}</option>-->
@@ -90,7 +93,8 @@
           <div class="col-md-4" ng-if="showRole(['admin','teacher','parent'])">
             <div class="form-group" ng-class="{'has-error': evaluations.$submitted  && evaluations.examSchedule.$pristine}">
               <label>Select Exam Schedule</label>
-              <select class="form-control select2" ng-change="getExamPapers(data.examSchedule_name,data.secId)" style="width: 100%;" ng-model="data.examSchedule_name" name="examSchedule" ng-options="examSch.exam_sch_id as examSch.exam_title for examSch in examSchedule ">
+              <select class="form-control select2" ng-change="getExamPapers(data.examSchedule_name,data.secId)" style="width: 100%;" ng-model="data.examSchedule_name"
+                name="examSchedule" ng-options="examSch.exam_sch_id as examSch.exam_title for examSch in examSchedule ">
                         <!--<option selected="selected">--Select--</option>
                         <option ng-repeat="exam in examSchedule " value="{{exam.exam_title}}">{{exam.exam_title}}</option>-->
                         
@@ -101,7 +105,7 @@
           <div class="col-md-4" ng-if="showRole(['admin','teacher','parent'])">
             <div class="form-group" ng-class="{'has-error': evaluations.$submitted  && evaluations.paperId.$pristine}">
               <label>Paper Title </label>
-              <select  class="form-control select2" style="width: 100%;" name="paperId" ng-model="data.paper_name" ng-options="paper.exam_paper_id as paper.exam_paper_title for paper in papers ">
+              <select class="form-control select2" style="width: 100%;" name="paperId" ng-model="data.paper_name" ng-options="paper.exam_paper_id as paper.exam_paper_title for paper in papers ">
                             <!--<option value="">--Select--</option>
                             <option ng-repeat="paper in papers " value="{{paper.exam_paper_id}}">{{paper.exam_paper_title}}</option>-->
                             
@@ -187,27 +191,37 @@
                   <!--<span editable-text="evaluations.student_name" e-name="evaluations.student_name" onaftersave="EditEvaluation($index)"
                     e-form="rowform" e-required>-->
                   {{evaluations.first_name || 'empty'}} {{evaluations.last_name || 'empty'}}</td>
-                <td><span editable-text="evaluations.exam_paper_title" e-name="evaluations.exam_paper_title" onaftersave="EditEvaluation($index)"
-                    e-form="rowform" e-required>{{evaluations.examschedule_name || 'empty' }}</span></td>
+                <td>
+                  <!--<span editable-text="evaluations.examschedule_name" e-name="evaluations.examschedule_name" onaftersave="EditEvaluation($index)"
+                    e-form="rowform" e-required>-->
+                  {{evaluations.examschedule_name || 'empty' }}</td>
                 <!--<td><span editable-text="evaluations.examschedule_name" e-name="evaluations.exam_paper_title" onaftersave="EditEvaluation($index)"
                     e-form="rowform" e-required>{{evaluations.subject_name || 'empty' }}</span></td>-->
-                <td><span editable-text="evaluations.paper_name" e-name="evaluations.exam_paper_title" onaftersave="EditEvaluation($index)"
-                    e-form="rowform" e-required>{{evaluations.paper_name || 'empty' }}</span></td>
+                <td>
+                  <!--<span editable-text="evaluations.paper_name" e-name="evaluations.paper_name" onaftersave="EditEvaluation($index)"
+                    e-form="rowform" e-required>-->
+                  {{evaluations.paper_name || 'empty' }}</td>
                 <td><span editable-text="evaluations.marks" e-name="evaluations.marks" onaftersave="EditEvaluation($index)" e-form="rowform"
                     e-required>{{evaluations.marks || 'empty' }}</span></td>
                 <td><span editable-text="evaluations.percentage" e-name="evaluations.percentage" onaftersave="EditEvaluation($index)"
                     e-form="rowform" e-required>{{evaluations.percentage || 'empty' }}</span></td>
-                <td><span editable-text="evaluations.conduct" e-name="evaluations.conduct" onaftersave="EditEvaluation($index)"
-                    e-form="rowform" e-required>{{evaluations.conduct || 'empty' }}</span></td>
+                <!--<td><span editable-text="evaluations.conduct" e-name="evaluations.conduct" onaftersave="EditEvaluation($index)"
+                    e-form="rowform" e-required>{{evaluations.conduct || 'empty' }}</span></td>-->
+                <td class="select-td">
+                  <span editable-select="evaluations.conduct" e-name="conduct" onaftersave="EditEvaluation($index)" e-form="rowform" e-selectpicker
+                    e-ng-options="sub.type as sub.id for sub in conduct">
+                {{evaluations.conduct}}
+              </span>
+                </td>
                 <td class="pull-right">
                   <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == evaluations">
-                    <button type="submit" ng-click="EditEvaluation($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">Save</button>
-                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">Cancel</button>
+                    <button type="submit" ng-click="EditEvaluation($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
+                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
                   </form>
 
                   <div class="buttons" ng-show="!rowform.$visible">
-                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">Edit</button>
-                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteEvaluation($index)" ng-confirm-click="Are you sure you want to delete this item?">Delete</button>
+                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
+                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteEvaluation($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
                     <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
                   </div>
                 </td>

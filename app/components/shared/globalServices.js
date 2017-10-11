@@ -1,7 +1,7 @@
 angular.module('school_erp')
     .factory('globalServices', ['$http', '$rootScope', function ($http, $rootScope) {
          var globalServices = {};
-<<<<<<< HEAD
+
         globalServices.globalValue = {
             baseURL: 'http://ec2-52-40-213-254.us-west-2.compute.amazonaws.com:4005/',
 
@@ -9,23 +9,10 @@ angular.module('school_erp')
             role: 'admin'
         };
         // globalServices.globalValue = {
-        //     baseURL: 'http://192.168.1.5:4005/',
+        //     baseURL: 'http://192.168.1.4:4005/',
         //     schoolID: '',
         //     role: 'admin'
         // }
-=======
-         globalServices.globalValue = {
-             baseURL: 'http://ec2-52-40-213-254.us-west-2.compute.amazonaws.com:4005/',
-
-             schoolID: '',
-             role: 'admin'
-        };
-       /*  globalServices.globalValue = {
-            baseURL: 'http://192.168.1.11:4005/',
-            schoolID: '',
-            role: 'admin'
-        } */
->>>>>>> 8ac00d63a973a26710b02342aeedfd5bd0481ffa
 
         globalServices.fetchRoleAuth = function (roles) {
             var i = 0;
@@ -41,6 +28,9 @@ angular.module('school_erp')
             }
             return retVal;
         }
+
+
+        
 
         globalServices.getClass = function () {
             return $http({

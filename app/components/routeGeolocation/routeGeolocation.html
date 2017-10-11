@@ -15,12 +15,20 @@
         <div class="col-md-4">
           <div class="form-group">
             <label>Select Vehicle</label>
-            <select ng-options="vehicle.vehicle_code as vehicle.vehicle_name for vehicle in vehicles" class="form-control select2" ng-model="data.vehicle_code"
+            <select ng-options="vehicle.vehicle_code as vehicle.vehicle_name for vehicle in vehicles" class="form-control select2" ng-model="vehicle_code"
               style="width: 100%;">
+              <option selected value="">--Select--</option>
                         </select>
           </div>
         </div>
-      </div>
+      
+
+      
+          <div class="col-md-8" >
+            <button style="margin-top: 24px;" ng-click="getGeolocation(vehicle_code);" class="btn btn-primary pull-right">Get Location</button>
+          </div>
+          </div>
+        
     </div>
 
     <!--<div class="col-md-4">
@@ -33,14 +41,12 @@
       </div>
     </div>-->
 
-    <div class="box box-default">
-      <section class="content-header">
-        <div ng-app="mapsApp" ng-controller="MapCtrl">
-          <div id="class" ng-repeat="marker in markers | orderBy : 'title'"></div>
+  
+        
+          <div id="class" ng-repeat="marker in markers "></div>
         </div>
         <div id="map" style="height:820px;"></div>
 
-      </section>
-    </div>
-
+    
+    
 </section>

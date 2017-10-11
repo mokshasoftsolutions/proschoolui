@@ -39,7 +39,7 @@ angular.module('school_erp')
             examServices.getExamPapersbySectionAndSchedule(exSchedule,sectionId)
                 .success(function (data, status) {
                     $scope.examData = data.resultArray;
-                    // console.log(JSON.stringify(data));
+                     console.log(JSON.stringify(data));
 
                 })
                 .error(function (data, success) {});

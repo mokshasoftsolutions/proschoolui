@@ -28,9 +28,9 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-      
+
       <div class="row">
-        <div class="col-md-12" ng-if="showRole(['admin')">
+        <div class="col-md-12" ng-if="showRole(['admin'])">
           <button type="submit" class="btn btn-primary pull-right">Select</button>
         </div>
       </div>
@@ -103,7 +103,7 @@
     <div class="box-body">
       <div class="tab-content">
         <div class="tab-pane table-responsive no-padding active" id="tab_1">
-          <table export-table class="table table-bordered table-hover table-condensed">
+          <table export-table class="table rwd-table table-striped">
             <thead>
               <tr>
                 <th>#</th>
@@ -116,18 +116,20 @@
             <tbody>
               <tr ng-repeat="exam in examData" class="editable-row">
                 <td>{{$index+1}}</td>
-                <td><span editable-text="exam.exam_title" e-name="editdata.exam_title" onaftersave="EditExamSchedule($index)" e-form="rowform" e-required>{{exam.exam_title || 'empty' }}</span></td>
-                <td><span editable-text="exam.from_date" e-name="editdata.from_date" onaftersave="EditExamSchedule($index)" e-form="rowform" e-required>{{exam.from_date || 'empty' }}</span></td>
+                <td><span editable-text="exam.exam_title" e-name="exam_title" onaftersave="EditExamSchedule($index)" e-form="rowform"
+                    e-required>{{exam.exam_title || 'empty' }}</span></td>
+                <td><span editable-text="exam.from_date" e-name="from_date" onaftersave="EditExamSchedule($index)" e-form="rowform"
+                    e-required>{{exam.from_date || 'empty' }}</span></td>
                 <!--<td>{{exam.exam_classes}}</td>  -->
                 <td class="pull-right">
                   <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == exam">
-                    <button type="submit" ng-click="EditExamSchedule($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">Save</button>
-                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">Cancel</button>
+                    <button type="submit" ng-click="EditExamSchedule($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
+                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
                   </form>
 
                   <div class="buttons" ng-show="!rowform.$visible">
-                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">Edit</button>
-                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteExamSchedule($index)" ng-confirm-click="Are you sure you want to delete this item?">Delete</button>
+                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
+                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteExamSchedule($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
                     <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
                   </div>
                 </td>
@@ -140,7 +142,7 @@
   </div>
 </section>
 <!--Edit values modal Starts here-->
-<div class="modal fade" id="myModal" role="dialog">
+<!--<div class="modal fade" id="myModal" role="dialog">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
 
@@ -151,9 +153,7 @@
 
         <div class="modal-body">
 
-          <!-- /.box-header -->
-          <!-- /.box-header -->
-
+      
 
           <div class="row">
             <div class="col-md-4">
@@ -169,7 +169,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <!--<input type="text" class="form-control pull-right" ng-model="data.exam_classes" id="datepicker">-->
+                
                   <datepicker date-format="dd-MM-yyyy" style="z-index:999">
                     <input class="form-control" name="startDate" type="text" ng-readonly="true" ng-model="editdata.from_date" placeholder="Enter ..."
                       required/>
@@ -185,7 +185,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <!--<input type="text" class="form-control pull-right" ng-model="data.from_date" id="datepicker">-->
+              
                   <datepicker date-format="dd-MM-yyyy" style="z-index:999">
                     <input class="form-control" name="startDate" type="text" ng-model="editdata." ng-readonly="true" placeholder="Enter ..."
                       required/>
@@ -207,4 +207,4 @@
 
   </div>
 </div>
-</div>
+</div>-->

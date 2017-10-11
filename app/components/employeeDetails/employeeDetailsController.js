@@ -48,7 +48,7 @@ angular.module('school_erp')
             $scope.$apply(function () {
 
                 $scope.selectedFile = files[0];
-                // console.log(file);
+                 console.log(file);
             })
 
         }
@@ -57,7 +57,24 @@ angular.module('school_erp')
             console.log("messsage2");
             var file = $scope.selectedFile;
             console.log(file);
-            $scope.save(file);
+
+           if (file == undefined || file == null) {
+                ngDialog.open({
+                    template: '<p>Please Select a File </p>',
+                    plain: true
+                });
+            }
+
+            else if (file.type != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" && file.type != "application/vnd.ms-excel") {
+                ngDialog.open({
+                    template: '<p>Not a Excel File (The file format should be xls or xlsx !....) </p>',
+                    plain: true
+                });
+            }
+            else {
+
+                $scope.save(file);
+            }
 
 
             // if (file) {
@@ -109,6 +126,7 @@ angular.module('school_erp')
                 headers: { 'Content-Type': undefined }
             })
                 .success(function () {
+                   // console.log(JSON.stringify(data));
                     $timeout(function () {
                         ngDialog.open({
                             template: '<p>File Added Successfully.</p>',

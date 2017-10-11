@@ -1,5 +1,7 @@
 angular.module('school_erp')
-    .controller("dashboardController", ['$http', '$scope', '$compile', 'studentServices', 'chaptersServices', 'employeeServices', 'examServices', 'globalServices', 'subjectsServices', 'classWiseServices', 'NoticeBoardServices', 'schoolEventsServices', 'addVehicleServices', 'barChartOneService', 'ngDialog', '$rootScope', function ($http, $scope, $compile, studentServices, chaptersServices, employeeServices, examServices, globalServices, subjectsServices, classWiseServices, NoticeBoardServices, schoolEventsServices, addVehicleServices, barChartOneService, ngDialog, $rootScope) {
+    .controller("dashboardController", ['$http', '$scope', '$compile', 'studentServices', 'chaptersServices', 'employeeServices', 'examServices', 'globalServices', 'subjectsServices', 'classWiseServices', 'NoticeBoardServices', 'schoolEventsServices', 'addVehicleServices', 'barChartOneService', 'ngDialog', '$rootScope','ngProgressFactory', function ($http, $scope, $compile, studentServices, chaptersServices, employeeServices, examServices, globalServices, subjectsServices, classWiseServices, NoticeBoardServices, schoolEventsServices, addVehicleServices, barChartOneService, ngDialog, $rootScope,ngProgressFactory) {
+        // $scope.progressbar = ngProgressFactory.createInstance();
+        // $scope.progressbar.start();
 
         $scope.evalData = [];
         $scope.data = [];

@@ -16,6 +16,19 @@
     <!-- Select Criteria -->
 
     <div class="box box-default" ng-if="showRole(['admin','teacher'])">
+        <ul class="panel-controls">
+            <li><select class="form-control select2" ng-options="class.class_id as class.name for class in classData" data-ng-change="populateSections(classId)"
+                            style="width: 100%;" ng-model="classId">
+                       
+                      </select></li>
+                      <li> <select ng-options="sec.section_id as sec.name for sec in secData" class="form-control select2"
+                            style="width: 100%;" ng-model="secId">
+                      </select></li>
+                <li> <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)"
+                    /></li>
+                <li> <input type="button" value="Import" class="btn btn-primary" ng-click="handleFile(secId);" /></li>
+
+            </ul>
         <!--<div class="box-header with-border" ng-if="showRole(['admin','teacher'])">
             <i class="fa fa-search" aria-hidden="true"></i>
             <h3 class="box-title">Select Criteria</h3>
