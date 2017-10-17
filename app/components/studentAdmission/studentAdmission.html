@@ -33,7 +33,7 @@
       </ul>
     </div>
     <!-- /.box-header -->
-    <form name="studentAdmission" ng-submit="studentAdmission.$valid && addStudent(data)" novalidate>
+    <form name="studentAdmission" ng-submit="studentAdmission.$valid && addStudent(data);handleImage(data);" novalidate>
       <div class="box-body">
 
         <div class="row">
@@ -159,7 +159,8 @@
           <div class="col-md-4">
             <div class="form-group">
               <label>Student Photo</label>
-              <input type="file" ng-model="data.job_category" name="first_doc" id="doc1">
+              <input type="file" name="file" class="form-control" ng-model="data.student_photo" onchange="angular.element(this).scope().loadImage(this.files)">
+              <!-- <input type="file" ng-model="data.job_category" name="first_doc" id="doc1"> -->
             </div>
           </div>
         </div>

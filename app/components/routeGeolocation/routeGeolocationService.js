@@ -5,16 +5,16 @@ angular.module('school_erp')
      routeGeoLocationServices.getGeolocation = function(vehicle_code) {
             return $http({
                 method: 'GET',
-                url: "http://192.168.1.4:2016/api/netcomp/getDeviceCodeDetails/"+vehicle_code
+                url: globalServices.globalValue.baseURL+ 'api/get_single_tracking/'+vehicle_code
                 //url: globalServices.globalValue.baseURL + 'api/getDeviceCodeDetails/'+vehicle_code
             })
         };
 
     
-     routeGeoLocationServices.getAllGeolocations = function(vehicle_code) {
+     routeGeoLocationServices.getAllGeolocations = function() {
             return $http({
                 method: 'GET',
-                url: "http://192.168.1.4:2016/api/netcomp/getDeviceCodeDetails/"+vehicle_code
+                url: globalServices.globalValue.baseURL+ 'api/get_all_tracking'
                 //url: globalServices.globalValue.baseURL + 'api/getDeviceCodeDetails/'+vehicle_code
             })
         };

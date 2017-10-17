@@ -166,9 +166,10 @@
 
 </head>
 
-<body class="hold-transition" ng-class="loginPage? 'login-page' : 'skin-blue sidebar-mini'">
+<body class="hold-transition" ng-class="firstPage? 'main_area' : 'skin-blue sidebar-mini'">
 
-  <div ng-class="loginPage? 'login-box' : 'wrapper'" ui-view></div>
+  <!--<div ng-class="loginPage? 'login-box' : 'wrapper'" ui-view></div>-->
+  <div ng-class="firstPage? 'main_area' : 'wrapper'" ui-view></div>
   <!-- ./wrapper -->
   <script>
     $.widget.bridge('uibutton', $.ui.button);

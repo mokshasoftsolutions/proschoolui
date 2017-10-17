@@ -1,5 +1,5 @@
 angular.module('school_erp')
-    .config( function ($stateProvider, $urlRouterProvider, $locationProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         // $httpProvider.responseInterceptors.push(function ($q, $rootScope) {
 
         //     return function (promise) {
@@ -50,7 +50,15 @@ angular.module('school_erp')
                     requireLogin: true
                 }
             })
+            .state('main.parentInfo', { // login Page
+                url: "parentInformation",
+                templateUrl: "app/components/parentInformation/parentInformation.html",
+                controller: "parentInformationController",
+                data: {
+                    requireLogin: true
+                }
 
+            })
 
             // .state('main.parentDashboard', { // login Page
             //     url: "dashboard",

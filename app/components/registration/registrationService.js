@@ -1,16 +1,16 @@
  angular.module('school_erp')
-    .factory("registrationServices", ['$http', function($http) {
+    .factory("registrationServices", ['$http','globalServices', function($http,globalServices) {
     var  registrationServices= {};
-    registrationServices.globalValue = {
-            baseURL: 'http://192.168.1.11:4005/',
+    // registrationServices.globalValue = {
+    //         baseURL: 'http://192.168.1.11:4005/',
            
-        }
+    //     }
       
         registrationServices.getRegistration = function () {
             return $http({
                 method: 'GET',
                // url:'http://192.168.1.16:4005/api/schools'
-                url: registrationServices.globalValue.baseURL + 'api/schools'
+                url: globalServices.globalValue.baseURL + 'api/schools'
             })
         };
 
@@ -20,7 +20,7 @@
             return $http({
                 method: 'POST',
                // url:'http://192.168.1.16:4005/api/schools',
-                url: registrationServices.globalValue.baseURL + 'api/schools' ,
+                url: globalServices.globalValue.baseURL + 'api/schools' ,
                 data: $.param(dataValue),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             })
@@ -30,7 +30,7 @@
             return $http({
                 method: 'GET',
                // url:'http://192.168.1.16:4005/api/school_classes/SCH-176'
-                url: registrationServices.globalValue.baseURL + 'api/school_classes/'+school_id
+                url: globalServices.globalValue.baseURL + 'api/school_classes/'+school_id
             })
         };
 
@@ -40,7 +40,7 @@
             return $http({
                 method: 'POST',
                 //url:'http://192.168.1.16:4005/api/school_classes/SCH-176',
-                url: registrationServices.globalValue.baseURL + 'api/school_classes/'+school_id ,
+                url: globalServices.globalValue.baseURL + 'api/school_classes/'+school_id ,
                 data: $.param(dataValue),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             })
@@ -50,7 +50,7 @@
             return $http({
                 method: 'GET',
              //url:'http://192.168.1.16:4005/api/class_sections/CLS-1'
-            url: registrationServices.globalValue.baseURL + 'api/class_sections/'+class_id
+            url: globalServices.globalValue.baseURL + 'api/class_sections/'+class_id
             })
         };
 
@@ -60,7 +60,7 @@
             return $http({
                 method: 'POST',
                //url:'http://192.168.1.16:4005/api/class_sections/CLS-1',
-                url: registrationServices.globalValue.baseURL + 'api/class_sections/'+class_id,
+                url: globalServices.globalValue.baseURL + 'api/class_sections/'+class_id,
                 data: $.param(dataValue),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             })

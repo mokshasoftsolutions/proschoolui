@@ -359,14 +359,31 @@
           <div class="chart chart-responsive" style="height: 400px;">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li class="active"><a data-target="#bus_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>Bus List</a></li>
-                <li class=""><a data-target="#bus_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>GeoLocation</a></li>
+                <li class="active"><a data-target="#bus_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>GeoLocation</a></li>
+                <li class=""><a data-target="#bus_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Bus List</a></li>
               </ul>
             </div>
 
             <!--<div class="box-body">-->
             <div class="tab-content">
+
               <div class="tab-pane no-padding active" id="bus_1">
+
+
+                <div class="box box-solid ">
+                  <!--<div class="box-header">
+                    <i class="fa fa-th  pull-left"></i>
+                    <h3 class="box-title">
+                      Geolocation
+                    </h3>
+                  </div>-->
+                  <div class="box-body border-radius-none">
+                    <div id="map" style="height:342px;"></div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane no-padding " id="bus_2">
                 <div class="box-body border-radius-none">
                   <div class="table-responsive mailbox-messages" style="overflow-y: scroll;height:352px;">
                     <table class="table table-bordered table-hover table-condensed">
@@ -399,22 +416,7 @@
 
 
               </div>
-              <div class="tab-pane no-padding" id="bus_2">
-
-
-                <div class="box box-solid ">
-                  <!--<div class="box-header">
-                    <i class="fa fa-th  pull-left"></i>
-                    <h3 class="box-title">
-                      Geolocation
-                    </h3>
-                  </div>-->
-                  <div class="box-body border-radius-none">
-                    <div id="map" style="height:342px;"></div>
-
-                  </div>
-                </div>
-              </div>
+              
             </div>
           </div>
         </div>
