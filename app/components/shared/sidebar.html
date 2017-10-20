@@ -47,7 +47,7 @@
           </a>
     </li>
 
-<li class="treeview">
+<li class="treeview" data-ng-if="setRole('admin')">
       <a ui-sref='main.parentInfo'>
             <i class="fa fa-users"></i> <span>Parent Information</span>
           </a>
@@ -55,7 +55,7 @@
 
 
     <!--parent login purpose-->
-    <li class="treeview" data-ng-if="setRole('parent')">
+    <li class="treeview" >
       <a ui-sref='main.studentProfile'>
              <i class="fa fa-users"></i> <span  ui-sref-active="active">StudentProfile</span>
           </a>
@@ -109,7 +109,7 @@
         <!--<li ui-sref-active="active"><a ui-sref='main.attendenceReports2'><i class="fa fa-circle-o"></i>Report2</a></li>-->
       </ul>
     </li>
-    <li class="treeview">
+    <li class="treeview" data-ng-if="setRole('teacher') || setRole('admin')">
       <a href="">
             <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
             <span>Employee Attendance</span>

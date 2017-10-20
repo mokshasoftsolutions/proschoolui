@@ -6,9 +6,11 @@ angular.module('school_erp')
         $scope.gender=[{ name:"Male",id:"male"},{name:"Female",id:"female"}];
 
         $scope.employeeType=[{type:"Teaching",id:"teaching"},{type:"Non-Teaching",id:"non-teaching"},{type:"Administrative",id:"administrative"}];
-
+        $scope.smartTablePageSize = 5;
+        
         employeeServices.getEmployee()
             .success(function (data, status) {
+              
                 $scope.employeeData = data.employee;
             })
             .error(function (data, success) {
