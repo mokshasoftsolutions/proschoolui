@@ -16,9 +16,6 @@
 
 <!-- Main content -->
 <section class="content">
-
-
-
   <!-- Select Criteria -->
 
   <div class="box box-default">
@@ -152,22 +149,18 @@
             <tbody>
               <tr st-select-row="row" st-select-mode="multiple" ng-repeat="student in display_records | filter:searchstudent">
                 <td>{{$index+1}}</td>
+                <td>{{student.admission_no}}</td>
                 <td>
-                  <a href="">{{student.admission_no}}</a>
-                </td>
-                <td>
-                  <a ui-sref='main.studentProfile'>{{student.first_name}} {{student.last_name}}</a>
-                </td>
-                <td>
-
-                  <a href=""> {{student.school_classes[0].name || 'empty' }}({{student.sections[0].name}})</a>
+                  <a ui-sref='main.studentProfile({student: student.student_id})'>{{student.first_name}} {{student.last_name}}</a>
                 </td>
                 <td>
 
-                  <a href=""> {{student.parents[0].parent_name || 'empty' }}</td>
+                  {{student.school_classes[0].name || 'empty' }}({{student.sections[0].name}})</td>
                 <td>
-                  <span editable-text="student.dob" e-name="student.dob" onaftersave="EditStudent($index)" e-form="rowform"
-                    e-required>{{student.dob || 'empty' }}</span>
+
+                  {{student.parents[1].parent_name || 'empty' }}</td>
+                <td>
+                  <span editable-text="student.dob" e-name="student.dob" onaftersave="EditStudent($index)" e-form="rowform" e-required>{{student.dob || 'empty' }}</span>
                 </td>
 
                 <td class="select-td">
@@ -182,8 +175,7 @@
                 </td>
 
                 <td>
-                  <span editable-text="student.phone" e-name="student.phone" onaftersave="EditStudent($index)" e-form="rowform"
-                    e-required>{{student.phone || 'empty' }}</span>
+                  <span editable-text="student.phone" e-name="student.phone" onaftersave="EditStudent($index)" e-form="rowform" e-required>{{student.phone || 'empty' }}</span>
                 </td>
                 <td>
                   <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == student">
@@ -222,7 +214,7 @@
 </section>
 
 <!--Edit values modal Starts here-->
-<div class="modal fade" id="myModal" role="dialog">
+<!-- <div class="modal fade" id="myModal" role="dialog">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <form name="studentDetails" ng-submit="studentAdmission.$valid && EditStudent(data)" novalidate>
@@ -231,8 +223,8 @@
         </div>
         <div class="modal-body">
 
-          <!-- /.box-header -->
-          <!-- /.box-header -->
+         
+          
           <div class="box-body">
             <div class="row">
               <div class="col-md-4">
@@ -254,7 +246,7 @@
                   <label>Class</label>
                   <select class="form-control select2" ng-options="class.class_id as class.name for class in classData" data-ng-change="populateSections(classId)"
                     style="width: 100%;" ng-model="classId">
-                    <!--<option ng-repeat="class in classData" value="{{class.class_id}}">{{class.name}}</option>-->
+                 
                   </select>
                 </div>
               </div>
@@ -264,7 +256,7 @@
                   <label>Section</label>
                   <select class="form-control select2" ng-options="sec.section_id as sec.name for sec in secData" data-ng-change="getStudentValue(secId)"
                     style="width: 100%;" ng-model="secId">
-                    <!--<option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
+                   
                   </select>
                 </div>
               </div>
@@ -364,4 +356,4 @@
       </form>
     </div>
   </div>
-</div>
+</div> -->

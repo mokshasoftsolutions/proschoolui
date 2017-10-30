@@ -1,6 +1,6 @@
 <section class="content-header">
   <h1>
-    <i class="fa fa-users"></i> Parent Information
+    <i class="fa fa-users"></i> Teacher Information
 
   </h1>
   <ol class="breadcrumb">
@@ -8,7 +8,7 @@
       <a href="">
         <i class="fa fa-dashboard"></i> Home</a>
     </li>
-    <li>Parent Information</li>
+    <li>Teacher Information</li>
 
   </ol>
 </section>
@@ -74,16 +74,16 @@
       <div class="box-body">
     <!-- <ul style="list-style-type:none;">
       
-     
+      
           <li class="col-md-6"> -->
 
-            <table export-table st-table="display_records" st-safe-src="parentsList" class="table rwd-table">
+            <table export-table st-table="display_records" st-safe-src="teacherList" class="table rwd-table" >
               <thead>
                 <tr>
                   <th>#</th>
                   <!-- <th>ParentId</th> -->
-                  <th>Student Name</th>
-                  <th>Parent Name</th>
+                  <th>Teacher Name</th>
+                  <!-- <th>Parent Name</th> -->
                   <!-- <th>SchoolId</th> -->
                   <th>User Name</th>
                 <th>Password</th>
@@ -91,25 +91,19 @@
                 </tr>
               </thead>
               <tbody>
-                <tr st-select-row="row" st-select-mode="multiple" ng-repeat="parent in display_records">
+                <tr st-select-row="row" st-select-mode="multiple" ng-repeat="teachers in display_records" >
                   <td>{{$index+1}}</td>
                   <td>
-                  
-                    <a href="">{{parent.student_doc[0].first_name}} {{parent.student_doc[0].last_name}}</a>
+                    <!--  -->
+                    <a href="">{{teachers.teacher_name}} </a>
                   </td>
                   
                   <td>
-                    <a href="">{{parent.parent_name}}</a>
+                    <a href="">{{teachers.teacher_id | lowercase}}</a>
                   </td>
-               
+                  <td><a href="">{{teachers.teacher_id | lowercase}}</a></td>
 
-                  <td>
-                    <a href="">{{parent.parent_id | lowercase}}</a>
-                  </td>
-                  <td>
-                    <a href="">{{parent.parent_id | lowercase}}</a>
-                  </td> 
-               
+                 
                 </tr>
               </tbody>
               <tfoot>
@@ -120,29 +114,30 @@
                 </tr>
               </tfoot>
             </table>
-        
-          <!-- </li> -->
-          <!-- <li class="col-md-6">
+          
+
+          <!-- </li>
+          <li class="col-md-6">
          
-            <table export-table st-table="display_records" st-safe-src="username" class="table rwd-table table-striped" >
+                <table export-table st-table="display_records" st-safe-src="username" class="table rwd-table">
               <thead>
                 <tr>
-              
+                 
                   <th>User Name</th>
                   <th>Password</th>
                 
                 </tr>
               </thead>
               <tbody>
-                <tr st-select-row="row" st-select-mode="multiple" ng-repeat="parent in display_records">
-                  
+                <tr st-select-row="row" st-select-mode="multiple" ng-repeat="teacher in display_records" >
+               
                   <td>
-                    <a href="">{{parent | lowercase}}</a>
+                    <a href="">{{teacher |  lowercase}}</a>
                   </td>
                   <td>
-                    <a href="">{{parent | lowercase}}</a>
+                    <a href="">{{teacher |  lowercase}}</a>
                   </td>
-                
+                 
                 </tr>
               </tbody>
               <tfoot>
@@ -153,11 +148,11 @@
                 </tr>
               </tfoot>
             </table>
-         
+          
           </li>
         
-      -->
-<!-- 
+     
+
     </ul> -->
   </div>
   </div>

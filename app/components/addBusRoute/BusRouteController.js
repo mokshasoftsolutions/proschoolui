@@ -22,7 +22,7 @@ angular.module('school_erp')
                     console.log(JSON.stringify(data));
                     $scope.busRoutes = data.Bus_Route;
 
-                 $scope.routeId = $scope.busRoutes[0].bus_route_id;
+                    $scope.routeId = $scope.busRoutes[0].bus_route_id;
                 })
                 .error(function (data, success) {
                 })
@@ -180,12 +180,27 @@ angular.module('school_erp')
         }
         $scope.getBusRouteToStation = function (routeId) {
             //console.log(vehicle_code);
+           // var arrLabels = new Array();
+           $scope.busRoutesToStation=[];
             BusRouteServices.getBusRouteToStation(routeId)
                 .success(function (data, status) {
                     console.log(JSON.stringify(data));
-                    $scope.busRoutesToStation= data.bus_routes;
+                   
+                    $scope.busRoutesToStation = data.bus_routes;
+                    console.log("message....");
                     console.log($scope.busRoutesToStation);
-                    // $scope.routeId = $scope.busRoutes[0].route_id;
+
+
+                //     $scope.stationList = [];
+                //    //
+                   
+                //     $scope.busRoutesToStation.forEach(function (item) {
+                //         // $scope.stations = item.stations;
+                //         $scope.stationList.push(item.stations);
+
+                //     })
+                //     console.log($scope.stationList);
+                    $scope.routeId = $scope.busRoutes[0].route_id;
                 })
                 .error(function (data, success) {
                 })
@@ -193,10 +208,10 @@ angular.module('school_erp')
 
 
         $scope.addBusRouteToStation = function (data) {
-            $scope.routeId=$scope.data.route_title;
-            console.log( $scope.routeId)
+            $scope.routeId = $scope.data.route_title;
+            console.log($scope.routeId)
             var BusRoutDetails = {
-                 //route_id: $scope.data.route_title,
+                //route_id: $scope.data.route_title,
                 // vehicle_code: $scope.data.vehicle_code,
 
                 station_name: $scope.data.station,
@@ -206,14 +221,14 @@ angular.module('school_erp')
             // $scope.vehicle_code = BusRoutDetails.vehicle_code;
             // console.log($scope.vehicle_code);
             //service changed   $scope.routeId, $scope.stationId
-            BusRouteServices.setBusRouteToStation(BusRoutDetails,$scope.routeId)
+            BusRouteServices.setBusRouteToStation(BusRoutDetails, $scope.routeId)
                 .success(function (data, status) {
                     ngDialog.open({
                         template: '<p>Stations are Added Successfully.</p>',
                         plain: true
                     });
                     $scope.data = [];
-                    $scope.getBusRouteToStation( $scope.routeId);
+                    $scope.getBusRouteToStation($scope.routeId);
                 })
                 .error(function (data, success) {
                     ngDialog.open({
@@ -235,7 +250,8 @@ angular.module('school_erp')
                         plain: true
                     });
                     $scope.editdata = [];
-                    $scope.getBusRouteToStation( $scope.routeId);
+                    $scope.getBusRoute();
+                    $scope.getBusRouteToStation($scope.routeId);
                 })
                 .error(function (data, success) {
                     ngDialog.open({
@@ -251,10 +267,7 @@ angular.module('school_erp')
             console.log("messsage");
             $scope.busRoutes = angular.copy($scope.busRoutesToStation[value]);
             var BusRoutDetails = {
-                // route_title: $scope.busRoute.route_title,
-                // vehicle_name: $scope.busRoute.vehicle_name,
-
-                station: $scope.busRoutes.station,
+                station: $scope.busRoutes.station_name,
                 pickup_time: $scope.busRoutes.pickup_time,
                 drop_time: $scope.busRoutes.drop_time
             }
@@ -271,7 +284,8 @@ angular.module('school_erp')
                     //     plain: true
                     // });
                     $scope.editdata = [];
-                    $scope.getBusRouteToStation( $scope.routeId);
+                    $scope.getBusRoute();
+                    $scope.getBusRouteToStation($scope.routeId);
                 })
                 .error(function (data, success) {
                     ngDialog.open({
@@ -292,7 +306,7 @@ angular.module('school_erp')
         $scope.getBusRoute();
         $scope.getStation();
 
-       
+
         $scope.getBusRouteToStation($scope.routeId);
     }])
 

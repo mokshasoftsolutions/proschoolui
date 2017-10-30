@@ -127,7 +127,7 @@
 
          $scope.DeleteEvaluation = function (value) {
              $scope.editdata = angular.copy($scope.evalData[value]);
-             $scope.paper_result_id = $scope.editdata.exam_paper_id;
+             $scope.paper_result_id = $scope.editdata.paper_result_id;
              console.log($scope.paper_result_id);
              examServices.DeleteEvaluation($scope.paper_result_id)
                  .success(function (data, status) {
@@ -150,7 +150,7 @@
 
              console.log("messsage");
              $scope.evaluations = angular.copy($scope.evalData[value]);
-             $scope.paper_result_id = $scope.evaluations.exam_paper_id;
+             $scope.paper_result_id = $scope.evaluations.paper_result_id;
              console.log($scope.paper_result_id);
              var EvaluationsDetails = {
                  student_name: $scope.evaluations.student_name,
@@ -252,7 +252,7 @@
 
              $http({
                  method: "POST",
-                 url: "globalServices.globalValue.baseURL + 'api/book/SCH-9271'",
+                 url: globalServices.globalValue.baseURL + 'api/book/'+globalServices.globalValue.school_id,
                  data: JSON.stringify(data),
                  headers: {
                      'Content-Type': 'application/json'

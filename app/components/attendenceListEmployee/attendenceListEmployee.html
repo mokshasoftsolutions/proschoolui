@@ -80,7 +80,7 @@
                             <div class="tab-content">
                                 <div class="table-responsive mailbox-messages">
 
-                                    <table class="table rwd-table table-striped">
+                                    <table export-table st-table="display_records" st-safe-src="attData"  class="table rwd-table table-striped">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -93,7 +93,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="attendance in attData" class="editable-row">
+                                            <tr st-select-row="row" st-select-mode="multiple" ng-repeat="attendance in display_records"  class="editable-row">
                                                 <td>
                                                     {{$index+1}}
                                                 </td>
@@ -126,6 +126,13 @@
                                                 </td>-->
                                             </tr>
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                              <td colspan="5" class="text-center">
+                                                <div class="pull-right" st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
+                                              </td>
+                                            </tr>
+                                          </tfoot>
                                     </table>
 
                                 </div>
@@ -195,7 +202,7 @@
                         <div class="row">
                             <div class="tab-content">
                                 <div class="table-responsive mailbox-messages">
-                                    <table export-table class="table rwd-table table-striped">
+                                    <table export-table st-table="display_records" st-safe-src="attDataMonth" class="table rwd-table table-striped">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -208,7 +215,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="attendance in attDataMonth  | filter:data.route_title:true" class="editable-row">
+                                            <tr st-select-row="row" st-select-mode="multiple" ng-repeat="attendance in display_records"  class="editable-row">
                                                 <td>
                                                     {{$index+1}}
                                                 </td>
@@ -264,6 +271,13 @@
                                                 </td>-->
                                             </tr>
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                              <td colspan="5" class="text-center">
+                                                <div class="pull-right" st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
+                                              </td>
+                                            </tr>
+                                          </tfoot>
                                     </table>
                                 </div>
                             </div>

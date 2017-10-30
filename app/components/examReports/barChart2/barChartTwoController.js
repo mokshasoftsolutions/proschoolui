@@ -1,30 +1,31 @@
 angular.module('school_erp')
-    .controller("barChartTwoController", ['$http', '$scope', 'globalServices', 'examServices', 'subjectsServices', 'studentServices', 'barChartTwoService', 'ngDialog', function ($http, $scope, globalServices, examServices, subjectsServices, studentServices, barChartTwoService, ngDialog) {
+    .controller("barChartTwoController", ['$http', '$scope', '$rootScope', 'globalServices', 'examServices', 'subjectsServices', 'studentServices', 'barChartTwoService', 'ngDialog', function ($http, $scope, $rootScope, globalServices, examServices, subjectsServices, studentServices, barChartTwoService, ngDialog) {
 
 
-
-        globalServices.getClass()
-            .success(function (data, status) {
-                $scope.classDatanew = data.school_classes;// Api list-name
-                $scope.classId = $scope.classDatanew[0].class_id;
-                console.log($scope.classId);
-                $scope.populateSections($scope.classId);
-            })
-            .error(function (data, success) {
-            })
+        $scope.getClassesInitalLoad = function () {
+            globalServices.getClass()
+                .success(function (data, status) {
+                    $scope.classDatanew = data.school_classes;// Api list-name
+                    $scope.classId = $scope.classDatanew[0].class_id;
+                    console.log($scope.classId);
+                    $scope.populateSections($scope.classId);
+                })
+                .error(function (data, success) {
+                })
+        }
         $scope.populateSections = function (classId) {
             globalServices.getSections(classId)
                 .success(function (data, status) {
                     $scope.secData = data.class_sections;// Api list-name
                     $scope.secId = $scope.secData[0].section_id;
-                   
+
                     $scope.getStudentValue($scope.secId);
 
                 })
                 .error(function (data, success) {
                 })
         }
-         
+
         $scope.getExamSchedule = function () {
             examServices.getExamSchedule()
                 .success(function (data, status) {
@@ -34,9 +35,11 @@ angular.module('school_erp')
                 })
                 .error(function (data, success) { })
         }
-         $scope.getExamSchedule();
+        $scope.getExamSchedule();
 
-
+        $scope.showRole = function (role) {
+            return globalServices.fetchRoleAuth(role);
+        }
 
         $scope.getStudentValue = function (secValue) {
             studentServices.getStudent(secValue)
@@ -54,6 +57,7 @@ angular.module('school_erp')
 
 
         $scope.getExamMarks = function (examScheduleId, studentId) {
+            console.log("message");
             var arrData = new Array();
             var arrLabels = new Array();
             $scope.examData = [];
@@ -64,7 +68,7 @@ angular.module('school_erp')
             $scope.label1 = [0];
             barChartTwoService.getExamMarks(examScheduleId, studentId)
                 .success(function (data, status) {
-                    $scope.examData = data.barchart;
+                    $scope.examData = data.resultArray;
                     console.log("message1");
                     console.log(JSON.stringify($scope.examData));
 
@@ -73,48 +77,79 @@ angular.module('school_erp')
                     $scope.examData1 = [];
 
                     $scope.array = $.map($scope.examData, function (item) {
+                        $scope.maxMarks = item.max_marks;
+                        console.log($scope.maxMarks);
 
-                        $scope.examData1 = item.exams;
-                        console.log("message2");
-                        console.log(JSON.stringify($scope.examData1));
-                        $scope.examData2 = [];
-                        $scope.array1 = $.map($scope.examData1, function (item1) {
-                            $scope.examData2 = item1.exam_evaluation;
-                            console.log("message3");
-                            console.log(JSON.stringify($scope.examData2));
-                            arrLabels.push(item1.exam_paper_title);
-                            $scope.maxMarks = item1.max_marks;
-                            console.log($scope.maxMarks);
-                            $scope.label1 = [];
-                            if (arrLabels != null) {
-                                for (var i = 0; i < arrLabels.length; i++) {
-                                    $scope.label1.push(arrLabels[i]);
-                                }
+                        arrLabels.push(item.paper_name);
+
+                        $scope.label1 = [];
+                        if (arrLabels != null) {
+                            for (var i = 0; i < arrLabels.length; i++) {
+                                $scope.label1.push(arrLabels[i]);
                             }
-                            console.log($scope.label1);
+                        }
+                        console.log($scope.label1);
 
-                            $scope.array2 = $.map($scope.examData2, function (item2) {
+                        $scope.data2 = JSON.parse(item.marks);
+                        arrData.push($scope.data2);
+                        $scope.data1 = [];
 
-                                $scope.data2 = JSON.parse(item2.marks);
-                                arrData.push($scope.data2);
-                                $scope.data1 = [];
+                        for (var j = 0; j < arrData.length; j++) {
+                            $scope.data1.push(arrData[j]);
+                        }
+                        console.log($scope.data1);
 
-                                for (var j = 0; j < arrData.length; j++) {
-                                    $scope.data1.push(arrData[j]);
-                                }
-                                console.log($scope.data1);
-
-                                return [[item.exam_evaluation]];
-                                //, item.student_name
-                            });
-                            return [[item.exams]];
-                            //, item.student_name
-                        });
 
 
                         return [[item]];
-                        //, item.student_name
+
                     });
+
+
+
+                    // $scope.array = $.map($scope.examData, function (item) {
+
+                    //     $scope.examData1 = item.exams;
+                    //     console.log("message2");
+                    //     console.log(JSON.stringify($scope.examData1));
+                    //     $scope.examData2 = [];
+                    //     $scope.array1 = $.map($scope.examData1, function (item1) {
+                    //         $scope.examData2 = item1.exam_evaluation;
+                    //         console.log("message3");
+                    //         console.log(JSON.stringify($scope.examData2));
+                    //         arrLabels.push(item1.exam_paper_title);
+                    //         $scope.maxMarks = item1.max_marks;
+                    //         console.log($scope.maxMarks);
+                    //         $scope.label1 = [];
+                    //         if (arrLabels != null) {
+                    //             for (var i = 0; i < arrLabels.length; i++) {
+                    //                 $scope.label1.push(arrLabels[i]);
+                    //             }
+                    //         }
+                    //         console.log($scope.label1);
+
+                    //         $scope.array2 = $.map($scope.examData2, function (item2) {
+
+                    //             $scope.data2 = JSON.parse(item2.marks);
+                    //             arrData.push($scope.data2);
+                    //             $scope.data1 = [];
+
+                    //             for (var j = 0; j < arrData.length; j++) {
+                    //                 $scope.data1.push(arrData[j]);
+                    //             }
+                    //             console.log($scope.data1);
+
+                    //             return [[item.exam_evaluation]];
+
+                    //         });
+                    //         return [[item.exams]];
+
+                    //     });
+
+
+                    //     return [[item]];
+
+                    // });
 
                     $scope.myJson = {
                         "graphset": [
@@ -218,5 +253,21 @@ angular.module('school_erp')
                 })
         }
 
-       
+
+        if ($rootScope.role == 'parent') {
+            console.log("message........................");
+            $scope.secId = $rootScope.student.section;
+            $scope.getExamSchedule();
+            $scope.getStudentValue($scope.secId);
+            // console.log("message........................2");
+            // console.log($scope.secId);
+            // console.log($scope.data.examSchedule_name);
+            // $scope.getExamPapers($scope.data.examSchedule_name, $scope.secId);
+
+
+        } else {
+            $scope.getClassesInitalLoad();
+        }
+
+
     }])

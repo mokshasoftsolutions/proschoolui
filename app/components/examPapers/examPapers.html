@@ -4,7 +4,10 @@
     <small>Exam Papers</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
+    <li>
+      <a href="">
+        <i class="fa fa-dashboard"></i> Home</a>
+    </li>
     <li>Examinations</li>
     <li class="active">Exam Papers</li>
   </ol>
@@ -17,14 +20,18 @@
 
   <div class="box box-default">
     <div class="box-header with-border" ng-if="showRole(['admin','teacher'])">
-      <i class="fa fa-search" aria-hidden="true"></i>
-      <h3 class="box-title">Select Criteria</h3>
-      <ul class="panel-controls">
-        <li> <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)"
-          /></li>
-        <li> <input type="button" value="Import" class="btn btn-primary" ng-click="handleFile()" /></li>
+      <!-- <i class="fa fa-search" aria-hidden="true"></i>
+      <h3 class="box-title">Select Criteria</h3> -->
+      <!-- <ul class="panel-controls">
+        <li>
+          <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)"
+          />
+        </li>
+        <li>
+          <input type="button" value="Import" class="btn btn-primary" ng-click="handleFile()" />
+        </li>
 
-      </ul>
+      </ul> -->
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -33,26 +40,28 @@
           <div class="form-group">
             <label>Class</label>
             <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId" ng-options="classData.class_id as classData.name for classData in classDatanew ">
-                        <!--<option selected="selected">--Select--</option>
+              <!--<option selected="selected">--Select--</option>
                         <option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
-                      </select>
+            </select>
           </div>
         </div>
 
         <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
           <div class="form-group">
             <label>Section</label>
-            <select class="form-control select2" ng-change="getSubjects(secId);getExamPapersbySectionAndSchedule(examScheduleId,secId)" style="width: 100%;" ng-model="secId" ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
-                       <!--<option selected="selected">--Select--</option>
+            <select class="form-control select2" ng-change="getSubjects(secId);getExamPapersbySectionAndSchedule(examScheduleId,secId)"
+              style="width: 100%;" ng-model="secId" ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
+              <!--<option selected="selected">--Select--</option>
                         <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
-                      </select>
+            </select>
           </div>
         </div>
 
         <div class="col-md-4" ng-if="showRole(['admin','teacher','parent'])">
           <div class="form-group">
             <label>Select Exam Schedule</label>
-            <select data-ng-change="getExamPapersbySectionAndSchedule(examScheduleId,secId)" name="examschedule" class="form-control select2" style="width: 100%;" ng-model="examScheduleId" ng-options="examSh.exam_sch_id as examSh.exam_title for examSh in examSchedule ">
+            <select data-ng-change="getExamPapersbySectionAndSchedule(examScheduleId,secId)" name="examschedule" class="form-control select2"
+              style="width: 100%;" ng-model="examScheduleId" ng-options="examSh.exam_sch_id as examSh.exam_title for examSh in examSchedule ">
             </select>
           </div>
         </div>
@@ -64,17 +73,18 @@
         </div>
       </div>
 
-      <div class="box-header with-border">
+      <div class="box-header with-border" ng-if="showRole(['admin','teacher'])">
         <i class="fa fa-plus-square" aria-hidden="true"></i>
         <h3 class="box-title">Add Exam Paper</h3>
       </div>
-      <form name="examPapers" ng-submit="examPapers.$valid && addExamPapers(data,data.subjectId,examScheduleId,classId,secId)" novalidate>
+      <form name="examPapers" ng-submit="examPapers.$valid && addExamPapers(data,data.subjectId,examScheduleId,classId,secId)"
+        novalidate>
         <div class="row">
           <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
             <div class="form-group">
               <label>Select Subject</label>
-              <select   class="form-control select2" name="subjects" ng-model="data.subjectId" style="width: 100%;" ng-options="subjectD.subject_id as subjectD.name for subjectD in subjectsData ">
-                  </select>
+              <select class="form-control select2" name="subjects" ng-model="data.subjectId" style="width: 100%;" ng-options="subjectD.subject_id as subjectD.name for subjectD in subjectsData ">
+              </select>
             </div>
           </div>
           <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
@@ -149,13 +159,17 @@
     <div class="box-header with-border">
       <i class="fa fa-th-list" aria-hidden="true"></i>
       <h3 class="box-title">Exam Papers</h3>
-      <li style="float:right;list-style-type:none;"><button type="button" data-ng-click="exportAction('excel')" class="btn btn-primary pull-right">Save as Excel</button></li>
-      <li style="float:right;list-style-type:none;"><button type="button" data-ng-click="exportAction('pdf')" class="btn btn-primary pull-right">Save as PDF</button></li>
+      <li style="float:right;list-style-type:none;">
+        <button type="button" data-ng-click="exportAction('excel')" class="btn btn-primary pull-right">Save as Excel</button>
+      </li>
+      <li style="float:right;list-style-type:none;">
+        <button type="button" data-ng-click="exportAction('pdf')" class="btn btn-primary pull-right">Save as PDF</button>
+      </li>
     </div>
     <div class="box-body">
       <div class="tab-content">
         <div class="tab-pane table-responsive no-padding active" id="tab_1">
-        <table export-table class="table rwd-table table-striped">
+          <table export-table st-table="display_records" st-safe-src="examData" class="table rwd-table table-striped">
             <thead>
               <tr>
                 <th>#</th>
@@ -169,32 +183,63 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="exam in examData" class="editable-row">
+              <tr st-select-row="row" st-select-mode="multiple" ng-repeat="exam in display_records" class="editable-row">
                 <td>{{$index+1}}</td>
-               <td class="select-td">
-              <span editable-select="exam.subject_name" e-name="subject" onaftersave="EditExamPapers($index)" e-form="rowform" e-selectpicker e-ng-options="sub.name as sub.name for sub in subjectsData">
-                {{ exam.subject_name}}
-              </span>
-            </td>
-                <td><span editable-text="exam.exam_paper_title" e-name="editdata.exam_paper_title" onaftersave="EditExamPapers($index)" e-form="rowform" e-required>{{exam.exam_paper_title || 'empty' }}</span></td>
-                <td><span editable-text="exam.max_marks" e-name="editdata.max_marks" onaftersave="EditExamPapers($index)" e-form="rowform" e-required>{{exam.max_marks || 'empty' }}</span></td>
-                <td><span editable-text="exam.date" e-name="editdata.date" onaftersave="EditExamPapers($index)" e-form="rowform" e-required>{{exam.date || 'empty' }}</span></td>
-                <td><span editable-text="exam.start_time" e-name="editdata.start_time" onaftersave="EditExamPapers($index)" e-form="rowform" e-required>{{exam.start_time || 'empty' }}</span></td>
-                <td><span editable-text="exam.end_time" e-name="editdata.end_time" onaftersave="EditExamPapers($index)" e-form="rowform" e-required>{{exam.end_time || 'empty' }}</span></td>
+                <td class="select-td">
+                  <span editable-select="exam.subject_name" e-name="subject" onaftersave="EditExamPapers($index)" e-form="rowform" e-selectpicker
+                    e-ng-options="sub.name as sub.name for sub in subjectsData">
+                    {{ exam.subject_name}}
+                  </span>
+                </td>
+                <td>
+                  <span editable-text="exam.exam_paper_title" e-name="editdata.exam_paper_title" onaftersave="EditExamPapers($index)"
+                    e-form="rowform" e-required>{{exam.exam_paper_title || 'empty' }}</span>
+                </td>
+                <td>
+                  <span editable-text="exam.max_marks" e-name="editdata.max_marks" onaftersave="EditExamPapers($index)" e-form="rowform"
+                    e-required>{{exam.max_marks || 'empty' }}</span>
+                </td>
+                <td>
+                  <span editable-text="exam.date" e-name="editdata.date" onaftersave="EditExamPapers($index)" e-form="rowform"
+                    e-required>{{exam.date || 'empty' }}</span>
+                </td>
+                <td>
+                  <span editable-text="exam.start_time" e-name="editdata.start_time" onaftersave="EditExamPapers($index)" e-form="rowform"
+                    e-required>{{exam.start_time || 'empty' }}</span>
+                </td>
+                <td>
+                  <span editable-text="exam.end_time" e-name="editdata.end_time" onaftersave="EditExamPapers($index)" e-form="rowform"
+                    e-required>{{exam.end_time || 'empty' }}</span>
+                </td>
                 <td class="pull-right">
                   <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == exam">
-                    <button type="submit" ng-click="EditExamPapers($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
-                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
+                    <button type="submit" ng-click="EditExamPapers($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                      <i class="fa fa-check"></i>
+                    </button>
+                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                      <i class="fa fa-remove"></i>
+                    </button>
                   </form>
 
                   <div class="buttons" ng-show="!rowform.$visible">
-                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
-                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteExamPapers($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteExamPapers($index)" ng-confirm-click="Are you sure you want to delete this item?">
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
                     <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
                   </div>
                 </td>
               </tr>
             </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="5" class="text-center">
+                  <div class="pull-right" st-pagination="" st-items-by-page="6" st-displayed-pages="5"></div>
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>
@@ -221,16 +266,16 @@
                 <div class="form-group">
                   <label>Select Subject</label>
                   <select class="form-control select2" style="width: 100%;">
-                            <option selected="selected">--Select--</option>
-                            <option>Subject 1</option>
-                            <option>Subject 2</option>
-                            <option>Subject 3</option>
-                            <option>Subject 4</option>
-                            <option>Subject 5</option>
-                            <option>Subject 6</option>
-                            <option>Subject 7</option>
-                            <option>Subject 8</option>
-                        </select>
+                    <option selected="selected">--Select--</option>
+                    <option>Subject 1</option>
+                    <option>Subject 2</option>
+                    <option>Subject 3</option>
+                    <option>Subject 4</option>
+                    <option>Subject 5</option>
+                    <option>Subject 6</option>
+                    <option>Subject 7</option>
+                    <option>Subject 8</option>
+                  </select>
                 </div>
               </div>
               <div class="col-md-4">

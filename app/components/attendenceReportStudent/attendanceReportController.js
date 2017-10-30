@@ -296,6 +296,7 @@ angular.module('school_erp')
                             $scope.dataMonth = [];
                             for (var i = 0; i < arrPresentMonth.length; i++) {
                                 $scope.dataMonth.push(arrPresentMonth[i]);
+                               
                             }
                             console.log($scope.dataMonth);
                             $scope.presentMonth = ($scope.dataMonth).length;
@@ -307,7 +308,7 @@ angular.module('school_erp')
                             $scope.labelMonth= [];
                             for (var j = 0; j < arrAbsentMonth.length; j++) {
                                 $scope.labelMonth.push(arrAbsentMonth[j]);
-
+                              
                             }
                             console.log($scope.labelMonth);
                             $scope.absentMonth = ($scope.labelMonth).length;
@@ -321,24 +322,25 @@ angular.module('school_erp')
                             $scope.leaveMonth = [];
                             for (var k = 0; k < arrLeaveMonth.length; k++) {
                                 $scope.leaveMonth.push(arrLeaveMonth[k]);
-
+                               
                             }
                             console.log($scope.leaveMonth);
                             $scope.leave = ($scope.leaveMonth).length;
-                            console.log($scope.leaveMonth);
+                            console.log($scope.leave);
 
 
                         }
-                        $scope.chartdataMonth = [
-                            [$scope.presentMonth],
-                            [$scope.absentMonth],
-                            [$scope.leaveMonth]
-                        ];
+                       
 
                         //arrLabels.push(item.student_name);
                         return;
                         //, item.student_name
                     });
+                    $scope.chartdataMonth = [
+                        [$scope.presentMonth],
+                        [$scope.absentMonth],
+                        [$scope.leaveMonth]
+                    ];
                     //$scope.chartdata = [[40], [30], [20]];
                     $scope.myJsonMonth = {
                         type: "ring",

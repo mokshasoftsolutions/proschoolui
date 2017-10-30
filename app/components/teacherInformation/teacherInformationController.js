@@ -1,5 +1,5 @@
 angular.module('school_erp')
-    .controller("parentInformationController", ['$http', '$scope', 'studentServices', 'ngDialog', 'globalServices', 'BusRouteServices', function ($http, $scope, studentServices, ngDialog, globalServices, BusRouteServices) {
+    .controller("teacherInformationController", ['$http', '$scope', 'studentServices', 'ngDialog', 'globalServices', 'BusRouteServices', function ($http, $scope, studentServices, ngDialog, globalServices, BusRouteServices) {
         $scope.classData = [];
         $scope.data = [];
         $scope.busRoutes = [];
@@ -41,25 +41,26 @@ angular.module('school_erp')
                 .error(function (data, success) {
                 })
         }
-        $scope.parentsList = [];
+        $scope.teacherList = [];
         $scope.username=[];
         // $scope.getParents =function(secId){
         //     console.log(secId);
-        studentServices.getParentListBySchool()
+        studentServices.getTeacherListBySchool()
             .success(function (data, status) {
                 console.log(JSON.stringify(data));
-                $scope.parentsList = data.parents;// Api list-name
+                $scope.teacherList = data.teachers;// Api list-name
                
-                console.log($scope.parentsList);
-                $scope.parentsList.forEach(function (item) {
-                $scope.parentId=item.parent_id;
+                console.log($scope.teacherList);
+                $scope.teacherList.forEach(function (item) {
+                $scope.teacherId=item.teacher_id;
                 //console.log($scope.parentId);
 
-                // $scope.splited=$scope.parentId.split('-');
-                // $scope.splited = $scope.splited[1]+$scope.splited[3];
+                // $scope.splited=$scope.teacherId.split('-');
+                // $scope.splited = $scope.splited[1]+"-"+$scope.splited[2]+"-"+$scope.splited[3];
+
                 // $scope.username.push($scope.splited);
-                $scope.username.push($scope.parentId);
-                //console.log($scope.splited);
+                $scope.username.push($scope.teacherId);
+              //  console.log($scope.splited);
 
 
                 })

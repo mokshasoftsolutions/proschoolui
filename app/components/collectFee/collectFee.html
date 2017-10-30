@@ -107,7 +107,7 @@
          <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
                 <li class="active"><a data-target="#paymentList" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Payment List </a></li>
-                <li class=""><a data-target="#paidList" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Paid List </a></li>
+                <!-- <li class=""><a data-target="#paidList" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Paid List </a></li> -->
              <li class="btn btn-primary pull-right" ng-click="getStudent($index)" data-toggle="modal" data-target="#myModal" title data-original-title>
               Collect Fees
             </li>
@@ -118,7 +118,7 @@
         <div class="box-body">
           <div class="tab-content">
             <div class="tab-pane table-responsive no-padding active" id="paymentList">
-              <table class="table table-striped">
+              <table export-table st-table="display_records" st-safe-src="collectFeeData" class="table table-striped">
                 <thead>
                   <tr>
                     <th> #</th>
@@ -133,7 +133,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="collectFee in collectFeeData">
+                  <tr st-select-row="row" st-select-mode="multiple" ng-repeat="collectFee in display_records" >
                     <td>{{$index+1}}</td>
                     <td>{{collectFee.feetype[0].fee_type}}</td>
                     <td>{{collectFee.feetype[0].fee_category}}</td>
@@ -149,6 +149,14 @@
                   </tr>
 
                 </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="5" class="text-center">
+                      <div class="pull-right" st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
+                    </td>
+                  </tr>
+                </tfoot>
+
               </table>
             </div>
 
@@ -192,7 +200,9 @@
 
       </div>
 </section>
-<!--Edit values modal Starts here-->
+
+
+<!-- values modal Starts here-->
 <div class="modal fade" id="myModal" role="dialog">
   <div class="modal-dialog modal-md">
     <div class="modal-content">

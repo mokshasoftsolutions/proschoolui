@@ -38,13 +38,18 @@
             <pane title="   School Information   ">
               <!--<div class="tab-pane no-padding active" id="tab_1">-->
               <!--<p class="login-box-msg">Register a new membership</p>-->
+               <form name="registration" ng-submit="registration.$valid &&  addRegistration(data) && handleFile()" novalidate>
               <div class="box-body">
-                <form name="registration" ng-submit="registration.$valid && addRegistration(data);handleFile();" novalidate>
-                  <div class="row">
+                 <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>School Name</label>
-                        <input type="text" class="form-control" ng-model="data.name" placeholder="School Name">
+                        <label>School Name  </label>
+                        <input type="text" class="form-control"   name="schoolName" ng-model="data.name" placeholder="School Name" required>
+                        <!--<div ng-if="registration.$pending.usernameExists">checking....</div>
+                        <div ng-if="registration.$error.usernameExists">username exists already</div>-->
+                        <div ng-if="registration.schoolName.$touched || registration.$submitted"  > 
+                                <span style="color:red" ng-show="registration.schoolName.$error.required">Please Enter School Name </span>
+                            </div>
                         <!--<span class="glyphicon glyphicon-user form-control-feedback"></span>-->
                       </div>
                     </div>
@@ -52,8 +57,10 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>School Email</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" ng-model="data.email" placeholder="School Email">
-
+                        <input type="email" class="form-control" name=email id="exampleInputEmail1" ng-model="data.email" placeholder="School Email" required>
+                        <div ng-if="registration.email.$touched || registration.$submitted"  > 
+                          <span style="color:red" ng-show="registration.email.$error.required">Please Enter Valid Email </span>
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -120,13 +127,17 @@
                   <div class="row">
 
                     <div class="col-xs-4">
-
-                      <button style="margin-left:305%;" type="submit" ng-click="goToTab('School Profile');" class="btn btn-info">Next</button>
+<li style="list-style-type:none ">
+                      <button style="margin-left:305%;" type="submit"  class="btn btn-info">Submit</button>
+                      <button style="margin-left:305%;float:left" type="submit" ng-click="goToTab('School Profile');" class="btn btn-info">Next</button>
+                    </li>
                     </div>
                     <!-- /.col -->
                   </div>
-                </form>
+                  
+             
               </div>
+                 </form>
             </pane>
 
             <pane title="   School Profile   ">
@@ -161,7 +172,7 @@
                       <label>Section</label>
                       <input type="text" class="form-control" ng-model="datavalue.section" id="exampleInputEmail1" placeholder="">
                     </div>
-                    <input type='button' ng-click="addSection(datavalue)" class="btn btn-info" value='Add Section' />
+                    <input type='button' ng-click="addSection(datavalue,datavalue.classId)" class="btn btn-info" value='Add Section' />
                   </div>
                 </div>
                 <a style="margin-top:50px;" ui-sref='login_page' class="btn btn-info">Login</a>

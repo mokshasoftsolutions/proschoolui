@@ -193,7 +193,7 @@ angular.module('school_erp')
 
             $http({
                 method: "POST",
-                url: "globalServices.globalValue.baseURL + 'api/book/SCH-9271'",
+                url: globalServices.globalValue.baseURL + 'api/book/'+globalServices.globalValue.school_id,
                 data: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json'

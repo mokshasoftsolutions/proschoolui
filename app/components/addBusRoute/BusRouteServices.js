@@ -5,15 +5,15 @@ angular.module('school_erp')
         BusRouteServices.getBusRoute = function () {
             return $http({
                 method: 'GET',
-                url: globalServices.globalValue.baseURL + 'api/bus_route_title/SCH-9271'
+                url: globalServices.globalValue.baseURL + 'api/bus_route_title/'+globalServices.globalValue.school_id
             })
         };
         BusRouteServices.setBusRoute = function (dataValue) {
             console.log(dataValue);
             return $http({
                 method: 'POST',
-                // url: globalServices.globalValue.baseURL + 'api/bus_route/SCH-9271',
-                url: globalServices.globalValue.baseURL + 'api/bus_route_title/SCH-9271/',
+                
+                url: globalServices.globalValue.baseURL + 'api/bus_route_title/'+globalServices.globalValue.school_id+'/',
                 data: $.param(dataValue),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             })
@@ -30,7 +30,7 @@ angular.module('school_erp')
             console.log(dataValue);
             return $http({
                 method: 'POST',
-                // url: globalServices.globalValue.baseURL + 'api/bus_route/SCH-9271',
+                
                 url: globalServices.globalValue.baseURL + 'api/addorupdatestationstobusroute/'+routeId,
                 data: $.param(dataValue),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

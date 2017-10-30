@@ -50,10 +50,32 @@ angular.module('school_erp')
                     requireLogin: true
                 }
             })
+
+            .state('main.addClass&Section', { // login Page
+                url: "addClass&Section",
+                templateUrl: "app/components/addClass&Section/addClass&Section.html",
+                controller: "addClassSectionController",
+                data: {
+                    requireLogin: true
+                }
+
+            })
+
             .state('main.parentInfo', { // login Page
                 url: "parentInformation",
                 templateUrl: "app/components/parentInformation/parentInformation.html",
                 controller: "parentInformationController",
+                data: {
+                    requireLogin: true
+                }
+
+            })
+
+
+            .state('main.teacherInfo', { // login Page
+                url: "teacherInformation",
+                templateUrl: "app/components/teacherInformation/teacherInformation.html",
+                controller: "teacherInformationController",
                 data: {
                     requireLogin: true
                 }
@@ -69,7 +91,7 @@ angular.module('school_erp')
             //     }
             // })
             .state('main.studentProfile', { // login Page
-                url: "student/studentProfile",
+                url: "student/studentProfile/:student",
                 templateUrl: "app/components/studentProfile/studentProfile.html",
                 controller: "studentProfileController",
                 data: {

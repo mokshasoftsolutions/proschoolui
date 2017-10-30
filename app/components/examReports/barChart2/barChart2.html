@@ -1,12 +1,12 @@
 <section class="content-header">
     <h1>
         <i class="fa fa-file-text"></i> Exam Reports
-        <small>BarChart2</small>
+        <small>Report By Student</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
         <li>Exam Reports</li>
-        <li class="active">BarChart2</li>
+        <li class="active">Report By Student</li>
     </ol>
 </section>
 <!-- /.Content Header -->
@@ -24,7 +24,7 @@
 
         <div class="box-body">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
                     <div class="form-group">
                         <label>Select Class</label>
                         <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId">
@@ -34,7 +34,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
                     <div class="form-group">
                         <label>Select Section</label>
                         <select class="form-control select2" data-ng-change="getStudentValue(secId);" style="width: 100%;" ng-model="secId">
@@ -57,7 +57,7 @@
 
               
 
-                <div class="col-md-4">
+                <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
                     <div class="form-group">
                         <label>Select Student</label>
                         <select class="form-control select2" style="width: 100%;" ng-model="studentId">

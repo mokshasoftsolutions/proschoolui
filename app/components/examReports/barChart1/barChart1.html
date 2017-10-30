@@ -1,12 +1,12 @@
 <section class="content-header">
     <h1>
         <i class="fa fa-file-text"></i> Exam Reports
-        <small>BarChart1</small>
+        <small>Report By Paper</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
         <li>Exam Reports</li>
-        <li class="active">BarChart1</li>
+        <li class="active">Report By Paper</li>
     </ol>
 </section>
 <!-- /.Content Header -->
@@ -17,14 +17,14 @@
 
 
     <div class="box box-default">
-        <div class="box-header with-border">
+        <!-- <div class="box-header with-border">
             <i class="fa fa-search" aria-hidden="true"></i>
             <h3 class="box-title">Select Criteria</h3>
-        </div>
+        </div> -->
 
         <div class="box-body">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
                     <div class="form-group">
                         <label>Select Class</label>
                         <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId">
@@ -34,7 +34,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
                     <div class="form-group">
                         <label>Select Section</label>
                         <select ng-change="getExamPapers(examScheduleId,secId);" class="form-control select2" style="width: 100%;" ng-model="secId">

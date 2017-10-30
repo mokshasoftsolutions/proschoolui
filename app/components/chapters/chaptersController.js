@@ -220,7 +220,7 @@ angular.module('school_erp')
             var fd = new FormData();
             fd.append('file', file);
            // fd.append('data', 'string');
-            $http.post(globalServices.globalValue.baseURL+'api/bulk_upload_courseworks/SCH-9271', fd, {
+            $http.post(globalServices.globalValue.baseURL+'api/bulk_upload_courseworks/'+globalServices.globalValue.school_id, fd, {
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }
             })

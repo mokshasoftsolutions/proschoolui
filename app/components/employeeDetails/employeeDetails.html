@@ -147,7 +147,8 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Employee Photo</label>
-                      <input type="file" ng-model="data.profile_image" name="first_doc" id="doc1">
+                      <input type="file" name="file" class="form-control" ng-model="data.profile_image" ngf-select ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" onchange="angular.element(this).scope().loadImage(this.files)">
+                      <!-- <input type="file" ng-model="data.profile_image" name="first_doc" id="doc1"> -->
                       </div>                    
                   </div>
                 </div>

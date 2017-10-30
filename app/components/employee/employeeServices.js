@@ -5,7 +5,7 @@ angular.module('school_erp')
         employeeService.getEmployee = function () {
             return $http({
                 method: 'GET',
-                url: globalServices.globalValue.baseURL + 'api/employee/SCH-9271'
+                url: globalServices.globalValue.baseURL + 'api/employee/'+globalServices.globalValue.school_id
             })
         };
 
@@ -13,7 +13,7 @@ angular.module('school_erp')
             console.log(dataValue);
             return $http({
                 method: 'POST',
-                url: globalServices.globalValue.baseURL + 'api/employee/SCH-9271',
+                url: globalServices.globalValue.baseURL + 'api/employee/'+globalServices.globalValue.school_id,
                 data: $.param(dataValue),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             })
@@ -42,7 +42,7 @@ angular.module('school_erp')
         //     console.log(dataValue);
         //     return $http({
         //         method: 'POST',
-        //         url: globalServices.globalValue.baseURL + 'api/employee_attendance/SCH-9271/' + Attendance,
+        //         url: globalServices.globalValue.baseURL + 'api/employee_attendance/'+globalServices.globalValue.school_id+'/' + Attendance,
         //         data: $.param(dataValue),
         //         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         //     })
@@ -67,7 +67,7 @@ angular.module('school_erp')
             console.log(dataValue);
             return $http({
                 method: 'POST',
-                url: globalServices.globalValue.baseURL + 'api/employee_attendancebulk/SCH-9271',
+                url: globalServices.globalValue.baseURL + 'api/employee_attendancebulk/'+globalServices.globalValue.school_id,
                 data: test,
                 headers: { 'Content-Type': 'application/json' },
             })
@@ -79,7 +79,7 @@ angular.module('school_erp')
         //     console.log(dataValue);
         //     return $http({
         //         method: 'POST',
-        //         url: globalServices.globalValue.baseURL + 'api/employee_attendancebulk/SCH-9271',
+        //         url: globalServices.globalValue.baseURL + 'api/employee_attendancebulk/'+globalServices.globalValue.school_id,
         //         data: $.param(test),
         //         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         //     })
@@ -88,7 +88,7 @@ angular.module('school_erp')
         employeeService.getEmployeeAttendenceByDay = function (date) {
             return $http({
                 method: 'GET',
-                url: globalServices.globalValue.baseURL + 'api/employee_attendance_by_date/' + date
+                url: globalServices.globalValue.baseURL + 'api/employee_attendance_by_date/' + date+'/'+globalServices.globalValue.school_id
             })
         };
 

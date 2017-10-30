@@ -4,7 +4,10 @@
     <small>Fee Master</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li>
+      <a href="#">
+        <i class="fa fa-dashboard"></i> Home</a>
+    </li>
     <li>Fee Collection</li>
     <li class="active">Fee Master</li>
   </ol>
@@ -21,41 +24,40 @@
       <h3 class="box-title">Select Criteria</h3>
     </div>-->
     <!-- /.box-header -->
-     <form name="feeMaster">
-    <div class="box-body">
-      <div class="row">
+    <form name="feeMaster">
+      <div class="box-body">
+        <div class="row">
 
-        <div class="col-md-4" >
-          <div class="form-group">
-            <label>Class</label>
-            <select class="form-control select2" ng-options="class.name as class.name for class in classData"
-              style="width: 100%;" ng-model="data.class_name">
-                        <!--<option ng-repeat="class in classData" value="{{class.class_id}}">{{class.name}}</option>-->
-                      </select>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Class</label>
+              <select class="form-control select2" ng-options="class.name as class.name for class in classData" style="width: 100%;" ng-model="data.class_name">
+                <option selected value="">--Select--</option>
+              </select>
+            </div>
           </div>
-        </div>
 
-        <div class="col-md-4">
-          <div class="form-group">
-            <label>Fee Type</label>
-            <select class="form-control select2" style="width: 100%;" ng-options="type.fee_type as type.fee_type for type in feeTypeData"
-              ng-model="data.fee_type">
-              
-                      </select>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Fee Type</label>
+              <select class="form-control select2" style="width: 100%;" ng-options="type.fee_type as type.fee_type for type in feeTypeData"
+                ng-model="data.fee_type">
+                <option selected value="">--Select--</option>
+              </select>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-            <label> Amount</label>
-            <input type="text" class="form-control" ng-model="data.amount" placeholder="Enter ...">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label> Amount</label>
+              <input type="text" class="form-control" ng-model="data.amount" placeholder="Enter ...">
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="box-footer">
-      <button type="submit" ng-click="addFeeMaster(data);" class="btn btn-primary pull-right">Add Fee</button>
-    </div>
+      <div class="box-footer">
+        <button type="submit" ng-click="addFeeMaster(data);" class="btn btn-primary pull-right">Add Fee</button>
+      </div>
   </div>
   </form>
 
@@ -64,14 +66,17 @@
   <div class="box box-default">
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-list"></i> Fee List</a></li>
+        <li class="active">
+          <a href="#tab_1" data-toggle="tab" aria-expanded="true">
+            <i class="fa fa-list"></i> Fee List</a>
+        </li>
       </ul>
     </div>
 
     <div class="box-body">
       <div class="tab-content">
         <div class="tab-pane table-responsive no-padding active" id="tab_1">
-          <table class="table table-striped">
+          <table export-table st-table="display_records" st-safe-src="feeMasterData" class="table rwd-table table-striped">
             <thead>
               <tr>
                 <th>Sl. No</th>
@@ -83,38 +88,57 @@
               </tr>
             </thead>
             <tbody>
-               <tr ng-repeat="feeMaster in feeMasterData" class="editable-row">
+              <tr st-select-row="row" st-select-mode="multiple" ng-repeat="feeMaster in display_records" class="editable-row">
                 <td>
                   {{$index+1}}
                 </td>
-                 <td class="select-td">
-                  <span editable-select="feeMaster.class_name" e-name="class_name" e-form="rowform" onaftersave="EditFeeMaster($index)" e-selectpicker e-ng-options="class.name as class.name for class in classData">
-                                                    {{ feeMaster.class_name}}</span>
+                <td class="select-td">
+                  <span editable-select="feeMaster.class_name" e-name="class_name" e-form="rowform" onaftersave="EditFeeMaster($index)" e-selectpicker
+                    e-ng-options="class.name as class.name for class in classData">
+                    {{ feeMaster.class_name}}</span>
                 </td>
                 <td class="select-td">
-                  <span editable-select="feeMaster.fee_type" e-name="fee_type" e-form="rowform" onaftersave="EditFeeMaster($index)" e-selectpicker e-ng-options="type.fee_type as type.fee_type for type in feeTypeData">
-                                                    {{ feeMaster.fee_type}}</span>
+                  <span editable-select="feeMaster.fee_type" e-name="fee_type" e-form="rowform" onaftersave="EditFeeMaster($index)" e-selectpicker
+                    e-ng-options="type.fee_type as type.fee_type for type in feeTypeData">
+                    {{ feeMaster.fee_type}}</span>
                 </td>
-                <td><a href="">{{feeMaster.fee_doc[0].fee_category}}</a></td>
+                <td>
+                  <a href="">{{feeMaster.fee_doc[0].fee_category}}</a>
+                </td>
                 <td>
                   <span editable-text="feeMaster.fee_amount" e-name="fee_amount" onaftersave="EditFeeMaster($index)" e-form="rowform" e-required>{{feeMaster.fee_amount || 'empty' }}</span>
                 </td>
-               
+
                 <td class="pull-right">
                   <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == feeMaster">
-                    <button type="submit" ng-click="EditFeeMaster($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
-                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
+                    <button type="submit" ng-click="EditFeeMaster($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                      <i class="fa fa-check"></i>
+                    </button>
+                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                      <i class="fa fa-remove"></i>
+                    </button>
                   </form>
 
                   <div class="buttons" ng-show="!rowform.$visible">
-                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
-                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteFeeMaster($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteFeeMaster($index)" ng-confirm-click="Are you sure you want to delete this item?">
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
                     <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
                   </div>
                 </td>
               </tr>
-              
+
             </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="5" class="text-center">
+                  <div class="pull-right" st-pagination="" st-items-by-page="8" st-displayed-pages="5"></div>
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>

@@ -4,7 +4,10 @@
         <small>Attendance</small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
+        <li>
+            <a href="">
+                <i class="fa fa-dashboard"></i> Home</a>
+        </li>
         <li>Student Attendance</li>
         <li class="active">Attendance</li>
     </ol>
@@ -37,15 +40,17 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Class</label>
-                        <select class="form-control select2" ng-options="class.class_id as class.name for class in classDatanew" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId">
-                      </select>
+                        <select class="form-control select2" ng-options="class.class_id as class.name for class in classDatanew" data-ng-change="populateSections(classId)"
+                            style="width: 100%;" ng-model="classId">
+                        </select>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Section</label>
-                        <select class="form-control select2" ng-options="sec.section_id as sec.name for sec in secData" data-ng-change="getStudents(secId)" style="width: 100%;" ng-model="secId">                    
+                        <select class="form-control select2" ng-options="sec.section_id as sec.name for sec in secData" data-ng-change="getStudents(secId)"
+                            style="width: 100%;" ng-model="secId">
                         </select>
 
                     </div>
@@ -67,7 +72,7 @@
     </div>
 
     <!-- /.content -->
-<!--{{attendanceBox}}-->
+    <!--{{attendanceBox}}-->
     <!-- Content List -->
     <div class="box box-default">
         <div class="box-header with-border">
@@ -79,24 +84,23 @@
                 <div class="col-md-6">
                     <div class="mailbox-controls">
                         <button type="button" class="btn btn-primary pull-left">
-                <i class="state-icon glyphicon glyphicon-unchecked"></i>
-                &nbsp;
-                Mark as holiday
-                </button>
+                            <i class="state-icon glyphicon glyphicon-unchecked"></i>
+                            &nbsp; Mark as holiday
+                        </button>
                         <input type="checkbox" class="hidden" name="holiday" value="checked">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <button type="button" class="btn btn-primary pull-right" ng-click="submitBulkAttendance()">
-                <i class="fa fa-save"></i>
-                Submit Attendance
-                </button>
+                        <i class="fa fa-save"></i>
+                        Submit Attendance
+                    </button>
                 </div>
             </div>
 
             <div class="tab-content">
                 <div class="tab-pane table-responsive no-padding active" id="tab_1">
-                    <table class="table table-hover table-striped">
+                    <table export-table st-table="display_records" st-safe-src="attendanceBox" class="table table-hover table-striped">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -110,14 +114,15 @@
                                 <th>Roll No</th>
                                 <th>Name</th>
                                 <th>Attendance
-                                    <select ng-if="check" class="select2" style="font-weight:normal;margin-left:15px;" ng-change="markAttendance(attendVal)" ng-model="attendVal">
-                                  <option value="" selected="selected">--Select--</option>
-                                  <option value="Present">Present</option>
-                                  <!--<option value="Late with excuse">Late with excuse</option>
+                                    <select ng-if="check" class="select2" style="font-weight:normal;margin-left:15px;" ng-change="markAttendance(attendVal)"
+                                        ng-model="attendVal">
+                                        <option value="" selected="selected">--Select--</option>
+                                        <option value="Present">Present</option>
+                                        <!--<option value="Late with excuse">Late with excuse</option>
                                   <option value="Late">Late</option>-->
-                                  <option value="Absent">Absent</option>
-                                  <option value="On Leave">On Leave</option>
-                                </select>
+                                        <option value="Absent">Absent</option>
+                                        <option value="On Leave">On Leave</option>
+                                    </select>
                                 </th>
                                 <th>Actions</th>
                                 <th></th>
@@ -127,7 +132,7 @@
                         </thead>
                         <tbody>
 
-                            <tr ng-repeat="student in attendanceBox | filter:searchStudent">
+                            <tr st-select-row="row" st-select-mode="multiple" ng-repeat="student in display_records | filter:searchStudent">
 
                                 <td>{{$index+1}}</td>
                                 <td>
@@ -140,7 +145,8 @@
                                 <td>{{student.first_name}} {{student.last_name}}</td>
                                 <td>
                                     <div class="radio radio-info radio-inline">
-                                        <input ng-change="attn(student,attend)" type="radio" ng-model="student.status" value="Present" id="attendencetype+{{$index}}" name="attendencetype+{{$index}}">
+                                        <input ng-change="attn(student,attend)" type="radio" ng-model="student.status" value="Present" id="attendencetype+{{$index}}"
+                                            name="attendencetype+{{$index}}">
                                         <label for="inlineRadio1"> Present </label>
                                     </div>
                                     <!--<div class="radio radio-info radio-inline">
@@ -161,9 +167,19 @@
                                     </div>
                                 </td>
 
-                                <td><button ng-click="addAttendance(student,student.status)" class="btn btn-primary smallButton" type="button" value="add">Add</button></td>
+                                <td>
+                                    <button ng-click="addAttendance(student,student.status)" class="btn btn-primary smallButton" type="button" value="add">Add</button>
+                                </td>
                             </tr>
                         </tbody>
+
+                        <tfoot>
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <div st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

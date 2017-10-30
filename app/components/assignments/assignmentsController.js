@@ -131,7 +131,7 @@ angular.module('school_erp')
                     //     plain: true
                     // });
                     $scope.editdata = [];
-                    $scope.getAssignments();
+                    $scope.getAssignments($scope.secId, $scope.chapterId);
                 })
                 .error(function (data, success) {
                     ngDialog.open({
@@ -153,7 +153,7 @@ angular.module('school_erp')
                         plain: true
                     });
                     $scope.editdata = [];
-                    $scope.getAssignments();
+                    $scope.getAssignments($scope.secId, $scope.chapterId);
                 })
                 .error(function (data, success) {
                     ngDialog.open({
@@ -282,7 +282,7 @@ angular.module('school_erp')
             var fd = new FormData();
             fd.append('file', file);
            // fd.append('data', 'string');
-            $http.post(globalServices.globalValue.baseURL+'api/upload_books/SCH-9271', fd, {
+            $http.post(globalServices.globalValue.baseURL+'api/upload_books/'+globalServices.globalValue.school_id, fd, {
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }
             })

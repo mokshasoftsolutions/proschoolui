@@ -3,43 +3,126 @@ angular.module('school_erp')
         $scope.employeeDetailsData = [];
         $scope.data = [];
         $scope.today1 = '01/01/1975';
-        $scope.addEmployee = function (data) {
-            var empDetails = {
-                first_name: $scope.data.first_name,
-                last_name: $scope.data.last_name,
-                dob: $scope.data.dob,
-                job_category: $scope.data.jobType,
-                experience: $scope.data.experience,
-                phone: $scope.data.phone,
-                email: $scope.data.email,
-                profile_image: "imageData",
-                website: $scope.data.website,
-                joined_on: $scope.data.joined_on,
-                gender: $scope.data.gender,
-                experience: $scope.data.experience,
-                website: $scope.data.website,
-                qualification: $scope.data.qualification
-            }
-            employeeServices.setEmployee(empDetails)
-                .success(function (data, status) {
-                    $timeout(function () {
-                        ngDialog.open({
-                            template: '<p>Employeee Added Successfully.</p>',
-                            plain: true
-                        });
-                    }, 300);
-                    $scope.data = [];
-                })
-                .error(function (data, success) {
-                    ngDialog.open({
-                        template: '<p>Some Error Occured!</p>',
-                        plain: true
-                    });
-                })
-        }
 
         $scope.selectedFile = null;
-        $scope.msg = "";
+
+        $scope.loadImage = function (files) {
+
+            console.log("messsage1");
+            $scope.$apply(function () {
+
+                $scope.selectedFile = files[0];
+                console.log($scope.selectedFile);
+
+                if ($scope.selectedFile.type != "image/jpeg" && $scope.selectedFile.type != "image/png") {
+                    //     ngDialog.open({
+                    //         template: '<p> Not a Image File </p>',
+                    //         plain: true
+                    //     });
+                    //    $window.alert("Not a Image File");
+                    $scope.message = "Not a Image File !..";
+                }
+
+
+            })
+
+        }
+
+        $scope.addEmployee = function (data) {
+
+            console.log("messsage2");
+            var file = $scope.selectedFile;
+            //console.log(file);
+            $scope.saveImage(file, data);
+            // var empDetails = {
+            //     first_name: $scope.data.first_name,
+            //     last_name: $scope.data.last_name,
+            //     dob: $scope.data.dob,
+            //     job_category: $scope.data.jobType,
+            //     experience: $scope.data.experience,
+            //     phone: $scope.data.phone,
+            //     email: $scope.data.email,
+            //     profile_image: "imageData",
+            //     website: $scope.data.website,
+            //     joined_on: $scope.data.joined_on,
+            //     gender: $scope.data.gender,
+            //    // experience: $scope.data.experience,
+            //    // website: $scope.data.website,
+            //     qualification: $scope.data.qualification
+            // }
+        }
+        //     employeeServices.setEmployee(empDetails)
+        //         .success(function (data, status) {
+        //             $timeout(function () {
+        //                 ngDialog.open({
+        //                     template: '<p>Employeee Added Successfully.</p>',
+        //                     plain: true
+        //                 });
+        //             }, 300);
+        //             $scope.data = [];
+        //         })
+        //         .error(function (data, success) {
+        //             ngDialog.open({
+        //                 template: '<p>Some Error Occured!</p>',
+        //                 plain: true
+        //             });
+        //         })
+        // }
+
+
+        $scope.saveImage = function (file, data) {
+
+            // console.log(stdAdmission);
+            // console.log("messsage3");
+            // console.log(file);
+
+            var fd = new FormData();
+            fd.append('file', file);
+            
+            fd.append('first_name', $scope.data.first_name);
+            fd.append('last_name', $scope.data.last_name);
+            fd.append('gender', $scope.data.gender);
+            fd.append('dob', $scope.data.dob);
+            fd.append('job_category',$scope.data.jobType);
+            fd.append('experience', $scope.data.experience);
+            fd.append('phone', $scope.data.phone);
+            fd.append('email', $scope.data.email);
+            fd.append('profile_image', $scope.data. profile_image);
+            fd.append('website', $scope.data.website);
+            fd.append('joined_on',$scope.data.joined_on);
+            fd.append('qualification', $scope.data.qualification);
+            
+            console.log(JSON.stringify(fd));
+            $http.post(globalServices.globalValue.baseURL +  'api/employee/'+globalServices.globalValue.school_id, fd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            })
+                .success(function () {
+                    ngDialog.open({
+                        template: '<p>Employee Information  submitted successfully.</p>',
+                        plain: true
+                    });
+                   // $scope.data = [];
+
+                })
+                .error(function () {
+                    ngDialog.open({
+                        template: '<p>Some Error Occured!.</p>',
+                        plain: true
+                    });
+                });
+        }
+
+
+
+
+
+
+
+
+
+        // $scope.selectedFile = null;
+        // $scope.msg = "";
 
 
         $scope.loadFile = function (files) {
@@ -48,7 +131,7 @@ angular.module('school_erp')
             $scope.$apply(function () {
 
                 $scope.selectedFile = files[0];
-                 console.log(file);
+                console.log(file);
             })
 
         }
@@ -58,7 +141,7 @@ angular.module('school_erp')
             var file = $scope.selectedFile;
             console.log(file);
 
-           if (file == undefined || file == null) {
+            if (file == undefined || file == null) {
                 ngDialog.open({
                     template: '<p>Please Select a File </p>',
                     plain: true
@@ -121,12 +204,12 @@ angular.module('school_erp')
             var fd = new FormData();
             fd.append('file', file);
             // fd.append('data', 'string');
-            $http.post(globalServices.globalValue.baseURL + 'api/bulk_upload_employees/SCH-9271', fd, {
+            $http.post(globalServices.globalValue.baseURL + 'api/bulk_upload_employees/' + globalServices.globalValue.school_id, fd, {
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }
             })
                 .success(function () {
-                   // console.log(JSON.stringify(data));
+                    // console.log(JSON.stringify(data));
                     $timeout(function () {
                         ngDialog.open({
                             template: '<p>File Added Successfully.</p>',

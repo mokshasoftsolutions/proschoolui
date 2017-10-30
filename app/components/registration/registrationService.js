@@ -21,8 +21,8 @@
                 method: 'POST',
                // url:'http://192.168.1.16:4005/api/schools',
                 url: globalServices.globalValue.baseURL + 'api/schools' ,
-                data: $.param(dataValue),
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                data: dataValue ,
+                headers: { 'Content-Type': 'application/json' }
             })
         };
 

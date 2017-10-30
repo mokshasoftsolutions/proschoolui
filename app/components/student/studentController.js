@@ -1,21 +1,5 @@
 angular.module('school_erp')
     .controller("studentController", ['$http', '$scope', '$rootScope', 'studentServices', 'globalServices', 'ngDialog', function ($http, $scope, $rootScope, studentServices, globalServices, ngDialog) {
-       
-        // $scope.loading = false;
-        // $scope.getData = function() {
-        //     $scope.loading = true;
-        //     $http.get(globalServices.globalValue.baseURL + 'api/employee/SCH-9271')
-        //     .then(function(data){
-        //         $scope.employees =data;
-        //         console.log(JSON.stringify(response));
-        //         $scope.loading = false;
-        //     });
-        // }
-        // $scope.getData();
-       
-       
-       
-       
         $scope.studentData = [];
         //$scope.editdata= [];
         $scope.gender = [{ name: "Male", id: 1 }, { name: "Female", id: 2 }];

@@ -1,5 +1,5 @@
 angular.module('school_erp')
-    .controller("loginController", ['$http', '$scope', '$rootScope', 'authService', '$state', 'ngDialog', '$window', 'ngProgressFactory', function ($http, $scope, $rootScope, authService, $state, ngDialog, $window, ngProgressFactory) {
+    .controller("loginController", ['$http', '$scope', '$rootScope', 'authService', '$state', 'ngDialog', '$window', 'ngProgressFactory','globalServices', function ($http, $scope, $rootScope, authService, $state, ngDialog, $window, ngProgressFactory,globalServices) {
 
         $scope.progressbar = ngProgressFactory.createInstance();
 
@@ -22,15 +22,11 @@ angular.module('school_erp')
 
                     $scope.loginData = data.role;
                     console.log($scope.loginData);
-
-
-
-
                     if (status != 401) {
                         $window.localStorage["userInfo"] = JSON.stringify(data);
                         $rootScope.role = data.role;
                         $rootScope.loginPage = false;
-
+                        globalServices.getUserInfo();
                         $state.go('main.dashboard');
                     }
                 })

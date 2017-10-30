@@ -18,12 +18,12 @@
     <div class="box-header with-border" ng-show="showRole(['admin','teacher'])">
       <!--<i class="fa fa-search" aria-hidden="true"></i>
       <h3 class="box-title">Select Criteria</h3>-->
-      <ul class="panel-controls">
+      <!-- <ul class="panel-controls">
         <li> <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)"
           /></li>
         <li> <input type="button" value="Import" class="btn btn-primary" ng-click="handleFile()" /></li>
 
-      </ul>
+      </ul> -->
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -146,7 +146,7 @@
     <div class="box-body">
       <div class="tab-content">
         <div class="tab-pane table-responsive no-padding active" id="tab_1">
-           <table export-table class="table rwd-table table-striped">
+          <table export-table st-table="display_records" st-safe-src="assignmentsData" class="table rwd-table table-striped">
             <thead>
               <tr>
                 <th>#</th>
@@ -158,7 +158,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="assignment in assignmentsData">
+              <tr st-select-row="row" st-select-mode="multiple" ng-repeat="assignment in display_records">
                 <td>{{$index+1}}</td>
                 <td><span editable-text="assignment.assignment_title" e-name="assignment.assignment_title" onaftersave="EditAssignments($index)" e-form="rowform" e-required>{{assignment.assignment_title || 'empty' }}</span></td>
                 <!--<td><span editable-text="assignment.chapter_name" e-name="assignment.chapter_name" onaftersave="EditAssignments($index)" e-form="rowform" e-required>{{assignment.chapter_name || 'empty' }}</span></td>-->
@@ -183,6 +183,13 @@
                 </td>
               </tr>
             </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="5" class="text-center">
+                  <div class="pull-right" st-pagination="" st-items-by-page="6" st-displayed-pages="5"></div>
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>

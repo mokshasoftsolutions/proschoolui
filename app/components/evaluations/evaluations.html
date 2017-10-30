@@ -4,7 +4,10 @@
     <small>Evaluations</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
+    <li>
+      <a href="">
+        <i class="fa fa-dashboard"></i> Home</a>
+    </li>
     <li>Examinations</li>
     <li class="active">Evaluations</li>
   </ol>
@@ -16,15 +19,19 @@
   <!-- Select Criteria -->
 
   <div class="box box-default">
-    <div class="box-header with-border" ng-if="showRole(['admin','teacher','parent'])">
-      <i class="fa fa-search" aria-hidden="true"></i>
-      <h3 class="box-title">Select Criteria</h3>
-      <ul class="panel-controls">
-        <li> <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)"
-          /></li>
-        <li> <input type="button" value="Import" class="btn btn-primary" ng-click="handleFile()" /></li>
+    <div class="box-header with-border" ng-if="showRole(['admin','teacher'])">
+      <!-- <i class="fa fa-search" aria-hidden="true"></i>
+      <h3 class="box-title">Select Criteria</h3> -->
+      <!-- <ul class="panel-controls">
+        <li>
+          <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)"
+          />
+        </li>
+        <li>
+          <input type="button" value="Import" class="btn btn-primary" ng-click="handleFile()" />
+        </li>
 
-      </ul>
+      </ul> -->
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -34,9 +41,9 @@
             <label>Select Class</label>
             <select class="form-control select2" data-ng-change="populateSections(data.classId)" style="width: 100%;" ng-model="data.classId"
               ng-options="class.class_id as class.name  for class in classDatanew">
-                       
-                       <!--<option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
-                      </select>
+
+              <!--<option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
+            </select>
           </div>
         </div>
 
@@ -45,21 +52,21 @@
             <label>Select Section</label>
             <select class="form-control select2" ng-change="populateStudentValue(data.secId);getExamPapers(data.examSchedule_name,data.secId);"
               style="width: 100%;" name="section" ng-model="data.secId" ng-options="sec.section_id as sec.name  for sec in secData">
-<!--                      
+              <!--                      
                        <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
-                        
-                      </select>
+
+            </select>
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group" ng-if="showRole(['admin','teacher'])">
-            <label>Select Student  </label>
+            <label>Select Student </label>
             <select class="form-control select2" style="width: 100%;" name="studentId" ng-change="getEvaluation(data.studentId,data.examSchedule_name)"
               ng-model="data.studentId" ng-options="student.student_id as student.first_name+' '+student.last_name for student in students ">
-                            <!--<option selected="selected">--Select--</option>
+              <!--<option selected="selected">--Select--</option>
       
                             <option ng-repeat="student in students " value="{{student.student_id}}">{{student.first_name}} {{student.last_name}}</option>-->
-                        </select>
+            </select>
           </div>
         </div>
 
@@ -69,7 +76,7 @@
 
       </div>
       <div class="row">
-        <div class="col-md-12" ng-if="showRole(['admin','teacher','parent'])">
+        <div class="col-md-12" ng-if="showRole(['admin','teacher'])">
           <button type="button" ng-click="" class="btn btn-primary pull-right">Select</button>
         </div>
       </div>
@@ -95,10 +102,10 @@
               <label>Select Exam Schedule</label>
               <select class="form-control select2" ng-change="getExamPapers(data.examSchedule_name,data.secId)" style="width: 100%;" ng-model="data.examSchedule_name"
                 name="examSchedule" ng-options="examSch.exam_sch_id as examSch.exam_title for examSch in examSchedule ">
-                        <!--<option selected="selected">--Select--</option>
+                <!--<option selected="selected">--Select--</option>
                         <option ng-repeat="exam in examSchedule " value="{{exam.exam_title}}">{{exam.exam_title}}</option>-->
-                        
-                      </select>
+
+              </select>
             </div>
           </div>
 
@@ -106,10 +113,10 @@
             <div class="form-group" ng-class="{'has-error': evaluations.$submitted  && evaluations.paperId.$pristine}">
               <label>Paper Title </label>
               <select class="form-control select2" style="width: 100%;" name="paperId" ng-model="data.paper_name" ng-options="paper.exam_paper_id as paper.exam_paper_title for paper in papers ">
-                            <!--<option value="">--Select--</option>
+                <!--<option value="">--Select--</option>
                             <option ng-repeat="paper in papers " value="{{paper.exam_paper_id}}">{{paper.exam_paper_title}}</option>-->
-                            
-                        </select>
+
+              </select>
             </div>
           </div>
 
@@ -133,14 +140,14 @@
             <div class="form-group" ng-class="{'has-error': evaluations.$submitted  && evaluations.conduct.$pristine}">
               <label>Conduct</label>
               <select name="conduct" ng-model="data.conduct" class="form-control select2" style="width: 100%;">
-                            <option selected="selected">--Select--</option>
-                            <option>Poor</option>
-                            <option>Below Average</option>
-                            <option>Average</option>
-                            <option>Above Average</option>
-                            <option>Good</option>
-                            <option>Excellent</option>
-                        </select>
+                <option selected="selected">--Select--</option>
+                <option>Poor</option>
+                <option>Below Average</option>
+                <option>Average</option>
+                <option>Above Average</option>
+                <option>Good</option>
+                <option>Excellent</option>
+              </select>
             </div>
           </div>
 
@@ -164,13 +171,17 @@
     <div class="box-header with-border">
       <i class="fa fa-th-list" aria-hidden="true"></i>
       <h3 class="box-title">Exam Marks</h3>
-      <li style="float:right;list-style-type:none;"><button type="button" data-ng-click="exportAction('excel')" class="btn btn-primary pull-right">Save as Excel</button></li>
-      <li style="float:right;list-style-type:none;"><button type="button" data-ng-click="exportAction('pdf')" class="btn btn-primary pull-right">Save as PDF</button></li>
+      <li style="float:right;list-style-type:none;">
+        <button type="button" data-ng-click="exportAction('excel')" class="btn btn-primary pull-right">Save as Excel</button>
+      </li>
+      <li style="float:right;list-style-type:none;">
+        <button type="button" data-ng-click="exportAction('pdf')" class="btn btn-primary pull-right">Save as PDF</button>
+      </li>
     </div>
     <div class="box-body">
       <div class="tab-content">
         <div class="tab-pane table-responsive no-padding active" id="tab_1">
-          <table export-table class="table table-bordered table-hover table-condensed">
+          <table export-table st-table="display_records" st-safe-src="evalData" class="table rwd-table table-striped">
             <thead>
               <tr>
                 <th>#</th>
@@ -185,7 +196,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="evaluations in evalData" class="editable-row">
+              <tr st-select-row="row" st-select-mode="multiple" ng-repeat="evaluations in display_records" class="editable-row">
                 <td>{{$index+1}}</td>
                 <td>
                   <!--<span editable-text="evaluations.student_name" e-name="evaluations.student_name" onaftersave="EditEvaluation($index)"
@@ -201,32 +212,53 @@
                   <!--<span editable-text="evaluations.paper_name" e-name="evaluations.paper_name" onaftersave="EditEvaluation($index)"
                     e-form="rowform" e-required>-->
                   {{evaluations.paper_name || 'empty' }}</td>
-                <td><span editable-text="evaluations.marks" e-name="evaluations.marks" onaftersave="EditEvaluation($index)" e-form="rowform"
-                    e-required>{{evaluations.marks || 'empty' }}</span></td>
-                <td><span editable-text="evaluations.percentage" e-name="evaluations.percentage" onaftersave="EditEvaluation($index)"
-                    e-form="rowform" e-required>{{evaluations.percentage || 'empty' }}</span></td>
+                <td>
+                  <span editable-text="evaluations.marks" e-name="evaluations.marks" onaftersave="EditEvaluation($index)" e-form="rowform"
+                    e-required>{{evaluations.marks || 'empty' }}</span>
+                </td>
+                <td>
+                  <span editable-text="evaluations.percentage" e-name="evaluations.percentage" onaftersave="EditEvaluation($index)"
+                    e-form="rowform" e-required>{{evaluations.percentage || 'empty' }}</span>
+                </td>
                 <!--<td><span editable-text="evaluations.conduct" e-name="evaluations.conduct" onaftersave="EditEvaluation($index)"
                     e-form="rowform" e-required>{{evaluations.conduct || 'empty' }}</span></td>-->
                 <td class="select-td">
                   <span editable-select="evaluations.conduct" e-name="conduct" onaftersave="EditEvaluation($index)" e-form="rowform" e-selectpicker
                     e-ng-options="sub.type as sub.id for sub in conduct">
-                {{evaluations.conduct}}
-              </span>
+                    {{evaluations.conduct}}
+                  </span>
                 </td>
                 <td class="pull-right">
                   <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == evaluations">
-                    <button type="submit" ng-click="EditEvaluation($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
-                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
+                    <button type="submit" ng-click="EditEvaluation($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                      <i class="fa fa-check"></i>
+                    </button>
+                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                      <i class="fa fa-remove"></i>
+                    </button>
                   </form>
 
                   <div class="buttons" ng-show="!rowform.$visible">
-                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
-                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteEvaluation($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteEvaluation($index)" ng-confirm-click="Are you sure you want to delete this item?">
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
                     <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
                   </div>
                 </td>
               </tr>
             </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="5" class="text-center">
+                  <div class="pull-right" st-pagination="" st-items-by-page="6" st-displayed-pages="5"></div>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+
           </table>
         </div>
       </div>
@@ -236,7 +268,7 @@
 
 
 <!--Edit values modal Starts here-->
-<div class="modal fade" id="myModal" role="dialog">
+<!-- <div class="modal fade" id="myModal" role="dialog">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <form name="employeeDetails" ng-submit="addEmployee(data)" novalidate>
@@ -245,8 +277,7 @@
         </div>
         <div class="modal-body">
 
-          <!-- /.box-header -->
-          <!-- /.box-header -->
+         
           <form name="evaluations" ng-submit="evaluations.$valid && addEvaluations(data)" novalidate>
             <div class="row">
               <div class="col-md-4">
@@ -265,14 +296,14 @@
                 <div class="form-group">
                   <label>Conduct</label>
                   <select class="form-control select2" style="width: 100%;">
-                            <option selected="selected">--Select--</option>
-                            <option>Poor</option>
-                            <option>Below Average</option>
-                            <option>Average</option>
-                            <option>Above Average</option>
-                            <option>Good</option>
-                            <option>Excellent</option>
-                        </select>
+                    <option selected="selected">--Select--</option>
+                    <option>Poor</option>
+                    <option>Below Average</option>
+                    <option>Average</option>
+                    <option>Above Average</option>
+                    <option>Good</option>
+                    <option>Excellent</option>
+                  </select>
                 </div>
               </div>
 
@@ -289,4 +320,4 @@
     </form>
   </div>
 </div>
-</div>
+</div> -->

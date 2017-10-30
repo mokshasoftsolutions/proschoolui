@@ -6,9 +6,9 @@ angular.module('school_erp')
             console.log(dataValue);
             return $http({
                 method: 'POST',
-                 url: globalServices.globalValue.baseURL + 'api/addorupdatesubjectstoteacher/SCH-9271',
+                 url: globalServices.globalValue.baseURL + 'api/addorupdatesubjectstoteacher/'+globalServices.globalValue.school_id,
                 //  url:globalServices.globalValue.baseURL +'api/add_subjects_to_teacher/'+teacher_id,
-              //  url: globalServices.globalValue.baseURL + 'api/teachers/SCH-9271',
+             
                 data: $.param(dataValue),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             })

@@ -16,15 +16,15 @@
     <!-- Select Criteria -->
 
     <div class="box box-default">
-        <div class="box-header with-border">
+        <div class="box-header with-border" ng-show="showRole(['admin','teacher'])">
             <!--<i class="fa fa-search" aria-hidden="true"></i>
             <h3 class="box-title">Select Criteria</h3>-->
-            <ul class="panel-controls">
+            <!-- <ul class="panel-controls">
                 <li> <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)"
                     /></li>
                 <li> <input type="button" value="Import" class="btn btn-primary" ng-click="handleFile()" /></li>
 
-            </ul>
+            </ul> -->
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -124,7 +124,7 @@
         <div class="box-body">
             <div class="tab-content">
                 <div class="tab-pane table-responsive no-padding active" id="tab_1">
-                     <table export-table class="table rwd-table table-striped">
+                    <table export-table st-table="display_records" st-safe-src="chaptersData"  class="table rwd-table table-striped">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -137,7 +137,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="chapter in chaptersData" class="editable-row">
+                            <tr st-select-row="row" st-select-mode="multiple" ng-repeat="chapter in display_records" class="editable-row">
                                 <td>{{$index+1}}</td>
                                 <td><span editable-text="chapter.title" e-name="chapter.title" onaftersave="EditChapters($index)" e-form="rowform" e-required>{{chapter.title || 'empty' }}</span></td>
                                 <td><span editable-text="chapter.chapter_code" e-name="chapter.chapter_code" onaftersave="EditChapters($index)" e-form="rowform" e-required>{{chapter.chapter_code || 'empty' }}</span></td>
@@ -158,6 +158,13 @@
                                 </td>
                             </tr>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                              <td colspan="5" class="text-center">
+                                <div class="pull-right" st-pagination="" st-items-by-page="8" st-displayed-pages="5"></div>
+                              </td>
+                            </tr>
+                          </tfoot>
                     </table>
                 </div>
             </div>

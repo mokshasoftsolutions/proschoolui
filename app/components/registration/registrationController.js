@@ -1,6 +1,5 @@
-
 angular.module('school_erp')
-    .controller("registrationController", ['$http', '$scope', '$window', 'ngDialog', 'registrationServices','globalServices', function ($http, $scope, $window, ngDialog, registrationServices,globalServices) {
+    .controller("registrationController", ['$http', '$scope', '$window', 'ngDialog', 'registrationServices', 'globalServices', function ($http, $scope, $window, ngDialog, registrationServices, globalServices) {
 
 
 
@@ -34,12 +33,12 @@ angular.module('school_erp')
                 console.log($scope.selectedFile);
 
                 if ($scope.selectedFile.type != "image/jpeg") {
-                //     ngDialog.open({
-                //         template: '<p> Not a Image File </p>',
-                //         plain: true
-                //     });
-                //    $window.alert("Not a Image File");
-                    $scope.message="Not a Image File !..";
+                    //     ngDialog.open({
+                    //         template: '<p> Not a Image File </p>',
+                    //         plain: true
+                    //     });
+                    //    $window.alert("Not a Image File");
+                    $scope.message = "Not a Image File !..";
                 }
 
 
@@ -50,7 +49,7 @@ angular.module('school_erp')
             console.log("messsage2");
             var file = $scope.selectedFile;
             //console.log(file);
-            $scope.save(file,data);
+            $scope.save(file, data);
             // console.log(file.name);
             // console.log(file.type);
             // if (file == undefined || file == null) {
@@ -75,18 +74,20 @@ angular.module('school_erp')
         }
 
 
-        $scope.save = function (file,data) {
+        $scope.save = function (file, data) {
             console.log("messsage3");
             console.log(file);
 
             var fd = new FormData();
             fd.append('file', file);
-            fd.append('data', 'string');
+            // fd.append('data', 'string');
             console.log(JSON.stringify(fd));
-            $http.post(globalServices.globalValue.baseURL + 'api/upload_image/SCH-9271', fd, {
-                transformRequest: angular.identity,
-                headers: { 'Content-Type': undefined }
-            })
+            $http.post(globalServices.globalValue.baseURL + 'api/upload_image/' + globalServices.globalValue.school_id, fd, {
+                    transformRequest: angular.identity,
+                    headers: {
+                        'Content-Type': undefined
+                    }
+                })
                 .success(function () {
                     ngDialog.open({
                         template: '<p>File Added Successfully.</p>',
@@ -124,7 +125,7 @@ angular.module('school_erp')
 
 
                 })
-                .error(function (data, success) { })
+                .error(function (data, success) {})
         }
 
         // Add attendance single
@@ -138,8 +139,8 @@ angular.module('school_erp')
                 academic_year: $scope.data.batch_year,
                 website: $scope.data.website,
                 address: $scope.data.address,
-                description: $scope.data.description,
-                logo: $scope.data.logo
+                description: $scope.data.description 
+                // logo: $scope.data.logo
 
             }
             console.log(Registration);
@@ -172,7 +173,7 @@ angular.module('school_erp')
                     console.log($scope.class_id);
 
                 })
-                .error(function (data, success) { })
+                .error(function (data, success) {})
         }
 
 
@@ -212,11 +213,11 @@ angular.module('school_erp')
                     $scope.classData = $scope.class_sections;
 
                 })
-                .error(function (data, success) { })
+                .error(function (data, success) {})
         }
 
 
-        $scope.addSection = function (datavalue) {
+        $scope.addSection = function (datavalue,class_id) {
             console.log("message");
             //console.log(JSON.stringify(value));
             var SectionData = {
@@ -225,7 +226,7 @@ angular.module('school_erp')
             }
             console.log(SectionData);
 
-            registrationServices.setSection(SectionData, $scope.class_id)
+            registrationServices.setSection(SectionData,class_id)
                 .success(function (data, status) {
 
                     ngDialog.open({
@@ -274,33 +275,91 @@ angular.module('school_erp')
                 };
                 $scope.$parent.LinkControllers(panes);
             }],
-            template:
-            '<div class="tabbable">' +
-            '<ul  class="nav nav-tabs">' +
-            '<li ng-repeat="pane in panes" ng-class="{active:pane.selected}">' +
-            '<a style="padding: 10px 64px;" href="" ng-click="select(pane)">{{pane.title}}</a>' +
-            '</li>' +
-            '</ul>' +
-            '<div class="tab-content" ng-transclude></div>' +
-            '</div>',
+            template: '<div class="tabbable">' +
+                '<ul  class="nav nav-tabs">' +
+                '<li ng-repeat="pane in panes" ng-class="{active:pane.selected}">' +
+                '<a style="padding: 10px 64px;" href="" ng-click="select(pane)">{{pane.title}}</a>' +
+                '</li>' +
+                '</ul>' +
+                '<div class="tab-content" ng-transclude></div>' +
+                '</div>',
             replace: true
         };
     }).
-    directive('pane', function () {
-        return {
-            require: '^tabs',
-            restrict: 'E',
-            transclude: true,
-            scope: {
-                title: '@'
-            },
-            link: function (scope, element, attrs, tabsCtrl) {
-                scope.title = attrs.title;
-                tabsCtrl.addPane(scope);
-            },
-            template:
-            '<div class="tab-pane" ng-class="{active: selected}" ng-transclude>' +
+directive('pane', function () {
+    return {
+        require: '^tabs',
+        restrict: 'E',
+        transclude: true,
+        scope: {
+            title: '@'
+        },
+        link: function (scope, element, attrs, tabsCtrl) {
+            scope.title = attrs.title;
+            tabsCtrl.addPane(scope);
+        },
+        template: '<div class="tab-pane" ng-class="{active: selected}" ng-transclude>' +
             '</div>',
-            replace: true
-        };
-    });
+        replace: true
+    };
+  })
+  //.directive('usernameAvailable', function ($timeout, $q, $http, globalServices) {
+//     return {
+//         restrict: 'AE',
+//         require: 'ngModel',
+//         link: function (scope, elm, attr, ngModel) {
+//             ngModel.$asyncValidators.usernameExists = function (modelValue, viewValue) {
+//                 //here you should access the backend, to check if username exists
+//                 //and return a promise
+//                 // console.log(model.$viewValue);
+//                 // console.log(elm);
+//                 // var defer = $q.defer();
+//                 //  $http({  method: 'POST',
+//                 //             url: globalServices.globalValue.baseURL + 'checkemail',
+//                 //             data: {email:model.$viewValue},
+//                 //             headers: { 'Content-Type': 'application/json'},
+//                 //         }).success(function(data, status) {
+//                 //             console.log(data);
+//                 //             if(data.error == true){
+//                 //                  model.$setValidity('usernameExists', true); 
+//                 //                  defer.resolve;
+
+//                 //             }else{
+//                 //                  model.$setValidity('usernameExists', false); 
+//                 //                  defer.resolve;
+//                 //             }
+
+
+//                 // }).error(function(data, status) {
+//                 //    model.$setValidity('usernameExists', false); 
+//                 //                  defer.reject;
+//                 // });
+//                   var defer = $q.defer();
+//                 $http({
+//                     method: 'POST',
+//                     url: globalServices.globalValue.baseURL + 'checkemail',
+//                     data: {
+//                         email: ngModel.$viewValue
+//                     },
+//                     headers: {
+//                         'Content-Type': 'application/json'
+//                     },
+//                 }).then(function (res) {
+//                     console.log(res.data)
+//                     $timeout(function () {
+//                        ngModel.$setValidity('usernameExists', res.data.error);
+//                         if(res.data.error){
+//                            defer.resolve;
+//                         }else{
+//                            defer.reject;
+//                         }
+                         
+//                     }, 1000);
+               
+//                 });
+//               return defer.promise;
+
+//             };
+//         }
+//     }
+// });
