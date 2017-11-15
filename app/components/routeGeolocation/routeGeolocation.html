@@ -27,8 +27,9 @@
           <div class="form-group">
 
             <label>Select Vehicle</label>
-            <select ng-options="vehicle.vehicle_code as vehicle.vehicle_name for vehicle in vehicles" class="form-control select2" ng-model="data.vehicle_code"
+            <select ng-options="vehicle.vehicle_code as vehicle.vehicle_name for vehicle in vehicles" class="form-control select2" ng-model="vehicle_code"
               style="width: 100%;">
+              <option selected value="">--Select--</option>
                         </select>
           </div>
           <div class="form-group">
@@ -36,16 +37,32 @@
           </div>
 
         </div>
+<<<<<<< HEAD
       </div>
       <div class="col-md-9">
         <div class="backwhite">
           <div class="box box-default">
             <section class="content-header">
               <div id="map" style="height:420px;"></div>
+=======
+      
+
+      
+          <div class="col-md-8" >
+            <button style="margin-top: 24px;" ng-click="getGeolocation(vehicle_code);" class="btn btn-primary pull-right">Get Location</button>
+          </div>
+          </div>
+        
+    </div>
+
+    <!--<div class="col-md-4">
+      <div class="form-group">
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
 
             </section>
           </div>
 
+<<<<<<< HEAD
         </div>
       </div>
     </div>
@@ -56,3 +73,14 @@
  <script src="js/scripts.js"></script>
 </body>
 </html> -->
+=======
+  
+        
+          <div id="class" ng-repeat="marker in markers "></div>
+        </div>
+        <div id="map" style="height:820px;"></div>
+
+    
+    
+</section>
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366

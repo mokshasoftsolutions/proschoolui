@@ -30,8 +30,12 @@
                // url:'http://192.168.1.16:4005/api/schools',
                 url: globalServices.globalValue.baseURL + 'api/schools' ,
                 data: dataValue ,
+<<<<<<< HEAD
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }
+=======
+                headers: { 'Content-Type': 'application/json' }
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
             })
         };
 

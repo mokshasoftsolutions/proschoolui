@@ -13,6 +13,7 @@
 
 <link rel="stylesheet" href="../../../dist/login/web/css/font-awesome.css">
 
+<<<<<<< HEAD
 <body>
   <div class="regback">
     <div class="img">
@@ -121,11 +122,219 @@
               </div>
             </div>
           </div>
+=======
+<body class="hold-transition register-page">
+
+
+
+  <div class="register-box" style="width:44.18%;margin-left: 35%;">
+
+    <div class="register-box-body" style="background-color:#00918d;">
+      <div class="login-logo">
+        <h2 style="color:white">Register your School</h2>
+      </div>
+      <!--
+      <div class="nav-tabs-custom" style="margin-left:10px;background-color:#00918d;">
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-target="#tab_1" style="padding:10px 60px;" data-toggle="tab" aria-expanded="true">School Information </a></li>
+          <li class=""><a data-target="#tab_2" style="padding:10px 70px;" data-toggle="tab" aria-expanded="false">School Profile</a></li>
+        </ul>
+      </div>-->
+
+      <div class="box-body">
+        <div class="tab-content">
+          <tabs>
+
+            <pane title="   School Information   ">
+              <!--<div class="tab-pane no-padding active" id="tab_1">-->
+              <!--<p class="login-box-msg">Register a new membership</p>-->
+               <form name="registration" ng-submit="registration.$valid &&  addRegistration(data) && handleFile()" novalidate>
+              <div class="box-body">
+                 <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>School Name  </label>
+                        <input type="text" class="form-control"   name="schoolName" ng-model="data.name" placeholder="School Name" required>
+                        <!--<div ng-if="registration.$pending.usernameExists">checking....</div>
+                        <div ng-if="registration.$error.usernameExists">username exists already</div>-->
+                        <div ng-if="registration.schoolName.$touched || registration.$submitted"  > 
+                                <span style="color:red" ng-show="registration.schoolName.$error.required">Please Enter School Name </span>
+                            </div>
+                        <!--<span class="glyphicon glyphicon-user form-control-feedback"></span>-->
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>School Email</label>
+                        <input type="email" class="form-control" name=email id="exampleInputEmail1" ng-model="data.email" placeholder="School Email" required>
+                        <div ng-if="registration.email.$touched || registration.$submitted"  > 
+                          <span style="color:red" ng-show="registration.email.$error.required">Please Enter Valid Email </span>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group  col-md-6">
+                      <label>School Contact No</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" ng-model="data.contact" placeholder="School Contact No">
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Batch year</label>
+                        <select class="form-control select2" ng-model="data.batch_year" style="width: 100%;">
+                                          <option value="" selected="selected">--Select--</option>
+                                          <option>2017-2018</option>
+                                          <option>2018-2019</option>
+                                          <option>2019-2020</option>
+                                          <option>2020-2021</option>
+                                          <option>2021-2022</option>
+                                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>School Website</label>
+                        <input type="text" class="form-control" ng-model="data.website" placeholder="School Website">
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Address</label>
+                        <textarea class="form-control" style="margin-top:5px;" rows="4" ng-model="data.address" placeholder="Enter ..."></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <!--style="margin-top:-8%"-->
+                  <div class="row">
+                    <div class="col-md-6 ">
+                      <div class="form-group" style="margin-top:-50px;">
+                        <label>School Description</label>
+                        <textarea class="form-control" style="margin-top:5px;" rows="6" ng-model="data.description" placeholder="Write a description about the School">
+                                            </textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Choose Logo</label>
+                        <input type="file" name="file" ng-model="data.logo" ngf-select ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB"
+                          class="form-control" onchange="angular.element(this).scope().loadFile(this.files)">
+                        <p style="color:#9e0707"> {{message}} </p>
+                        <!--<div class="picture">
+                          <img src="" class="picture-src" title="" />
+                          <input style="color:#fff;" type="file" ng-model="data.logo">
+                        </div>-->
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="row">
+
+                    <div class="col-xs-4">
+<li style="list-style-type:none ">
+                      <button style="margin-left:305%;" type="submit"  class="btn btn-info">Submit</button>
+                      <button style="margin-left:305%;float:left" type="submit" ng-click="goToTab('School Profile');" class="btn btn-info">Next</button>
+                    </li>
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                  
+             
+              </div>
+                 </form>
+            </pane>
+
+            <pane title="   School Profile   ">
+              <!--<div class="tab-pane no-padding" id="tab_2">-->
+              <div class="box-body">
+                <h4 class="info-text" style="color:#fff;">Add Classes & Sections</h4>
+              </div>
+              <div class="box-body">
+                <div class="row">
+                  <div class="col-sm-5 col-sm-offset-1">
+                    <div class="form-group">
+                      <label>Class</label>
+                      <input type="text" class="form-control" ng-model="value.name" id="exampleInputEmail1" placeholder="">
+                    </div>
+                    <input type='button' ng-click="addClass(value)" class="btn btn-info" value='Add Class' />
+                  </div>
+                  <div class="col-sm-5">
+                    <div class="form-group">
+                      <label>Select Class</label>
+                      <select class="form-control select2" style="width: 100%;" ng-model="datavalue.classId" ng-options="data.class_id as data.name for data in classData">
+                                          <option value="" selected>--Select--</option>
+                                          <!--<option>Class 1</option>
+                                          <option>Class 2</option>
+                                          <option>Class 3</option>
+                                          <option>Class 4</option>
+                                          <option>Class 5</option>-->
+                                        </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-5">
+                    <div class="form-group">
+                      <label>Section</label>
+                      <input type="text" class="form-control" ng-model="datavalue.section" id="exampleInputEmail1" placeholder="">
+                    </div>
+                    <input type='button' ng-click="addSection(datavalue,datavalue.classId)" class="btn btn-info" value='Add Section' />
+                  </div>
+                </div>
+                <a style="margin-top:50px;" ui-sref='login_page' class="btn btn-info">Login</a>
+              </div>
+            </pane>
+          </tabs>
+        </div>
+
+
+
+
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
 
 
         </form>
       </div>
     </div>
   </div>
+<<<<<<< HEAD
+=======
+  <!-- /.register-box -->
+
+
+  <!--<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="../../plugins/iCheck/icheck.min.js"></script>
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+  });
+</script>-->
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
 </body>
+<style>
+  /*div.tab-content tabs pane:active,
+  div.tab-content tabs pane:hover {
+    padding: 5px 80px;
+    position: relative;
+    display: block;
+    background-color: #00acd6;
+    border-color: #00acd6;
+    color: #fff;
+  }*/
+
+  label {
+    color: white;
+  }
+</style>
 <script type="text/javascript" src="../../../dist/login/web/js/jquery-2.1.4.min.js"></script>

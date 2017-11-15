@@ -23,7 +23,10 @@ angular.module('school_erp')
                     $scope.busRoutes = data.Bus_Route;
 
                     $scope.routeId = $scope.busRoutes[0].bus_route_id;
+<<<<<<< HEAD
                     $scope.getBusRouteToStation($scope.routeId);
+=======
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                 })
                 .error(function (data, success) {
                 })
@@ -182,17 +185,27 @@ angular.module('school_erp')
         }
         $scope.getBusRouteToStation = function (routeId) {
             //console.log(vehicle_code);
+<<<<<<< HEAD
             // var arrLabels = new Array();
             $scope.busRoutesToStation = [];
             BusRouteServices.getBusRouteToStation(routeId)
                 .success(function (data, status) {
                     console.log(JSON.stringify(data));
 
+=======
+           // var arrLabels = new Array();
+           $scope.busRoutesToStation=[];
+            BusRouteServices.getBusRouteToStation(routeId)
+                .success(function (data, status) {
+                    console.log(JSON.stringify(data));
+                   
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                     $scope.busRoutesToStation = data.bus_routes;
                     console.log("message....");
                     console.log($scope.busRoutesToStation);
 
 
+<<<<<<< HEAD
                     //     $scope.stationList = [];
                     //    //
 
@@ -203,6 +216,18 @@ angular.module('school_erp')
                     //     })
                     //     console.log($scope.stationList);
                   //  $scope.routeId = $scope.busRoutes[0].route_id;
+=======
+                //     $scope.stationList = [];
+                //    //
+                   
+                //     $scope.busRoutesToStation.forEach(function (item) {
+                //         // $scope.stations = item.stations;
+                //         $scope.stationList.push(item.stations);
+
+                //     })
+                //     console.log($scope.stationList);
+                    $scope.routeId = $scope.busRoutes[0].route_id;
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                 })
                 .error(function (data, success) {
                 })
@@ -261,7 +286,11 @@ angular.module('school_erp')
                         plain: true
                     });
                     $scope.editdata = [];
+<<<<<<< HEAD
                     //$scope.getBusRoute();
+=======
+                    $scope.getBusRoute();
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                     $scope.getBusRouteToStation($scope.routeId);
                 })
                 .error(function (data, success) {
@@ -319,6 +348,10 @@ angular.module('school_erp')
         $scope.getStation();
 
 
+<<<<<<< HEAD
         
+=======
+        $scope.getBusRouteToStation($scope.routeId);
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
     }])
 

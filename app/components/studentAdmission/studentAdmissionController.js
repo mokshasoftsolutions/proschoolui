@@ -262,7 +262,10 @@ angular.module('school_erp')
                         plain: true
                     });
                     $scope.data = [];
+<<<<<<< HEAD
                     $scope.selectedFile = null;
+=======
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
 
                 })
                 .error(function () {

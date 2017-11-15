@@ -234,6 +234,7 @@ angular.module('school_erp')
                     requireLogin: true
                 }
             })
+<<<<<<< HEAD
                .state('main.marks', { // login Page
                 url: "academics/marks",
                 templateUrl: "app/components/marks/marks.html",
@@ -242,6 +243,8 @@ angular.module('school_erp')
                     requireLogin: true
                 }
             })
+=======
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
             .state('main.examSchedules', { // login Page
                 url: "examination/examSchedules",
                 templateUrl: "app/components/examSchedules/examSchedules.html",

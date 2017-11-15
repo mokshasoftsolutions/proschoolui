@@ -7,7 +7,7 @@
 
     <form name="loginform" ng-submit="loginform.$valid && login(datab)" novalidate>
       <div class="form-group has-feedback" ng-class="{'has-error': loginform.$submitted  && loginform.username.$pristine}">
-        <input type="email" ng-model="datab.username" name="username" class="form-control" placeholder="Email" required/>
+        <input type="text" ng-model="datab.username" name="username" class="form-control" placeholder="Email" required/>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback" ng-class="{'has-error': loginform.$submitted  && loginform.passsword.$pristine}">

@@ -105,6 +105,7 @@
                       <input class="form-control" name="doj" type="text" ng-model="data.joined_on" ng-readonly="true" placeholder="Enter ..." required/>
                     </datepicker>
                   </div>
+<<<<<<< HEAD
                 </div>
               </div>
 
@@ -119,6 +120,15 @@
                       <option value="non-teaching">Non-Teaching</option>
                       <option value="administrative">Administrative</option>
                     </select>
+=======
+                    
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Employee Photo</label>
+                      <input type="file" name="file" class="form-control" ng-model="data.profile_image" ngf-select ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" onchange="angular.element(this).scope().loadImage(this.files)">
+                      <!-- <input type="file" ng-model="data.profile_image" name="first_doc" id="doc1"> -->
+                      </div>                    
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                   </div>
                 </div>
 

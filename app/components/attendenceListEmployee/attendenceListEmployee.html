@@ -69,6 +69,7 @@
 
                     </div>
 
+<<<<<<< HEAD
                     <div class="col-md-9">
                         <div class="backwhite">
                             <table table table export-table st-table="display_records" st-safe-src="attData" class="table rwd-table table-striped" class="table rwd-table table-striped"
@@ -95,6 +96,36 @@
                                         <td>
                                             {{attendance.first_name || 'empty' }} {{attendance.last_name || 'empty' }}
                                             <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
+=======
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="tab-content">
+                                <div class="table-responsive mailbox-messages">
+
+                                    <table export-table st-table="display_records" st-safe-src="attData"  class="table rwd-table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>EmployeeId</th>
+                                                <th>Name</th>
+                                                <th>EmployeeType</th>
+                                                <th>Gender</th>
+                                                <th>Attendance</th>
+                                                <!--<th class="pull-right">Action</th>-->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr st-select-row="row" st-select-mode="multiple" ng-repeat="attendance in display_records"  class="editable-row">
+                                                <td>
+                                                    {{$index+1}}
+                                                </td>
+                                                <td>{{attendance.employee_id || 'empty' }}
+                                                    <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                                                </td>
+                                                <td>
+                                                    {{attendance.first_name || 'empty' }} {{attendance.last_name || 'empty' }}
+                                                    <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                                                     {{busRoute.vehicle_code}}</span>-->
                                         </td>
                                         <td>{{attendance.employee_type || 'empty' }}</td>
@@ -116,6 +147,7 @@
                                                         <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
                                         <!--</div>
                                                 </td>-->
+<<<<<<< HEAD
                                     </tr>
                                 </tbody>
                                 <tfoot>
@@ -126,6 +158,21 @@
                                     </tr>
                                 </tfoot>
                             </table>
+=======
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                              <td colspan="5" class="text-center">
+                                                <div class="pull-right" st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
+                                              </td>
+                                            </tr>
+                                          </tfoot>
+                                    </table>
+
+                                </div>
+                            </div>
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                         </div>
                     </div>
                 </div>
@@ -181,10 +228,18 @@
                         </div>
 
                     </div>
+<<<<<<< HEAD
 
                     <div class="col-md-9">
                         <div class="backwhite">
                                           <table export-table class="table rwd-table table-striped">
+=======
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="tab-content">
+                                <div class="table-responsive mailbox-messages">
+                                    <table export-table st-table="display_records" st-safe-src="attDataMonth" class="table rwd-table table-striped">
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -197,7 +252,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="attendance in attDataMonth  | filter:data.route_title:true" class="editable-row">
+                                            <tr st-select-row="row" st-select-mode="multiple" ng-repeat="attendance in display_records"  class="editable-row">
                                                 <td>
                                                     {{$index+1}}
                                                 </td>
@@ -221,6 +276,13 @@
                                           
                                             </tr>
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                              <td colspan="5" class="text-center">
+                                                <div class="pull-right" st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
+                                              </td>
+                                            </tr>
+                                          </tfoot>
                                     </table>
 
                         </div>

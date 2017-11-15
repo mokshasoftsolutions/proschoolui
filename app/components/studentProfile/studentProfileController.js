@@ -55,7 +55,10 @@ angular.module('school_erp')
         $scope.getStudentById = function (student_id) {
             studentServices.getStudentById(student_id)
                 .success(function (data, status) {
+<<<<<<< HEAD
                     console.log(JSON.stringify(data));
+=======
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                     $scope.studentDetails = data.students;
                     $scope.student_id = $scope.studentDetails.student_id;
                     $scope.first_name = $scope.studentDetails.first_name;
@@ -68,9 +71,14 @@ angular.module('school_erp')
                     $scope.class_id = $scope.studentDetails.class_id;
                     $scope.section = $scope.studentDetails.section_id;
                     //$scope.studentPhoto=globalServices.globalValue.baseURL+$scope.studentDetails.studentImage[0].imagePath;
+<<<<<<< HEAD
                     $rootScope.studentPhoto=globalServices.globalValue.baseURL+'api/image/'+$scope.studentDetails.studentImage[0].filename;
                     //$scope.studentPhoto=globalServices.globalValue.baseURL+"uploads"+'/'+"Jellyfish.jpg";
                     console.log($rootScope.studentPhoto);
+=======
+                    $scope.studentPhoto=globalServices.globalValue.baseURL+"Jellyfish.jpg";
+                    console.log($scope.studentPhoto);
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                     // $scope.splited=$scope.studentPhoto.split('\\');
                     // $scope.splited =globalServices.globalValue.baseURL+$scope.splited[0]+'/'+$scope.splited[1];
                     //  console.log($scope.splited);
@@ -111,6 +119,35 @@ angular.module('school_erp')
             console.log($rootScope.student.student_id);
             $scope.getStudentById($rootScope.student.student_id);
             //console.log($rootScope.studentId);
+            // $scope.studentSelection = $rootScope.student._id;
+           
+
+        } else {
+            $scope.getStudentById($stateParams.student);
+            console.log($stateParams.student);
+            // $scope.getClassesInitalLoad();
+        }
+
+
+        // if ($rootScope.role == 'parent') {
+
+        //     $scope.secId = $rootScope.student.section;
+        //     $scope.getStudentValue($scope.secId);
+
+
+        // } else {
+        //     $scope.getClassesInitalLoad();
+        // }
+
+
+        // Role based Display
+        $scope.showRole = function (role) {
+            return globalServices.fetchRoleAuth(role);
+        }
+
+        if ($rootScope.role == 'parent') {
+            $scope.getStudentById($rootScope.studentId);
+            console.log($rootScope.studentId);
             // $scope.studentSelection = $rootScope.student._id;
            
 

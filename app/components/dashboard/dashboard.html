@@ -81,6 +81,7 @@
                   <div class="progress-bar progress-bar-danger" aria-valuenow="{{absentPercentage}}" aria-valuemin="0" aria-valuemax="100"
                     ng-style="{width:(absentPercentage)}">A:{{absent}}</div> &nbsp; Total :{{count}}
 
+<<<<<<< HEAD
                 </div>
               </td>
             </tr>
@@ -88,12 +89,88 @@
         </table>
       </div> -->
 
+=======
+<section class="content">
+  <!-- BAR CHART -->
+  <!--style="background-color:#35879f;"-->
+  <div class="box box-primary">
+    <div class="box-header with-border btn-primary">
+      <!--<i class="fa fa-inbox"></i>-->
+      <h3 class="box-title">Curriculum for the week</h3>
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
 
     </div>
+<<<<<<< HEAD
 
   </div>
 </div>
 
+=======
+    <div class="box-body chart-responsive" style="height:478px;background-color:#35879f;">
+      <!--<div class="chart" id="bar-chart" style="height: 400px;"></div>-->
+      <div class="box-body">
+        <!--<div class="box-header with-border">
+                    <h3 class="box-title">TimeTable List</h3>
+                    </div>-->
+
+        <div class="row">
+          <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
+            <div class="form-group">
+              <label>Select Class</label>
+              <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId" ng-options="classData.class_id as classData.name for classData in classDatanew ">
+                     <option selected="selected">--Select--</option>
+                          <!--<option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
+                      </select>
+            </div>
+          </div>
+
+          <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
+            <div class="form-group">
+              <label>Select Section</label>
+              <select class="form-control select2" ng-change="getTimeTable(secId)" style="width: 100%;" ng-model="secId" ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
+                        <!--<option selected="selected">--Select--</option>
+                       <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
+                        
+                      </select>
+            </div>
+          </div>
+
+          <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
+            <div class="form-group">
+              <button type="submit" ng-click="getTimeTable(secId)" class="btn btn-primary pull-right" style="margin-top: 8%;margin-right: 64%;">Select</button>
+              <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>-->
+            </div>
+          </div>
+        </div>
+        <table export-table class="table">
+          <thead>
+            <tr>
+              <th>Time </th>
+
+              <th class="text text-center">
+                Monday
+              </th>
+              <th class="text text-center">
+                Tuesday
+              </th>
+              <th class="text text-center">
+                Wednesday
+              </th>
+              <th class="text text-center">
+                Thursday
+              </th>
+              <th class="text text-center">
+                Friday
+              </th>
+              <th class="text text-center">
+                Saturday
+              </th>
+              <th class="text text-center">
+                Sunday
+              </th>
+            </tr>
+          </thead>
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
 
 
 
@@ -976,7 +1053,7 @@
             <div class="tab-content">
               <div class="tab-pane no-padding active" id="tab_1">
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
                     <div class="form-group">
                       <label>Select Class</label>
                       <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId" ng-options="classData.class_id as classData.name for classData in classDatanew ">
@@ -985,7 +1062,7 @@
                     </div>
                   </div>
 
-                  <div class="col-md-4">
+                  <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
                     <div class="form-group">
                       <label>Select Section</label>
                       <select class="form-control select2" style="width: 100%;" ng-model="secId" ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
@@ -994,7 +1071,7 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
                     <button style="margin-top:24px;" type="submit" ng-click="getAttendenceByDay(select_date,classId,secId)" class="btn btn-primary pull-right">Select</button>
 
                   </div>
@@ -1012,7 +1089,11 @@
                         <tr>
                           <th>#</th>
                           <th>Name</th>
+<<<<<<< HEAD
 
+=======
+                          <!--<th>Admission No</th>-->
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                           <th>Roll No</th>
                           <th>Class</th>
                           <th>Gender</th>
@@ -1026,6 +1107,7 @@
                             {{$index+1}}
                           </td>
                           <td>{{attendance.first_name || 'empty' }} {{attendance.last_name || 'empty' }}
+<<<<<<< HEAD
 
                           </td>
 
@@ -1034,13 +1116,34 @@
                           </td>
                           <td>{{attendance.roll_no || 'empty' }}
 
+=======
+                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          </td>
+                          <!--<td>
+                                                    {{attendance.admission_no || 'empty' }}
+                                                    
+                                                </td>-->
+                          <td>{{attendance.roll_no || 'empty' }}
+                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                           </td>
                           <td>{{attendance.class_name || 'empty' }} ({{attendance.section_name || 'empty' }})</td>
                           <td>{{attendance.gender || 'empty' }}</td>
                           <td>{{attendance.status || 'empty' }}
 
                           </td>
+                          <!--<td class="pull-right">
+                                                    <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == busRoute">
+                                                        <button type="submit" ng-click="EditBusRoute($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
+                                                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
+                                                    </form>
 
+                                                    <div class="buttons" ng-show="!rowform.$visible">
+                                                        <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
+                                                        <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBusRoute($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                        <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
+                          <!--</div>
+                                                </td>-->
                         </tr>
                       </tbody>
                     </table>
@@ -1051,8 +1154,9 @@
 
               </div>
               <div class="tab-pane no-padding" id="tab_2">
+              
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
                     <div class="form-group">
                       <label>Select Class</label>
                       <select class="form-control select2" name="classId" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId"
@@ -1062,7 +1166,7 @@
                     </div>
                   </div>
 
-                  <div class="col-md-4">
+                  <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
                     <div class="form-group">
                       <label>Select Section</label>
                       <select class="form-control select2" name="sectionId" data-ng-change="getStudentValue(secId)" style="width: 100%;" ng-model="secId"
@@ -1072,7 +1176,7 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
                     <button style="margin-top:24px;" type="submit" ng-click="getAttendenceByDay(select_date,classId,secId)" class="btn btn-primary pull-right">Select</button>
 
                   </div>
@@ -1133,6 +1237,7 @@
           <div class="chart chart-responsive" style="height: 400px;">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
+<<<<<<< HEAD
                 <li class="active">
                   <a data-target="#bus_1" data-toggle="tab" aria-expanded="true">
                     <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>Bus List</a>
@@ -1141,14 +1246,40 @@
                   <a data-target="#bus_2" data-toggle="tab" aria-expanded="false">
                     <i class="fa fa-calendar-check-o" aria-hidden="true"></i>GeoLocation</a>
                 </li>
+=======
+                <li class="active"><a data-target="#bus_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>GeoLocation</a></li>
+                <li class="" ng-show="showRole(['admin','teacher'])"><a data-target="#bus_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Bus List</a></li>
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
               </ul>
             </div>
 
 
             <div class="tab-content">
+
               <div class="tab-pane no-padding active" id="bus_1">
+<<<<<<< HEAD
                 <div class="box-body border-radius-none">
                   <div class="table-responsive mailbox-messages" style="overflow-y: scroll;height:375px;">
+=======
+
+
+                <div class="box box-solid ">
+                  <!--<div class="box-header">
+                    <i class="fa fa-th  pull-left"></i>
+                    <h3 class="box-title">
+                      Geolocation
+                    </h3>
+                  </div>-->
+                  <div class="box-body border-radius-none">
+                    <div id="map" style="height:342px;"></div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane no-padding " id="bus_2">
+                <div class="box-body border-radius-none">
+                  <div class="table-responsive mailbox-messages" style="overflow-y: scroll;height:352px;">
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                     <table class="table table-bordered table-hover table-condensed">
                       <thead>
                         <tr>
@@ -1161,6 +1292,7 @@
                       <tbody>
                         <tr ng-repeat="vehicle in vehicles" class="editable-row">
                           <td> {{$index+1}}</td>
+<<<<<<< HEAD
                           <td>
                             <span editable-text="vehicle.vehicle_name" e-name="editdata.vehicle_name" onaftersave="EditVehicle($index)" e-form="rowform"
                               e-required>{{vehicle.vehicle_name || 'empty' }}</span>
@@ -1169,6 +1301,12 @@
                             <span editable-text="vehicle.vehicle_code" e-name="editdata.vehicle_code" onaftersave="EditVehicle($index)" e-form="rowform"
                               e-required>{{vehicle.vehicle_code || 'empty' }}</span>
                           </td>
+=======
+                          <td><span editable-text="vehicle.vehicle_name" e-name="editdata.vehicle_name" onaftersave="EditVehicle($index)"
+                              e-form="rowform" e-required>{{vehicle.vehicle_name || 'empty' }}</span></td>
+                          <td><span editable-text="vehicle.vehicle_code" e-name="editdata.vehicle_code" onaftersave="EditVehicle($index)"
+                              e-form="rowform" e-required>{{vehicle.vehicle_code || 'empty' }}</span></td>
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
 
                         </tr>
                       </tbody>
@@ -1177,8 +1315,10 @@
                   </div>
                 </div>
 
+                <!--<div ng-include="'app/components/addBusRoute/addBusRoute.html'"></div>-->
 
 
+<<<<<<< HEAD
 
 
 
@@ -1193,7 +1333,12 @@
 
                   </div>
                 </div>
+=======
+
+
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
               </div>
+              
             </div>
           </div>
         </div>
@@ -1202,6 +1347,7 @@
 
 
 
+<<<<<<< HEAD
 
       <div class="box box-primary">
 
@@ -1289,13 +1435,121 @@
 
 
                         </ul>
+=======
+      <div class="box box-primary" ng-show="showRole(['admin','teacher'])">
+          
+                  <div class="box-header with-border btn-primary">
+                    <h3 class="box-title">Messages&TaskManager</h3>
+          
+                    <div class="box-tools pull-right">
+                      <button type="button" class="btn btn-info btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                          </button>
+                      <button type="button" class="btn btn-danger btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                  </div>
+          
+          
+                  <div class="box-body chart-responsive">
+                    <div class="chart chart-responsive" style="height: 400px;">
+                      <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                          <li class="active"><a data-target="#messages" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>Messages</a></li>
+                          <li class=""><a data-target="#taskManager" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Task Manager</a></li>
+                        </ul>
+                      </div>
+          
+                      <!--<div class="box-body">-->
+                      <div class="tab-content">
+                        <div class="tab-pane no-padding active" id="messages">
+          
+                          <form action="#" method="post" style="margin-top:50px;">
+                            <div class="form-group">
+                              <input type="email" class="form-control" name="emailto" placeholder="Message to:">
+                            </div>
+                            <div class="form-group">
+                              <input type="text" class="form-control" name="subject" placeholder="Subject">
+                            </div>
+                            <div>
+                              <textarea class="textarea" placeholder="Message" style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                            </div>
+          
+          
+                            <div class="box-footer clearfix">
+                              <button type="button" class="pull-right btn btn-default" id="sendEmail">Send
+                          <i class="fa fa-arrow-circle-right"></i></button>
+                            </div>
+                          </form>
+          
+          
+                        </div>
+                        <div class="tab-pane no-padding" id="taskManager">
+          
+          
+                          <div class="tab-content">
+                            <div class="table-responsive mailbox-messages" style="overflow-y: scroll;height:375px;">
+          
+                              <table class="table rwd-table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Task</th>
+                                    <th>Priority</th>
+                                    <th>Subject</th>
+                                    <th>Due</th>
+                                    <th>Assigned</th>
+                                    <!--<th class="pull-right">Action</th>-->
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr ng-repeat="attendance in attDataEmp" class="editable-row">
+                                    <td>
+                                      {{$index+1}}
+                                    </td>
+                                    <td>{{attendance.employee_id || 'empty' }}
+                                      <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                                    </td>
+                                    <td>
+                                      {{attendance.first_name || 'empty' }} {{attendance.last_name || 'empty' }}
+                                      <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
+                                                              {{busRoute.vehicle_code}}</span>-->
+                                    </td>
+                                    <td>{{attendance.employee_type || 'empty' }}</td>
+                                    <td>{{attendance.gender || 'empty' }}
+                                      <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                                    </td>
+                                    <td>{{attendance.status || 'empty' }}
+                                      <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                                    </td>
+                                    <!--<td class="pull-right">
+                                                              <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == busRoute">
+                                                                  <button type="submit" ng-click="EditBusRoute($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
+                                                                  <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
+                                                              </form>
+          
+                                                              <div class="buttons" ng-show="!rowform.$visible">
+                                                                  <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
+                                                                  <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBusRoute($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                                  <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
+                                    <!--</div>
+                                                          </td>-->
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <!--</div>-->
+                              <!--</div>-->
+                            </div>
+                          </div>
+                        </div>
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                       </div>
 
                     </div>
 
                   </div>
+                  <!-- /.box-body -->
                 </div>
 
+<<<<<<< HEAD
 
               </div>
             </div>
@@ -1305,6 +1559,9 @@
       </div>
 
 
+=======
+      
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
 
 
 
@@ -1315,7 +1572,7 @@
 
 
 
-      <div class="box box-primary">
+      <div class="box box-primary" ng-show="showRole(['admin','teacher'])">
 
         <div class="box-header with-border btn-primary">
           <h3 class="box-title">Employee Attendance</h3>
@@ -1349,6 +1606,7 @@
 
             <div class="tab-content">
               <div class="tab-pane no-padding active" id="list_1">
+<<<<<<< HEAD
 
                 <div class="tab-content">
                   <div class="table-responsive mailbox-messages" style="overflow-y: scroll;height:375px;">
@@ -1470,21 +1728,41 @@
                       <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId">
                         <option selected="selected">--Select--</option>
                         <option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>
+=======
+                <!--<div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Employee Type</label>
+                      <select ng-model="search.job_category" class="form-control select2" style="width: 100%;">
+                        <option value="" selected="selected">--All--</option>
+                        <option value="teaching">Teaching</option>
+                        <option value="non-teaching">Non-Teaching</option>
+                        <option value="administrative">Administrative</option>
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                       </select>
                     </div>
                   </div>
 
                   <div class="col-md-4">
                     <div class="form-group">
+<<<<<<< HEAD
                       <label>Select Section</label>
                       <select ng-change="getExamPapers(examScheduleId,secId);" class="form-control select2" style="width: 100%;" ng-model="secId">
                         <option selected="selected">--Select--</option>
                         <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>
 
+=======
+                      <label>Gender</label>
+                      <select ng-model="search.gender" class="form-control select2" style="width: 100%;">
+                        <option value="" selected="selected">--All--</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                       </select>
                     </div>
                   </div>
                   <div class="col-md-4">
+<<<<<<< HEAD
                     <div class="form-group">
                       <label>Select Exam Schedule</label>
                       <select ng-change="getExamPapers(examScheduleId,secId);" class="form-control select2" style="width: 100%;" ng-model="examScheduleId">
@@ -1503,6 +1781,10 @@
 
                       </select>
                     </div>
+=======
+                    <button style="margin-top:24px;" type="submit" ng-click="getEmpAttendenceByDay(select_date)" class="btn btn-primary pull-right">Select</button>
+                  
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                   </div>
                   <div class="col-md-4">
                     <button style="margin-top:24px;margin-left:30px;" type="submit" ng-click="getExamMarks(paperId);" class="btn btn-primary pull-right">Select</button>
@@ -1510,15 +1792,16 @@
                   </div>
 
 
-                </div>
+                </div>-->
 
                 <div class="tab-content">
-                  <div class="table-responsive mailbox-messages">
+                  <div class="table-responsive mailbox-messages" style="overflow-y: scroll;height:375px;">
 
                     <table class="table rwd-table table-striped">
                       <thead>
                         <tr>
                           <th>#</th>
+<<<<<<< HEAD
                           <th>Name</th>
                           <th>Roll No</th>
                           <th>Class</th>
@@ -1541,35 +1824,100 @@
                     </table>
 
 
+=======
+                          <th>EmployeeId</th>
+                          <th>Name</th>
+                          <th>EmployeeType</th>
+                          <th>Gender</th>
+                          <th>Attendance</th>
+                          <!--<th class="pull-right">Action</th>-->
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="attendance in attDataEmp" class="editable-row">
+                          <td>
+                            {{$index+1}}
+                          </td>
+                          <td>{{attendance.employee_id || 'empty' }}
+                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          </td>
+                          <td>
+                            {{attendance.first_name || 'empty' }} {{attendance.last_name || 'empty' }}
+                            <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
+                                                    {{busRoute.vehicle_code}}</span>-->
+                          </td>
+                          <td>{{attendance.employee_type || 'empty' }}</td>
+                          <td>{{attendance.gender || 'empty' }}
+                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          </td>
+                          <td>{{attendance.status || 'empty' }}
+                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          </td>
+                          <!--<td class="pull-right">
+                                                    <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == busRoute">
+                                                        <button type="submit" ng-click="EditBusRoute($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
+                                                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
+                                                    </form>
+
+                                                    <div class="buttons" ng-show="!rowform.$visible">
+                                                        <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
+                                                        <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBusRoute($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                        <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
+                          <!--</div>
+                                                </td>-->
+                        </tr>
+                      </tbody>
+                    </table>
+                    <!--</div>-->
+                    <!--</div>-->
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                   </div>
                 </div>
 
 
 
               </div>
-              <div class="tab-pane no-padding" id="exam_2">
-                <div class="row">
+              <div class="tab-pane no-padding" id="report_2">
+                <!--<div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
+<<<<<<< HEAD
                       <label>Select Class</label>
                       <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId">
                         <option selected="selected">--Select--</option>
                         <option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>
+=======
+                      <label>Employee Type</label>
+                      <select ng-model="search.job_category" class="form-control select2" style="width: 100%;">
+                        <option value="" selected="selected">--All--</option>
+                        <option value="teaching">Teaching</option>
+                        <option value="non-teaching">Non-Teaching</option>
+                        <option value="administrative">Administrative</option>
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                       </select>
                     </div>
                   </div>
 
                   <div class="col-md-4">
                     <div class="form-group">
+<<<<<<< HEAD
                       <label>Select Section</label>
                       <select ng-change="getExamPapers(examScheduleId,secId);" class="form-control select2" style="width: 100%;" ng-model="secId">
                         <option selected="selected">--Select--</option>
                         <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>
 
+=======
+                      <label>Gender</label>
+                      <select ng-model="search.gender" class="form-control select2" style="width: 100%;">
+                        <option value="" selected="selected">--All--</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                       </select>
                     </div>
                   </div>
                   <div class="col-md-4">
+<<<<<<< HEAD
                     <div class="form-group">
                       <label>Select Exam Schedule</label>
                       <select ng-change="getExamPapers(examScheduleId,secId);" class="form-control select2" style="width: 100%;" ng-model="examScheduleId">
@@ -1595,8 +1943,15 @@
                   </div>
 
 
+=======
+                    <button style="margin-top:24px;" type="submit" ng-click="getAttendenceByDay(select_date)" class="btn btn-primary pull-right">Select</button>
+                    
+                  </div>
 
-                </div>
+                 
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
+
+                </div>-->
 
                 <div class="box-body">
                   <div class="row">
@@ -1604,17 +1959,34 @@
                       <div class="table-responsive mailbox-messages">
 
 
+<<<<<<< HEAD
                         <div class="box" style="margin-top:-60px">
 
                           <div class="box-body" pdf-save-content="idOneGraph">
                             <div class="chart">
 
                               <zingchart id="myExamChart" zc-values="chartdataExam" zc-json="myJsonExam" zc-height=250 zc-width=450></zingchart>
+=======
+                        <div class="box " style="margin-top:10px">
+
+                          <!--<div class="box-header with-border">
+                            <h3 class="box-title">Donut Chart</h3>
+
+                            <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                              </button>
+                              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                             </div>
+                          </div>-->
+                          <div class="box-body" pdf-save-content="idOneGraph">
+                            <div class="chart" style="margin-left:-60px">
+                              <zingchart id="myChartEmp" zc-values="chartdataEmp" zc-json="myJsonEmp" zc-height=310 zc-width=600></zingchart>
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
+                            </div>
+
                           </div>
 
                         </div>
-
                       </div>
                     </div>
                   </div>
@@ -1626,14 +1998,17 @@
         </div>
 
       </div>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
 
 
       <div class="box box-primary">
 
         <div class="box-header with-border btn-primary">
-          <h3 class="box-title">Messages&TaskManager</h3>
+          <h3 class="box-title">Exam Reports</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-info btn-box-tool" data-widget="collapse">
@@ -1650,6 +2025,7 @@
           <div class="chart chart-responsive" style="height: 400px;">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
+<<<<<<< HEAD
                 <li class="active">
                   <a data-target="#messages" data-toggle="tab" aria-expanded="true">
                     <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>Messages</a>
@@ -1658,12 +2034,63 @@
                   <a data-target="#taskManager" data-toggle="tab" aria-expanded="false">
                     <i class="fa fa-calendar-check-o" aria-hidden="true"></i>Task Manager</a>
                 </li>
+=======
+                <li class="active"><a data-target="#exam_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>List</a></li>
+                <li class=""><a data-target="#exam_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Report</a></li>
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
               </ul>
             </div>
 
             <div class="tab-content">
-              <div class="tab-pane no-padding active" id="messages">
+              <div class="tab-pane no-padding active" id="exam_1">
+                <div class="row">
+                  <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
+                    <div class="form-group">
+                      <label>Select Class</label>
+                      <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId">
+                        <option selected="selected">--Select--</option>
+                       <option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>
+                      </select>
+                    </div>
+                  </div>
 
+                  <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
+                    <div class="form-group">
+                      <label>Select Section</label>
+                      <select ng-change="getExamPapers(examScheduleId,secId);" class="form-control select2" style="width: 100%;" ng-model="secId">
+                        <option selected="selected">--Select--</option>
+                       <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>
+                        
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Select Exam Schedule</label>
+                      <select ng-change="getExamPapers(examScheduleId,secId);" class="form-control select2" style="width: 100%;" ng-model="examScheduleId">
+                        <option selected="selected">--Select--</option>
+                        <option ng-repeat="exam in examSchedule " value="{{exam.exam_sch_id}}">{{exam.exam_title}}</option>
+                        
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Paper Title</label>
+                      <select class="form-control select2" style="width: 100%;" ng-model="paperId">
+                            <option selected="selected">--Select--</option>
+                            <option ng-repeat="paper in papers " value="{{paper.exam_paper_id}}">{{paper.exam_paper_title}}</option>
+                            
+                        </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
+                    <button style="margin-top:24px;margin-left:30px;" type="submit" ng-click="getExamMarks(paperId);" class="btn btn-primary pull-right">Select</button>
+                    <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>-->
+                  </div>
+
+
+<<<<<<< HEAD
                 <form action="#" method="post" style="margin-top:50px;">
                   <div class="form-group">
                     <input type="email" class="form-control" name="emailto" placeholder="Message to:">
@@ -1687,20 +2114,36 @@
               </div>
               <div class="tab-pane no-padding" id="taskManager">
 
+=======
+                </div>
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
 
                 <div class="tab-content">
+<<<<<<< HEAD
                   <div class="table-responsive mailbox-messages" style="overflow-y: scroll;height:375px;">
+=======
+                  <div class="table-responsive mailbox-messages" style="overflow-y: scroll;height:217px;">
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
 
                     <table class="table rwd-table table-striped">
                       <thead>
                         <tr>
                           <th>#</th>
+<<<<<<< HEAD
                           <th>Task</th>
                           <th>Priority</th>
                           <th>Subject</th>
                           <th>Due</th>
                           <th>Assigned</th>
 
+=======
+                          <th>Name</th>
+                          <th>Roll No</th>
+                          <th>Class</th>
+                          <th>Max Marks</th>
+                          <th>Marks</th>
+                          <!--<th class="pull-right">Action</th>-->
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                         </tr>
                       </thead>
                       <tbody>
@@ -1710,6 +2153,7 @@
                           </td>
                           <td>{{attendance.employee_id || 'empty' }}
 
+<<<<<<< HEAD
                           </td>
                           <td>
                             {{attendance.first_name || 'empty' }} {{attendance.last_name || 'empty' }}
@@ -1723,19 +2167,228 @@
 
                           </td>
 
+=======
+                        <tr ng-repeat="exam in examData" class="editable-row">
+                          <th>{{$index+1}}
+                          <td>{{exam.student_name}}</td>
+                          <td>{{exam.roll_no}}</td>
+                            <td>{{exam.class_name || 'empty'}}</td>
+                            <td>{{exam.max_marks}}</td>
+                            <td>{{exam.marks}}</td>
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                         </tr>
                       </tbody>
                     </table>
 
+<<<<<<< HEAD
                   </div>
                 </div>
+=======
+
+                  </div>
+                </div>
+
+
+
+              </div>
+              <div class="tab-pane no-padding" id="exam_2">
+                <div class="row">
+                  <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
+                    <div class="form-group">
+                      <label>Select Class</label>
+                      <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId">
+                        <option selected="selected">--Select--</option>
+                       <option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
+                    <div class="form-group">
+                      <label>Select Section</label>
+                      <select ng-change="getExamPapers(examScheduleId,secId);" class="form-control select2" style="width: 100%;" ng-model="secId">
+                        <option selected="selected">--Select--</option>
+                       <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>
+                        
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Select Exam Schedule</label>
+                      <select ng-change="getExamPapers(examScheduleId,secId);" class="form-control select2" style="width: 100%;" ng-model="examScheduleId">
+                        <option selected="selected">--Select--</option>
+                        <option ng-repeat="exam in examSchedule " value="{{exam.exam_sch_id}}">{{exam.exam_title}}</option>
+                        
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Paper Title</label>
+                      <select class="form-control select2" style="width: 100%;" ng-model="paperId">
+                            <option selected="selected">--Select--</option>
+                            <option ng-repeat="paper in papers " value="{{paper.exam_paper_id}}">{{paper.exam_paper_title}}</option>
+                            
+                        </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
+                    <button style="margin-top:24px;margin-left:30px;" type="submit" ng-click="getExamMarks(paperId);" class="btn btn-primary pull-right">Select</button>
+                    <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>-->
+                  </div>
+
+                  <!--<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels"> chart-series="series"
+                </canvas>-->
+
+                </div>
+
+                <div class="box-body">
+                  <div class="row">
+                    <div class="tab-content">
+                      <div class="table-responsive mailbox-messages">
+
+
+                        <div class="box" style="margin-top:-60px">
+
+                          <div class="box-body" pdf-save-content="idOneGraph">
+                            <div class="chart">
+                              <!--<div id='myChart'></div>-->
+                              <zingchart id="myExamChart" zc-values="chartdataExam" zc-json="myJsonExam" zc-height=250 zc-width=450></zingchart>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!--</div>-->
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
               </div>
             </div>
           </div>
         </div>
 
       </div>
+<<<<<<< HEAD
 
+=======
+      <!-- /.box -->
+
+      <div class="box box-primary">
+          
+                  <div class="box-header with-border btn-primary">
+                    <h3 class="box-title">Events&NoticeBoard</h3>
+          
+                    <div class="box-tools pull-right">
+                      <button type="button" class="btn btn-info btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                          </button>
+                      <button type="button" class="btn btn-danger btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                  </div>
+          
+          
+                  <div class="box-body chart-responsive">
+                    <div class="chart chart-responsive" style="height: 400px;">
+                      <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                          <li class="active"><a data-target="#events_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>Events</a></li>
+                          <li class=""><a data-target="#noticeBoard_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>NoticeBoard</a></li>
+                        </ul>
+                      </div>
+          
+                      <!--<div class="box-body">-->
+                      <div class="tab-content">
+                        <div class="tab-pane no-padding active" id="events_1">
+          
+                          <!--<div class="btn-toolbar">
+          
+                            <div class="btn-group" style="margin-top: 1%;">
+                              <button class="btn btn-success" ng-click="changeView('agendaDay', 'myCalendar3')">AgendaDay</button>
+                              <button class="btn btn-success" ng-click="changeView('agendaWeek', 'myCalendar3')">AgendaWeek</button>
+                              <button class="btn btn-success" ng-click="changeView('month', 'myCalendar3')">Month</button>
+                            </div>
+                          </div>-->
+                          <!--Events-->
+                          <div class="box box-solid ">
+                            <!--<div class="box-header">
+                              <i class="fa fa-th  pull-left"></i>
+                              <h3 class="box-title">
+                                Events
+                              </h3>
+                            </div>-->
+                            <div class="box-body border-radius-none">
+                              <div  class="calendar" ng-model="eventSources2" calendar="myCalendar3" ui-calendar="uiConfig.calendar"></div>
+                            </div>
+                          </div>
+          
+          
+                        </div>
+                        <div class="tab-pane no-padding" id="noticeBoard_2">
+          
+          
+                          <!--  Notices-->
+                          <div class="box box-solid ">
+                            <div class="box-header">
+                              <i class="fa fa-inbox pull-left"></i>
+          
+                              <h3 class="box-title">
+                                Notices
+                              </h3>
+                            </div>
+                            <div class="box-body border-radius-none" style="overflow-y: scroll;height:337px;">
+          
+                              <!-- row -->
+                              <div class="row">
+                                <div class="col-md-12" ng-repeat="board in NoticeBoardData">
+                                  <!-- The time line -->
+                                  <ul class="timeline">
+                                    <!-- timeline time label -->
+                                    <li class="time-label">
+                                      <span class="bg-red">
+                           {{board.date}}
+                          </span>
+                                    </li>
+          
+                                    <li>
+                                      <i class="fa fa-envelope bg-blue"></i>
+          
+                                      <div class="timeline-item">
+                                        <!--<span class="time"><i class="fa fa-clock-o"></i> </span>-->
+                                        <span class="time">{{board.time}}</span>
+                                        <h3 class="timeline-header">{{board.subject}}</h3>
+          
+                                        <div class="timeline-body">
+                                          {{board.messages}}
+                                        </div>
+          
+                                      </div>
+                                    </li>
+          
+          
+                                  </ul>
+                                </div>
+                                <!-- /.col -->
+                              </div>
+                              <!-- /.row -->
+                            </div>
+                          </div>
+          
+                          <!--</div>-->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.box-body -->
+                </div>
+          
+          
+
+      <!-- /.box -->
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
     </div>
   </div>
 </section>
@@ -1746,6 +2399,10 @@
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
 <!--
 <section class="content">
 

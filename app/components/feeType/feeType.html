@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="row background">
   <div class="container">
     <h1>Fee Management</h1>
@@ -26,6 +27,46 @@
             <select class="form-control select2" style="width: 100%;" name="FeeCatogery" ng-model="data.fee_catogery" ng-options="fee.name as fee.name for fee in fee_catogery">
                          <option value="" selected="selected">--Select--</option>
                       </select>
+=======
+<section class="content-header">
+  <h1>
+    <i class="fa fa-money"></i> Fee Collection
+    <small>Fee Type</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+      <a href="#">
+        <i class="fa fa-dashboard"></i> Home</a>
+    </li>
+    <li>Fee Collection</li>
+    <li class="active">Fee Type</li>
+  </ol>
+</section>
+<!-- /.Content Header -->
+
+<!-- Main content -->
+<section class="content">
+  <!-- Select Criteria -->
+
+  <div class="box box-default">
+    <div class="box-header with-border">
+      <!--<i class="fa fa-search" aria-hidden="true"></i>
+      <h3 class="box-title">Select Criteria</h3>-->
+    </div>
+    <!-- /.box-header -->
+    <form name="feeType">
+      <div class="box-body">
+
+        <div class="row">
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Fee Category</label>
+              <select class="form-control select2" style="width: 100%;" name="FeeCatogery" ng-model="data.fee_catogery" ng-options="fee.name as fee.name for fee in fee_catogery">
+                <option value="" selected="selected">--Select--</option>
+              </select>
+            </div>
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
           </div>
           <div class="form-group">
             <label>Fee Type</label>
@@ -51,6 +92,7 @@
                   <button><img src="../../../dist/img/images/xlsx6.png" data-ng-click="exportAction('pdf')" class="img-responsive" width="30" height="30" alt="Responsive image"></button>
                   <span class="tooltiptext">Download file</span>
 
+<<<<<<< HEAD
                 </div>
                 <p>Fee Type List</p>
               </div>
@@ -59,6 +101,23 @@
           </div>
 
           <table class="table table-striped">
+=======
+  <!-- Content List -->
+  <div class="box box-default">
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a data-toggle="tab" aria-expanded="true">
+            <i class="fa fa-list"></i> Fee Type List</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="box-body">
+      <div class="tab-content">
+        <div class="tab-pane table-responsive no-padding active" id="tab_1">
+          <table export-table st-table="display_records" st-safe-src="feeTypeData" class="table rwd-table table-striped">
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
             <thead>
               <tr>
                 <th>Sl. No</th>
@@ -69,14 +128,18 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="feeType in feeTypeData" class="editable-row">
+              <tr st-select-row="row" st-select-mode="multiple" ng-repeat="feeType in display_records" class="editable-row">
                 <td>
                   {{$index+1}}
                 </td>
                 <td class="select-td">
                   <span editable-select="feeType.fee_category" e-name="fee_category" e-form="rowform" onaftersave="EditFeeType($index)" e-selectpicker
                     e-ng-options="fee.name as fee.name for fee in fee_catogery">
+<<<<<<< HEAD
                                                     {{feeType.fee_category}}</span>
+=======
+                    {{feeType.fee_category}}</span>
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                 </td>
                 <td>
                   <span editable-text="feeType.fee_type" e-name="fee_type" onaftersave="EditFeeType($index)" e-form="rowform" e-required>{{feeType.fee_type || 'empty' }}</span>
@@ -84,19 +147,34 @@
 
                 <td class="pull-right">
                   <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == feeType">
-                    <button type="submit" ng-click="EditFeeType($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
-                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
+                    <button type="submit" ng-click="EditFeeType($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                      <i class="fa fa-check"></i>
+                    </button>
+                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                      <i class="fa fa-remove"></i>
+                    </button>
                   </form>
 
                   <div class="buttons" ng-show="!rowform.$visible">
-                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
-                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteFeeType($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteFeeType($index)" ng-confirm-click="Are you sure you want to delete this item?">
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
                     <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
                   </div>
                 </td>
               </tr>
 
             </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="5" class="text-center">
+                  <div class="pull-right" st-pagination="" st-items-by-page="8" st-displayed-pages="5"></div>
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>

@@ -6,7 +6,11 @@ angular.module('school_erp')
             console.log(dataValue);
             return $http({
                 method: 'POST',
+<<<<<<< HEAD
                  url: globalServices.globalValue.baseURL + 'api/addorupdatesubjectstoteacher/'+globalServices.globalValue.school_id+'/'+secId,
+=======
+                 url: globalServices.globalValue.baseURL + 'api/addorupdatesubjectstoteacher/'+globalServices.globalValue.school_id,
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                 //  url:globalServices.globalValue.baseURL +'api/add_subjects_to_teacher/'+teacher_id,
              
                 data: $.param(dataValue),

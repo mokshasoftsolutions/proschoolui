@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="row background">
   <div class="container">
     <h1>Assignment Management</h1>
@@ -20,6 +21,39 @@
           <h1>Assignments</h1>
 
 
+=======
+<section class="content-header">
+  <h1>
+    <i class="fa fa-book"></i> Assignments
+    <small></small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Assignments</li>
+  </ol>
+</section>
+<!-- /.Content Header -->
+
+<!-- Main content -->
+<section class="content">
+  <!-- Select Criteria -->
+
+  <div class="box box-default">
+    <div class="box-header with-border" ng-show="showRole(['admin','teacher'])">
+      <!--<i class="fa fa-search" aria-hidden="true"></i>
+      <h3 class="box-title">Select Criteria</h3>-->
+      <!-- <ul class="panel-controls">
+        <li> <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)"
+          /></li>
+        <li> <input type="button" value="Import" class="btn btn-primary" ng-click="handleFile()" /></li>
+
+      </ul> -->
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+      <div class="row">
+        <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
           <div class="form-group">
             <label>Class</label>
             <select class="form-control select2" ng-options="class.class_id as class.name for class in classData" data-ng-change="populateSections(classId)"
@@ -211,6 +245,7 @@
                   <button><img src="../../../dist/img/images/xlsx6.png" data-ng-click="exportAction('excel')" class="img-responsive" width="30" height="30" alt="Responsive image"></button>
                   <span class="tooltiptext">Download file</span>
 
+<<<<<<< HEAD
                 </div>
                 <p>Assignment List</p>
               </div>
@@ -229,6 +264,43 @@
             </tr>
             <tbody>
               <tr st-select-row="row" st-select-mode="multiple" ng-repeat="assignment in display_records" class="editable-row">
+=======
+  <!-- /.content -->
+
+  <!-- Content List -->
+  <div class="box box-default">
+    <div class="box-header with-border">
+
+      <i class="fa fa-th-list" aria-hidden="true"></i>
+      <h3 class="box-title">Assignments</h3>
+      <li style="float:right;list-style-type:none;"><button type="button" data-ng-click="exportAction('excel')" class="btn btn-primary pull-right">Save as Excel</button></li>
+      <li style="float:right;list-style-type:none;"><button type="button" data-ng-click="exportAction('pdf')" class="btn btn-primary pull-right">Save as PDF</button></li>
+      <!--<ul class="panel-controls">
+        <div id="exportthis"></div>
+        <canvas></canvas>
+        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+        <li><button type="button" ng-click="export()" class="btn btn-primary pull-right" >Save as PDF</button></li>
+
+       
+      </ul>-->
+    </div>
+    <div class="box-body">
+      <div class="tab-content">
+        <div class="tab-pane table-responsive no-padding active" id="tab_1">
+          <table export-table st-table="display_records" st-safe-src="assignmentsData" class="table rwd-table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Assignment Title</th>
+                <th>Chapter Name</th>
+                <th>Due Date</th>
+                <th>Description</th>
+                <th class="pull-right" >Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr st-select-row="row" st-select-mode="multiple" ng-repeat="assignment in display_records">
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                 <td>{{$index+1}}</td>
                 <td><span editable-text="assignment.assignment_title" e-name="assignment.assignment_title" onaftersave="EditAssignments($index)"
                     e-form="rowform" e-required>{{assignment.assignment_title || 'empty' }}</span></td>
@@ -260,7 +332,11 @@
             <tfoot>
               <tr>
                 <td colspan="5" class="text-center">
+<<<<<<< HEAD
                   <div class="pull-right" st-pagination="" st-items-by-page="5" st-displayed-pages="2"></div>
+=======
+                  <div class="pull-right" st-pagination="" st-items-by-page="6" st-displayed-pages="5"></div>
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                 </td>
               </tr>
             </tfoot>

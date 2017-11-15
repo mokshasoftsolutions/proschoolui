@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="row background">
   <div class="container">
     <h1>Academics Management</h1>
@@ -27,6 +28,44 @@
                 <label>Select Class</label>
                 <select data-ng-change="populateSections(classId)" ng-options="class.class_id as class.name for class in classData" class="form-control select2"
                   style="width: 100%;" ng-model="classId">
+=======
+<section class="content-header">
+    <h1>
+        <i class="fa fa-graduation-cap" aria-hidden="true"></i> Academics
+        <small>Chapters</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
+        <li>Academics</li>
+        <li class="active">Chapters</li>
+    </ol>
+</section>
+<!-- /.Content Header -->
+
+<!-- Main content -->
+<section class="content">
+    <!-- Select Criteria -->
+
+    <div class="box box-default">
+        <div class="box-header with-border" ng-show="showRole(['admin','teacher'])">
+            <!--<i class="fa fa-search" aria-hidden="true"></i>
+            <h3 class="box-title">Select Criteria</h3>-->
+            <!-- <ul class="panel-controls">
+                <li> <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)"
+                    /></li>
+                <li> <input type="button" value="Import" class="btn btn-primary" ng-click="handleFile()" /></li>
+
+            </ul> -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
+                    <div class="form-group">
+                        <label>Select Class</label>
+                        <select data-ng-change="populateSections(classId)" ng-options="class.class_id as class.name for class in classData" class="form-control select2"
+                            style="width: 100%;" ng-model="classId">
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                                              
                       </select>
               </div>
@@ -175,6 +214,7 @@
           </div> -->
 
 
+<<<<<<< HEAD
           </div>
       
       </div>
@@ -190,6 +230,61 @@
                 <div class="tooltip">
                   <button><img src="../../../dist/img/images/xlsx6.png" class="img-responsive" width="30" height="30" alt="Responsive image"></button>
                   <span class="tooltiptext">Save</span>
+=======
+    <!-- Content List -->
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <i class="fa fa-th-list" aria-hidden="true"></i>
+            <h3 class="box-title">Chapters List</h3>
+            <li style="float:right;list-style-type:none;"><button type="button" data-ng-click="exportAction('excel')" class="btn btn-primary pull-right">Save as Excel</button></li>
+            <li style="float:right;list-style-type:none;"><button type="button" data-ng-click="exportAction('pdf')" class="btn btn-primary pull-right">Save as PDF</button></li>
+        </div>
+        <div class="box-body">
+            <div class="tab-content">
+                <div class="tab-pane table-responsive no-padding active" id="tab_1">
+                    <table export-table st-table="display_records" st-safe-src="chaptersData"  class="table rwd-table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Chapter Name</th>
+                                <th>Chapter Code</th>
+                                <th>Subject</th>
+                                <th>Description</th>
+                                <th>No of Topics</th>
+                                <th class="pull-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr st-select-row="row" st-select-mode="multiple" ng-repeat="chapter in display_records" class="editable-row">
+                                <td>{{$index+1}}</td>
+                                <td><span editable-text="chapter.title" e-name="chapter.title" onaftersave="EditChapters($index)" e-form="rowform" e-required>{{chapter.title || 'empty' }}</span></td>
+                                <td><span editable-text="chapter.chapter_code" e-name="chapter.chapter_code" onaftersave="EditChapters($index)" e-form="rowform" e-required>{{chapter.chapter_code || 'empty' }}</span></td>
+                                <td><a href="">{{chapter.subjects[0].name || 'empty' }}</a></td>
+                                <td><span editable-text="chapter.description" e-name="chapter.description" onaftersave="EditChapters($index)" e-form="rowform" e-required>{{chapter.description || 'empty' }}</span></td>
+                                <td><span editable-text="chapter.no_of_topics" e-name="chapter.no_of_topics" onaftersave="EditChapters($index)" e-form="rowform" e-required>{{chapter.no_of_topics || 'empty' }}</span></td>
+                                <td class="pull-right">
+                                  <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == chapter">
+                                    <button type="submit" ng-click="EditChapters($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
+                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
+                                  </form>
+
+                                  <div class="buttons" ng-show="!rowform.$visible">
+                                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
+                                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteChapters($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
+                                  </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                              <td colspan="5" class="text-center">
+                                <div class="pull-right" st-pagination="" st-items-by-page="8" st-displayed-pages="5"></div>
+                              </td>
+                            </tr>
+                          </tfoot>
+                    </table>
+>>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                 </div>
                 <p>Chapters List</p>
               </div>
