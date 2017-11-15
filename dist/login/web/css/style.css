@@ -6,7 +6,250 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
 
 
+
+
+/*login  */
+div.login{
+  width:300px;
+  margin:0 auto;
+  height:300px;
+  background-color:lightgrey;
+}
+
+div#logo{
+  background-image:url(../images/login.png);
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-position:center center;
+  width:100px;
+  height:100px;
+  margin:0 auto;
+}
+
+div.container{
+  width:500px;
+  height:auto;
+  background-color:lightgrey;
+}
+
+input.input-lg{
+  width:450px;
+}
+
+span.text-success.bg-primary{
+  margin-right:10px;
+  margin-bottom:10px;
+}
+
+input.input-lg{
+  margin-bottom:10px;
+}
+
+button.btn.btn-primary{
+  display:block;
+  margin-bottom:10px;
+}
+
+button.btn.btn-primary{
+  float:middle;
+  margin-left:150px;
+  margin-top:10px;
+}
+
+/* 
+button.btn.btn-info{
+    display:block;
+    margin-bottom:10px;
+  }
+  
+  button.btn.btn-info{
+    float:middle;
+    margin-left:150px;
+    margin-top:20px;
+  }
+   */
+
+body{
+  width:100%;
+  height:1024px;
+  background-color: transparent;
+  
+  background-image:url(../images/registrationpic.jpg);  
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-size:cover;
+}
+
+div#logo{
+}
+
+i.glyphicon.glyphicon-envelope{
+}
+
+button.btn.btn-primary{
+  width:200px;
+}
+
+input{
+  width:20px;
+}
+
+span#right{
+  text-align:right;
+  margin-left:200px;
+}
+
+input#checkbox{
+  margin-left:20px;
+}
+
+
+/* 
+.textContainer { 
+    height: 345px; 
+    line-height: 340px;
+} */
+
+.textContainer h2 {
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    margin-left: 100px;
+}
+
+
+
+
+
+
+/*registration1  */
+
+
+.register h2{
+  padding-left:100px;
+  padding-top:30px;
+}
+
+.register .col-md-12 .col-md-12{
+  text-align:right;
+}
+
+.register div.col-md-12 .col-md-6 form div.input-group{
+  margin-bottom:10px;
+}
+
+.navigation ul li{
+  display:inline-block;
+}
+
+.register div.col-md-12 #top{
+  top:-80px;
+}
+
+.regback div.img{
+  width:150px;
+  height:150px;
+  margin:0 auto;
+  margin-top:10px;
+}
+
+div.register{
+  width:500px;
+  height:auto;
+  margin:0 auto;
+  background-color:lightgrey;
+}
+
+div#Next.col-md-6{
+  margin-top:10px;
+}
+
+div.backwhite{
+  height:500px;
+}
+
+div.col-md-12{
+  background-color:lightgrey;
+  padding-top:30px;
+}
+
+div#Next.col-md-6{
+  margin-top:60px;
+  padding-left:160px;
+}
+
+div#choose.col-md-6{
+  margin-top:10px;
+}
+
+div.navigation{
+  padding-left:90px;
+}
+
+
+
+/*registration  */
+div.register{
+  width:500px;
+  height:300px;
+  margin:0 auto;
+  background-color:lightgrey;
+}
+
+div.img{
+  width:150px;
+  height:150px;
+  margin:0 auto;
+  margin-top:10px;
+}
+
+.navigation ul li{
+  display:inline-block;
+}
+
+.register h1{
+  padding-left:140px;
+  padding-top:20px;
+}
+
+.register div.col-md-12 div.col-md-12{
+  text-align:right;
+}
+
+.register div.col-md-12 .col-md-6{
+  margin-bottom:10px;
+}
+
+.regback div.img{
+  margin:0 auto;
+}
+
+.register div.col-md-12 div.col-md-12 div{
+  margin-top:10px;
+}
+
+div.regback div.img{
+  margin-top:20px;
+}
+
+div.navigation{
+  padding-left:90px;
+}
+
+
+
+
+
 /* reset */
+
+
+
+
+
+
+
+/* 
+
 
 html,
 body,
@@ -136,8 +379,6 @@ table {
 }
 
 
-/* start editing from here */
-
 a {
     text-decoration: none;
 }
@@ -147,98 +388,76 @@ a {
 }
 
 
-/* text align right */
-
 .txt-lt {
     text-align: left;
 }
 
 
-/* text align left */
 
 .txt-center {
     text-align: center;
 }
 
 
-/* text align center */
-
 .float-rt {
     float: right;
 }
 
-
-/* float right */
 
 .float-lt {
     float: left;
 }
 
 
-/* float left */
-
 .clear {
     clear: both;
 }
 
 
-/* clear float */
 
 .pos-relative {
     position: relative;
 }
 
 
-/* Position Relative */
-
 .pos-absolute {
     position: absolute;
 }
 
 
-/* Position Absolute */
 
 .vertical-base {
     vertical-align: baseline;
 }
 
 
-/* vertical align baseline */
 
 .vertical-top {
     vertical-align: top;
 }
-
-
-/* vertical align top */
 
 nav.vertical ul li {
     display: block;
 }
 
 
-/* vertical menu */
-
 nav.horizontal ul li {
     display: inline-block;
 }
 
-
-/* horizontal menu */
 
 img {
     max-width: 100%;
 }
 
 
-/*end reset*/
 
 body {
      width: 100%;
      height: auto;
     text-align: center;
     font-family: 'Philosopher', sans-serif;
- background: url(../images/school2.png) no-repeat !important;
+  background: url(../images/school2.png) no-repeat !important; 
     background-size: cover !important;
     position: relative;
    
@@ -253,8 +472,6 @@ body {
 }
 
 
-/*--header--*/
-
 .header-w3l {
     padding: 3em 0;
 }
@@ -267,10 +484,6 @@ body {
 }
 
 
-/*--//header--*/
-
-
-/*--main--*/
 
 .main-content-agile {
     margin: 0 auto;
@@ -435,8 +648,6 @@ span.check-w3 {
 }
 
 
-/*-- social-icons --*/
-
 .social-icons ul li {
     display: inline-block;
 }
@@ -483,8 +694,6 @@ span.check-w3 {
 }
 
 
-/* facebook */
-
 .icon-border.facebook:hover::before {
     -webkit-box-shadow: inset 0 0 0 48px #3b5998;
     -moz-box-shadow: inset 0 0 0 48px #3b5998;
@@ -493,8 +702,6 @@ span.check-w3 {
     box-shadow: inset 0 0 0 48px #3b5998;
 }
 
-
-/* twitter */
 
 .icon-border.twitter:hover::before {
     -webkit-box-shadow: inset 0 0 0 48px #4099ff;
@@ -505,8 +712,6 @@ span.check-w3 {
 }
 
 
-/* google plus */
-
 .icon-border.googleplus:hover::before {
     -webkit-box-shadow: inset 0 0 0 48px #d34836;
     -moz-box-shadow: inset 0 0 0 48px #d34836;
@@ -515,8 +720,6 @@ span.check-w3 {
     box-shadow: inset 0 0 0 48px #d34836;
 }
 
-
-/* rss */
 
 .icon-border.rss:hover::before {
     -webkit-box-shadow: inset 0 0 0 48px #C92228;
@@ -527,13 +730,6 @@ span.check-w3 {
 }
 
 
-/*-- //social-icons --*/
-
-
-/*--//main--*/
-
-
-/*--footer--*/
 
 .footer {
     padding: 3.05em 0;
@@ -554,10 +750,7 @@ span.check-w3 {
 }
 
 
-/*--//footer--*/
 
-
-/*--responsive--*/
 
 @media(max-width: 1440px) {
     .header-w3l h1 {
@@ -875,7 +1068,7 @@ span.check-w3 {
         font-size: 1em;
         padding: .5em 2.5em;
     }
-}
+} */
 
 
 /*--//responsive--*/

@@ -2,23 +2,23 @@ angular.module('school_erp')
     .factory('assignServices', ['$http', 'globalServices', function ($http, globalServices) {
         var assignServices = {};
 
-        assignServices.setTeacher = function (dataValue) {
+        assignServices.setTeacher = function (dataValue,secId) {
             console.log(dataValue);
             return $http({
                 method: 'POST',
-                 url: globalServices.globalValue.baseURL + 'api/addorupdatesubjectstoteacher/SCH-9271',
+                 url: globalServices.globalValue.baseURL + 'api/addorupdatesubjectstoteacher/'+globalServices.globalValue.school_id+'/'+secId,
                 //  url:globalServices.globalValue.baseURL +'api/add_subjects_to_teacher/'+teacher_id,
-              //  url: globalServices.globalValue.baseURL + 'api/teachers/SCH-9271',
+             
                 data: $.param(dataValue),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             })
         };
 
-        assignServices.getTeacher = function (secId) {
+        assignServices.getTeacher = function () {
             //console.log(dataValue,teacherId);
             return $http({
                 method: 'GET',
-                url: globalServices.globalValue.baseURL + 'api/addsubjectstoteacher/'+secId
+                url: globalServices.globalValue.baseURL + 'api/listsubjectstoteacher/'+globalServices.globalValue.school_id
 
             })
         };
@@ -35,11 +35,11 @@ angular.module('school_erp')
         //     })
         // };
 
-        assignServices.DeleteAssignSubject = function (teacher_id) {
+        assignServices.DeleteAssignSubject = function (teacher_id,subject_id) {
 
             return $http({
-                method: 'DELETE',
-                url: globalServices.globalValue.baseURL + 'api/delete_teacher/' + teacher_id,
+                method: 'PUT',
+                url: globalServices.globalValue.baseURL + 'api/delete_subject_teacher/' + teacher_id+'/'+subject_id
             })
         };
 

@@ -153,85 +153,92 @@ angular.module('school_erp')
         }
 
 
+        
         $scope.selectedFile = null;
         $scope.msg = "";
 
 
         $scope.loadFile = function (files) {
 
+            console.log("messsage1");
             $scope.$apply(function () {
 
                 $scope.selectedFile = files[0];
-
+                // console.log(file);
             })
 
         }
 
         $scope.handleFile = function () {
-
+            console.log("messsage2");
             var file = $scope.selectedFile;
+            console.log(file);
+            $scope.save(file);
 
-            if (file) {
 
-                var reader = new FileReader();
+            // if (file) {
 
-                reader.onload = function (e) {
+            //     var reader = new FileReader();
 
-                    var data = e.target.result;
+            //     reader.onload = function (e) {
 
-                    var workbook = XLSX.read(data, {
-                        type: 'binary'
+            //         var data = e.target.result;
+
+            //         var workbook = XLSX.read(data, { type: 'binary' });
+
+            //         var first_sheet_name = workbook.SheetNames[0];
+
+            //         var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);
+
+            //         //console.log(excelData);  
+
+            //         if (dataObjects.length > 0) {
+
+
+            //             $scope.save(dataObjects);
+
+
+            //         } else {
+            //             $scope.msg = "Error : Something Wrong1 !";
+            //         }
+
+            //     }
+
+            //     reader.onerror = function (ex) {
+
+            //     }
+
+            //     reader.readAsBinaryString(file);
+            // }
+        }
+
+
+        $scope.save = function (file) {
+            console.log("messsage3");
+            console.log(file);
+
+            var fd = new FormData();
+            fd.append('file', file);
+           // fd.append('data', 'string');
+            $http.post(globalServices.globalValue.baseURL+'api/bulk_upload_courseworks/'+globalServices.globalValue.school_id, fd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            })
+                .success(function () {
+                    ngDialog.open({
+                        template: '<p>File Added Successfully.</p>',
+                        plain: true
                     });
 
-                    var first_sheet_name = workbook.SheetNames[0];
-
-                    var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);
-
-                    //console.log(excelData);  
-
-                    if (dataObjects.length > 0) {
-
-
-                        $scope.save(dataObjects);
-
-
-                    } else {
-                        $scope.msg = "Error : Something Wrong1 !";
-                    }
-
-                }
-
-                reader.onerror = function (ex) {
-
-                }
-
-                reader.readAsBinaryString(file);
-            }
+                })
+                .error(function () {
+                    ngDialog.open({
+                        template: '<p>Some Error Occured!.</p>',
+                        plain: true
+                    });
+                });
         }
-
-
-        $scope.save = function (data) {
-            // console.log(JSON.stringify(data));
-
-            $http({
-                method: "POST",
-                url: "globalServices.globalValue.baseURL + 'api/book/SCH-9271'",
-                data: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-
-            }).then(function (data) {
-                if (data.status) {
-                    $scope.msg = "Data has been inserted ! ";
-                } else {
-                    $scope.msg = "Error : Something Wrong2";
-                }
-            }, function (error) {
-                $scope.msg = "Error : Something Wrong3";
-            })
-
-        }
+           
         $scope.exportAction = function (option) {
             switch (option) {
                 case 'pdf':

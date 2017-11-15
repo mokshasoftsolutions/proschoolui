@@ -1,5 +1,5 @@
 
-angular.module('school_erp', ['ui.router','720kb.datepicker', 'ngDialog', 'zingchart-angularjs', 'htmlToPdfSave', 'xeditable', 'ui.calendar', 'ui.bootstrap','anguFixedHeaderTable'])
+angular.module('school_erp', ['ui.router','720kb.datepicker', 'ngDialog', 'zingchart-angularjs', 'htmlToPdfSave', 'xeditable', 'ui.calendar', 'ui.bootstrap','anguFixedHeaderTable','smart-table','ngProgress'])
   .run(function ($rootScope, $state, authService) {
     $rootScope.loginPage = false;
     $rootScope.role = 'teacher';

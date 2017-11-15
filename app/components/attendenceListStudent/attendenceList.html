@@ -1,51 +1,73 @@
-<section class="content-header">
-    <h1>
-        <i class="fa fa-bus"></i> Student Attendance
-        <small>Attendance List</small>
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Student Attendance</li>
-        <li class="active">Attendance List</li>
-    </ol>
-</section>
+<div class="row background">
+    <div class="container">
+        <h1>Attendance Management</h1>
+        <ul class="links" ui-sref-active="active">
+            <li ui-sref-active="active">
+                <a data-ng-if="setRole('teacher') || setRole('admin')" ui-sref='main.studentAttendance'>Student Attendance</a>/
+                <ul class="links">
+                    <li ui-sref-active="active">
+                        <a ui-sref='main.attendenceListStudent'>List</a>
+                    </li>/
+                    <li ui-sref-active="active">
+                        <a ui-sref='main.attendenceReportStudent'>Report</a>
+                    </li>
 
-<section class="content">
-    <!-- Select Criteria -->
-    <div class="box box-default">
-        <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-target="#tab_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> List By Day </a></li>
-                <li class=""><a data-target="#tab_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> List By Month </a></li>
-            </ul>
-        </div>
+                </ul>
+            </li>
+        
 
-        <div class="box-body">
-            <div class="tab-content">
-                <div class="tab-pane no-padding active" id="tab_1">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
+            <li data-ng-if="setRole('teacher') || setRole('admin')">
+                <a data-ng-if="setRole('admin')" ui-sref='main.employeeAttendance'>Employee Attendance</a>
+                <ul class="links">
+                    <li>
+                        <a ui-sref='main.attendenceListEmployee'>List</a>
+                    </li>/
+                    <li>
+                        <a ui-sref='main.attendenceReportEmployee'>Report</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-target="#tab_1" data-toggle="tab" aria-expanded="true">
+                <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> List By Day </a>
+        </li>
+        <li class="">
+            <a data-target="#tab_2" data-toggle="tab" aria-expanded="false">
+                <i class="fa fa-calendar-check-o" aria-hidden="true"></i> List By Month </a>
+        </li>
+    </ul>
+</div>
+<div class="tab-content">
+    <div class="tab-pane no-padding active" id="tab_1">
+        <div class="container">
+            <div class="row">
+                <div class="Examschedular">
+                    <div class="col-md-3">
+                        <div class="backwhite">
+                            <h1>Examinations</h1>
+
+
+                            <div class="form-group" ng-show="showRole(['admin','teacher'])">>
                                 <label>Select Class</label>
                                 <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId" ng-options="classData.class_id as classData.name for classData in classDatanew ">
-                       
-                      </select>
-                            </div>
-                        </div>
 
-                        <div class="col-md-4">
-                            <div class="form-group">
+                                </select>
+                            </div>
+
+
+                            <div class="form-group" ng-show="showRole(['admin','teacher'])">>
                                 <label>Select Section</label>
-                                <select class="form-control select2" style="width: 100%;" ng-model="secId" ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
-                        <!--<option selected="selected">--Select--</option>
+                                <select class="form-control select2" data-ng-change="getStudentValue(secId);" style="width: 100%;" ng-model="secId" ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
+                                    <!--<option selected="selected">--Select--</option>
                        <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
-                        
-                      </select>
+
+                                </select>
                             </div>
-                        </div>
-
-
-                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Select Date</label>
                                 <div class="input-group date">
@@ -59,59 +81,54 @@
                                     </datepicker>
                                 </div>
                             </div>
+                            <div class="box-footer">
+                                <button type="submit" ng-click="getAttendenceByDay(select_date,classId,secId)" class="btn btn-primary pull-right">Select</button>
+                            </div>
+
+
                         </div>
-
-
-                        <div class="col-md-12">
-                            <button type="submit" ng-click="getAttendenceByDay(select_date,classId,secId)" class="btn btn-primary pull-right">Select</button>
-                            <li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>
-                        </div>
-
-                        <!--<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels"> chart-series="series"
-                </canvas>-->
 
                     </div>
 
-                    <div class="box-body">
-                        <div class="row">
-                            <div class="tab-content">
-                                <div class="table-responsive mailbox-messages">
+                    <div class="col-md-9">
+                        <div class="backwhite">
 
-                                    <table class="table rwd-table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Admission No</th>
-                                                <th>Roll No</th>
-                                                <th>Class</th>
-                                                <th>Gender</th>
-                                                <th>Attendance</th>
-                                                <!--<th class="pull-right">Action</th>-->
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr ng-repeat="attendance in attData" class="editable-row">
-                                                <td>
-                                                    {{$index+1}}
-                                                </td>
-                                                <td>{{attendance.first_name || 'empty' }} {{attendance.last_name || 'empty' }}
-                                                    <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                                </td>
-                                                <td>
-                                                    {{attendance.admission_no || 'empty' }}
-                                                    <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
+
+                            <table class="table rwd-table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Admission No</th>
+                                        <th>Roll No</th>
+                                        <th>Class</th>
+                                        <th>Gender</th>
+                                        <th>Attendance</th>
+                                        <!--<th class="pull-right">Action</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="attendance in attData" class="editable-row">
+                                        <td>
+                                            {{$index+1}}
+                                        </td>
+                                        <td>{{attendance.first_name || 'empty' }} {{attendance.last_name || 'empty' }}
+                                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                                        </td>
+                                        <td>
+                                            {{attendance.admission_no || 'empty' }}
+                                            <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
                                                     {{busRoute.vehicle_code}}</span>-->
-                                                </td>
-                                                <td>{{attendance.roll_no || 'empty' }}
-                                                    <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                                </td>
-                                                <td>{{attendance.class_name || 'empty' }} ({{attendance.section_name || 'empty' }})</td>
-                                                <td>{{attendance.gender || 'empty' }}</td>
-                                                <td>{{attendance.status || 'empty' }}
-                                                    <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                                </td>
-                                                <!--<td class="pull-right">
+                                        </td>
+                                        <td>{{attendance.roll_no || 'empty' }}
+                                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                                        </td>
+                                        <td>{{attendance.class_name || 'empty' }} ({{attendance.section_name || 'empty' }})</td>
+                                        <td>{{attendance.gender || 'empty' }}</td>
+                                        <td>{{attendance.status || 'empty' }}
+                                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                                        </td>
+                                        <!--<td class="pull-right">
                                                     <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == busRoute">
                                                         <button type="submit" ng-click="EditBusRoute($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
                                                         <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
@@ -121,115 +138,121 @@
                                                         <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
                                                         <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBusRoute($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                         <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
-                                                    <!--</div>
+                                        <!--</div>
                                                 </td>-->
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-                                </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane no-padding" id="tab_2">
+        <div class="container">
+            <div class="row">
+                <div class="Examschedular">
+                    <div class="col-md-3">
+                        <div class="backwhite">
+                            <h1>Examinations</h1>
+
+
+                            <div class="form-group">
+                                <label>Select Class</label>
+                                <select class="form-control select2" name="classId" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId"
+                                    ng-options="classData.class_id as classData.name for classData in classDatanew ">
+                                    <!--<option selected="selected">--Select--</option>
+                       <option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
+                                </select>
                             </div>
+
+                            <div class="form-group">
+                                <label>Select Section</label>
+                                <select class="form-control select2" name="sectionId" data-ng-change="getStudentValue(secId)" style="width: 100%;" ng-model="secId"
+                                    ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
+                                    <!--<option selected="selected">--Select--</option>
+                       <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
+
+                                </select>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label>Select Student</label>
+                                <select class="form-control select2" style="width: 100%;" ng-model="studentId" ng-options="studentData.student_id as studentData.first_name for studentData in students ">
+                                    <!--<option selected="selected">--Select--</option>
+      
+                            <option ng-repeat="student in students " value="{{student.student_id}}">{{student.first_name}} {{student.last_name}}</option>-->
+                                </select>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label>Select Month</label>
+                                <select name="month" class="form-control select2" style="width: 100%;" ng-model="select_month" ng-options="monthData.id as monthData.name for monthData in months ">
+                                    <!--<option selected="selected">--Select--</option>
+                            <option ng-repeat="month in months " value="{{month.id}}">{{month.name}}</option>-->
+                                </select>
+                            </div>
+
+
+                            <div class="box-footer">
+                                <button type="button" class="btn btn-primary pull-right" ng-click="getAttendenceByMonth(select_month,studentId)">Select</button>
+
+                            </div>
+
                         </div>
                     </div>
 
 
 
-                </div>
-                <div class="tab-pane no-padding" id="tab_2">
-                    <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Select Class</label>
-                        <select class="form-control select2" name="classId" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId" ng-options="classData.class_id as classData.name for classData in classDatanew ">
-                        <!--<option selected="selected">--Select--</option>
-                       <option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
-                      </select>
-                    </div>
-                </div>
+                    <div class="col-md-9">
+                        <div class="backwhite">
 
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Select Section</label>
-                        <select class="form-control select2" name="sectionId" data-ng-change="getStudentValue(secId)" style="width: 100%;" ng-model="secId" ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
-                        <!--<option selected="selected">--Select--</option>
-                       <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
-                        
-                      </select>
-                    </div>
-                </div>
-
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Select Student</label>
-                        <select   class="form-control select2" style="width: 100%;" ng-model="studentId" ng-options="studentData.student_id as studentData.first_name for studentData in students ">
-                            <!--<option selected="selected">--Select--</option>
-      
-                            <option ng-repeat="student in students " value="{{student.student_id}}">{{student.first_name}} {{student.last_name}}</option>-->
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Select Month</label>
-                        <select  name="month" class="form-control select2" style="width: 100%;" ng-model="select_month" ng-options="monthData.id as monthData.name for monthData in months ">
-                            <!--<option selected="selected">--Select--</option>
-                            <option ng-repeat="month in months " value="{{month.id}}">{{month.name}}</option>-->
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <button type="button" class="btn btn-primary pull-right" ng-click="getAttendenceByMonth(select_month,studentId)">Select</button>
-                    <li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-left">Save as PDF</button></li>
-                </div>
-                <!--<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels"> chart-series="series"
-                </canvas>-->
-
-            </div>
-                    <div class="box-body">
-                        <div class="row">
-                            <div class="tab-content">
-                                <div class="table-responsive mailbox-messages">
-                                    <table export-table class="table rwd-table table-striped">
-                                        <thead>
-                                            <tr>
-                                               <th>#</th>
-                                                <th>Addmission No</th>
-                                                <th>Roll No</th>
-                                                <th>Class</th>
-                                                <th>Date</th>
-                                                <th>Attendance</th>
-                                                <!--<th class="pull-right">Action</th>-->
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr ng-repeat="attendance in attDataMonth  | filter:data.route_title:true" class="editable-row">
-                                                <td>
-                                                    {{$index+1}}
-                                                </td>
-                                                <td>{{attendance.student_id || 'empty' }}
-                                                    <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                                </td>
-                                                <td>
-                                                    {{attendance.roll_no || 'empty' }}
-                                                    <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
+                            <table export-table class="table rwd-table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Admission No</th>
+                                        <th>Roll No</th>
+                                        <th>Class</th>
+                                        <th>Gender</th>
+                                        <th>Attendance</th>
+                                        <!--<th class="pull-right">Action</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="attendance in attDataMonth  | filter:data.route_title:true" class="editable-row">
+                                        <td>
+                                            {{$index+1}}
+                                        </td>
+                                        <td>{{attendance.first_name || 'empty' }} {{attendance.last_name || 'empty' }}
+                                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                                        </td>
+                                        <td>
+                                            {{attendance.admission_no || 'empty' }}
+                                            <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
                                                     {{busRoute.vehicle_code}}</span>-->
-                                                </td>
-                                                <td>{{attendance.class_id || 'empty' }}
-                                                    <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                                </td>
-                                                 <td>{{attendance.date || 'empty' }}
-                                                    <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                                </td>
-                                                <td>{{attendance.status || 'empty' }}
-                                                    <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                                </td>
-                                               
-                                               
-                                               
-                                                <!--<td>
+                                        </td>
+                                        <td>{{attendance.roll_no || 'empty' }}
+                                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                                        </td>
+                                        <td>{{attendance.class_name || 'empty' }} ({{attendance.section_name || 'empty' }})</td>
+                                        <td>{{attendance.gender || 'empty' }}</td>
+                                        <td>{{attendance.status || 'empty' }}
+                                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                                        </td>
+
+
+
+                                        <!--<td>
                                                     {{$index+1}}
                                                 </td>
                                                 <td class="select-td">
@@ -259,17 +282,15 @@
                                                        
                                                     </div>
                                                 </td>-->
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-
-</section>
+</div>
+</div>

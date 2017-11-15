@@ -1,17 +1,26 @@
 angular.module('school_erp')
-    .factory('globalServices', ['$http', '$rootScope', function ($http, $rootScope) {
+    .factory('globalServices', ['$http', '$rootScope','$window', function ($http, $rootScope,$window) {
          var globalServices = {};
+
         // globalServices.globalValue = {
         //     baseURL: 'http://ec2-52-40-213-254.us-west-2.compute.amazonaws.com:4005/',
 
         //     schoolID: '',
         //     role: 'admin'
         // };
+
         globalServices.globalValue = {
-            baseURL: 'http://192.168.1.11:4005/',
+            baseURL: 'http://192.168.1.5:4005/',
             schoolID: '',
             role: 'admin'
         }
+
+        // globalServices.globalValue = {
+        //     baseURL: 'http://localhost:4005/',
+        //     schoolID: '',
+        //     role: 'admin'
+        // }
+
 
         globalServices.fetchRoleAuth = function (roles) {
             var i = 0;
@@ -28,18 +37,43 @@ angular.module('school_erp')
             return retVal;
         }
 
+        globalServices.getUserInfo = function () {
+             if ($window.localStorage["userInfo"]) {
+            userInfo = JSON.parse($window.localStorage["userInfo"]);
+            if (userInfo != null) {
+                globalServices.globalValue.token = userInfo.token;
+                globalServices.globalValue.school_id = userInfo.school_id;
+                globalServices.globalValue.role = userInfo.role;
+                // console.log("user info");
+                // console.log(globalServices.globalValue);
+                } else {
+                    $window.localStorage["userInfo"] = null;
+                    globalServices.globalValue.token = "";
+                    globalServices.globalValue.school_id = "";
+                    globalServices.globalValue.role = "";
+                    //  $window.localStorage["wishlist"] = null;
+                    //  $window.localStorage["sales"] = null;
+                }
+            }
+        
+        }
+        
+
+      globalServices.getUserInfo();
+        
+
         globalServices.getClass = function () {
             return $http({
                 method: 'GET',
-                //url: globalServices.globalValue.baseURL + 'api/school_classes/SCH-9271'
-                url: globalServices.globalValue.baseURL + 'api/school_classes/SCH-9271'
+             
+                url: globalServices.globalValue.baseURL + 'api/school_classes/'+globalServices.globalValue.school_id
 
             })
         };
         globalServices.getSections = function (classID) {
             return $http({
                 method: 'GET',
-                //url: globalServices.globalValue.baseURL + 'api/class_sections/'+classID
+                
                 url: globalServices.globalValue.baseURL + 'api/class_sections/' + classID
 
             })
@@ -47,8 +81,8 @@ angular.module('school_erp')
         globalServices.getBusRoutes = function () {
             return $http({
                 method: 'GET',
-                // url: globalServices.globalValue.baseURL + 'api/bus_route/SCH-9271'
-                url: globalServices.globalValue.baseURL + 'api/bus_route_title/SCH-9271'
+               
+                url: globalServices.globalValue.baseURL + 'api/bus_route_title/'+globalServices.globalValue.school_id
             })
         };
         return globalServices;

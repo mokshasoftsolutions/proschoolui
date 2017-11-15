@@ -5,7 +5,7 @@ angular.module('school_erp')
         addVehicleServices.getVehicle = function () {
             return $http({
                 method: 'GET',
-                url: globalServices.globalValue.baseURL + 'api/vehicles/SCH-9271'
+                url: globalServices.globalValue.baseURL + 'api/vehicles/'+globalServices.globalValue.school_id
             })
         };
 
@@ -13,7 +13,7 @@ angular.module('school_erp')
             console.log(dataValue);
             return $http({
                 method: 'POST',
-                url: globalServices.globalValue.baseURL + 'api/vehicles/SCH-9271',
+                url: globalServices.globalValue.baseURL + 'api/vehicles/'+globalServices.globalValue.school_id,
                 data: $.param(dataValue),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             })

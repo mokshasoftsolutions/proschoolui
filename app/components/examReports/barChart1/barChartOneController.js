@@ -1,25 +1,30 @@
 angular.module('school_erp')
-    .controller("barChartOneController", ['$http', '$scope', 'globalServices', 'examServices', 'subjectsServices', 'studentServices', 'barChartOneService', 'ngDialog', function ($http, $scope, globalServices, examServices, subjectsServices, studentServices, barChartOneService, ngDialog) {
-        
-      
-       
-        globalServices.getClass()
-            .success(function (data, status) {
-                $scope.classDatanew = data.school_classes;// Api list-name
-                $scope.classId = $scope.classDatanew[0].class_id;
-                console.log($scope.classId);
-               
-                $scope.populateSections($scope.classId);
-            })
-            .error(function (data, success) {
-            })
-       
+    .controller("barChartOneController", ['$http', '$scope', '$rootScope', 'globalServices', 'examServices', 'subjectsServices', 'studentServices', 'barChartOneService', 'ngDialog', function ($http, $scope, $rootScope, globalServices, examServices, subjectsServices, studentServices, barChartOneService, ngDialog) {
+
+
+
+
+        $scope.getClassesInitalLoad = function () {
+            globalServices.getClass()
+                .success(function (data, status) {
+                    $scope.classDatanew = data.school_classes;// Api list-name
+                    $scope.classId = $scope.classDatanew[0].class_id;
+                    console.log($scope.classId);
+
+                    $scope.populateSections($scope.classId);
+                })
+                .error(function (data, success) {
+                })
+        }
+
         $scope.getExamSchedule = function () {
             examServices.getExamSchedule()
                 .success(function (data, status) {
                     $scope.examSchedule = data.exam_schedules; // Api list-name
+                    $scope.data = data;
+                  //  console.log($scope.data +' hemababu');
                     $scope.data.examSchedule_name = data.exam_schedules[0].exam_sch_id;
-                    
+
                 })
                 .error(function (data, success) { })
         }
@@ -30,24 +35,26 @@ angular.module('school_erp')
                 .success(function (data, status) {
                     $scope.secData = data.class_sections;// Api list-name
                     $scope.secId = $scope.secData[0].section_id;
-                  
-                    $scope.getExamPapers($scope.data.examSchedule_name,$scope.secId);
+
+                    $scope.getExamPapers($scope.data.examSchedule_name, $scope.secId);
                 })
                 .error(function (data, success) {
                 })
         }
 
-        
+        $scope.showRole = function (role) {
+            return globalServices.fetchRoleAuth(role);
+        }
 
 
         $scope.getExamPapers = function (exSchedule, sectionId) {
-            examServices.getExamPapersbySectionAndSchedule(exSchedule,sectionId)
+            examServices.getExamPapersbySectionAndSchedule(exSchedule, sectionId)
                 .success(function (data, status) {
 
                     // $scope.papers = data[exSchedule+'-'+examSubject];// Api list-name
                     $scope.papers = data.resultArray;
                     // $scope.paperId = $scope.papers[0].exam_paper_id;
-                    $scope.data.paper_name = data.resultArray[0].exam_paper_id;
+                    $scope.data.paper_name = $scope.data.exam_paper_id;
                     console.log($scope.data.paper_name);
                     //  $scope.getEvaluation($scope.data.studentId, $scope.data.examSchedule_name);
                     $scope.getExamMarks($scope.data.paper_name);
@@ -56,7 +63,7 @@ angular.module('school_erp')
                 .error(function (data, success) { })
         }
 
-       
+
         $scope.getExamMarks = function (paperId) {
             var arrData = new Array();
             var arrLabels = new Array();
@@ -69,7 +76,7 @@ angular.module('school_erp')
                     console.log(JSON.stringify($scope.examData));
 
 
-                   
+
                     // $scope.chartdata1 = [30, 20, 40, 80, 50, 40, 30, 60];
                     // $scope.studata1 = ["stu1", "stu2", "stu3", "stu4", "stu5", "stu6", "stu7", "stu8"];
                     //console.log($scope.chartdata1);
@@ -84,8 +91,8 @@ angular.module('school_erp')
                         arrLabels.push(item.student_name);
                         $scope.data1 = [];
                         $scope.label1 = [];
-                         $scope.maxMarks =item.max_marks;
-                         console.log( $scope.maxMarks );
+                        $scope.maxMarks = item.max_marks;
+                        console.log($scope.maxMarks);
                         //$scope.data1.push(arrData.trim(""));
                         //  for (var j = 0; j < arrData.length; i++) {
                         //     $scope.data1.push(arrData[i]);
@@ -142,7 +149,7 @@ angular.module('school_erp')
                                     "item": {
                                         "font-color": "#7e7e7e"
                                     },
-                                    "values": "0:"+$scope.maxMarks,
+                                    "values": "0:" + $scope.maxMarks,
                                     "guide": {
                                         "visible": true
                                     },
@@ -211,5 +218,21 @@ angular.module('school_erp')
                 .error(function (data, success) {
                 })
         }
-      
+
+
+        if ($rootScope.role == 'parent') {
+            console.log("message........................");
+            $scope.secId = $rootScope.student.section;
+            console.log("message........................2");
+            console.log($scope.secId);
+            $scope.getExamSchedule();
+            console.log($scope.data.examSchedule_name);
+            $scope.getExamPapers($scope.data.examSchedule_name, $scope.secId);
+
+
+        } else {
+            $scope.getClassesInitalLoad();
+        }
+
+
     }])

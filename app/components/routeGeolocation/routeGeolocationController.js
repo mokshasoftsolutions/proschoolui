@@ -1,5 +1,5 @@
 angular.module('school_erp')
-  .controller("routeGeoLocationController", ['$http', '$scope', 'addVehicleServices', function ($http, $scope, addVehicleServices) {
+  .controller("routeGeoLocationController", ['$http', '$scope', 'addVehicleServices','routeGeoLocationServices', function ($http, $scope, addVehicleServices,routeGeoLocationServices) {
     // $scope.code = 900;
     addVehicleServices.getVehicle()
       .success(function (data, status) {
@@ -53,6 +53,7 @@ angular.module('school_erp')
     }
 
     $scope.getGeolocation = function (vehicle_code) {
+      console.log("message");
       routeGeoLocationServices.getGeolocation(vehicle_code)
         .success(function (data, status) {
           $scope.status = status;

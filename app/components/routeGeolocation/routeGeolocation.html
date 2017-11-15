@@ -1,46 +1,58 @@
-<section class="content-header">
-  <h1>
-    <i class="fa fa-calendar"></i> Route Geolocation
-  </h1>
-</section>
-<!-- /.Content Header -->
+<div class="row background">
+  <div class="container">
+    <h1>Transport Mangement</h1>
+    <ul class="links">
+      <li>
+        <a ui-sref='main.addStation'>Addstation</a>
+      </li>/
+      <li>
+        <a ui-sref='main.addVehicle'>Addvehical</a>
+      </li>/
+      <li>
+        <a ui-sref='main.addBusRoute'>Addbusroute</a>
+      </li>/
+      <li>
+        <a ui-sref='main.routeGeolocation'>Routegeolocation</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="RouteGeoLocation">
+      <div class="col-md-3">
+        <div class="backwhite">
+          <h1>RouteGeoLocation</h1>
 
-<!-- Main content -->
-<section class="content">
-  <!-- Select Criteria -->
-  <div class="box box-default">
-    <!-- /.box-header -->
-    <div class="box-body">
-      <div class="row">
-        <div class="col-md-4">
           <div class="form-group">
+
             <label>Select Vehicle</label>
             <select ng-options="vehicle.vehicle_code as vehicle.vehicle_name for vehicle in vehicles" class="form-control select2" ng-model="data.vehicle_code"
               style="width: 100%;">
                         </select>
           </div>
+          <div class="form-group">
+            <button>Search</button>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="backwhite">
+          <div class="box box-default">
+            <section class="content-header">
+              <div id="map" style="height:420px;"></div>
+
+            </section>
+          </div>
+
         </div>
       </div>
     </div>
-
-    <!--<div class="col-md-4">
-      <div class="form-group">
-
-        <label>Select Vehicle</label>
-        <select ng-options="vehicle.vehicle_code as vehicle.vehicle_name for vehicle in vehicles" class="form-control select2" ng-model="data.vehicle_code"
-          style="width: 100%;">
-                        </select>
-      </div>
-    </div>-->
-
-    <div class="box box-default">
-      <section class="content-header">
-        <div ng-app="mapsApp" ng-controller="MapCtrl">
-          <div id="class" ng-repeat="marker in markers | orderBy : 'title'"></div>
-        </div>
-        <div id="map" style="height:820px;"></div>
-
-      </section>
-    </div>
-
-</section>
+  </div>
+</div>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <script src="js/scripts.js"></script>
+</body>
+</html> -->

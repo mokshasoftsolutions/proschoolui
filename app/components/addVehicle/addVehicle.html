@@ -1,80 +1,86 @@
-
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <i class="fa fa-bus"></i>
-        Transport
-        <small>Add Vehicle</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Transport</li>
-        <li class="active">Add Vehicle</li>
-      </ol>
-    </section>
-    <!-- /.Content Header -->
-
-    <!-- Main content -->
-    <section class="content">
-      <!-- Select Criteria -->
-      <form name="Vehicles" ng-submit="Vehicles.$valid && addVehicle(data)" novalidate>
+<div class="row background">
+    <div class="container">
+        <h1>Transport Mangement</h1>
+        <ul class="links">
+            <li>
+                <a ui-sref='main.addStation'>Addstation</a>
+            </li>/
+            <li>
+                <a ui-sref='main.addVehicle'>AddVehicle</a>
+            </li>/
+            <li>
+                <a ui-sref='main.addBusRoute'>Addbusroute</a>
+            </li>/
+            <li>
+                <a ui-sref='main.routeGeolocation'>Routegeolocation</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="Addvehicle">
+            <div class="col-md-3">
+                <div class="backwhite">
+                    <h1>Transport</h1>
+                    <h1>Create vehicle</h1>
+                    <form name="Vehicles" ng-submit="Vehicles.$valid && addVehicle(data)" novalidate>
             <div class="box box-default">
               <div class="box-header with-border">
-                  <h3 class="box-title">Create Vehicle</h3>
-              </div>
+                  
+              
               <!-- /.box-header -->
-              <div class="box-body">
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
+                              
+                 
+                    <div class="form-group" ng-class="{'has-error': Vehicles.$submitted  && Vehicles.admissionNo.$pristine}" >
                       <label>Vehicle Name</label>
-                      <input type="text" ng-model="data.vehicle_name" class="form-control" placeholder="Enter ...">
+                      <input type="text" name="admissionNo" ng-model="data.vehicle_name" class="form-control" placeholder="Enter ..." required>
                     </div>
-                  </div>
+                 
 
-                  <div class="col-md-4">
-                    <div class="form-group">
+                  
+                    <div class="form-group" ng-class="{'has-error': Vehicles.$submitted  && Vehicles.code.$pristine}" >
                       <label>Vehicle Code</label>
-                      <input type="text" ng-model="data.vehicle_code" class="form-control" placeholder="Enter ...">
+                      <input type="text" name="code" ng-model="data.vehicle_code" class="form-control" placeholder="Enter ..." required>
                     </div>
-                  </div>
-
-                </div>
-              </div>
+                  
+              
 
               <div class="box-footer">
-                  <button type="submit" class="btn btn-primary pull-right">Add Vehicle</button>
+                  <button type="submit" class="btn btn-primary pull-right" style= "background-color: #03104e;border-color: #03104e;">Add Vehicle</button>
               </div>
             </div>
-      </form>
-    <!-- /.content -->
-    
-    <!-- Content List -->
-        <div class="box box-default">
-            <div class="box-header with-border">
-                  <h3 class="box-title">Vehicle List</h3>
             </div>
-          <div class="box-body">       
-                
-            <div class="tab-content">
-              <div class="mailbox-controls">
-                <div class="pull-right">
-                              
-                </div><!-- /.pull-right -->
-              </div>  
-              
-              <div class="table-responsive mailbox-messages">
-              <table export-table class="table rwd-table table-striped">
-                  <thead>
-                    <tr>
-                      <th>#</th>  
-                      <th>Vehicle Name</th>
-                      <th>Vehicle Code</th>
-                      <th class="pull-right">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr ng-repeat="vehicle in vehicles" class="editable-row">
+      </form>
+
+                    <!-- <div class="form-group">
+
+                        <label for="inputdefault">Vehicle Name</label><br>
+                        <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                    </div>
+                    <div class="form-group">
+
+                        <label for="inputdefault">Vehicle Code</label><br>
+                        <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <button>Add vehicle</button>
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="backwhite">
+                    <h1>Vehicle List</h1>
+                    <table table export-table st-table="display_records" st-safe-src="vehicles" class="table rwd-table table-striped" style="width:100%">
+                        <tr>
+                            <th>#</th>
+                            <th>Vehicle name</th>
+                            <th>Vehicle code</th>
+                            <th class="pull-right">Action</th>
+                        </tr>
+                         <tbody>
+                    <tr st-select-row="row" st-select-mode="multiple" class="editable-row" ng-repeat="vehicle in display_records" class="editable-row">
                       <td> {{$index+1}}</td>  
                       <td><span editable-text="vehicle.vehicle_name" e-name="editdata.vehicle_name" onaftersave="EditVehicle($index)" e-form="rowform" e-required>{{vehicle.vehicle_name || 'empty' }}</span></td>
                       <td><span editable-text="vehicle.vehicle_code" e-name="editdata.vehicle_code" onaftersave="EditVehicle($index)" e-form="rowform" e-required>{{vehicle.vehicle_code || 'empty' }}</span></td>                      
@@ -92,56 +98,21 @@
                       </td>  
                     </tr>
                 </tbody>
-                </table><!-- /.table -->
-              </div>
-            </div>
-          </div>
-        </div>
-    </section>
- 
-
-    <!--Edit values modal Starts here-->
- <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content">
-        <form name="VehicleList" ng-submit="Vehicles.$valid && EditVehicle(data)" novalidate>
-         <div class="modal-header">
-            <h3>Edit Bus Route</h3>
-        </div>
-        <div class="modal-body">
-       
-        <!-- /.box-header -->
-         <!-- /.box-header -->
-           
-             
-              <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label>Vehicle Name</label>
-                      <input type="text" ng-model="editdata.vehicle_name" class="form-control" placeholder="Enter ...">
-                    </div>
-                  </div>
-
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label>Vehicle Code</label>
-                      <input type="text" ng-model="editdata.vehicle_code" class="form-control" placeholder="Enter ...">
-                    </div>
-                  </div>
-
+                 <tfoot>
+              <tr>
+                <td colspan="5" class="text-center">
+                  <div class="pull-right" st-pagination="" st-items-by-page="2" st-displayed-pages="5"></div>
+                </td>
+              </tr>
+            </tfoot>
+                    </table>
                 </div>
-                        
-
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Add</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-              </div>
-        
+            </div>
         </div>
-       
-     </form>
-      </div>
     </div>
-  </div>
-
-
+</div>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <script src="js/scripts.js"></script>
+</body>
+</html> -->

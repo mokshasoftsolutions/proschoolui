@@ -1,6 +1,7 @@
 angular.module('school_erp')
     .factory('studentServices', ['$http', 'globalServices', function ($http, globalServices) {
         var studentServices = {};
+        console.log(globalServices.globalValue);    
 
         studentServices.getStudent = function (classSecValue) {
             return $http({
@@ -11,20 +12,28 @@ angular.module('school_erp')
 
 
         studentServices.setStudent = function (dataValue, classSecToAdd) {
+             dataValue.school_id = globalServices.globalValue.school_id;
             return $http({
                 method: 'POST',
                 url: globalServices.globalValue.baseURL + 'api/students/' + classSecToAdd,
-                data: $.param(dataValue),
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                 data:  dataValue,
+                headers: { 'Content-Type': 'application/json' }
             })
         };
 
         studentServices.getStudentById = function (student_id) {
             return $http({
                 method: 'GET',
-                url: globalServices.globalValue.baseURL + 'api/studentsdetails/' + student_id
+                url: globalServices.globalValue.baseURL + 'api/student_details/' + student_id
             })
         };
+
+        // studentServices.getStudentPhoto = function (student_id) {
+        //     return $http({
+        //         method: 'GET',
+        //         url: globalServices.globalValue.baseURL + 'api/image/' + student_id
+        //     })
+        // };
         //   studentServices.setParent = function(parentDetails,studentId){       
         //     return $http({
         //                 method: 'POST',
@@ -74,6 +83,22 @@ angular.module('school_erp')
             })
         };
 
+        studentServices.getAttendenceByDaySection = function (select_date,section_id) {
+            return $http({
+                method: 'GET',
+                //url: "http://192.168.1.6:4005/api/examevaluationlistbystudentid/263/456"
+                url: globalServices.globalValue.baseURL + 'api/section_attendence_by_Date/' +select_date+ '/' + section_id 
+                        })
+        };
+
+        studentServices.getAttendenceByDayAndClass = function () {
+            return $http({
+                method: 'GET',
+                //url: "http://192.168.1.6:4005/api/examevaluationlistbystudentid/263/456"
+                url: globalServices.globalValue.baseURL + 'api/allClasses_Attendence_by_date/' + new Date().toDateString() + '/' + globalServices.globalValue.school_id 
+            })
+        }; 
+
         studentServices.getAttendenceByMonth = function (month, studentId) {
             return $http({
                 method: 'GET',
@@ -88,7 +113,7 @@ angular.module('school_erp')
             console.log(dataValue);
             return $http({
                 method: 'POST',
-                url: globalServices.globalValue.baseURL + 'api/attendancebulk/' + classVal + '/' + section + '/' + 'SCH-9271',
+                url: globalServices.globalValue.baseURL + 'api/attendancebulk/' + classVal + '/' + section + '/' + globalServices.globalValue.school_id,
                 data: test,
                 headers: { 'Content-Type': 'application/json' },
             })
@@ -101,7 +126,7 @@ angular.module('school_erp')
         //     console.log(dataValue);
         //     return $http({
         //         method: 'POST',
-        //         url: globalServices.globalValue.baseURL + 'api/attendancebulk/' + classVal + '/' + section + '/' + 'SCH-9271',
+        //         url: globalServices.globalValue.baseURL + 'api/attendancebulk/' + classVal + '/' + section + '/' + globalServices.globalValue.school_id,
         //         data: $.param(test),
         //         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         //     })
@@ -124,7 +149,22 @@ angular.module('school_erp')
                 url: globalServices.globalValue.baseURL + 'api/delete_student/' + student_id,
             })
         };
-
+        studentServices.getParentListBySchool = function () {
+            //console.log(secId);
+            return $http({
+                method: 'GET',
+                // url: "http://192.168.1.13:4005/api/examevaluation/3/2347/34/45"
+                url: globalServices.globalValue.baseURL + 'api/getparentlist/'+globalServices.globalValue.school_id
+            })
+        };
+        studentServices.getTeacherListBySchool = function () {
+            //console.log(secId);
+            return $http({
+                method: 'GET',
+                // url: "http://192.168.1.13:4005/api/examevaluation/3/2347/34/45"
+                url: globalServices.globalValue.baseURL + 'api/teachers/'+globalServices.globalValue.school_id
+            })
+        };
 
         return studentServices;
 

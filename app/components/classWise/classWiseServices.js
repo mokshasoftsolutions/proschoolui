@@ -29,5 +29,19 @@ angular.module('school_erp')
                     })
         };
 
+        classWiseServices.getTimeTableDay = function(day){
+            return $http({
+                        method: 'GET',
+                        url: globalServices.globalValue.baseURL + 'api/classes_timetable_by_day/'+day 
+                    })
+        };
+        classWiseServices.getTimeTableByDayAndSection = function(day,secId){
+            return $http({
+                        method: 'GET',
+                        url: globalServices.globalValue.baseURL + 'api/class_timetable_by_day/'+day+'/'+secId 
+                    })
+        };
+    
+
        return classWiseServices;
     }]);  

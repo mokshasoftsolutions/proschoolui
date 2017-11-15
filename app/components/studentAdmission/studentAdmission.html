@@ -1,401 +1,725 @@
-<section class="content-header">
-  <h1>
-    <i class="fa fa-users"></i> Student Information
-    <small>Admission</small>
-  </h1>
-  <ol class="breadcrumb">
-    <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
-    <li>Student Information</li>
-    <li class="active">Student Admission</li>
-  </ol>
-</section>
+<div class="row background">
+  <div class="container">
+    <h1>Student Management</h1>
+    <ul class="links">
+      <li ui-sref-active="active">
+        <a ui-sref="main.student">Information</a>
+      </li>/
+      <li ui-sref-active="active">
+        <a ui-sref="main.studentAdmission">Admission</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="Admission">
+      <div class="col-md-12">
+        <div class="backwhite">
+          <section class="studentadmission">
+            <h1>Student Admission</h1>
+            <div class="box-header with-border">
+              <ul class="panel-controls">
+                <li>
+                  <select name="class" class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;"
+                    ng-model="classId">
+                    <option selected="selected">--Select--</option>
+                    <option ng-repeat="class in classData" value="{{class.class_id}}">{{class.name}}</option>
+                  </select>
+                </li>
+                <li>
+                  <select class="form-control select2" name="section" style="width: 100%;" ng-model="secId">
+                    <option selected="selected">--Select--</option>
+                    <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>
+                  </select>
+                </li>
 
-<!-- Main content -->
-<section class="content">
-  <!-- SELECT2 EXAMPLE -->
-  <div class="box box-default">
-    <div class="box-header with-border">
 
-      <h3 class="box-title">Student Admission</h3>
-      <ul class="panel-controls">
-        <li> <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)"
-          /></li>
-        <li> <input type="button" value="Import" class="btn btn-primary" ng-click="handleFile()" /></li>
+                <li>
+                  <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)"
+                  />
+                </li>
+                <li>
+                  <input type="button" value="Import" class="btn btn-primary" ng-click="handleFile(secId)" />
+                </li>
 
-      </ul>
-    </div>
-    <!-- /.box-header -->
-    <form name="studentAdmission" ng-submit="studentAdmission.$valid && addStudent(data)" novalidate>
-      <div class="box-body">
-
-        <div class="row">
-          <div class="col-md-3">
-            <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted && studentAdmission.admissionNo.$invalid && studentAdmission.admissionNo.$pristine}">
-              <label>Admission No</label>
-              <input type="text" name="admissionNo" ng-model="data.admission_no" class="form-control" placeholder="Enter ..." required>
+              </ul>
             </div>
-          </div>
 
-          <div class="col-md-3">
-            <div class="form-group">
-              <label>Roll No</label>
-              <input type="text" class="form-control" placeholder="Enter ..." ng-model="data.roll_no">
-            </div>
-          </div>
+            <!-- /.box-header -->
+            <form name="studentAdmission" ng-submit="studentAdmission.$valid && handleImage(data);" novalidate>
+              <div class="box-body">
 
-          <div class="col-md-3">
-            <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.class.$pristine}">
-              <label>Class</label>
-              <select name="class" class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted && studentAdmission.admissionNo.$invalid && studentAdmission.admissionNo.$pristine}">
+                      <label>Admission No</label>
+                      <input type="text" name="admissionNo" ng-model="data.admission_no" class="form-control" placeholder="Enter ..." required>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.roll.$pristine}">
+                      <label>Roll No</label>
+                      <input type="text" name="roll" class="form-control" placeholder="Enter ..." ng-model="data.roll_no">
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.class.$pristine}">
+                      <label>Class</label>
+                      <select name="class" class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId">
                         <option selected="selected">--Select--</option>
                         <option ng-repeat="class in classData" value="{{class.class_id}}">{{class.name}}</option>
                       </select>
-            </div>
-          </div>
+                    </div>
+                  </div>
 
-          <div class="col-md-3">
-            <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.section.$pristine }">
-              <label>Section</label>
-              <select class="form-control select2" name="section" style="width: 100%;" ng-model="secId">
-                       <option selected="selected">--Select--</option>
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.section.$pristine }">
+                      <label>Section</label>
+                      <select class="form-control select2" name="section" style="width: 100%;" ng-model="secId">
+                        <option selected="selected">--Select--</option>
                         <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>
                       </select>
-            </div>
-          </div>
-        </div>
+                    </div>
+                  </div>
+                </div>
 
-        <div class="row">
-          <div class="col-md-3">
-            <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted && studentAdmission.firstName.$invalid && studentAdmission.firstName.$pristine}">
-              <label>First Name</label>
-              <input type="text" name="firstName" ng-model="data.first_name" class="form-control" placeholder="Enter ..." required>
-            </div>
-          </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted && studentAdmission.firstName.$invalid && studentAdmission.firstName.$pristine}">
+                      <label>First Name</label>
+                      <input type="text" name="firstName" ng-model="data.first_name" class="form-control" placeholder="Enter ..." required>
+                    </div>
+                  </div>
 
-          <div class="col-md-3">
-            <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted && studentAdmission.lastName.$invalid && studentAdmission.lastName.$pristine}">
-              <label>Last Name</label>
-              <input type="text" name="lastName" ng-model="data.last_name" class="form-control" placeholder="Enter ..." required>
-            </div>
-          </div>
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted && studentAdmission.lastName.$invalid && studentAdmission.lastName.$pristine}">
+                      <label>Last Name</label>
+                      <input type="text" name="lastName" ng-model="data.last_name" class="form-control" placeholder="Enter ..." required>
+                    </div>
+                  </div>
 
-          <div class="col-md-3">
-            <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.gender.$pristine}">
-              <label>Gender</label>
-              <select name="gender" ng-model="data.gender" class="form-control select2" style="width: 100%;">
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.gender.$pristine}">
+                      <label>Gender</label>
+                      <select name="gender" ng-model="data.gender" class="form-control select2" style="width: 100%;">
                         <option selected="selected">--Select--</option>
                         <option>Male</option>
                         <option>Female</option>
                       </select>
-            </div>
-          </div>
+                    </div>
+                  </div>
 
-          <div class="col-md-3">
-            <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.dob.$pristine}">
-              <label>Date of Birth</label>
-              <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="dd-MM-yyyy" style="z-index:999">
-                <input name="dob" class="form-control" type="text" ng-model="data.dob" ng-readonly="true" placeholder="Enter ..." required/>
-              </datepicker>
-            </div>
-          </div>
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.dob.$pristine}">
+                      <label>Date of Birth</label>
+                      <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="dd-MM-yyyy" style="z-index:999">
+                        <input name="dob" class="form-control" type="text" ng-model="data.dob" ng-readonly="true" placeholder="Enter ..." required/>
+                      </datepicker>
+                    </div>
+                  </div>
 
 
-        </div>
+                </div>
 
-        <div class="row">
-          <div class="col-md-3">
-            <div class="form-group">
-              <label>Category</label>
-              <select class="form-control select2" ng-model="data.category" style="width: 100%;">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.category.$pristine}">
+                      <label>Category</label>
+                      <select name="category" class="form-control select2" ng-model="data.category" style="width: 100%;">
                         <option selected="selected">--Select--</option>
                         <option>General</option>
                         <option>OBC</option>
                         <option>Minority</option>
                       </select>
-            </div>
-          </div>
+                    </div>
+                  </div>
 
-          <div class="col-md-3">
-            <div class="form-group">
-              <label>Religion</label>
-              <input type="text" ng-model="data.religion"  class="form-control" placeholder="Enter ...">
-            </div>
-          </div>
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.religion.$pristine}">
+                      <label>Religion</label>
+                      <input type="text" name="religion" ng-model="data.religion" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
 
-          <div class="col-md-3">
-            <div class="form-group">
-              <label>Contact No</label>
-              <input type="text" ng-model="data.phone" class="form-control" placeholder="Enter ...">
-            </div>
-          </div>
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.contact.$pristine||studentAdmission.contact.$error.pattern}">
+                      <label>Contact No</label>
+                      <input name="contact" type="text" ng-model="data.phone" ng-pattern="/^(\+\d{1,3}[- ]?)?\d{10}$/" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
 
-          <div class="col-md-3">
-            <div class="form-group">
-              <label>Email</label>
-              <input type="text" ng-model="data.email" class="form-control" placeholder="Enter ...">
-            </div>
-          </div>
-        </div>
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.email.$pristine||studentAdmission.email.$error.pattern}">
+                      <label>Email</label>
+                      <input type="text" name="email" ng-model="data.email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" class="form-control" placeholder="Enter ..."
+                        required>
+                    </div>
+                  </div>
+                </div>
 
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.admissionDate.$pristine}">
-              <label>Admission Date</label>
-              <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="dd-MM-yyyy" style="z-index:999">
-                <input name="admissionDate" class="form-control" type="text" ng-model="data.admission_date" ng-readonly="true" placeholder="Enter ..."
-                  required/>
-              </datepicker>
-            </div>
-          </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.admissionDate.$pristine}">
+                      <label>Admission Date</label>
+                      <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="dd-MM-yyyy" style="z-index:999">
+                        <input name="admissionDate" class="form-control" type="text" ng-model="data.admission_date" ng-readonly="true" placeholder="Enter ..."
+                          required/>
+                      </datepicker>
+                    </div>
+                  </div>
 
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Student Photo</label>
-              <input type="file" ng-model="data.job_category" name="first_doc" id="doc1">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="box-header with-border">
-
-        <h3 class="box-title">Parent/Guardian Details</h3>
-
-      </div>
-
-      <div class="box-body">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Father Name</label>
-              <input type="text" ng-model="data.father_name" class="form-control" placeholder="Enter ...">
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Father Phone</label>
-              <input type="text" ng-model="data.father_contact" class="form-control" placeholder="Enter ...">
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Father Occupation</label>
-              <input type="text" ng-model="data.father_occupation" class="form-control" placeholder="Enter ...">
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Mother Name</label>
-              <input type="text" ng-model="data.mother_name" class="form-control" placeholder="Enter ...">
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Mother Phone</label>
-              <input type="text" ng-model="data.mother_contact" class="form-control" placeholder="Enter ...">
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Mother Occupation</label>
-              <input type="text" ng-model="data.mother_occupation" class="form-control" placeholder="Enter ...">
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Guardian Name</label>
-                  <input type="text" ng-model="data.gaurdian_name" class="form-control" placeholder="Enter ...">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Student Photo</label>
+                      <input type="file" name="file" class="form-control" ng-model="data.student_photo" ngf-select ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" onchange="angular.element(this).scope().loadImage(this.files)">
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Guardian Relation</label>
-                  <input type="text" ng-model="data.gaurdian_contact" class="form-control" placeholder="Enter ...">
-                </div>
-              </div>
-            </div>
+              <div class="box-header with-border">
 
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Guardian Phone</label>
-                  <input type="text" ng-model="data.gaurdian_relation" class="form-control" placeholder="Enter ...">
-                </div>
+                <h3 class="box-title">Parent/Guardian Details</h3>
+
               </div>
 
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Guardian Occupation</label>
-                  <input type="text" ng-model="data.gaurdian_occupation" class="form-control" placeholder="Enter ...">
+              <div class="box-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.father.$pristine}">
+                      <label>Father Name</label>
+                      <input type="text" name="father" ng-model="data.father_name" class="form-control" placeholder="Enter ..." required>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.Phone.$pristine||studentAdmission.Phone.$error.pattern}">
+                      <label>Father Phone</label>
+                      <input name="Phone" type="text" ng-model="data.father_contact" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.occupation.$pristine}">
+                      <label>Father Occupation</label>
+                      <input name="occupation" type="text" ng-model="data.father_occupation" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.Name.$pristine}">
+                      <label>Mother Name</label>
+                      <input name="Name" type="text" ng-model="data.mother_name" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.phone.$pristine||studentAdmission.phone.$error.pattern}">
+                      <label>Mother Phone</label>
+                      <input name="phone" type="text" ng-model="data.mother_contact" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.mother.$pristine}">
+                      <label>Mother Occupation</label>
+                      <input name="mother" type="text" ng-model="data.mother_occupation" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.name.$pristine}">
+                          <label>Guardian Name</label>
+                          <input name="name" type="text" ng-model="data.gaurdian_name" class="form-control" placeholder="Enter ...">
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.relation.$pristine}">
+                          <label>Guardian Relation</label>
+                          <input name="relation" type="text" ng-model="data.gaurdian_contact" class="form-control" placeholder="Enter ...">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.phone.$pristine}">
+                          <label>Guardian Phone</label>
+                          <input name="phone" type="text" ng-model="data.gaurdian_relation" class="form-control" placeholder="Enter ...">
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.guardian.$pristine}">
+                          <label>Guardian Occupation</label>
+                          <input name="guardian" type="text" ng-model="data.gaurdian_occupation" class="form-control" placeholder="Enter ...">
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.address.$pristine}">
+                      <label>Guardian Address</label>
+                      <textarea name="address" class="form-control" ng-model="data.gaurdian_address" rows="3" placeholder="Enter ..."></textarea>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-          </div>
 
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Guardian Address</label>
-              <textarea class="form-control" ng-model="data.gaurdian_address" rows="3" placeholder="Enter ..."></textarea>
-            </div>
-          </div>
+
+              <!-- SELECT2 EXAMPLE -->
+
+              <div class="box-header with-border">
+                <h3 class="box-title">Student Address</h3>
+
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.current.$pristine}">
+                      <label>Current Address</label>
+                      <textarea name="current" class="form-control" ng-model="data.cur_address" rows="3" placeholder="Enter ..."></textarea>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.permanant.$pristine}">
+                      <label>Permanent Address</label>
+                      <textarea class="form-control" name="permanant" ng-model="data.perm_address" rows="3" placeholder="Enter ..."></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.route.$pristine}">
+                      <label>School Bus Route</label>
+                      <select class="form-control select2" name="route" ng-model="routeId" style="width: 100%;">
+                        <option selected="">--Select--</option>
+                        <option ng-repeat="route in busRoutes" value="{{route.bus_route_id}}">{{route.route_title}}</option>
+
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.aadhaar.$pristine}">
+                      <label>Aadhaar No</label> 
+                      <input name="aadhaar" type="text" ng-model="data.aadhar_no" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Create Parent Account</label>
+
+                      <div class="radio">
+                        <label>
+                          <input style="position:relative;margin-left:0;" type="radio" name="parentAccount" value="true" ng-value="true" ng-model="data.parentAccount"> Yes
+                        </label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input style="position:relative;margin-left:0;" type="radio" name="parentAccount" value="false" ng-value="false" ng-model="data.parentAccount"> No
+                        </label>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="col-md-4" ng-show="data.parentAccount == true">
+                    <div class="form-group">
+                      <label>Choose Account</label>
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="parentAccountCreate" value="true" ng-value="true" ng-model="data.parentAccountCreate"> New
+                        </label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="parentAccountCreate" value="false" ng-value="false" ng-model="data.parentAccountCreate"> Existing
+                        </label>
+                      </div>
+                      <!--<select   name="parentId"   ng-model="parentId" class="form-control"> 
+                        <option>select</option>
+                      </select>-->
+
+                    </div>
+                  </div>
+                  <div class="col-md-4" ng-show="data.parentAccountCreate == false">
+                    <div class="form-group">
+                      <label>Choose Account</label>
+
+                      <select name="parentId" ng-model="data.parentId" class="form-control" ng-options="parent.parent_id as parent.parent_name for parent in parentsList ">
+                        <option value="" selected>--Select Parent--</option>
+                      </select>
+
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="row">
+
+                  <h4 class="box-title">Upload Documents</h4>
+                  <div class="col-md-6">
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <th style="width: 10px">#</th>
+                          <th>Title</th>
+                          <th></th>
+                        </tr>
+                        <tr>
+                          <td>1.</td>
+                          <td>
+                            <input type="text" name="first_title" class="form-control" placeholder="">
+                          </td>
+                          <td>
+                            <input type="file" name="first_doc" id="doc1">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>2.</td>
+                          <td>
+                            <input type="text" name="first_title" class="form-control" placeholder="">
+                          </td>
+                          <td>
+                            <input type="file" name="first_doc" id="doc1">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>3.</td>
+                          <td>
+                            <input type="text" name="first_title" class="form-control" placeholder="">
+                          </td>
+                          <td>
+                            <input type="file" name="first_doc" id="doc1">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>4.</td>
+                          <td>
+                            <input type="text" name="first_title" class="form-control" placeholder="">
+                          </td>
+                          <td>
+                            <input type="file" name="first_doc" id="doc1">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="col-md-6">
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <th style="width: 10px">#</th>
+                          <th>Title</th>
+                          <th></th>
+                        </tr>
+                        <tr>
+                          <td>5.</td>
+                          <td>
+                            <input type="text" name="first_title" class="form-control" placeholder="">
+                          </td>
+                          <td>
+                            <input type="file" name="first_doc" id="doc1">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>6.</td>
+                          <td>
+                            <input type="text" name="first_title" class="form-control" placeholder="">
+                          </td>
+                          <td>
+                            <input type="file" name="first_doc" id="doc1">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>7.</td>
+                          <td>
+                            <input type="text" name="first_title" class="form-control" placeholder="">
+                          </td>
+                          <td>
+                            <input type="file" name="first_doc" id="doc1">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>8.</td>
+                          <td>
+                            <input type="text" name="first_title" class="form-control" placeholder="">
+                          </td>
+                          <td>
+                            <input type="file" name="first_doc" id="doc1">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary pull-right">Submit</button>
+              </div>
+            </form>
         </div>
       </div>
+    </div>
+  </div>
+</div>
 
 
 
-      <!-- SELECT2 EXAMPLE -->
 
-      <div class="box-header with-border">
-        <h3 class="box-title">Student Address</h3>
 
-      </div>
-      <!-- /.box-header -->
-      <div class="box-body">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Current Address</label>
-              <textarea class="form-control" ng-model="data.cur_address" rows="3" placeholder="Enter ..."></textarea>
-            </div>
-          </div>
 
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Permanent Address</label>
-              <textarea class="form-control" ng-model="data.perm_address" rows="3" placeholder="Enter ..."></textarea>
-            </div>
-          </div>
-        </div>
 
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>School Bus Route</label>
-              <select class="form-control select2" ng-model="routeId" style="width: 100%;">
-                       <option selected="">--Select--</option>
-                       <option ng-repeat="route in busRoutes" value="{{route.bus_route_id}}">{{route.route_title}}</option>
-                       
+
+
+<!-- <div class="col-md-3">
+                           <div class="form-group">
+                     <label for="inputdefault">Admission Number</label>
+                     <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                   </div>
+                   </div>
+                   <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="inputdefault">Roll Number</label>
+                     <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                     </div> 
+                     </div>
+                     <div class="col-md-3">
+                         <div class="form-group">
+                             <label>Class</label>
+                            <select class="form-control" id="sel1">
+                             <option>Select...</option>
+                             <option>Class 1</option>
+                             <option>Class 2</option>
+                         </select>
+                      </div>
+                      </div>
+                      <div class="col-md-3"> 
+                       <div class="form-group">
+                     <label>Section</label>
+                          <select class="form-control" id="sel1">
+                            <option>Select...</option>
+                            <option>Section 1A</option>
+                            <option>Section 2A</option>
+                         </select>
+                    </div> 
+                    </div>
+                        <div class="col-md-3">
+                        <div class="form-group">
+                         <label for="inputdefault">ForeName</label>
+                     <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                     </div>
+                     </div>
+                     <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="inputdefault">SurName</label>
+                     <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                     </div>
+                     </div>
+                     <div class="col-md-3">
+                     <div class="form-group">
+                     <label>Gender</label>
+                          <select class="form-control" id="sel1">
+                            <option>Select...</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                         </select>
+                    </div> 
+                    </div>
+                    <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="inputdefault">Date of Birth</label>
+                     <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                     </div>
+                </div>                
+                   <div class="col-md-3">
+                   <div class="form-group">
+               <label>Category</label>
+                    <select class="form-control" id="sel1">
+                      <option>Select...</option>
+                      <option>General</option>
+                      <option>OBC</option>
+                      <option>Minority</option>
+                   </select>
+              </div> 
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+               <label>Religion</label>
+                    <select class="form-control" id="sel1">
+                      <option>Select...</option>
                     </select>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Aadhaar No</label>
-              <input type="text" ng-model="data.aadhar_no" class="form-control" placeholder="Enter ...">
-            </div>
-          </div>
+              </div> 
+              </div>
+              <div class="col-md-3">
+              <div class="form-group">
+               <label>Contact</label>
+                    <select class="form-control" id="sel1">
+                      <option>Select...</option>
+                    </select>
+              </div> 
+              </div>
+              <div class="col-md-3">
+              <div class="form-group">
+               <label>Email</label>
+                    <select class="form-control" id="sel1">
+                      <option>Select...</option>
+                    </select>
+              </div> 
+                </div>
+                 <div class="col-md-4">
+                  <div class="form-group">
+               <label>Admission Date</label>
+                    <select class="form-control" id="sel1">
+                      <option>Select...</option>
+                    </select>
+              </div>
+              </div>
+               <div class="col-md-4">
+                  <div class="form-group">
+                   <label>Student Photo</label><br> 
+                   <button><img src="../../../images/Upload.png" alt="Smiley face" width="30" height="30">Choose Files</button>
+                  </div>
+                </div>
+              </section>
+              <section class="parentdetails">
+               <h1>Parent/Guardian details</h1>
+                     <div class="col-md-4">
+                       <div class="form-group">
+                       <label for="inputdefault">Father Name</label>
+                     <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                     </div>
+                     </div>
+                     <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="inputdefault">Contact</label>
+                     <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                     </div>
+                     </div>
+                     <div class="col-md-4">
+                     <div class="form-group">
+                        <label for="inputdefault">Occupation</label>
+                     <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                     </div>
+                   </div>
+                     <div class="col-md-4">
+                      <div class="form-group">
+                     <label for="inputdefault">Mother Name</label>
+                     <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                   </div>
+                   </div>
+                   <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="inputdefault">Contact</label>
+                     <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                   </div>
+                   </div>
+                   <div class="col-md-4">
+                   <div class="form-group">
+                      <label for="inputdefault">Occupation</label>
+                     <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                   </div>
+                </div>
+                     <div class="col-md-4">
+                      <div class="form-group">
+                       <label for="inputdefault">Guardian Name</label>
+                     <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                     </div>
+                     </div>
+                     <div class="col-md-4">
+                    <div class="form-group">
+                     <label for="inputdefault">Guardian Relation</label>
+                     <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                     </div>
+                     </div>
+                     <div class="col-md-4">
+                   <div class="form-group">
+                     <label for="comment">Guardian Address</label>
+                     <textarea class="form-control" placeholder="Enter here.." rows="5" id="comment"></textarea>
+                   </div>
+                 </div>
+                     <div class="col-md-3">
+                      <div class="form-group">
+                       <label for="inputdefault">Guardian Phone</label>
+                     <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                     </div>
+                   </div>
+                   <div class="col-md-3">
+                    <div class="form-group">
+                     <label for="inputdefault">Guardian Qualification</label>
+                     <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                     </div>
+                </div>
+              </section>
+              <section class="Studentaddress">
+               <div class="row">
+              <h1>Student Address</h1> 
+                <div class="col-md-6">
+                  <div class="form-group">
+                 <label for="comment">Current</label>
+                  <textarea class="form-control" placeholder="Enter here.." rows="5" id="comment"></textarea>
+                   </div>
+                   </div>
+                   <div class="col-md-6">
+                   <div class="form-group">
+                    <label for="comment">Permanent</label>
+                <textarea class="form-control" placeholder="Enter here.." rows="5" id="comment"></textarea>
+                   </div>
+                   
+                </div>
+                
 
+                <div class="col-md-6">
+                  <div class="form-group">
+                   <label>School Bus Route</label>
+                    <select class="form-control" id="sel1">
+                      <option>Select...</option>
+                    </select>
+              </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group" id="aadhar">
+                 <label for="inputdefault">Aadhar Number</label>
+                     <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                    
+                   </div>
+                
+                </div>            
+              </section>
+              <section class="uploaddocuments">
+              <div class="col-md-12">
+                <div class="row">
+                    <h1>Upload Documents</h1>
+                     <button><img src="../../../images/Upload.png" alt="Smiley face" width="30" height="30">Choose Files</button>
+             
+                    </div>
+            
+               </div>
+               </section>
+               </div>     
+            </div>
         </div>
-
-        <div class="row">
-          <div class="col-md-12">
-            <h4 class="box-title">Upload Documents</h4>
-            <div class="col-md-6">
-              <table class="table">
-                <tbody>
-                  <tr>
-                    <th style="width: 10px">#</th>
-                    <th>Title</th>
-                    <th></th>
-                  </tr>
-                  <tr>
-                    <td>1.</td>
-                    <td><input type="text" name="first_title" class="form-control" placeholder=""></td>
-                    <td>
-                      <input type="file" name="first_doc" id="doc1">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2.</td>
-                    <td><input type="text" name="first_title" class="form-control" placeholder=""></td>
-                    <td>
-                      <input type="file" name="first_doc" id="doc1">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>3.</td>
-                    <td><input type="text" name="first_title" class="form-control" placeholder=""></td>
-                    <td>
-                      <input type="file" name="first_doc" id="doc1">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>4.</td>
-                    <td><input type="text" name="first_title" class="form-control" placeholder=""></td>
-                    <td>
-                      <input type="file" name="first_doc" id="doc1">
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div class="col-md-6">
-              <table class="table">
-                <tbody>
-                  <tr>
-                    <th style="width: 10px">#</th>
-                    <th>Title</th>
-                    <th></th>
-                  </tr>
-                  <tr>
-                    <td>5.</td>
-                    <td><input type="text" name="first_title" class="form-control" placeholder=""></td>
-                    <td>
-                      <input type="file" name="first_doc" id="doc1">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>6.</td>
-                    <td><input type="text" name="first_title" class="form-control" placeholder=""></td>
-                    <td>
-                      <input type="file" name="first_doc" id="doc1">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>7.</td>
-                    <td><input type="text" name="first_title" class="form-control" placeholder=""></td>
-                    <td>
-                      <input type="file" name="first_doc" id="doc1">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>8.</td>
-                    <td><input type="text" name="first_title" class="form-control" placeholder=""></td>
-                    <td>
-                      <input type="file" name="first_doc" id="doc1">
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
         </div>
       </div>
-
-      <div class="box-footer">
-        <button type="submit" class="btn btn-primary pull-right">Submit</button>
-      </div>
-    </form>
-  </div>
-  </div>
-  <!-- /.row -->
-  <!-- Main row -->
-
-  <!-- /.row (main row) -->
-
-</section>
+    </div>
+      -->

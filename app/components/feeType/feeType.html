@@ -1,74 +1,70 @@
-<section class="content-header">
-  <h1>
-    <i class="fa fa-money"></i> Fee Collection
-    <small>Fee Type</small>
-  </h1>
-  <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li>Fee Collection</li>
-    <li class="active">Fee Type</li>
-  </ol>
-</section>
-<!-- /.Content Header -->
+<div class="row background">
+  <div class="container">
+    <h1>Fee Management</h1>
+    <ul class="links">
+      <li>
+        <a ui-sref='main.feeType'>Feetype</a>
+      </li>
+      <li>/
+        <a ui-sref='main.feeMaster'>FeeMaster</a>
+      </li>
+      <li>/
+        <a ui-sref='main.collectFee'>CollectFee</a>
+      </li>
 
-<!-- Main content -->
-<section class="content">
-  <!-- Select Criteria -->
-
-  <div class="box box-default">
-    <div class="box-header with-border">
-      <!--<i class="fa fa-search" aria-hidden="true"></i>
-      <h3 class="box-title">Select Criteria</h3>-->
-    </div>
-    <!-- /.box-header -->
-    <form name="feeType">
-      <div class="box-body">
-
-        <div class="row">
-
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Fee Category</label>
-              <select class="form-control select2" style="width: 100%;" name="FeeCatogery" ng-model="data.fee_catogery" ng-options="fee.name as fee.name for fee in fee_catogery">
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="Feetype">
+      <div class="col-md-3">
+        <div class="backwhite">
+          <h1>Fee Collection</h1>
+          <div class="form-group">
+            <label>Fee Category</label>
+            <select class="form-control select2" style="width: 100%;" name="FeeCatogery" ng-model="data.fee_catogery" ng-options="fee.name as fee.name for fee in fee_catogery">
                          <option value="" selected="selected">--Select--</option>
                       </select>
-            </div>
+          </div>
+          <div class="form-group">
+            <label>Fee Type</label>
+            <input type="text" class="form-control" name="FeeType" ng-model="data.fee_type" placeholder="Enter ...">
           </div>
 
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Fee Type</label>
-              <input type="text" class="form-control" name="FeeType" ng-model="data.fee_type" placeholder="Enter ...">
-            </div>
+          <div class="box-footer">
+            <button type="submit" ng-click="addFeeType(data);" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Add</button>
           </div>
-
         </div>
       </div>
+      <div class="col-md-9">
+        <div class="backwhite">
+          <div class="subjectlist">
+            <div class="col-md-12">
 
-      <div class="box-footer">
-        <button type="submit" ng-click="addFeeType(data);" class="btn btn-primary pull-right">Add</button>
-      </div>
-    </form>
-  </div>
+              <div class="col-xs-3 col-md-4">
+                <div class="tooltip">
+                  <button><img src="../../../dist/img/images/pdf.jpg" data-ng-click="exportAction('excel')" class="img-responsive" width="30" height="30" alt="Responsive image"></button>
+                  <span class="tooltiptext">Download file</span>
+                </div>
+                <div class="tooltip">
+                  <button><img src="../../../dist/img/images/xlsx6.png" data-ng-click="exportAction('pdf')" class="img-responsive" width="30" height="30" alt="Responsive image"></button>
+                  <span class="tooltiptext">Download file</span>
 
-  <!-- Content List -->
-  <div class="box box-default">
-    <div class="nav-tabs-custom">
-      <ul class="nav nav-tabs">
-        <li class="active"><a  data-toggle="tab" aria-expanded="true"><i class="fa fa-list"></i> Fee Type List</a></li>
-      </ul>
-    </div>
+                </div>
+                <p>Fee Type List</p>
+              </div>
 
-    <div class="box-body">
-      <div class="tab-content">
-        <div class="tab-pane table-responsive no-padding active" id="tab_1">
+            </div>
+          </div>
+
           <table class="table table-striped">
             <thead>
               <tr>
                 <th>Sl. No</th>
                 <th>Fee Category</th>
                 <th>Fee Type</th>
-                
+
                 <th class="pull-right">Action</th>
               </tr>
             </thead>
@@ -77,14 +73,15 @@
                 <td>
                   {{$index+1}}
                 </td>
-                 <td class="select-td">
-                  <span editable-select="feeType.fee_category" e-name="fee_category" e-form="rowform" onaftersave="EditFeeType($index)" e-selectpicker e-ng-options="fee.name as fee.name for fee in fee_catogery">
+                <td class="select-td">
+                  <span editable-select="feeType.fee_category" e-name="fee_category" e-form="rowform" onaftersave="EditFeeType($index)" e-selectpicker
+                    e-ng-options="fee.name as fee.name for fee in fee_catogery">
                                                     {{feeType.fee_category}}</span>
                 </td>
                 <td>
                   <span editable-text="feeType.fee_type" e-name="fee_type" onaftersave="EditFeeType($index)" e-form="rowform" e-required>{{feeType.fee_type || 'empty' }}</span>
                 </td>
-               
+
                 <td class="pull-right">
                   <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == feeType">
                     <button type="submit" ng-click="EditFeeType($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
@@ -98,11 +95,14 @@
                   </div>
                 </td>
               </tr>
-              
+
             </tbody>
           </table>
         </div>
       </div>
+
+
     </div>
+
   </div>
-</section>
+</div>

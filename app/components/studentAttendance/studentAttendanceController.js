@@ -103,6 +103,12 @@ angular.module('school_erp')
             });
         }
 
+
+        $scope.attn= function(student,attend){
+            
+
+        }
+
         $scope.sendAttendanceHolder = [];
         $scope.submitBulkAttendance = function() {
             var dataB = $scope.attendanceBox;
@@ -132,6 +138,10 @@ angular.module('school_erp')
                 studentServices.setBulkAttendance($scope.sendAttendanceHolder, $scope.classId, $scope.secId)
                 .success(function(data, status) {
                    $scope.sendAttendanceHolder=[];
+                   ngDialog.open({
+                    template: '<p> Student Attendance  submitted successfully </p>',
+                    plain: true
+                });
                 })
                 .error(function(data, success) {
                     $scope.sendAttendanceHolder=[];

@@ -1,5 +1,5 @@
 angular.module('school_erp')
-    .controller("attendanceReportController", ['$http', '$scope', '$rootScope', '$window', 'globalServices', 'examServices', 'subjectsServices', 'studentServices', 'donutChartOneService', 'ngDialog', function ($http, $scope, $rootScope, $window, globalServices, examServices, subjectsServices, studentServices, donutChartOneService, ngDialog) {
+    .controller("attendanceReportController", ['$http', '$scope', '$rootScope', '$window', 'globalServices', 'examServices', 'subjectsServices', 'studentServices', 'ngDialog', function ($http, $scope, $rootScope, $window, globalServices, examServices, subjectsServices, studentServices, ngDialog) {
         $scope.evalData = [];
         $scope.data = [];
         $scope.select_date =new Date().toDateString();
@@ -81,7 +81,7 @@ angular.module('school_erp')
                     $scope.array = $.map($scope.attData, function (item) {
                         console.log(item);
                         //$scope.item=null;
-                        if(item.date==true){
+                        // if(item.date==true){
                         if (item.status == "Present") {
                             arrPresent.push(item.status);
 
@@ -118,7 +118,7 @@ angular.module('school_erp')
                             console.log($scope.leave1);
                             $scope.leave = ($scope.leave1).length;
                             console.log($scope.leave);
-                        }
+                        // }
                         }
                         $scope.chartdata = [
                             [$scope.present],
@@ -262,23 +262,23 @@ angular.module('school_erp')
 
         }
         $scope.getAttendenceByMonth = function (month, studentId) {
-            var arrPresent = new Array();
-            var arrAbsent = new Array();
-            var arrLeave = new Array();
-            $scope.attData = [];
+            var arrPresentMonth = new Array();
+            var arrAbsentMonth = new Array();
+            var arrLeaveMonth = new Array();
+            $scope.attDataMonth = [];
             studentServices.getAttendenceByMonth(month, studentId)
                 .success(function (data, status) {
-                    $scope.attData = data.donutchart;
+                    $scope.attDataMonth = data.donutchart;
                     console.log(JSON.stringify(data));
                     // $scope.chartdata = [[0], [0], [0]];
-                    if ($scope.attData == 0) {
+                    if ($scope.attDataMonth == 0) {
                         // array empty or does not exist
-                        $scope.chartdata1 = [
+                        $scope.chartdataMonth = [
                             [],
                             [],
                             []
                         ];
-                        if ($scope.chartdata1) {
+                        if ($scope.chartdataMonth) {
                             ngDialog.open({
                                 template: '<p>Report is not available.</p>',
                                 plain: true
@@ -288,59 +288,61 @@ angular.module('school_erp')
                         console.log("report not available")
                     }
 
-                    $scope.array = $.map($scope.attData, function (item) {
+                    $scope.array = $.map($scope.attDataMonth, function (item) {
 
                         if (item.status == "Present") {
-                            arrPresent.push(item.status);
+                            arrPresentMonth.push(item.status);
 
-                            $scope.data1 = [];
-                            for (var i = 0; i < arrPresent.length; i++) {
-                                $scope.data1.push(arrPresent[i]);
+                            $scope.dataMonth = [];
+                            for (var i = 0; i < arrPresentMonth.length; i++) {
+                                $scope.dataMonth.push(arrPresentMonth[i]);
+                               
                             }
-                            console.log($scope.data1);
-                            $scope.present = ($scope.data1).length;
-                            console.log($scope.present);
+                            console.log($scope.dataMonth);
+                            $scope.presentMonth = ($scope.dataMonth).length;
+                            console.log($scope.presentMonth);
                         } else if (item.status == "Absent") {
 
-                            arrAbsent.push(item.status);
+                            arrAbsentMonth.push(item.status);
 
-                            $scope.label1 = [];
-                            for (var j = 0; j < arrAbsent.length; j++) {
-                                $scope.label1.push(arrAbsent[j]);
-
+                            $scope.labelMonth= [];
+                            for (var j = 0; j < arrAbsentMonth.length; j++) {
+                                $scope.labelMonth.push(arrAbsentMonth[j]);
+                              
                             }
-                            console.log($scope.label1);
-                            $scope.absent = ($scope.label1).length;
-                            console.log($scope.absent);
+                            console.log($scope.labelMonth);
+                            $scope.absentMonth = ($scope.labelMonth).length;
+                            console.log($scope.absentMonth);
 
 
                         } else if (item.status == "On Leave") {
 
-                            arrLeave.push(item.status);
+                            arrLeaveMonth.push(item.status);
 
-                            $scope.leave1 = [];
-                            for (var k = 0; k < arrLeave.length; k++) {
-                                $scope.leave1.push(arrLeave[k]);
-
+                            $scope.leaveMonth = [];
+                            for (var k = 0; k < arrLeaveMonth.length; k++) {
+                                $scope.leaveMonth.push(arrLeaveMonth[k]);
+                               
                             }
-                            console.log($scope.leave1);
-                            $scope.leave = ($scope.leave1).length;
+                            console.log($scope.leaveMonth);
+                            $scope.leave = ($scope.leaveMonth).length;
                             console.log($scope.leave);
 
 
                         }
-                        $scope.chartdata1 = [
-                            [$scope.present],
-                            [$scope.absent],
-                            [$scope.leave]
-                        ];
+                       
 
                         //arrLabels.push(item.student_name);
                         return;
                         //, item.student_name
                     });
+                    $scope.chartdataMonth = [
+                        [$scope.presentMonth],
+                        [$scope.absentMonth],
+                        [$scope.leaveMonth]
+                    ];
                     //$scope.chartdata = [[40], [30], [20]];
-                    $scope.myJson1 = {
+                    $scope.myJsonMonth = {
                         type: "ring",
                         title: {
                             text: 'Attendance Report'

@@ -1,156 +1,98 @@
-
 angular.module('school_erp')
-    .controller("registrationController", ['$http', '$scope', 'registrationServices', function ($http, $scope, registrationServices) {
-        
-        
-        function tab1()
-        {
-            document.getElementById(tab_1).style.backgroundColor="rgba(3, 200, 244, 0.69)";
-            document.getElementById(tab_2).style.backgroundColor="grey";
-            
+    .controller("registrationController", ['$http', '$scope', '$window', 'ngDialog', 'registrationServices', 'globalServices', function ($http, $scope, $window, ngDialog, registrationServices, globalServices) {
+        $scope.schoolData = [];
+        $scope.classData = [];
+        $scope.data = [];
+        $scope.value = [];
+        $scope.datavalue = [];
+        $window.localStorage["schoolId"] = null;
+
+
+        $scope.selectedFile = null;
+
+        $scope.loadFile = function (files) {
+
+            console.log("messsage1");
+            $scope.$apply(function () {
+
+                $scope.selectedFile = files[0];
+                console.log($scope.selectedFile);
+
+                if ($scope.selectedFile.type != "image/jpeg" && $scope.selectedFile.type !="image/png") {
+                    //     ngDialog.open({
+                    //         template: '<p> Not a Image File </p>',
+                    //         plain: true
+                    //     });
+                    //    $window.alert("Not a Image File");
+                    $scope.message = "Not a Image File !..";
+                }
+
+
+            })
+
+        }
+      
+         // Add attendance single
+         $scope.addRegistration = function (data) {
+            var file = $scope.selectedFile;
+            var fd = new FormData();
+            fd.append('file', file);
+            fd.append('name', $scope.data.name);
+            fd.append('email', $scope.data.email);
+            fd.append('phone', $scope.data.contact);
+            fd.append('academic_year', $scope.data.batch_year);
+            fd.append('website', $scope.data.website);
+            fd.append('address', $scope.data.address);
+            fd.append('description', $scope.data.description);
+          
+
+            registrationServices.setRegistration(fd)
+                .success(function (data, status) {
+
+                    ngDialog.open({
+                        template: '<p> Registration submitted successfully </p>',
+                        plain: true
+                    });
+                    $scope.data = [];
+                    $scope.selectedFile = null;
+                    $scope.getRegistration();
+
+                })
+                .error(function (data, success) {
+                    ngDialog.open({
+                        template: '<p>Some Error Occured!</p>',
+                        plain: true
+                    });
+                })
         }
 
-        function tab2()
-        {
-            document.getElementById(tab_1).style.backgroundColor="grey";
-            document.getElementById(tab_2).style.backgroundColor="rgba(3, 200, 244, 0.69)";
-            
-        }
-        $scope.schoolData = [];
-        $scope.classData =[];
+
+
         $scope.getRegistration = function () {
 
             registrationServices.getRegistration()
                 .success(function (data, status) {
                     console.log(JSON.stringify(data));
                     $scope.schoolData = data.schools;
-                    $scope.school_id=$scope.schoolData[0].school_id;
+
+                    $scope.latestValue = $scope.schoolData[$scope.schoolData.length - 1];
+                    $scope.school_id = $scope.latestValue.school_id;
+                    //  $window.localStorage["schoolId"] = JSON.stringify($scope.latestValue.school_id);
+                    console.log($scope.latestValue);
                     console.log($scope.school_id);
+                    //console.log(schoolId);
+                    console.log("messages..........2");
+                    //$scope.school_id = $scope.schoolData[0].school_id;
+
+
+
+
 
                 })
-                .error(function (data, success) { })
+                .error(function (data, success) {})
         }
-
-        // Add attendance single
-        $scope.addRegistration = function (data) {
-            var Registration = {
-
-                name: $scope.data.name,
-                email: $scope.data.email,
-                phone: $scope.data.contact,
-                academic_year: $scope.data.batch_year,
-                website: $scope.data.website,
-                address: $scope.data.address,
-                description:$scope.data.description,
-                logo:$scope.data.logo
-
-            }
-            console.log(Registration);
-
-            registrationServices.setRegistration(Registration)
-                .success(function (data, status) {
-
-                    // ngDialog.open({
-                    //     template: '<p> Student Attendance  submitted successfully </p>',
-                    //     plain: true
-                    // });
-                    $scope.data = [];
-                    $scope.getRegistration();
-
-                })
-                .error(function (data, success) {
-                    // ngDialog.open({
-                    //     template: '<p>Some Error Occured!</p>',
-                    //     plain: true
-                    // });
-                })
-        }
-        $scope.getClass = function (school_id) {
-
-            registrationServices.getClass(school_id)
-                .success(function (data, status) {
-                    console.log(JSON.stringify(data));
-                    $scope.classData=data.school_classes;
-                    $scope.class_id=$scope.classData[0].class_id;
-                    console.log($scope.class_id);
-
-                })
-                .error(function (data, success) { })
-        }
-
-       
-        $scope.addClass = function (value) {
-            console.log("message");
-            var ClassData = {
-                name: $scope.value.name
-
-            }
-            console.log(ClassData);
-
-            registrationServices.setClass(ClassData,$scope.school_id)
-                .success(function (data, status) {
-
-                    // ngDialog.open({
-                    //     template: '<p> Student Attendance  submitted successfully </p>',
-                    //     plain: true
-                    // });
-                    $scope.value = [];
-
-                    $scope.getClass($scope.school_id);
-                })
-                .error(function (data, success) {
-                    // ngDialog.open({
-                    //     template: '<p>Some Error Occured!</p>',
-                    //     plain: true
-                    // });
-                })
-        }
-
-         $scope.getSection = function (class_id) {
-
-            registrationServices.getSection(class_id)
-                .success(function (data, status) {
-                    console.log(JSON.stringify(data));
-                    $scope.classData=$scope.class_sections;
-
-                })
-                .error(function (data, success) { })
-        }
-
-       
-        $scope.addSection = function (datavalue) {
-            var SectionData = {
-                name: $scope.datavalue.section
-
-            }
-            console.log(SectionData);
-
-            registrationServices.setSection(SectionData,$scope.class_id)
-                .success(function (data, status) {
-
-                    // ngDialog.open({
-                    //     template: '<p> Student Attendance  submitted successfully </p>',
-                    //     plain: true
-                    // });
-                    //$scope.datavalue= [];
-                     
-                    $scope.getSection($scope.class_id);
-                    $scope.getClass($scope.school_id);
-
-                })
-                .error(function (data, success) {
-                    // ngDialog.open({
-                    //     template: '<p>Some Error Occured!</p>',
-                    //     plain: true
-                    // });
-                })
-        }
-
-
-
-
-         $scope.getRegistration();
-         $scope.getClass($scope.school_id);
-         $scope.getSection($scope.class_id);
+        
+        $scope.getRegistration();
+      
 
     }])

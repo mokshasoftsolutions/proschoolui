@@ -128,6 +128,96 @@ angular.module('school_erp')
                 })
         }
 
+
+
+ $scope.selectedFile = null;
+        $scope.msg = "";
+
+
+        $scope.loadFile = function (files) {
+
+            console.log("messsage1");
+            $scope.$apply(function () {
+
+                $scope.selectedFile = files[0];
+                // console.log(file);
+            })
+
+        }
+
+        $scope.handleFile = function (secId) {
+            console.log("messsage2");
+            console.log(secId);
+            var file = $scope.selectedFile;
+            console.log(file);
+            $scope.save(file,secId);
+
+
+            // if (file) {
+
+            //     var reader = new FileReader();
+
+            //     reader.onload = function (e) {
+
+            //         var data = e.target.result;
+
+            //         var workbook = XLSX.read(data, { type: 'binary' });
+
+            //         var first_sheet_name = workbook.SheetNames[0];
+
+            //         var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);
+
+            //         //console.log(excelData);  
+
+            //         if (dataObjects.length > 0) {
+
+
+            //             $scope.save(dataObjects);
+
+
+            //         } else {
+            //             $scope.msg = "Error : Something Wrong1 !";
+            //         }
+
+            //     }
+
+            //     reader.onerror = function (ex) {
+
+            //     }
+
+            //     reader.readAsBinaryString(file);
+            // }
+        }
+
+
+        $scope.save = function (file,secId) {
+            console.log("messsage3");
+            console.log(file);
+
+            var fd = new FormData();
+            fd.append('file', file);
+           // fd.append('data', 'string');
+            $http.post(globalServices.globalValue.baseURL+'api/bulk_upload_subjects/'+secId, fd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            })
+                .success(function () {
+                    ngDialog.open({
+                        template: '<p>File Added Successfully.</p>',
+                        plain: true
+                    });
+
+                })
+                .error(function () {
+                    ngDialog.open({
+                        template: '<p>Some Error Occured!.</p>',
+                        plain: true
+                    });
+                });
+        }
+
+
+
         $scope.exportAction = function (option) {
             switch (option) {
                 case 'pdf':

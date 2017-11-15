@@ -5,7 +5,7 @@ angular.module('school_erp')
     NoticeBoardServices.getNoticeBoard = function() {
             return $http({
                 method: 'GET',
-                url: globalServices.globalValue.baseURL + 'api/noticeboard/SCH-9271'
+                url: globalServices.globalValue.baseURL + 'api/noticeboard/'+globalServices.globalValue.school_id
             })
         };
 
@@ -13,7 +13,7 @@ angular.module('school_erp')
             console.log(dataValue);
             return $http({
                 method: 'POST',
-                url: globalServices.globalValue.baseURL + 'api/noticeboard/SCH-9271',
+                url: globalServices.globalValue.baseURL + 'api/noticeboard/'+globalServices.globalValue.school_id,
                 data: $.param(dataValue),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             })

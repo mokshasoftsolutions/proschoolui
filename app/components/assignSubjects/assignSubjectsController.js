@@ -1,5 +1,5 @@
 angular.module('school_erp')
-    .controller("assignSbjectsController", ['$http', '$scope', 'assignServices', 'ngDialog', 'globalServices', 'subjectsServices', 'employeeServices', function ($http, $scope, assignServices, ngDialog, globalServices, subjectsServices, employeeServices) {
+    .controller("assignSbjectsController", ['$http', '$scope', 'assignServices', 'ngDialog', 'globalServices', 'subjectsServices', 'employeeServices','studentServices', function ($http, $scope, assignServices, ngDialog, globalServices, subjectsServices, employeeServices,studentServices) {
         $scope.employeeData = [];
         $scope.teacherData = [];
         $scope.subjects = [];
@@ -13,9 +13,12 @@ angular.module('school_erp')
         // })
 
         globalServices.getClass()
+        
             .success(function (data, status) {
+                console.log(JSON.stringify(data))
                 $scope.classDatanew = data.school_classes;// Api list-name
                 $scope.classId = $scope.classDatanew[0].class_id;
+                // console.log(class_id);
                 $scope.populateSections($scope.classId);
             })
             .error(function (data, success) {
@@ -27,6 +30,7 @@ angular.module('school_erp')
                 .success(function (data, status) {
                     $scope.secData = data.class_sections;// Api list-name
                     $scope.secId = $scope.secData[0].section_id;
+                    // console.log($scope.section_id);
                     $scope.getTeacher($scope.secId);
                     $scope.getSubjects($scope.secId);
                 })
@@ -56,68 +60,89 @@ angular.module('school_erp')
             });
         };
 
-        var arrTeacher = new Array();
-        employeeServices.getEmployee()
-            .success(function (data, status) {
-             //   console.log(JSON.stringify(data));
-                $scope.employeeData = data.employee;
-
-                $scope.array = $.map($scope.employeeData, function (item) {
-                    //console.log(item);
-                    //$scope.item=null;
-                    if (item.job_category == "teaching") {
-                        var id = item.employee_id;
-                        var name = item.first_name + ' ' + item.last_name;
-                        console.log(name);
-                        console.log(id);
-                        arrTeacher.push(name);
-                        // arrTeacher.push(id);
-
-                        $scope.teachers = [];
-                        for (var i = 0; i < arrTeacher.length; i++) {
-                            $scope.teachers.push(arrTeacher[i]);
-                        }
-                        console.log("message");
-                        console.log($scope.teachers);
-                        // $scope.present = ($scope.data1).length;
-                        // console.log($scope.present);
-                    }
-                    return;
-                });
 
 
-                // $scope.empType=$scope.employeeData[0].job_category;
-                // console.log($scope.empType);
-            })
-            .error(function (data, success) {
-            })
+        studentServices.getTeacherListBySchool()
+        .success(function (data, status) {
+            console.log(JSON.stringify(data));
+            $scope.teacherList = data.teachers;// Api list-name
+           
+            console.log($scope.teacherList);
+           
+        })
+        .error(function (data, success) {
+        })
 
-        $scope.addTeacher = function (data) {
+
+
+
+        // var arrTeacher = new Array();
+        // employeeServices.getEmployee()
+        //     .success(function (data, status) {
+        //      //   console.log(JSON.stringify(data));
+        //         $scope.employeeData = data.employee;
+
+        //         $scope.array = $.map($scope.employeeData, function (item) {
+        //             //console.log(item);
+        //             //$scope.item=null;
+        //             if (item.job_category == "teaching") {
+        //                 var id = item.employee_id;
+        //                 var name = item.first_name + ' ' + item.last_name;
+        //                 console.log(name);
+        //                 console.log(id);
+        //                 arrTeacher.push(name);
+        //                 // arrTeacher.push(id);
+
+        //                 $scope.teachers = [];
+        //                 for (var i = 0; i < arrTeacher.length; i++) {
+        //                     $scope.teachers.push(arrTeacher[i]);
+        //                 }
+        //                 console.log("message");
+        //                 console.log($scope.teachers);
+        //                 // $scope.present = ($scope.data1).length;
+        //                 // console.log($scope.present);
+        //             }
+        //             return;
+        //         });
+
+
+        //         // $scope.empType=$scope.employeeData[0].job_category;
+        //         // console.log($scope.empType);
+        //     })
+        //     .error(function (data, success) {
+        //     })
+
+        $scope.addTeacher = function (data,secId) {
             console.log("message");
 
 
             var teacherDetails = {
-                section_id: $scope.secId,
-                //employee_id:data.teachId.
-                //subject_id: $scope.data.subjectObj.subject_id,
-                subject_name: $scope.data.subjectObj,
-                employee_id: $scope.data.teachId,
-                // teacher_name:$scope.data.teachId
-
+                subject_id: $scope.data.subjectObj,
+                teacher_id: $scope.data.teachId,
+               
 
             }
             console.log(teacherDetails);
 
 
-            assignServices.setTeacher(teacherDetails)
+            assignServices.setTeacher(teacherDetails,secId)
                 .success(function (data, status) {
+                    if (data == false || data=='false') {
+                        ngDialog.open({
+                            template: '<p>Subject is Already Added</p>',
+                            plain: true
+                        });
+                    }
+                    else {
                     ngDialog.open({
                         template: '<p>Subjects are Added Successfully.</p>',
                         plain: true
                     });
+                }
                     $scope.data = [];
-                    $scope.getTeacher($scope.secId);
+                    $scope.getTeacher();
                 })
+                
                 .error(function (data, success) {
                     ngDialog.open({
                         template: '<p>Some Error Occured!</p>',
@@ -126,9 +151,9 @@ angular.module('school_erp')
                 })
 
         }
-        $scope.getTeacher = function (secId) {
+        $scope.getTeacher = function () {
 
-            assignServices.getTeacher(secId)
+            assignServices.getTeacher()
                 .success(function (data, status) {
                     $scope.teacherData = data.teachers;
 
@@ -186,15 +211,17 @@ angular.module('school_erp')
         $scope.DeleteAssignSubject = function (value) {
             $scope.editdata = angular.copy($scope.teacherData[value]);
             $scope.teacher_id = $scope.editdata.teacher_id;
+            $scope.subject_id = $scope.editdata.subject_id;
             console.log($scope.teacher_id);
-            assignServices.DeleteAssignSubject($scope.teacher_id)
+            console.log($scope.subject_id);
+            assignServices.DeleteAssignSubject($scope.teacher_id,$scope.subject_id)
                 .success(function (data, status) {
                     ngDialog.open({
-                        template: '<p>Chapter is Deleted Successfully.</p>',
+                        template: '<p>Subject is Deleted Successfully.</p>',
                         plain: true
                     });
                     $scope.editdata = [];
-                    $scope.getTeacher($scope.secId);
+                    $scope.getTeacher();
                 })
                 .error(function (data, success) {
                     ngDialog.open({
@@ -216,79 +243,85 @@ angular.module('school_erp')
 
         $scope.loadFile = function (files) {
 
+            console.log("messsage1");
             $scope.$apply(function () {
 
                 $scope.selectedFile = files[0];
-
+                // console.log(file);
             })
 
         }
 
         $scope.handleFile = function () {
-
+            console.log("messsage2");
             var file = $scope.selectedFile;
-
-            if (file) {
-
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-
-                    var data = e.target.result;
-
-                    var workbook = XLSX.read(data, { type: 'binary' });
-
-                    var first_sheet_name = workbook.SheetNames[0];
-
-                    var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);
-
-                    //console.log(excelData);  
-
-                    if (dataObjects.length > 0) {
+            console.log(file);
+            $scope.save(file);
 
 
-                        $scope.save(dataObjects);
+            // if (file) {
+
+            //     var reader = new FileReader();
+
+            //     reader.onload = function (e) {
+
+            //         var data = e.target.result;
+
+            //         var workbook = XLSX.read(data, { type: 'binary' });
+
+            //         var first_sheet_name = workbook.SheetNames[0];
+
+            //         var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);
+
+            //         //console.log(excelData);  
+
+            //         if (dataObjects.length > 0) {
 
 
-                    } else {
-                        $scope.msg = "Error : Something Wrong1 !";
-                    }
+            //             $scope.save(dataObjects);
 
-                }
 
-                reader.onerror = function (ex) {
+            //         } else {
+            //             $scope.msg = "Error : Something Wrong1 !";
+            //         }
 
-                }
+            //     }
 
-                reader.readAsBinaryString(file);
-            }
+            //     reader.onerror = function (ex) {
+
+            //     }
+
+            //     reader.readAsBinaryString(file);
+            // }
         }
 
 
-        $scope.save = function (data) {
-            console.log(JSON.stringify(data));
+        $scope.save = function (file) {
+            console.log("messsage3");
+            console.log(file);
 
-            $http({
-                method: "POST",
-                url: "globalServices.globalValue.baseURL + 'api/book/SCH-9271'",
-                data: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-
-            }).then(function (data) {
-                if (data.status) {
-                    $scope.msg = "Data has been inserted ! ";
-                }
-                else {
-                    $scope.msg = "Error : Something Wrong2";
-                }
-            }, function (error) {
-                $scope.msg = "Error : Something Wrong3";
+            var fd = new FormData();
+            fd.append('file', file);
+           // fd.append('data', 'string');
+            $http.post(globalServices.globalValue.baseURL+'api/upload_books/'+globalServices.globalValue.school_id, fd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
             })
+                .success(function () {
+                    ngDialog.open({
+                        template: '<p>File Added Successfully.</p>',
+                        plain: true
+                    });
 
+                })
+                .error(function () {
+                    ngDialog.open({
+                        template: '<p>Some Error Occured!.</p>',
+                        plain: true
+                    });
+                });
         }
-
+           
 
         $scope.exportAction = function (option) {
             switch (option) {

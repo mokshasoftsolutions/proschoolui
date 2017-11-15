@@ -1,4 +1,4 @@
-<section class="content-header">
+<!--<section class="content-header">
   <h1>
     <i class="fa fa-book"></i> Library
     <small>Book List</small>
@@ -13,20 +13,168 @@
 <!-- /.Content Header -->
 
 <!-- Main content -->
-<section class="content">
-  
+<div class="row background">
+  <div class="container">
+    <h1>Library Management</h1>
+    <ul class="links">
+      <li>
+        <a ui-sref='main.addBook'>Addbook</a>
+      </li>
+      <li>/
+        <a ui-sref='main.bookList'>Booklist</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="booklist">
+      <div class="col-md-12">
+        <div class="backwhite">
+          <!-- <section class="content"> -->
 
-  <div class="box box-default">
+
+          <!-- <div class="box box-default">
+    <div class="box-header with-border">
+      <i class="fa fa-th-list" aria-hidden="true"></i> -->
+          <!-- <h3 class="box-title">Book List</h3> -->
+          <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-right">Save as PDF</button></li>-->
+          <!-- <li style="list-style-type:none;"><button type="button" data-ng-click="exportAction('excel')" class="btn btn-primary pull-right">Save as Excel</button></li>
+      <li style="list-style-type:none;"><button type="button" data-ng-click="exportAction('pdf')" class="btn btn-primary pull-right">Save as PDF</button></li> -->
+          <!-- <div class="panel-body"> -->
+          <!--//pdf-save-content="idOneGraph"-->
+         <div class="Booklist">
+                <div class="col-md-12"> 
+            
+    <div class="col-xs-3 col-md-4">
+                <div class="tooltip">
+                <button><img src="../../../dist/img/images/pdf.jpg" data-ng-click="exportAction('pdf')" class="img-responsive" width="30" height="30" alt="Responsive image"></button>
+                  <span class="tooltiptext">Download file</span>
+                </div>
+                <div class="tooltip">
+                <button><img src="../../../dist/img/images/xlsx6.png" data-ng-click="exportAction('excel')" class="img-responsive" width="30" height="30" alt="Responsive image"></button>
+                <span class="tooltiptext">Download file</span>
+                
+                </div> 
+                   <p>Booklist</p>
+        </div> 
+                </div>
+         </div>
+
+
+          <table export-table st-table="display_records" st-safe-src="data" class="table rwd-table table-striped" style="width: 100%; margin-top: 22px">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Book Title</th>
+                <th>Author</th>
+                <th>Subject</th>
+                <th>Book Price</th>
+                <th>Quantity</th>
+                <th>Rack Number</th>
+                <th>Inward Date</th>
+                <th class="pull-right">Action</th>
+              </tr>
+            </thead>
+            <tr st-select-row="row" st-select-mode="multiple" ng-repeat="books in display_records" class="editable-row">
+              <td>{{$index+1}}</td>
+              <td><span editable-text="books.book_title" e-name="editdata.book_title" onaftersave="EditBook($index)" e-form="rowform"
+                  e-required>{{books.book_title || 'empty' }}</span></td>
+              <td><span editable-text="books.author_name" e-name="editdata.author_name" onaftersave="EditBook($index)" e-form="rowform"
+                  e-required>{{books.author_name || 'empty' }}</span></td>
+              <td class="select-td">
+                <span editable-select="books.subject" e-name="subject" e-form="rowform" onaftersave="EditBook($index)" e-selectpicker e-ng-options="sub.name as sub.name for sub in subData">
+                {{ books.subject}}
+              </span>
+              </td>
+              <td><span editable-text="books.book_price" e-name="editdata.book_price" onaftersave="EditBook($index)" e-form="rowform"
+                  e-required>{{books.book_price || 'empty' }}</span></td>
+              <td><span editable-text="books.qty" e-name="editdata.qty" onaftersave="EditBook($index)" e-form="rowform" e-required>{{books.qty || 'empty' }}</span></td>
+              <td><span editable-text="books.rack_number" e-name="editdata.rack_number" onaftersave="EditBook($index)" e-form="rowform"
+                  e-required>{{books.rack_number || 'empty' }}</span></td>
+              <td><span editable-text="books.inward_date" e-name="editdata.inward_date" onaftersave="EditBook($index)" e-form="rowform"
+                  e-required>{{books.inward_date || 'empty' }}</span></td>
+
+              <td class="pull-right">
+                <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == books">
+                  <button type="submit" ng-click="EditBook($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
+                  <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
+                </form>
+
+                <div class="buttons" ng-show="!rowform.$visible">
+                  <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
+                  <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBook($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
+                </div>
+              </td>
+            </tr>
+
+
+            <tbody>
+
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="5" class="text-center">
+                  <div class="pull-right" st-pagination="" st-items-by-page="7" st-displayed-pages="5"></div>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+          <!--<export-to-pdf elem-id="table"></export-to-pdf>-->
+
+          <!-- </div>
+    </div> -->
+          <!-- </div> -->
+          <!-- </section> -->
+
+          <!-- <div class="Booklist">
+                <div class="col-md-12"> 
+                    <div class="col-xs-3 col-md-4">
+                <div class="tooltip">
+                <button><img src="../../../dist/img/images/pdf-file.png" class="img-responsive" width="30" height="30" alt="Responsive image"></button>
+                  <span class="tooltiptext">Save</span>
+                </div>
+                <div class="tooltip">
+                <button><img src="../../../dist/img/images/xlsx-file-format-extension.png" class="img-responsive" width="30" height="30" alt="Responsive image"></button>
+                <span class="tooltiptext">Save</span>                
+                </div> 
+                   <p>Text</p>
+               </div>          
+             </div>  
+          </div>
+          <table style="width:100%">
+               <tr>
+                   <th>#</th>
+                   <th>BookTitle</th>
+                   <th>Author</th>
+                   <th>Subject</th>
+                   <th>BookPrice</th>
+                   <th>Quantity</th>
+                   <th>Rackcalander</th>
+                   <th>IwardDate</th>
+                   <th>Action</th>
+               </tr>                
+           </table> -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--<div class="box box-default">
     <div class="box-header with-border">
       <i class="fa fa-th-list" aria-hidden="true"></i>
       <h3 class="box-title">Book List</h3>
       <!--<li style="list-style-type:none;"><button type="button" pdf-save-button="idOneGraph" pdf-name="bookList.pdf" class="btn btn-primary pull-right">Save as PDF</button></li>-->
-      <li style="list-style-type:none;"><button type="button" data-ng-click="exportAction('excel')" class="btn btn-primary pull-right">Save as Excel</button></li>
+<!--<li style="list-style-type:none;"><button type="button" data-ng-click="exportAction('excel')" class="btn btn-primary pull-right">Save as Excel</button></li>
       <li style="list-style-type:none;"><button type="button" data-ng-click="exportAction('pdf')" class="btn btn-primary pull-right">Save as PDF</button></li>
 
       <div class="panel-body">
         <!--//pdf-save-content="idOneGraph"-->
-        <table export-table class="table rwd-table table-striped" style="width: 100%; margin-top: 22px">
+<!--<table export-table class="table rwd-table table-striped" style="width: 100%; margin-top: 22px">
           <thead>
             <tr>
               <th>#</th>
@@ -69,19 +217,18 @@
                 <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
                 <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBook($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
-              </div>
-            </td>
-          </tr>
+</div>
+</td>
+</tr>
 
 
-          <tbody>
+<tbody>
 
-          </tbody>
-        </table>
-        <!--<export-to-pdf elem-id="table"></export-to-pdf>-->
+</tbody>
+</table>
+<!--<export-to-pdf elem-id="table"></export-to-pdf>-->
 
-      </div>
-    </div>
-  </div>
+</div>
+</div>
+</div>
 </section>
-

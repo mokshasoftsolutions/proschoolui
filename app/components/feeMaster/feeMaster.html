@@ -1,77 +1,71 @@
-<section class="content-header">
-  <h1>
-    <i class="fa fa-money"></i> Fee Collection
-    <small>Fee Master</small>
-  </h1>
-  <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li>Fee Collection</li>
-    <li class="active">Fee Master</li>
-  </ol>
-</section>
-<!-- /.Content Header -->
-
-<!-- Main content -->
-<section class="content">
-  <!-- Select Criteria -->
-
-  <div class="box box-default">
-    <!--<div class="box-header with-border">
-      <i class="fa fa-search" aria-hidden="true"></i>
-      <h3 class="box-title">Select Criteria</h3>
-    </div>-->
-    <!-- /.box-header -->
-     <form name="feeMaster">
-    <div class="box-body">
-      <div class="row">
-
-        <div class="col-md-4" >
-          <div class="form-group">
+<div class="row background">
+  <div class="container">
+        <h1>Fee Management</h1>
+       <ul class="links">
+          <li>
+              <a ui-sref='main.feeType'>Feetype</a>
+          </li>
+          <li>/
+              <a ui-sref='main.feeMaster'>FeeMaster</a>
+          </li>
+          <li>/
+              <a ui-sref='main.collectFee'>CollectFee</a>
+          </li>
+          
+      </ul>        
+  </div>
+</div>
+<div class="container">
+    <div class="row">
+      <div class="FeeMaster">
+        <div class="col-md-3">
+          <div class="backwhite">
+            <h1>Fee Collection</h1>     
+           <div class="form-group">
             <label>Class</label>
             <select class="form-control select2" ng-options="class.name as class.name for class in classData"
               style="width: 100%;" ng-model="data.class_name">
                         <!--<option ng-repeat="class in classData" value="{{class.class_id}}">{{class.name}}</option>-->
                       </select>
           </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="form-group">
+                <div class="form-group">
             <label>Fee Type</label>
             <select class="form-control select2" style="width: 100%;" ng-options="type.fee_type as type.fee_type for type in feeTypeData"
               ng-model="data.fee_type">
               
                       </select>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
+                    <div class="form-group">
             <label> Amount</label>
             <input type="text" class="form-control" ng-model="data.amount" placeholder="Enter ...">
           </div>
-        </div>
-      </div>
-    </div>
+          <div class="box-footer">
+      <button type="submit" ng-click="addFeeMaster(data);" class="btn btn-primary pull-right"style="background-color: #03104e;border-color: #03104e;">Add Fee</button>
+    </div>       
+             </div>
+          </div>
+         <div class="col-md-9">
+           <div class="backwhite">
+                 <div class="subjectlist">
+            <div class="col-md-12">
 
-    <div class="box-footer">
-      <button type="submit" ng-click="addFeeMaster(data);" class="btn btn-primary pull-right">Add Fee</button>
-    </div>
-  </div>
-  </form>
+              <div class="col-xs-3 col-md-4">
+                <div class="tooltip">
+                  <button><img src="../../../dist/img/images/pdf.jpg" data-ng-click="exportAction('excel')" class="img-responsive" width="30" height="30" alt="Responsive image"></button>
+                  <span class="tooltiptext">Download file</span>
+                </div>
+                <div class="tooltip">
+                  <button><img src="../../../dist/img/images/xlsx6.png" data-ng-click="exportAction('pdf')" class="img-responsive" width="30" height="30" alt="Responsive image"></button>
+                  <span class="tooltiptext">Download file</span>
 
+                </div>
+                <p>Fee List</p>
+              </div>
 
-  <!-- Content List -->
-  <div class="box box-default">
-    <div class="nav-tabs-custom">
-      <ul class="nav nav-tabs">
-        <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-list"></i> Fee List</a></li>
-      </ul>
-    </div>
-
-    <div class="box-body">
-      <div class="tab-content">
-        <div class="tab-pane table-responsive no-padding active" id="tab_1">
-          <table class="table table-striped">
+            </div>
+          </div>
+             
+              <table class="table table-striped">
             <thead>
               <tr>
                 <th>Sl. No</th>
@@ -116,8 +110,12 @@
               
             </tbody>
           </table>
+           </div>
         </div>
+       
+        
       </div>
-    </div>
-  </div>
-</section>
+    
+ </div>
+</div>
+

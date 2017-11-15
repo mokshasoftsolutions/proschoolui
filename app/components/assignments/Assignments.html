@@ -1,34 +1,25 @@
-<section class="content-header">
-  <h1>
-    <i class="fa fa-book"></i> Assignments
-    <small></small>
-  </h1>
-  <ol class="breadcrumb">
-    <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">Assignments</li>
-  </ol>
-</section>
-<!-- /.Content Header -->
+<div class="row background">
+  <div class="container">
+    <h1>Assignment Management</h1>
+    <ul class="links">
+      <li>
+        <a ui-sref='main.assignments'>Assignment</a>
+      </li>
+      <li>/
+        <a ui-sref='main.marks'>Marks</a>
+      </li>
 
-<!-- Main content -->
-<section class="content">
-  <!-- Select Criteria -->
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="Assignments">
+      <div class="col-md-3">
+        <div class="backwhite">
+          <h1>Assignments</h1>
 
-  <div class="box box-default">
-    <div class="box-header with-border" ng-show="showRole(['admin','teacher'])">
-      <!--<i class="fa fa-search" aria-hidden="true"></i>
-      <h3 class="box-title">Select Criteria</h3>-->
-      <ul class="panel-controls">
-        <li> <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)"
-          /></li>
-        <li> <input type="button" value="Import" class="btn btn-primary" ng-click="handleFile()" /></li>
 
-      </ul>
-    </div>
-    <!-- /.box-header -->
-    <div class="box-body">
-      <div class="row">
-        <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
           <div class="form-group">
             <label>Class</label>
             <select class="form-control select2" ng-options="class.class_id as class.name for class in classData" data-ng-change="populateSections(classId)"
@@ -36,140 +27,223 @@
                         
                       </select>
           </div>
-        </div>
 
-        <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
+
+
           <div class="form-group">
             <label>Section</label>
             <select data-ng-change="populateSubjects(secId)" ng-options="sec.section_id as sec.name for sec in secData" class="form-control select2"
               style="width: 100%;" ng-model="secId">
                       </select>
           </div>
-        </div>
 
-        <div class="col-md-4" ng-show="showRole(['admin','teacher','parent'])">
+
+
           <div class="form-group">
             <label>Select Subject</label>
             <select data-ng-change="populateChapters(subId)" ng-options="sub.subject_id as sub.name for sub in subData" class="form-control select2"
               ng-model="subId" style="width: 100%;">
                         </select>
           </div>
-        </div>
-         <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
-            <div class="form-group">
-              <label>Select Chapter </label>
-             
-                      </select>
-                      <select data-ng-change="getAssignments(secId,chapterId)" class="form-control select2" ng-model="chapterId" style="width: 100%;">
+
+
+          <div class="form-group">
+            <label>Select Chapter </label>
+
+
+            <select data-ng-change="getAssignments(secId,chapterId)" class="form-control select2" ng-model="chapterId" style="width: 100%;">
                             <option selected="selected">--Select--</option>
                             <option ng-repeat="chapter in chapterData" value="{{chapter.lession_id}}">{{chapter.title}}</option>
-                        </select>
-            </div>
+                </select>
+          </div>
+          <div class="box-footer">
+            <button type="submit" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Search</button>
           </div>
 
-      </div>
-      <div class="row">
-        <div class="col-md-12" ng-if="showRole(['admin','teacher'])">
-          <button type="submit" class="btn btn-primary pull-right">Select</button>
+
+
+
+
+
+
+
+
+          <!-- <div class="form-group">
+                   <label>Class</label>
+                    <select class="form-control" id="sel1">
+                      <option>select...</option>
+                      <option>class 1</option>
+                      <option>class 2</option>
+                   </select>
+             </div>
+              <div class="form-group">
+                <label>Section</label>
+                    <select class="form-control" id="sel1">
+                      <option>select...</option>
+                      <option>section 1A</option>
+                      <option>section 2A</option>
+                   </select>
+             </div>
+             <div class="form-group">
+                <label>Select subject</label>
+                    <select class="form-control" id="sel1">
+                      <option>select...</option>
+                      <option>English</option>
+                      <option>Maths</option>
+                      <option>Science</option>
+                      <option>Social</option>
+                      <option>Sanskrit</option>
+                      <option>Hindi</option>
+                   </select>
+             </div>
+             <div class="form-group"> 
+                 <button>Search</button>
+               </div> -->
+
+
         </div>
       </div>
 
-      <div class="box-header with-border" ng-show="showRole(['admin','teacher'])">
-        <i class="fa fa-plus-square" aria-hidden="true"></i>
-        <h3 class="box-title">Add Assignments</h3>
-      </div>
-    
-      <form name="Assignments" ng-submit="Assignments.$valid && addAssignments(data)" novalidate>
-        <div class="row">
-          <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
-            <div class="form-group" ng-class="{'has-error': Assignments.$submitted  && Assignments.assignmentTitle.$pristine}">
-              <label>Assignment Title</label>
-              <input type="text" name="assignmentTitle" ng-model="data.assignment_title" class="form-control" placeholder="Enter ..." required>
-            </div>
-          </div>
-         
-          <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
-            <div class="form-group">
-              <label>Due Date</label>
-              <div class="input-group date" ng-class="{'has-error': Assignments.$submitted  && Assignments.dueDate.$pristine}">
-                <div class="input-group-addon">
-                  <i class="fa fa-calendar"></i>
+      <div class="col-md-9">
+
+        <div class="addsubject">
+          <h1>Add Assignments</h1>
+          <form name="Assignments" ng-submit="Assignments.$valid && addAssignments(data)" novalidate>
+            <div class="row">
+              <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
+                <div class="form-group" ng-class="{'has-error': Assignments.$submitted  && Assignments.assignmentTitle.$pristine}">
+                  <label>Assignment Title</label>
+                  <input type="text" name="assignmentTitle" ng-model="data.assignment_title" class="form-control" placeholder="Enter ..." required>
                 </div>
-                <!--<input type="text"  ng-model="data.due_date" class="form-control pull-right" id="datepicker">-->
-                <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="dd-MM-yyyy" style="z-index:999">
-                  <input class="form-control" name="dueDate" type="text" ng-model="data.due_date" ng-readonly="true" placeholder="Enter ..."
-                    required/>
-                </datepicker>
+              </div>
+
+              <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
+                <div class="form-group" ng-class="{'has-error': Assignments.$submitted  && Assignments.dueDate.$pristine}">
+                  <label>Due Date</label>
+                  <div class="input-group date">
+                    <div class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <!--<input type="text"  ng-model="data.due_date" class="form-control pull-right" id="datepicker">-->
+                    <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="dd-MM-yyyy" style="z-index:999">
+                      <input class="form-control" name="dueDate" type="text" ng-model="data.due_date" ng-readonly="true" placeholder="Enter ..."
+                        required/>
+                    </datepicker>
+                  </div>
+                </div>
+              </div>
+              <!--</div>
+        <div class="row">-->
+              <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
+                <div class="form-group" ng-class="{'has-error': Assignments.$submitted  && Assignments.description.$pristine}">
+                  <label>Description</label>
+                  <textarea class="form-control" name="description" ng-model="data.description" rows="3" placeholder="Enter ..." required></textarea>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-12" ng-if="showRole(['admin','teacher'])">
+                <button type="submit" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Add Assignment</button>
+              </div>
+            </div>
+          </form>
+          <!-- <div class="col-md-3">
+                    <div class="form-group">
+                 
+                  <label for="inputdefault">Assignment Title</label><br>
+                   <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+               </div>
+               </div>
+              <div class="col-md-3"> 
+               <div class="form-group">
+                   <label></label>
+                    <select class="form-control" id="sel1">
+                      <option>select...</option>
+                      <option>chapter 1</option>
+                   </select>
+             </div>
+             </div>
+             <div class="col-md-3">
+             <div class="form-group">
+            <label>date</label>
+            <div id="filterDate2">
+              <div class="input-group date" data-date-format="dd.mm.yyyy">
+
+                <input  type="text" class="form-control" placeholder="dd.mm.yyyy">
+                <div class="input-group-addon" >
+                  <span class="glyphicon glyphicon-th"></span>
+                </div>
+              </div>
+              <script>
+                $('.input-group.date').datepicker({format: "dd.mm.yyyy"});
+              </script>
+            </div>
+            </div>
+          </div>   
+            <div class="col-md-3">
+             <div class="form-group">
+             <label for="comment">Guardian Address</label>
+                  <textarea class="form-control" placeholder="Enter here.." rows="5" id="comment"></textarea>
+               </div>
+            </div>
+            <div class="col-md-3" style="top: -50px;">   
+              <div class="form-group"> 
+                 <button>Add Assignment</button>
+               </div>
+              </div> -->
+        </div>
+
+      </div>
+      <div class="col-md-9">
+
+        <div class="subjectlist">
+          <div class="Booklist">
+            <div class="col-md-12">
+
+              <div class="col-xs-3 col-md-4">
+                <div class="tooltip">
+                  <button><img src="../../../dist/img/images/pdf.jpg" data-ng-click="exportAction('pdf')" class="img-responsive" width="30" height="30" alt="Responsive image"></button>
+                  <span class="tooltiptext">Download file</span>
+                </div>
+                <div class="tooltip">
+                  <button><img src="../../../dist/img/images/xlsx6.png" data-ng-click="exportAction('excel')" class="img-responsive" width="30" height="30" alt="Responsive image"></button>
+                  <span class="tooltiptext">Download file</span>
+
+                </div>
+                <p>Assignment List</p>
               </div>
             </div>
           </div>
-        <!--</div>
-        <div class="row">-->
-          <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
-            <div class="form-group" ng-class="{'has-error': Assignments.$submitted  && Assignments.description.$pristine}">
-              <label>Description</label>
-              <textarea class="form-control" name="description" ng-model="data.description" rows="3" placeholder="Enter ..." required></textarea>
-            </div>
-          </div>
-        </div>
 
-        <div class="row">
-          <div class="col-md-12" ng-if="showRole(['admin','teacher'])">
-            <button type="submit" class="btn btn-primary pull-right">Add Assignment</button>
-          </div>
-        </div>
-      </form>
-    </div>
-
-
-  </div>
-
-  <!-- /.content -->
-
-  <!-- Content List -->
-  <div class="box box-default">
-    <div class="box-header with-border">
-
-      <i class="fa fa-th-list" aria-hidden="true"></i>
-      <h3 class="box-title">Assignments</h3>
-      <li style="float:right;list-style-type:none;"><button type="button" data-ng-click="exportAction('excel')" class="btn btn-primary pull-right">Save as Excel</button></li>
-      <li style="float:right;list-style-type:none;"><button type="button" data-ng-click="exportAction('pdf')" class="btn btn-primary pull-right">Save as PDF</button></li>
-      <!--<ul class="panel-controls">
-        <div id="exportthis"></div>
-        <canvas></canvas>
-        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-        <li><button type="button" ng-click="export()" class="btn btn-primary pull-right" >Save as PDF</button></li>
-
-       
-      </ul>-->
-    </div>
-    <div class="box-body">
-      <div class="tab-content">
-        <div class="tab-pane table-responsive no-padding active" id="tab_1">
-           <table export-table class="table rwd-table table-striped">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Assignment Title</th>
-                <th>Chapter Name</th>
-                <th>Due Date</th>
-                <th>Description</th>
-                <th class="pull-right" >Action</th>
-              </tr>
-            </thead>
+          <table table export-table st-table="display_records" st-safe-src="assignmentsData" class="table rwd-table table-striped"
+            style="width:100%">
+            <tr>
+              <th>#</th>
+              <th>Assignment Title</th>
+              <th>Chapter Name</th>
+              <th>Due Date</th>
+              <th>Description</th>
+              <th class="pull-right">Action</th>
+            </tr>
             <tbody>
-              <tr ng-repeat="assignment in assignmentsData">
+              <tr st-select-row="row" st-select-mode="multiple" ng-repeat="assignment in display_records" class="editable-row">
                 <td>{{$index+1}}</td>
-                <td><span editable-text="assignment.assignment_title" e-name="assignment.assignment_title" onaftersave="EditAssignments($index)" e-form="rowform" e-required>{{assignment.assignment_title || 'empty' }}</span></td>
+                <td><span editable-text="assignment.assignment_title" e-name="assignment.assignment_title" onaftersave="EditAssignments($index)"
+                    e-form="rowform" e-required>{{assignment.assignment_title || 'empty' }}</span></td>
                 <!--<td><span editable-text="assignment.chapter_name" e-name="assignment.chapter_name" onaftersave="EditAssignments($index)" e-form="rowform" e-required>{{assignment.chapter_name || 'empty' }}</span></td>-->
-                <td><a href="">
-                                                    <!--<span editable-select="assignment.chapter_name" e-name="chapter_name" e-form="rowform" e-selectpicker e-ng-options="chapter.title as chapter.title for chapter in chapterData">-->
-                {{ assignment.chapter_doc[0].title}}</a>
-              <!--</span>-->
-                                                </td>
-                <td><span editable-text="assignment.due_date" e-name="assignment.due_date" onaftersave="EditAssignments($index)" e-form="rowform" e-required>{{assignment.due_date || 'empty' }}</span></td>
-                <td><span editable-text="assignment.description" e-name="assignment.description" onaftersave="EditAssignments($index)" e-form="rowform" e-required>{{assignment.description || 'empty' }}</span></td>
-                <td class="pull-right" >
+                <td>
+                  <a href="">
+                    <!--<span editable-select="assignment.chapter_name" e-name="chapter_name" e-form="rowform" e-selectpicker e-ng-options="chapter.title as chapter.title for chapter in chapterData">-->
+                    {{ assignment.chapter_doc[0].title}}</a>
+                  <!--</span>-->
+                </td>
+                <td><span editable-text="assignment.due_date" e-name="assignment.due_date" onaftersave="EditAssignments($index)"
+                    e-form="rowform" e-required>{{assignment.due_date || 'empty' }}</span></td>
+                <td><span editable-text="assignment.description" e-name="assignment.description" onaftersave="EditAssignments($index)"
+                    e-form="rowform" e-required>{{assignment.description || 'empty' }}</span></td>
+                <td class="pull-right">
                   <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == assignment">
                     <button type="submit" ng-click="EditAssignments($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
                     <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
@@ -183,10 +257,16 @@
                 </td>
               </tr>
             </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="5" class="text-center">
+                  <div class="pull-right" st-pagination="" st-items-by-page="5" st-displayed-pages="2"></div>
+                </td>
+              </tr>
+            </tfoot>
           </table>
+
         </div>
+
       </div>
     </div>
-  </div>
-</section>
-

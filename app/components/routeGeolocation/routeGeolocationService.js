@@ -5,19 +5,19 @@ angular.module('school_erp')
      routeGeoLocationServices.getGeolocation = function(vehicle_code) {
             return $http({
                 method: 'GET',
-                url: "http://192.168.1.4:2016/api/netcomp/getAllDevicesDetails"+vehicle_code
-                //url: globalServices.globalValue.baseURL + 'api/noticeboard/SCH-9271'
+                url: globalServices.globalValue.baseURL+ 'api/get_single_tracking/'+vehicle_code
+                //url: globalServices.globalValue.baseURL + 'api/getDeviceCodeDetails/'+vehicle_code
             })
         };
 
-    routeGeoLocationServices.setNoticeBoard = function(dataValue) {
-            console.log(dataValue);
+    
+     routeGeoLocationServices.getAllGeolocations = function() {
             return $http({
-                method: 'POST',
-                url: globalServices.globalValue.baseURL + 'api/noticeboard/SCH-9271',
-                data: $.param(dataValue),
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                method: 'GET',
+                url: globalServices.globalValue.baseURL+ 'api/get_all_tracking'
+                //url: globalServices.globalValue.baseURL + 'api/getDeviceCodeDetails/'+vehicle_code
             })
-    };   
+        };
+    
     return routeGeoLocationServices;
     }]);  

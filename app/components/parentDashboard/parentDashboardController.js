@@ -34,7 +34,7 @@ angular.module('school_erp')
                 .success(function (data, status) {
                     $scope.subData = data.subjects;
                     // $scope.subId = $scope.subData[0].subject_id;
-                    $scope.subId = "SCH-9271-CL-21-SEC-26-SUB-13";
+                    $scope.subId = data.subjects[0].subject_id;
                     //$scope.getChapters($scope.subId);
                     $scope.getTimeTable($scope.subId);
                 })

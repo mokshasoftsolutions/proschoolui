@@ -1,146 +1,170 @@
-<section class="content-header">
-    <h1>
-        <i class="fa fa-graduation-cap" aria-hidden="true"></i> Academics
-        <small>Subjects</small>
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Academics</li>
-        <li class="active">Subjects</li>
-    </ol>
-</section>
-<!-- /.Content Header -->
-
-<!-- Main content -->
-<section class="content">
-    <!-- Select Criteria -->
-
-    <div class="box box-default" ng-if="showRole(['admin','teacher'])">
-        <!--<div class="box-header with-border" ng-if="showRole(['admin','teacher'])">
-            <i class="fa fa-search" aria-hidden="true"></i>
-            <h3 class="box-title">Select Criteria</h3>
-        </div>-->
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="row">
-                <div class="col-md-6" ng-show="showRole(['admin','teacher'])">
-                    <div class="form-group">
-                        <label>Select Class</label>
-                        <select class="form-control select2" ng-options="class.class_id as class.name for class in classData" data-ng-change="populateSections(classId)"
-                            style="width: 100%;" ng-model="classId">
+<div class="row background">
+  <div class="container">
+    <h1>Acadamic Management</h1>
+    <ul class="links">
+      <li>
+        <a ui-sref='main.subjects'>Subjects</a>
+      </li>
+      <li>/
+        <a ui-sref='main.chapters'>Chapters</a>
+      </li>
+      <li>/
+        <a ui-sref='main.assignSubjects'>Assignsubjects</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="subjects">
+      <div class="col-md-3">
+        <div class="backwhite">
+          
+          <div class="box-body">
+            
+              
+                <div class="form-group">
+                  <label>Select Class</label>
+                  <select class="form-control select2" ng-options="class.class_id as class.name for class in classData" data-ng-change="populateSections(classId)"
+                    style="width: 100%;" ng-model="classId">
                        
                       </select>
-                    </div>
                 </div>
-
-                <div class="col-md-6" ng-show="showRole(['admin','teacher'])">
-                    <div class="form-group">
-                        <label>Select Section</label>
-                        <select ng-options="sec.section_id as sec.name for sec in secData" class="form-control select2"
-                            style="width: 100%;" ng-model="secId">
+              
+              
+                <div class="form-group">
+                  <label>Select Section</label>
+                  <select ng-options="sec.section_id as sec.name for sec in secData" class="form-control select2" style="width: 100%;" ng-model="secId">
                       </select>
-                    </div>
                 </div>
+              
 
-            </div>
+            
             <div class="row">
-                <div class="col-md-12" ng-if="showRole(['admin','teacher'])">
-                    <button ng-click="getSubjects(secId)" class="btn btn-primary pull-right">Select</button>
-                </div>
+              <div class="col-md-12" ng-if="showRole(['admin','teacher'])">
+                <button ng-click="getSubjects(secId)" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Search</button>
+              </div>
             </div>
 
             <div class="box-header with-border">
-                <i class="fa fa-plus-square" aria-hidden="true"></i>
-                <h3 class="box-title">Add Subjects</h3>
+              <i class="fa fa-plus-square" aria-hidden="true"></i>
+              <h3 class="box-title">Add Subjects</h3>
             </div>
             <form name="subjects" ng-submit="subjects.$valid && addSubjects(data)" novalidate>
-                <div class="row">
-                    <div class="col-md-4" ng-show="showRole(['admin','teacher'])">
-                        <div class="form-group" ng-class="{'has-error': subjects.$submitted  && subjects.subjectName.$pristine}">
-                            <label>Subject Name</label>
-                            <input type="text" name="subjectName" class="form-control" ng-model="data.name" placeholder="Enter ..." required>
-                        </div>
-                    </div>
-                    <!--<div class="col-md-4" ng-if="showRole(['admin','teacher'])">
-                      <div class="form-group">
-                        <label>Subject Code</label>
-                        <input type="text" class="form-control" ng-model="data.subject_id" placeholder="Enter ...">
-                      </div>
-                    </div>-->
-                    <!--<div class="col-md-4" ng-if="showRole(['admin','teacher'])">
-                      <div class="radio">
-                        <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1"  value="option1" checked="">
-                        Theory
-                        </label>
-                      </div>
-                      <div class="radio">
-                        <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios2"  value="option2">
-                        Practical
-                        </label>
-                      </div>
-                    </div>-->
-                </div>
-                <div class="row">
-                    <div class="col-md-12" ng-if="showRole(['admin','teacher'])">
-                        <button type="submit" ng class="btn btn-primary pull-right">Add Subject</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-
-    </div>
-
-    <!-- /.content -->
-
-    <!-- Content List -->
-    <div class="box box-default">
-        <div class="box-header with-border">
-            <i class="fa fa-th-list" aria-hidden="true"></i>
-            <h3 class="box-title">Subject List</h3>
-            <li style="list-style-type:none;"><button type="button" data-ng-click="exportAction('excel')" class="btn btn-primary pull-right">Save as Excel</button></li>
-            <li style="list-style-type:none;"><button type="button" data-ng-click="exportAction('pdf')" class="btn btn-primary pull-right">Save as PDF</button></li>
-        </div>
-        <div class="box-body">
-            <div class="tab-content">
-                <div class="tab-pane table-responsive no-padding active" id="tab_1">
-                   <table export-table class="table rwd-table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Subject Name</th>
-                                <!--<th>Subject Code</th>-->
-                                <!--<th>Subject Type</th>-->
-                                <th class="pull-right" >Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="subjects in subjectsData" class="editable-row">
-                                <td>{{$index+1}}</td>
-                                <td><span editable-text="subjects.name" e-name="subjects.name" onaftersave="EditSubjects($index)" e-form="rowform" e-required>{{subjects.name || 'empty' }}</span></td>
-                                <!--<td>{{subjects.subject_id}} </td>-->
-                                <!--<td>{{subjects._id}}</td>-->
-                                <td class="pull-right" >
-                                  <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == subjects">
-                                    <button type="submit" ng-click="EditSubjects($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
-                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
-                                  </form>
-
-                                  <div class="buttons" ng-show="!rowform.$visible">
-                                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
-                                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteSubjects($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                    <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
-                                  </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+              
+                
+                  <div class="form-group" ng-class="{'has-error': subjects.$submitted  && subjects.subjectName.$pristine}">
+                    <label>Subject Name</label>
+                    <input type="text" name="subjectName" class="form-control" ng-model="data.name" placeholder="Enter ..." required>
+                  </div>
+                
+              
+               <div class="box-footer">
+              <button type="submit" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Add Subject</button>
             </div>
-        </div>
-    </div>
-</section>
-</div>
+            </form>
+          </div>
 
+          <!-- <div class="box box-default">
+              <div class="box-header with-border">
+          <div class="form-group">
+            <label>Class</label>
+             
+            <select class="form-control" id="sel1">
+                      <option>select...</option>
+                      <option>class 1</option>
+                      <option>class 2</option>
+                   </select>
+          </div>
+          <div class="form-group">
+            <label>Section</label>
+            <select class="form-control" id="sel1">
+                      <option>select...</option>
+                      <option>section 1A</option>
+                      <option>section 2A</option>
+                   </select>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" style= "background-color: #03104e;border-color: #03104e;">Search</button>
+          </div> -->
+          
+      <!-- <div class="addsubjects">
+            <h1>Add Subjects</h1>
+            <div class="form-group">
+              <label for="inputdefault">Subject input</label>
+              <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+            </div>
+            <div class="form-group">
+              <button>Search</button>
+            </div>
+
+          </div> -->
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="backwhite">
+      <div class="subjectlist">
+        <div class="col-md-12">
+              
+    <div class="col-xs-3 col-md-4">
+                <div class="tooltip">
+                <button><img src="../../../dist/img/images/pdf.jpg" data-ng-click="exportAction('excel')" class="img-responsive" width="30" height="30" alt="Responsive image"></button>
+                  <span class="tooltiptext">Download file</span>
+                </div>
+                <div class="tooltip">
+                <button><img src="../../../dist/img/images/xlsx6.png" data-ng-click="exportAction('pdf')" class="img-responsive" width="30" height="30" alt="Responsive image"></button>
+                <span class="tooltiptext">Download file</span>
+                
+                </div> 
+                   <p>Subject List</p>
+        </div> 
+
+        </div>
+      </div>
+      <table export-table st-table="display_records" st-safe-src="subjectsData" class="table rwd-table table-striped" style="width:100%;margin-top: 20px;">
+        <tr>
+          <th>#</th>
+          <th>SubjectName</th>
+          <th class="pull-right">Action</th>
+        </tr>
+        <tbody>
+          <tr st-select-row="row" st-select-mode="multiple" class="editable-row" ng-repeat="subjects in display_records" class="editable-row">
+            <td>{{$index+1}}</td>
+            <td><span editable-text="subjects.name" e-name="subjects.name" onaftersave="EditSubjects($index)" e-form="rowform"
+                e-required>{{subjects.name || 'empty' }}</span></td>
+            <!--<td>{{subjects.subject_id}} </td>-->
+            <!--<td>{{subjects._id}}</td>-->
+            <td class="pull-right">
+              <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == subjects">
+                <button type="submit" ng-click="EditSubjects($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
+                <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
+              </form>
+
+              <div class="buttons" ng-show="!rowform.$visible">
+                <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
+                <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteSubjects($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5" class="text-center">
+              <div class="pull-right" st-pagination="" st-items-by-page="7" st-displayed-pages="5"></div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="js/scripts.js"></script>
+</body>
+
+</html>

@@ -39,7 +39,7 @@ angular.module('school_erp')
             examServices.getExamPapersbySectionAndSchedule(exSchedule,sectionId)
                 .success(function (data, status) {
                     $scope.examData = data.resultArray;
-                    // console.log(JSON.stringify(data));
+                     console.log(JSON.stringify(data));
 
                 })
                 .error(function (data, success) {});
@@ -230,7 +230,7 @@ angular.module('school_erp')
 
             $http({
                 method: "POST",
-                url: "globalServices.globalValue.baseURL + 'api/book/SCH-9271'",
+                url: globalServices.globalValue.baseURL + 'api/book/'+globalServices.globalValue.school_id,
                 data: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json'

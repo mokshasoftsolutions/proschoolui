@@ -1,73 +1,75 @@
 angular.module('school_erp')
-.controller("examSchedulesController",['$http','$scope','examServices','ngDialog', 'globalServices', function($http, $scope, examServices,ngDialog, globalServices){
+    .controller("examSchedulesController", ['$http', '$scope', 'examServices', 'ngDialog', 'globalServices', function ($http, $scope, examServices, ngDialog, globalServices) {
         $scope.examData = [];
-          $scope.today1 = '01/01/1975';
-          $scope.data = [];
+        $scope.today1 = '01/01/1975';
+        $scope.data = [];
 
         globalServices.getClass()
-        .success(function(data, status){
-            $scope.classData = data.school_classes;// Api list-name
-            $scope.classId = $scope.classData[0].class_id;
-            $scope.populateSections($scope.classId)
-            
-        })
-        .error(function(data,success){
-        })
+            .success(function (data, status) {
+                $scope.classData = data.school_classes;// Api list-name
+                $scope.classId = $scope.classData[0].class_id;
+                $scope.populateSections($scope.classId)
 
-        $scope.populateSections = function(classId){
+            })
+            .error(function (data, success) {
+            })
+
+        $scope.populateSections = function (classId) {
             globalServices.getSections(classId)
-            .success(function(data, status){
-                $scope.secData = data.class_sections;// Api list-name
-                $scope.secId = $scope.secData[0].section_id;
-            })
-            .error(function(data,success){
-            })
+                .success(function (data, status) {
+                    $scope.secData = data.class_sections;// Api list-name
+                    $scope.secId = $scope.secData[0].section_id;
+                })
+                .error(function (data, success) {
+                })
         }
-       
-        $scope.populateExams= function(secId) {
+
+        $scope.populateExams = function (secId) {
             $scope.getExamPapers($scope.secId);
         }
-        $scope.getExamScheduleData = function(){
-             examServices.getExamSchedule()
-            .success(function(data, status){
-                $scope.examData = data.exam_schedules;
-            })
-            .error(function(data,success){
-            })
+        $scope.getExamScheduleData = function () {
+            examServices.getExamSchedule()
+                .success(function (data, status) {
+                    $scope.examData = data.exam_schedules;
+                })
+                .error(function (data, success) {
+                })
         }
-       
-         $scope.addExamSchedule = function(data){
-             var examDetails = {
+
+        $scope.addExamSchedule = function (data) {
+            var examDetails = {
                 exam_title: $scope.data.exam_title,
                 exam_classes: $scope.data.exam_classes,
                 from_date: $scope.data.from_date
-             }
-            examServices.setExamSchedule(examDetails)   
-            .success(function(data, status){
-                ngDialog.open({
-                template: '<p>ExamSchedules are Added Successfully.</p>',
-                plain: true
-                });
-                $scope.data = [];
-                $scope.getExamScheduleData();
-            })
-            .error(function(data,success){
-                ngDialog.open({
-                template: '<p>Some Error Occured!</p>',
-                plain: true
-                });
-            })
-           
+            }
+            examServices.setExamSchedule(examDetails)
+                .success(function (data, status) {
+                    ngDialog.open({
+                        template: '<p>ExamSchedules are Added Successfully.</p>',
+                        plain: true
+                    });
+                    $scope.data = [];
+                    $scope.getExamScheduleData();
+                })
+                .error(function (data, success) {
+                    ngDialog.open({
+                        template: '<p>Some Error Occured!</p>',
+                        plain: true
+                    });
+                })
+
         }
-    //     $scope.EditExamSchedule = function(value){
-    //     $scope.editdata = $scope.examData[value];
-    // }
-    
-      $scope.EditExamSchedule = function (value,exam) {
+
+        $scope.showRole = function (role) {
+            return globalServices.fetchRoleAuth(role);
+        }
+
+
+        $scope.EditExamSchedule = function (value, exam) {
 
             console.log("messsage");
             $scope.exam = angular.copy($scope.examData[value]);
-             $scope.exam_sch_id = $scope.exam.exam_sch_id;
+            $scope.exam_sch_id = $scope.exam.exam_sch_id;
             console.log($scope.exam_sch_id);
             var Exam_SchDetails = {
                 exam_title: $scope.exam.exam_title,
@@ -75,10 +77,10 @@ angular.module('school_erp')
                 from_date: $scope.exam.from_date
             }
             console.log(Exam_SchDetails);
-           
-            $scope.addEditExamSchedule(Exam_SchDetails ,$scope.exam_sch_id);
+
+            $scope.addEditExamSchedule(Exam_SchDetails, $scope.exam_sch_id);
         }
-        $scope.addEditExamSchedule = function (Exam_SchDetails ,exam_sch_id) {
+        $scope.addEditExamSchedule = function (Exam_SchDetails, exam_sch_id) {
             examServices.EditExamSchedule(Exam_SchDetails, exam_sch_id)
                 .success(function (data, status) {
                     // ngDialog.open({
@@ -100,9 +102,7 @@ angular.module('school_erp')
         $scope.getExamScheduleData();
 
 
-           $scope.showRole = function(role){            
-            return globalServices.fetchRoleAuth(role);
-        } 
+
 
 
         $scope.selectedFile = null;
@@ -188,7 +188,7 @@ angular.module('school_erp')
 
             $http({
                 method: "POST",
-                url: "globalServices.globalValue.baseURL + 'api/book/SCH-9271'",
+                url: globalServices.globalValue.baseURL + 'api/book/'+globalServices.globalValue.school_id,
                 data: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json'
@@ -215,5 +215,5 @@ angular.module('school_erp')
                 default: console.log('no event caught');
             }
         }
-}])
+    }])
 

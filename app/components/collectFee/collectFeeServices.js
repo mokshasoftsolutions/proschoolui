@@ -12,7 +12,7 @@ angular.module('school_erp')
     collectFeeServices.getFeeTypes = function(classId){
         return $http({
                     method: 'GET',
-                    url: globalServices.globalValue.baseURL + 'api/feetypes/SCH-9271/'+classId
+                    url: globalServices.globalValue.baseURL + 'api/feetypes/'+globalServices.globalValue.school_id+'/'+classId
                 })
     };
 

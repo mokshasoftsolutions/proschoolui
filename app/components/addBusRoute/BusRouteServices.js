@@ -5,15 +5,15 @@ angular.module('school_erp')
         BusRouteServices.getBusRoute = function () {
             return $http({
                 method: 'GET',
-                url: globalServices.globalValue.baseURL + 'api/bus_route_title/SCH-9271'
+                url: globalServices.globalValue.baseURL + 'api/bus_route_title/'+globalServices.globalValue.school_id
             })
         };
         BusRouteServices.setBusRoute = function (dataValue) {
             console.log(dataValue);
             return $http({
                 method: 'POST',
-                // url: globalServices.globalValue.baseURL + 'api/bus_route/SCH-9271',
-                url: globalServices.globalValue.baseURL + 'api/bus_route_title/SCH-9271/',
+                
+                url: globalServices.globalValue.baseURL + 'api/bus_route_title/'+globalServices.globalValue.school_id+'/',
                 data: $.param(dataValue),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             })
@@ -30,7 +30,7 @@ angular.module('school_erp')
             console.log(dataValue);
             return $http({
                 method: 'POST',
-                // url: globalServices.globalValue.baseURL + 'api/bus_route/SCH-9271',
+                
                 url: globalServices.globalValue.baseURL + 'api/addorupdatestationstobusroute/'+routeId,
                 data: $.param(dataValue),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -72,20 +72,20 @@ angular.module('school_erp')
                 url: globalServices.globalValue.baseURL + 'api/delete_bus_route_title/' + busRoute_id
             })
         }
-         BusRouteServices.EditBusRouteToStation = function (dataValue, busRoute_id) {
+         BusRouteServices.EditBusRouteToStation = function (dataValue, busRoute_id,station) {
             console.log(dataValue);
             return $http({
                 method: 'PUT',
-                url: globalServices.globalValue.baseURL + 'api/edit_bus_route/' + busRoute_id,
+                url: globalServices.globalValue.baseURL + 'api/edit_bus_route_station/' + busRoute_id+'/'+station,
 
                 data: $.param(dataValue),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             })
         };
-        BusRouteServices.DeleteBusRouteToStation = function (busRoute_id) {
+        BusRouteServices.DeleteBusRouteToStation = function (busRoute_id,station) {
             return $http({
-                method: 'DELETE',
-                url: globalServices.globalValue.baseURL + 'api/delete_bus_route/' + busRoute_id
+                method: 'PUT',
+                url: globalServices.globalValue.baseURL + 'api/delete_bus_route_station/' + busRoute_id+ '/'+station
             })
         }
 

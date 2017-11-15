@@ -1,123 +1,92 @@
-<section class="content-header">
-  <h1>
-    <i class="fa fa-graduation-cap" aria-hidden="true"></i> Academics
-    <small>Assign Subjects 2</small>
-  </h1>
-  <ol class="breadcrumb">
-    <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
-    <li>Academics</li>
-    <li class="active">Assign Subjects</li>
-  </ol>
-</section>
-<!-- /.Content Header -->
+<div class="row background">
+  <div class="container">
+    <h1>Academic Management</h1>
+    <ul class="links">
+      <li>
+        <a ui-sref='main.subjects'>Subjects</a>
+      </li>
+      <li>/
+        <a ui-sref='main.chapters'>Chapters</a>
+      </li>
+      <li>/
+        <a ui-sref='main.assignSubjects'>Assignsubjects</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="Assignsubjects">
+      <div class="col-md-3" ng-show="showRole(['admin','teacher'])">
+        <div class="backwhite">
+ 
 
-<!-- Main content -->
-<section class="content">
-  <!-- Select Criteria -->
-
-  <div class="box box-default">
-    <div class="box-header with-border" ng-show="showRole(['admin','teacher'])">
-      <!--<i class="fa fa-search" aria-hidden="true"></i>
-      <h3 class="box-title">Select Criteria</h3>-->
-      <ul class="panel-controls">
-        <li> <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)"
-          /></li>
-        <li> <input type="button" value="Import" class="btn btn-primary" ng-click="handleFile()" /></li>
-
-      </ul>
-    </div>
-    <!-- /.box-header -->
-    <div class="box-body">
-
-      <div class="row">
-        <div class="col-md-5" ng-show="showRole(['admin','teacher'])">
-          <div class="form-group">
+          <div class="form-group" ng-show="showRole(['admin','teacher'])">
             <label>Select Class</label>
             <select class="form-control select2" data-ng-change="populateSections(classId)" ng-options="class.class_id as class.name for class in classDatanew"
               style="width: 100%;" ng-model="classId">
-                      
-                      </select>
+                </select>
           </div>
-        </div>
-
-        <div class="col-md-5" ng-show="showRole(['admin','teacher'])">
-          <div class="form-group">
+          <div class="form-group" ng-show="showRole(['admin','teacher'])">
             <label>Select Section</label>
             <select class="form-control select2" style="width: 100%;" data-ng-change="getTeacher(secId);getSubjects(secId);" ng-options="sec.section_id as sec.name for sec in secData"
               ng-model="secId">
-                              
                       </select>
           </div>
-        </div>
-
-      </div>
-      <div class="row">
-        <div class="col-md-12" ng-if="showRole(['admin','teacher'])">
-          <button type="submit" class="btn btn-primary pull-right">Select</button>
-        </div>
-      </div>
-      <form ng-submit="addTeacher(data)">
-        <div class="box-header with-border" ng-show="showRole(['admin','teacher'])">
-          <i class="fa fa-plus-square" aria-hidden="true"></i>
-          <h3 class="box-title">Assign Subjects</h3>
-        </div>
-
-        <div class="row">
-          <div class="col-md-5" ng-show="showRole(['admin','teacher'])">
+          <div class="col-md-12" ng-if="showRole(['admin','teacher'])">
+            <button type="submit" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Select</button>
+          </div>
+          <form name="assignSubjects" ng-submit="assignSubjects.$valid && addTeacher(data)" novalidate>
+            <h3 class="box-title">Assign Subjects</h3>
             <div class="form-group">
               <h4><b>Subject Name</b></h4>
             </div>
-          </div>
-          <div class="col-md-5" ng-show="showRole(['admin','teacher'])">
-            <div class="form-group">
-              <h4><b>Teacher</b></h4>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-5" ng-show="showRole(['admin','teacher','parent'])">
-            <div class="form-group">
-              <select class="form-control select2" style="width: 100%;" ng-options="sub.name as sub.name for sub in subjectsData" ng-model="data.subjectObj">
+          <div class="form-group" ng-show="showRole(['admin','teacher'])">
+              <select class="form-control select2" style="width: 100%;" ng-options="sub.subject_id as sub.name for sub in subjectsData" ng-model="data.subjectObj">
                <option value="" selected>--Select--</option>
                           </select>
             </div>
-          </div>
-          <div class="col-md-5" ng-show="showRole(['admin','teacher','parent'])">
-
-            <div class="form-group">
-              <select class="form-control select2" style="width: 100%;" ng-options="teacher as teacher for teacher in teachers" ng-model="data.teachId">
+            <div class="form-group" ng-show="showRole(['admin','teacher'])">
+              <h4><b>Teacher</b></h4>
+            </div>
+                 <div class="form-group" ng-class="{'has-error': assignSubjects.$submitted  && assignSubjects.teacher.$pristine}">
+              <select name="teacher" class="form-control select2" style="width: 100%;" ng-options="teacher.teacher_id as teacher.teacher_name for teacher in teacherList" ng-model="data.teachId">
                 <option value="" selected>--Select--</option>
                      
                           </select>
             </div>
-          </div>
-          <div class="col-md-2" ng-if="showRole(['admin','teacher','parent'])">
-            <div class="form-group">
-              <button class="btn btn-primary" type="submit" value="add">Add</button>
+              <div class="box-footer">
+                <button class="btn btn-primary pull-right" type="submit" value="add" style="background-color: #03104e;border-color: #03104e;">Add</button>
+              </div>
+          
+
+          </form>
+
+        </div>
+      </div>
+      <div class="col-md-9">
+       
+          <div class="subjectlist">
+            <div class="col-md-12">
+
+
+              <div class="col-xs-3 col-md-4">
+                <div class="tooltip">
+                  <button><img src="../../../dist/img/images/pdf.jpg" data-ng-click="exportAction('excel')" class="img-responsive" width="30" height="30" alt="Responsive image"></button>
+                  <span class="tooltiptext">Download file</span>
+                </div>
+                <div class="tooltip">
+                  <button><img src="../../../dist/img/images/xlsx6.png" data-ng-click="exportAction('pdf')" class="img-responsive" width="30" height="30" alt="Responsive image"></button>
+                  <span class="tooltiptext">Download file</span>
+
+                </div>
+                <p>Subject list</p>
+              </div>
+
             </div>
           </div>
-        </div>
-      </form>
-    </div>
-
-
-  </div>
-
-  <!-- /.content -->
-  <div class="box box-default">
-    <div class="nav-tabs-custom">
-      <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" aria-expanded="true"><i class="fa fa-list"></i> List  View</a></li>
-        <!--<li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-newspaper-o"></i> Details View</a></li>-->
-        <li style="float:right"><button type="button" data-ng-click="exportAction('excel')" class="btn btn-primary pull-right">Save as Excel</button></li>
-        <li style="float:right"><button type="button" data-ng-click="exportAction('pdf')" class="btn btn-primary pull-right">Save as PDF</button></li>
-      </ul>
-    </div>
-
-    <div class="box-body">
-      <div class="tab-content">
-        <div class="tab-pane table-responsive no-padding active" id="tab_1">
-          <table export-table class="table table-striped">
+      
+        <table export-table st-table="display_records" st-safe-src="teacherData" class="table table-striped">
             <thead>
               <tr>
                 <th>#</th>
@@ -137,16 +106,16 @@
                       </a>
                 </td>
               </tr>-->
-              <tr ng-repeat="teachers in teacherData" class="editable-row">
+              <tr st-select-row="row" st-select-mode="multiple" ng-repeat="teachers in display_records" class="editable-row">
                 <td>{{$index+1}}</td>
                 <td>
                   <!--<span editable-text="teachers.subject_name" e-name="subject_name" onaftersave="EditAssignSubjects($index)"
                     e-form="rowform" e-required>-->
-                  <a href="">  {{teachers.subjects[0].subject_name || 'empty' }}</a></td>
+                  <a href="">  {{teachers.subjects[0].subjects || 'empty' }}</a></td>
                 <td>
                   <!--<span editable-text="teachers.teacher_name" e-name="teacher_id" onaftersave="EditAssignSubjects($index)"
                     e-form="rowform" e-required>-->
-                    <a href="">{{teachers.employee_id}}</a></td>
+                    <a href="">{{teachers.teacher_name}}</a></td>
                   <!--<a href="">  {{teachers.employee_doc.first_name || 'empty' }} {{ teachers.employee_doc.last_name || 'empty' }}</a></td>-->
                 <!--<td><span editable-text="chapter.subject_name" e-name="chapter.subject_name" onaftersave="EditChapters($index)" e-form="rowform" e-required>{{chapter.subject_name || 'empty' }}</span></td>
                                 <td><span editable-text="chapter.description" e-name="chapter.description" onaftersave="EditChapters($index)" e-form="rowform" e-required>{{chapter.description || 'empty' }}</span></td>
@@ -165,9 +134,17 @@
                 </td>
               </tr>
             </tbody>
-          </table>
-        </div>
-      </div>
+            <tfoot>
+              <tr>
+                <td colspan="5" class="text-center">
+                  <div class="pull-right" st-pagination="" st-items-by-page="2" st-displayed-pages="5"></div>
+                </td>
+              </tr>
+            </tfoot>
+          </table>  
+            </div>
     </div>
   </div>
-</section>
+</div>
+</div>
+</div>

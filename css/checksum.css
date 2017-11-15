@@ -1,0 +1,71 @@
+body,html{
+  margin:0px;
+  padding: 0px;
+}
+
+.navbar-inverse { 
+  min-height: 200px; 
+  padding: 20px;
+}
+
+#myNavbar .navbar-nav {
+  width: 100%;
+  text-align: center;
+}
+
+#myNavbar .navbar-nav > li {
+  float: none;
+  display: inline-block;
+}
+
+#myNavbar .navbar-nav > li > a { padding: 10px 20px; }
+
+.logo{
+  margin-top: 10px;
+  margin-bottom:10px; 
+}
+
+div.logo img{ width:200px; }
+
+header .logo,.logout{ display: inline-block; }
+
+.logout{
+  float:right;
+  padding-top: 40px;
+}
+
+.student_link .links li{ display: inline-block; }
+
+/*nav.navbar.navbar-inverse{ z-index: -1; }*/
+
+nav.navbar-nav {
+  height:200px;
+  position:relative;
+}
+
+.background{
+  background-image: url('../images/Assignments.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height:400px;
+  width:1200px;
+  margin: 0 auto;
+  
+  position: relative;
+  top: -50px;
+}
+
+.links li{ display: inline-block; }
+
+.student_link {
+  width:700px;
+  height:200px;
+  margin-top: 20px;
+  margin-left: 20px;
+  padding-top: 10px;
+}

@@ -1,3 +1,486 @@
+/*side bar to top navigation*/
+.content-wrapper,
+.right-side,
+.main-footer {
+  margin-left: 0;
+}
+.main-header > .navbar {
+  margin-left: 0;
+  
+}
+.main-sidebar,
+.left-side {
+  width: 0;
+}
+/*top navigation*/
+
+/*======headerstyles=======*/
+/*======headerstyles=======*/
+body,html,.content-wrapper{
+	margin:0px;
+	padding: 0px;
+	  background-color: lightgrey;  
+  font-family: 'Gloria Hallelujah', cursive;
+  /* background-image:url(../images/registrationpic.jpg);  */
+	 background-image: url('../../../dist/img/images/background.jpg'); 
+	background-blend-mode:screen;
+}
+/*.content-wrapper{background-image: url('../../../dist/img/images/background.jpg');background-blend-mode:screen;}*/
+body h1{font-size: 23px;}
+body .container p{font-size: 23px;}
+div.logo img{ width:200px; }
+header .logo,.year,.Date,.logout{ display: inline-block; }
+header .logo,.textright{display: inline-block;}
+header .textright{float:right;padding-top: 25px;}
+header .textright .year,.Date,.logout{padding: 0 10px;}
+.student_link .links li{ display: inline-block; }
+.links li{ display: inline-block; }
+.links li> a {
+	color:white;
+}
+.student_link {
+	width:700px;
+	height:200px;
+	margin-top: 20px;
+	margin-left: 20px;
+	padding-top: 10px;
+}
+/*=========navbar styles===========*/
+.navbar-inverse { 
+	min-height: 250px; 
+	padding: 20px;
+	background-color: #03104e; 
+}
+#myNavbar .navbar-nav {
+  width: 85%;
+  margin:0 auto;
+	text-align: center;
+}
+#myNavbar .navbar-nav > li {
+	float: none;
+	display: inline-block;
+}
+.navbar-inverse .navbar-nav>li>a {color: aliceblue;}
+#myNavbar .navbar-nav > li > a { padding: 10px 5px; }
+nav.navbar-nav {
+	height:200px;
+	position:absolute;
+}
+div.container-fluid div.user-panel{width:160px;}
+#myNavbar .user-panel,ul.nav.navbar-nav{display:inline-block}
+header.main-header.ng-scope a.logo.ng-scope{height:60px;}
+/*===================backgroundimage styles===========*/
+.background{
+	background-image: url('../img/images/banner2.jpg');
+	/*background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;*/
+	height:180px;
+	width:1200px;
+	margin: 0 auto;
+	position: relative;
+	/*top: -150px*/;
+  border-radius: 10px;
+  margin-top: 70px;
+}
+/*div.background div.container{margin-top: 100px;}*/
+div.background div.container h1{color:black;margin-top: -15px;}
+div.background div.container .links li>a{color:black;}
+
+/*=====================container styles======================*/
+
+.container{width:1200px;height:auto;margin: 0 auto;/*top:-120px;*/margin-top: 31px;}
+
+/*==============attendence styles==========*/
+
+.rollno div.hvr-bounce-in.transition{background-color: #4d79ff;}
+.rollno div.hvr-bounce-in.transition div.icons{margin-left: 15px;margin-bottom: 10px;}
+.rollno .row1 div h1{font-size: 12px;text-align: center;}
+.rollno .row1 div{width:100px;display:inline-block;background-color: #4d79ff ;margin-bottom: 15px;}
+.rollno .row2 div h1{font-size: 12px;text-align: center;}
+.rollno .row2 div{width:100px;display:inline-block;background-color: #4d79ff ;margin-bottom: 15px;}
+.rollno .row3 div h1{font-size: 12px;text-align: center;}
+.rollno .row3 div{width:100px;display:inline-block;background-color: #4d79ff ;margin-bottom: 15px;}
+.icons i{display: inline-block;}
+.icons{background-color: white;padding-left: 20px;}
+.rollno {text-align: center;} 
+.rollno,.groove{margin-bottom: 20px;margin-top: 20px;}
+.groove {border-style: groove;border-radius: 10px;}
+.rollno {border-style: groove;border-radius: 10px;}
+.studentdetails {padding-top: 20px;}
+.studentdetails h1{font-size: 20px;}
+.studentdetails p{padding:15 15px;}
+div.groove p{margin:0px;}
+.studentdetails{text-align: center;background-color: white;border-radius: 10px;}
+div.hvr-bounce-in.transition{margin-bottom: 20px;margin-right: 40px;}
+div.hvr-bounce-in.transition:hover {background-color: red;}
+div.input-group.date div.input-group-addon{width:40px;}				
+span.glyphicon.glyphicon-th{padding-bottom: 6px;} 
+
+	/*==== bounce in ====*/
+
+		.hvr-bounce-in {
+				backface-visibility: hidden;
+				box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+				display: inline-block;
+				transform: translateZ(0px);
+				transition-duration: 0.5s;
+        vertical-align: middle;
+        width: 150px;
+		}
+		.hvr-bounce-in:hover, .hvr-bounce-in:focus, .hvr-bounce-in:active {
+				transform: scale(1.2);
+				transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+		}
+		.hvr-wobble-top {
+				backface-visibility: hidden;
+				box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+				display: inline-block;
+				transform: translateZ(0px);
+				transform-origin: 0 100% 0;
+				vertical-align: middle;
+		}
+		.hvr-wobble-top:hover, .hvr-wobble-top:focus, .hvr-wobble-top:active {
+				animation-duration: 1s;
+				animation-iteration-count: 1;
+				animation-name: wobble-top;
+				animation-timing-function: ease-in-out;
+		}
+/*===============backgroundhovereffects====================*/
+
+ @import url(https://fonts.googleapis.com/css?family=Quando);
+*, *:after, *:before {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+* {margin:0;border:0 none;position: relative; outline: none;
+}
+.links li> a{text-decoration: none;z-index: 1;}
+.links li> a:before {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 3px;
+	bottom: 0;
+	left: 0;
+	background: black;
+	visibility: hidden;
+	border-radius: 5px;
+	transform: scaleX(0);
+	transition: .25s linear;
+}
+.links li> a:hover:before,
+.links li> a:focus:before {
+	visibility: visible;
+	transform: scaleX(1);
+}
+/*==============studentinformation styles============*/
+
+.studentinfo{margin:0 auto;height:500px;}
+.studentinfo .col-md-3 div.form-group{width:250px;}
+.studentinfo .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;margin-top: 0px;padding:10px;}
+.studentinfo .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;margin-left: 13px;padding:10px; }
+.studentinfo .row .col-md-3 div.form-group{display: inline-block;}
+
+.studentinfo .col-md-9 table tbody tr th{width:90px;text-align: center;}
+.studentinfo .col-md-3 div.form-group input{width:250px;height:30px;border-radius: 5px;}
+.studentinfo button.search{color:white;border-radius: 5px;margin-bottom: 20px;}
+
+/*================studentadmissionstyles=============*/
+
+.Admission{margin:0 auto;height:1300px;}
+.Admission .col-md-12{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 10px;}
+.studentadmission {height:350px;}
+.parentdetails{height:400px;} 
+.parentdetails .col-md-3{top:-60px;}
+.Studentaddress{padding-left: 10px;}
+.uploaddocuments .title,.title2{display:inline-block;width:500px;}
+.uploaddocuments div.col-md-6 .title1 section .input,.button{display:inline-block;}
+.uploaddocuments div.col-md-6 .title2 section .input,.button{display:inline-block;}
+.uploaddocuments div.col-md-6 .title2 section {margin-bottom: 20px;}
+.uploaddocuments div.col-md-6 .title1 section {margin-bottom: 20px;}
+
+/*===================staffdetailsstyles=============*/
+
+.staffdetails .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+.staffdetails .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-left:15px;}
+.staffdetails{margin:0 auto;height:500px;}
+
+/*=====================staffemployment================*/
+
+.staffemployment div.col-md-12 div.col-xs-3.col-md-4{width:100%;}
+.staffemployment div.col-md-12 .tooltip{float:right;padding:0 8px;}
+.staffemployment div.col-md-6 button.btn.btn-default{margin-top: 25px;}
+.staffemployment div.col-md-12{background-color: white;border:1px solid blue;border-radius: 10px;padding:10px;height:auto;}
+.staffemployment {margin:0 auto;height:500px;}
+
+/*=================Studentattendance=============*/
+
+.studentattendance{margin:0 auto;height:500px;}
+.studentattendance .col-md-3 div.form-group input{border:1px solid lightgrey;border-radius: 2px;border:1px solid lightgrey;}
+.studentattendance .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+.studentattendance .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;}
+
+/*==================Employee Attendance====================*/
+
+.employeeattendance{margin:0 auto;height:500px;}
+.employeeattendance .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+.employeeattendance .col-md-12 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;}
+
+/*=========================subjectsstyles===============*/
+
+.subjects{margin:0 auto;height:500px;}
+.subjects div.col-md-12 div.col-xs-3.col-md-4{width:100%;}
+.subjects div.col-md-12 .tooltip{float:right;padding:0 8px;}
+.subjects .col-md-3 div.form-group input{border:1px solid lightgrey;border-radius: 2px;border:1px solid lightgrey;}
+.subjects .col-md-9 .backwhite .buttons{float:right;}
+.subjects .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;} 
+.subjects .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;}
+
+/*===========================chapterstyles=================*/
+
+div.subjectlist div.col-md-12 div.col-xs-3.col-md-4{width:100%;}
+div.subjectlist div.col-md-12 .tooltip{float:right;padding:0 8px;}
+.chapters{margin:0 auto;height:900px;}
+.chapters .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;} 
+.chapters .col-md-9 {background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-bottom: 20px;}
+
+/*====================Asignsubjectsstyles=========*/
+
+.Assignsubjects{margin:0 auto;height:500px;}
+.Assignsubjects div.col-md-12 div.col-xs-3.col-md-4{width:100%;}
+.Assignsubjects div.col-md-12 .tooltip{float:right;padding:0 8px;}
+.Assignsubjects .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;} 
+.Assignsubjects .col-md-9 {background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;}
+
+/*====================Assignmentstyles============*/
+
+.Assignments{margin:0 auto;height:900px;}
+.Assignments .col-md-3 div.form-group input{border:1px solid lightblue;border-radius: 2px;border:1px solid lightgrey;}
+.Assignments .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;} 
+.Assignments .col-md-3 .backwhite div.form-group textarea{border:1px solid lightgrey;border-radius: 2px;width:245px;height:100px;border:1px solid lightgrey;}
+.Assignments .col-md-9 .backwhite{background-color: white;border-radius: 10px;padding: 10px;}
+.Assignments .col-md-3 .backwhite div.input-group-addon{width:40px;height: 34px;}
+.Assignments .col-md-9 {background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-bottom: 20px;}
+
+ .tooltip {
+    position: relative;
+    display: inline-block;
+    opacity: 10;
+}
+ .tooltip .tooltiptext {
+     visibility: hidden;
+    width: 120px;
+    background-color: #4d79ff;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -60px;
+}
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #4d79ff transparent transparent transparent;
+}
+ .tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+/*==================librarystyles============*/
+
+.Addbook{margin:0 auto;height:500px;}
+.Addbook .col-md-12 {height:auto;background-color: white;border:1px solid blue;border-radius: 5px; margin-top:3px;}
+.Addbook .col-md-12 .backwhite .row1 div.form-group{display: inline-block;}
+.Addbook .col-md-12 .backwhite .row1 div.form-group input{border:1px solid lightgrey;}
+.Addbook .col-md-12 .backwhite {padding-left: 30px;}
+.Addbook .col-md-12 .backwhite .row2 div.form-group{display: inline-block;}
+.Addbook .col-md-12 .backwhite .row2 div.form-group input{border:1px solid lightgrey;}
+.Addbook .col-md-12 .backwhite .row3 div.form-group{display: inline-block;}
+.Addbook .col-md-12 .backwhite .row3 div.form-group input{border:1px solid lightgrey;}
+.Addbook textarea{border:1px solid lightgrey;border-radius: 2px;}
+.Addbook .col-md-12 .backwhite{background-color: white;border-radius: 10px;padding: 10px;}
+.Addbook .col-md-12 div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+.Addbook div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+.Addbook .col-md-12 .row5{text-align: right;}
+
+/*==============bookliststyles========*/
+
+.Booklist div.col-md-12 div.col-xs-3.col-md-4{width:100%;}
+.Booklist div.col-md-12 .tooltip{float:right;padding:0 8px;}
+.booklist{margin:0 auto;height:500px;}
+.booklist .col-md-12 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+.booklist .col-md-12 .backwhite .button{float: right;}
+
+/*=============examschedularstyles========*/
+
+.Examschedular{margin:0 auto;height:500px;}
+.Examschedular div.col-md-12 div.col-xs-3.col-md-4{width:100%;}
+.Examschedular div.col-md-12 .tooltip{float:right;padding:0 8px;}
+.Examschedular .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+.Examschedular .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
+.Examschedular .col-md-9 .backwhite .button{float: right;}
+.Examschedular div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+
+/*==================Evaluationsstyles============*/
+
+.Evaluations{margin:0 auto;}
+.Evaluations div.col-md-12 div.col-xs-3.col-md-4{width:100%;}
+.Evaluations div.col-md-12 .tooltip{float:right;padding:0 8px;}
+.Evaluations .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+.Evaluations .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px; }
+.Evaluations .col-md-9 {background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-bottom: 20px;}
+.Evaluations .col-md-9 .backwhite .button{float: right;}
+.Evaluations div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+
+/*===================exampapers===========*/
+
+.Exampapers{margin:0 auto;height:500px;}
+.Exampapers div.col-md-12 div.col-xs-3.col-md-4{width:100%;}
+.Exampapers div.col-md-12 .tooltip{float:right;padding:0 8px;}
+.Exampapers .col-md-3{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;} 
+
+.Exampapers .col-md-9 {background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-bottom: 20px;}
+.Exampapers .col-md-9 .backwhite .button{float: right;}
+.Exampapers div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+
+/*================Addstationstyles============*/
+
+.Addstation{margin:0 auto;height:500px;}
+.Addstation .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+.Addstation .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
+.Addstation .col-md-9 .backwhite .button{float: right;}
+.Addstation div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+
+/*===============Addvehicle===============*/
+
+.Addvehicle{margin:0 auto;height:500px;}
+.Addvehicle .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+.Addvehicle .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
+.Addvehicle .col-md-9 .backwhite .button{float: right;}
+.Addvehicle div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+
+/*================Addstationtobusstyles============*/
+
+.Addstationtobus{margin:0 auto;height:500px;}
+.Addstationtobus .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+.Addstationtobus .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
+.Addstationtobus .col-md-9 .backwhite .button{float: right;}
+.Addstationtobus div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+/*================Addbusroutestyles============*/
+
+.Addbusroute{margin:0 auto;height:500px;}
+.Addbusroute .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+.Addbusroute .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
+.Addbusroute .col-md-9 .backwhite .button{float: right;}
+.Addbusroute div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+.navigate{top:-120px;}
+.navigate ul li{display: inline-block;}
+
+
+/*==============routegeolocation============*/
+
+.RouteGeoLocation{margin:0 auto;height:500px;}
+.RouteGeoLocation .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+.RouteGeoLocation div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+
+/*=============feetypestyles===========*/
+
+.Feetype{margin:0 auto;height:500px;}
+.Feetype .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+.Feetype .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
+.Feetype .col-md-9 .backwhite .button{float: right;}
+.Feetype div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+
+/*=================feemasterstyles===========*/
+
+.FeeMaster{margin:0 auto;height:500px;}
+.FeeMaster .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+.FeeMaster .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
+.FeeMaster .col-md-9 .backwhite .button{float: right;}
+.FeeMaster div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+
+/*=====================collectfeestyles===========*/
+
+.collectfee{margin:0 auto;height:500px;}
+.collectfee .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+.collectfee .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
+.collectfee .col-md-9 .backwhite .button{float: right;}
+.collectfee div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+
+/*===========================collectfee2===========*/
+
+.collectfee2{margin:0 auto;height:500px;}
+.collectfee2 .col-md-12 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+
+/*==============classwisestyles===========*/
+
+.classwise{margin:0 auto;height:500px;}
+.classwise .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+.classwise .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
+.classwise .col-md-9 .backwhite .button{float: right;}
+.classwise  div.form-group input{border:1px solid lightgrey;border-radius: 2px;width:250px;height:34px;}
+
+/*===============onlinenoticeboardstyles=============*/
+
+.onlinenoticeboard{margin:0 auto;height:500px;}
+.onlinenoticeboard .col-md-6 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+.onlinenoticeboard div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+.onlinenoticeboard .col-md-6{vertical-align: top;}
+.onlinenoticeboard div.pongal,div.Dussara,div.diwali{background-color:bisque;border:1px solid blue;}
+
+/*===============hovereffects===========*/
+
+  @keyframes hvr-pop {
+    50% {
+        transform: scale(1.2);
+    }
+    }
+    .hvr-pop {
+        backface-visibility: hidden;
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+        display: inline-block;
+        transform: translateZ(0px);
+        vertical-align: middle;
+    }
+    .hvr-pop:hover, .hvr-pop:focus, .hvr-pop:active {
+        animation-duration: 0.3s;
+        animation-iteration-count: 1;
+        animation-name: hvr-pop;
+        animation-timing-function: linear;
+    }
+
+  @media screen and (max-width: 1200px) {
+         .row.background{width:90%;}
+         .container{width:90%;}
+    }
+  @media screen and (max-width: 992px) {
+       .container .col-md-9{margin-top: 30px;}
+	}
+  @media screen and (max-width: 950px) {
+	 .row.background{margin-top: 70px;}
+    }
+
+
+
+  /*custom*/
+
+
+
+
+
 .modal-header{
     border-bottom:3px solid #ccc;
     padding: 0px 15px;
@@ -236,4 +719,276 @@ ul.panel-controls > li > .dropdown-menu:before {
   margin-left: auto;
   margin-right: -6px;
 }
+  
+   /*==========dashboardstyles===========*/
+/*===============dashboardstyles=========*/
+  /* .Circulam{background-color: beige;border:1px solid grey;border-radius: 5px;}
+  .Circulam h2{text-align: center;}
+  .Dashboard .col-md-12{background-color: cadetblue;}
+  .Dashboard .col-md-12 h2{text-align: center;}
+ 
+  .col-md-12 .col-md-2{background-color: yellowgreen;}
+  .col-md-12 .col-md-4 h1{font-size: 20px;}
+  .acadamic .col-md-9{background-color: lightgrey;}
+  .col-md-12 .col-md-9 img{display: inline-block;}
+  .col-md-12 .col-md-4 .backwhite{border:1px solid green;border-radius: 2px;}
+  .col-md-2{background-color: lightgrey;}
+  .acadamic .col-md-12 .col-md-3{height:250px;background-color: darkkhaki;}
+  .col-md-12{margin-top: 30px;}
+  .col-md-6 .events,.notices{height:100px;background-color: cadetblue;text-align: center;}
+  .col-md-6 .events h1,.notices h1{font-size: 20px;}
+  .col-md-12 .col-md-2{width:350px;height: 270px;}
+  
+  * {box-sizing: border-box;}
+ul {list-style-type: none;}
+.weekdays {
+    margin: 0;
+    padding: 10px 0;
+    background-color: #ddd;
+}
 
+.weekdays li {
+    display: inline-block;
+    width: 13.6%;
+    color: #666;
+    text-align: center;
+}
+
+.days {
+    padding: 10px 0;
+    background: #eee;
+    margin: 0;
+}
+
+.days li {
+    list-style-type: none;
+    display: inline-block;
+    width: 13.6%;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size:12px;
+    color: #777;
+}
+
+.days li .active {
+    padding: 5px;
+    background: #1abc9c;
+    color: white !important
+} */
+  .Circulam{background-color: beige;border:1px solid grey;border-radius: 5px;}
+  .Circulam h2{text-align: center;}
+  .Dashboard .col-md-12{background-color: cadetblue;}
+  .Dashboard .col-md-12 h2{text-align: center;}
+  .col-md-12 .col-md-2{background-color: yellowgreen;}
+  .col-md-12 .col-md-4 h1{font-size: 18px;}
+  .col-md-12 .col-md-9 img{display: inline-block;}
+  .col-md-12 .col-md-4 .staff{border:1px solid green;border-radius: 2px;}
+  .col-md-2{background-color: lightgrey;}
+  .acadamic .col-md-12 .col-md-3{height:250px;background-color: darkkhaki;}
+  .col-md-12{margin-top: 30px;}
+  .col-md-6 .events h1{text-align: center;}
+  .col-md-6 .events,.notices{background-color: cadetblue;}
+  .col-md-6 .events h1,.notices h1{font-size: 20px;}
+  .col-md-12 .col-md-2{width:350px;height: 270px;} 
+  .attendancetaken .col-md-12 .col-md-8{border:1px solid green;border-radius: 2px;} 
+  .attendancetaken .col-md-12 .col-md-4 div.staff{height:350px;}
+  .attendancetaken .col-md-12 .col-md-4 div.staff div.backwhite table{height:350px;}
+  .attendancetaken .col-md-12 .col-md-4  div.backwhite .calander{margin-top: 30px;}
+  .Circulam div h1{width:300px;}
+  .classalign h1{width:200px;}
+  .notices h1{text-align: center;height:150px;}
+  .classalign h1 button{display: inline-block;}
+  .classalign .col-md-9 {padding-top: 25px;}
+  .classalign .col-md-9 button{margin-right: 40px;background-color: blueviolet;width:40px;text-align: center;}
+ * {box-sizing: border-box;}
+ul {list-style-type: none;}
+.weekdays {
+    margin: 0;
+    padding: 10px 0;
+    background-color: #ddd;
+}
+.weekdays li {
+    display: inline-block;
+    width: 13.6%;
+    color: #666;
+    text-align: center;
+}
+.days {
+    padding: 10px 0;
+    background: #eee;
+    margin: 0;
+}
+.days li {
+    list-style-type: none;
+    display: inline-block;
+    width: 13.6%;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size:12px;
+    color: #777;
+}
+
+.days li .active {
+    padding: 5px;
+    background: #1abc9c;
+    color: white !important
+}
+
+/* Add media queries for smaller screens */
+@media screen and (max-width:720px) {
+    .weekdays li, .days li {width: 13.1%;}
+}
+
+@media screen and (max-width: 420px) {
+    .weekdays li, .days li {width: 12.5%;}
+    .days li .active {padding: 2px;}
+}
+@media screen and (max-width: 290px) {
+    .weekdays li, .days li {width: 12.2%;}
+}
+@media screen and (max-width: 768px) {
+   .acadamic .col-md-12 .col-md-9 img.img-responsive{width:170px;height:170px;}
+}
+@media screen and (max-width: 1024px) {
+   .acadamic .col-md-12 .col-md-9 img.img-responsive{width:150;height: 150px;margin-left: 25px;}
+   .classalign .col-md-9 button{margin-right: 10px;}
+   .classalign .col-md-9 {text-align: center;}
+}
+
+
+/*===============hovereffects===========*/
+
+  @keyframes hvr-pop {
+    50% {
+        transform: scale(1.2);
+    }
+    }
+    .hvr-pop {
+        backface-visibility: hidden;
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+        display: inline-block;
+        transform: translateZ(0px);
+        vertical-align: middle;
+    }
+    .hvr-pop:hover, .hvr-pop:focus, .hvr-pop:active {
+        animation-duration: 0.3s;
+        animation-iteration-count: 1;
+        animation-name: hvr-pop;
+        animation-timing-function: linear;
+    }
+
+
+/* Add media queries for smaller screens */
+@media screen and (max-width:720px) {
+    .weekdays li, .days li {width: 13.1%;}
+}
+
+@media screen and (max-width: 420px) {
+    .weekdays li, .days li {width: 12.5%;}
+    .days li .active {padding: 2px;}
+}
+
+@media screen and (max-width: 290px) {
+    .weekdays li, .days li {width: 12.2%;}
+}
+
+@media screen and (max-width: 1200px) {
+
+   .row.background{width:100%;}
+   .container{width:100%;}
+}
+@media screen and (max-width: 768px) {
+   .acadamic .col-md-12 .col-md-9 img.img-responsive{width:150;height: 150px;margin-left: 25px;}
+}
+@media screen and (max-width: 1024px) {
+   .acadamic .col-md-12 .col-md-9 img.img-responsive{width:150;height: 150px;margin-left: 25px;}
+}
+
+/*addClass&Section  */
+body{
+  /* background-image:url(../../assets/img/registrationpic.jpg); */
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center center;
+  width:100%;
+  height:1024px;
+}
+
+div.register{
+  width:500px;
+  height:300px;
+  margin:0 auto;
+  background-color:lightgrey;
+}
+
+div.img{
+  width:150px;
+  height:150px;
+  margin:0 auto;
+  margin-top:10px;
+}
+
+.navigation ul li{
+  display:inline-block;
+}
+
+.register h1{
+  padding-left:144px;
+  padding-top:20px;
+}
+
+.register div.col-md-12 div.col-md-12{
+  text-align:right;
+}
+
+.register div.col-md-12 .col-md-6{
+  margin-bottom:10px;
+}
+
+.regback div.img{
+  margin:0 auto;
+}
+
+.register div.col-md-12 div.col-md-12 div{
+  margin-top:10px;
+}
+
+div.regback div.img{
+  margin-top:20px;
+}
+
+div.navigation{
+  padding-left:90px;
+}
+
+/*==============studentprofile============*/
+
+div.studentprofile {height: 1124px;background-color: lightgrey;}
+.studentimage {height:100px;}
+.studentimage img{width:100px;height: 100px;margin-right: 60px;margin-top:60px;}
+.studentimage{width:100%;}
+.tooltip{float:right;}
+
+        /*==========addClass&Section===========*/
+
+ .col-md-4 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+ .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
+ .col-md-9 .backwhite .button{float: right;}
+ div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+ #addclass{margin-left: 194px;}
+ #addSection{margin-top: 10px;}
+
+
+  .btn.btn-primary{
+ background-color: #03104e;
+    border-color: #03104e;
+  }
+   /*====================marksstyles=============*/
+.Marks .col-md-9 .backwhite table tbody{vertical-align: top;}
+.Marks .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+.Marks .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;}
+.Marks .col-md-9 .backwhite table tbody tr th div.form-group
+.container .row .col-md-9 .backwhite .table-responsive{overflow-x: visible;border:0px;}
+.container div.row .col-md-9 .backwhite .table-responsive{overflow-x: visible;border:0px;}
+   .container div.row .col-md-9 .backwhite .table-responsive table tbody tr th input{width:120px;}
+  .container div.row .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;}

@@ -13,206 +13,119 @@
 
 <link rel="stylesheet" href="../../../dist/login/web/css/font-awesome.css">
 
-<body class="hold-transition register-page">
-  <div class="register-box" style="width:50%;">
-    <div class="register-logo">
-      <h3>
-        <b>Register</b> your School <br>
-        <!--<small>This information will let us know more about your school.</small>-->
-      </h3>
+<body>
+  <div class="regback">
+    <div class="img">
+      <img src="dist/img/images/high-school.png" class="img-responsive" alt="" width="150" height="150">
     </div>
+    <div class="register">
+      <div class="backwhite">
 
-    <div class="register-box-body">
-      <div class="nav-tabs-custom">
-        <ul class="nav nav-tabs">
-          <li class="active" style="li.active:" ><a data-target="#tab_1" style="padding:22px 85px;" data-toggle="tab" aria-expanded="true">School Information </a></li>
-          <li class=""><a data-target="#tab_2" style="padding:22px 85px;" data-toggle="tab"  aria-expanded="false">School Profile</a></li>
-        </ul>
-      </div>
 
-      <div class="box-body">
-        <div class="tab-content">
-          <div class="tab-pane no-padding active" id="tab_1">
-            <!--<p class="login-box-msg">Register a new membership</p>-->
+        <h2>REGISTER YOUR SCHOOL</h2>
+        <div class="navigation">
+        </div>
+        <form name="registration" ng-submit="registration.$valid &&  addRegistration(data)" novalidate>
 
-            <form action="../../index.html" method="post">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>School Name</label>
-                    <input type="text" class="form-control" ng-model="data.name" placeholder="School Name">
-                    <!--<span class="glyphicon glyphicon-user form-control-feedback"></span>-->
-                  </div>
-                </div>
+          <div class="col-md-12">
+            <div class="col-md-6">
 
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>School Email</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" ng-model="data.email" placeholder="School Email">
+              <div class="input-group" ng-class="{'has-error': registration.$submitted  && registration.schoolName.$pristine}">
+                <input name="schoolName" type="text" class="form-control" name="schoolName" ng-model="data.name" placeholder="School Name"
+                  required>
 
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group  col-md-6">
-                  <label>School Contact No</label>
-                  <input type="text" class="form-control" id="exampleInputEmail1" ng-model="data.contact" placeholder="School Contact No">
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Batch year</label>
-                    <select class="form-control select2" ng-model="data.batch_year" style="width: 100%;">
-                                          <option value="" selected="selected">--Select--</option>
-                                          <option>2017-2018</option>
-                                          <option>2018-2019</option>
-                                          <option>2019-2020</option>
-                                          <option>2020-2021</option>
-                                          <option>2021-2022</option>
-                                        </select>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>School Website</label>
-                    <input type="text" class="form-control" ng-model="data.website" placeholder="School Website">
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Address</label>
-                    <textarea class="form-control" style="margin-top:5px;" rows="4" ng-model="data.address" placeholder="Enter ..."></textarea>
-                  </div>
-                </div>
-              </div>
-              <!--style="margin-top:-8%"-->
-              <div class="row">
-                <div class="col-md-6 ">
-                  <div class="form-group" style="margin-top:-50px;">
-                    <label>School Description</label>
-                    <textarea class="form-control" style="margin-top:5px;" rows="9" ng-model="data.description" placeholder="Write a description about the School">
-                                            </textarea>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="picture-container">
-                    <h6>Choose Logo</h6>
-                    <div class="picture">
-                      <img src="" class="picture-src" title="" />
-                      <input type="file" ng-model="data.logo">
-                    </div>
-
-                  </div>
+                <div class="input-group-btn">
+                  <button class="btn btn-default" type="submit">
+                    <span class="fa fa-university" aria-hidden="true"></span>
+                  </button>
                 </div>
               </div>
 
+            </div>
+            <div class="col-md-6">
 
-              <!--<div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Full name">
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
-              </div>
-              <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="Email">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-              </div>
-              <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Password">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-              </div>
-              <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Retype password">
-                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-              </div>-->
-              <div class="row">
-                <!--<div class="col-xs-8">
-                    <div class="checkbox icheck">
-                      <label>
-              <input type="checkbox"> I agree to the <a href="#">terms</a>
-            </label>
-                    </div>
-                  </div>-->
+              <div class="input-group" ng-class="{'has-error': registration.$submitted  && registration.email.$pristine}">
 
-                <div class="col-xs-4">
-                  <button type="submit" class="btn btn-primary pull-right">Next</button>
-                </div>
-                <!-- /.col -->
-              </div>
-            </form>
-          </div>
-          <!--<div class="social-auth-links text-center">
-              <p>- OR -</p>
-              <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using
-        Facebook</a>
-              <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using
-        Google+</a>
-            </div>-->
-
-          <!--<a href="login.html" class="text-center">I already have a membership</a>-->
-
-
-
-          <div class="tab-pane no-padding" id="tab_2">
-
-            <h4 class="info-text">Add Classes & Sections</h4>
-            <div class="row">
-              <div class="col-sm-5 col-sm-offset-1">
-                <div class="form-group">
-                  <label>Class</label>
-                  <input type="text" class="form-control" ng-model="value.name" id="exampleInputEmail1" placeholder="">
-                </div>
-                <input type='button' ng-click="addClass(value)" class="btn btn-info" value='Add Class' />
-              </div>
-              <div class="col-sm-5">
-                <div class="form-group">
-                  <label>Select Class</label>
-                  <select class="form-control select2" style="width: 100%;" ng-model="datavalue.classId" ng-options="data.class_id as data.name for data in classData">
-                                          <option value="" selected>--Select--</option>
-                                          <!--<option>Class 1</option>
-                                          <option>Class 2</option>
-                                          <option>Class 3</option>
-                                          <option>Class 4</option>
-                                          <option>Class 5</option>-->
-                                        </select>
+                <input name="email" type="email" class="form-control" id="exampleInputEmail1" ng-model="data.email" placeholder="School Email"
+                  required>
+                <div class="input-group-btn">
+                  <button class="btn btn-default" type="submit">
+                    <span class="fa fa-envelope" aria-hidden="true"></span>
+                  </button>
                 </div>
               </div>
-              <div class="col-sm-5">
-                <div class="form-group">
-                  <label>Section</label>
-                  <input type="text" class="form-control" ng-model="datavalue.section" id="exampleInputEmail1" placeholder="">
+
+            </div>
+            <div class="col-md-6">
+
+              <div class="input-group" ng-class="{'has-error': registration.$submitted  && registration.contact.$pristine}">
+                <input name="contact" type="text" class="form-control" id="exampleInputEmail1" ng-model="data.contact" placeholder="School Contact No">
+                <div class="input-group-btn">
+                  <button class="btn btn-default" type="submit">
+                    <span class="fa fa-phone" aria-hidden="true"></span>
+                  </button>
                 </div>
-                <input type='button' ng-click="addSection(datavalue)" class="btn btn-info" value='Add Section' />
+              </div>
+
+            </div>
+            <div class="col-md-6">
+              <div class="form-group" ng-class="{'has-error': registration.$submitted  && registration.batch.$pristine}">
+
+                <select name="batch" class="form-control select2" ng-model="data.batch_year" style="width: 100%;">
+                  <option value="" selected="selected">Batch year</option>
+                  <option>2017-2018</option>
+                  <option>2018-2019</option>
+                  <option>2019-2020</option>
+                  <option>2020-2021</option>
+                  <option>2021-2022</option>
+                </select>
               </div>
             </div>
+            <div class="col-md-6">
 
+              <div class="input-group" ng-class="{'has-error': registration.$submitted  && registration.website.$pristine}">
+                <input name="website" type="text" class="form-control" ng-model="data.website" placeholder="School Website">
+                <div class="input-group-btn">
+                  <button class="btn btn-default" type="submit">
+                    <span class="fa fa-map-marker" aria-hidden="true"></span>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-md-6">
+              <div class="form-group" ng-class="{'has-error': registration.$submitted  && registration.address.$pristine}">
+                <textarea name="address" class="form-control" style="margin-top:5px;" rows="4" ng-model="data.address" placeholder="School Address"></textarea>
+              </div>
+            </div>
+            <div class="col-md-6" id="top">
+              <div class="form-group" ng-class="{'has-error': registration.$submitted  && registration.description.$pristine}">
+                <textarea name="description" class="form-control" style="margin-top:5px;" rows="6" ng-model="data.description" placeholder="Write a description about the School">
+                                            </textarea>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="file" name="file" ng-model="data.logo" ngf-select ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB"
+                  class="form-control" onchange="angular.element(this).scope().loadFile(this.files)">
+                <p style="color:#9e0707"> {{message}} </p>
+
+
+              </div>
+            </div>
+            <div class="col-md-6" id="Next">
+              <div>
+                <!-- <button type="submit" class="btn btn-info">Submit</button> -->
+                <button style="margin-left:-260px;" class="btn btn-primary"  type="submit" >Submit </button>
+                <a ui-sref="login_page"><button style="margin-left:-260px;" class="btn btn-primary" type="button">Login</button> </a>
+              </div>
+            </div>
           </div>
-        </div>
 
 
-
-
-
-
+        </form>
       </div>
-      <!-- /.form-box -->
     </div>
-    <!-- /.register-box -->
-
-
-    <!--<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-
-<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-<script src="../../plugins/iCheck/icheck.min.js"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' // optional
-    });
-  });
-</script>-->
+  </div>
 </body>
 <script type="text/javascript" src="../../../dist/login/web/js/jquery-2.1.4.min.js"></script>
