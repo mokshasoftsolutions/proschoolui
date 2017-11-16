@@ -968,6 +968,14 @@ div.studentprofile {height: 1124px;background-color: lightgrey;}
 .studentimage img{width:100px;height: 100px;margin-right: 60px;margin-top:60px;}
 .studentimage{width:100%;}
 .tooltip{float:right;}
+.studentprofile div .table-responsive{overflow-x: hidden;}
+.studentprofile div .table-responsive table.table.table-bordered{border-collapse: separate;}
+
+
+  /*------student profile media queries------*/
+  @media screen and (max-width: 981px) {
+    div .studentprofile {height: 1600px;background-color: lightgrey;}  
+}
 
         /*==========addClass&Section===========*/
 

@@ -2,11 +2,7 @@ angular.module('school_erp')
     .controller("dashboardController", ['$http', '$scope', '$compile', 'studentServices', 'chaptersServices', 'employeeServices', 'examServices', 'globalServices', 'subjectsServices', 'classWiseServices', 'NoticeBoardServices', 'schoolEventsServices', 'addVehicleServices', 'barChartOneService', 'ngDialog', '$rootScope', 'ngProgressFactory', 'routeGeoLocationServices', function ($http, $scope, $compile, studentServices, chaptersServices, employeeServices, examServices, globalServices, subjectsServices, classWiseServices, NoticeBoardServices, schoolEventsServices, addVehicleServices, barChartOneService, ngDialog, $rootScope, ngProgressFactory, routeGeoLocationServices) {
         // $scope.progressbar = ngProgressFactory.createInstance();
         // $scope.progressbar.start();
-<<<<<<< HEAD
         $scope.index = 'true';
-=======
-
->>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
         $scope.evalData = [];
         $scope.data = [];
         $scope.employeeAttendance = [];
@@ -520,7 +516,6 @@ angular.module('school_erp')
 
 
         //Employee Attendance
-<<<<<<< HEAD
 
         $scope.getAttedanceByCategoryTeaching = function () {
             console.log("employee att msg");
@@ -757,8 +752,6 @@ angular.module('school_erp')
                 })
                 .error(function (data, success) { })
         }
-=======
->>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
 
         //Employee Attendance List
 
@@ -806,17 +799,10 @@ angular.module('school_erp')
                             []
                         ];
                         if ($scope.chartdataEmp) {
-<<<<<<< HEAD
                             // ngDialog.open({
                             //     template: '<p>Report is not available.</p>',
                             //     plain: true
                             // });
-=======
-                            ngDialog.open({
-                                template: '<p>Report is not available.</p>',
-                                plain: true
-                            });
->>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
                             // $window.alert("report not availabel");
                         }
                         console.log("report not available")
@@ -927,7 +913,6 @@ angular.module('school_erp')
             });
 
         // Geo Location 
-<<<<<<< HEAD
 
 
         // Map Settings //
@@ -1020,100 +1005,6 @@ angular.module('school_erp')
 
 
 
-=======
-
-
-        // Map Settings //
-        $scope.getAllDevicesGeolocation = function () {
-
-            var mapOptions = {
-                center: new google.maps.LatLng(17.745875, 83.314301),
-                zoom: 0,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-            //   // Geo Location /
-            //     navigator.geolocation.getCurrentPosition(function(pos) {
-            //         map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-            //         var myLocation = new google.maps.Marker({
-            //             position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-            //             map: map,
-            //             animation: google.maps.Animation.DROP,
-            //             title: "My Location"
-            //         });
-            //     });
-            $scope.map = map;
-            // Additional Markers //
-            $scope.markers = [];
-            var image = {
-                url: 'dist/img/school_bus.png',
-                // This marker is 20 pixels wide by 32 pixels high.
-                scaleSize: new google.maps.Size(40, 60),
-                // The origin for this image is (0, 0).
-                origin: new google.maps.Point(0, 0),
-                // The anchor for this image is the base of the flagpole at (0, 32).
-                anchor: new google.maps.Point(0, 32)
-            };
-            var infoWindow = new google.maps.InfoWindow();
-            var createMarker = function (info) {
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(info.latitude, info.longitude),
-                    map: $scope.map,
-                    icon: image,
-                    // animation: google.maps.Animation.DROP,
-                    title: info.address
-                });
-                marker.content = '<div class="infoWindowContent"><h2>Bus Id : ' + info.deviceid + '</h2></div>';
-                google.maps.event.addListener(marker, 'click', function () {
-                    infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
-                    infoWindow.open($scope.map, marker);
-                });
-                $scope.map.setZoom(20);
-                $scope.map.panTo(marker.position)
-                $scope.markers.push(marker);
-                //$scope.getGeolocation();
-            }
-
-            console.log("message for geolocation")
-            // $http({ method: 'GET', url: "http://192.168.1.12:4005/api/get_all_tracking" }).
-            //"http://192.168.1.14:2016/netcomp/getAllDevicesDetails"
-            //$http.get("http://192.168.1.10:2016/netcomp/getAllPositionsDetails",{headers: { 'Content-type': 'application/json'}}).
-
-            routeGeoLocationServices.getAllGeolocations().
-                success(function (data, status) {
-                    $scope.status = status;
-                    $scope.JSONdata = data;
-                    console.log("geolacation");
-                    console.log(JSON.stringify(data));
-
-                    $scope.locations = data;
-                    console.log($scope.locations);
-                    for (i = 0; i < $scope.locations.length; i++) {
-                        createMarker($scope.locations[i]);
-                    }
-                }).
-                error(function (data, status) {
-                    $scope.JSONdata = data || "Request failed";
-                    $scope.status = status;
-                    console.log($scope.data + $scope.status);
-                });
-
-
-        };
-        $scope.getAllDevicesDetails = function () {
-            google.maps.event.addDomListener(document.getElementById("map"), 'load', $scope.getAllDevicesGeolocation());
-
-        }
-
-
-
-
-
-
-
-
-
->>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
 
         //School Events
         schoolEventsServices.getEvents()
@@ -1450,7 +1341,6 @@ angular.module('school_erp')
         }
 
 
-<<<<<<< HEAD
         // $scope.getGeolocation = function (vehicle_code) {
         //     var mapOptions = {
         //         zoom: 5,
@@ -1522,102 +1412,6 @@ angular.module('school_erp')
         // }
 
         if ($rootScope.role == 'parent') {
-=======
-        $scope.getGeolocation = function (vehicle_code) {
-            var mapOptions = {
-                zoom: 5,
-                center: new google.maps.LatLng(17.745875, 83.314301),
-                mapTypeId: google.maps.MapTypeId.TERRAIN
-            }
-
-            $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-            $scope.markers = [];
-            var image = {
-                url: 'dist/img/school_bus.png',
-
-                scaledSize: new google.maps.Size(40, 40), // scaled size
-                origin: new google.maps.Point(0, 0), // origin
-                anchor: new google.maps.Point(0, 0) // anchor
-
-            };
-            infowindow = new google.maps.InfoWindow();
-
-            var createMarker = function (lat, lng, id, address) {
-
-                var marker = new google.maps.Marker({
-                    map: $scope.map,
-                    position: new google.maps.LatLng(lat, lng),
-                    animation: google.maps.Animation.DROP,
-                    icon: image,
-                    title: "Bus Id: " + id + ",   address: " + address
-
-                });
-                // marker.content = '<div class="infoWindowContent">' + infowindow.address + '</div>';
-                google.maps.event.addListener(marker, 'click', function () {
-                    infowindow.setContent('<h2>' + marker.title + '</h2>');
-                    infowindow.open($scope.map, marker);
-                });
-
-                $scope.map.setZoom(18);
-                $scope.map.panTo(marker.position);
-                $scope.markers.push(marker);
-
-            }
-
-
-            console.log("message");
-
-            routeGeoLocationServices.getGeolocation(vehicle_code)
-                .success(function (data, status) {
-                    $scope.status = status;
-                    $scope.JSONdata = data;
-                    console.log(JSON.stringify(data));
-                    //for POST
-                    $scope.locations = data;
-                    $scope.latitude = data[0].latitude;
-                    $scope.longitude = data[0].longitude;
-                    $scope.id = data[0].deviceid;
-                    $scope.address = data[0].address;
-                    //for GET
-                    // $scope.latitude = data[0].docPickUpAddress;
-                    // $scope.longitude = data[0].avAddress;
-                    //some google api data
-                    //$scope.latitude=data.results[0].geometry.location.lat;
-                    //$scope.longitude=data.results[0].geometry.location.lng;
-                    console.log($scope.latitude);
-                    console.log($scope.longitude);
-                    createMarker($scope.latitude, $scope.longitude, $scope.id, $scope.address);
-                })
-                .error(function (data, success) {
-                })
-        }
-
-        if ($rootScope.role == 'parent') {
-
-            $scope.secId = $rootScope.student.section;
-            $scope.classId = $rootScope.student.class_id;
-            $scope.vehicle_code = $rootScope.student.route_id;
-            console.log($scope.classId);
-            console.log($scope.vehicle_code);
-            $scope.getTimeTable($scope.secId);
-            if ($scope.initialLoadAttendence == false) {
-                $scope.getAttendenceByDay($scope.select_date, $scope.classId, $scope.secId);
-                // $scope.getAttendence($scope.select_date, $scope.classId, $scope.secId);
-            }
-            $scope.getExamSchedule();
-            $scope.getExamPapers($scope.data.examSchedule_name, $scope.secId);
-
-            $scope.getGeolocation($scope.vehicle_code);
-
-            //$scope.populateSubjects($scope.secId);
-
-
-        } else {
-            $scope.getClassesInitalLoad();
-            $scope.getAllDevicesDetails();
-        }
->>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
 
             $scope.secId = $rootScope.student.section;
             $scope.classId = $rootScope.student.class_id;

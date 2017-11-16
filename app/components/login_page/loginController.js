@@ -8,11 +8,7 @@ angular.module('school_erp')
         //    "url": "dist/img/school2.png"}]
 
         $scope.login = function (data) {
-<<<<<<< HEAD
 console.log("login  mesaage.....");
-=======
-
->>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
             $scope.progressbar.start();
             var dataValue = {
                 email: $scope.datab.username,

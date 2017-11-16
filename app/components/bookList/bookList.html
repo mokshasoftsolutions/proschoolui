@@ -174,11 +174,7 @@
 
       <div class="panel-body">
         <!--//pdf-save-content="idOneGraph"-->
-<<<<<<< HEAD
 <!--<table export-table class="table rwd-table table-striped" style="width: 100%; margin-top: 22px">
-=======
-        <table export-table st-table="display_records" st-safe-src="data" class="table rwd-table table-striped" style="width: 100%; margin-top: 22px">
->>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
           <thead>
             <tr>
               <th>#</th>
@@ -192,7 +188,7 @@
               <th class="pull-right" >Action</th>
             </tr>
           </thead>
-          <tr st-select-row="row" st-select-mode="multiple" ng-repeat="books in display_records" class="editable-row">
+          <tr ng-repeat="books in data" class="editable-row">
             <td>{{$index+1}}</td>
             <td><span editable-text="books.book_title" e-name="editdata.book_title" onaftersave="EditBook($index)" e-form="rowform"
                 e-required>{{books.book_title || 'empty' }}</span></td>
@@ -226,20 +222,7 @@
 </tr>
 
 
-<<<<<<< HEAD
 <tbody>
-=======
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="5" class="text-center">
-                <div class="pull-right" st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-        <!--<export-to-pdf elem-id="table"></export-to-pdf>-->
->>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
 
 </tbody>
 </table>

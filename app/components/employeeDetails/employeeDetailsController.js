@@ -131,11 +131,7 @@ angular.module('school_erp')
             $scope.$apply(function () {
 
                 $scope.selectedFile = files[0];
-<<<<<<< HEAD
                 //console.log(file);
-=======
-                console.log(file);
->>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
             })
 
         }

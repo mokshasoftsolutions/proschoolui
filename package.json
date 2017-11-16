@@ -18,7 +18,6 @@
     "grunt-contrib-watch": "^1.0.0"
   },
   "dependencies": {
-    "angular-data-table": "^0.7.0",
     "cli": "^1.0.1",
     "grunt-cli": "^1.2.0"
   }

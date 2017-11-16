@@ -1,4 +1,4 @@
-<!-- sidebar: style can be found in sidebar.less -->
+ <!-- sidebar: style can be found in sidebar.less -->
 <section class="sidebar">
   <!-- Sidebar user panel -->
   <div class="user-panel">
@@ -7,8 +7,7 @@
     </div>
     <div class="pull-left info">
       <p>{{role}} login</p>
-      <a href="">
-        <i class="fa fa-circle text-success"></i> Online</a>
+      <a href=""><i class="fa fa-circle text-success"></i> Online</a>
     </div>
   </div>
   <!-- search form -->
@@ -25,14 +24,14 @@
   <div class="input-group" ng-if="role == 'parent'" style="width:100%;">
     <select name="studentSelection" ng-change="changeStudent(studentSelection)" class="form-control" data-ng-options="student._id as student.first_name for student in users  "
       ng-model="studentSelection">
-      <option value="" selected>--Select Student--</option>
-    </select>
+          <option value="" selected>--Select Student--</option>
+      </select>
 
   </div>
 
   <!-- /.search form -->
   <!-- sidebar menu: : style can be found in sidebar.less -->
-  <ul class="sidebar-menu">
+  <ul class="sidebar-menu" >
     <!--<li class="header">MAIN NAVIGATION</li>-->
     <!--parent login purpose-->
     <!--<li class="treeview" data-ng-if="setRole('parent')" ui-sref-active="active">
@@ -42,139 +41,82 @@
     </li>-->
 
     <!-- Dashboard -->
-    <li class="treeview" ui-sref-active="active">
+    <li class="treeview">
       <a ui-sref='main.dashboard'>
-        <i class="fa fa-dashboard"></i>
-        <span>Dashboard</span>
-      </a>
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+          </a>
     </li>
-    <li class="treeview" data-ng-if="setRole('admin')">
-      <a href="">
-        <i class="fa fa-users"></i>
-        <span>Admin Profile</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li class="treeview" ui-sref-active="active" data-ng-if="setRole('admin')">
-          <a ui-sref='main.addClass&Section'>
-            <i class="fa fa-circle-o"></i>
-            <span>Add Class & Section</span>
-          </a>
-        </li>
-        <li class="treeview" ui-sref-active="active" data-ng-if="setRole('admin')">
-          <a ui-sref='main.parentInfo'>
-            <i class="fa fa-circle-o"></i>
-            <span>Parent Information</span>
-          </a>
-        </li>
 
-        <li class="treeview" ui-sref-active="active" data-ng-if="setRole('admin')">
-          <a ui-sref='main.teacherInfo'>
-            <i class="fa fa-circle-o"></i>
-            <span>Teacher Information</span>
-          </a>
-        </li>
-      </ul>
-    </li>
+     
+
 
     <!--parent login purpose-->
-    <li class="treeview" ui-sref-active="active" ng-show="setRole('parent')">
+    <li class="treeview" data-ng-if="setRole('parent')">
       <a ui-sref='main.studentProfile'>
-        <i class="fa fa-users"></i>
-        <span ui-sref-active="active">StudentProfile</span>
-      </a>
+             <i class="fa fa-users"></i> <span  ui-sref-active="active">StudentProfile</span>
+          </a>
     </li>
+
+
 
     <!-- Student Information -->
     <li class="treeview" data-ng-if="setRole('teacher') || setRole('admin')">
       <a href="">
-        <i class="fa fa-users"></i>
-        <span>Student Information</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-      </a>
+            <i class="fa fa-users"></i>
+            <span>Student Information</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
       <ul class="treeview-menu">
-        <li ui-sref-active="active">
-          <a ui-sref='main.student'>
-            <i class="fa fa-circle-o"></i> Students</a>
-        </li>
-        <li ui-sref-active="active" data-ng-if="setRole('admin')">
-          <a ui-sref='main.studentAdmission'>
-            <i class="fa fa-circle-o"></i> Student Admission</a>
-        </li>
+        <li ui-sref-active="active"><a ui-sref='main.student'><i class="fa fa-circle-o"></i> Students</a></li>
+        <li ui-sref-active="active" data-ng-if="setRole('admin')"><a ui-sref='main.studentAdmission'><i class="fa fa-circle-o"></i> Student Admission</a></li>
         <!--<li ui-sref-active="active"><a ui-sref='main.studentDetails'><i class="fa fa-circle-o"></i> Student Details</a></li>-->
       </ul>
     </li>
     <!-- Staff Management -->
     <li class="treeview" data-ng-if="setRole('admin')">
       <a href="">
-        <i class="fa fa-users"></i>
-        <span>Employee Information</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-      </a>
+            <i class="fa fa-users"></i>
+            <span>Employee Information</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
       <ul class="treeview-menu">
-        <li ui-sref-active="active" data-ng-if="setRole('admin')">
-          <a ui-sref='main.employee'>
-            <i class="fa fa-circle-o"></i> Employee</a>
-        </li>
-        <li ui-sref-active="active" data-ng-if="setRole('admin')">
-          <a ui-sref='main.employeeDetails'>
-            <i class="fa fa-circle-o"></i> Employee Details</a>
-        </li>
+        <li ui-sref-active="active" data-ng-if="setRole('admin')"><a ui-sref='main.employee'><i class="fa fa-circle-o"></i> Employee</a></li>
+        <li ui-sref-active="active" data-ng-if="setRole('admin')"><a ui-sref='main.employeeDetails'><i class="fa fa-circle-o"></i> Employee Details</a></li>
         <!--<li ui-sref-active="active" data-ng-if="setRole('admin')"><a ui-sref='main.employeeAttendance'><i class="fa fa-circle-o"></i> Employee Attendance</a></li>-->
       </ul>
     </li>
     <!-- Attendance -->
     <li class="treeview">
       <a href="">
-        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-        <span>Student Attendance</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-      </a>
+            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+            <span>Student Attendance</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
       <ul class="treeview-menu">
-        <li ui-sref-active="active" data-ng-if="setRole('teacher') || setRole('admin')">
-          <a ui-sref='main.studentAttendance'>
-            <i class="fa fa-circle-o"></i>Attendance</a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref='main.attendenceListStudent'>
-            <i class="fa fa-circle-o"></i>Attendance List</a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref='main.attendenceReportStudent'>
-            <i class="fa fa-circle-o"></i>Attendance Report</a>
-        </li>
+        <li ui-sref-active="active" data-ng-if="setRole('teacher') || setRole('admin')"><a ui-sref='main.studentAttendance'><i class="fa fa-circle-o"></i>Attendance</a></li>
+        <li ui-sref-active="active"><a ui-sref='main.attendenceListStudent'><i class="fa fa-circle-o"></i>Attendance List</a></li>
+        <li ui-sref-active="active"><a ui-sref='main.attendenceReportStudent'><i class="fa fa-circle-o"></i>Attendance Report</a></li>
         <!--<li ui-sref-active="active"><a ui-sref='main.attendenceReports2'><i class="fa fa-circle-o"></i>Report2</a></li>-->
       </ul>
     </li>
-    <li class="treeview" data-ng-if="setRole('teacher') || setRole('admin')">
+    <li class="treeview">
       <a href="">
-        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-        <span>Employee Attendance</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-      </a>
+            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+            <span>Employee Attendance</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
       <ul class="treeview-menu">
-        <li ui-sref-active="active" data-ng-if="setRole('admin')">
-          <a ui-sref='main.employeeAttendance'>
-            <i class="fa fa-circle-o"></i>Attendance</a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref='main.attendenceListEmployee'>
-            <i class="fa fa-circle-o"></i>Attendance List</a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref='main.attendenceReportEmployee'>
-            <i class="fa fa-circle-o"></i>Attendance Report</a>
-        </li>
+        <li ui-sref-active="active" data-ng-if="setRole('admin')"><a ui-sref='main.employeeAttendance'><i class="fa fa-circle-o"></i>Attendance</a></li>
+        <li ui-sref-active="active"><a ui-sref='main.attendenceListEmployee'><i class="fa fa-circle-o"></i>Attendance List</a></li>
+        <li ui-sref-active="active"><a ui-sref='main.attendenceReportEmployee'><i class="fa fa-circle-o"></i>Attendance Report</a></li>
         <!--<li ui-sref-active="active"><a ui-sref='main.attendenceReports2'><i class="fa fa-circle-o"></i>Report2</a></li>-->
 
       </ul>
@@ -183,31 +125,21 @@
     <!-- Academics -->
     <li class="treeview">
       <a href="">
-        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-        <span>Academics</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-      </a>
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+            <span>Academics</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
       <ul class="treeview-menu">
-        <li ui-sref-active="active">
-          <a ui-sref='main.subjects'>
-            <i class="fa fa-circle-o"></i> Subjects</a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref='main.chapters'>
-            <i class="fa fa-circle-o"></i> Chapters</a>
-        </li>
-        <li ui-sref-active="active" data-ng-if="setRole('admin')">
-          <a ui-sref='main.assignSubjects'>
-            <i class="fa fa-circle-o"></i> Assign Subjects</a>
-        </li>
+        <li ui-sref-active="active"><a ui-sref='main.subjects'><i class="fa fa-circle-o"></i> Subjects</a></li>
+        <li ui-sref-active="active"><a ui-sref='main.chapters'><i class="fa fa-circle-o"></i> Chapters</a></li>
+        <li ui-sref-active="active" data-ng-if="setRole('admin')"><a ui-sref='main.assignSubjects'><i class="fa fa-circle-o"></i> Assign Subjects</a></li>
       </ul>
     </li>
     <!-- Assignments -->
     <li class="treeview" ui-sref-active="active" data-ng-if="setRole('teacher') || setRole('admin') || setRole('parent')">
       <a ui-sref='main.assignments'>
-<<<<<<< HEAD
             <i class="fa fa-book" aria-hidden="true"></i>
             <span>Assignments</span>
           </a>
@@ -215,40 +147,20 @@
             <i class="fa fa-book" aria-hidden="true"></i>
             <span>Marks</span>
           </a>
-=======
-        <i class="fa fa-book" aria-hidden="true"></i>
-        <span>Assignments</span>
-      </a>
->>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
     </li>
     <!-- Examinations -->
     <li class="treeview">
       <a href="">
-        <i class="fa fa-file-text" aria-hidden="true"></i>
-        <span>Examinations</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-      </a>
+            <i class="fa fa-file-text" aria-hidden="true"></i>
+            <span>Examinations</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
       <ul class="treeview-menu">
-<<<<<<< HEAD
         <li ui-sref-active="active"><a ui-sref='main.examSchedules'><i class="fa fa-circle-o"></i> Exam Schedules</a></li>
         <li ui-sref-active="active"><a ui-sref='main.examPapers'><i class="fa fa-circle-o"></i> Exam Papers</a></li>
         <li ui-sref-active="active"><a ui-sref='main.evaluations'><i class="fa fa-circle-o"></i> Evaluations</a></li>
-=======
-        <li ui-sref-active="active">
-          <a ui-sref='main.examSchedules'>
-            <i class="fa fa-circle-o"></i> Exam Schedules</a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref='main.examPapers'>
-            <i class="fa fa-circle-o"></i> Exam Papers</a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref='main.evaluations'>
-            <i class="fa fa-circle-o"></i> Evaluations</a>
-        </li>
->>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
         <li class="treeview">
           <a href="">
             <i class="fa fa-file-text" aria-hidden="true"></i>
@@ -258,19 +170,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-<<<<<<< HEAD
             <li ui-sref-active="active"><a ui-sref='main.examReports1'><i class="fa fa-circle-o"></i>Report By Paper</a></li>
             <li ui-sref-active="active"><a ui-sref='main.examReports2'><i class="fa fa-circle-o"></i>Report By Student</a></li>
-=======
-            <li ui-sref-active="active">
-              <a ui-sref='main.examReports1'>
-                <i class="fa fa-circle-o"></i>Report By Paper</a>
-            </li>
-            <li ui-sref-active="active">
-              <a ui-sref='main.examReports2'>
-                <i class="fa fa-circle-o"></i>Report By Student</a>
-            </li>
->>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
           </ul>
         </li>
       </ul>
@@ -278,55 +179,31 @@
     <!-- Timetable-->
     <li>
       <a href="">
-        <i class="fa fa-calendar"></i>
-        <span>Timetable</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-      </a>
+            <i class="fa fa-calendar"></i> <span>Timetable</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>              
+            </span>
+          </a>
       <ul class="treeview-menu">
-        <li ui-sref-active="active">
-          <a ui-sref='main.classWise'>
-            <i class="fa fa-circle-o"></i> Class-wise</a>
-        </li>
+        <li ui-sref-active="active"><a ui-sref='main.classWise'><i class="fa fa-circle-o"></i> Class-wise</a></li>
         <!--<li  ui-sref-active="active" data-ng-if="setRole('admin')"><a ui-sref='main.teacherWise'><i class="fa fa-circle-o"></i> Teacher-wise</a></li>-->
-        <li ui-sref-active="active">
-          <a ui-sref='main.schoolEvents'>
-            <i class="fa fa-circle-o"></i> School Events</a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref='main.onlineNoticeBoard'>
-            <i class="fa fa-circle-o"></i> Online NoticeBoard</a>
-        </li>
+        <li ui-sref-active="active"><a ui-sref='main.schoolEvents'><i class="fa fa-circle-o"></i> School Events</a></li>
+        <li ui-sref-active="active"><a ui-sref='main.onlineNoticeBoard'><i class="fa fa-circle-o"></i> Online NoticeBoard</a></li>
       </ul>
     </li>
     <!--Fee-->
     <li data-ng-if="setRole('admin')">
       <a href="">
-        <i class="fa fa-inr" aria-hidden="true"></i>
-        <span>Fees Collection</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-      </a>
+            <i class="fa fa-inr" aria-hidden="true"></i><span>Fees Collection</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
       <ul class="treeview-menu">
-        <li data-ng-if="setRole('admin')">
-          <a ui-sref='main.feeType'>
-            <i class="fa fa-circle-o"></i> Fee Type </a>
-        </li>
-        <li data-ng-if="setRole('admin')">
-          <a ui-sref='main.feeMaster'>
-            <i class="fa fa-circle-o"></i> Fee Master </a>
-        </li>
+        <li data-ng-if="setRole('admin')"><a ui-sref='main.feeType'><i class="fa fa-circle-o"></i> Fee Type </a></li>
+        <li data-ng-if="setRole('admin')"><a ui-sref='main.feeMaster'><i class="fa fa-circle-o"></i> Fee Master </a></li>
 
-<<<<<<< HEAD
         <li data-ng-if="setRole('admin')"><a ui-sref='main.collectFee'><i class="fa fa-circle-o"></i> Collect Fee </a></li>
-=======
-        <li data-ng-if="setRole('admin')">
-          <a ui-sref='main.collectFee'>
-            <i class="fa fa-circle-o"></i> Collect Fee </a>
-        </li>
->>>>>>> 3063d8978d8eca3b5913af595172c0022cb6e366
         <!--<li data-ng-if="setRole('admin')"><a ui-sref='main.collectFee2'><i class="fa fa-circle-o"></i> Collect Fee2 </a></li>-->
       </ul>
     </li>
@@ -334,51 +211,31 @@
     <!-- Library-->
     <li>
       <a href="">
-        <i class="fa fa-book" aria-hidden="true"></i>
-        <span>Library</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-      </a>
+            <i class="fa fa-book" aria-hidden="true"></i> <span>Library</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
       <ul class="treeview-menu">
         <!--<li data-ng-if="setRole('admin')"><a ui-sref='main.libraryRules'><i class="fa fa-circle-o"></i> Library rules</a></li>-->
-        <li ui-sref-active="active" data-ng-if="setRole('admin')">
-          <a ui-sref='main.addBook'>
-            <i class="fa fa-circle-o"></i> Add Book</a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref='main.bookList'>
-            <i class="fa fa-circle-o"></i> Book List</a>
-        </li>
+        <li ui-sref-active="active" data-ng-if="setRole('admin') || setRole('teacher')"><a ui-sref='main.addBook'><i class="fa fa-circle-o"></i> Add Book</a></li>
+        <li ui-sref-active="active"><a ui-sref='main.bookList'><i class="fa fa-circle-o"></i> Book List</a></li>
       </ul>
     </li>
     <!-- Transport-->
     <li>
       <a href="">
-        <i class="fa fa-bus" aria-hidden="true"></i>
-        <span>Transport</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-      </a>
+            <i class="fa fa-bus" aria-hidden="true"></i> <span>Transport</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
       <ul class="treeview-menu">
-        <li ui-sref-active="active" data-ng-if="setRole('admin')">
-          <a ui-sref='main.addStation'>
-            <i class="fa fa-circle-o"></i> Add Station</a>
-        </li>
-        <li ui-sref-active="active" data-ng-if="setRole('admin')">
-          <a ui-sref='main.addVehicle'>
-            <i class="fa fa-circle-o"></i> Add Vehicle</a>
-        </li>
-        <li ui-sref-active="active" data-ng-if="setRole('admin')">
-          <a ui-sref='main.addBusRoute'>
-            <i class="fa fa-circle-o"></i> Add Bus Route</a>
-        </li>
+        <li ui-sref-active="active" data-ng-if="setRole('admin')"><a ui-sref='main.addStation'><i class="fa fa-circle-o"></i> Add Station</a></li>
+        <li ui-sref-active="active" data-ng-if="setRole('admin')"><a ui-sref='main.addVehicle'><i class="fa fa-circle-o"></i> Add Vehicle</a></li>
+        <li ui-sref-active="active" data-ng-if="setRole('admin')"><a ui-sref='main.addBusRoute'><i class="fa fa-circle-o"></i> Add Bus Route</a></li>
 
-        <li ui-sref-active="active">
-          <a ui-sref='main.routeGeolocation'>
-            <i class="fa fa-circle-o"></i> Route Geolocation</a>
-        </li>
+        <li ui-sref-active="active"><a ui-sref='main.routeGeolocation'><i class="fa fa-circle-o"></i> Route Geolocation</a></li>
       </ul>
     </li>
     <!-- -->
