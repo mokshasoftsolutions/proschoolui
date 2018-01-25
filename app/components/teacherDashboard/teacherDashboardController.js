@@ -205,7 +205,7 @@ angular.module('school_erp')
             $scope.getAttendanceByStudent($scope.student_id);
             $scope.getStudentStatus($scope.student_id);
 
-        }
+        }hfghfdg
         // $scope.data = [];
         // globalServices.getClass()
         //     .success(function (data, status) {
