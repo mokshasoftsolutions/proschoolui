@@ -519,7 +519,7 @@ div.Maintenance{height:100px;padding-left: 20px;}
 
 /*==============classwisestyles===========*/
 
-.classwise{margin:0 auto;height:500px;}
+.classwise{margin:0 auto;height:700px;}
 .classwise .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
 .classwise .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
 .classwise .col-md-9 .backwhite .button{float: right;}

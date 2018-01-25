@@ -101,7 +101,28 @@ angular.module('school_erp')
                 .success(function (data, status) {
                     //   console.log(JSON.stringify(data));
                     // $scope.evalData = data[examPaper+'-'+student]
-                    $scope.evalData = data.resultArray;
+                    $scope.eval = data.resultArray;
+                    $scope.evalData = [];
+                    index = 0;
+                    $scope.eval.forEach(function (element) {
+
+                        var obj = {
+                            id: index++,
+                            paper_result_id: element.paper_result_id,
+                            first_name: element.first_name,
+                            last_name:element.last_name,
+                            examschedule_name: element.examschedule_name,
+                            paper_name:element.paper_name,
+                            marks:element.marks,
+                            percentage:element.percentage,
+                            conduct:element.conduct
+
+
+                        }
+                        $scope.evalData.push(obj);
+                       // console.log($scope.examData);
+                    })
+
                 })
                 .error(function (data, success) { })
         }
