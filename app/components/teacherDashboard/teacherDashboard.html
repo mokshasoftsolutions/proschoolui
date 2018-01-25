@@ -9,16 +9,16 @@
       <div class="col-md-12">
         <div class="studetails">
           <div class="col-md-4">
-            <div class="backwhite" ng-repeat="stuData in studentData">
+            <div class="backwhite" ng-repeat="empData in employeeData">
               <div class="parimage">
-                <img ng-src="{{globalServicesURL}}api/image/{{stuData.studentImage[0].filename}}">
+                <img ng-src="{{globalServicesURL}}api/image/{{empData.employeeImage[0].filename}}">
                 
-                <h2>Admission No:   {{ stuData.Admission_no}}</h2>
-                <h2>Roll No:  {{stuData.roll_no}}</h2>
+                <!-- <h2>Admission No:   {{ empData.Admission_no}}</h2>
+                <h2>Roll No:  {{empData.roll_no}}</h2> -->
               </div>
               <div class="stuinfor">
-                <h1>{{stuData.student_name}}</h1>
-                <h2>{{stuData.status}}</h2>
+                <h1>{{empData.employee_name}}</h1>
+                <h2>{{empData.status}}</h2>
 
               </div>
             </div>
@@ -67,19 +67,19 @@
               <h3>Attendance Report</h3>
               <table class="table">
                 <tbody>
-                  <tr ng-repeat="student in studentAttData">
-                    <td>{{student.monthName}}
+                  <tr ng-repeat="employee in employeeAttData">
+                    <td>{{employee.monthName}}
                     </td>
                     <td>
                       <div class="progress">
                         <div class="progress-bar progress-bar-success" ng-style="{width:(student.attendance.presentPercent)}">
-                          P:{{student.attendance.present}}/{{student.count}}
+                          P:{{employee.attendance.present}}/{{employee.count}}
                         </div>
                         <div class="progress-bar progress-bar-warning" ng-style="{width:(student.attendance.onLeavePercent)}">
-                          L:{{student.attendance.onLeave}}/{{student.count}}
+                          L:{{employee.attendance.onLeave}}/{{employee.count}}
                         </div>
                         <div class="progress-bar progress-bar-danger" ng-style="{width:(student.attendance.absentPercent)}">
-                          A:{{student.attendance.absent}}/{{student.count}}
+                          A:{{employee.attendance.absent}}/{{employee.count}}
                         </div>
                       </div>
                     </td>

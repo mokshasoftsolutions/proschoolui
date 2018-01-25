@@ -1,11 +1,11 @@
 angular.module('school_erp')
-    .controller("teacherDashboardController", ['$http', '$scope', '$compile', 'chaptersServices', 'globalServices', 'subjectsServices', 'studentServices', 'classWiseServices', 'NoticeBoardServices', 'schoolEventsServices', 'addVehicleServices', 'barChartOneService', 'ngDialog', '$rootScope', function ($http, $scope, $compile, chaptersServices, globalServices, subjectsServices, studentServices, classWiseServices, NoticeBoardServices, schoolEventsServices, addVehicleServices, barChartOneService, ngDialog, $rootScope) {
+    .controller("teacherDashboardController", ['$http', '$scope', '$compile', 'chaptersServices', 'employeeServices', 'globalServices', 'subjectsServices', 'studentServices', 'classWiseServices', 'NoticeBoardServices', 'schoolEventsServices', 'addVehicleServices', 'ngDialog', '$rootScope', function ($http, $scope, $compile, chaptersServices, employeeServices, globalServices, subjectsServices, studentServices, classWiseServices, NoticeBoardServices, schoolEventsServices, addVehicleServices, ngDialog, $rootScope) {
         $scope.globalServicesURL = globalServices.globalValue.baseURL;
 
-        $scope.getTimeTableByEmployee = function (secId) {
+        $scope.getTimeTableByEmployee = function (teacher_id) {
 
             day = new Date().getDay() + 1;
-            classWiseServices.getTimeTableByEmployee(day, secId)
+            classWiseServices.getTimeTableByEmployee(day, teacher_id)
                 .success(function (data, status) {
                     console.log(JSON.stringify(data));
                     //  $scope.timeTableData = [];
@@ -20,16 +20,13 @@ angular.module('school_erp')
 
 
 
-        $scope.getAttendanceByEmployee = function (student_id) {
-            studentServices.getAttendanceByEmployee(student_id)
+        $scope.getAttendanceByEmployee = function (employee_id) {
+            console.log(employee_id);
+            employeeServices.getAttendanceByEmployee(employee_id)
                 .success(function (data, status) {
-                    //   console.log("school atttttt..................");
+                    console.log(employee_id);
                     console.log(JSON.stringify(data));
-                    $scope.studentAttData = data.studentAttendence;
-
-
-
-
+                    $scope.employeeAttData = data.employeeAttendence;
 
                 })
                 .error(function (data, success) {
@@ -37,14 +34,14 @@ angular.module('school_erp')
         }
 
 
-        $scope.getEmployeeStatus = function (student_id) {
-            studentServices.getEmployeeStatus(student_id)
+        $scope.getEmployeeStatus = function (employee_id) {
+            employeeServices.getEmployeeStatus(employee_id)
                 .success(function (data, status) {
                     //   console.log("school atttttt..................");
                     console.log(JSON.stringify(data));
-                    $scope.studentData = data.studentAttendence;
+                    $scope.employeeData = data.employeeAttendence;
 
-                    $scope.image = $scope.studentData[0].studentImage[0].filename;
+                    $scope.image = $scope.employeeData[0].employeeImage[0].filename;
 
 
 
@@ -197,15 +194,15 @@ angular.module('school_erp')
 
         if ($rootScope.role == 'teacher') {
 
-            $scope.secId = $rootScope.student.section_id;
-            $scope.classId = $rootScope.student.class_id;
-            $scope.vehicle_code = $rootScope.student.route_id;
-            $scope.student_id = $rootScope.student.student_id;
-            $scope.getTimeTableByStudent($scope.secId);
-            $scope.getAttendanceByStudent($scope.student_id);
-            $scope.getStudentStatus($scope.student_id);
+            $scope.employee_id = $rootScope.employee_id;
+            $scope.teacher_id = $rootScope.teacher_id;
+            //console.log($scope.role);
+            //  console.log($scope.employee_id);
+            $scope.getTimeTableByEmployee($scope.teacher_id);
+            $scope.getAttendanceByEmployee($scope.employee_id);
+            $scope.getEmployeeStatus($scope.employee_id);
 
-        }hfghfdg
+        }
         // $scope.data = [];
         // globalServices.getClass()
         //     .success(function (data, status) {

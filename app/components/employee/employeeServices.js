@@ -121,6 +121,22 @@ angular.module('school_erp')
             })
         };
 
+        employeeService.getAttendanceByEmployee = function (employee_id) {
+            return $http({
+                method: 'GET',
+                //url: "http://192.168.1.6:4005/api/examevaluationlistbystudentid/263/456"
+                url: globalServices.globalValue.baseURL + 'api/employee_tillDate_attendence/' + employee_id
+            })
+        };
+
+        employeeService.getEmployeeStatus  = function (employee_id) {
+            return $http({
+                method: 'GET',
+                //url: "http://192.168.1.6:4005/api/examevaluationlistbystudentid/263/456"
+                url: globalServices.globalValue.baseURL + 'api/presentDay_employee_attendence/'+ new Date().toDateString() + '/'  + employee_id
+            })
+        };
+
 
         return employeeService;
 

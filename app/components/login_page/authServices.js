@@ -33,6 +33,10 @@ angular.module('school_erp')
 
           //   console.log(" students information");
           //    console.log($rootScope.users);
+          if ($rootScope.role == 'teacher'){
+            $rootScope.employee_id = userInfo.employee_id;
+            $rootScope.teacher_id = userInfo.uniqueId;
+          }
 
 
           if ($rootScope.role == 'parent') {

@@ -1,5 +1,5 @@
 angular.module('school_erp')
-    .controller("classWiseController", ['$http', '$scope', 'globalServices', 'subjectsServices', 'classWiseServices', 'sessionServices', 'ngDialog', function ($http, $scope, globalServices, subjectsServices, classWiseServices, sessionServices, ngDialog) {
+    .controller("classWiseController", ['$http', '$scope', 'globalServices','studentServices','subjectsServices', 'classWiseServices', 'sessionServices', 'ngDialog', function ($http, $scope, globalServices,studentServices, subjectsServices, classWiseServices, sessionServices, ngDialog) {
         $scope.days = [{
             name: "Sunday",
             id: 1
@@ -36,6 +36,17 @@ angular.module('school_erp')
                 $scope.classData = data.school_classes;// Api list-name
                 $scope.classId = $scope.classData[0].class_id;
                 $scope.populateSections($scope.classId)
+
+            })
+            .error(function (data, success) {
+            })
+
+            studentServices.getTeacherListBySchool()
+            .success(function (data, status) {
+                //  console.log(JSON.stringify(data));
+                $scope.teacherList = data.teachers;// Api list-name
+
+                //    console.log($scope.teacherList);
 
             })
             .error(function (data, success) {
@@ -149,11 +160,13 @@ angular.module('school_erp')
 
         $scope.addTimeTable = function (data,secId) {
             $scope.subId = $scope.data.subId;
+           
             $scope.secId=secId;
             var TimeTableDetails = {
                 day: $scope.data.select_day,
                 // room_no: $scope.data.room_no,
                 start_time: $scope.data.time_from,
+                teacher_id:$scope.data.teacher_id
                 //end_time: "4:30"
             }
             classWiseServices.setTimeTable(TimeTableDetails, $scope.secId, $scope.subId)

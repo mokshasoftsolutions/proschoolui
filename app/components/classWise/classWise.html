@@ -61,7 +61,15 @@
               </select>
             </div>
 
-
+            <div  ng-show="showRole(['admin'])">
+              <div class="form-group" ng-class="{'has-error': TimeTable.$submitted && TimeTable.teacher.$invalid && TimeTable.teacher.$pristine}">
+                  <label for="inputdefault">Teacher</label>
+                  <br>
+                  <select name="teacher" class="form-control" id="sel1" ng-model="data.teacher_id" ng-options="teacher.teacher_id as teacher.teacher_name for teacher in teacherList">
+                      <option selected value="">--select--</option>
+                  </select>
+              </div>
+          </div>
             <!--</div>
                             <div class="row">-->
 

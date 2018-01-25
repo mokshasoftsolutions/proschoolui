@@ -51,6 +51,12 @@ angular.module('school_erp')
             })
         };
 
+        classWiseServices.getTimeTableByEmployee = function (day,employee_id) {
+            return $http({
+                method: 'GET',
+                url: globalServices.globalValue.baseURL + 'api/teacher_timetable_by_day/' + day + '/' + employee_id
+            })
+        };
 
         return classWiseServices;
     }]);  
