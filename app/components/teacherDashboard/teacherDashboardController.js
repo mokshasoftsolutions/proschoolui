@@ -37,8 +37,8 @@ angular.module('school_erp')
         }
 
 
-        $scope.getStudentStatus = function (student_id) {
-            studentServices.getStudentStatus(student_id)
+        $scope.getEmployeeStatus = function (student_id) {
+            studentServices.getEmployeeStatus(student_id)
                 .success(function (data, status) {
                     //   console.log("school atttttt..................");
                     console.log(JSON.stringify(data));
@@ -195,7 +195,7 @@ angular.module('school_erp')
             })
 
 
-        if ($rootScope.role == 'parent') {
+        if ($rootScope.role == 'teacher') {
 
             $scope.secId = $rootScope.student.section_id;
             $scope.classId = $rootScope.student.class_id;
