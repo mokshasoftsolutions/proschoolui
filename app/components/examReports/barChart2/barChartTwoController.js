@@ -7,7 +7,7 @@ angular.module('school_erp')
                 .success(function (data, status) {
                     $scope.classDatanew = data.school_classes;// Api list-name
                     $scope.classId = $scope.classDatanew[0].class_id;
-                    console.log($scope.classId);
+                    //   console.log($scope.classId);
                     $scope.populateSections($scope.classId);
                 })
                 .error(function (data, success) {
@@ -46,8 +46,8 @@ angular.module('school_erp')
                 .success(function (data, status) {
                     $scope.students = data.students;
                     $scope.studentId = $scope.students[0].student_id;
-                    console.log(JSON.stringify(data));
-                    console.log($scope.studentId);
+                    //     console.log(JSON.stringify(data));
+                    //     console.log($scope.studentId);
 
                     $scope.getExamMarks($scope.data.examSchedule_name, $scope.studentId);
                 })
@@ -57,7 +57,7 @@ angular.module('school_erp')
 
 
         $scope.getExamMarks = function (examScheduleId, studentId) {
-            console.log("message");
+            //    console.log("message");
             var arrData = new Array();
             var arrLabels = new Array();
             $scope.examData = [];
@@ -69,8 +69,8 @@ angular.module('school_erp')
             barChartTwoService.getExamMarks(examScheduleId, studentId)
                 .success(function (data, status) {
                     $scope.examData = data.resultArray;
-                    console.log("message1");
-                    console.log(JSON.stringify($scope.examData));
+                    //     console.log("message1");
+                    //     console.log(JSON.stringify($scope.examData));
 
 
 
@@ -78,7 +78,7 @@ angular.module('school_erp')
 
                     $scope.array = $.map($scope.examData, function (item) {
                         $scope.maxMarks = item.max_marks;
-                        console.log($scope.maxMarks);
+                        //    console.log($scope.maxMarks);
 
                         arrLabels.push(item.paper_name);
 
@@ -88,7 +88,7 @@ angular.module('school_erp')
                                 $scope.label1.push(arrLabels[i]);
                             }
                         }
-                        console.log($scope.label1);
+                        //     console.log($scope.label1);
 
                         $scope.data2 = JSON.parse(item.marks);
                         arrData.push($scope.data2);
@@ -97,7 +97,7 @@ angular.module('school_erp')
                         for (var j = 0; j < arrData.length; j++) {
                             $scope.data1.push(arrData[j]);
                         }
-                        console.log($scope.data1);
+                        //    console.log($scope.data1);
 
 
 
@@ -255,14 +255,20 @@ angular.module('school_erp')
 
 
         if ($rootScope.role == 'parent') {
-            console.log("message........................");
-            $scope.secId = $rootScope.student.section;
-            $scope.getExamSchedule();
-            $scope.getStudentValue($scope.secId);
-            // console.log("message........................2");
-            // console.log($scope.secId);
-            // console.log($scope.data.examSchedule_name);
-            // $scope.getExamPapers($scope.data.examSchedule_name, $scope.secId);
+            //    console.log("message for examSchedule");
+            $scope.studentId = $rootScope.student.student_id;
+
+            // $scope.getExamSchedule = function () {
+            examServices.getExamSchedule()
+                .success(function (data, status) {
+                    $scope.examSchedule = data.exam_schedules; // Api list-name
+                    $scope.data.examSchedule_name = data.exam_schedules[0].exam_sch_id;
+                    $scope.getExamMarks($scope.data.examSchedule_name, $scope.studentId);
+
+                })
+                .error(function (data, success) { })
+            // }
+            // $scope.getExamSchedule();
 
 
         } else {

@@ -51,6 +51,25 @@ angular.module('school_erp')
                 }
             })
 
+
+            .state('main.parentDashboard', { // login Page
+                url: "parentdashboard",
+                templateUrl: "app/components/parentDashboard/parentDashboard.html",
+                controller: "parentDashboardController",
+                data: {
+                    requireLogin: true
+                }
+            })
+
+            .state('main.teacherDashboard', { // login Page
+                url: "teacherdashboard",
+                templateUrl: "app/components/teacherDashboard/teacherDashboard.html",
+                controller: "teacherDashboardController",
+                data: {
+                    requireLogin: true
+                }
+            })
+
             .state('main.addClass&Section', { // login Page
                 url: "addClass&Section",
                 templateUrl: "app/components/addClass&Section/addClass&Section.html",
@@ -81,15 +100,59 @@ angular.module('school_erp')
                 }
 
             })
+            .state('main.taskManagement', { // login Page
+                url: "taskManagement",
+                templateUrl: "app/components/TaskManager/taskManager.html",
+                controller: "taskManagerController",
+                data: {
+                    requireLogin: true
+                }
 
-            // .state('main.parentDashboard', { // login Page
-            //     url: "dashboard",
-            //     templateUrl: "app/components/parentDashboard/parentDashboard.html",
-            //     controller: "parentDashboardController",
-            //     data: {
+            })
+            .state('main.session_timings', {
+                url: "session_timings",
+                templateUrl: "app/components/session_timings/session_timings.html",
+                controller:"sessionController",
+                date: {
+                    requireLogin: true
+                }
+            })
+
+            .state('main.pay_bands', {
+                url: "pay_bands",
+                templateUrl: "app/components/pay_bands/pay_bands.html",
+                controller:"PaybandController",
+                date: {
+                    requireLogin: true
+                }
+            })
+
+            .state('main.messages', { // login Page
+                url: "messages",
+                templateUrl: "app/components/messages/messages.html",
+               // controller: "messagesController",
+                data: {
+                    requireLogin: true
+                }
+            })
+
+            .state('main.schoolProfile', { // login Page
+                url: "schoolProfile",
+                templateUrl: "app/components/schoolProfile/schoolProfile.html",
+                controller: "schoolInformationController",
+                data: {
+                    requireLogin: true
+                }
+            })
+            // .state('main.schoolInformation', {
+            //     url: "schoolInformation",
+            //     templateUrl: "app/components/schoolProfile/schoolInformation.html",
+            //     controller:"schoolInformationController",
+            //     date: {
             //         requireLogin: true
             //     }
             // })
+
             .state('main.studentProfile', { // login Page
                 url: "student/studentProfile/:student",
                 templateUrl: "app/components/studentProfile/studentProfile.html",
@@ -114,14 +177,21 @@ angular.module('school_erp')
                 data: {
                     requireLogin: true
                 }
-                // views:{
-                //     '':{templateUrl:"app/components/student/studentProfile/studentProfile.html"}
-                // }
+               
             })
             // .state('main.studentDetails', { // login Page
             //     url: "studentInfo/studentDetails",
             //     templateUrl: "app/components/studentDetails/studentDetails.html"          
             // })
+            .state('main.employeeProfile', { // login Page
+                url: "employee/employeeProfile/:employee",
+                templateUrl: "app/components/employeeProfile/employeeProfile.html",
+                controller: "employeeProfileController",
+                data: {
+                    requireLogin: true
+                }
+
+            })
             .state('main.employee', { // login Page
                 url: "employeeInfo/employee",
                 templateUrl: "app/components/employee/employee.html",
@@ -192,14 +262,7 @@ angular.module('school_erp')
                 }
             })
 
-            // .state('main.attendenceReports2', { // login Page
-            //     url: "attendance/attendenceReports/Report2",
-            //     templateUrl: "app/components/attendenceReports/Report2/report2.html",
-            //     controller: "reportTwoController",
-            //     data: {
-            //         requireLogin: true
-            //     }
-            // })
+            
 
 
             .state('main.subjects', { // login Page
@@ -214,6 +277,23 @@ angular.module('school_erp')
                 url: "academics/chapters",
                 templateUrl: "app/components/chapters/chapters.html",
                 controller: "chaptersController",
+                data: {
+                    requireLogin: true
+                }
+            })
+            .state('main.lessonPlanner', { // login Page
+                url: "academics/lessonPlanner",
+                templateUrl: "app/components/lessonPlanner/lessonPlanner.html",
+                controller: "lessonPlannerController",
+                data: {
+                    requireLogin: true
+                }
+            })
+
+            .state('main.lessonTracker', { // login Page
+                url: "academics/lessonTracker",
+                templateUrl: "app/components/lessonTracker/lessonTracker.html",
+                controller: "lessonTrackerController",
                 data: {
                     requireLogin: true
                 }
@@ -235,9 +315,25 @@ angular.module('school_erp')
                 }
             })
                .state('main.marks', { // login Page
-                url: "academics/marks",
+                url: "assignments/marks",
                 templateUrl: "app/components/marks/marks.html",
                 controller: "marksController",
+                data: {
+                    requireLogin: true
+                }
+            })
+            .state('main.quiz', { // login Page
+                url: "quiz/quiz",
+                templateUrl: "app/components/quiz/quiz.html",
+                controller: "quizController",
+                data: {
+                    requireLogin: true
+                }
+            })
+            .state('main.addQuestions', { // login Page
+                url: "quiz/addQuestions",
+                templateUrl: "app/components/addQuestions/addQuestions.html",
+                controller: "addQuestionsController",
                 data: {
                     requireLogin: true
                 }
@@ -406,6 +502,41 @@ angular.module('school_erp')
                     requireLogin: true
                 }
             })
+
+            .state('main.payroll', {
+                url: "HR/payroll",
+                templateUrl: "app/components/payroll/payroll.html",
+               // controller: "payrollController",
+                data: {
+                    requireLogin: true
+                }
+            })
+
+            .state('main.store', {
+                url: "store/store",
+                templateUrl: "app/components/store/store.html",
+                controller: "storeController",
+                data: {
+                    requireLogin: true
+                }
+            })
+            .state('main.materialIn', {
+                url: "store/materialIn",
+                templateUrl: "app/components/MaterialIn/materialIn.html",
+                controller: "materialInController",
+                data: {
+                    requireLogin: true
+                }
+            })
+            .state('main.materialOut', {
+                url: "store/materialOut",
+                templateUrl: "app/components/MaterialOut/materialOut.html",
+                controller: "materialOutController",
+                data: {
+                    requireLogin: true
+                }
+            })
+
             .state('first_page', { // login Page
                 url: "/first_page",
                 templateUrl: "app/components/first_page/firstPage.html",

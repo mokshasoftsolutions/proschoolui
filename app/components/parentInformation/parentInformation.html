@@ -1,34 +1,40 @@
 <div class="row background">
-    <div class="container">
-        <h1>Admin Management</h1>
-        <ul class="links">
-            <li ui-sref-active="active">
-                
-                <a ui-sref='main.addClass&Section'>AddClass&Section</a>
-            </li>/
-            <li ui-sref-active="active">
-                <a ui-sref='main.parentInfo'>ParentInfo</a>
-            </li>/
-            <li ui-sref-active="active">
-                <a ui-sref='main.teacherInfo'>TeacherInfo</a>
-            </li>
-        </ul>
-    </div>
+  <div class="container">
+    <h1>Admin Management</h1>
+    <ul class="links">
+      <li ui-sref-active="active">
+          <a ui-sref='main.schoolProfile'>School Profile</a>
+      </li>
+      <li ui-sref-active="active" >
+
+         / <a ui-sref='main.addClass&Section'>Class&Section</a>
+      </li>
+      <li ui-sref-active="active" ng-show="showRole(['admin'])">
+          /<a ui-sref='main.parentInfo'>ParentInfo</a>
+      </li>
+      <li ui-sref-active="active" ng-show="showRole(['admin'])">
+         / <a ui-sref='main.teacherInfo' >TeacherInfo</a>
+      </li>
+      <li ui-sref-active="active" ng-show="showRole(['admin','teacher'])">
+          /<a ui-sref='main.taskManagement'>TaskManagement</a>
+      </li>
+  </ul>
+  </div>
 </div>
 
 <!-- Main content -->
 
-  <!-- Select Criteria -->
+<!-- Select Criteria -->
 
-  <!-- <div class="box box-default"> -->
-  <!--<div class="box-header with-border" >
+<!-- <div class="box box-default"> -->
+<!--<div class="box-header with-border" >
       <i class="fa fa-search" aria-hidden="true"></i>
       <h3 class="box-title">Select Criteria</h3>
     </div>-->
-  <!-- /.box-header -->
-  <!-- <div class="box-body">
+<!-- /.box-header -->
+<!-- <div class="box-body">
       <div class="row"> -->
-  <!--<div class="col-md-3">
+<!--<div class="col-md-3">
           <div class="form-group">
             <label>Batch Year</label>
             <select class="form-control select2" style="width: 100%;">
@@ -39,7 +45,7 @@
           </div>
         </div>-->
 
-  <!-- <div class="col-md-3">
+<!-- <div class="col-md-3">
           <div class="form-group">
             <label>Class</label>
             <select class="form-control select2" ng-options="class.class_id as class.name for class in classData" data-ng-change="populateSections(classId)"
@@ -73,61 +79,61 @@
     </div>
   </div> -->
 
-  <!-- /.content -->
- <div class="container">
+<!-- /.content -->
+<div class="container">
   <div class="row">
     <div class="booklist">
       <div class="col-md-12">
         <div class="backwhite">
-    <!-- <ul style="list-style-type:none;">
+          <!-- <ul style="list-style-type:none;">
       
      
           <li class="col-md-6"> -->
 
-            <table export-table st-table="display_records" st-safe-src="parentsList" class="table rwd-table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <!-- <th>ParentId</th> -->
-                  <th>Student Name</th>
-                  <th>Parent Name</th>
-                  <!-- <th>SchoolId</th> -->
-                  <th>User Name</th>
+          <table export-table st-table="display_records" st-safe-src="parentBox" class="table rwd-table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <!-- <th>ParentId</th> -->
+                <th>Student Name</th>
+                <th>Parent Name</th>
+                <!-- <th>SchoolId</th> -->
+                <th>User Name</th>
                 <th>Password</th>
 
-                </tr>
-              </thead>
-              <tbody>
-                <tr st-select-row="row" st-select-mode="multiple" ng-repeat="parent in display_records">
-                  <td>{{$index+1}}</td>
-                  <td>
-                  
-                    <a href="">{{parent.student_doc[0].first_name}} {{parent.student_doc[0].last_name}}</a>
-                  </td>
-                  
-                  <td>
-                    <a href="">{{parent.parent_name}}</a>
-                  </td>
-               
+              </tr>
+            </thead>
+            <tbody>
+              <tr st-select-row="row" st-select-mode="multiple" ng-repeat="parent in display_records">
+                <td>{{parent.id+1}}</td>
+                <td>
 
-                  <td>
-                    <a href="">{{parent.parent_id | lowercase}}</a>
-                  </td>
-                  <td>
-                    <a href="">{{parent.parent_id | lowercase}}</a>
-                  </td> 
-               
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="5" class="text-center">
-                    <div class="pull-right" st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
-        
+                  {{parent.first_name}} {{parent.last_name}}
+                </td>
+
+                <td>
+                  {{parent.parent_name}}
+                </td>
+
+
+                <td>
+                  {{parent.parent_id | lowercase}}
+                </td>
+                <td>
+                  {{parent.parent_id | lowercase}}
+                </td>
+
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="5" class="text-center">
+                  <div class="pull-right" st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+
           <!-- </li> -->
           <!-- <li class="col-md-6">
          
@@ -164,10 +170,10 @@
           </li>
         
       -->
-<!-- 
+          <!-- 
     </ul> -->
         </div>
       </div>
     </div>
   </div>
- </div>
+</div>

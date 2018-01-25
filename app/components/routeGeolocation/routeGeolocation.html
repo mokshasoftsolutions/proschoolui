@@ -3,16 +3,16 @@
     <h1>Transport Mangement</h1>
     <ul class="links">
       <li>
-        <a ui-sref='main.addStation'>Addstation</a>
-      </li>/
+        <a ui-sref='main.addStation'>Station</a>
+      </li>
+      <li>/
+        <a ui-sref='main.addVehicle'>Vehical</a>
+      </li>
+      <li>/
+        <a ui-sref='main.addBusRoute'>Bus Route</a>/
+      </li>
       <li>
-        <a ui-sref='main.addVehicle'>Addvehical</a>
-      </li>/
-      <li>
-        <a ui-sref='main.addBusRoute'>Addbusroute</a>
-      </li>/
-      <li>
-        <a ui-sref='main.routeGeolocation'>Routegeolocation</a>
+        <a ui-sref='main.routeGeolocation'>Route Geolocation</a>
       </li>
     </ul>
   </div>
@@ -20,19 +20,19 @@
 <div class="container">
   <div class="row">
     <div class="RouteGeoLocation">
-      <div class="col-md-3">
+      <div class="col-md-3" ng-if="showRole(['admin','teacher'])">
         <div class="backwhite">
           <h1>RouteGeoLocation</h1>
 
-          <div class="form-group">
+          <div class="form-group" ng-show="showRole(['admin','teacher'])">
 
-            <label>Select Vehicle</label>
+            <label>Vehicle</label>
             <select ng-options="vehicle.vehicle_code as vehicle.vehicle_name for vehicle in vehicles" class="form-control select2" ng-model="data.vehicle_code"
               style="width: 100%;">
                         </select>
           </div>
-          <div class="form-group">
-            <button>Search</button>
+          <div class="form-group" ng-if="showRole(['admin','teacher'])">
+              <button class="btn btn-primary " type="submit" style="background-color: #03104e;border-color: #03104e;">Search</button>
           </div>
 
         </div>

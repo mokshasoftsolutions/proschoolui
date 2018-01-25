@@ -17,152 +17,152 @@
 <div class="container">
   <div class="row">
     <div class="classwise">
-      <div class="col-md-3">
+      <div class="col-md-3" ng-if="showRole(['admin'])">
         <div class="backwhite">
-          
-            <div class="form-group" ng-class="{'has-error': Book.$submitted  && Book.selectSubject.$pristine}">
-              <label>Select Class</label>
-              <select data-ng-change="populateSections(classId)" name="selectSubject" class="form-control select2" ng-model="classId" style="width: 100%;">
-                        <option selected="selected">--Select--</option>
-                        <option ng-repeat="class in classData" value="{{class.class_id}}">{{class.name}}</option>
-                      </select>
-            </div>
-            <div class="form-group" ng-class="{'has-error': Book.$submitted  && Book.selectSubject.$pristine}">
-              <label>Select Section</label>
-              <select data-ng-change="populateSubjects(secId)" name="selectSubject" class="form-control select2" ng-model="secId" style="width: 100%;">
-                        <option selected="selected">--Select--</option>
-                        <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>
-                      </select>
-            </div>
 
-          
-                      <div class="box-footer">
-              <button type="submit" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Select</button>
-            </div>
-          
-
-          <div class="box-header with-border" ng-if="showRole(['admin'])">
-            <i class="fa fa-calendar" aria-hidden="true"></i>
-            <h3 class="box-title">Class Timetable</h3>
+          <div ng-show="showRole(['admin'])" class="form-group" ng-class="{'has-error': Book.$submitted  && Book.selectSubject.$pristine}">
+            <label>Class</label>
+            <select data-ng-change="populateSections(classId)" name="selectSubject" class="form-control select2" ng-model="classId" style="width: 100%;">
+              <option selected="selected" value="">--Select--</option>
+              <option ng-repeat="class in classData" value="{{class.class_id}}">{{class.name}}</option>
+            </select>
+          </div>
+          <div ng-show="showRole(['admin'])" class="form-group" ng-class="{'has-error': Book.$submitted  && Book.selectSubject.$pristine}">
+            <label>Section</label>
+            <!-- <select class="form-control select2" name="selectSubject" data-ng-change="populateSubjects(secId)" style="width: 100%;" ng-model="secId" ng-options="sectionData.section_id as sectionData.name for sectionData in secData "> -->
+            <select data-ng-change="populateSubjects(secId)" name="selectSubject" class="form-control select2" ng-model="secId" style="width: 100%;">
+              <option selected value="">--Select--</option>
+              <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>
+            </select>
           </div>
 
 
+          <div class="box-footer" ng-if="showRole(['admin'])">
+            <button type="submit" class="btn btn-primary pull-right" ng-click="getTimeTable(secId)" style="background-color: #03104e;border-color: #03104e;">Select</button>
+          </div>
 
 
+          <form name="TimeTable" ng-submit="TimeTable.$valid && addTimeTable(data,secId)" novalidate>
 
-          <form name="TimeTable" ng-submit="TimeTable.$valid && addTimeTable(data)" novalidate>
-            
-              
-                <div class="form-group" ng-class="{'has-error': Book.$submitted  && Book.selectSubject.$pristine}">
-                  <label>Select Subject</label>
-                  <select data-ng-change="getChapters(subId)" name="selectSubject" class="form-control select2" ng-model="subId" style="width: 100%;">
-                        <option selected="selected">--Select--</option>
-                        <option ng-repeat="sub in subData" value="{{sub.subject_id}}">{{sub.name}}</option>
-                      </select>
-                </div>
-                
-                  <div class="form-group" ng-class="{'has-error': TimeTable.$submitted && TimeTable.day.$invalid && TimeTable.day.$pristine}">
-                    <label>Day</label>
-                    <select ng-change="getMonth(select_month)" name="day" class="form-control select2" style="width: 100%;" ng-model="data.select_day">
-                            <option selected="selected">--Select--</option>
-                            <option ng-repeat="day in days " value="{{day.id}}">{{day.name}}</option>
-                        </select>
-                  </div>
-                
 
-                <!--</div>
+            <div ng-show="showRole(['admin'])" class="form-group" ng-class="{'has-error': Book.$submitted  && Book.selectSubject.$pristine}">
+              <label>Subject</label>
+              <select  name="selectSubject" class="form-control select2" ng-model="data.subId" style="width: 100%;">
+                <option selected value="">--Select--</option>
+                <option ng-repeat="sub in subData" value="{{sub.subject_id}}">{{sub.name}}</option>
+              </select>
+            </div>
+
+            <div ng-show="showRole(['admin'])" class="form-group" ng-class="{'has-error': TimeTable.$submitted && TimeTable.day.$invalid && TimeTable.day.$pristine}">
+              <label>Day</label>
+              <select ng-change="getMonth(select_month)" name="day" class="form-control select2" style="width: 100%;" ng-model="data.select_day">
+                <option selected value="">--Select--</option>
+                <option ng-repeat="day in days " value="{{day.id}}">{{day.name}}</option>
+              </select>
+            </div>
+
+
+            <!--</div>
                             <div class="row">-->
-                
-                  <div class="form-group" ng-class="{'has-error': TimeTable.$submitted && TimeTable.startTime.$invalid && TimeTable.startTime.$pristine}">
-                    <label>Time</label>
-                    <div class="input-group">
-                      <!--<input type="text" name="startTime" ng-model="data.time_from" class="form-control timepicker" required>-->
-                      <select class="form-control timepicker" ng-model="data.time_from" required>
-                                                <option value="09:30-10:30">09:30-10:30</option>
-                                                <option value="10:30-11:30">10:30-11:30</option>
-                                                <option value="11:30-12:30">11:30-12:30</option>
-                                                <option value="01:30-02:30">01:30-02:30</option>
-                                                <option value="02:30-03:30">02:30-03:30</option>
-                                                <option value="03:30-04:30">03:30-04:30</option>
-                                               
-                                            </select>
-                      <div class="input-group-addon">
-                        <i class="fa fa-clock-o"></i>
-                      </div>
-                    </div>
-                  </div>
-                
-            
-                
-                  <div class="box-footer">
+
+            <div ng-show="showRole(['admin'])" class="form-group" ng-class="{'has-error': TimeTable.$submitted && TimeTable.startTime.$invalid && TimeTable.startTime.$pristine}">
+              <label>Sessions</label>
+              <!-- <div class="input-group"> -->
+                <!--<input type="text" name="startTime" ng-model="data.time_from" class="form-control timepicker" required>-->
+                <select class="form-control timepicker" ng-model="data.time_from" required>
+                    <option selected="selected" value="">--Select--</option>
+                    <option ng-repeat="session in sessionData " value="{{session.start_time}}">{{session.session}}({{session.start_time}}-{{session.end_time}})</option>
+                  <!-- <option value="09:30-10:30">09:30-10:30</option>
+                  <option value="10:30-11:30">10:30-11:30</option>
+                  <option value="11:30-12:30">11:30-12:30</option>
+                  <option value="01:30-02:30">01:30-02:30</option>
+                  <option value="02:30-03:30">02:30-03:30</option>
+                  <option value="03:30-04:30">03:30-04:30</option> -->
+
+                </select>
+                 <!--
+                <div class="input-group-addon">
+                  <i class="fa fa-clock-o"></i>
+                </div> -->
+              <!-- </div> -->
+            </div>
+
+
+
+            <div class="box-footer" ng-if="showRole(['admin'])">
               <button type="submit" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Add Subject</button>
             </div>
-                
-              
-            
+
+
+
           </form>
 
         </div>
       </div>
       <div class="col-md-9">
         <div class="backwhite">
-          <h1>Time Table</h1>
+          <div class="box-header with-border" ng-if="showRole(['admin'])">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <h3 class="box-title">Class Timetable</h3>
+          </div>
           <table style="width:100%">
-           <tr >
-                                <th>Time </th>
+            <tr>
+              <th>Sessions </th>
 
-                                <th class="text text-center">
-                                    Monday
-                                </th>
-                                <th class="text text-center">
-                                    Tuesday
-                                </th>
-                                <th class="text text-center">
-                                    Wednesday
-                                </th>
-                                <th class="text text-center">
-                                    Thursday
-                                </th>
-                                <th class="text text-center">
-                                    Friday
-                                </th>
-                                <th class="text text-center">
-                                    Saturday
-                                </th>
-                                <th class="text text-center">
-                                    Sunday
-                                </th>
-                            </tr>
+              <th class="text text-center">
+                Monday
+              </th>
+              <th class="text text-center">
+                Tuesday
+              </th>
+              <th class="text text-center">
+                Wednesday
+              </th>
+              <th class="text text-center">
+                Thursday
+              </th>
+              <th class="text text-center">
+                Friday
+              </th>
+              <th class="text text-center">
+                Saturday
+              </th>
+              <th class="text text-center">
+                Sunday
+              </th>
+            </tr>
 
             <tbody>
-                            <tr ng-repeat="timetable in timeTableData">
-                                <th>
-                                    <div class="attachment-block clearfix">
-                                        <strong class="text-blue">{{timetable.start_time}}</strong>
-                                        <!--<b class="text text-center">-</b>
+              <tr ng-repeat="timetable in timeTableData">
+                <th>
+                  <div class="attachment-block clearfix">
+                    <strong class="text-blue">{{timetable.session}}({{timetable.start_time}}-{{timetable.end_time}})</strong>
+                    <!--<b class="text text-center">-</b>
                                         <strong class="text-blue">{{timetable.end_time}}</strong>-->
-                                    </div>
-                                </th>
-                                <td class="text text-center">
-                                    <strong class="text-blue">{{timetable.data.monday}}</strong>
-                                </td>
-                                <td class="text text-center">
-                                    <strong class="text-blue">{{timetable.data.tuesday}}</strong>
-                                </td>
-                                <td class="text text-center">
-                                    <strong class="text-blue">{{timetable.data.wednesday }}</strong>
-                                </td>
-                                <td class="text text-center">
-                                    <strong class="text-blue">{{timetable.data.thursday }}</strong>
-                                </td>
-                                <td class="text text-center">
-                                    <strong class="text-blue">{{timetable.data.friday}}</strong>
-                                </td>
-                                <td class="text text-center">
-                                    <strong class="text-blue">{{timetable.data.saturday }}</strong>
-                                </td>
-                                <td class="text text-center"><strong class="text-blue">{{timetable.data.sunday}}</strong></td>
-                                 </tr>
+                  </div>
+                </th>
+                <td class="text text-center">
+                  <strong class="text-blue">{{timetable.data.monday}}</strong>
+                </td>
+                <td class="text text-center">
+                  <strong class="text-blue">{{timetable.data.tuesday}}</strong>
+                </td>
+                <td class="text text-center">
+                  <strong class="text-blue">{{timetable.data.wednesday }}</strong>
+                </td>
+                <td class="text text-center">
+                  <strong class="text-blue">{{timetable.data.thursday }}</strong>
+                </td>
+                <td class="text text-center">
+                  <strong class="text-blue">{{timetable.data.friday}}</strong>
+                </td>
+                <td class="text text-center">
+                  <strong class="text-blue">{{timetable.data.saturday }}</strong>
+                </td>
+                <td class="text text-center">
+                  <strong class="text-blue">{{timetable.data.sunday}}</strong>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -172,9 +172,4 @@
     </div>
 
   </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="js/scripts.js"></script>
-  </body>
-
-  </html>
+  

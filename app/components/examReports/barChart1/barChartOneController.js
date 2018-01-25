@@ -4,25 +4,25 @@ angular.module('school_erp')
 
 
 
-        $scope.getClassesInitalLoad = function () {
-            globalServices.getClass()
-                .success(function (data, status) {
-                    $scope.classDatanew = data.school_classes;// Api list-name
-                    $scope.classId = $scope.classDatanew[0].class_id;
-                    console.log($scope.classId);
+        // $scope.getClassesInitalLoad = function () {
+        globalServices.getClass()
+            .success(function (data, status) {
+                $scope.classDatanew = data.school_classes;// Api list-name
+                $scope.classId = $scope.classDatanew[0].class_id;
+                //   console.log($scope.classId);
 
-                    $scope.populateSections($scope.classId);
-                })
-                .error(function (data, success) {
-                })
-        }
+                $scope.populateSections($scope.classId);
+            })
+            .error(function (data, success) {
+            })
+        // }
 
         $scope.getExamSchedule = function () {
             examServices.getExamSchedule()
                 .success(function (data, status) {
                     $scope.examSchedule = data.exam_schedules; // Api list-name
                     $scope.data = data;
-                  //  console.log($scope.data +' hemababu');
+                    //  console.log($scope.data +' hemababu');
                     $scope.data.examSchedule_name = data.exam_schedules[0].exam_sch_id;
 
                 })
@@ -55,7 +55,7 @@ angular.module('school_erp')
                     $scope.papers = data.resultArray;
                     // $scope.paperId = $scope.papers[0].exam_paper_id;
                     $scope.data.paper_name = $scope.data.exam_paper_id;
-                    console.log($scope.data.paper_name);
+                    //    console.log($scope.data.paper_name);
                     //  $scope.getEvaluation($scope.data.studentId, $scope.data.examSchedule_name);
                     $scope.getExamMarks($scope.data.paper_name);
 
@@ -73,7 +73,7 @@ angular.module('school_erp')
             barChartOneService.getExamMarks(paperId)
                 .success(function (data, status) {
                     $scope.examData = data.barchart;
-                    console.log(JSON.stringify($scope.examData));
+                    //   console.log(JSON.stringify($scope.examData));
 
 
 
@@ -92,7 +92,7 @@ angular.module('school_erp')
                         $scope.data1 = [];
                         $scope.label1 = [];
                         $scope.maxMarks = item.max_marks;
-                        console.log($scope.maxMarks);
+                        //    console.log($scope.maxMarks);
                         //$scope.data1.push(arrData.trim(""));
                         //  for (var j = 0; j < arrData.length; i++) {
                         //     $scope.data1.push(arrData[i]);
@@ -111,8 +111,8 @@ angular.module('school_erp')
                                 $scope.label1.push(arrLabels[i]);
                             }
                         }
-                        console.log($scope.data1);
-                        console.log($scope.label1);
+                        //     console.log($scope.data1);
+                        //   console.log($scope.label1);
                         return [[item.marks, item.student_name]];
                         //, item.student_name
                     });
@@ -220,19 +220,19 @@ angular.module('school_erp')
         }
 
 
-        if ($rootScope.role == 'parent') {
-            console.log("message........................");
-            $scope.secId = $rootScope.student.section;
-            console.log("message........................2");
-            console.log($scope.secId);
-            $scope.getExamSchedule();
-            console.log($scope.data.examSchedule_name);
-            $scope.getExamPapers($scope.data.examSchedule_name, $scope.secId);
+        // if ($rootScope.role == 'parent') {
+        //     console.log("message........................");
+        //     $scope.secId = $rootScope.student.section;
+        //     console.log("message........................2");
+        //     console.log($scope.secId);
+        //     $scope.getExamSchedule();
+        //     console.log($scope.data.examSchedule_name);
+        //     $scope.getExamPapers($scope.data.examSchedule_name, $scope.secId);
 
 
-        } else {
-            $scope.getClassesInitalLoad();
-        }
+        // } else {
+        //     $scope.getClassesInitalLoad();
+        // }
 
 
     }])

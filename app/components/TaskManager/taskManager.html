@@ -1,0 +1,166 @@
+<div class="row background">
+    <div class="container">
+        <h1>Admin Management</h1>
+        <ul class="links">
+            <li ui-sref-active="active">
+                <a ui-sref='main.schoolProfile'>School Profile</a>
+            </li>
+            <li ui-sref-active="active" >
+      
+               / <a ui-sref='main.addClass&Section'>Class&Section</a>
+            </li>
+            <li ui-sref-active="active" ng-show="showRole(['admin'])">
+                /<a ui-sref='main.parentInfo'>ParentInfo</a>
+            </li>
+            <li ui-sref-active="active" ng-show="showRole(['admin'])">
+               / <a ui-sref='main.teacherInfo' >TeacherInfo</a>
+            </li>
+            <li ui-sref-active="active" ng-show="showRole(['admin','teacher'])">
+                /<a ui-sref='main.taskManagement'>TaskManagement</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="chapters">
+            <div class="col-md-3" >
+                <div class="backwhite">
+
+                    <form name="tasks" ng-submit="tasks.$valid && addsetTaskManager(data)" novalidate>
+
+                        <div class="form-group" ng-show="showRole(['admin'])" ng-class="{'has-error': tasks.$submitted  && tasks.task.$pristine}">
+                            <label>Task</label>
+                            <textarea name="description" class="form-control"  rows="4" ng-model="data.task" placeholder="Enter..." required>
+                            </textarea>
+                            <!-- <input name="task" type="text" ng-model="data.task" class="form-control" placeholder="Enter ..." required> -->
+                        </div>
+                        <div class="form-group">
+                            <label>Department</label>
+                            <select ng-change="getEmployee(data.job_category)" ng-model="data.job_category" class="form-control select2" style="width: 100%;" ng-options="empType.id as empType.type for empType in employeeType">
+                        <option value="" selected="selected">--Select--</option>
+                        
+                      </select>
+                        </div>
+
+                        <div class="form-group" ng-show="showRole(['admin'])" ng-class="{'has-error': tasks.$submitted  && tasks.assigned_to.$pristine}">
+                            <label>Assigned To</label>
+                               <select ng-model="data.assigned_to" class="form-control select2" style="width: 100%;" ng-options="employee.first_name as employee.first_name for employee in empData">
+                        <option value="" selected="selected">--Select--</option>
+                        
+                      </select>
+                            <!-- <input name="assigned_to" type="text" ng-model="data.assigned_to" class="form-control" placeholder="Enter ..." required> -->
+                        </div>
+
+                        <div class="form-group" ng-show="showRole(['admin'])">
+                            <label>Priority</label>
+                            <select class="form-control select2" style="width: 100%;" name="priority" ng-model="data.priority" ng-options="task.name as task.name for task in priority">
+                                <option value="" selected="selected">--Select--</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" ng-show="showRole(['admin'])" ng-class="{'has-error': tasks.$submitted && tasks.assignedon.$pristine}">
+                            <label>Due On</label>
+                            <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="dd-MM-yyyy" style="z-index:999">
+                                <input name="assignedon"  class="form-control" type="text" ng-model="data.assigned_on" ng-readonly="true" placeholder="Enter ..." required/>
+                              </datepicker>
+                            <!-- <input name="assignedon" type="text" ng-model="data.assigned_on" class="form-control" placeholder="Enter ..." required> -->
+                        </div>
+
+                        <div class="box-footer" ng-show="showRole(['admin'])">
+                            <button type="submit" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Add Task</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-9">
+
+                <div class="table-responsive">
+                    <table export-table st-table="display_records" st-safe-src="taskBox" class="table rwd-table table-striped" style="width:100%;margin-top: 20px;">
+                        <tr>
+                            <th>#</th>
+                            <th>Task</th>
+                            <th>Department</th>
+                            <th>Assigned to</th>
+                            <th>Priority</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        <tbody>
+                            <tr st-select-row="row" st-select-mode="multiple" ng-repeat="tasks in display_records  | filter:data.job_category:true | filter:data.priority:true"  class="editable-row">
+                                <td>
+                                    {{tasks.id+1}}
+                                </td>
+                                <td>
+                                    <span editable-text="tasks.task" e-name="editdata.task" onaftersave="EditTaskManager(tasks.id)" e-form="rowform" e-required>{{tasks.task || 'empty' }}</span>
+                                </td>
+                                  <!-- <td>
+                                    <span editable-text="tasks.department" e-name="editdata.department" onaftersave="EditTaskManager($index)" e-form="rowform" e-required>{{tasks.department || 'empty' }}</span>
+                                </td> -->
+                                <td class="select-td" data-ng-click="$parent.selData(row);">
+                                    <span editable-select="tasks.department" e-name="tasks.department" e-form="rowform" onaftersave="EditTaskManager(tasks.id)"
+                                      e-selectpicker e-ng-options="empType.id as empType.type for empType in employeeType">
+                                      {{tasks.department}}</span>
+                                  </td>
+                                  <td class="select-td" data-ng-click="$parent.selData(row);">
+                                    <span editable-select="tasks.assigned_to" e-name="tasks.assigned_to" e-form="rowform" onaftersave="EditTaskManager(tasks.id)"
+                                      e-selectpicker e-ng-options="employee.first_name as employee.first_name for employee in empData">
+                                      {{tasks.assigned_to}}</span>
+                                  </td>
+                                  <td class="select-td" data-ng-click="$parent.selData(row);">
+                                    <span editable-select="tasks.priority" e-name="tasks.priority" e-form="rowform" onaftersave="EditTaskManager(tasks.id)"
+                                      e-selectpicker e-ng-options="task.name as task.name for task in priority">
+                                      {{tasks.priority}}</span>
+                                  </td>
+                                <!-- <td>
+                                    <span editable-text="tasks.assigned_to" e-name="editdata.assigned_to" onaftersave="EditTaskManager($index)" e-form="rowform"
+                                        e-required>{{tasks.assigned_to || 'empty' }}</span>
+                                </td> -->
+                                <!-- <td>
+                                    <span editable-text="tasks.priority" e-name="editdata.priority" onaftersave="EditTaskManager($index)" e-form="rowform" e-required>{{tasks.priority || 'empty' }}</span>
+                                </td> -->
+                                <td>
+                                    <span editable-text="tasks.assigned_on" e-name="editdata.assigned_on" onaftersave="EditTaskManager(tasks.id)" e-form="rowform"
+                                        e-required>{{tasks.assigned_on | date }}</span>
+                                </td>
+                                <td>
+                                    <span editable-text="tasks.status" e-name="editdata.status" onaftersave="EditTaskManager(tasks.id)" e-form="rowform" e-required>{{tasks.status || 'empty' }}</span>
+                                </td>
+
+                                <td class="pull-right">
+                                    <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == tasks">
+                                        <button type="submit" ng-click="EditTaskManager(tasks.id)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                                                <i class="fa fa-check"></i>
+                                            </button>
+                                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                                                <i class="fa fa-remove"></i>
+                                            </button>
+                                    </form>
+
+                                    <div class="buttons" ng-show="!rowform.$visible">
+                                        <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                        <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteTaskManager(tasks.id)" ng-confirm-click="Are you sure you want to delete this item?">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <div class="pull-right" st-pagination="" st-items-by-page="8" st-displayed-pages="4"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>

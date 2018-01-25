@@ -2,28 +2,57 @@
 
 <a ui-sref="main.dashboard" class="logo">
   <div class="logo">
-    <img src="../../../dist/img/images/school.png" style="height:60px;">
+    <img class="img-thumbnail" src="../../../dist/img/images/school.png" style="height:55px;">
   </div>
 </a>
 <!-- Header Navbar: style can be found in header.less -->
-<nav class="navbar navbar-static-top">
+<nav class="navbar navbar-static-top" style="height: 50px;">
 
   <div class="navbar-custom-menu">
     <ul class="nav navbar-nav">
-      <li class="dropdown messages-menu">
-        <a id="date" class="dropdown-toggle" data-toggle="dropdown">
-        </a>
-      </li>
-      <li class="dropdown messages-menu">
+      <li  class="dropdown messages-menu">
         <a class="dropdown-toggle" data-toggle="dropdown">
           Academic Year 2017-2018
         </a>
       </li>
+      <li class="dropdown messages-menu">
+        <a id="date" class="dropdown-toggle" data-toggle="dropdown">
+        </a>
+      </li>
+
+
       <li class="dropdown user user-menu">
-        <!--<a ng-click="logout()" class="dropdown-toggle" data-toggle="dropdown">-->
-        <a ng-click="logout()" class="dropdown-toggle">
+
+        <a ui-sref='main.schoolProfile' class="hvr-pop transition" style="padding: 10px 0px">
           <img ng-src="{{schoolImage}}" class="user-image" alt="User Image">
-          <span class="hidden-xs">Logout</span>
+          <!-- <p>{{schoolName}}</p> -->
+        </a>
+      </li>
+      <li class="dropdown messages-menu">
+        <a class="dropdown-toggle" style="padding: 12px 0px;color:brown;font-style: italic" data-toggle="dropdown">
+          <!-- {{role}} login -->
+
+        </a>
+      </li>
+      <li class="dropdown messages-menu">
+        <a ui-sref='main.messages' class="hvr-pop transition">
+          <i class="fa fa-envelope" aria-hidden="true" style="font-size:20px">
+            <span class="hidden-xs"></span>
+          </i>
+        </a>
+      </li>
+      <li class="dropdown messages-menu">
+        <a ui-sref='main.session_timings' class="dropdown-toggle hvr-pop transition" data-toggle="dropdown">
+          <i class="fa fa-cog" aria-hidden="true" style="font-size:20px">
+            <span class="hidden-xs"></span>
+          </i>
+        </a>
+      </li>
+      <li class="dropdown messages-menu">
+        <a class="dropdown-toggle hvr-pop transition" data-toggle="dropdown">
+          <i class="fa fa-power-off" ng-click="logout()" aria-hidden="true" style="font-size:20px">
+            <span class="hidden-xs"></span>
+          </i>
         </a>
       </li>
     </ul>
@@ -43,132 +72,153 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="navbar-collapse collapse" id="myNavbar">
       <!-- Sidebar user panel -->
-      <div class="user-panel">
+      <!-- <div class="user-panel">
         <div class="pull-left image">
           <img ng-src="{{schoolImage}}" class="img-circle" alt="User Image">
           <p style="color:white;">{{schoolName}}
           </p>
         </div>
-        <div class="pull-left info" style="color:white;">
+          <div class="pull-left info" style="color:white;">
           <p>{{role}} login</p>
           <a href="">
             <i class="fa fa-circle text-success"></i> Online</a>
         </div>
-      </div>
-      <ul class="nav navbar-nav">
+      </div>  -->
+        <ul class="nav navbar-nav">
 
-        <li style="margin-left:-63px;">
-          <div class="input-group" ng-if="role == 'parent'" style="width:100%;">
-            <select name="studentSelection" ng-change="changeStudent(studentSelection)" class="form-control" data-ng-options="student._id as student.first_name for student in users  "
-              ng-model="studentSelection">
-              <option value="" selected>--Select Student--</option>
-            </select>
+          <li style="margin-left:-63px;">
+            <div class="input-group" ng-if="role == 'parent'" style="width:100%;">
+              <select name="studentSelection" ng-change="changeStudent(studentSelection)" class="form-control" data-ng-options="student._id as student.first_name for student in users"
+                ng-model="studentSelection">
+                <!-- <option value="" selected>--Select Student--</option> -->
+              </select>
 
-          </div>
+            </div>
 
-        </li>
+          </li>
 
-        <li ui-sref-active="active">
-          <a ui-sref='main.dashboard' class="hvr-pop transition">
-            <!--<i class="fa fa-th-large" aria-hidden="true"></i>-->
-            <img src="../../../dist/img/images/analytics.png" width="30px" height="30">
-            <p>Dashboard</p>
-          </a>
-        </li>
-        <li data-ng-if="setRole('parent')" ui-sref-active="active">
-          <a ui-sref='main.studentProfile' class="hvr-pop transition">
-            <!--<i class="fa fa-th-large" aria-hidden="true"></i>-->
-            <img ng-src="{{studentPhoto}}" width="30px" height="30">
-            <p>Student Profile</p>
-          </a>
-        </li>
+          <li ui-sref-active="active">
+            <a ui-sref='main.dashboard' class="hvr-pop transition">
+              <!--<i class="fa fa-th-large" aria-hidden="true"></i>-->
+              <img src="../../../dist/img/images/analytics.png" width="30px" height="30">
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li data-ng-if="setRole('parent')" ui-sref-active="active">
+            <a ui-sref='main.studentProfile' class="hvr-pop transition">
+              <!--<i class="fa fa-th-large" aria-hidden="true"></i>-->
+              <img ng-src="{{studentPhoto}}" width="30px" height="30">
+              <p>Student Profile</p>
+            </a>
+          </li>
 
-        <li data-ng-if="setRole('admin')" ui-sref-active="active">
-          <a ui-sref='main.addClass&Section' class="hvr-pop transition">
+          <li data-ng-if="setRole('admin')" ui-sref-active="active">
+            <a ui-sref='main.schoolProfile' class="hvr-pop transition">
 
-            <img src="../../../dist/img/images/administrator.png" width="30px" height="30">
-            <p>Admin</p>
-          </a>
-        </li>
+              <img src="../../../dist/img/images/administrator.png" width="30px" height="30">
+              <p>Admin</p>
+            </a>
+          </li>
 
-        <li data-ng-if="setRole('teacher') || setRole('admin')" ui-sref-active="active">
-          <a ui-sref='main.student' class="hvr-pop transition">
-            <img src="../../../dist/img//images/Student.png" width="30px" height="30">
-            <p>Student</p>
-          </a>
-        </li>
-
-
-        <li data-ng-if="setRole('admin')" ui-sref-active="active">
-          <a ui-sref='main.employee' class="hvr-pop transition">
-            <img src="../../../dist/img/images/staff.png" width="30px" height="30">
-            <p>Staff</p>
-          </a>
-        </li>
-        <li data-ng-if="setRole('teacher') || setRole('admin')" ui-sref-active="active">
-          <a ui-sref='main.studentAttendance' class="hvr-pop transition">
-            <img src="../../../dist/img/images/Attendance.png" width="30px" height="30">
-            <p>Attendence</p>
-          </a>
-        </li>
-        <li data-ng-if="setRole('parent')" ui-sref-active="active">
-          <a ui-sref='main.attendenceListStudent' class="hvr-pop transition" ui-sref-active="active">
-            <img src="../../../dist/img/images/Attendance.png" width="30px" height="30">
-            <p>Attendence</p>
-          </a>
-        </li>
-        <li>
-          <a ui-sref='main.subjects' class="hvr-pop transition">
-            <img src="../../../dist/img/images/Academics.png" width="30px" height="30">
-            <p>Acadamics</p>
-          </a>
-        </li>
-        <li>
-          <a ui-sref='main.assignments' class="hvr-pop transition">
-            <img src="../../../dist/img/images/Assignments.png" width="30px" height="30">
-            <p>Assignments</p>
-          </a>
-        </li>
-        <li>
-          <a ui-sref='main.examSchedules' class="hvr-pop transition">
-            <img src="../../../dist/img/images/Examination.png" width="30px" height="30">
-            <p>Examinations</p>
-          </a>
-        </li>
-        <li>
-          <a ui-sref='main.classWise' class="hvr-pop transition">
-            <img src="../../../dist/img/images/Timetable.png" width="30px" height="30">
-            <p>Timetable</p>
-          </a>
-        </li>
-        <li>
-          <a ui-sref='main.feeType' class="hvr-pop transition">
-            <img src="../../../dist/img/images/money.png" width="30px" height="30">
-            <p>Fee</p>
-          </a>
-        </li>
-        <li>
-          <a ui-sref='main.addBook' class="hvr-pop transition">
-            <img src="../../../dist/img/images/Library.png" width="30px" height="30">
-            <p>Library</p>
-          </a>
-        </li>
-        <li>
-          <a ui-sref='main.addStation' class="hvr-pop transition">
-            <img src="../../../dist/img/images/Transport.png" width="30px" height="30">
-            <p>Transport</p>
-          </a>
-        </li>
+          <li data-ng-if="setRole('teacher') || setRole('admin')" ui-sref-active="active">
+            <a ui-sref='main.student' class="hvr-pop transition">
+              <img src="../../../dist/img/images/student.png" width="30px" height="30">
+              <p>Student</p>
+            </a>
+          </li>
 
 
+          <li data-ng-if="setRole('admin') || setRole('teacher')" ui-sref-active="active">
+            <a ui-sref='main.employee' class="hvr-pop transition">
+              <img src="../../../dist/img/images/Staff.png" width="30px" height="30">
+              <p>Staff</p>
+            </a>
+          </li>
+          <li data-ng-if="setRole('teacher') || setRole('admin')" ui-sref-active="active">
+            <a ui-sref='main.studentAttendance' class="hvr-pop transition">
+              <img src="../../../dist/img/images/Attendance.png" width="30px" height="30">
+              <p>Attendence</p>
+            </a>
+          </li>
+          <!-- <li data-ng-if="setRole('parent')" ui-sref-active="active">
+            <a ui-sref='main.attendenceListStudent' class="hvr-pop transition" ui-sref-active="active">
+              <img src="../../../dist/img/images/Attendance.png" width="30px" height="30">
+              <p>Attendence</p>
+            </a>
+          </li> -->
+          <li ui-sref-active="active">
+            <a ui-sref='main.subjects' class="hvr-pop transition">
+              <img src="../../../dist/img/images/Academics.png" width="30px" height="30">
+              <p>Acadamics</p>
+            </a>
+          </li>
+          <li ui-sref-active="active">
+            <a ui-sref='main.assignments' class="hvr-pop transition">
+              <img src="../../../dist/img/images/Assignments.png" width="30px" height="30">
+              <p>Assignments</p>
+            </a>
+          </li>
+          <li ui-sref-active="active">
+            <a ui-sref='main.examSchedules' class="hvr-pop transition">
+              <img src="../../../dist/img/images/Examination.png" width="30px" height="30">
+              <p>Examinations</p>
+            </a>
+          </li>
+          <li ui-sref-active="active">
+            <a ui-sref='main.classWise' class="hvr-pop transition">
+              <img src="../../../dist/img/images/Timetable.png" width="30px" height="30">
+              <p>Timetable</p>
+            </a>
+          </li>
+          <li ui-sref-active="active" data-ng-if="setRole('admin')">
+            <a ui-sref='main.feeType' class="hvr-pop transition">
+              <img src="../../../dist/img/images/money.png" width="30px" height="30">
+              <p>Fee</p>
+            </a>
+          </li>
 
-        <!--<li class="treeview" ui-sref-active="active">
+
+          <li ui-sref-active="active" data-ng-if="setRole('admin')">
+            <a ui-sref='main.payroll' class="hvr-pop transition">
+              <img src="../../../dist/img/images/HR.png" width="30px" height="30">
+              <p>HR</p>
+            </a>
+          </li>
+
+          <li ui-sref-active="active" data-ng-if="setRole('admin')">
+            <a ui-sref='main.store' class="hvr-pop transition">
+              <img src="../../../dist/img/images/Store.png" width="30px" height="30">
+              <p>Store</p>
+            </a>
+          </li>
+          <li ui-sref-active="active">
+            <a ui-sref='main.bookList' class="hvr-pop transition">
+              <img src="../../../dist/img/images/Library.png" width="30px" height="30">
+              <p>Library</p>
+            </a>
+          </li>
+          <li ui-sref-active="active" data-ng-if="setRole('admin')">
+            <a ui-sref='main.addStation' class="hvr-pop transition">
+              <img src="../../../dist/img/images/Transport.png" width="30px" height="30">
+              <p>Transport</p>
+            </a>
+          </li>
+          <li ui-sref-active="active" data-ng-if="setRole('teacher') || setRole('parent')">
+            <a ui-sref='main.routeGeolocation' class="hvr-pop transition">
+              <img src="../../../dist/img/images/Transport.png" width="30px" height="30">
+              <p>Transport</p>
+            </a>
+          </li>
+
+
+
+          <!--<li class="treeview" ui-sref-active="active">
           <a ui-sref='main.dashboard'>
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>-->
-        <!-- Student Information -->
-        <!--<li class="treeview" data-ng-if="setRole('teacher') || setRole('admin')">
+          <!-- Student Information -->
+          <!--<li class="treeview" data-ng-if="setRole('teacher') || setRole('admin')">
       <a href="">
             <i class="fa fa-users"></i>
             <span>Student Information</span>
@@ -176,14 +226,14 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>-->
-        <!--<ul class="treeview-menu">
+          <!--<ul class="treeview-menu">
         <li ui-sref-active="active"><a ui-sref='main.student'><i class="fa fa-circle-o"></i> Students</a></li>
         <li ui-sref-active="active"><a ui-sref='main.studentAdmission'><i class="fa fa-circle-o"></i> Student Admission</a></li>-->
-        <!--<li ui-sref-active="active"><a ui-sref='main.studentDetails'><i class="fa fa-circle-o"></i> Student Details</a></li>-->
-        <!--</ul>
+          <!--<li ui-sref-active="active"><a ui-sref='main.studentDetails'><i class="fa fa-circle-o"></i> Student Details</a></li>-->
+          <!--</ul>
     </li>-->
-        <!-- Staff Management -->
-        <!--<li class="treeview" data-ng-if="setRole('admin')">
+          <!-- Staff Management -->
+          <!--<li class="treeview" data-ng-if="setRole('admin')">
       <a href="">
             <i class="fa fa-users"></i>
             <span>Staff Management</span>
@@ -194,19 +244,19 @@
       <ul class="treeview-menu">
         <li ui-sref-active="active" data-ng-if="setRole('admin')"><a ui-sref='main.employee'><i class="fa fa-circle-o"></i> Employee</a></li>
         <li ui-sref-active="active" data-ng-if="setRole('admin')"><a ui-sref='main.employeeDetails'><i class="fa fa-circle-o"></i> Employee Details</a></li>-->
-        <!--<li ui-sref-active="active" data-ng-if="setRole('admin')"><a ui-sref='main.employeeAttendance'><i class="fa fa-circle-o"></i> Employee Attendance</a></li>-->
-        <!--</ul>
+          <!--<li ui-sref-active="active" data-ng-if="setRole('admin')"><a ui-sref='main.employeeAttendance'><i class="fa fa-circle-o"></i> Employee Attendance</a></li>-->
+          <!--</ul>
     </li>-->
-        <!-- Attendance -->
-        <!--<li class="treeview">-->
-        <!--<a href="">
+          <!-- Attendance -->
+          <!--<li class="treeview">-->
+          <!--<a href="">
             <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
             <span>Attendance</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>-->
-        <!--<ul class="treeview-menu">
+          <!--<ul class="treeview-menu">
         <li  ui-sref-active="active" data-ng-if="setRole('teacher') || setRole('admin')"><a ui-sref='main.studentAttendance'><i class="fa fa-circle-o"></i> Student Attendance</a></li>
         <li  ui-sref-active="active" data-ng-if="setRole('admin')"><a ui-sref='main.employeeAttendance'><i class="fa fa-circle-o"></i> Employee Attendance</a></li>
 
@@ -225,9 +275,9 @@
           </ul>
         </li>
       </ul>-->
-        <!--</li>-->
-        <!-- Academics -->
-        <!--<li class="treeview">
+          <!--</li>-->
+          <!-- Academics -->
+          <!--<li class="treeview">
       <a href="">
             <i class="fa fa-graduation-cap" aria-hidden="true"></i>
             <span>Academics</span>
@@ -241,23 +291,23 @@
         <li  ui-sref-active="active" data-ng-if="setRole('admin')"><a ui-sref='main.assignSubjects'><i class="fa fa-circle-o"></i> Assign Subjects</a></li>
       </ul>
     </li>-->
-        <!-- Assignments -->
-        <!--<li class="treeview" ui-sref-active="active" data-ng-if="setRole('teacher') || setRole('admin')">
+          <!-- Assignments -->
+          <!--<li class="treeview" ui-sref-active="active" data-ng-if="setRole('teacher') || setRole('admin')">
       <a ui-sref='main.assignments'>
             <i class="fa fa-book" aria-hidden="true"></i>
             <span>Assignments</span>
           </a>
     </li>-->
-        <!-- Examinations -->
-        <!--<li class="treeview">-->
-        <!--<a href="">
+          <!-- Examinations -->
+          <!--<li class="treeview">-->
+          <!--<a href="">
             <i class="fa fa-file-text" aria-hidden="true"></i>
             <span>Examinations</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>-->
-        <!--<ul class="treeview-menu">
+          <!--<ul class="treeview-menu">
         <li  ui-sref-active="active"><a ui-sref='main.examSchedules'><i class="fa fa-circle-o"></i>Exam Schedules</a></li>
         <li  ui-sref-active="active"><a ui-sref='main.examPapers'><i class="fa fa-circle-o"></i> Exam Papers</a></li>
         <li  ui-sref-active="active"><a ui-sref='main.evaluations'><i class="fa fa-circle-o"></i> Evaluations</a></li>
@@ -275,9 +325,9 @@
           </ul>
         </li>
       </ul>-->
-        <!--</li>-->
-        <!-- Timetable-->
-        <!--<li data-ng-if="setRole('admin')">
+          <!--</li>-->
+          <!-- Timetable-->
+          <!--<li data-ng-if="setRole('admin')">
       <a href="">
             <i class="fa fa-calendar"></i> <span>Timetable</span>
             <span class="pull-right-container">
@@ -291,25 +341,25 @@
         <li  ui-sref-active="active" data-ng-if="setRole('admin')"><a ui-sref='main.onlineNoticeBoard'><i class="fa fa-circle-o"></i> Online NoticeBoard</a></li>
       </ul>
     </li>-->
-        <!-- Library-->
-        <!--<li>
+          <!-- Library-->
+          <!--<li>
   <a ui-sref='main.addBook' class="hvr-pop transition">
           
         <img src="../../../dist/img/Library.png" width="30px" height="30">
             <p>Library</p></a>-->
-        <!--<i class="fa fa-book" aria-hidden="true"></i><a ui-sref='main.addBook'> <span>Library</span></a>
+          <!--<i class="fa fa-book" aria-hidden="true"></i><a ui-sref='main.addBook'> <span>Library</span></a>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>-->
 
-        <!--<ul class="treeview-menu">
+          <!--<ul class="treeview-menu">
         <!--<li data-ng-if="setRole('admin')"><a ui-sref='main.libraryRules'><i class="fa fa-circle-o"></i> Library rules</a></li>-->
-        <!--<li  ui-sref-active="active" data-ng-if="setRole('admin') || setRole('teacher')"><a ui-sref='main.addBook'><i class="fa fa-circle-o"></i> Add Book</a></li>
+          <!--<li  ui-sref-active="active" data-ng-if="setRole('admin') || setRole('teacher')"><a ui-sref='main.addBook'><i class="fa fa-circle-o"></i> Add Book</a></li>
         <li  ui-sref-active="active"><a ui-sref='main.bookList'><i class="fa fa-circle-o"></i> Book List</a></li>-->
-        <!--</ul>-->
-        <!--</li>-->
-        <!-- Transport-->
-        <!--<li>
+          <!--</ul>-->
+          <!--</li>-->
+          <!-- Transport-->
+          <!--<li>
       <a href="">
             <i class="fa fa-bus" aria-hidden="true"></i> <span>Transport</span>
             <span class="pull-right-container">
@@ -323,9 +373,9 @@
         <li ui-sref-active="active"><a ui-sref='main.routeGeolocation'><i class="fa fa-circle-o"></i> Route Geolocation</a></li>
       </ul>
     </li>-->
-        <!-- -->
-      </ul>
+          <!-- -->
+        </ul>
     </section>
     <!-- /.sidebar -->
-  </div>
+    </div>
 </nav>

@@ -39,7 +39,6 @@
                     <label>First Name</label>
                     <input type="text" ng-model="data.first_name" name="firstname" class="form-control" placeholder="Enter ..." required>
                   </div>
-
                 </div>
 
                 <div class="col-md-6">
@@ -104,6 +103,81 @@
                     <datepicker date-min-limit='today1' date-format="dd-MM-yyyy" style="z-index:999">
                       <input class="form-control" name="doj" type="text" ng-model="data.joined_on" ng-readonly="true" placeholder="Enter ..." required/>
                     </datepicker>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group" ng-class="{'has-error': employeeDetails.$submitted && employeeDetails.bloodgroup.$pristine}">
+                    <label>Blood Group</label>
+                    <input type="text" ng-model="data.blood_group" name="bloodgroup" class="form-control" placeholder="Enter ..." required>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group" ng-class="{'has-error': employeeDetails.$submitted && employeeDetails.maritalStatus.$pristine}">
+                    <label>Martial Status</label>
+                    <input type="text" class="form-control" name="maritalStatus" ng-model="data.marital_status" placeholder="Enter ..." required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group" ng-class="{'has-error': employeeDetails.$submitted && employeeDetails.basicPay.$pristine}">
+                    <label>Basic Pay</label>
+                    <input type="text" ng-model="data.basic_pay" name="basicPay" class="form-control" placeholder="Enter ..." required>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group" ng-class="{'has-error': employeeDetails.$submitted && employeeDetails.SalaryBand.$pristine}">
+                    <label>Salary Band</label>
+                    <input type="text" class="form-control" name="SalaryBand" ng-model="data.salary_band" placeholder="Enter ..." required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group" ng-class="{'has-error': employeeDetails.$submitted && employeeDetails.mobile.$invalid && employeeDetails.mobile.$pristine}">
+                    <label>mobile</label>
+                    <input type="text" ng-model="data.mobile" name="mobile" class="form-control" placeholder="Enter ..." required>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group" ng-class="{'has-error': employeeDetails.$submitted && employeeDetails.perminent.$pristine}">
+                    <label>Permenent city</label>
+                    <input type="text" class="form-control" name="perminent" ng-model="data.perm_city" placeholder="Enter ..." required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group" ng-class="{'has-error': employeeDetails.$submitted && employeeDetails.firstname.$pristine}">
+                    <label>State</label>
+                    <input type="text" ng-model="data.state" name="state" class="form-control" placeholder="Enter ..." required>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group" ng-class="{'has-error': employeeDetails.$submitted && employeeDetails.country.$pristine}">
+                    <label>Country</label>
+                    <input type="text" class="form-control" name="country" ng-model="data.country" placeholder="Enter ..." required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group" ng-class="{'has-error': employeeDetails.$submitted && employeeDetails.postalcode.$pristine}">
+                    <label>Postal Code</label>
+                    <input type="text" ng-model="data.postal_code" name="postalcode" class="form-control" placeholder="Enter ..." required>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group" ng-class="{'has-error': employeeDetails.$submitted && employeeDetails.language.$pristine}">
+                    <label>Spoken Languages</label>
+                    <input type="text" class="form-control" name="language" ng-model="data.spoken_languages" placeholder="Enter ..." required>
                   </div>
                 </div>
               </div>

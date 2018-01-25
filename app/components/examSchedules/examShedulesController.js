@@ -30,7 +30,25 @@ angular.module('school_erp')
         $scope.getExamScheduleData = function () {
             examServices.getExamSchedule()
                 .success(function (data, status) {
-                    $scope.examData = data.exam_schedules;
+                    $scope.exam = data.exam_schedules;
+                    
+                    $scope.examData = [];
+                    index = 0;
+                    $scope.exam.forEach(function (element) {
+
+                        var obj = {
+                            id: index++,
+                            exam_sch_id: element.exam_sch_id,
+                            exam_title: element.exam_title,
+                            from_date:element.from_date,
+                           
+
+
+                        }
+                        $scope.examData.push(obj);
+                        console.log($scope.examData);
+                    })
+
                 })
                 .error(function (data, success) {
                 })
@@ -67,16 +85,16 @@ angular.module('school_erp')
 
         $scope.EditExamSchedule = function (value, exam) {
 
-            console.log("messsage");
+            //     console.log("messsage");
             $scope.exam = angular.copy($scope.examData[value]);
             $scope.exam_sch_id = $scope.exam.exam_sch_id;
-            console.log($scope.exam_sch_id);
+            //   console.log($scope.exam_sch_id);
             var Exam_SchDetails = {
                 exam_title: $scope.exam.exam_title,
                 exam_classes: $scope.exam.exam_classes,
                 from_date: $scope.exam.from_date
             }
-            console.log(Exam_SchDetails);
+            //  console.log(Exam_SchDetails);
 
             $scope.addEditExamSchedule(Exam_SchDetails, $scope.exam_sch_id);
         }
@@ -122,7 +140,7 @@ angular.module('school_erp')
         $scope.DeleteExamSchedule = function (value) {
             $scope.editdata = angular.copy($scope.examData[value]);
             $scope.exam_sch_id = $scope.editdata.exam_sch_id;
-            console.log($scope.exam_sch_id);
+            //    console.log($scope.exam_sch_id);
             examServices.DeleteExamSchedule($scope.exam_sch_id)
                 .success(function (data, status) {
                     ngDialog.open({
@@ -184,11 +202,11 @@ angular.module('school_erp')
 
 
         $scope.save = function (data) {
-            console.log(JSON.stringify(data));
+            //    console.log(JSON.stringify(data));
 
             $http({
                 method: "POST",
-                url: globalServices.globalValue.baseURL + 'api/book/'+globalServices.globalValue.school_id,
+                url: globalServices.globalValue.baseURL + 'api/book/' + globalServices.globalValue.school_id,
                 data: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json'

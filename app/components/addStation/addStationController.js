@@ -1,14 +1,33 @@
 angular.module('school_erp')
-    .controller("addStationController", ['$http', '$scope', '$rootScope', 'addStationServices', 'ngDialog', function ($http, $scope, $rootScope, addStationServices, ngDialog) {
+    .controller("addStationController", ['$http', '$scope', '$rootScope', 'globalServices', 'addStationServices', 'ngDialog', function ($http, $scope, $rootScope, globalServices, addStationServices, ngDialog) {
         $scope.data = [];
 
         $scope.getStation = function () {
             addStationServices.getStation()
                 .success(function (data, status) {
-                    $scope.data = data.stations;
-                    // console.log(JSON.stringify(data));
-                    // $scope.station_id = $scope.data[].station_id;
-                    // console.log($scope.station_id);
+                    $scope.stationList = data.stations;
+                    $scope.data = [];
+                    index = 0;
+                    $scope.stationList.forEach(function (element) {
+
+                        var obj = {
+                            id: index++,
+                            station_id: element.station_id,
+                            station_name: element.station_name,
+                            station_code: element.station_code,
+                            station_geo_location: element.station_geo_location,
+                            book_price: element.book_price,
+                            qty: element.qty,
+                            rack_number: element.rack_number,
+                            inward_date: element.inward_date,
+
+
+                        }
+                        $scope.data.push(obj);
+                        // console.log(JSON.stringify(data));
+                        // $scope.station_id = $scope.data[].station_id;
+                        // console.log($scope.station_id);
+                    })
 
                 })
                 .error(function (data, success) {
@@ -46,7 +65,7 @@ angular.module('school_erp')
         $scope.DeleteStation = function (value) {
             $scope.editdata = angular.copy($scope.data[value]);
             $scope.station_id = $scope.editdata.station_id;
-            console.log($scope.station_id);
+            // console.log($scope.station_id);
             addStationServices.DeleteStation($scope.station_id)
                 .success(function (data, status) {
                     ngDialog.open({
@@ -65,21 +84,21 @@ angular.module('school_erp')
         }
 
         // $scope.editdata = angular.copy($scope.data[value]);
-        $scope.EditStation = function (value,station) {
+        $scope.EditStation = function (value, station) {
 
-            console.log("messsage");
+            // console.log("messsage");
             $scope.station = angular.copy($scope.data[value]);
             var StationDetails = {
                 station_name: $scope.station.station_name,
                 station_code: $scope.station.station_code,
                 station_geo_location: $scope.station.station_geo_location
             }
-            console.log(StationDetails);
+            // console.log(StationDetails);
             $scope.station_id = $scope.station.station_id;
-            console.log($scope.station_id);
-            $scope.addEditStation(StationDetails ,$scope.station_id);
+            //  console.log($scope.station_id);
+            $scope.addEditStation(StationDetails, $scope.station_id);
         }
-        $scope.addEditStation = function (StationDetails ,station_id) {
+        $scope.addEditStation = function (StationDetails, station_id) {
             addStationServices.EditStation(StationDetails, station_id)
                 .success(function (data, status) {
                     // ngDialog.open({
@@ -96,6 +115,10 @@ angular.module('school_erp')
                     });
                 })
 
+        }
+        
+        $rootScope.showRole = function (role) {
+            return globalServices.fetchRoleAuth(role);
         }
 
         $scope.getStation();

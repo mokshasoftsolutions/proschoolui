@@ -8,9 +8,24 @@ angular.module('school_erp')
                 url: globalServices.globalValue.baseURL + 'api/employee/'+globalServices.globalValue.school_id
             })
         };
+        
+        employeeService.getEmployeeById = function (employee_id) {
+            return $http({
+                method: 'GET',
+                url: globalServices.globalValue.baseURL + 'api/employee_details/'+employee_id
+            })
+        };
+
+        employeeService.getEmployeeByCategory = function (category) {
+            return $http({
+                method: 'GET',
+                url: globalServices.globalValue.baseURL + 'api/employees_by_category/'+category+'/'+globalServices.globalValue.school_id
+            })
+        };
+
 
         employeeService.setEmployee = function (dataValue) {
-            console.log(dataValue);
+            //console.log(dataValue);
             return $http({
                 method: 'POST',
                 url: globalServices.globalValue.baseURL + 'api/employee/'+globalServices.globalValue.school_id,
@@ -20,7 +35,7 @@ angular.module('school_erp')
         };
 
         employeeService.EditEmployee = function (dataValue, employee_id) {
-            console.log(dataValue);
+            //console.log(dataValue);
             return $http({
                 method: 'PUT',
                 url: globalServices.globalValue.baseURL + 'api/edit_employee/' + employee_id,
@@ -50,7 +65,7 @@ angular.module('school_erp')
 
 
          employeeService.setAttendance = function(dataValue, Attendance) {
-            console.log(dataValue);
+           // console.log(dataValue);
             return $http({
                 method: 'POST',
                 url: globalServices.globalValue.baseURL + 'api/employee_attendance/' + Attendance,
@@ -64,7 +79,7 @@ angular.module('school_erp')
             var test = {
                 "employees": dataValue,
             };
-            console.log(dataValue);
+          //  console.log(dataValue);
             return $http({
                 method: 'POST',
                 url: globalServices.globalValue.baseURL + 'api/employee_attendancebulk/'+globalServices.globalValue.school_id,
@@ -91,11 +106,18 @@ angular.module('school_erp')
                 url: globalServices.globalValue.baseURL + 'api/employee_attendance_by_date/' + date+'/'+globalServices.globalValue.school_id
             })
         };
+
+        employeeService.getAttendenceByMonth = function (month,employee_id) {
+            return $http({
+                method: 'GET',
+                url: globalServices.globalValue.baseURL + 'api/employee_attendance_by_month/' + month+'/'+employee_id+'/'+globalServices.globalValue.school_id
+            })
+        };
        
         employeeService.getAttedanceByCategory = function (teaching, date) {
             return $http({
                 method: 'GET',
-                url: globalServices.globalValue.baseURL + 'api/employee_Attendance_by_category/' + teaching + '/' + date
+                url: globalServices.globalValue.baseURL + 'api/employee_Attendance_by_category/' + teaching + '/' + date +'/'+ globalServices.globalValue.school_id
             })
         };
 

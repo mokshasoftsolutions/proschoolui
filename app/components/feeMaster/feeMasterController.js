@@ -8,7 +8,7 @@ angular.module('school_erp')
         globalServices.getClass()
 
             .success(function (data, status) {
-                   console.log(JSON.stringify(data))
+                //       console.log(JSON.stringify(data))
                 $scope.classData = data.school_classes;// Api list-name
                 $scope.classId = $scope.classData[0].class_id;
                 //$scope.populateSections($scope.classId)
@@ -22,7 +22,7 @@ angular.module('school_erp')
                 .success(function (data, status) {
                     // console.log(subId)
                     $scope.feeTypeData = data.feetypes;
-                    console.log(JSON.stringify(data))
+                    //       console.log(JSON.stringify(data))
 
                 })
                 .error(function (data, success) { });
@@ -32,8 +32,28 @@ angular.module('school_erp')
             feeMasterServices.getFeeMaster()
                 .success(function (data, status) {
                     // console.log(subId)
-                    $scope.feeMasterData = data.feemaster;
-                    console.log(JSON.stringify(data))
+                    $scope.feeMaster = data.feemaster;
+                    //       console.log(JSON.stringify(data))
+                    $scope.feeMasterData = [];
+                    index = 0;
+                    $scope.feeMaster.forEach(function (element) {
+
+                        var obj = {
+                            id: index++,
+                            fee_master_id: element.fee_master_id,
+                            class_name: element.class_name,
+                            fee_type: element.fee_type,
+                            fee_amount: element.fee_amount,
+                            fee_category: element.fee_doc[0].fee_category,
+                           
+                           
+
+                        }
+                        $scope.feeMasterData.push(obj);
+                        // console.log("mesaage for section");
+                       // console.log($scope.employeeData);
+                    })
+
 
                 })
                 .error(function (data, success) { });
@@ -41,11 +61,11 @@ angular.module('school_erp')
 
 
         $scope.addFeeMaster = function (data) {
-            console.log("message");
+            //    console.log("message");
             var FeeMasterDetails = {
                 class_name: $scope.data.class_name,
                 fee_type: $scope.data.fee_type,
-                fee_amount:$scope.data.amount
+                fee_amount: $scope.data.amount
 
             }
             feeMasterServices.setFeeMaster(FeeMasterDetails)
@@ -68,15 +88,15 @@ angular.module('school_erp')
 
         $scope.EditFeeMaster = function (value, feeMaster) {
 
-            console.log("messsage");
+            //   console.log("messsage");
             $scope.feeMaster = angular.copy($scope.feeMasterData[value]);
 
             $scope.fee_master_id = $scope.feeMaster.fee_master_id;
-            console.log($scope.fee_master_id);
+            //     console.log($scope.fee_master_id);
             var FeeMasterDetails = {
                 class_name: $scope.feeMaster.class_name,
                 fee_type: $scope.feeMaster.fee_type,
-                fee_amount:$scope.feeMaster.fee_amount
+                fee_amount: $scope.feeMaster.fee_amount
 
             }
 
@@ -104,7 +124,7 @@ angular.module('school_erp')
         $scope.DeleteFeeMaster = function (value) {
             $scope.editdata = angular.copy($scope.feeMasterData[value]);
             $scope.fee_master_id = $scope.editdata.fee_master_id;
-            console.log($scope.fee_master_id);
+            //    console.log($scope.fee_master_id);
             feeMasterServices.DeleteFeeMaster($scope.fee_master_id)
                 .success(function (data, status) {
                     ngDialog.open({
@@ -189,11 +209,11 @@ angular.module('school_erp')
 
 
         $scope.save = function (data) {
-            console.log(JSON.stringify(data));
+            //    console.log(JSON.stringify(data));
 
             $http({
                 method: "POST",
-                url: globalServices.globalValue.baseURL + 'api/book/'+globalServices.globalValue.school_id,
+                url: globalServices.globalValue.baseURL + 'api/book/' + globalServices.globalValue.school_id,
                 data: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json'

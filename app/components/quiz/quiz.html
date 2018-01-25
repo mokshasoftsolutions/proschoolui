@@ -1,0 +1,188 @@
+<div class="row background">
+  <div class="container">
+    <h1>Assignment Management</h1>
+    <ul class="links" ui-sref-active="active">
+      <li ui-sref-active="active">
+        <a ui-sref='main.assignments'>Assignment</a>/
+        <!-- <ul class="links">
+          <li ui-sref-active="active">
+            <a ui-sref='main.assignments'>Add Assignment</a>
+          </li>/
+          <li ui-sref-active="active">
+            <a ui-sref='main.marks'>Marks</a>
+          </li>
+        </ul> -->
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref='main.marks'>Marks</a>/
+      </li>
+      <li ng-show="showRole(['admin','teacher'])">
+        <a ui-sref='main.addQuestions'>Quizz</a>
+        <!-- <ul class="links">
+          <li>
+            <a ui-sref='main.addQuestions'>Add Questions</a>
+          </li>/
+          <li>
+            <a ui-sref='main.quiz'>Quizz</a>
+          </li>
+
+        </ul> -->
+      </li>
+      <!-- <li ui-sref-active="active">
+        <a ui-sref='main.marks'>Marks</a>
+      </li> -->
+      <li ng-show="showRole(['parent'])">
+        <a ui-sref='main.quiz'>Quizz</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="Quiz">
+      <div class="col-md-3">
+        <div class="backwhite">
+          <!-- <div class="form-group">
+            <label>Class</label>
+            <select class="form-control select2" ng-options="class.class_id as class.name for class in classData" data-ng-change="populateSections(classId)"
+              style="width: 100%;" ng-model="classId">
+
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Section</label>
+            <select data-ng-change="populateSubjects(secId)" ng-options="sec.section_id as sec.name for sec in secData" class="form-control select2"
+              style="width: 100%;" ng-model="secId">
+            </select>
+          </div> -->
+          <div class="form-group">
+            <label>Subject</label>
+            <select data-ng-change="populateChapters(subId)" ng-options="sub.subject_id as sub.name for sub in subData" class="form-control select2"
+              ng-model="subId" style="width: 100%;">
+            </select>
+          </div>
+          <!-- <div class="form-group">
+            <label>Select Chapter </label>
+
+
+            <select data-ng-change="getAssignments(secId,chapterId)" class="form-control select2" ng-model="chapterId" style="width: 100%;">
+              <option selected="selected">--Select--</option>
+              <option ng-repeat="chapter in chapterData" value="{{chapter.lession_id}}">{{chapter.title}}</option>
+            </select>
+          </div> -->
+          <div class="box-footer">
+            <button type="submit" ng-click="getQuestionsForSubject(subId,student.class_id);" class="btn btn-primary pull-right">Search</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="subjectlist">
+          <div class="col-md-12">
+            <!-- <div class="col-xs-3 col-md-4"> -->
+            <!-- <quiz/> -->
+
+            <div class="col-md-12">
+              <div class="form-group" ng-show="!inProgress">
+                <p>Welcome to the Quiz</p>
+                <button class="btn btn-primary" ng-click="start()">Start the Quiz</button>
+              </div>
+
+              <div class="col-md-12" ng-show="inProgress">
+                <div ng-show="!quizOver">
+                  <p>Quiz:Question-{{id+1}}</p>
+                  <div class="form-group">
+                    <textarea class="form-control" placeholder="Type the question..." rows="5" id="comment">{{question}}</textarea>
+                  </div>
+                  <div ng-repeat="option in options">
+                    <div class="col-md-6">
+                      <label class="radio-inline">
+                        <input type="radio" name="answer" value="{{option}}"> {{option}}
+                      </label>
+                    </div>
+
+                  </div>
+
+                  <button ng-click="checkAnswer()" class="btn btn-primary" ng-show="answerMode">Submit</button>
+
+                  <div ng-show="!answerMode" style="margin-top:15px;">
+                    <!-- <button ng-click="nextQuestion()" class="next-question">Next</button> -->
+                    <span ng-show="correctAns" style="color:green;">That is correct!</span>
+                    <span ng-show="!correctAns" style="color:red;">Sorry, that is an incorrect answer.</span>
+                  </div>
+
+                  <div class="col-md-12">
+                    <ul>
+                      <!-- <button type="submit" ng-click="checkAnswer()" class="btn btn-primary pull-right">Submit</button> -->
+                      <button type="submit" ng-click="nextQuestion();" class="btn btn-primary pull-right">Next</button>
+
+                      <button type="submit" ng-click="previousQuestion()" class="btn btn-primary pull-right">Previous</button>
+
+                    </ul>
+                  </div>
+                </div>
+
+                <div ng-show="quizOver">
+                  <h2>Quiz is over</h2>
+                  <button ng-click="reset()" class="btn btn-primary">Play again</button>
+
+                  <div class="col-md-12">
+                    <div>Score: {{score}}</div>
+                    <div class="col-md-3">
+                      <table export-table class="table rwd-table table-striped">
+                        <thead>
+                          <tr>
+                            <th>Question</th>
+
+                          </tr>
+                        </thead>
+                        <tr ng-repeat="qus in AllQus">
+                          <td>{{qus}}</td>
+
+                        </tr>
+
+                      </table>
+                    </div>
+                    <div class="col-md-3">
+                      <table export-table class="table rwd-table table-striped">
+                        <thead>
+                          <tr>
+                            <th>Answers</th>
+
+                          </tr>
+                        </thead>
+                        <tr ng-repeat="ans in AllAns">
+                          <td>{{ans}}</td>
+
+                        </tr>
+
+                      </table>
+                    </div>
+                    <div class="col-md-3">
+                      <table export-table class="table rwd-table table-striped">
+                        <thead>
+                          <tr>
+                            <th>Your Answers</th>
+
+                          </tr>
+                        </thead>
+                        <tr ng-repeat="ans1 in YourAns">
+                          <td>{{ans1}}</td>
+
+                        </tr>
+
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+
+
+
+            </div>
+            <!-- </div> -->
+          </div>
+        </div>
+
+      </div>

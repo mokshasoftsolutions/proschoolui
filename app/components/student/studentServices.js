@@ -1,7 +1,7 @@
 angular.module('school_erp')
     .factory('studentServices', ['$http', 'globalServices', function ($http, globalServices) {
         var studentServices = {};
-        console.log(globalServices.globalValue);    
+        // console.log(globalServices.globalValue);    
 
         studentServices.getStudent = function (classSecValue) {
             return $http({
@@ -12,11 +12,11 @@ angular.module('school_erp')
 
 
         studentServices.setStudent = function (dataValue, classSecToAdd) {
-             dataValue.school_id = globalServices.globalValue.school_id;
+            dataValue.school_id = globalServices.globalValue.school_id;
             return $http({
                 method: 'POST',
                 url: globalServices.globalValue.baseURL + 'api/students/' + classSecToAdd,
-                 data:  dataValue,
+                data: dataValue,
                 headers: { 'Content-Type': 'application/json' }
             })
         };
@@ -27,30 +27,6 @@ angular.module('school_erp')
                 url: globalServices.globalValue.baseURL + 'api/student_details/' + student_id
             })
         };
-
-        // studentServices.getStudentPhoto = function (student_id) {
-        //     return $http({
-        //         method: 'GET',
-        //         url: globalServices.globalValue.baseURL + 'api/image/' + student_id
-        //     })
-        // };
-        //   studentServices.setParent = function(parentDetails,studentId){       
-        //     return $http({
-        //                 method: 'POST',
-        //                 url: globalServices.globalValue.baseURL + 'api/add_parent/'+studentId,
-        //                 data: $.param(parentDetails),
-        //                 headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
-        //             })
-        //   };
-
-        //    studentServices.setStudentaddress = function(Studentaddress,studentId){       
-        //     return $http({
-        //                 method: 'POST',
-        //                 url: globalServices.globalValue.baseURL + 'api/add_parent/'+studentId,
-        //                 data: $.param(Studentaddress),
-        //                 headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
-        //             })
-        //   };
 
         studentServices.setAttendance = function (dataValue, classToAdd) {
             return $http({
@@ -83,21 +59,55 @@ angular.module('school_erp')
             })
         };
 
-        studentServices.getAttendenceByDaySection = function (select_date,section_id) {
+        studentServices.getAttendenceByDayStudent = function (select_date, student_id) {
             return $http({
                 method: 'GET',
                 //url: "http://192.168.1.6:4005/api/examevaluationlistbystudentid/263/456"
-                url: globalServices.globalValue.baseURL + 'api/section_attendence_by_Date/' +select_date+ '/' + section_id 
-                        })
+                url: globalServices.globalValue.baseURL + 'api/attendancechartbyStudentAndDate/' + select_date + '/' + student_id
+            })
+        };
+
+        studentServices.getAttendenceByDaySection = function (select_date, section_id) {
+            return $http({
+                method: 'GET',
+                //url: "http://192.168.1.6:4005/api/examevaluationlistbystudentid/263/456"
+                url: globalServices.globalValue.baseURL + 'api/section_attendence_by_Date/' + select_date + '/' + section_id
+            })
+        };
+
+
+        studentServices.getAttendanceBySchool = function () {
+            return $http({
+                method: 'GET',
+                //url: "http://192.168.1.6:4005/api/examevaluationlistbystudentid/263/456"
+                url: globalServices.globalValue.baseURL + 'api/all_cses_att_date_testing/' + new Date().toDateString() + '/' + globalServices.globalValue.school_id
+            })
+        };
+
+        studentServices.getAttendanceByStudent = function (student_id) {
+            return $http({
+                method: 'GET',
+                //url: "http://192.168.1.6:4005/api/examevaluationlistbystudentid/263/456"
+                url: globalServices.globalValue.baseURL + 'api/student_tillDate_attendence/' + student_id
+            })
+        };
+
+
+        studentServices.getStudentStatus = function (student_id) {
+            return $http({
+                method: 'GET',
+                //url: "http://192.168.1.6:4005/api/examevaluationlistbystudentid/263/456"
+                url: globalServices.globalValue.baseURL + 'api/presentDay_student_attendence/'+ new Date().toDateString() + '/'  + student_id
+            })
         };
 
         studentServices.getAttendenceByDayAndClass = function () {
             return $http({
                 method: 'GET',
                 //url: "http://192.168.1.6:4005/api/examevaluationlistbystudentid/263/456"
-                url: globalServices.globalValue.baseURL + 'api/allClasses_Attendence_by_date/' + new Date().toDateString() + '/' + globalServices.globalValue.school_id 
+                url: globalServices.globalValue.baseURL + 'api/all_cses_att_date_testing/' + new Date().toDateString() + '/' + globalServices.globalValue.school_id
             })
-        }; 
+        };
 
         studentServices.getAttendenceByMonth = function (month, studentId) {
             return $http({
@@ -110,7 +120,7 @@ angular.module('school_erp')
             var test = {
                 "students": dataValue,
             };
-            console.log(dataValue);
+            //     console.log(dataValue);
             return $http({
                 method: 'POST',
                 url: globalServices.globalValue.baseURL + 'api/attendancebulk/' + classVal + '/' + section + '/' + globalServices.globalValue.school_id,
@@ -133,7 +143,7 @@ angular.module('school_erp')
         // };
 
         studentServices.EditStudent = function (dataValue, student_id) {
-            console.log(dataValue);
+            //     console.log(dataValue);
             return $http({
                 method: 'PUT',
                 //url: globalServices.globalValue.baseURL + 'book_edit/:book_id/:name/:value',
@@ -154,7 +164,7 @@ angular.module('school_erp')
             return $http({
                 method: 'GET',
                 // url: "http://192.168.1.13:4005/api/examevaluation/3/2347/34/45"
-                url: globalServices.globalValue.baseURL + 'api/getparentlist/'+globalServices.globalValue.school_id
+                url: globalServices.globalValue.baseURL + 'api/getparentlist/' + globalServices.globalValue.school_id
             })
         };
         studentServices.getTeacherListBySchool = function () {
@@ -162,7 +172,7 @@ angular.module('school_erp')
             return $http({
                 method: 'GET',
                 // url: "http://192.168.1.13:4005/api/examevaluation/3/2347/34/45"
-                url: globalServices.globalValue.baseURL + 'api/teachers/'+globalServices.globalValue.school_id
+                url: globalServices.globalValue.baseURL + 'api/teachers/' + globalServices.globalValue.school_id
             })
         };
 

@@ -1,0 +1,113 @@
+<div class="row background">
+  <div class="container">
+    <h1>Acadamic Management</h1>
+    <ul class="links">
+      <li>
+        <a ui-sref='main.subjects'>Subjects</a>
+      </li>
+      <li>/
+        <a ui-sref='main.chapters'>Chapters</a>
+      </li>
+      <li ng-if="showRole(['admin','teacher'])">/
+        <a ui-sref='main.assignSubjects'>Assign Subjects</a>
+      </li>
+      <li ng-if="showRole(['admin','teacher'])">/
+        <a ui-sref='main.lessonPlanner'>Lession Planner</a>
+      </li>
+      <li ng-if="showRole(['admin','teacher'])">/
+        <a ui-sref='main.lessonTracker'>Lession Tracker</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="trackersearch">
+      <div class="col-md-3">
+        <div class="backwhite">
+          <div class="form-group">
+            <label>Class</label>
+            <select data-ng-change="populateSections(classId)" ng-options="class.class_id as class.name for class in classData" class="form-control select2"
+              style="width: 100%;" ng-model="classId">
+
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Section</label>
+            <select ng-options="sec.section_id as sec.name for sec in secData" data-ng-change="populateSubjects(secId)" class="form-control select2"
+              style="width: 100%;" ng-model="secId">
+
+            </select>
+          </div>
+          <div class="row">
+            <div class="col-md-12" ng-show="showRole(['admin','teacher','parent'])">
+              <button type="submit" ng-click="getChapterResponse(secId);" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Select</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="trackerresult">
+      <div class="col-md-9">
+        <h1>Lesson Tracker</h1>
+
+        <div class="backwhite">
+
+          <table class="table-responsive">
+            <tbody>
+              <th style="padding-left: 15px;">
+                Subjects
+              </th>
+              <th style="padding-left: 270px;">Chapters</th>
+
+            </tbody>
+          </table>
+
+          <div style="padding-top: 30px" ng-repeat="subject in subjects">
+
+            <div class="table-responsive">
+
+              <div class="col-md-1" style="color:black">
+                <table class="table-responsive">
+                  <tbody>
+                    <tr>
+                      <td style="padding:none;">{{subject.subjectName}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div style="padding-left:115px">
+                <table>
+                  <tr>
+
+                    <th class="col-md-1" ng-repeat="chapter in subject.chapters ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{chapter.chapterName}}
+
+
+
+                      <div class="progress">
+                        <div class="progress-bar progress-bar-success" ng-style="{width:(chapter.percent)}">
+                          C:{{chapter.completed_topics}}/{{chapter.no_of_topics}}
+                        </div>
+
+                      </div>
+                    </th>
+
+
+                  </tr>
+
+
+
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

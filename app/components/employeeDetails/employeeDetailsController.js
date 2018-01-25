@@ -8,11 +8,11 @@ angular.module('school_erp')
 
         $scope.loadImage = function (files) {
 
-            console.log("messsage1");
+         //   console.log("messsage1");
             $scope.$apply(function () {
 
                 $scope.selectedFile = files[0];
-                console.log($scope.selectedFile);
+             //   console.log($scope.selectedFile);
 
                 if ($scope.selectedFile.type != "image/jpeg" && $scope.selectedFile.type != "image/png") {
                     //     ngDialog.open({
@@ -30,7 +30,7 @@ angular.module('school_erp')
 
         $scope.addEmployee = function (data) {
 
-            console.log("messsage2");
+        //    console.log("messsage2");
             var file = $scope.selectedFile;
             //console.log(file);
             $scope.saveImage(file, data);
@@ -87,12 +87,24 @@ angular.module('school_erp')
             fd.append('experience', $scope.data.experience);
             fd.append('phone', $scope.data.phone);
             fd.append('email', $scope.data.email);
-            fd.append('profile_image', $scope.data. profile_image);
+            fd.append('profile_image', $scope.data.profile_image);
             fd.append('website', $scope.data.website);
+            fd.append('work_email', $scope.data.work_email);
             fd.append('joined_on',$scope.data.joined_on);
             fd.append('qualification', $scope.data.qualification);
+            fd.append('alternate_phone', $scope.data.alternate_phone);
+            fd.append('basic_pay', $scope.data.basic_pay);
+            fd.append('country', $scope.data.country);
+            fd.append('state', $scope.data.state);
+            fd.append('mobile', $scope.data.mobile);
+            fd.append('perm_city', $scope.data.perm_city);
+            fd.append('martial_status', $scope.data.martial_status);
+            fd.append('postal_code', $scope.data.postal_code);
+            fd.append('salary_band',$scope.data.salary_band);
+            fd.append('blood_group',$scope.data.blood_group);
+            fd.append('spoken_languages', $scope.data.spoken_languages);
             
-            console.log(JSON.stringify(fd));
+         //   console.log(JSON.stringify(fd));
             $http.post(globalServices.globalValue.baseURL +  'api/employee/'+globalServices.globalValue.school_id, fd, {
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }
@@ -127,7 +139,7 @@ angular.module('school_erp')
 
         $scope.loadFile = function (files) {
 
-            console.log("messsage1");
+         //   console.log("messsage1");
             $scope.$apply(function () {
 
                 $scope.selectedFile = files[0];
@@ -137,9 +149,9 @@ angular.module('school_erp')
         }
 
         $scope.handleFile = function () {
-            console.log("messsage2");
+        //    console.log("messsage2");
             var file = $scope.selectedFile;
-            console.log(file);
+        //    console.log(file);
 
             if (file == undefined || file == null) {
                 ngDialog.open({
@@ -198,8 +210,8 @@ angular.module('school_erp')
 
 
         $scope.save = function (file) {
-            console.log("messsage3");
-            console.log(file);
+        //    console.log("messsage3");
+        //    console.log(file);
 
             var fd = new FormData();
             fd.append('file', file);

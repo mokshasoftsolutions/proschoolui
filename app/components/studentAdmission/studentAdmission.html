@@ -4,9 +4,9 @@
     <ul class="links">
       <li ui-sref-active="active">
         <a ui-sref="main.student">Information</a>
-      </li>/
-      <li ui-sref-active="active">
-        <a ui-sref="main.studentAdmission">Admission</a>
+      </li>
+      <li ui-sref-active="active" ng-show="showRole(['admin'])">
+        /<a ui-sref="main.studentAdmission">Admission</a>
       </li>
     </ul>
   </div>
@@ -21,8 +21,7 @@
             <div class="box-header with-border">
               <ul class="panel-controls">
                 <li>
-                  <select name="class" class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;"
-                    ng-model="classId">
+                  <select name="class" class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId">
                     <option selected="selected">--Select--</option>
                     <option ng-repeat="class in classData" value="{{class.class_id}}">{{class.name}}</option>
                   </select>
@@ -36,8 +35,7 @@
 
 
                 <li>
-                  <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)"
-                  />
+                  <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)" />
                 </li>
                 <li>
                   <input type="button" value="Import" class="btn btn-primary" ng-click="handleFile(secId)" />
@@ -47,7 +45,7 @@
             </div>
 
             <!-- /.box-header -->
-            <form name="studentAdmission" ng-submit="studentAdmission.$valid && handleImage(data);" novalidate>
+            <form name="studentAdmission" ng-submit="studentAdmission.$valid && handleImage(data);addDocuments();" novalidate>
               <div class="box-body">
 
                 <div class="row">
@@ -69,7 +67,7 @@
                     <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.class.$pristine}">
                       <label>Class</label>
                       <select name="class" class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId">
-                        <option selected="selected">--Select--</option>
+                        <option selected="selected" value="">--Select--</option>
                         <option ng-repeat="class in classData" value="{{class.class_id}}">{{class.name}}</option>
                       </select>
                     </div>
@@ -79,7 +77,7 @@
                     <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.section.$pristine }">
                       <label>Section</label>
                       <select class="form-control select2" name="section" style="width: 100%;" ng-model="secId">
-                        <option selected="selected">--Select--</option>
+                        <option selected="selected" value="">--Select--</option>
                         <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>
                       </select>
                     </div>
@@ -105,7 +103,7 @@
                     <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.gender.$pristine}">
                       <label>Gender</label>
                       <select name="gender" ng-model="data.gender" class="form-control select2" style="width: 100%;">
-                        <option selected="selected">--Select--</option>
+                        <option selected="selected" value="">--Select--</option>
                         <option>Male</option>
                         <option>Female</option>
                       </select>
@@ -129,7 +127,7 @@
                     <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.category.$pristine}">
                       <label>Category</label>
                       <select name="category" class="form-control select2" ng-model="data.category" style="width: 100%;">
-                        <option selected="selected">--Select--</option>
+                        <option selected="selected" value="">--Select--</option>
                         <option>General</option>
                         <option>OBC</option>
                         <option>Minority</option>
@@ -139,7 +137,7 @@
 
                   <div class="col-md-3">
                     <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.religion.$pristine}">
-                      <label>Religion</label>
+                      <label>Nationality</label>
                       <input type="text" name="religion" ng-model="data.religion" class="form-control" placeholder="Enter ...">
                     </div>
                   </div>
@@ -161,7 +159,13 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.bloodGroup.$pristine}">
+                      <label>Blood Group</label>
+                      <input type="text" name="bloodGroup" ng-model="data.bloodGroup" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
+                  <div class="col-md-3">
                     <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.admissionDate.$pristine}">
                       <label>Admission Date</label>
                       <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="dd-MM-yyyy" style="z-index:999">
@@ -170,11 +174,37 @@
                       </datepicker>
                     </div>
                   </div>
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.route.$pristine}">
+                      <label>School Bus Route</label>
+                      <select class="form-control select2" name="route" ng-model="routeId" style="width: 100%;">
+                        <option selected value="">--Select--</option>
+                        <option ng-repeat="route in busRoutes" value="{{route.bus_route_id}}">{{route.route_title}}</option>
 
-                  <div class="col-md-4">
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.aadhaar.$pristine}">
+                      <label>Aadhaar No</label>
+                      <input name="aadhaar" type="text" ng-model="data.aadhar_no" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="row">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label>Student Photo</label>
-                      <input type="file" name="file" class="form-control" ng-model="data.student_photo" ngf-select ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" onchange="angular.element(this).scope().loadImage(this.files)">
+                      <input type="file" name="file" class="form-control" ng-model="data.student_photo" ngf-select ngf-pattern="'image/*'" accept="image/*"
+                        ngf-max-size="1MB" onchange="angular.element(this).scope().loadImage(this.files)">
+
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <p style="color:#9e0707;font-size:15px;margin-top:27px;"> {{message}} </p>
                     </div>
                   </div>
                 </div>
@@ -188,21 +218,27 @@
 
               <div class="box-body">
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.father.$pristine}">
                       <label>Father Name</label>
                       <input type="text" name="father" ng-model="data.father_name" class="form-control" placeholder="Enter ..." required>
                     </div>
                   </div>
 
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.Phone.$pristine||studentAdmission.Phone.$error.pattern}">
                       <label>Father Phone</label>
-                      <input name="Phone" type="text" ng-model="data.father_contact" class="form-control" placeholder="Enter ...">
+                      <input name="Phone" type="text" ng-model="data.father_contact" ng-pattern="/^(\+\d{1,3}[- ]?)?\d{10}$/"  class="form-control" placeholder="Enter ...">
                     </div>
                   </div>
-
-                  <div class="col-md-4">
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.fatheremail.$pristine||studentAdmission.fatheremail.$error.pattern}">
+                      <label>Father Email</label>
+                      <input type="email" name="fatheremail" ng-model="data.fatheremail" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" class="form-control"
+                        placeholder="Enter ..." required>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
                     <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.occupation.$pristine}">
                       <label>Father Occupation</label>
                       <input name="occupation" type="text" ng-model="data.father_occupation" class="form-control" placeholder="Enter ...">
@@ -211,21 +247,27 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.Name.$pristine}">
                       <label>Mother Name</label>
                       <input name="Name" type="text" ng-model="data.mother_name" class="form-control" placeholder="Enter ...">
                     </div>
                   </div>
 
-                  <div class="col-md-4">
-                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.phone.$pristine||studentAdmission.phone.$error.pattern}">
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.motherphone.$pristine||studentAdmission.motherphone.$error.pattern}">
                       <label>Mother Phone</label>
-                      <input name="phone" type="text" ng-model="data.mother_contact" class="form-control" placeholder="Enter ...">
+                      <input name="motherphone" type="text" ng-model="data.mother_contact" ng-pattern="/^(\+\d{1,3}[- ]?)?\d{10}$/" class="form-control" placeholder="Enter ...">
                     </div>
                   </div>
-
-                  <div class="col-md-4">
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.motheremail.$pristine||studentAdmission.motheremail.$error.pattern}">
+                      <label>Mother Email</label>
+                      <input type="email" name="motheremail" ng-model="data.motheremail" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" class="form-control"
+                        placeholder="Enter ..." required>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
                     <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.mother.$pristine}">
                       <label>Mother Occupation</label>
                       <input name="mother" type="text" ng-model="data.mother_occupation" class="form-control" placeholder="Enter ...">
@@ -233,50 +275,59 @@
                   </div>
                 </div>
 
+                <!-- <div class="row">
+                  <div class="col-md-6"> -->
                 <div class="row">
-                  <div class="col-md-6">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.name.$pristine}">
-                          <label>Guardian Name</label>
-                          <input name="name" type="text" ng-model="data.gaurdian_name" class="form-control" placeholder="Enter ...">
-                        </div>
-                      </div>
-
-                      <div class="col-md-6">
-                        <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.relation.$pristine}">
-                          <label>Guardian Relation</label>
-                          <input name="relation" type="text" ng-model="data.gaurdian_relation"  class="form-control" placeholder="Enter ...">
-                        </div>
-                      </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Guardian Name</label>
+                      <input name="name" type="text" ng-model="data.gaurdian_name" class="form-control" placeholder="Enter ...">
                     </div>
-
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.phone.$pristine}">
-                          <label>Guardian Phone</label>
-                          <input name="phone" type="text" ng-model="data.gaurdian_contact" class="form-control" placeholder="Enter ...">
-                        </div>
-                      </div>
-
-                      <div class="col-md-6">
-                        <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.guardian.$pristine}">
-                          <label>Guardian Occupation</label>
-                          <input name="guardian" type="text" ng-model="data.gaurdian_occupation" class="form-control" placeholder="Enter ...">
-                        </div>
-                      </div>
-                    </div>
-
                   </div>
 
+
+                  <!-- </div>
+
+                    <div class="row"> -->
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Guardian Phone</label>
+                      <input name="phone" type="text" ng-model="data.gaurdian_contact" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Guardian Email</label>
+                      <input type="text" name="gaurdianemail" ng-model="data.gaurdianemail" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" class="form-control"
+                        placeholder="Enter ..." required>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Guardian Occupation</label>
+                      <input name="guardian" type="text" ng-model="data.gaurdian_occupation" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
                   <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Guardian Relation</label>
+                      <input name="relation" type="text" ng-model="data.gaurdian_relation" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- <div class="col-md-6">
                     <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.address.$pristine}">
                       <label>Guardian Address</label>
                       <textarea name="address" class="form-control" ng-model="data.gaurdian_address" rows="3" placeholder="Enter ..."></textarea>
                     </div>
-                  </div>
-                </div>
-              </div>
+                  </div> -->
+              <!-- </div>
+              </div> -->
 
 
 
@@ -305,22 +356,6 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.route.$pristine}">
-                      <label>School Bus Route</label>
-                      <select class="form-control select2" name="route" ng-model="routeId" style="width: 100%;">
-                        <option selected="">--Select--</option>
-                        <option ng-repeat="route in busRoutes" value="{{route.bus_route_id}}">{{route.route_title}}</option>
-
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.aadhaar.$pristine}">
-                      <label>Aadhaar No</label> 
-                      <input name="aadhaar" type="text" ng-model="data.aadhar_no" class="form-control" placeholder="Enter ...">
-                    </div>
-                  </div>
 
 
                   <div class="col-md-4">
@@ -372,10 +407,27 @@
 
                 </div>
 
+                <!-- <div class="row">
+
+                  
+                </div> -->
                 <div class="row">
 
                   <h4 class="box-title">Upload Documents</h4>
-                  <div class="col-md-6">
+                  <div class="col-md-4">
+                      <fieldset data-ng-repeat="choice in choices">
+                       <label>Title</label>
+                       <input type="text" ng-model="data.name" class="form-control" name="" placeholder="">
+                     <label>Choose File</label>    
+                     <input type="file" name="file" class="form-control" ng-model="data.studentDoc" ngf-select 
+                        ngf-max-size="1MB" onchange="angular.element(this).scope().loadDocument(this.files)">
+                     <button style="background: #C76868;" class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
+                       
+                      </fieldset>
+                      
+                      <button style="background: #C76868;margin-left:323px;" class="addfields" ng-click="addNewChoice()">+</button>
+                    </div>
+                  <!-- <div class="col-md-6">
                     <table class="table">
                       <tbody>
                         <tr>
@@ -421,9 +473,9 @@
                         </tr>
                       </tbody>
                     </table>
-                  </div>
+                  </div> -->
 
-                  <div class="col-md-6">
+                  <!-- <div class="col-md-6">
                     <table class="table">
                       <tbody>
                         <tr>
@@ -469,7 +521,7 @@
                         </tr>
                       </tbody>
                     </table>
-                  </div>
+                  </div> -->
 
                 </div>
               </div>

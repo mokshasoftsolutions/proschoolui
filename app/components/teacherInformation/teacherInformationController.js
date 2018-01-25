@@ -42,25 +42,32 @@ angular.module('school_erp')
                 })
         }
         $scope.teacherList = [];
-        $scope.username=[];
+        $scope.username = [];
         // $scope.getParents =function(secId){
         //     console.log(secId);
         studentServices.getTeacherListBySchool()
             .success(function (data, status) {
-                console.log(JSON.stringify(data));
+                //    console.log(JSON.stringify(data));
                 $scope.teacherList = data.teachers;// Api list-name
-               
-                console.log($scope.teacherList);
-                $scope.teacherList.forEach(function (item) {
-                $scope.teacherId=item.teacher_id;
-                //console.log($scope.parentId);
 
-                // $scope.splited=$scope.teacherId.split('-');
-                // $scope.splited = $scope.splited[1]+"-"+$scope.splited[2]+"-"+$scope.splited[3];
+                //     console.log($scope.teacherList);
+                $scope.teacherBox=[];
+                index=0;
+                $scope.teacherList.forEach(function (element) {
+                    $scope.teacherId = element.teacher_id;
+                    var obj = {
+                        id: index++,
+                        teacher_id: element.teacher_id,
+                        teacher_name: element.teacher_name
+                        // first_name: element.student_doc[0].first_name,
+                        // last_name: element.student_doc[0].last_name
 
-                // $scope.username.push($scope.splited);
-                $scope.username.push($scope.teacherId);
-              //  console.log($scope.splited);
+
+
+                    }
+                    $scope.teacherBox.push(obj);
+                    $scope.username.push($scope.teacherId);
+                    //  console.log($scope.splited);
 
 
                 })
@@ -69,6 +76,12 @@ angular.module('school_erp')
             })
             .error(function (data, success) {
             })
+
+
+            $scope.showRole = function (role) {
+                return globalServices.fetchRoleAuth(role);
+            }
+        
         // }
 
         // $scope.addStudent = function (data) {

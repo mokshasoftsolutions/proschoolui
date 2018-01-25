@@ -1,0 +1,155 @@
+<div class="row background">
+  <div class="container">
+    <h1>Assignment Management</h1>
+    <!-- <ul class="links" ui-sref-active="active">
+      <li ui-sref-active="active">
+        <a ui-sref='main.assignments'>Assignment</a>/
+        <ul class="links">
+          <li ui-sref-active="active">
+            <a ui-sref='main.assignments'>Add Assignment</a>
+          </li>/
+          <li ui-sref-active="active">
+            <a ui-sref='main.marks'>Marks</a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a ui-sref='main.addQuestions'>Quizz</a>
+        <ul class="links">
+          <li>
+            <a ui-sref='main.addQuestions'>Add Questions</a>
+          </li>/
+          <li>
+            <a ui-sref='main.quiz'>Quizz</a>
+          </li>
+
+        </ul>
+      </li>
+    </ul> -->
+    <ul class="links" ui-sref-active="active">
+        <li ui-sref-active="active">
+          <a ui-sref='main.assignments'>Assignment</a>/
+          <!-- <ul class="links">
+            <li ui-sref-active="active">
+              <a ui-sref='main.assignments'>Add Assignment</a>
+            </li>/
+            <li ui-sref-active="active">
+              <a ui-sref='main.marks'>Marks</a>
+            </li>
+          </ul> -->
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref='main.marks'>Marks</a>/
+        </li>
+        <li ng-show="showRole(['admin','teacher'])">
+          <a ui-sref='main.addQuestions'>Quizz</a>
+          <!-- <ul class="links">
+            <li>
+              <a ui-sref='main.addQuestions'>Add Questions</a>
+            </li>/
+            <li>
+              <a ui-sref='main.quiz'>Quizz</a>
+            </li>
+  
+          </ul> -->
+        </li>
+        <!-- <li ui-sref-active="active">
+          <a ui-sref='main.marks'>Marks</a>
+        </li> -->
+        <li ng-show="showRole(['parent'])">
+            <a ui-sref='main.quiz'>Quizz</a>
+          </li>
+      </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="Quiz">
+      <div class="col-md-3">
+        <div class="backwhite">
+          <div class="form-group">
+            <label>Class</label>
+            <select class="form-control select2" ng-options="class.class_id as class.name for class in classData" data-ng-change="populateSections(classId)"
+              style="width: 100%;" ng-model="classId">
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Section</label>
+            <select data-ng-change="populateSubjects(secId)" ng-options="sec.section_id as sec.name for sec in secData" class="form-control select2"
+              style="width: 100%;" ng-model="secId">
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <select data-ng-change="populateChapters(subId)" ng-options="sub.subject_id as sub.name for sub in subData" class="form-control select2"
+              ng-model="subId" style="width: 100%;">
+            </select>
+          </div>
+          <div class="box-footer">
+            <button type="submit" class="btn btn-primary pull-right">Search</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+
+        <div class="subjectlist">
+          <div class="col-md-12">
+            <div class="col-xs-3 col-md-4">
+              <!-- <div class="tooltip">
+                <button>
+                  <img src="../../../dist/img/images/pdf.jpg" data-ng-click="exportAction('pdf')" class="img-responsive" width="30"
+                    height="30" alt="Responsive image">
+                </button>
+                <span class="tooltiptext">Download file</span>
+              </div>
+              <div class="tooltip">
+                <button>
+                  <img src="../../../dist/img/images/xlsx6.png" data-ng-click="exportAction('excel')" class="img-responsive"
+                    width="30" height="30" alt="Responsive image">
+                </button>
+                <span class="tooltiptext">Download file</span>
+              </div> -->
+              <p>Quiz:Question-1</p>
+              <form export-table class="table table-striped" name="questions" ng-submit="questions.$valid && addQuestions(subId,data,classId);"
+                novalidate>
+                <div class="col-md-12">
+                  <div class="form-group" ng-class="{'has-error': questions.$submitted  && questions.question.$pristine}">
+                    <textarea name="question" class="form-control" ng-model="data.question" placeholder="Type the question..." rows="5" id="comment"
+                      required></textarea>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group" ng-class="{'has-error': questions.$submitted  && questions.option1.$pristine}">
+                      <input name="option1" class="form-control" ng-model="data.option1" placeholder="A." id="inputdefault" type="text" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group" ng-class="{'has-error': questions.$submitted  && questions.option2.$pristine}">
+                      <input name="option2" class="form-control" ng-model="data.option2" placeholder="B." id="inputdefault" type="text" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group" ng-class="{'has-error': questions.$submitted  && questions.option3.$pristine}">
+                      <input name="option3" class="form-control" ng-model="data.option3" placeholder="c." id="inputdefault" type="text" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group" ng-class="{'has-error': questions.$submitted  && questions.option4.$pristine}">
+                      <input name="option4" class="form-control" ng-model="data.option4" placeholder="D." id="inputdefault" type="text" required>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="col-md-6">
+                      <div class="form-group" ng-class="{'has-error': questions.$submitted  && questions.option5.$pristine}">
+                        <input name="option5" class="form-control" ng-model="data.answer" placeholder="Ans.." id="inputdefault" type="text" required>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary pull-right">Add Question</button>
+
+
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>

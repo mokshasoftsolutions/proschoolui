@@ -5,7 +5,7 @@ angular.module('school_erp')
         //$scope.classData = [];
         //$scope.secId = '';
         //$scope.secData = [];
-       // $scope.classId = '';
+        // $scope.classId = '';
 
         $scope.getclassesInitialLoad = function () {
             globalServices.getClass()
@@ -20,14 +20,14 @@ angular.module('school_erp')
         }
 
         $scope.populateSections = function (classId) {
-           $scope.secData = [];
+            $scope.secData = [];
             globalServices.getSections(classId)
                 .success(function (data, status) {
-                    console.log(JSON.stringify(data));
+                    //   console.log(JSON.stringify(data));
 
                     $scope.secData = data.class_sections; // Api list-name
                     $scope.secId = $scope.secData[0].section_id;
-                    console.log($scope.secId);
+                    //  console.log($scope.secId);
                     $scope.getSubjects($scope.secId);
                 })
                 .error(function (data, success) { })
@@ -36,25 +36,40 @@ angular.module('school_erp')
 
         // Get Subjects from Database for section
         $scope.getSubjects = function (secId) {
-           $scope.secId=secId;
+            $scope.secId = secId;
             subjectsServices.getSubjects(secId)
                 .success(function (data, status) {
-                    console.log(JSON.stringify(data));
+                    //  console.log(JSON.stringify(data));
 
-                    $scope.subjectsData=data.subjects;
+                    $scope.subjects = data.subjects;
+
+                    $scope.subjectsData = [];
+                    index = 0;
+                    $scope.subjects.forEach(function (element) {
+
+                        var obj = {
+                            id: index++,
+                            subject_id: element.subject_id,
+                            name: element.name
+
+
+                        }
+                        $scope.subjectsData.push(obj);
+                        console.log($scope.subjectsData);
+                    })
                     //$scope.subjectsData = data[secId + ""];
-                   //console.log($scope.subjectsData);
+                    //console.log($scope.subjectsData);
                 })
                 .error(function (data, success) { });
         }
 
         $scope.addSubjects = function (data) {
-            console.log("message");
+            //   console.log("message");
             //  console.log($scope.secId);
             var Subjects = {
-               
-               // subject_id: $scope.data.subject_id,
-              
+
+                // subject_id: $scope.data.subject_id,
+
                 name: $scope.data.name
             }
             subjectsServices.setSubjects(Subjects, $scope.secId)
@@ -77,14 +92,14 @@ angular.module('school_erp')
 
         $scope.EditSubjects = function (value, subjects) {
 
-            console.log("messsage");
+            //     console.log("messsage");
             $scope.subjects = angular.copy($scope.subjectsData[value]);
             $scope.subject_id = $scope.subjects.subject_id;
-            console.log($scope.subject_id);
+            //   console.log($scope.subject_id);
             var SubjectsDetails = {
                 name: $scope.subjects.name,
             }
-            console.log(SubjectsDetails);
+            //     console.log(SubjectsDetails);
 
             $scope.addEditSubjects(SubjectsDetails, $scope.subject_id);
         }
@@ -110,7 +125,7 @@ angular.module('school_erp')
         $scope.DeleteSubjects = function (value) {
             $scope.editdata = angular.copy($scope.subjectsData[value]);
             $scope.subject_id = $scope.editdata.subject_id;
-            console.log($scope.subject_id);
+            //   console.log($scope.subject_id);
             subjectsServices.DeleteSubjects($scope.subject_id)
                 .success(function (data, status) {
                     ngDialog.open({
@@ -130,13 +145,13 @@ angular.module('school_erp')
 
 
 
- $scope.selectedFile = null;
+        $scope.selectedFile = null;
         $scope.msg = "";
 
 
         $scope.loadFile = function (files) {
 
-            console.log("messsage1");
+            //    console.log("messsage1");
             $scope.$apply(function () {
 
                 $scope.selectedFile = files[0];
@@ -146,11 +161,11 @@ angular.module('school_erp')
         }
 
         $scope.handleFile = function (secId) {
-            console.log("messsage2");
-            console.log(secId);
+            //    console.log("messsage2");
+            //    console.log(secId);
             var file = $scope.selectedFile;
-            console.log(file);
-            $scope.save(file,secId);
+            //   console.log(file);
+            $scope.save(file, secId);
 
 
             // if (file) {
@@ -190,14 +205,14 @@ angular.module('school_erp')
         }
 
 
-        $scope.save = function (file,secId) {
-            console.log("messsage3");
-            console.log(file);
+        $scope.save = function (file, secId) {
+            //     console.log("messsage3");
+            //     console.log(file);
 
             var fd = new FormData();
             fd.append('file', file);
-           // fd.append('data', 'string');
-            $http.post(globalServices.globalValue.baseURL+'api/bulk_upload_subjects/'+secId, fd, {
+            // fd.append('data', 'string');
+            $http.post(globalServices.globalValue.baseURL + 'api/bulk_upload_subjects/' + secId, fd, {
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }
             })
@@ -240,7 +255,7 @@ angular.module('school_erp')
 
         if ($rootScope.role == 'parent') {
 
-            $scope.secId = $rootScope.student.section;
+            $scope.secId = $rootScope.student.section_id;
             $scope.getSubjects($scope.secId);
 
 

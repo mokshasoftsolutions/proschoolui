@@ -24,7 +24,7 @@ angular.module('school_erp')
                 .success(function (data, status) {
                     $scope.secData = data.class_sections; // Api list-name
                     $scope.secId = $scope.secData[0].section_id;
-                    console.log($scope.secId);
+                    //  console.log($scope.secId);
                     $scope.populateSubjects($scope.secId);
 
                 })
@@ -51,11 +51,12 @@ angular.module('school_erp')
             $scope.chapterData = [];
             chaptersServices.getChapters(subId)
                 .success(function (data, status) {
-                    console.log(JSON.stringify(data));
-                    console.log(subId)
-                    $scope.chapterData = data[subId + ""];
+                      console.log(JSON.stringify(data));
+                    //   console.log(subId)
+                    $scope.chapterData = data.chapters;
+                    console.log($scope.chapterData);
                     $scope.chapterId = $scope.chapterData[0].lession_id;
-                    console.log($scope.chapterId);
+                    //  console.log($scope.chapterId);
                     $scope.getAssignments($scope.secId, $scope.chapterId);
                 })
                 .error(function (data, success) {
@@ -65,15 +66,35 @@ angular.module('school_erp')
 
         $scope.getAssignments = function (secId, chapterId) {
             //$scope.chapterId = chapterId;
-         console.log(secId);
-         console.log(chapterId);
+            //  console.log(secId);
+            //  console.log(chapterId);
             assignmentsServices.getAssignments(secId, chapterId)
                 .success(function (data, status) {
-                    console.log(JSON.stringify(data));
+                    //    console.log(JSON.stringify(data));
 
-                 $scope.assignmentsData = data.assignments;
+                    $scope.assignment = data.assignments;
 
                     // console.log($scope.assignmentsData);
+                    $scope.assignmentsData = [];
+                    index = 0;
+                    $scope.assignment.forEach(function (element) {
+
+                        var obj = {
+                            id: index++,
+                            assignment_id: element.assignment_id,
+                            assignment_title: element.assignment_title,
+                            chapter_title:element.chapter_doc[0].title,
+                            due_date:element.due_date,
+                            lession_id:element.lession_id,
+                            description:element.description,
+                            
+
+
+                        }
+                        $scope.assignmentsData.push(obj);
+                        //console.log($scope.subjectsData);
+                    })
+
 
                 })
                 .error(function (data, success) {
@@ -85,7 +106,7 @@ angular.module('school_erp')
             //console.log($scope.chapterId + "lesson");
             var assignDetails = {
                 assignment_title: $scope.data.assignment_title,
-               // chapter_name: $scope.data.chapter_name,
+                // chapter_name: $scope.data.chapter_name,
                 due_date: $scope.data.due_date,
                 description: $scope.data.description
             }
@@ -109,17 +130,17 @@ angular.module('school_erp')
 
         $scope.EditAssignments = function (value, assignment) {
 
-            console.log("messsage");
+            //  console.log("messsage");
             $scope.assignment = angular.copy($scope.assignmentsData[value]);
             $scope.assignment_id = $scope.assignment.assignment_id;
-            console.log($scope.assignment_id);
+            //  console.log($scope.assignment_id);
             var AssignmentDetails = {
                 assignment_title: $scope.assignment.assignment_title,
                 chapter_name: $scope.assignment.chapter_name,
                 due_date: $scope.assignment.due_date,
                 description: $scope.assignment.description,
             }
-            console.log(AssignmentDetails);
+            // console.log(AssignmentDetails);
 
             $scope.addEditAssignments(AssignmentDetails, $scope.assignment_id);
         }
@@ -145,7 +166,7 @@ angular.module('school_erp')
         $scope.DeleteAssignments = function (value) {
             $scope.editdata = angular.copy($scope.assignmentsData[value]);
             $scope.assignment_id = $scope.editdata.assignment_id;
-            console.log($scope.exam_sch_id);
+            //  console.log($scope.exam_sch_id);
             assignmentsServices.DeleteAssignments($scope.assignment_id)
                 .success(function (data, status) {
                     ngDialog.open({
@@ -216,13 +237,13 @@ angular.module('school_erp')
 
 
 
-       $scope.selectedFile = null;
+        $scope.selectedFile = null;
         $scope.msg = "";
 
 
         $scope.loadFile = function (files) {
 
-            console.log("messsage1");
+            //  console.log("messsage1");
             $scope.$apply(function () {
 
                 $scope.selectedFile = files[0];
@@ -232,9 +253,9 @@ angular.module('school_erp')
         }
 
         $scope.handleFile = function () {
-            console.log("messsage2");
+            //  console.log("messsage2");
             var file = $scope.selectedFile;
-            console.log(file);
+            //  console.log(file);
             $scope.save(file);
 
 
@@ -276,13 +297,13 @@ angular.module('school_erp')
 
 
         $scope.save = function (file) {
-            console.log("messsage3");
-            console.log(file);
+            // console.log("messsage3");
+            // console.log(file);
 
             var fd = new FormData();
             fd.append('file', file);
-           // fd.append('data', 'string');
-            $http.post(globalServices.globalValue.baseURL+'api/upload_books/'+globalServices.globalValue.school_id, fd, {
+            // fd.append('data', 'string');
+            $http.post(globalServices.globalValue.baseURL + 'api/upload_books/' + globalServices.globalValue.school_id, fd, {
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }
             })
@@ -300,7 +321,7 @@ angular.module('school_erp')
                     });
                 });
         }
-           
+
 
         $scope.exportAction = function (option) {
             switch (option) {
@@ -314,7 +335,7 @@ angular.module('school_erp')
 
         if ($rootScope.role == 'parent') {
 
-            $scope.secId = $rootScope.student.section;
+            $scope.secId = $rootScope.student.section_id;
             $scope.populateSubjects($scope.secId);
 
 

@@ -18,6 +18,21 @@ angular.module('school_erp')
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             })
         };
+        addVehicleServices.getVehicleDetails = function () {
+            return $http({
+                method: 'GET',
+                url: globalServices.globalValue.baseURL + 'api/vehicle_all_details/'+globalServices.globalValue.school_id
+            })
+        };
+        addVehicleServices.setVehicleDetails = function (dataValue) {
+            console.log(dataValue);
+            return $http({
+                method: 'POST',
+                url: globalServices.globalValue.baseURL + 'api/vehicle_all_details/'+globalServices.globalValue.school_id,
+                data: $.param(dataValue),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            })
+        };
 
         addVehicleServices.EditVehicle = function (dataValue,vehicle_id) {
             console.log(dataValue);

@@ -1,6 +1,6 @@
 angular.module('school_erp')
-    .controller("classWiseController", ['$http', '$scope', 'globalServices', 'subjectsServices','classWiseServices','ngDialog', function ($http, $scope, globalServices, subjectsServices,classWiseServices,ngDialog) {
-      $scope.days = [{
+    .controller("classWiseController", ['$http', '$scope', 'globalServices', 'subjectsServices', 'classWiseServices', 'sessionServices', 'ngDialog', function ($http, $scope, globalServices, subjectsServices, classWiseServices, sessionServices, ngDialog) {
+        $scope.days = [{
             name: "Sunday",
             id: 1
         },
@@ -29,7 +29,7 @@ angular.module('school_erp')
             id: 7
         }
         ]
-      
+
         $scope.data = [];
         globalServices.getClass()
             .success(function (data, status) {
@@ -42,13 +42,13 @@ angular.module('school_erp')
             })
 
         $scope.populateSections = function (classId) {
-            $scope.secId = [];
+           // $scope.secId = [];
             globalServices.getSections(classId)
                 .success(function (data, status) {
                     $scope.secData = data.class_sections;// Api list-name
                     $scope.secId = $scope.secData[0].section_id;
                     $scope.populateSubjects($scope.secId);
-                
+
 
                 })
                 .error(function (data, success) {
@@ -74,59 +74,71 @@ angular.module('school_erp')
             return globalServices.fetchRoleAuth(role);
         }
 
+        // $scope.getSession_timings = function () {
+        sessionServices.getSession_timings()
+            .success(function (data, status) {
+                console.log(JSON.stringify(data));
+                $scope.sessionData = data.session_timings; // Api list-name
+            })
+            .error(function (data, success) { })
+
+        // }
 
         $scope.getTimeTable = function (secId) {
             classWiseServices.getTimeTable(secId)
                 .success(function (data, status) {
                     $scope.timeTableData = [];
-                    
-                                    var slots =[{time :"09:30-10:30" },
-                                    {time :"10:30-11:30" },
-                                    {time :"11:30-12:30" },
-                                    {time :"01:30-02:30" },
-                                    {time :"02:30-03:30" },
-                                    {time :"03:30-04:30" }]         
-          angular.forEach(slots, function(value, key) {
-              var dataObj = {
-                        "start_time" :value.time,
-                        "data":{"monday":"--","tuesday":"--","wednesday":"--","thursday":"--","friday":"--","saturday":"--","sunday":"--"},
-                    }
-                    angular.forEach(data.timetable, function(valuesub, keysub) {
-                        
-                        if(valuesub.start_time == value.time){
-                            
-                            if(valuesub.day == "monday"){
-                              dataObj.data.monday = valuesub.name;
-                            }else if(valuesub.day == "tuesday"){
-                              dataObj.data.tuesday = valuesub.name;
-                            }else if(valuesub.day == "wednesday"){
-                                dataObj.data.wednesday = valuesub.name;
-                            }else if(valuesub.day == "thrusday"){
-                                dataObj.data.thursday = valuesub.name;
-                            }else if(valuesub.day == "friday"){
-                                dataObj.data.friday = valuesub.name;
-                            }else if(valuesub.day == "saturday"){
-                                  dataObj.data.saturday = valuesub.name;
-                            }else if(valuesub.day == "sunday"){
-                                 dataObj.data.sunday = valuesub.name;
-                            }else{
+
+                    // var slots = [{ time: "09:30-10:30" },
+                    // { time: "10:30-11:30" },
+                    // { time: "11:30-12:30" },
+                    // { time: "01:30-02:30" },
+                    // { time: "02:30-03:30" },
+                    // { time: "03:30-04:30" }]
+                    angular.forEach($scope.sessionData, function (value, key) {
+                        var dataObj = {
+                            "session": value.session,
+                            "start_time": value.start_time,
+                            "end_time": value.end_time,
+                            "data": { "monday": "--", "tuesday": "--", "wednesday": "--", "thursday": "--", "friday": "--", "saturday": "--", "sunday": "--" },
+                        }
+                        angular.forEach(data.timetable, function (valuesub, keysub) {
+                            // console.log(valuesub.start_time);
+                            // console.log(value.start_time);
+                            if (valuesub.start_time == value.start_time) {
+
+                                if (valuesub.day == "monday") {
+                                    dataObj.data.monday = valuesub.name;
+                                } else if (valuesub.day == "tuesday") {
+                                    dataObj.data.tuesday = valuesub.name;
+                                } else if (valuesub.day == "wednesday") {
+                                    dataObj.data.wednesday = valuesub.name;
+                                } else if (valuesub.day == "thrusday") {
+                                    dataObj.data.thursday = valuesub.name;
+                                } else if (valuesub.day == "friday") {
+                                    dataObj.data.friday = valuesub.name;
+                                } else if (valuesub.day == "saturday") {
+                                    dataObj.data.saturday = valuesub.name;
+                                } else if (valuesub.day == "sunday") {
+                                    dataObj.data.sunday = valuesub.name;
+                                } else {
+
+                                }
 
                             }
 
-                        }
+                        })
 
-                    })
 
-       
-                $scope.timeTableData.push(dataObj);
-               
-           });
-                                       
-                   
+                        $scope.timeTableData.push(dataObj);
+
+                    });
+
+
                     $scope.timetables = data.timetable;
 
 
-                    $scope.id=$scope.timetables.id;
+                    $scope.id = $scope.timetables.id;
                     // $scope.studentId = $scope.students[0].student_id;
                     //console.log($scope.studentId);
                 })
@@ -135,30 +147,32 @@ angular.module('school_erp')
         }
 
 
-        $scope.addTimeTable = function(data){
-             var TimeTableDetails = {
-                 day: $scope.data.select_day,
-                room_no: $scope.data.room_no,
+        $scope.addTimeTable = function (data,secId) {
+            $scope.subId = $scope.data.subId;
+            $scope.secId=secId;
+            var TimeTableDetails = {
+                day: $scope.data.select_day,
+                // room_no: $scope.data.room_no,
                 start_time: $scope.data.time_from,
-                end_time: "4:30"
-             }
-            classWiseServices.setTimeTable(TimeTableDetails,$scope.secId,$scope.subId)   
-            .success(function(data, status){
-                ngDialog.open({
-                template: '<p>TimeTable is Added Successfully.</p>',
-                plain: true
-                });
-                $scope.data = [];
-                $scope.getTimeTable( $scope.secId);
-               // $scope.getEvaluation($scope.paperId , $scope.studentId);
-            })
-            .error(function(data,success){
-                ngDialog.open({
-                template: '<p>Some Error Occured!</p>',
-                plain: true
-                });
-            })
-           
+                //end_time: "4:30"
+            }
+            classWiseServices.setTimeTable(TimeTableDetails, $scope.secId, $scope.subId)
+                .success(function (data, status) {
+                    ngDialog.open({
+                        template: '<p>TimeTable is Added Successfully.</p>',
+                        plain: true
+                    });
+                    $scope.data = [];
+                    $scope.getTimeTable($scope.secId);
+                    // $scope.getEvaluation($scope.paperId , $scope.studentId);
+                })
+                .error(function (data, success) {
+                    ngDialog.open({
+                        template: '<p>Some Error Occured!</p>',
+                        plain: true
+                    });
+                })
+
         }
 
 

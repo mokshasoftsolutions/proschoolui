@@ -11,94 +11,107 @@
             <li>
                 <a ui-sref='main.evaluations'>Evaluations</a>/
             </li>
-        </ul>
-        <ul class="links">
             <li>
-                <a ui-sref='main.examReports1'>Exam Reports</a>
+                <a ui-sref='main.examReports2'>Report By Student</a>
+            </li>
+            <li ng-show="showRole(['admin','teacher'])">/
+                <a ui-sref='main.examReports1'>Report By Paper</a>
+            </li>
+
+        </ul>
+        <!-- <ul class="links">
+            <li>
+                <a ui-sref='main.examReports2'>Exam Reports</a>
                 <ul>
-                    <li><a ui-sref='main.examReports1'>Report By Paper</a></li>/
-                    <li><a ui-sref='main.examReports2'>Report By Student</a></li>
+                    <li>
+                        <a ui-sref='main.examReports2'>Report By Student</a>
+                    </li>
+                    <li ng-show="showRole(['admin','teacher'])">/
+                        <a ui-sref='main.examReports1'>Report By Paper</a>
+                    </li>
+
                 </ul>
             </li>
-        </ul>
+        </ul> -->
     </div>
 </div>
 <div class="container">
     <div class="row">
         <div class="Examschedular">
-            <div class="col-md-3">
+            <div class="col-md-3" >
                 <div class="backwhite">
-                    <h1>Examinations</h1>
-                    
-                   
-                    <div class="form-group">
-                        <label>Select Class</label>
+
+                    <div class="form-group" ng-show="showRole(['admin','teacher'])">
+                        <label>Class</label>
                         <select class="form-control select2" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId">
-                        <option selected="selected">--Select--</option>
-                       <option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>
-                      </select>
+                            <option selected="selected">--Select--</option>
+                            <option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <label>Select Section</label>
+                    <div class="form-group" ng-show="showRole(['admin','teacher'])">
+                        <label>Section</label>
                         <select class="form-control select2" style="width: 100%;" ng-model="secId">
-                        <option selected="selected">--Select--</option>
-                       <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>
-                        
-                      </select>
+                            <option selected="selected">--Select--</option>
+                            <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>
+
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <label>Select Exam Schedule</label>
+                    <div class="form-group" ng-show="showRole(['admin','teacher','parent'])">
+                        <label>Exam Schedule</label>
                         <select ng-change="getExamSchedule();" class="form-control select2" style="width: 100%;" ng-model="examScheduleId">
-                        <option selected="selected">--Select--</option>
-                        <option ng-repeat="exam in examSchedule " value="{{exam.exam_sch_id}}">{{exam.exam_title}}</option>
-                        
-                      </select>
+                            <option selected="selected">--Select--</option>
+                            <option ng-repeat="exam in examSchedule " value="{{exam.exam_sch_id}}">{{exam.exam_title}}</option>
+
+                        </select>
                     </div>
-                   <div class="form-group">
-                        <label>Select Student</label>
+                    <div class="form-group" ng-show="showRole(['admin','teacher'])">
+                        <label>Student</label>
                         <select class="form-control select2" style="width: 100%;" ng-model="studentId">
                             <option selected="selected">--Select--</option>
-      
+
                             <option ng-repeat="student in students " value="{{student.student_id}}">{{student.first_name}} {{student.last_name}}</option>
                         </select>
                     </div>
-                       <div class="box-footer">
-                    <button ng-click="getExamMarks(examScheduleId,studentId);" class="btn btn-primary pull-right">Select</button>
-                   
+                    <div class="box-footer">
+                        <button  ng-if="showRole(['admin','teacher'])" ng-click="getExamMarks(examScheduleId,studentId);" class="btn btn-primary pull-right">Select</button>
+                        <button  ng-if="showRole(['parent'])" ng-click="getExamMarks(examScheduleId,student.student_id);" class="btn btn-primary pull-right">Select</button>
+                    </div>
                 </div>
-                  </div>
             </div>
-       
-        <div class="col-md-9">
-           <div class="backwhite">
-              <div class="subjectlist">
-                <div class="col-md-12">           
-                 
-              
-        </div>  
-              </div>
-        
-               <table style="width:100%">
-                      <div class="box box-success" style="margin-top:10px">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Bar Chart</h3>
 
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                    </div>
-                </div>
-                <div class="box-body" pdf-save-content="idOneGraph">
-                    <div class="chart" style="margin-left:37px">
-                        <zingchart id="myChart" zc-values="chartdata" zc-json="myJson" zc-height=400 zc-width=800></zingchart>
-                    </div>
-                </div>
+            <div class="col-md-9">
+                <div class="backwhite">
+                    <div class="subjectlist">
+                        <div class="col-md-12">
 
-            </div>        
-           </table> 
-           </div>
+
+                        </div>
+                    </div>
+
+                    <table style="width:100%">
+                        <div class="box box-success" style="margin-top:10px">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Bar Chart</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-box-tool" data-widget="remove">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body" pdf-save-content="idOneGraph">
+                                <div class="chart" style="margin-left:37px">
+                                    <zingchart id="myChart" zc-values="chartdata" zc-json="myJson" zc-height=400 zc-width=800></zingchart>
+                                </div>
+                            </div>
+
+                        </div>
+                    </table>
+                </div>
+            </div>
         </div>
-         </div>
     </div>
 </div>

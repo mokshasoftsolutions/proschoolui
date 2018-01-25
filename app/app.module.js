@@ -21,3 +21,8 @@ angular.module('school_erp', ['ui.router','720kb.datepicker', 'ngDialog', 'zingc
   });
 
 
+  // "ngMaterial",
+  //     "ngAnimate",
+  //     "ngAria",
+  //     "ngMessages",
+  //     "mdPickers"

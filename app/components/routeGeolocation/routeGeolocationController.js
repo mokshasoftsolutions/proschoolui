@@ -1,15 +1,15 @@
 angular.module('school_erp')
-  .controller("routeGeoLocationController", ['$http', '$scope', 'addVehicleServices','routeGeoLocationServices', function ($http, $scope, addVehicleServices,routeGeoLocationServices) {
+  .controller("routeGeoLocationController", ['$http', '$scope', '$rootScope', 'globalServices', 'addVehicleServices', 'routeGeoLocationServices', function ($http, $scope, $rootScope, globalServices, addVehicleServices, routeGeoLocationServices) {
     // $scope.code = 900;
-    addVehicleServices.getVehicle()
-      .success(function (data, status) {
-        console.log(JSON.stringify(data));
-        $scope.vehicles = data.vehicles;
-        $scope.vehicle_code = $scope.vehicles[0].vehicle_code;
-        console.log($scope.vehicle_code);
-      })
-      .error(function (data, success) {
-      });
+    // addVehicleServices.getVehicle()
+    //   .success(function (data, status) {
+    //     console.log(JSON.stringify(data));
+    //     $scope.vehicles = data.vehicles;
+    //     $scope.vehicle_code = $scope.vehicles[0].vehicle_code;
+    //     console.log($scope.vehicle_code);
+    //   })
+    //   .error(function (data, success) {
+    //   });
 
     var mapOptions = {
       zoom: 5,
@@ -53,12 +53,12 @@ angular.module('school_erp')
     }
 
     $scope.getGeolocation = function (vehicle_code) {
-      console.log("message");
+      //  console.log("message");
       routeGeoLocationServices.getGeolocation(vehicle_code)
         .success(function (data, status) {
           $scope.status = status;
           $scope.JSONdata = data;
-          console.log(JSON.stringify(data));
+          //    console.log(JSON.stringify(data));
           //for POST
           $scope.latitude = data.positions.latitude;
           $scope.longitude = data.positions.longitude;
@@ -70,8 +70,8 @@ angular.module('school_erp')
           //some google api data
           //$scope.latitude=data.results[0].geometry.location.lat;
           //$scope.longitude=data.results[0].geometry.location.lng;
-          console.log($scope.latitude);
-          console.log($scope.longitude);
+          //    console.log($scope.latitude);
+          //    console.log($scope.longitude);
           createMarker($scope.latitude, $scope.longitude, $scope.id, $scope.address);
         })
         .error(function (data, success) {
@@ -86,7 +86,7 @@ angular.module('school_erp')
       success(function (data, status) {
         $scope.status = status;
         $scope.JSONdata = data;
-        console.log(JSON.stringify(data));
+        //    console.log(JSON.stringify(data));
         //for POST
         $scope.latitude = data.positions.latitude;
         $scope.longitude = data.positions.longitude;
@@ -98,16 +98,43 @@ angular.module('school_erp')
         //some google api data
         //$scope.latitude=data.results[0].geometry.location.lat;
         //$scope.longitude=data.results[0].geometry.location.lng;
-        console.log($scope.latitude);
-        console.log($scope.longitude);
+        //    console.log($scope.latitude);
+        //   console.log($scope.longitude);
         createMarker($scope.latitude, $scope.longitude, $scope.id, $scope.address);
         //createInfoWindow($scope.id, $scope.address);
       }).
       error(function (data, status) {
         $scope.JSONdata = data || "Request failed";
         $scope.status = status;
-        console.log($scope.data + $scope.status);
+        //    console.log($scope.data + $scope.status);
       });
-    $scope.getGeolocation($scope.vehicle_code);
+
+
+    // Role based Display
+    $scope.showRole = function (role) {
+      return globalServices.fetchRoleAuth(role);
+    }
+
+    if ($rootScope.role == 'parent') {
+
+      $scope.vehicle_code = $rootScope.student.bus_route_id;
+      $scope.getGeolocation($scope.vehicle_code);
+
+
+    } else {
+      addVehicleServices.getVehicle()
+        .success(function (data, status) {
+          //     console.log(JSON.stringify(data));
+          $scope.vehicles = data.vehicles;
+          $scope.vehicle_code = $scope.vehicles[0].vehicle_code;
+          //     console.log($scope.vehicle_code);
+          $scope.getGeolocation($scope.vehicle_code);
+        })
+        .error(function (data, success) {
+        });
+
+
+    }
+
   }])
 

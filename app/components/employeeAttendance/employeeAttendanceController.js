@@ -1,17 +1,19 @@
 angular.module('school_erp')
-    .controller("employeeAttendanceController", ['$http', '$scope', 'employeeServices', 'ngDialog', function ($http, $scope, employeeServices, ngDialog) {
+    .controller("employeeAttendanceController", ['$http', '$scope', 'globalServices', 'employeeServices', 'ngDialog', function ($http, $scope, globalServices, employeeServices, ngDialog) {
         $scope.employeeData = [];
         $scope.attendanceBox = [];
         $scope.employee = [];
-
-        employeeServices.getEmployee()
-            .success(function (data, status) {
-                $scope.employeeData = data.employee;
-                $scope.attendanceBox = [];
-                $scope.attendanceStatus();
-            })
-            .error(function (data, success) { })
-
+        $scope.globalServicesURL = globalServices.globalValue.baseURL;
+        // console.log($scope.globalServicesURL);
+        $scope.getEmployeeByCategory = function (category) {
+            employeeServices.getEmployeeByCategory(category)
+                .success(function (data, status) {
+                    $scope.employeeData = data.employees;
+                    $scope.attendanceBox = [];
+                    $scope.attendanceStatus();
+                })
+                .error(function (data, success) { })
+        }
         $scope.addAttendance = function (employee, status) {
             var Attendance = {
                 session: "morning",
@@ -64,6 +66,7 @@ angular.module('school_erp')
                     last_name: element.last_name, // remove
                     gender: element.gender,
                     job_category: element.job_category,
+                    image: element.employeeImage[0].filename,
                     selected: false,
                     status: "none"
                 }
@@ -99,13 +102,22 @@ angular.module('school_erp')
                     $scope.sendAttendanceHolder.push(obj);
                 })
 
-                employeeServices.setBulkAttendance($scope.sendAttendanceHolder).success(function (data, status) {
-                    $scope.sendAttendanceHolder = [];
-                    ngDialog.open({
-                        template: '<p> Attendance Updated Successful</p>',
-                        plain: true
-                    });
-                })
+                employeeServices.setBulkAttendance($scope.sendAttendanceHolder)
+                    .success(function (data, status) {
+                        $scope.sendAttendanceHolder = [];
+                        if (data == false || data == 'false') {
+                            ngDialog.open({
+                                template: '<p>Employee Attendance Already submitted</p>',
+                                plain: true
+                            });
+                        }
+                        else {
+                            ngDialog.open({
+                                template: '<p>Employee Attendance  submitted successfully </p>',
+                                plain: true
+                            });
+                        }
+                    })
                     .error(function (data, success) {
                         $scope.sendAttendanceHolder = [];
                         ngDialog.open({
@@ -121,6 +133,10 @@ angular.module('school_erp')
             }
 
 
+        }
+
+        $scope.showRole = function (role) {
+            return globalServices.fetchRoleAuth(role);
         }
 
     }])

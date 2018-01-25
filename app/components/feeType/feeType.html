@@ -20,12 +20,12 @@
     <div class="Feetype">
       <div class="col-md-3">
         <div class="backwhite">
-          <h1>Fee Collection</h1>
+          <!-- <h1>Fee Collection</h1> -->
           <div class="form-group">
             <label>Fee Category</label>
             <select class="form-control select2" style="width: 100%;" name="FeeCatogery" ng-model="data.fee_catogery" ng-options="fee.name as fee.name for fee in fee_catogery">
-                         <option value="" selected="selected">--Select--</option>
-                      </select>
+              <option value="" selected="selected">--Select--</option>
+            </select>
           </div>
           <div class="form-group">
             <label>Fee Type</label>
@@ -39,7 +39,7 @@
       </div>
       <div class="col-md-9">
         <div class="backwhite">
-          <div class="subjectlist">
+          <!-- <div class="subjectlist">
             <div class="col-md-12">
 
               <div class="col-xs-3 col-md-4">
@@ -56,9 +56,9 @@
               </div>
 
             </div>
-          </div>
+          </div> -->
 
-          <table class="table table-striped">
+          <table export-table st-table="display_records" st-safe-src="feeTypeData" class="table rwd-table table-striped" style="width:100%">
             <thead>
               <tr>
                 <th>Sl. No</th>
@@ -69,34 +69,49 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="feeType in feeTypeData" class="editable-row">
+              <tr st-select-row="row" st-select-mode="multiple" ng-repeat="feeType in display_records" class="editable-row">
                 <td>
-                  {{$index+1}}
+                  {{feeType.id+1}}
                 </td>
                 <td class="select-td">
-                  <span editable-select="feeType.fee_category" e-name="fee_category" e-form="rowform" onaftersave="EditFeeType($index)" e-selectpicker
-                    e-ng-options="fee.name as fee.name for fee in fee_catogery">
-                                                    {{feeType.fee_category}}</span>
+                  <span editable-select="feeType.fee_category" e-name="fee_category" e-form="rowform" onaftersave="EditFeeType(feeType.id)"
+                    e-selectpicker e-ng-options="fee.name as fee.name for fee in fee_catogery">
+                    {{feeType.fee_category}}</span>
                 </td>
                 <td>
-                  <span editable-text="feeType.fee_type" e-name="fee_type" onaftersave="EditFeeType($index)" e-form="rowform" e-required>{{feeType.fee_type || 'empty' }}</span>
+                  <span editable-text="feeType.fee_type" e-name="fee_type" onaftersave="EditFeeType(feeType.id)" e-form="rowform" e-required>{{feeType.fee_type || 'empty' }}</span>
                 </td>
 
                 <td class="pull-right">
                   <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == feeType">
-                    <button type="submit" ng-click="EditFeeType($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
-                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
+                    <button type="submit" ng-click="EditFeeType(feeType.id)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                      <i class="fa fa-check"></i>
+                    </button>
+                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                      <i class="fa fa-remove"></i>
+                    </button>
                   </form>
 
                   <div class="buttons" ng-show="!rowform.$visible">
-                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
-                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteFeeType($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                    <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteFeeType(feeType.id)" ng-confirm-click="Are you sure you want to delete this item?">
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
                     <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
                   </div>
                 </td>
               </tr>
 
             </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="5" class="text-center">
+                  <div class="pull-right" st-pagination="" st-items-by-page="7" st-displayed-pages="5"></div>
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>

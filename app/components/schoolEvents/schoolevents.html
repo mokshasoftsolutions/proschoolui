@@ -17,18 +17,12 @@
 <div class="container">
   <div class="row">
     <div class="Evaluations">
-      <div class="col-md-3">
+      <div class="col-md-3" >
         <div class="backwhite">
           <form name="events" ng-submit="events.$valid && addEvent(data)" novalidate>
-            <!-- /.box-header -->
 
 
-
-            <h3 class="box-title">Add Events</h3>
-
-
-
-            <div class="form-group" ng-class="{'has-error': events.$submitted && events.event_name.$invalid && events.event_name.$pristine}">
+            <div ng-show="showRole(['admin'])" class="form-group" ng-class="{'has-error': events.$submitted && events.event_name.$invalid && events.event_name.$pristine}">
               <label>Event Title</label>
               <input type="text" name="event_name" class="form-control" ng-model="data.event_name" placeholder="Enter ..." required>
             </div>
@@ -36,7 +30,7 @@
 
 
 
-            <div class="form-group" ng-class="{'has-error': events.$submitted && events.date.$invalid && events.date.$pristine}">
+            <div ng-show="showRole(['admin'])" class="form-group" ng-class="{'has-error': events.$submitted && events.date.$invalid && events.date.$pristine}">
               <label>Event Date</label>
               <div class="input-group date">
                 <div class="input-group-addon">
@@ -53,7 +47,7 @@
 
 
 
-            <div class="form-group" ng-class="{'has-error': events.$submitted && events.time.$invalid && events.time.$pristine}">
+            <div ng-show="showRole(['admin'])" class="form-group" ng-class="{'has-error': events.$submitted && events.time.$invalid && events.time.$pristine}">
               <label>Event Time</label>
               <div class="input-group">
                 <!--<circulartimepicker input type="text" name="Time" ng-model="data.time" class="form-control timepicker" required></circulartimepicker>-->
@@ -67,7 +61,7 @@
 
 
 
-            <div class="form-group" ng-class="{'has-error': events.$submitted && events.description.$invalid && events.description.$pristine}">
+            <div ng-show="showRole(['admin'])" class="form-group" ng-class="{'has-error': events.$submitted && events.description.$invalid && events.description.$pristine}">
 
               <label>Description</label>
               <input type="text" name="Description" class="form-control" ng-model="data.description" placeholder="Enter ..." required>
@@ -77,7 +71,7 @@
 
 
 
-            <div class="box-footer">
+            <div class="box-footer" ng-if="showRole(['admin'])">
               <button type="submit" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e; margin-right:12px;">Add Event</button>
             </div>
 
@@ -85,7 +79,7 @@
 
           </form>
         </div>
-      </div>
+      </div> 
 
 
 
@@ -103,7 +97,7 @@
                   <button class="btn btn-success" ng-click="changeView('month', 'myCalendar3')">Month</button>
                 </div>
               </div>
-              <div class="calendar" ng-model="eventSources2" calendar="myCalendar3" ui-calendar="uiConfig.calendar"></div>
+              <div class="calendar" ng-model="eventSources" calendar="myCalendar3" ui-calendar="uiConfig.calendar"></div>
             </tab>
           </tabset>
         </div>

@@ -1,5 +1,5 @@
 angular.module('school_erp')
-    .controller("chaptersController", ['$http', '$scope', 'chaptersServices', 'globalServices', 'subjectsServices', 'ngDialog','$rootScope', function ($http, $scope, chaptersServices, globalServices, subjectsServices, ngDialog,$rootScope) {
+    .controller("chaptersController", ['$http', '$scope', 'chaptersServices', 'globalServices', 'subjectsServices', 'ngDialog', '$rootScope', function ($http, $scope, chaptersServices, globalServices, subjectsServices, ngDialog, $rootScope) {
         $scope.chapterData = [];
         $scope.data = [];
         $scope.getClassesInitalLoad = function () {
@@ -10,7 +10,7 @@ angular.module('school_erp')
                     $scope.populateSections($scope.classId)
 
                 })
-                .error(function (data, success) {})
+                .error(function (data, success) { })
 
         }
 
@@ -21,7 +21,7 @@ angular.module('school_erp')
                 .success(function (data, status) {
                     $scope.secData = data.class_sections; // Api list-name
                     $scope.secId = $scope.secData[0].section_id;
-                    console.log($scope.secId);
+                    // console.log($scope.secId);
                     $scope.populateSubjects($scope.secId);
 
                 })
@@ -41,12 +41,12 @@ angular.module('school_erp')
             subjectsServices.getSubjects(secId)
                 .success(function (data, status) {
                     $scope.subData = data.subjects;
-                    
+
                     $scope.subId = $scope.subData[0].subject_id;
                     // console.log($scope.subId )
                     $scope.getChapters($scope.subId);
                 })
-                .error(function (data, success) {});
+                .error(function (data, success) { });
         }
 
 
@@ -55,15 +55,36 @@ angular.module('school_erp')
             $scope.subId = subId;
             chaptersServices.getChapters(subId)
                 .success(function (data, status) {
-                     console.log(JSON.stringify(data))
+                    //    console.log(JSON.stringify(data))
                     // console.log(subId)
                     // console.log($scope.subId);
-                    $scope.chaptersData = data[subId + ""];
-                    console.log($scope.chaptersData);
-                   
+                    $scope.chapters = data.chapters;
+                    //   console.log($scope.chaptersData);
+
+
+                    $scope.chaptersData = [];
+                    index = 0;
+                    $scope.chapters.forEach(function (element) {
+
+                        var obj = {
+                            id: index++,
+                            lession_id: element.lession_id,
+                            title: element.title,
+                            chapter_code:element.chapter_code,
+                            subject_name:element.subjects[0].name,
+                            subject_id:element.subjects[0].subject_id,
+                            description:element.description,
+                            no_of_topics:element.no_of_topics
+
+
+                        }
+                        $scope.chaptersData.push(obj);
+                        //console.log($scope.subjectsData);
+                    })
+
 
                 })
-                .error(function (data, success) {});
+                .error(function (data, success) { });
         }
 
 
@@ -99,21 +120,21 @@ angular.module('school_erp')
             // console.log("messsage");
             $scope.chapter = angular.copy($scope.chaptersData[value]);
             // console.log($scope.chapter);
-             $scope.chapter_id = $scope.chapter.lession_id;
+            $scope.chapter_id = $scope.chapter.lession_id;
             // console.log($scope.chapter_id);
             var ChapterDetails = {
                 title: $scope.chapter.title,
                 chapter_code: $scope.chapter.chapter_code,
-               // subject_name: $scope.chapter.subject_name,
+                // subject_name: $scope.chapter.subject_name,
                 description: $scope.chapter.description,
                 no_of_topics: $scope.chapter.no_of_topics,
             }
             // console.log(ChapterDetails);
-           
-            $scope.addEditChapters(ChapterDetails ,$scope.chapter_id);
+
+            $scope.addEditChapters(ChapterDetails, $scope.chapter_id);
         }
-        $scope.addEditChapters = function (ChapterDetails ,chapter_id) {
-            chaptersServices.EditChapters(ChapterDetails ,chapter_id)
+        $scope.addEditChapters = function (ChapterDetails, chapter_id) {
+            chaptersServices.EditChapters(ChapterDetails, chapter_id)
                 .success(function (data, status) {
                     // ngDialog.open({
                     //     template: '<p>Station is Edited Successfully.</p>',
@@ -142,7 +163,7 @@ angular.module('school_erp')
                         plain: true
                     });
                     $scope.editdata = [];
-                     $scope.getChapters($scope.subId);
+                    $scope.getChapters($scope.subId);
                 })
                 .error(function (data, success) {
                     ngDialog.open({
@@ -153,14 +174,14 @@ angular.module('school_erp')
         }
 
 
-        
+
         $scope.selectedFile = null;
         $scope.msg = "";
 
 
         $scope.loadFile = function (files) {
 
-            console.log("messsage1");
+            //   console.log("messsage1");
             $scope.$apply(function () {
 
                 $scope.selectedFile = files[0];
@@ -170,9 +191,9 @@ angular.module('school_erp')
         }
 
         $scope.handleFile = function () {
-            console.log("messsage2");
+            //   console.log("messsage2");
             var file = $scope.selectedFile;
-            console.log(file);
+            //   console.log(file);
             $scope.save(file);
 
 
@@ -214,13 +235,13 @@ angular.module('school_erp')
 
 
         $scope.save = function (file) {
-            console.log("messsage3");
-            console.log(file);
+            // console.log("messsage3");
+            //  console.log(file);
 
             var fd = new FormData();
             fd.append('file', file);
-           // fd.append('data', 'string');
-            $http.post(globalServices.globalValue.baseURL+'api/bulk_upload_courseworks/'+globalServices.globalValue.school_id, fd, {
+            // fd.append('data', 'string');
+            $http.post(globalServices.globalValue.baseURL + 'api/bulk_upload_courseworks/' + globalServices.globalValue.school_id, fd, {
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }
             })
@@ -238,7 +259,7 @@ angular.module('school_erp')
                     });
                 });
         }
-           
+
         $scope.exportAction = function (option) {
             switch (option) {
                 case 'pdf':
@@ -254,9 +275,9 @@ angular.module('school_erp')
 
         if ($rootScope.role == 'parent') {
 
-            $scope.secId = $rootScope.student.section;
+            $scope.secId = $rootScope.student.section_id;
             $scope.populateSubjects($scope.secId);
-          
+
 
         } else {
             $scope.getClassesInitalLoad();

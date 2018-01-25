@@ -1,260 +1,660 @@
-
-
-  <div class="row background">
+<div class="row background">
   <div class="container">
-      <h1>Student Profile</h1>         
+    <h1>Student Management</h1>
+    <ul class="links">
+      <!-- <li ui-sref-active="active">
+        <a ui-sref="main.studentProfile">Student Profile</a>
+      </li> -->
+      <li ui-sref-active="active" ng-show="showRole(['admin','teacher'])">
+
+        <a ui-sref="main.student">Information</a>
+      </li>
+      <li ui-sref-active="active" ng-show="showRole(['admin'])">
+        /
+        <a ui-sref="main.studentAdmission">Admission</a>
+      </li>
+    </ul>
   </div>
 </div>
-<div class="container">
-  <div class="studentprofile">
-   <div class="studentimage">
-     <div class="tooltip">
-         <img class="img-thumbnail"  ng-src="{{studentPhoto}}" >
-        <p>{{studentDetails.first_name}}</p>
-     </div>
-   </div>
-    <div class="col-md-12">
-     <div class="admissiondetails">
-       <div class="col-md-12">
-         <h1>Admission details</h1>
-         
-          <div class="col-md-6">
-            <div class="table-responsive">
-               <table class="table table-bordered" style="width:100%">
-               <thead>
-                <tr>
-                </tr> 
-               </thead>
-               <tbody>
-                 <tr>
-                   <td><b>First Name :</b> {{studentDetails.first_name}}</td>
-                 </tr>
-                 <tr>
-                   <td><b>Last Name :</b>{{studentDetails.last_name}}</td>
-                 </tr>
-                 <tr>
-                   <td><b>Admission Number :</b> {{studentDetails.admission_no}}</td>
-                  
-                 </tr>
-                 
-                 <tr>
-                    <td><b>Roll no :</b>{{studentDetails.roll_no}}</td>
-                    
-                 </tr> 
-                
-                 <tr>
-                    <td><b>Class :</b>{{studentDetails.school_classes[0].name}}</td>
-                    
-                 </tr> 
-                 <tr>
-                    <td><b>Section :</b>{{studentDetails.sections[0].name}}</td>
-                 </tr>
-                 
-                 <tr>
-                   <td><b>Gender :</b>{{studentDetails.gender}}</td>
-                 </tr>
-                </tbody>               
-            </table>
-           </div>
-           </div>
-           
-           <div class="col-md-6">
-             <div class="table-responsive">
-               <table class="table table-bordered" style="width:100%">
-               <thead>
-                <tr>
-                </tr> 
-               </thead>
-               <tbody>
-                <tr>
-                   <td><b>Date of Birth :</b>{{studentDetails.dob}}</td>
-                 </tr>
-                
-                 <tr>
-                   <td><b>Category :</b>{{studentDetails.category}}</td>
-                  
-                 </tr>
-                 
-                 <tr>
-                    <td><b>Religion :</b>{{studentDetails.religion}}</td>
-                    
-                 </tr> 
-                
-                 <tr>
-                    <td><b>Contact :</b>{{studentDetails.phone}}</td>
-                    
-                 </tr> 
-                 <tr>
-                    <td><b>Email :</b>{{studentDetails.email}}</td>
-                 </tr>
-                 <tr>
-                    <td><b>Admission Date :</b>{{studentDetails.admission_date}}</td>
-                 </tr>
-                 </tbody>               
-            </table>
-           </div>
-           </div>
-       </div>
-    </div>
- </div>
- <div class="parentdetails">
-       <div class="col-md-12">
-         <h1>Parent/Guardian details</h1>
-        <div class="col-md-6">
-        <div class="table-responsive">
-               <table class="table table-bordered" style="width:100%">
-               <thead>
-                <tr>
-                </tr> 
-               </thead>
-               <tbody>
-                 <tr>
-                   <td><b>Father Name :</b>{{studentDetails.parents[1].parent_name}}</td>
-                 </tr>
-                 <tr>
-                    <td><b>Father Contact :</b>{{studentDetails.parents[1].parent_contact}}</td> 
-                 </tr> 
-                 <tr>
-                    <td><b>Father Occupation :</b>{{studentDetails.parents[1].occupation}}</td>
-                 </tr> 
-                
-                 <tr>
-                   <td><b>Mother Name :</b>{{studentDetails.parents[0].parent_name}}</td>
-                 </tr>
-                 <tr>
-                   <td><b>Mother Contact :</b>{{studentDetails.parents[0].parent_contact}}</td>
-                 </tr>
-                 <tr>
-                   <td><b>Mother Occupation :</b>{{studentDetails.parents[0].occupation}}</td>
-                 </tr>
-                </tbody>               
-            </table>
-           </div>
-           </div>
-           <div class="col-md-6">
-             <div class="table-responsive">
-               <table class="table table-bordered" style="width:100%">
-               <thead>
-                <tr>
-                </tr> 
-               </thead>
-               <tbody>
-               
-                <tr>
-                   <td><b>Guardian Name :</b>{{studentDetails.parents[2].parent_name}}</td>
-                 </tr>
-                 <tr>
-                   <td><b>Guardian Relation :</b>{{studentDetails.parents[2].parent_relation}}</td>
-                 </tr>
-                 <tr>
-                    <td><b>Guardian Address :</b>{{studentDetails.parents[2].parent_address}}</td>
-                 </tr> 
-                 <tr>
-                    <td><b>Guardian Phone :</b>{{studentDetails.parents[2].parent_contact}}</td>
-                 </tr> 
-                 <tr>
-                    <td><b>Guardian Qualification :</b>{{studentDetails.parents[2].occupation}}</td>
-                 </tr>
-                 </tbody>               
-            </table>
-           </div>
+<div class="nav-tabs-custom">
+  <ul class="nav nav-tabs">
+    <li class="active">
+      <a data-target="#tab_1" data-toggle="tab" aria-expanded="true">
+        <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>Student Profile</a>
+    </li>
+    <li class="">
+      <a data-target="#tab_2" data-toggle="tab" aria-expanded="false">
+        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>Attendance Report</a>
+    </li>
+    <li class="">
+      <a data-target="#tab_3" data-toggle="tab" aria-expanded="false">
+        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>Acadamic Report</a>
+    </li>
+  </ul>
+</div>
+<div class="tab-content">
+  <div class="tab-pane no-padding active" id="tab_1" ng-repeat="student in studentDetails">
+    <div class="container">
+      <div class="studentprofile">
+        <h1>Admission details</h1>
+        <form editable-form name="rowform3" ng-show="rowform3.$visible" class="form-buttons form-inline" shown="inserted == student">
+          <button type="submit" ng-click="EditStudent_details($index)" ng-disabled="rowform3.$waiting" class="btn btn-primary editable-table-button btn-xs">
+            <i class="fa fa-check"></i>
+          </button>
+          <button type="button" ng-disabled="rowform3.$waiting" ng-click="rowform3.$cancel()" class="btn btn-default editable-table-button btn-xs">
+            <i class="fa fa-remove"></i>
+          </button>
+        </form>
+        <div class="buttons" ng-show="!rowform3.$visible" >
+          <button ng-show="showRole(['admin','parent'])" class="btn btn-primary editable-table-button btn-xs" ng-click="rowform3.$show()">
+            <i class="fa fa-pencil"></i>
+          </button>
         </div>
-       <div class="Studentdetails">
-       <div class="col-md-12">
-         <h1>Student Address</h1>
-        <div class="col-md-6">
-        <div class="table-responsive">
-               <table class="table table-bordered" style="width:100%">
-               <thead>
-               
-               
-               <tbody>
-                 <tr>
-                   <td><b>Current :</b>{{studentDetails.current_address[0].cur_address}}</td>
-                 </tr>
-                 <tr>
-                    <td><b>Pernament :</b>{{studentDetails.permanent_address[0].perm_address}}</td> 
-                 </tr> 
-                
-                </tbody>               
-            </table>
-           </div>
-           </div>
-           <div class="col-md-6">
-             <div class="table-responsive">
-               <table class="table table-bordered" style="width:100%">
-               <thead>
-                <tr>
-                </tr> 
-               </thead>
-               <tbody>
-               <tr>
-                   <td><b>School Bus Route :</b>{{studentDetails.bus_route_id}}</td>
-                 </tr>
-                <tr>
-                   <td><b>Aadhar Number :</b>{{studentDetails.aadhar_no}}</td>
-                 </tr>
-                 </tbody>               
-            </table>
-           </div>
+        <div class="col-md-12">
+          <div class="admissiondetails">
+            <div class="col-md-12">
+
+
+
+              <div class="col-md-9">
+                <div class="table-responsive">
+                  <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered" style="width:100">
+                    <thead>
+                      <tr>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <b>Admission Number :</b>
+                          <span editable-text="student.admission_no" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                            e-required>{{student.admission_no || 'empty' }}</span>
+                        </td>
+
+                        <td>
+                          <b>Class :</b>
+                          <span editable-text="student.school_classes[0].name" e-name="editdata.student" onaftersave="EditStudent_details($index)"
+                            e-form="rowform3" e-required>{{student.school_classes[0].name || 'empty' }}</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <b>Roll No :</b>
+                          <span editable-text="student.roll_no" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                            e-required>{{student.roll_no || 'empty' }}</span>
+                        </td>
+
+                        <td>
+                          <b>First Name :</b>
+                          <span editable-text="student.first_name" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                            e-required>{{student.first_name || 'empty' }}</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <b>Gender :</b>
+                          <span editable-text="student.gender" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                            e-required>{{student.gender || 'empty' }}</span>
+                        </td>
+                        <td>
+                          <b>Surname :</b>
+                          <span editable-text="student.last_name" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                            e-required>{{student.last_name || 'empty' }}</span>
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td>
+                          <b>Contact :</b>
+                          <span editable-text="student.phone" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                            e-required>{{student.phone || 'empty' }}</span>
+                        </td>
+
+                        <td>
+                          <b>Blood Group :</b>
+                          <span editable-text="student.blood_group" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                            e-required>{{student.blood_group || 'empty' }}</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <b>Date of Admission :</b>
+                          <span editable-text="student.admission_date" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                            e-required>{{student.admission_date || 'empty' }}</span>
+                        </td>
+
+                        <td>
+                          <b>Section :</b>
+                          <span editable-text="student.sections[0].name" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                            e-required>{{student.sections[0].name || 'empty' }}</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <b>Aadhar No :</b>
+                          <span editable-text="student.aadhar_no" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                            e-required>{{student.aadhar_no || 'empty' }}</span>
+                        </td>
+
+                        <td>
+                          <b>Category :</b>
+                          <span editable-text="student.category" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                            e-required>{{student.category || 'empty' }}</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <b>DOB :</b>
+                          <span editable-text="student.dob" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3" e-required>{{student.dob || 'empty' }}</span>
+                        </td>
+
+                        <td>
+                          <b>Religion :</b>
+                          <span editable-text="student.religion" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                            e-required>{{student.religion || 'empty' }}</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <b>Email ID :</b>
+                          <span editable-text="student.email" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                            e-required>{{student.email || 'empty' }}</span>
+                        </td>
+
+                        <td>
+                          <b>Bus Route :</b>
+                          <span editable-text="student.bus_route_id" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                            e-required>{{student.bus_route_id || 'empty' }}</span>
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <h1 id="stupro">Student Profile</h1>
+                <div class="studentimage">
+                  <div class="tooltip">
+                    <!-- <img id="view" class="img-thumbnail" ng-src="{{studentPhoto}}">
+                    <span class="tooltiptext">Save</span> -->
+
+                    <span editable-text="student.image" e-name="editdata.student" e-form="rowformImage" e-required>
+                      <img id="view" ng-src="{{studentPhoto}}" alt="">
+                    </span>
+                    <form editable-form name="rowformImage" ng-show="rowformImage.$visible" class="form-buttons form-inline" shown="inserted == student">
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <input type="file" name="file" ng-model="data.logo" ngf-select ngf-pattern="'image/*'" accept="image/*" ngf-max-size="5MB"
+                            onchange="angular.element(this).scope().loadFile(this.files)">
+                          <p style="color:#9e0707"> {{message}} </p>
+
+
+                        </div>
+                      </div>
+                      <button type="submit" ng-click="editStudentImage()" ng-disabled="rowformImage.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                        <i class="fa fa-check"></i>
+                      </button>
+                      <button type="button" ng-disabled="rowformImage.$waiting" ng-click="rowformImage.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                        <i class="fa fa-remove"></i>
+                      </button>
+
+                    </form>
+                    <div class="buttons"  ng-show="!rowformImage.$visible" >
+                      <button  ng-show="showRole(['admin','parent'])" class="btn btn-primary editable-table-button btn-xs" ng-click="rowformImage.$show()">
+                        <i class="fa fa-pencil"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-     
+        <div class="parentdetails">
+          <div class="col-md-12">
+            <h1>Parent/Guardian details</h1>
+            <form editable-form name="rowform1" ng-show="rowform1.$visible" class="form-buttons form-inline" shown="inserted == student">
+              <button type="submit" ng-click="EditStudent_details($index)" ng-disabled="rowform1.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                <i class="fa fa-check"></i>
+              </button>
+              <button type="button" ng-disabled="rowform1.$waiting" ng-click="rowform1.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                <i class="fa fa-remove"></i>
+              </button>
+            </form>
+            <div class="buttons" ng-show="!rowform1.$visible">
+              <button ng-show="showRole(['admin','parent'])" class="btn btn-primary editable-table-button btn-xs" ng-click="rowform1.$show()">
+                <i class="fa fa-pencil"></i>
+              </button>
+            </div>
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table class="table table-bordered" style="width:100">
+                  <thead>
+                    <tr>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <b>Father Name :</b>
+                        <span editable-text="student.parents[1].parent_name" e-name="editdata.student" onaftersave="EditStudent_details($index)"
+                          e-form="rowform1" e-required>{{student.parents[1].parent_name || 'empty' }}</span>
+                      </td>
+                      <td>
+                        <b>Mother Name :</b>
+                        <span editable-text="student.parents[0].parent_name" e-name="editdata.student" onaftersave="EditStudent_details($index)"
+                          e-form="rowform1" e-required>{{student.parents[0].parent_name || 'empty' }}</span>
+                      </td>
+                      <td>
+                        <b>Guardian Name :</b>
+                        <span editable-text="student.parents[2].parent_name" e-name="editdata.student" onaftersave="EditStudent_details($index)"
+                          e-form="rowform1" e-required>{{student.parents[2].parent_name || 'empty' }}</span>
+                      </td>
+
+                    </tr>
+                    <tr>
+                      <td>
+                        <b>Father Occupation :</b>
+                        <span editable-text="student.parents[1].occupation" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform1"
+                          e-required>{{student.parents[1].occupation || 'empty' }}</span>
+                      </td>
+                      <td>
+                        <b>Mother Occupation :</b>
+                        <span editable-text="student.parents[0].occupation" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform1"
+                          e-required>{{student.parents[0].occupation || 'empty' }}</span>
+                      </td>
+                      <td>
+                        <b>Guardian Occupation :</b>
+                        <span editable-text="student.parents[2].occupation" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform1"
+                          e-required>{{student.parents[2].occupation || 'empty' }}</span>
+                      </td>
+
+                    </tr>
+                    <tr>
+
+                      <td>
+                        <b>Father Contact :</b>
+                        <span editable-text="student.parents[1].parent_contact" e-name="editdata.student" onaftersave="EditStudent_details($index)"
+                          e-form="rowform1" e-required>{{student.parents[1].parent_contact || 'empty' }}</span>
+                      </td>
+
+                      <td>
+                        <b>Mother Contact :</b>
+                        <span editable-text="student.parents[0].parent_contact" e-name="editdata.student" onaftersave="EditStudent_details($index)"
+                          e-form="rowform1" e-required>{{student.parents[0].parent_contact || 'empty' }}</span>
+                      </td>
+                      <td>
+                        <b>Guardian Contact :</b>
+                        <span editable-text="student.parents[2].parent_contact" e-name="editdata.student" onaftersave="EditStudent_details($index)"
+                          e-form="rowform1" e-required>{{student.parents[2].parent_contact || 'empty' }}</span>
+                      </td>
+
+                    </tr>
+                    <tr>
+                      <td>
+
+                      </td>
+                      <td>
+
+                      </td>
+                      <td>
+                        <b>Guardian Relation :</b>
+                        <span editable-text="student.parents[2].parent_relation" e-name="editdata.student" onaftersave="EditStudent_details($index)"
+                          e-form="rowform1" e-required>{{student.parents[2].parent_relation || 'empty' }}</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="Studentdetails">
+          <div class="col-md-12">
+            <h1>Student Address</h1>
+            <form editable-form name="rowform2" ng-show="rowform2.$visible" class="form-buttons form-inline" shown="inserted == student">
+              <button type="submit" ng-click="EditStudent_details($index)" ng-disabled="rowform2.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                <i class="fa fa-check"></i>
+              </button>
+              <button type="button" ng-disabled="rowform2.$waiting" ng-click="rowform2.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                <i class="fa fa-remove"></i>
+              </button>
+            </form>
+            <div class="buttons" ng-show="!rowform2.$visible">
+              <button ng-show="showRole(['admin','parent'])" class="btn btn-primary editable-table-button btn-xs" ng-click="rowform2.$show()">
+                <i class="fa fa-pencil"></i>
+              </button>
+            </div>
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table class="table table-bordered" style="width:100">
+                  <thead>
+                    <tr>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <b>Current :</b>
+                        <span editable-text="student.current_address[0].cur_address" e-name="editdata.student" onaftersave="EditStudent_details($index)"
+                          e-form="rowform2" e-required>{{student.current_address[0].cur_address|| 'empty' }}</span>
+                      </td>
+                      <td>
+                        <b>Permanent :</b>
+                        <span editable-text="student.permanent_address[0].perm_address" e-name="editdata.student" onaftersave="EditStudent_details($index)"
+                          e-form="rowform2" e-required>{{student.permanent_address[0].perm_address || 'empty' }}</span>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>   
- </div>
- </div>
- </div>
- </div>
- 
-<!-- <div class="row background">
-  <div class="container">
-    <h1>Student Profile</h1>
-    </div>
+  </div>
+
+  <div class="tab-pane no-padding " id="tab_2">
+    <div class="container">
+      <div class="row">
+        <div class="Studentatt">
+          <div class="col-md-12">
+            <div class="col-md-3">
+              <div class="backwhite">
+                <!-- <h1>Examinations</h1> -->
+                <div class="form-group">
+                  <label>Select Month</label>
+                  <select name="month" class="form-control select2" style="width: 100%;" ng-model="select_month" ng-options="monthData.id as monthData.name for monthData in months ">
+                    <!--<option selected="selected">--Select--</option>
+                                  <option ng-repeat="month in months " value="{{month.id}}">{{month.name}}</option>-->
+                  </select>
+
+                  <button type="button" class="btn btn-primary pull-right" ng-click="getAttendenceByMonth(select_month,student.student_id)">Select</button>
+                </div>
+
+              </div>
+            </div>
+
+            <body>
+              <div class="col-md-9">
+                <div class="backwhite">
+                  <div class="subjectlist">
+                    <div class="col-md-12">
+
+                      <div class="col-xs-3 col-md-4">
+
+                        <div class="tooltip">
+                          <button>
+                            <img src="../../../dist/img/images/pdf.jpg" ng-click="generatePDF();" class="img-responsive" width="30" height="30" alt="Responsive image">
+                          </button>
+                          <span ng-hide="pdf" class="tooltiptext">Download file</span>
+                          <span ng-show="pdf" class="tooltiptext">Downloading....</span>
+
+                        </div>
+                        <p>Attendance List</p>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div id="exportthis">
+                    <div ng-show="pdf">
+                      <div class="jumbotron">
+
+                        <h2 align="center">Student Attendance Monthly Report </h2>
+                        <ul>
+
+                          <li>
+                            <b>School Name </b> :{{schoolDetails[0].name}}</li>
+                          <li>
+                            <b>Class Name</b> : {{class_name}}</li>
+                          <li>
+                            <b>Section Name</b> : {{section_name}}</li>
+
+                        </ul>
+
+                      </div>
+
+                    </div>
+
+                    <table export-table class="table rwd-table table-striped">
+                      <thead>
+                        <tr>
+
+                          <th>Date</th>
+                          <th>Name</th>
+
+                          <th>Attendance</th>
+                          <!--<th class="pull-right">Action</th>-->
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="attendance in attDataMonth  | filter:data.route_title:true" class="editable-row">
+                          <td>
+                            {{$index+1}}
+                          </td>
+                          <td>{{attendance.first_name || 'empty' }} {{attendance.last_name || 'empty' }}
+                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          </td>
+                          <td>
+                            {{attendance.admission_no || 'empty' }}
+                            <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
+                                                          {{busRoute.vehicle_code}}</span>-->
+                          </td>
+                          <td>{{attendance.roll_no || 'empty' }}
+                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          </td>
+                          <td>{{attendance.class_name || 'empty' }} ({{attendance.section_name || 'empty' }})</td>
+                          <td>{{attendance.gender || 'empty' }}</td>
+                          <td>{{attendance.date | date }}</td>
+                          <td>{{attendance.status || 'empty' }}
+                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                          </td>
+
+
+
+                          <!--<td>
+                                                          {{$index+1}}
+                                                      </td>
+                                                      <td class="select-td">
+                                                          <span editable-select="busRoutes.station" e-name="station" onaftersave="EditBusRouteToStation($index)" onshow="loadGroups()"
+                                                              e-form="rowform" e-selectpicker e-ng-options="Station.station_name as Station.station_name for Station in stations">
+                                                      {{busRoutes.stations[0].station_name }}</span>
+                                                      </td>
+      
+                                                      <td>
+                                                          <span editable-text="busRoutes.pickup_time" e-name="pickup_time" onaftersave="EditBusRouteToStation($index)" e-form="rowform"
+                                                              e-required>{{busRoutes.stations[0].pickup_time || 'empty' }}</span>
+                                                      </td>
+                                                      <td>
+                                                          <span editable-text="busRoutes.drop_time" e-name="drop_time" onaftersave="EditBusRouteToStation($index)" e-form="rowform"
+                                                              e-required>{{busRoutes.stations[0].drop_time || 'empty' }}</span>
+                                                      </td>
+      
+                                                      <td>
+                                                          <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == busRoutes">
+                                                              <button type="submit" ng-click="EditBusRouteToStation($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
+                                                              <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-check"></i></button>
+                                                          </form>
+      
+                                                          <div class="buttons" ng-show="!rowform.$visible">
+                                                              <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
+                                                              <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBusRouteToStation($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                             
+                                                          </div>
+                                                      </td>-->
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-9" id="chart">
+                <div class="backwhite">
+
+                  <div class="box box-success" style="margin-top:10px">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Donut Chart</h3>
+
+                      <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                          <i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove">
+                          <i class="fa fa-times"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="box-body" pdf-save-content="idOneGraph">
+                      <div class="chart" style="margin:0px" ;>
+                        <!--<div id='myChart'></div>-->
+                        <zingchart id="myChartMonth" zc-values="chartdataMonth" zc-json="myJsonMonth" zc-height=400 zc-width=100%></zingchart>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </body>
+          </div>
+        </div>
+      </div>
     </div>
 
-<section class="content">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="box box-primary" >
-        <div class="box-header with-border" >
-          <h3 class="box-title"> {{student.first_name}} {{student.last_name}}</h3>
-          <div class="box-tools pull-right">
-            
-          </div>
-          <div class="box-body">
-            <br>
-            <div class="col-md-2">
-              
-              
-              <img class="img-thumbnail" ng-src="{{studentPhoto}}"  alt="No Image">
+  </div>
+  <div class="tab-pane no-padding " id="tab_3" ng-repeat="student in studentDetails">
+
+    <div class="container">
+      <div class="acadamicreport">
+        <div class="col-md-12">
+          <div class="backwhite">
+            <div class="col-md-4" id="photo">
+              <div class="studentimage">
+                <img ng-src="{{studentPhoto}}">
+              </div>
             </div>
-          
-            <div class="col-md-10">
-              <table class="table table-striped">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="inputdefault">
+                  <b>Class :</b>{{student.school_classes[0].name}}</label>
+                <br>
+              </div>
+              <div class="form-group">
+                <label for="inputdefault">
+                  <b>First Name :</b>{{student.first_name}}</label>
+                <br>
+              </div>
+              <div class="form-group">
+                <label for="inputdefault">
+                  <b>Admission No :</b>{{student.admission_no}}</label>
+                <br>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="inputdefault">
+                  <b>Section :</b>{{student.sections[0].name}}</label>
+                <br>
+              </div>
+              <div class="form-group">
+                <label for="inputdefault">
+                  <b>Last Name :</b>{{student.last_name}}</label>
+                <br>
+              </div>
+              <div class="form-group">
+                <label for="inputdefault">
+                  <b>Roll No :</b>{{student.roll_no}}</label>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <h1>Formative Assement</h1>
+          <div class="formative">
+            <div class="table-responsive">
+              <table id="tbl-timetable" class="table table-bordered" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Exam</th>
+                    <th>Sub-1</th>
+                    <th>Sub-2</th>
+                    <th>Sub-3</th>
+                    <th>Sub-4</th>
+                    <th>Sub-5</th>
+                    <th>Sub-6</th>
+                    <th>Sub-7</th>
+                    <th>Grade</th>
+                  </tr>
+                </thead>
                 <tbody>
                   <tr>
-                    <th>Name :</th>
-                    <td> {{first_name}} {{last_name}}</td>
-                    <th>Father Name :</th>
-                    <td>{{father_name}}</td>
+                    <td>1</td>
+                    <td>FA-1</td>
                   </tr>
                   <tr>
-                    <th>Class :</th>
-                    <td>{{class_id}}</td>
-                    <th>Section :</th>
-                    <td>{{section}}</td>
+                    <td>2</td>
+                    <td>FA-2</td>
                   </tr>
                   <tr>
-                    <th>Admission No :</th>
-                    <td>{{admission_no}}</td>
-                    <th>Roll No :</th>
-                    <td>{{roll_no}}</td>
+                    <td>3</td>
+                    <td>FA-3</td>
                   </tr>
                   <tr>
-                    <th>Mobile No :</th>
-                    <td>{{phone}}</td>
-                    <th>Category :</th>
-                    <td>{{category}}</td>
+                    <td>4</td>
+                    <td>FA-4</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Remarks</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <h1>Summative Assement</h1>
+          <div class="summative">
+            <div class="table-responsive">
+              <table id="tbl-timetable" class="table table-bordered" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Exam</th>
+                    <th>Sub-1</th>
+                    <th>Sub-2</th>
+                    <th>Sub-3</th>
+                    <th>Sub-4</th>
+                    <th>Sub-5</th>
+                    <th>Sub-6</th>
+                    <th>Sub-7</th>
+                    <th>Grade</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>SA-1</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>SA-2</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>SA-3</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Remarks</td>
                   </tr>
                 </tbody>
               </table>
@@ -264,5 +664,4 @@
       </div>
     </div>
   </div>
-
-    </section> -->
+</div>

@@ -3,189 +3,189 @@
         <h1>Admin Management</h1>
         <ul class="links">
             <li ui-sref-active="active">
-
-                <a  ui-sref='main.addClass&Section'>AddClass&Section</a>
-            </li>/
-            <li ui-sref-active="active">
-                <a ui-sref='main.parentInfo'>ParentInfo</a>
-            </li>/
-            <li ui-sref-active="active">
-                <a ui-sref='main.teacherInfo'>TeacherInfo</a>
+                <a ui-sref='main.schoolProfile'>School Profile</a>
+            </li>
+            <li ui-sref-active="active" >
+      
+               / <a ui-sref='main.addClass&Section'>Class&Section</a>
+            </li>
+            <li ui-sref-active="active" ng-show="showRole(['admin'])">
+                /<a ui-sref='main.parentInfo'>ParentInfo</a>
+            </li>
+            <li ui-sref-active="active" ng-show="showRole(['admin'])">
+               / <a ui-sref='main.teacherInfo' >TeacherInfo</a>
+            </li>
+            <li ui-sref-active="active" ng-show="showRole(['admin','teacher'])">
+                /<a ui-sref='main.taskManagement'>TaskManagement</a>
             </li>
         </ul>
     </div>
 </div>
-<div class="nav-tabs-custom">
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-target="#tab_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Add Class & Section </a></li>
-        <li class=""><a data-target="#tab_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Class List & Section List </a></li>
-    </ul>
-</div>
-<div class="tab-content">
-    <div class="tab-pane no-padding active" id="tab_1">
-        <div class="register">
-            <div class="backwhite">
-                <h1>Add Class & Section </h1>
-                <div class="navigation">
 
+<div class="container">
+    <div class="row">
+        <div class="classinfo">
+            <div class="col-md-3">
+                <div class="addclass" ng-show="showRole(['admin'])">
+                    <div class="form-group" id="addclasses">
+                        <input class="form-control" placeholder="Enter..." ng-model="value.name" id="inputdefault" type="text">
+                    </div>
+                    <div class="form-group" ng-show="showRole(['admin'])">
+                        <button class="btn btn-primary active" ng-click="addClass(value)" style="background-color: #30104e;float: right;">Add class</button>
+                    </div>
                 </div>
+                <div class="table-responsive">
+                    <table export-table st-table="display_records" st-safe-src="classBox" class="table rwd-table table-striped" style="width:100%;margin-top: 20px;">
+                        <tr>
+                            <th>#</th>
+                            <th>Class</th>
+                            <th ng-show="showRole(['admin'])">Action</th>
+                        </tr>
+                        <tbody>
+                            <tr st-select-row="row" st-select-mode="multiple" ng-repeat="className in display_records" class="editable-row">
+                                <td>
+                                    {{className.id+1}}
+                                </td>
+                                <td>
+                                    <span editable-text="className.name" e-name="editdata.name" onaftersave="EditClass(className.id)" e-form="rowform" e-required>{{className.name || 'empty' }}</span>
+                                </td>
 
-                <div class="col-md-12">
-                    <div class="col-md-6">
+                                <td ng-show="showRole(['admin'])">
+                                    <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == className">
+                                        <button type="submit" ng-click="EditClass(className.id)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                                            <i class="fa fa-remove"></i>
+                                        </button>
+                                    </form>
 
-                        <div class="input-group">
+                                    <div class="buttons" ng-show="!rowform.$visible">
+                                        <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteClass(className.id)" ng-confirm-click="Are you sure you want to delete this item?">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
 
-                            <input type="text" class="form-control" ng-model="value.name" id="exampleInputEmail1" placeholder="">
-                            <div class="input-group-btn">
-                                <button class="btn btn-default"><span i class="fa fa-users" aria-hidden="true"></span></button>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-6">
-
-                        <div class="input-group">
-
-                            <select class="form-control select2" style="width: 171%;" ng-model="datavalue.classId" ng-options="data.class_id as data.name for data in classData">
-                        <option value="" selected>--Select--</option>
-                       
-                    </select>
-
-                        </div>
-
-                    </div>
-                    <div class="col-md-6">
-                        <div>
-
-                            <input type='button' ng-click="addClass(value)" class="btn btn-primary pull-right" value='Add Class' />
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-
-                        <div class="input-group">
-
-                            <input type="text" class="form-control" ng-model="datavalue.section" id="exampleInputEmail1" placeholder="">
-                            <div class="input-group-btn">
-                                <button class="btn btn-default"> <span class="fa fa-file" aria-hidden="true"></span></button>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-md-12">
-                        <div>
-                            <input type='button' ng-click="addSection(datavalue,datavalue.classId)" class="btn btn-primary pull-right" value='Add Section'
-                            />
-                        </div>
-                    </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <div st-pagination="" st-items-by-page="5" st-displayed-pages="100"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
 
                 </div>
             </div>
-        </div>
+            <div class="col-md-9">
 
-
-    </div>
-    <div class="tab-pane no-padding" id="tab_2">
-        <div class="container">
-            <div class="row">
-                <div class="Addstationtobus">
-
-                    <div class="col-md-4" id="addclass">
-                        <div class="backwhite" >
-                            <table table table export-table st-table="display_records" st-safe-src="classData" class="table rwd-table table-striped"
-                                style="width:100%;">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Class</th>
-
-                                        <th class="pull-right">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr st-select-row="row" st-select-mode="multiple" ng-repeat="class in display_records" class="editable-row">
-                                        <td>
-                                            {{$index+1}}
-                                        </td>
-                                        <td>
-                                            <span editable-text="class.name" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{class.name || 'empty' }}</span>
-                                        </td>
-
-                                        <td class="pull-right">
-                                            <!-- <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == busRoute">
-                                                <button type="submit" ng-click="EditBusRoute($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
-                                                <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
-                                            </form> -->
-
-                                            <div class="buttons" ng-show="!rowform.$visible">
-                                                <!-- <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button> -->
-                                                <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteClass($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                                <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="5" class="text-center">
-                                            <div class="pull-right" st-pagination="" st-items-by-page="5" st-displayed-pages="5"></div>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-md-4" >
-                        <select class="form-control select2" style="width: 98%;border:1px solid lightgrey; border-radius:2px;" ng-model="classId" ng-change="getSection(classId);" ng-options="data.class_id as data.name for data in classData" >
-                        <option value="" selected>--Select Section--</option>
-                       
-                    </select>
-                        <div class="backwhite" style="margin-top:30px;">
-                            <table table table export-table st-table="records" st-safe-src="secData" class="table rwd-table table-striped"
-                                style="width:100%;">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Section</th>
-
-                                        <th class="pull-right">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr st-select-row="row" st-select-mode="multiple" ng-repeat="section in records" class="editable-row">
-                                        <td>
-                                            {{$index+1}}
-                                        </td>
-                                        <td>
-                                            <span editable-text="section.name" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{section.name || 'empty' }}</span>
-                                        </td>
-
-                                        <td class="pull-right">
-                                            <!-- <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == busRoute">
-                                                <button type="submit" ng-click="EditBusRoute($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
-                                                <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
-                                            </form> -->
-
-                                            <div class="buttons" ng-show="!rowform.$visible">
-                                                <!-- <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button> -->
-                                                <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteSection($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                                <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="5" class="text-center">
-                                            <div class="pull-right" st-pagination="" st-items-by-page="3" st-displayed-pages="5"></div>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                <div class="backwhite">
+                    <form name="classDetails" ng-submit="classDetails.$valid && addSection(sectionName,sectionName.classId);" novalidate>
+                        <div class="addsection">
+                            <div class="col-md-4">
+                                <div class="form-group" ng-class="{'has-error': classDetails.$submitted && classDetails.class.$invalid && classDetails.class.$pristine}">
+                                    <label>Class</label>
+                                    <select name="class" class="form-control select2" id="sel1" data-ng-change="getSection(sectionName.classId)" ng-model="sectionName.classId"
+                                        ng-options="class.class_id as class.name for class in classData">
+                                        <option selected value="">--select--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4" ng-show="showRole(['admin'])">
+                                <div class="form-group" ng-class="{'has-error': classDetails.$submitted && classDetails.section.$invalid && classDetails.section.$pristine}">
+                                    <label>Section</label>
+                                    <input class="form-control" name="section" placeholder="Enter..." ng-model="sectionName.section_name" id="inputdefault" type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-4" ng-show="showRole(['admin'])">
+                                <div class="form-group" ng-class="{'has-error': classDetails.$submitted && classDetails.teacher.$invalid && classDetails.teacher.$pristine}">
+                                    <label for="inputdefault">Class Teacher</label>
+                                    <br>
+                                    <select name="teacher" class="form-control" id="sel1" ng-model="sectionName.teacher_name" ng-options="teacher.teacher_name as teacher.teacher_name for teacher in teacherList">
+                                        <option selected value="">--select--</option>
+                                    </select>
+                                </div>
+                            </div>
 
                         </div>
+                        <div class="col-md-12" ng-show="showRole(['admin'])">
+                            <div class="form-group">
+                                <button class="btn btn-primary pull-right " style="background-color: #30104e;">Add section</button>
+                            </div>
+                        </div>
+                        <!-- <div class="box-footer">
+                            <button ng-disabled="false" type="submit" class="btn btn-primary pull-right">Submit</button>
+                        </div> -->
+                    </form>
+                    <div class="table-responsive">
+                        <table export-table st-table="Section_details" st-safe-src="sectionBox" class="table rwd-table table-striped" style="width:100%">
+                            <tr>
+                                <th>#</th>
+                                <th>class</th>
+                                <th>Section</th>
+                                <th>class teacher</th>
+                                <th ng-show="showRole(['admin'])">Action</th>
+                            </tr>
+                            <tbody>
+                                <tr st-select-row="row" st-select-mode="multiple" ng-repeat="sections in Section_details" class="editable-row">
+                                    <td>
+                                        {{sections.id+1}}
+                                    </td>
+                                    <td>
+                                        <span>{{sections.class_name || 'empty' }}</span>
+                                    </td>
+                                    <td>
+                                        <span editable-text="sections.section_name" e-name="editdata.section_name" onaftersave="EditSection(sections.id)" e-form="rowform"
+                                            e-required>{{sections.section_name || 'empty' }}</span>
+                                    </td>
+
+
+                                    <td class="select-td">
+                                        <span editable-select="sections.teacher_name" e-name="editdata.teacher_name" e-form="rowform" onaftersave="EditSection(sections.id)"
+                                            e-selectpicker e-ng-options="teacher.teacher_name as teacher.teacher_name for teacher in teacherList">
+                                            {{sections.teacher_name }}</span>
+                                    </td>
+
+
+                                    <td ng-show="showRole(['admin'])">
+                                        <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == sections">
+                                            <button type="submit" ng-click="EditSection(sections.id)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                                                <i class="fa fa-check"></i>
+                                            </button>
+                                            <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                                                <i class="fa fa-remove"></i>
+                                            </button>
+                                        </form>
+
+                                        <div class="buttons" ng-show="!rowform.$visible">
+                                            <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteSection(sections.id)" ng-confirm-click="Are you sure you want to delete this item?">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5" class="text-center">
+                                        <div st-pagination="" st-items-by-page="5" st-displayed-pages="100"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

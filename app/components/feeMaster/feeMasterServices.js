@@ -10,7 +10,7 @@ angular.module('school_erp')
     };
 
      feeMasterServices.setFeeMaster = function(dataValue){
-         console.log(dataValue);
+       //  console.log(dataValue);
         return $http({
                     method: 'POST',
                     url: globalServices.globalValue.baseURL + 'api/fee_master/'+globalServices.globalValue.school_id,
@@ -20,8 +20,8 @@ angular.module('school_erp')
       };
 
       feeMasterServices.EditFeeMaster = function(dataValue,fee_master_id){
-            console.log(dataValue);
-             console.log("hello");
+          //  console.log(dataValue);
+         //    console.log("hello");
             return $http({
                         method: 'PUT',
                         url: globalServices.globalValue.baseURL + 'api/edit_fee_master/'+fee_master_id,

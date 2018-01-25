@@ -1,181 +1,60 @@
 <div class="row background">
     <div class="container">
         <h1>Attendance Management</h1>
-          <ul class="links">
+        <ul class="links">
             <li>
-                <a ui-sref='main.studentAttendance'>Student Attendance</a>/
-                 <ul class="links">
-                    <li><a ui-sref='main.attendenceListStudent'>List</a></li>/
-                    <li><a ui-sref='main.attendenceReportStudent'> Report</a></li>
-                </ul>
+                <a ui-sref='main.studentAttendance'>Student</a>
+                <!-- <ul class="links">
+                    <li>
+                        <a ui-sref='main.attendenceListStudent'>ReportByDay</a>
+                    </li>/
+                    <li>
+                        <a ui-sref='main.attendenceReportStudent'> ReportByMonth</a>
+                    </li>
+                </ul> -->
+            </li>
+            <li class="links" ng-show="showRole(['admin'])">
+                /<a ui-sref='main.employeeAttendance'>Employee</a>
+                <!-- <ul class="links">
+                    <li>
+                        <a ui-sref='main.attendenceListEmployee'>ReportByDay</a>
+                    </li>/
+                    <li>
+                        <a ui-sref='main.attendenceReportEmployee'>ReportByMonth</a>
+                    </li>
+                </ul> -->
             </li>
             <li class="links">
-                <a ui-sref='main.employeeAttendance'>Employee Attendance</a>
-                 <ul class="links">
-                    <li><a ui-sref='main.attendenceListEmployee'>List</a></li>/
-                    <li><a ui-sref='main.attendenceReportEmployee'>Report</a></li>
-                </ul>
-            </li>
-           
+                    /<a ui-sref='main.attendenceListStudent'>Student Reports</a>
+                    <!-- <ul class="links">
+                        <li>
+                            <a ui-sref='main.attendenceListEmployee'>ReportByDay</a>
+                        </li>/
+                        <li>
+                            <a ui-sref='main.attendenceReportEmployee'>ReportByMonth</a>
+                        </li>
+                    </ul> -->
+                </li>
+                <li class="links" ng-show="showRole(['admin'])">
+                        /<a ui-sref='main.attendenceListEmployee'>Employee Reports</a>
+                        <!-- <ul class="links">
+                            <li>
+                                <a ui-sref='main.attendenceListEmployee'>ReportByDay</a>
+                            </li>/
+                            <li>
+                                <a ui-sref='main.attendenceReportEmployee'>ReportByMonth</a>
+                            </li>
+                        </ul> -->
+                    </li>
+    
         </ul>
-        <!-- <ul >
-            <li>
-                 <ul class="links">
-                    <li><a ui-sref='main.attendenceListStudent'>List</a></li>/
-                    <li><a ui-sref='main.attendenceReportStudent'> Report</a></li>
-                </ul>
-            </li>
-        </ul>
-        <ul>
-            <li>
-                
-                 <ul class="links">
-                    <li><a ui-sref='main.attendenceListEmployee'>List</a></li>/
-                    <li><a ui-sref='main.attendenceReportEmployee'>Report</a></li>
-                </ul>
-            </li>
-        </ul> -->
     </div>
 </div>
-<!-- <div class="container">
-    <div class="row">
-        <div class="studentattendance">
-            <div class="col-md-3">
-                <div class="backwhite">
-                    <h1>Student Attendance</h1>
-                 
-
-                    <div class="form-group">
-                        <label>Select Date</label>
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            
-                            <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="yyyy-MM-dd" style="z-index:999">
-                                <input class="form-control" name="selectDate" type="text" ng-model="select_date" ng-readonly="true" placeholder="Enter ..."
-                                    required/>
-                            </datepicker>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Class</label>
-                        <select class="form-control select2" ng-options="class.class_id as class.name for class in classDatanew" data-ng-change="populateSections(classId)"
-                            style="width: 100%;" ng-model="classId">
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Section</label>
-                        <select class="form-control select2" ng-options="sec.section_id as sec.name for sec in secData" style="width: 100%;" ng-model="secId">
-                        </select>
-                    </div>
-                    <div class="box-footer">
-                        <button ng-click="getStudents(secId)" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Search</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="backwhite">
-
-                    <div class="row">
-                        <div class="col-md-6">
-                          
-                            <div class="squaredFour">
-
-                                <input type="checkbox" value="None" id="squaredFour" data-ng-change="tickAll(check)" ng-model="check" name="check" />
-                                <label for="squaredFour"></label>
-
-                            </div>
-                            <span>Tick All</span>
-
-                            <select ng-if="check" class="select2" style="font-weight:normal;margin-left:15px;" ng-change="markAttendance(attendVal)"
-                                ng-model="attendVal">
-                                <option value="" selected="selected">--Select--</option>
-                                <option value="Present">Present</option>
-                                
-                                <option value="Absent">Absent</option>
-                                <option value="On Leave">On Leave</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <button type="button" class="btn btn-primary pull-right" ng-click="submitBulkAttendance()">
-                                <i class="fa fa-save"></i>
-                                Submit Attendance
-                            </button>
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="rollno">
-                    
-                        <div class="hvr-bounce-in transition" ng-repeat="student in attendanceBox">
-                            <div class="squaredFour">
-                                <input type="checkbox" value="None" id="squaredFour{{$index}}" name="check" ng-model="student.selected" />
-                                <label for="squaredFour{{$index}}"></label>
-                            </div>
-                            {{$index+1}}
-                            <h1>{{student.roll_no}}</h1>
-                            <div class="icons" style="background-color: white;width:85px;height:40px;padding-left:0px;text-align: center;padding-top: 10px;">
-                              
-
-                                <input class="fa fa-check" ng-change="attn(student,attend)" type="radio" ng-model="student.status" value="Present" id="attendencetype+{{$index}}"
-                                    name="attendencetype+{{$index}}" />
-
-
-                                <input class="fa fa-calendar-o" ng-change="attn(student,attend)" type="radio" ng-model="student.status" value="On Leave"
-                                    name="attendencetype+{{$index}}" />
-
-                                <input class="fa fa-times" ng-change="attn(student,attend)" type="radio" ng-model="student.status" value="Absent" name="attendencetype+{{$index}}"
-                                />
-                               
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 <div class="container">
     <div class="row">
         <div class="studentattendance">
             <div class="col-md-3">
                 <div class="backwhite">
-                    <h1>Student Attendance</h1>
-                    <!-- <div class="form-group">
-                        <label>date</label>
-                        <div id="filterDate2">
-                            
-                            <div class="input-group date" data-date-format="dd.mm.yyyy">
-
-                                <input type="text" class="form-control" placeholder="dd.mm.yyyy">
-                                <div class="input-group-addon">
-                                    <span class="glyphicon glyphicon-th"></span>
-                                </div>
-                            </div>
-                            <script>
-                                $('.input-group.date').datepicker({ format: "dd.mm.yyyy" });
-                            </script>
-                        </div>
-                    </div> -->
-
-                    <!-- <div class="form-group">
-                        <label>Select Date</label>
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            
-                            <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="yyyy-MM-dd" style="z-index:999">
-                                <input class="form-control" name="selectDate" type="text" ng-model="select_date" ng-readonly="true" placeholder="Enter ..."
-                                    required/>
-                            </datepicker>
-                        </div>
-                    </div> -->
 
                     <div class="form-group">
                         <label>Class</label>
@@ -198,13 +77,6 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <!-- <div class="mailbox-controls">
-                                        <button type="button" class="btn btn-primary pull-left">
-                                            <i class="state-icon glyphicon glyphicon-unchecked"></i>
-                                            &nbsp; Mark as holiday
-                                        </button>
-                                        <input type="checkbox" class="hidden" name="holiday" value="checked">
-                                    </div> -->
                             <div class="squaredFour">
 
                                 <input type="checkbox" value="None" id="squaredFour" data-ng-change="tickAll(check)" ng-model="check" name="check" />
@@ -230,31 +102,29 @@
                             </button>
                         </div>
                     </div>
-
-
-
-
                     <div class="rollno">
                         <!--<div class="row1">-->
                         <div class="hvr-bounce-in transition" ng-repeat="student in attendanceBox">
                             <div class="squaredFour">
                                 <input type="checkbox" value="None" id="squaredFour{{$index}}" name="check" ng-model="student.selected" />
-                                <label for="squaredFour{{$index}}"></label>
+                                <label for="squaredFour{{$index}}"></label>{{student.roll_no}}
+                                <!-- <h4 style="text-align:center"></h4> -->
                             </div>
-                            {{$index+1}}
-                            <h1>{{student.roll_no}}</h1>
+                            <!-- {{student.roll_no}} -->
+
+                            <!-- <div class="logo">
+                                    <img class="img-thumbnail" ng-src="{{globalServices}}{{student.image}}" style="height:55px;">
+                            </div> -->
+                            <!-- <img ng-src="{{schoolImage}}" class="user-image" alt="User Image"> -->
+                            <h1>{{student.first_name}}{{student.last_name}}</h1>
+                            <div class="stuattbg" style="background-color: white;width: 70px;height: 65px;border-radius: 35px;margin-left: 37px;margin-bottom: 10px;">
+                                <div class="stuattpic" style="height: 100px;width: 100px;">
+                                    <img ng-src="{{globalServicesURL}}api/image/{{student.image}}" alt="Image" style="height: 50px;width: 50px;margin-right: 28px;margin-top: 7px;border-radius: 20px;">
+                                    <!-- <img ng-src="http://192.168.1.4:4005/api/image/{{student.image}}" style="height: 50px;width: 50px;margin-right: 28px;margin-top: 7px;border-radius: 20px;"> -->
+                                </div>
+                            </div>
+
                             <div class="icons" style="background-color: white;width:120px;height:40px;padding-left:0px;text-align: center;padding-top: 0px;">
-                                <!-- <div class="btn-group" ng-model="radioValue" bs-buttons-radio>
-                                    <button type="button" ng-change="attn(student,attend)" class="btn fa fa-check" value="left" name="attendencetype+{{$index}}">
-                                        <i class="icon-align-left"></i>
-                                    </button>
-                                    <button type="button" ng-change="attn(student,attend)" class="btn fa-times" value="middle" name="attendencetype+{{$index}}">
-                                        <i class="icon-align-center"></i>
-                                    </button>
-                                    <button type="button" ng-change="attn(student,attend)" class="btn fa-calendar-o" value="right" name="attendencetype+{{$index}}">
-                                        <i class="icon-align-right"></i>
-                                    </button>
-                                </div> -->
 
                                 <input ng-change="attn(student,attend)" type="radio" ng-model="student.status" value="Present" id="radio1{{$index}}" name="attendencetype+{{$index}}"
                                 />
@@ -272,19 +142,6 @@
                                     <i class="fa fa-calendar-o"></i>
                                 </label>
 
-                                <!-- <div class="radio radio-info radio-inline">
-                                    <input ng-change="attn(student,attend)" type="radio" ng-model="student.status" value="Present" id="attendencetype+{{$index}}"
-                                        name="attendencetype+{{$index}}">
-                                    <label for="inlineRadio1"> Present </label>
-                                </div>
-                                <div class="radio radio-info radio-inline">
-                                    <input ng-change="attn(student,attend)" type="radio" ng-model="student.status" value="Absent" name="attendencetype+{{$index}}">
-                                    <label for="inlineRadio1"> Absent </label>
-                                </div>
-                                <div class="radio radio-info radio-inline">
-                                    <input ng-change="attn(student,attend)" type="radio" ng-model="student.status" value="On Leave" name="attendencetype+{{$index}}">
-                                    <label for="inlineRadio1"> On Leave </label>
-                                </div> -->
                             </div>
                         </div>
 
@@ -313,175 +170,9 @@
         width: 5px;
         height: 20px;
         visibility: hidden;
-        /* 
-        border: 1px solid darkgray;
-        border-radius: 50%;
-
-        outline: none;
-
-        box-shadow: 0 0 5px 0px gray inset; */
     }
-
-    /*   */
-
-    /* input[type='radio']:hover {
-        box-shadow: 0 0 5px 0px orange inset;
-    }
-
-    input[type='radio']:before {
-        content: '';
-        display: block;
-        width: 60%;
-        height: 60%;
-        margin: 20% auto;
-        border-radius: 50%;
-    }
-
-    input[type='radio']:checked:before {
-        background: green;
-    } */
 
     input[type='radio']:checked+label {
         background: green;
     }
 </style>
-
-
-
-
-
-
-<!-- 
-<div class="box-body">
-    <div class="row">
-
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label>Class</label>
-                <select class="form-control select2" ng-options="class.class_id as class.name for class in classDatanew" data-ng-change="populateSections(classId)"
-                    style="width: 100%;" ng-model="classId">
-                </select>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label>Section</label>
-                <select class="form-control select2" ng-options="sec.section_id as sec.name for sec in secData" data-ng-change="getStudents(secId)"
-                    style="width: 100%;" ng-model="secId">
-                </select>
-
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label>Search by keyword</label>
-                <input type="text" ng-model="searchStudent" name="search_text" class="form-control" placeholder="Search...">
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<div class="box-footer">
-    <button type="submit" class="btn btn-primary pull-right">Search</button>
-</div>
-</div>
-
-<div class="box box-default">
-    <div class="box-header with-border">
-        <i class="fa fa-users" aria-hidden="true"></i>
-        <h3 class="box-title">Student List</h3>
-    </div>
-    <div class="box-body">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="mailbox-controls">
-                    <button type="button" class="btn btn-primary pull-left">
-                        <i class="state-icon glyphicon glyphicon-unchecked"></i>
-                        &nbsp; Mark as holiday
-                    </button>
-                    <input type="checkbox" class="hidden" name="holiday" value="checked">
-                </div>
-            </div>
-            <div class="col-md-6">
-                <button type="button" class="btn btn-primary pull-right" ng-click="submitBulkAttendance()">
-                    <i class="fa fa-save"></i>
-                    Submit Attendance
-                </button>
-            </div>
-        </div>
-
-        <div class="tab-content">
-            <div class="tab-pane table-responsive no-padding active" id="tab_1">
-                <table class="table table-hover table-striped">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>
-                                <div class="squaredFour">
-                                    <input type="checkbox" value="None" id="squaredFour" data-ng-change="tickAll(check)" ng-model="check" name="check" />
-                                    <label for="squaredFour"></label>
-                                </div>
-                                <span class="selection">All</span>
-                            </th>
-                            <th>Roll No</th>
-                            <th>Name</th>
-                            <th>Attendance
-                                <select ng-if="check" class="select2" style="font-weight:normal;margin-left:15px;" ng-change="markAttendance(attendVal)"
-                                    ng-model="attendVal">
-                                    <option value="" selected="selected">--Select--</option>
-                                    <option value="Present">Present</option>
-                                   
-                                    <option value="Absent">Absent</option>
-                                    <option value="On Leave">On Leave</option>
-                                </select>
-                            </th>
-                            <th>Actions</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <tr ng-repeat="student in attendanceBox | filter:searchStudent">
-
-                            <td>{{$index+1}}</td>
-                            <td>
-                                <div class="squaredFour">
-                                    <input type="checkbox" value="None" id="squaredFour{{$index}}" name="check" ng-model="student.selected" />
-                                    <label for="squaredFour{{$index}}"></label>
-                                </div>
-                            </td>
-                            <td>{{student.roll_no}}</td>
-                            <td>{{student.first_name}} {{student.last_name}}</td>
-                            <td>
-                                <div class="radio radio-info radio-inline">
-                                    <input ng-change="attn(student,attend)" type="radio" ng-model="student.status" value="Present" id="attendencetype+{{$index}}"
-                                        name="attendencetype+{{$index}}">
-                                    <label for="inlineRadio1"> Present </label>
-                                </div>
-                              
-                                <div class="radio radio-info radio-inline">
-                                    <input ng-change="attn(student,attend)" type="radio" ng-model="student.status" value="Absent" name="attendencetype+{{$index}}">
-                                    <label for="inlineRadio1"> Absent </label>
-                                </div>
-                                <div class="radio radio-info radio-inline">
-                                    <input ng-change="attn(student,attend)" type="radio" ng-model="student.status" value="On Leave" name="attendencetype+{{$index}}">
-                                    <label for="inlineRadio1"> On Leave </label>
-                                </div>
-                            </td>
-
-                            <td>
-                                <button ng-click="addAttendance(student,student.status)" class="btn btn-primary smallButton" type="button" value="add">Add</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div> -->

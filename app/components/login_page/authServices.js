@@ -30,10 +30,10 @@ angular.module('school_erp')
         if (userInfo != null) {
           $rootScope.role = userInfo.role;
           $rootScope.users = userInfo.users;
-         
-          console.log(" students information");
-          console.log($rootScope.users);
-         
+
+          //   console.log(" students information");
+          //    console.log($rootScope.users);
+
 
           if ($rootScope.role == 'parent') {
             if ($rootScope.users.length > 0 && !$window.localStorage["student"]) {

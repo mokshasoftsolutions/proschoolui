@@ -12,13 +12,13 @@ angular.module('school_erp')
 
         $scope.loadFile = function (files) {
 
-            console.log("messsage1");
+            //     console.log("messsage1");
             $scope.$apply(function () {
 
                 $scope.selectedFile = files[0];
-                console.log($scope.selectedFile);
+                //     console.log($scope.selectedFile);
 
-                if ($scope.selectedFile.type != "image/jpeg" && $scope.selectedFile.type !="image/png") {
+                if ($scope.selectedFile.type != "image/jpeg" && $scope.selectedFile.type != "image/png") {
                     //     ngDialog.open({
                     //         template: '<p> Not a Image File </p>',
                     //         plain: true
@@ -31,9 +31,9 @@ angular.module('school_erp')
             })
 
         }
-      
-         // Add attendance single
-         $scope.addRegistration = function (data) {
+
+        // Add attendance single
+        $scope.addRegistration = function (data) {
             var file = $scope.selectedFile;
             var fd = new FormData();
             fd.append('file', file);
@@ -44,7 +44,7 @@ angular.module('school_erp')
             fd.append('website', $scope.data.website);
             fd.append('address', $scope.data.address);
             fd.append('description', $scope.data.description);
-          
+
 
             registrationServices.setRegistration(fd)
                 .success(function (data, status) {
@@ -72,16 +72,16 @@ angular.module('school_erp')
 
             registrationServices.getRegistration()
                 .success(function (data, status) {
-                    console.log(JSON.stringify(data));
+                    //   console.log(JSON.stringify(data));
                     $scope.schoolData = data.schools;
 
                     $scope.latestValue = $scope.schoolData[$scope.schoolData.length - 1];
                     $scope.school_id = $scope.latestValue.school_id;
                     //  $window.localStorage["schoolId"] = JSON.stringify($scope.latestValue.school_id);
-                    console.log($scope.latestValue);
-                    console.log($scope.school_id);
+                    //   console.log($scope.latestValue);
+                    //   console.log($scope.school_id);
                     //console.log(schoolId);
-                    console.log("messages..........2");
+                    //    console.log("messages..........2");
                     //$scope.school_id = $scope.schoolData[0].school_id;
 
 
@@ -89,10 +89,10 @@ angular.module('school_erp')
 
 
                 })
-                .error(function (data, success) {})
+                .error(function (data, success) { })
         }
-        
+
         $scope.getRegistration();
-      
+
 
     }])

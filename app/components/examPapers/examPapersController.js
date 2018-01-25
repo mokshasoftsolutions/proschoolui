@@ -1,23 +1,24 @@
 angular.module('school_erp')
-    .controller("examPapersController", ['$http', '$scope', 'examServices', 'ngDialog', 'globalServices', 'subjectsServices', function ($http, $scope, examServices, ngDialog, globalServices, subjectsServices) {
+    .controller("examPapersController", ['$http', '$scope', '$rootScope', 'examServices', 'ngDialog', 'globalServices', 'subjectsServices', function ($http, $scope, $rootScope, examServices, ngDialog, globalServices, subjectsServices) {
         $scope.data = {};
-         globalServices.getClass()
-            .success(function (data, status) {
-                $scope.classDatanew = data.school_classes; // Api list-name
-                $scope.classId = data.school_classes[0].class_id;
-                $scope.populateSections($scope.classId);
-                
-            })
-            .error(function (data, success) {})
+        $scope.getClassesInitalLoad = function () {
+            globalServices.getClass()
+                .success(function (data, status) {
+                    $scope.classDatanew = data.school_classes; // Api list-name
+                    $scope.classId = data.school_classes[0].class_id;
+                    $scope.populateSections($scope.classId);
 
-            $scope.getExamSchedule = function(){
+                })
+                .error(function (data, success) { })
+        }
+        $scope.getExamSchedule = function () {
             examServices.getExamSchedule()
-            .success(function (data, status) {
-                $scope.examSchedule = data.exam_schedules; // Api list-name
-                $scope.examScheduleId = data.exam_schedules[0].exam_sch_id;
-                // $scope.getExamPapersbySectionAndSchedule($scope.examScheduleId,$scope.secId);
-            })
-            .error(function (data, success) {})
+                .success(function (data, status) {
+                    $scope.examSchedule = data.exam_schedules; // Api list-name
+                    $scope.examScheduleId = data.exam_schedules[0].exam_sch_id;
+                    // $scope.getExamPapersbySectionAndSchedule($scope.examScheduleId,$scope.secId);
+                })
+                .error(function (data, success) { })
 
         }
         $scope.getExamSchedule();
@@ -29,41 +30,62 @@ angular.module('school_erp')
                     $scope.secData = data.class_sections; // Api list-name
                     $scope.secId = data.class_sections[0].section_id;
                     $scope.getSubjects($scope.secId);
-                    $scope.getExamPapersbySectionAndSchedule($scope.examScheduleId,$scope.secId);
+                    $scope.getExamPapersbySectionAndSchedule($scope.examScheduleId, $scope.secId);
                 })
-                .error(function (data, success) {})
+                .error(function (data, success) { })
         }
 
-         $scope.getExamPapersbySectionAndSchedule = function (exSchedule,sectionId) {
-             $scope.examScheduleId = exSchedule;
-            examServices.getExamPapersbySectionAndSchedule(exSchedule,sectionId)
+        $scope.getExamPapersbySectionAndSchedule = function (exSchedule, sectionId) {
+            $scope.examScheduleId = exSchedule;
+            examServices.getExamPapersbySectionAndSchedule(exSchedule, sectionId)
                 .success(function (data, status) {
-                    $scope.examData = data.resultArray;
-                     console.log(JSON.stringify(data));
+                    $scope.examPaper = data.resultArray;
+
+
+                    $scope.examData = [];
+                    index = 0;
+                    $scope.examPaper.forEach(function (element) {
+
+                        var obj = {
+                            id: index++,
+                            exam_paper_id: element.exam_paper_id,
+                            subject_name: element.subject_name,
+                            exam_paper_title:element.exam_paper_title,
+                            max_marks: element.max_marks,
+                            date:element.date,
+                            start_time:element.start_time,
+                            end_time:element.end_time
+
+
+                        }
+                        $scope.examData.push(obj);
+                       // console.log($scope.examData);
+                    })
+                 //   console.log(JSON.stringify(data));
 
                 })
-                .error(function (data, success) {});
+                .error(function (data, success) { });
         }
 
         // $scope.populateExams = function (examScheduleId,classId) {
         //     $scope.examScheduleId = examScheduleId;
         //     $scope.getExamPapersbySectionAndSchedule(examScheduleId,$scope.classId);
         // }
-        $scope.getExamSchedule = function(){
+        $scope.getExamSchedule = function () {
             examServices.getExamSchedule()
-            .success(function (data, status) {
-                $scope.examSchedule = data.exam_schedules; // Api list-name
-                $scope.examScheduleId = data.exam_schedules[0].exam_sch_id;
-                // $scope.getExamPapersbySectionAndSchedule($scope.examScheduleId,$scope.secId);
-            })
-            .error(function (data, success) {})
+                .success(function (data, status) {
+                    $scope.examSchedule = data.exam_schedules; // Api list-name
+                    $scope.examScheduleId = data.exam_schedules[0].exam_sch_id;
+                    // $scope.getExamPapersbySectionAndSchedule($scope.examScheduleId,$scope.secId);
+                })
+                .error(function (data, success) { })
 
         }
         $scope.getExamSchedule();
-        
- 
 
-        $scope.addExamPapers = function (data,subjectId, examScheduleId,classId,secId) {
+
+
+        $scope.addExamPapers = function (data, subjectId, examScheduleId, classId, secId) {
             var examDetails = {
                 subject_name: $scope.data.subject_name,
                 exam_paper_title: $scope.data.exam_paper_title,
@@ -74,14 +96,14 @@ angular.module('school_erp')
             }
             // console.log($scope.examScheduleId, $scope.secId,  $scope.classId)
             //   console.log(data,subjectId, examScheduleId,classId,secId)
-            examServices.setExamPapers(examDetails, subjectId, examScheduleId,classId,secId)
+            examServices.setExamPapers(examDetails, subjectId, examScheduleId, classId, secId)
                 .success(function (data, status) {
                     ngDialog.open({
                         template: '<p>ExamPapers are Added Successfully.</p>',
                         plain: true
                     });
                     $scope.data = {};
-                    $scope.getExamPapersbySectionAndSchedule($scope.examScheduleId,$scope.secId);
+                    $scope.getExamPapersbySectionAndSchedule($scope.examScheduleId, $scope.secId);
                 })
                 .error(function (data, success) {
                     ngDialog.open({
@@ -95,13 +117,13 @@ angular.module('school_erp')
         $scope.getSubjects = function (secId) {
             subjectsServices.getSubjects(secId)
                 .success(function (data, status) {
-                   ;
+                    ;
                     $scope.subjectsData = data.subjects;
                     $scope.data.subjectId = data.subjects[0].subject_id;
-                    
+
                     // $scope.getExamPapersbySectionAndSchedule($scope.subjectId, $scope.examScheduleId);
                 })
-                .error(function (data, success) {});
+                .error(function (data, success) { });
         }
 
         $scope.showRole = function (role) {
@@ -135,7 +157,7 @@ angular.module('school_erp')
                     //     plain: true
                     // });
                     $scope.editdata = [];
-                    $scope.getExamPapersbySectionAndSchedule( $scope.examScheduleId,$scope.secId);
+                    $scope.getExamPapersbySectionAndSchedule($scope.examScheduleId, $scope.secId);
                 })
                 .error(function (data, success) {
                     ngDialog.open({
@@ -157,7 +179,7 @@ angular.module('school_erp')
                         plain: true
                     });
                     $scope.editdata = [];
-                    $scope.getExamPapersbySectionAndSchedule( $scope.examScheduleId,$scope.secId);
+                    $scope.getExamPapersbySectionAndSchedule($scope.examScheduleId, $scope.secId);
                 })
                 .error(function (data, success) {
                     ngDialog.open({
@@ -230,7 +252,7 @@ angular.module('school_erp')
 
             $http({
                 method: "POST",
-                url: globalServices.globalValue.baseURL + 'api/book/'+globalServices.globalValue.school_id,
+                url: globalServices.globalValue.baseURL + 'api/book/' + globalServices.globalValue.school_id,
                 data: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json'
@@ -258,5 +280,14 @@ angular.module('school_erp')
                 default:
                     console.log('no event caught');
             }
+        }
+
+        if ($rootScope.role == 'parent') {
+
+            $scope.class_id = $rootScope.student.class_id;
+            $scope.populateSections($scope.class_id);
+
+        } else {
+            $scope.getClassesInitalLoad();
         }
     }])

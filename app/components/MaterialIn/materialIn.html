@@ -1,0 +1,164 @@
+<div class="row background">
+    <div class="container">
+        <h1>Store Mangement</h1>
+        <ul class="links">
+            <li>
+                <!-- <a ui-sref='main.addBook'>Addbook</a> -->
+                <a ui-sref='main.store'>Vendor</a>
+            </li>/
+            <li>
+                <a ui-sref='main.materialIn'>Material-In</a>
+            </li>/
+            <li>
+                <a ui-sref='main.materialOut'>Material_out</a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="Addstation">
+            <div class="col-md-3">
+                <div class="backwhite">
+                    <!-- <h1>Material In</h1> -->
+                    <h1>Store Material </h1>
+                    <form name="MaterialIn" ng-submit="MaterialIn.$valid && addsetMaterialIn(data)" novalidate>                     
+
+                        <div class="form-group" ng-class="{'has-error': MaterialIn.$submitted  && MaterialIn.materialName.$pristine}">
+                            <label>Material</label>
+                            <input name="materialName" type="text" ng-model="data.material" class="form-control" placeholder="Enter ..." required>
+                        </div>
+
+
+
+                        <div class="form-group" ng-class="{'has-error': MaterialIn.$submitted  && MaterialIn.vendorName.$pristine}">
+                            <label>Vendor Name</label>
+                            <input name="vendorName" type="text" ng-model="data.vendor_name" class="form-control" placeholder="Enter ..." required>
+                        </div>
+
+
+
+                        <div class="form-group" ng-class="{'has-error': MaterialIn.$submitted && MaterialIn.noofunits.$pristine}">
+                            <label>No Of Units</label>
+                            <input name="noofunits" type="text" ng-model="data.no_of_units" class="form-control" placeholder="Enter ..." required>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': MaterialIn.$submitted && MaterialIn.price.$pristine}">
+                            <label>Price</label>
+                            <input name="price" type="text" ng-model="data.price" class="form-control" placeholder="Enter ..." required>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': MaterialIn.$submitted && MaterialIn.purchased_date.$pristine}">
+                            <label>Purchased_date</label>
+                            <input name="purchased_date" type="text" ng-model="data.purchased_date" class="form-control" placeholder="Enter ..." required>
+                        </div>
+
+
+
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Add Material In</button>
+                        </div>
+
+                    </form>
+
+
+
+
+
+                    <!-- <div class="form-group">
+                        <label for="inputdefault">Station Name</label><br>
+                        <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                    </div>
+                    <div class="form-group">
+
+                        <label for="inputdefault">Station Code</label><br>
+                        <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                    </div>
+                    <div class="form-group">
+
+                        <label for="inputdefault">Station Geolocation</label><br>
+                        <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
+                    </div>
+                    <div class="form-group">
+                        <button>Add Station</button>
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="backwhite">
+                    <h1>Material-In List</h1>
+                    <table export-table st-table="display_records" st-safe-src="data" class="table rwd-table table-striped" style="width:100%">
+                        <tr>
+                            <th>#</th>
+                            <th>Material</th>
+                            <th>Vendor</th>
+                            <th>No of units</th>
+                            <th>Price</th>
+                            <th>Purchased_date</th>
+                            <th class="pull-right">Action</th>
+                        </tr>
+                        <tbody>
+                            <tr st-select-row="row" st-select-mode="multiple" ng-repeat="material in display_records" class="editable-row">
+                                <td>
+                                    {{$index+1}}
+                                </td>
+                                <td>
+                                    <span editable-text="material.material" e-name="editdata.material" onaftersave="EditMaterialIn($index)" e-form="rowform" e-required>{{material.material || 'empty' }}</span>
+                                </td>
+                                <td>
+                                    <span editable-text="material.vendor_name" e-name="editdata.vendor_name" onaftersave="EditMaterialIn($index)" e-form="rowform" e-required>{{material.vendor_name || 'empty' }}</span>
+                                </td>
+                                <td>
+                                    <span editable-text="material.no_of_units" e-name="editdata.no_of_units" onaftersave="EditMaterialIn($index)" e-form="rowform" e-required>{{material.no_of_units || 'empty' }}</span>
+                                </td>
+                                <td>
+                                    <span editable-text="material.price" e-name="editdata.price" onaftersave="EditMaterialIn($index)" e-form="rowform" e-required>{{material.price || 'empty' }}</span>
+                                </td>
+                                <td>
+                                    <span editable-text="material.purchased_date" e-name="editdata.purchased_date" onaftersave="EditMaterialIn($index)" e-form="rowform"
+                                        e-required>{{material.purchased_date || 'empty' }}</span>
+                                </td>
+
+
+                                <td class="pull-right">
+                                    <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == material">
+                                        <button type="submit" ng-click="EditMaterialIn($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                                            <i class="fa fa-remove"></i>
+                                        </button>
+                                    </form>
+
+                                    <div class="buttons" ng-show="!rowform.$visible">
+                                        <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteMaterialIn($index)" ng-confirm-click="Are you sure you want to delete this item?">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <div class="pull-right" st-pagination="" st-items-by-page="5" st-displayed-pages="5"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <script src="js/scripts.js"></script>
+</body>
+</html> -->

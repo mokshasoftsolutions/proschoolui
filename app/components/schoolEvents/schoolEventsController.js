@@ -1,8 +1,8 @@
 angular.module('school_erp')
-    .controller("schoolEventsController", ['$http', '$scope', '$rootScope', '$compile', 'uiCalendarConfig', 'schoolEventsServices', 'ngDialog','globalServices', function ($http, $scope, $rootScope, $compile, uiCalendarConfig, schoolEventsServices, ngDialog,globalServices) {
-        
+    .controller("schoolEventsController", ['$http', '$scope', '$rootScope', '$compile','$filter','uiCalendarConfig', 'schoolEventsServices', 'ngDialog', 'globalServices', function ($http, $scope, $rootScope, $compile,$filter, uiCalendarConfig, schoolEventsServices, ngDialog, globalServices) {
 
-      $scope.eventsData = [];
+
+        $scope.eventsData = [];
 
         var date = new Date();
         var d = date.getDate();
@@ -10,13 +10,13 @@ angular.module('school_erp')
         var y = date.getFullYear();
 
         $scope.changeTo = 'Hungarian';
-        
+
         $scope.eventsF = function (start, end, timezone, callback) {
-           
+
             callback($scope.eventsData);
         };
 
-       /* alert on eventClick */
+        /* alert on eventClick */
         $scope.alertOnEventClick = function (date, jsEvent, view) {
             $scope.alertMessage = (date.title + ' was clicked ');
         };
@@ -43,14 +43,14 @@ angular.module('school_erp')
         };
         /* add custom event*/
         $scope.addEvent = function (data) {
-            console.log($scope.eventsData);
+            //console.log($scope.eventsData);
             //  $rootScope.events.push({
             //     title: 'Open Sesame',
             //     start: new Date(y, m, 12),
             //     end: new Date(y, m, 13),
             //     className: ['openSesame']
             // });
-
+               //  console.log(data+"hema");
             var EventDetails = {
                 event_title: $scope.data.event_name,
                 date: $scope.data.date,
@@ -59,7 +59,7 @@ angular.module('school_erp')
             }
 
 
-                  
+
 
             schoolEventsServices.setEvents(EventDetails)
                 .success(function (successdata, status) {
@@ -67,7 +67,7 @@ angular.module('school_erp')
                         template: '<p>SchoolEvents are added Successfully.</p>',
                         plain: true
                     });
-                  
+
                     $scope.data = {};
                     //$scope. = [];
                     $scope.getEvent();
@@ -93,24 +93,25 @@ angular.module('school_erp')
 
             schoolEventsServices.getEvents()
                 .success(function (data, status) {
-                    // console.log(JSON.stringify(data));
+                     console.log(JSON.stringify(data));
                     // $scope.eventData = data.school_events;
 
-                    angular.forEach(data.school_events, function(value, key) {
-                 
-                        
-                            $scope.eventsData.push({
-                                            title:value.event_title,
-                                            start:new Date(value.date),
-                                            end: new Date(value.date),
-                                            className: value.description,
-                                            allDay: false
-                                        });
+                    angular.forEach(data.school_events, function (value, key) {
+
+
+                        $scope.eventsData.push({
+                            title: value.event_title,
+                            start: new Date(value.date),
+                            end: new Date(value.date),
+                            time: $filter('date')(new Date(value.date), 'HH:mm'),
+                            className: value.description,
+                            allDay: false
+                        });
 
 
                     })
 
- 
+
 
 
 
@@ -153,6 +154,8 @@ angular.module('school_erp')
         $scope.eventRender = function (event, element, view) {
             element.attr({
                 'tooltip': event.title,
+                'tooltip':event.time,
+                'tooltip':event.className,
                 'tooltip-append-to-body': true
             });
             $compile(element)($scope);
@@ -186,15 +189,15 @@ angular.module('school_erp')
             }
         };
         /* event sources array*/
-        $scope.eventSources = [$scope.eventsData];
-        console.log($scope.eventsData);
-        $scope.eventSources2 = [$scope.eventsF,$scope.eventsData];
+      $scope.eventSources = [$scope.eventsData];
+        //   console.log($scope.eventsData);
+        //$scope.eventSources2 = [$scope.eventsF, $scope.eventsData];
 
 
-         // Role based Display
+        // Role based Display
         $scope.showRole = function (role) {
             return globalServices.fetchRoleAuth(role);
-        } 
+        }
 
         $scope.getEvent();
 

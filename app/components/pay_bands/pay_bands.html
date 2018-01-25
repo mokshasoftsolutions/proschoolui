@@ -1,0 +1,112 @@
+<div class="row background">
+  <div class="container">
+    <h1>Settings</h1>
+    <ul class="links">
+      <!-- <li ui-sref-active="active">
+        <a ui-sref="main.schoolInformation">School Details</a>
+      </li>/ -->
+      <li ui-sref-active="active">
+        <a ui-sref="main.session_timings">Session Timings</a>
+      </li>/
+      <li ui-sref-active="active">
+        <a ui-sref="main.pay_bands">Pay Bands</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="Salary">
+      <h1>Salary Heads</h1>
+      <div class="backwhite">
+        <div class="col-md-4">
+          <label for="inputdefault">Pay Band :</label>
+          <br>
+          <input class="form-control" placeholder="Enter..." id="inputdefault" ng-model="data.pay_band" type="text">
+        </div>
+        <div class="col-md-4">
+          <label for="inputdefault">Basic Pay :</label>
+          <br>
+          <input class="form-control" placeholder="Enter..." id="inputdefault" ng-model="data.basic" type="text">
+        </div>
+        <div class="col-md-4">
+          <button ng-click="addPay_band(data)" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Add PayBand</button>
+        </div>
+      </div>
+      <div class="col-md-12" ">
+        <div class="col-md-6 ">
+          <h1>ALLOWENCES [+]</h1>
+          <div class="table-responsive ">
+            <table style="width: 100% ">
+              <tbody>
+                <tr>
+                  <td><label for="DA ">DA  :</label></td>
+                  <td><input type="text " ng-model="data.DA "></td>
+                </tr>
+                <tr>
+                  <td><label for="HRA ">HRA  :</label></td>
+                  <td><input type = "text " ng-model="data.HRA "></td>
+                </tr>
+                <tr>
+                  <td><label for="CA ">CA  :</label></td>
+                  <td><input type="text " ng-model="data.CA "></td>
+                </tr>
+                <tr>
+                  <td><label for="ALOW ">ALOW   :</label></td>
+                  <td><input type="text " ng-model="data.ALOW "></td>
+                </tr>
+                <tr>
+                  <td><label for="ARR ">ARR  :</label></td>
+                  <td><input type="text " ng-model="data.ARR "></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-6 ">
+          <h1>DEDUCTIONS [-]</h1>
+          <div class="table-responsive ">
+            <table style="width: 100% ">
+              <tbody>
+                <tr>
+                  <td><label for="EPF ">EPF:</label></td>
+                  <td><input type="text " ng-model="data.EPF "></td>
+                </tr>
+                <tr>
+                  <td><label for="ESIC ">ESIC  :</label></td>
+                  <td><input type = "text " ng-model="data.ESIC "></td>
+                </tr>
+                <tr>
+                  <td><label for="TDS ">TDS   :</label></td>
+                  <td><input type="text " ng-model="data.TDS "></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 ">
+        <div class="table-responsive ">
+          <table style="width:100% ">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Basic</th>
+                <th>Allowences </th>
+                <th>Deductions</th>    
+              </tr> 
+            </thead>
+            <tbody>
+              <tr>
+                <th>{{$index+1}}</th>
+                <th>{{payband.basic}}</th>
+                <th>{{payband.allowances}}</th>
+                <th>{{payband.deductions}}</th>
+              </tr>
+            </tbody>               
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

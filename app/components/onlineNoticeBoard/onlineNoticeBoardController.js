@@ -1,17 +1,17 @@
 angular.module('school_erp')
-    .controller("noticeboardController", ['$http', '$scope','$filter','$rootScope', 'globalServices', 'NoticeBoardServices', 'ngDialog', function ($http, $scope, $filter,$rootScope, globalServices, NoticeBoardServices, ngDialog) {
+    .controller("noticeboardController", ['$http', '$scope', '$filter', '$rootScope', 'globalServices', 'NoticeBoardServices', 'ngDialog', function ($http, $scope, $filter, $rootScope, globalServices, NoticeBoardServices, ngDialog) {
         $scope.NoticeBoardData = [];
         $scope.editdata = [];
 
 
         NoticeBoardServices.getNoticeBoard()
             .success(function (data, status) {
-                 console.log(JSON.stringify(data));
+                //   console.log(JSON.stringify(data));
                 $scope.NoticeBoardData = data.messages;
-               
-                console.log($scope.NoticeBoardData);
-                 $scope.message_id = $scope.NoticeBoardData[0].messages_id;
-            console.log($scope.message_id);
+
+                //   console.log($scope.NoticeBoardData);
+                $scope.message_id = $scope.NoticeBoardData[0].messages_id;
+                // console.log($scope.message_id);
             })
             .error(function (data, success) {
             })
@@ -19,14 +19,14 @@ angular.module('school_erp')
 
 
         $scope.addNoticeBoard = function (data) {
-            console.log("message");
+            // console.log("message");
             var NoticeBoardDetails = {
                 subject: $scope.data.subject,
                 messages: $scope.data.message,
                 date: new Date().toDateString(),
-                time:$filter('date')(new Date(), 'HH:mm')
+                time: $filter('date')(new Date(), 'HH:mm')
             }
-            console.log(NoticeBoardDetails);
+            //  console.log(NoticeBoardDetails);
             NoticeBoardServices.setNoticeBoard(NoticeBoardDetails)
                 .success(function (data, status) {
                     ngDialog.open({
@@ -37,8 +37,8 @@ angular.module('school_erp')
                     NoticeBoardServices.getNoticeBoard()
                         .success(function (data, status) {
                             $scope.NoticeBoardData = data.messages;
-                            console.log(JSON.stringify(data));
-                            console.log($scope.NoticeBoardData);
+                            //    console.log(JSON.stringify(data));
+                            //    console.log($scope.NoticeBoardData);
                         })
                         .error(function (data, success) {
                         })
@@ -94,7 +94,7 @@ angular.module('school_erp')
         $scope.DeleteNoticeBoard = function (value) {
             $scope.editdata = angular.copy($scope.NoticeBoardData[value]);
             $scope.message_id = $scope.editdata.messages_id;
-            console.log($scope.message_id);
+            //   console.log($scope.message_id);
             NoticeBoardServices.DeleteNoticeBoard($scope.message_id)
                 .success(function (data, status) {
                     ngDialog.open({
@@ -222,11 +222,11 @@ angular.module('school_erp')
 
 
         $scope.save = function (data) {
-            console.log(JSON.stringify(data));
+            //  console.log(JSON.stringify(data));
 
             $http({
                 method: "POST",
-                url: globalServices.globalValue.baseURL + 'api/book/'+globalServices.globalValue.school_id,
+                url: globalServices.globalValue.baseURL + 'api/book/' + globalServices.globalValue.school_id,
                 data: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json'
@@ -254,10 +254,10 @@ angular.module('school_erp')
             }
         }
 
-         // Role based Display
+        // Role based Display
         $scope.showRole = function (role) {
             return globalServices.fetchRoleAuth(role);
-        } 
+        }
 
         // if ($rootScope.role == 'parent') {
 

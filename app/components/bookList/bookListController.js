@@ -12,18 +12,39 @@ angular.module('school_erp')
         //$scope.hideForm = false;
 
 
-        $scope.data = [];
+       $scope.getBook = function(){
         addBookServices.getBook()
             .success(function (data, status) {
 
-                $scope.data = data.books;
-                console.log(JSON.stringify(data));
+                $scope.bookList = data.books;
+                // console.log(JSON.stringify(data));
+                $scope.data = [];
+                index = 0;
+                $scope.bookList.forEach(function (element) {
 
-                
+                    var obj = {
+                        id: index++,
+                        book_id: element.book_id,
+                        book_title: element.book_title,
+                        author_name: element.author_name,
+                        subject: element.subject,
+                        book_price: element.book_price,
+                        qty: element.qty,
+                        rack_number: element.rack_number,
+                        inward_date:element.inward_date,
+                       
+
+                    }
+                    $scope.data.push(obj);
+                    // console.log("mesaage for section");
+                   // console.log($scope.employeeData);
+                })
+
+
             })
             .error(function (data, success) {
             })
-
+        }
         $scope.getClassesInitalLoad = function () {
 
             globalServices.getClass()
@@ -70,12 +91,12 @@ angular.module('school_erp')
         }
 
 
-        $scope.EditBook = function (value,books) {
+        $scope.EditBook = function (value, books) {
 
-            console.log("messsage");
+            // console.log("messsage");
             $scope.books = angular.copy($scope.data[value]);
             var BooksDetails = {
-               book_title: $scope.books.book_title,
+                book_title: $scope.books.book_title,
                 author_name: $scope.books.author_name,
                 book_price: $scope.books.book_price,
                 qty: $scope.books.qty,
@@ -84,17 +105,17 @@ angular.module('school_erp')
                 book_description: $scope.books.book_description,
                 subject: $scope.books.subject
             }
-            console.log(BooksDetails);
+            //  console.log(BooksDetails);
             $scope.book_id = $scope.books.book_id;
-            console.log($scope.book_id);
-            $scope.addEditBook(BooksDetails ,$scope.book_id);
+            //   console.log($scope.book_id);
+            $scope.addEditBook(BooksDetails, $scope.book_id);
         }
         //  var StationDetails = {
         //     station_name:$scope.data.station_name,
         //     station_code:$scope.data.station_code,
         //     station_geo_location:$scope.data.station_geo_location
         //  }
-        $scope.addEditBook = function (BooksDetails ,book_id) {
+        $scope.addEditBook = function (BooksDetails, book_id) {
             addBookServices.EditBook(BooksDetails, book_id)
                 .success(function (data, status) {
                     // ngDialog.open({
@@ -102,13 +123,7 @@ angular.module('school_erp')
                     //     plain: true
                     // });
                     $scope.editdata = [];
-                    addBookServices.getBook()
-            .success(function (data, status) {
-
-                $scope.data = data.books;
-            })
-            .error(function (data, success) {
-            })
+                    $scope.getBook();
                 })
                 .error(function (data, success) {
                     ngDialog.open({
@@ -122,7 +137,7 @@ angular.module('school_erp')
         $scope.DeleteBook = function (value) {
             $scope.editdata = angular.copy($scope.data[value]);
             $scope.book_id = $scope.editdata.book_id;
-            console.log($scope.book_id);
+            //   console.log($scope.book_id);
             addBookServices.DeleteBook($scope.book_id)
                 .success(function (data, status) {
                     //ngDialog.open({
@@ -130,13 +145,13 @@ angular.module('school_erp')
                     //    plain: true
                     // });
                     $scope.editdata = [];
-                   addBookServices.getBook()
-            .success(function (data, status) {
+                    addBookServices.getBook()
+                        .success(function (data, status) {
 
-                $scope.data = data.books;
-            })
-            .error(function (data, success) {
-            })
+                            $scope.data = data.books;
+                        })
+                        .error(function (data, success) {
+                        })
                 })
                 .error(function (data, success) {
                     ngDialog.open({
@@ -145,6 +160,7 @@ angular.module('school_erp')
                     });
                 })
         }
+        $scope.getBook();
         //$scope.divEmployee = false;
 
         //     $scope.EditBook = function (books) {

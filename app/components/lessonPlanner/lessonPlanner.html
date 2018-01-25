@@ -1,0 +1,106 @@
+<div class="row background">
+  <div class="container">
+    <h1>Acadamic Management</h1>
+    <ul class="links">
+      <li>
+        <a ui-sref='main.subjects'>Subjects</a>
+      </li>
+      <li>/
+        <a ui-sref='main.chapters'>Chapters</a>
+      </li>
+      <li ng-if="showRole(['admin','teacher'])">/
+        <a ui-sref='main.assignSubjects'>Assign Subjects</a>
+      </li>
+      <li ng-if="showRole(['admin','teacher'])">/
+        <a ui-sref='main.lessonPlanner'>Lession Planner</a>
+      </li>
+      <li ng-if="showRole(['admin','teacher'])">/
+        <a ui-sref='main.lessonTracker'>Lession Tracker</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="Quiz">
+      <div class="col-md-3">
+        <div class="backwhite">
+          <div class="form-group">
+            <label>Class</label>
+            <select data-ng-change="populateSections(classId)" ng-options="class.class_id as class.name for class in classData" class="form-control select2"
+              style="width: 100%;" ng-model="classId">
+
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Section</label>
+            <select ng-options="sec.section_id as sec.name for sec in secData" data-ng-change="populateSubjects(secId)" class="form-control select2"
+              style="width: 100%;" ng-model="secId">
+
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Subject </label>
+            <select ng-options="sub.subject_id as sub.name for sub in subData " data-ng-change="getChapters(subId)" class="form-control select2"
+              style="width: 100%;" name="sectionId" ng-model="subId">
+
+            </select>
+          </div>
+          <div class="row">
+            <div class="col-md-12" ng-show="showRole(['admin','teacher','parent'])">
+              <button type="submit" ng-click="getChapters(subId)" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Select</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="backwhite1">
+          <div class="table-responsive">
+            <table export-table st-table="display_records" st-safe-src="chaptersData" class="table rwd-table table-striped" style="width:100%;margin-top: 20px;">
+
+              <tr>
+                <th>#</th>
+                <th>Chapter name</th>
+                <th>Chapter code</th>
+                <th>Total Topics</th>
+                <th>Completed Topics</th>
+              </tr>
+              <tbody>
+                <tr ng-repeat="chapter in display_records">
+                  <td>{{chapter.id+1}}</td>
+                  <td>
+                    {{chapter.title || 'empty' }}
+                  </td>
+                  <td>
+
+                    {{chapter.chapter_code || 'empty' }}
+                  </td>
+
+                  <td>
+
+                    {{chapter.no_of_topics || 'empty' }}
+                  </td>
+                  <td>
+
+                    <div class="form-group">
+                      <input type="text" class="form-control" ng-model="chapter.completed_topics" ng-bind="chapter.completed_topics" id="inputdefault">
+                    </div>
+                  </td>
+
+                </tr>
+              </tbody>
+
+
+
+
+
+            </table>
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary active pull-right" ng-click="addBulkChapter(subId);" style="background-color: #03104e">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

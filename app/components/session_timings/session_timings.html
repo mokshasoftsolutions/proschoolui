@@ -1,0 +1,115 @@
+<div class="row background">
+    <div class="container">
+        <h1>Settings</h1>
+        <ul class="links">
+            <!-- <li ui-sref-active="active">
+                <a ui-sref="main.schoolInformation">School Details</a>
+            </li>/ -->
+            <li ui-sref-active="active">
+                <a ui-sref="main.session_timings">Session Timings</a>
+            </li>/
+            <li ui-sref-active="active">
+                <a ui-sref="main.pay_bands">Pay Bands</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container">
+    <div class="studentinfo">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="backwhite">
+                    <div class="form-group">
+                        <label>Session</label>
+                        <input type="text" class="form-control" name="session" ng-model="data.session" placeholder="Enter ..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Start Time</label>
+                        <div class="input-group">
+                            <input type="text" name="startTime" ng-model="data.start_time" class="form-control timepicker" required>
+                            <!-- <div class="input-group-addon">
+                                <i class="fa fa-clock-o"></i>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>End Time</label>
+                        <div class="input-group">
+                            <input type="text" name="startTime" ng-model="data.end_time" class="form-control timepicker" required>
+                            <!-- <div class="input-group-addon">
+                                <i class="fa fa-clock-o"></i>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="box-footer">
+                        <button ng-click="addSession_timings(data)" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Add Session</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-9">
+                <div class="backwhite">
+                    <table table st-table="display_records" st-safe-src="sessionData" class="table rwd-table table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Session</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th ng-hide="pdf">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr st-select-row="row" st-select-mode="multiple" class="editable-row" ng-repeat="session in display_records" class="editable-row">
+                                <td ng-hide="index">{{$index+1}}</td>
+                                
+                                <td>
+                                    <span editable-text="session.session" e-name="session" onaftersave="EditSession($index)" e-form="rowform" e-required>{{session.session || 'empty' }}</span>
+                                </td>
+                                <td>
+                                    <span editable-text="session.start_time" e-name="start_time" onaftersave="EditSession($index)" e-form="rowform" e-required>{{session.start_time || 'empty' }}</span>
+                                </td>
+                                <td>
+                                    <span editable-text="session.end_time" e-name="end_time" onaftersave="EditSession($index)" e-form="rowform" e-required>{{session.end_time || 'empty' }}</span>
+                                </td>
+                                <!-- <td>
+                                    <a href="">{{session.session}}</a>
+                                </td>
+                                <td>
+                                    <a href="">{{session.start_time}}</a>
+                                </td>
+                                <td>
+                                    <a href="">{{session.end_time}}</a>
+                                </td> -->
+                                <td ng-hide="pdf">
+                                    <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == session">
+                                        <button type="submit" ng-click="EditSession($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                                            <i class="fa fa-remove"></i>
+                                        </button>
+                                    </form>
+
+                                    <div class="buttons" ng-show="!rowform.$visible">
+                                        <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteSession($index)" ng-confirm-click="Are you sure you want to delete this item?">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

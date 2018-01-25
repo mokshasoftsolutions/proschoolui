@@ -1,0 +1,491 @@
+<div class="row background">
+    <div class="container">
+        <h1>School Profile</h1>
+
+        <ul class="links">
+            <li ui-sref-active="active">
+                <a ui-sref='main.schoolProfile'>School Profile</a>
+            </li>
+            <li ui-sref-active="active" >
+      
+               / <a ui-sref='main.addClass&Section'>Class&Section</a>
+            </li>
+            <li ui-sref-active="active" ng-show="showRole(['admin'])">
+                /<a ui-sref='main.parentInfo'>ParentInfo</a>
+            </li>
+            <li ui-sref-active="active" ng-show="showRole(['admin'])">
+               / <a ui-sref='main.teacherInfo' >TeacherInfo</a>
+            </li>
+            <li ui-sref-active="active" ng-show="showRole(['admin','teacher'])">
+                /<a ui-sref='main.taskManagement'>TaskManagement</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container" ng-repeat="school in schoolDetails">
+    <div class="schoolprofile">
+        <div class="schoollogo">
+            <div class="col-md-12">
+                <div class="schoolimage">
+                    <div class="tooltip">
+
+                        <span editable-text="school.image" e-name="editdata.school" e-form="rowformImage"
+                            e-required> <img id="sclogo" ng-src="{{schoolImage}}" alt=""></span>
+                        <form editable-form name="rowformImage" ng-show="rowformImage.$visible" class="form-buttons form-inline" shown="inserted == school">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="file" name="file" ng-model="data.logo" ngf-select ngf-pattern="'image/*'" accept="image/*" ngf-max-size="5MB"
+                                        onchange="angular.element(this).scope().loadFile(this.files)">
+                                    <p style="color:#9e0707"> {{message}} </p>
+                                </div>
+                            </div>
+                            <button type="submit" ng-click="editSchoolImage()" ng-disabled="rowformImage.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                            <button type="button" ng-disabled="rowformImage.$waiting" ng-click="rowformImage.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                                            <i class="fa fa-remove"></i>
+                                        </button>
+
+                        </form>
+                        <div class="buttons" ng-show="!rowformImage.$visible">
+                            <button ng-show="showRole(['admin'])" class="btn btn-primary editable-table-button btn-xs" ng-click="rowformImage.$show()">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="schooldetails">
+            <div class="col-md-12">
+                <div class="editbutton">
+                    <h1>School Details</h1>
+                    <!-- <i class="fa fa-pencil" >Edit</i> -->
+                    <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == school">
+                        <button type="submit" ng-click="EditSchool_details($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                                            <i class="fa fa-remove"></i>
+                                        </button>
+                    </form>
+                    <div class="buttons" ng-show="!rowform.$visible">
+                        <button ng-show="showRole(['admin'])" class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered" style="width:100">
+                            <thead>
+                                <tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+
+                                    <td>
+                                        <b> Name </b> :
+                                        <span editable-text="school.name" e-name="editdata.school" onaftersave="EditSchool_details($index)" e-form="rowform" e-required>{{school.name || 'empty' }}</span>
+
+                                    </td>
+
+                                    <td>
+                                        <b>Class From :</b>
+                                        <span editable-text="school.class_from" e-name="editdata.school " onaftersave="EditSchool_details($index)" e-form="rowform"
+                                            e-required>{{school.class_from || 'empty' }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                    <td>
+                                        <b> Medium </b>
+                                        <span editable-text="school.medium" e-name="editdata.school " onaftersave="EditSchool_details($index)" e-form="rowform" e-required>{{school.medium || 'empty' }}</span>
+                                    </td>
+                                    <td>
+                                        <b> Affiliation </b>
+                                        <span editable-text="school.afflication" e-name="editdata.school " onaftersave="EditSchool_details($index)" e-form="rowform"
+                                            e-required>{{school.afflication|| 'empty' }}</span>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td> <b>Timings :</b>
+                                        <span editable-text="school.timings" e-name="editdata.school " onaftersave="EditSchool_details($index)" e-form="rowform"
+                                            e-required>{{school.timings|| 'empty' }}</span>
+
+
+                                    </td>
+                                    <td>
+                                        <b>Extra Curricular Activities :</b>
+                                        <span editable-text="school.extra_curricular_activites" e-name="editdata.school " onaftersave="EditSchool_details($index)"
+                                            e-form="rowform" e-required>{{school.extra_curricular_activites|| 'empty' }}</span>
+
+                                    </td>
+                                </tr>
+
+                                <!-- <tr>
+                                    <td>
+                                        <b>Facilities Available :</b>
+                                        <span editable-text="school.facilities_available" e-name="editdata.school " onaftersave="EditSchool_details($index)" e-form="rowform"
+                                            e-required>{{school.facilities_available|| 'empty' }}</span>
+
+                                    </td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="managementdetails">
+            <div class="col-md-12">
+                <div class="editbutton">
+                    <h1>Management Details</h1>
+                    <!-- <i class="fa fa-pencil" aria-hidden="true">Edit</i> -->
+                    <form editable-form name="rowform1" ng-show="rowform1.$visible" class="form-buttons form-inline" shown="inserted == school">
+                        <button type="submit" ng-click="EditSchool_details($index)" ng-disabled="rowform1.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                        <button type="button" ng-disabled="rowform1.$waiting" ng-click="rowform1.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                                            <i class="fa fa-remove"></i>
+                                        </button>
+                    </form>
+                    <div class="buttons" ng-show="!rowform1.$visible">
+                        <button ng-show="showRole(['admin'])" class="btn btn-primary editable-table-button btn-xs" ng-click="rowform1.$show()">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered" style="width:100">
+                            <thead>
+                                <tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <b>Founder :</b>
+                                        <span editable-text="school.founder" e-name="editdata.school " onaftersave="EditSchool_details($index)" e-form="rowform1"
+                                            e-required>{{school.founder|| 'empty' }}</span>
+
+                                    </td>
+                                    <td>
+                                        <b>Chairman :</b>
+                                        <span editable-text="school.chairman" e-name="editdata.school " onaftersave="EditSchool_details($index)" e-form="rowform1"
+                                            e-required>{{school.chairman|| 'empty' }}</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <b>Coordinator :</b>
+                                        <span editable-text="school.coordinator" e-name="editdata.school " onaftersave="EditSchool_details($index)" e-form="rowform1"
+                                            e-required>{{school.coordinator|| 'empty' }}</span>
+                                    </td>
+                                    <td>
+                                        <b>Principal :</b>
+                                        <span editable-text="school.principal" e-name="editdata.school " onaftersave="EditSchool_details($index)" e-form="rowform1"
+                                            e-required>{{school.principal|| 'empty' }}</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <b>Vice Principal :</b>
+                                        <span editable-text="school.vice_principal" e-name="editdata.school " onaftersave="EditSchool_details($index)" e-form="rowform1"
+                                            e-required>{{school.vice_principal|| 'empty' }}</span>
+                                    </td>
+                                    <td>
+                                        <b>Facilities Available :</b>
+                                        <span editable-text="school.facilities_available" e-name="editdata.school " onaftersave="EditSchool_details($index)" e-form="rowform1"
+                                            e-required>{{school.facilities_available|| 'empty' }}</span>
+                                    </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="contactdetails">
+                    <div class="col-md-12">
+                        <div class="editbutton">
+                            <h1>Contact Details</h1>
+                            <!-- <button><i class="fa fa-pencil" aria-hidden="true">Edit</i></button> -->
+                            <form editable-form name="rowform2" ng-show="rowform2.$visible" class="form-buttons form-inline" shown="inserted == school">
+                                <button type="submit" ng-click="EditSchool_details($index)" ng-disabled="rowform2.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                <button type="button" ng-disabled="rowform2.$waiting" ng-click="rowform2.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                                            <i class="fa fa-remove"></i>
+                                        </button>
+                            </form>
+                            <div class="buttons" ng-show="!rowform2.$visible">
+                                <button ng-show="showRole(['admin'])" class="btn btn-primary editable-table-button btn-xs" ng-click="rowform2.$show()">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered" style="width:100">
+                                    <thead>
+                                        <tr>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <b> Address</b>
+                                                <span editable-text="school.address" e-name="editdata.school " onaftersave="EditSchool_details($index)" e-form="rowform2"
+                                                    e-required>{{school.address|| 'empty' }}</span>
+                                            </td>
+                                            <td>
+                                                <b>Contact No :</b>
+                                                <span editable-text="school.phone" e-name="editdata.school " onaftersave="EditSchool_details($index)" e-form="rowform2" e-required>{{school.phone|| 'empty' }}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b> Alternate Phone:</b>
+                                                <span editable-text="school.alternate_phone" e-name="editdata.school " onaftersave="EditSchool_details($index)" e-form="rowform2"
+                                                    e-required>{{school.alternate_phone|| 'empty' }}</span>
+                                            </td>
+                                            <td><b>Website</b>
+                                                <span editable-text="school.website" e-name="editdata.school " onaftersave="EditSchool_details($index)" e-form="rowform2"
+                                                    e-required>{{school.website|| 'empty' }}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Email : </b>
+                                                <span editable-text="school.email" e-name="editdata.school " onaftersave="EditSchool_details($index)" e-form="rowform2" e-required>{{school.email|| 'empty' }}</span>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="row background">
+            <div class="container">
+                <h1>School Profile</h1>
+
+                <ul class="links">
+                    <li ui-sref-active="active">
+                        <a ui-sref='main.schoolProfile'>School Profile</a>
+                    </li>/
+                    <li ui-sref-active="active">
+
+                        <a ui-sref='main.addClass&Section'>AddClass&Section</a>
+                    </li>/
+                    <li ui-sref-active="active">
+                        <a ui-sref='main.parentInfo'>ParentInfo</a>
+                    </li>/
+                    <li ui-sref-active="active">
+                        <a ui-sref='main.teacherInfo'>TeacherInfo</a>
+                    </li>/
+                    <li ui-sref-active="active">
+                        <a ui-sref='main.taskManagement'>TaskManagement</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="schoolprofile">
+                <div class="schoollogo">
+                    <div class="col-md-12">
+                        <div class="schoolimage">
+                            <div class="tooltip">
+                                <img id="sclogo" ng-src="{{schoolImage}}" alt="">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="schooldetails">
+                    <div class="col-md-12">
+                        <h1>School Details</h1>
+                        <div class="col-md-6">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" style="width:100%; font-size: larger;">
+                                    <thead>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <b>School Name </b> :{{schoolDetails[0].name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>School Email </b> :{{schoolDetails[0].email}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Contact no</b> :{{schoolDetails[0].phone}}</td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <b>Batch Year</b> :{{schoolDetails[0].academic_year}}</td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="table-responsive">
+                                <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered" style="width:100">
+                                    <thead>
+                                        <tr>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <b>Class From :</b>{{schoolDetails[0].class_from}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Extra Curricular Activities :</b>{{schoolDetails[0].extra_curricular_activites}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Facilities Available :</b>{{schoolDetails[0].facilities_available}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="managementdetails">
+                    <div class="col-md-12">
+                        <h1>Management Details</h1>
+                        <div class="col-md-6">
+                            <div class="table-responsive">
+                                <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered" style="width:100">
+                                    <thead>
+                                        <tr>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <b>Founder :</b>{{schoolDetails[0].founder}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Chairman :</b>{{schoolDetails[0].chairman}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Coordinator :</b>{{schoolDetails[0].coordinator}}
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="table-responsive">
+                                <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered" style="width:100">
+                                    <thead>
+                                        <tr>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <b>Principal :</b>{{schoolDetails[0].principal}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Vice Principal :</b>{{schoolDetails[0].vice_principal}}
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contactdetails">
+                    <div class="col-md-12">
+                        <h1>Contact Details</h1>
+                        <div class="col-md-6">
+                            <div class="table-responsive">
+                                <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered" style="width:100">
+                                    <thead>
+                                        <tr>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <b>School Address</b> :{{schoolDetails[0].address}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Contact No :</b>{{schoolDetails[0].phone}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Atternate Email :</b>{{schoolDetails[0].alternate_email}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="col-md-6">
+                                <div class="table-responsive">
+                                    <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered" style="width:100">
+                                        <thead>
+                                            <tr>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <b>Website</b> :{{schoolDetails[0].website}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>Email : </b>{{schoolDetails[0].email}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->

@@ -1,54 +1,75 @@
 angular.module('school_erp')
-    .controller("feeTypeController", ['$http', '$scope', 'feeTypeServices', 'globalServices', 'subjectsServices', 'ngDialog','$rootScope', function ($http, $scope, feeTypeServices, globalServices, subjectsServices, ngDialog,$rootScope) {
+    .controller("feeTypeController", ['$http', '$scope', 'feeTypeServices', 'globalServices', 'subjectsServices', 'ngDialog', '$rootScope', function ($http, $scope, feeTypeServices, globalServices, subjectsServices, ngDialog, $rootScope) {
         $scope.feeTypeData = [];
         $scope.data = [];
-       
 
-      $scope.fee_catogery = [{
-                name: "Annual Fee",
-                id: 1
-            },
-            {
-                name: "Monthly Fee",
-                id: 2
-            },
-            {
-                name: "Quarterly Fee",
-                id: 3
-            },
-            {
-                name: "Half-yearly Fee",
-                id: 4
-            },
-            {
-                name: "Extra Fee",
-                id: 5
-            }];
+
+        $scope.fee_catogery = [{
+            name: "Annual Fee",
+            id: 1
+        },
+        {
+            name: "Monthly Fee",
+            id: 2
+        },
+        {
+            name: "Quarterly Fee",
+            id: 3
+        },
+        {
+            name: "Half-yearly Fee",
+            id: 4
+        },
+        {
+            name: "Extra Fee",
+            id: 5
+        }];
         // Role based Display
         $scope.showRole = function (role) {
             return globalServices.fetchRoleAuth(role);
         }
 
-       
+
 
         $scope.getFeeType = function () {
             feeTypeServices.getFeeType()
                 .success(function (data, status) {
-                   // console.log(subId)
-                    $scope.feeTypeData = data.feetypes;
-                    console.log(JSON.stringify(data))
+                    // console.log(subId)
+                    $scope.feeType = data.feetypes;
+                 //   console.log(JSON.stringify(data))
+                 $scope.feeTypeData = [];
+                 index = 0;
+                 $scope.feeType.forEach(function (element) {
+
+                     var obj = {
+                         id: index++,
+                         fee_types_id: element.fee_types_id,
+                         fee_category: element.fee_category,
+                         fee_type:element.fee_type,
+                        //  examschedule_name: element.examschedule_name,
+                        //  paper_name:element.paper_name,
+                        //  marks:element.marks,
+                        //  percentage:element.percentage,
+                        //  conduct:element.conduct
+
+
+                     }
+                     $scope.feeTypeData.push(obj);
+                    // console.log($scope.examData);
+                 })
+
 
                 })
-                .error(function (data, success) {});
+                .error(function (data, success) { });
         }
 
 
         $scope.addFeeType = function (data) {
-            console.log("message");
+            //    console.log("message");
             var FeeDetails = {
                 fee_category: $scope.data.fee_catogery,
                 fee_type: $scope.data.fee_type
-               
+
             }
             feeTypeServices.setFeeType(FeeDetails)
                 .success(function (data, status) {
@@ -70,21 +91,21 @@ angular.module('school_erp')
 
         $scope.EditFeeType = function (value, feeType) {
 
-            console.log("messsage");
+            //     console.log("messsage");
             $scope.feeType = angular.copy($scope.feeTypeData[value]);
-           
-             $scope.fee_types_id = $scope.feeType.fee_types_id;
-            console.log($scope.fee_types_id);
+
+            $scope.fee_types_id = $scope.feeType.fee_types_id;
+            //     console.log($scope.fee_types_id);
             var FeeDetails = {
                 fee_category: $scope.feeType.fee_category,
                 fee_type: $scope.feeType.fee_type
-               
+
             }
-           
-            $scope.addEditFeeType(FeeDetails ,$scope.fee_types_id);
+
+            $scope.addEditFeeType(FeeDetails, $scope.fee_types_id);
         }
-        $scope.addEditFeeType = function (FeeDetails ,fee_types_id) {
-            feeTypeServices.EditFeeType(FeeDetails ,fee_types_id)
+        $scope.addEditFeeType = function (FeeDetails, fee_types_id) {
+            feeTypeServices.EditFeeType(FeeDetails, fee_types_id)
                 .success(function (data, status) {
                     // ngDialog.open({
                     //     template: '<p>Station is Edited Successfully.</p>',
@@ -105,7 +126,7 @@ angular.module('school_erp')
         $scope.DeleteFeeType = function (value) {
             $scope.editdata = angular.copy($scope.feeTypeData[value]);
             $scope.fee_types_id = $scope.editdata.fee_types_id;
-            console.log($scope.fee_types_id);
+            //    console.log($scope.fee_types_id);
             feeTypeServices.DeleteFeeType($scope.fee_types_id)
                 .success(function (data, status) {
                     ngDialog.open({
@@ -113,7 +134,7 @@ angular.module('school_erp')
                         plain: true
                     });
                     $scope.editdata = [];
-                     $scope.getFeeType();
+                    $scope.getFeeType();
                 })
                 .error(function (data, success) {
                     ngDialog.open({
@@ -182,11 +203,11 @@ angular.module('school_erp')
 
 
         $scope.save = function (data) {
-            console.log(JSON.stringify(data));
+            //    console.log(JSON.stringify(data));
 
             $http({
                 method: "POST",
-                url: globalServices.globalValue.baseURL + 'api/book/'+globalServices.globalValue.school_id,
+                url: globalServices.globalValue.baseURL + 'api/book/' + globalServices.globalValue.school_id,
                 data: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json'
@@ -216,6 +237,6 @@ angular.module('school_erp')
             }
         }
 
-       
+
         $scope.getFeeType();
     }])

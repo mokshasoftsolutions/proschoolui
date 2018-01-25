@@ -1,5 +1,5 @@
 angular.module('school_erp')
-    .controller("assignSbjectsController", ['$http', '$scope', 'assignServices', 'ngDialog', 'globalServices', 'subjectsServices', 'employeeServices','studentServices', function ($http, $scope, assignServices, ngDialog, globalServices, subjectsServices, employeeServices,studentServices) {
+    .controller("assignSbjectsController", ['$http', '$scope', 'assignServices', 'ngDialog', 'globalServices', 'subjectsServices', 'employeeServices', 'studentServices', function ($http, $scope, assignServices, ngDialog, globalServices, subjectsServices, employeeServices, studentServices) {
         $scope.employeeData = [];
         $scope.teacherData = [];
         $scope.subjects = [];
@@ -13,9 +13,9 @@ angular.module('school_erp')
         // })
 
         globalServices.getClass()
-        
+
             .success(function (data, status) {
-                console.log(JSON.stringify(data))
+                // console.log(JSON.stringify(data))
                 $scope.classDatanew = data.school_classes;// Api list-name
                 $scope.classId = $scope.classDatanew[0].class_id;
                 // console.log(class_id);
@@ -41,10 +41,10 @@ angular.module('school_erp')
         $scope.getSubjects = function (secId) {
             subjectsServices.getSubjects(secId)
                 .success(function (data, status) {
-                    console.log(JSON.stringify(data));
+                    //   console.log(JSON.stringify(data));
                     $scope.subjectsData = data.subjects;
                     $scope.subjectId = $scope.subjectsData[0].subject_id;
-                    console.log($scope.subjectId);
+                    //   console.log($scope.subjectId);
 
                 })
                 .error(function (data, success) {
@@ -52,7 +52,7 @@ angular.module('school_erp')
         }
 
         $scope.getSubName = function (subid) {
-            console.log(subid);
+            //  console.log(subid);
             $scope.employeeData.forEach(function (ele) {
                 if (ele.subject_id == subid) {
                     return ele.name;
@@ -63,15 +63,15 @@ angular.module('school_erp')
 
 
         studentServices.getTeacherListBySchool()
-        .success(function (data, status) {
-            console.log(JSON.stringify(data));
-            $scope.teacherList = data.teachers;// Api list-name
-           
-            console.log($scope.teacherList);
-           
-        })
-        .error(function (data, success) {
-        })
+            .success(function (data, status) {
+                //   console.log(JSON.stringify(data));
+                $scope.teacherList = data.teachers;// Api list-name
+
+                //    console.log($scope.teacherList);
+
+            })
+            .error(function (data, success) {
+            })
 
 
 
@@ -112,37 +112,37 @@ angular.module('school_erp')
         //     .error(function (data, success) {
         //     })
 
-        $scope.addTeacher = function (data,secId) {
-            console.log("message");
+        $scope.addTeacher = function (data, secId) {
+            //  console.log("message");
 
 
             var teacherDetails = {
                 subject_id: $scope.data.subjectObj,
                 teacher_id: $scope.data.teachId,
-               
+
 
             }
-            console.log(teacherDetails);
+            //  console.log(teacherDetails);
 
 
-            assignServices.setTeacher(teacherDetails,secId)
+            assignServices.setTeacher(teacherDetails, secId)
                 .success(function (data, status) {
-                    if (data == false || data=='false') {
+                    if (data == false || data == 'false') {
                         ngDialog.open({
                             template: '<p>Subject is Already Added</p>',
                             plain: true
                         });
                     }
                     else {
-                    ngDialog.open({
-                        template: '<p>Subjects are Added Successfully.</p>',
-                        plain: true
-                    });
-                }
+                        ngDialog.open({
+                            template: '<p>Subjects are Added Successfully.</p>',
+                            plain: true
+                        });
+                    }
                     $scope.data = [];
                     $scope.getTeacher();
                 })
-                
+
                 .error(function (data, success) {
                     ngDialog.open({
                         template: '<p>Some Error Occured!</p>',
@@ -155,9 +155,30 @@ angular.module('school_erp')
 
             assignServices.getTeacher()
                 .success(function (data, status) {
-                    $scope.teacherData = data.teachers;
+                    $scope.teacher = data.teachers;
 
-                    console.log(JSON.stringify(data));
+                    // console.log(JSON.stringify(data));
+
+                    $scope.teacherData = [];
+                    index = 0;
+                    $scope.teacher.forEach(function (element) {
+
+                        var obj = {
+                            id: index++,
+                            teacher_id: element.teacher_id,
+
+                            teacher_name: element.teacher_name,
+                            subject_name: element.subjects[0].subjects,
+                            subject_id: element.subject_id
+                            // description:element.description,
+                            // no_of_topics:element.no_of_topics
+
+
+                        }
+                        $scope.teacherData.push(obj);
+                        //console.log($scope.teacherData);
+                    })
+
                     // $scope.subjects = $scope.teacherData[0].subjects;
                     //   console.log($scope.subjects);
                     //$scope.employeeData = data.employee;
@@ -212,9 +233,9 @@ angular.module('school_erp')
             $scope.editdata = angular.copy($scope.teacherData[value]);
             $scope.teacher_id = $scope.editdata.teacher_id;
             $scope.subject_id = $scope.editdata.subject_id;
-            console.log($scope.teacher_id);
-            console.log($scope.subject_id);
-            assignServices.DeleteAssignSubject($scope.teacher_id,$scope.subject_id)
+            //   console.log($scope.teacher_id);
+            //   console.log($scope.subject_id);
+            assignServices.DeleteAssignSubject($scope.teacher_id, $scope.subject_id)
                 .success(function (data, status) {
                     ngDialog.open({
                         template: '<p>Subject is Deleted Successfully.</p>',
@@ -243,7 +264,7 @@ angular.module('school_erp')
 
         $scope.loadFile = function (files) {
 
-            console.log("messsage1");
+            //  console.log("messsage1");
             $scope.$apply(function () {
 
                 $scope.selectedFile = files[0];
@@ -253,9 +274,9 @@ angular.module('school_erp')
         }
 
         $scope.handleFile = function () {
-            console.log("messsage2");
+            //  console.log("messsage2");
             var file = $scope.selectedFile;
-            console.log(file);
+            //  console.log(file);
             $scope.save(file);
 
 
@@ -297,13 +318,13 @@ angular.module('school_erp')
 
 
         $scope.save = function (file) {
-            console.log("messsage3");
-            console.log(file);
+            //   console.log("messsage3");
+            //   console.log(file);
 
             var fd = new FormData();
             fd.append('file', file);
-           // fd.append('data', 'string');
-            $http.post(globalServices.globalValue.baseURL+'api/upload_books/'+globalServices.globalValue.school_id, fd, {
+            // fd.append('data', 'string');
+            $http.post(globalServices.globalValue.baseURL + 'api/upload_books/' + globalServices.globalValue.school_id, fd, {
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }
             })
@@ -321,7 +342,7 @@ angular.module('school_erp')
                     });
                 });
         }
-           
+
 
         $scope.exportAction = function (option) {
             switch (option) {

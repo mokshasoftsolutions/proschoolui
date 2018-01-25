@@ -2,117 +2,385 @@
     <div class="container">
         <h1>Transport Mangement</h1>
         <ul class="links">
-            <li>
-                <a ui-sref='main.addStation'>Addstation</a>
-            </li>/
-            <li>
-                <a ui-sref='main.addVehicle'>AddVehicle</a>
-            </li>/
-            <li>
-                <a ui-sref='main.addBusRoute'>Addbusroute</a>
-            </li>/
-            <li>
-                <a ui-sref='main.routeGeolocation'>Routegeolocation</a>
-            </li>
-        </ul>
+                <li>
+                    <!-- <a ui-sref='main.addBook'>Addbook</a> -->
+                    <a ui-sref='main.addStation'>Station</a>
+                </li>/
+                <li>
+                    <a ui-sref='main.addVehicle'>Vehical</a>
+                </li>/
+                <li>
+                    <a ui-sref='main.addBusRoute'>Bus Route</a>
+                </li>/
+                <li>
+                    <a ui-sref='main.routeGeolocation'>Route Geolocation</a>
+                </li>
+            </ul>
     </div>
 </div>
-<div class="container">
-    <div class="row">
-        <div class="Addvehicle">
-            <div class="col-md-3">
-                <div class="backwhite">
-                    <h1>Transport</h1>
-                    <h1>Create vehicle</h1>
-                    <form name="Vehicles" ng-submit="Vehicles.$valid && addVehicle(data)" novalidate>
-            <div class="box box-default">
-              <div class="box-header with-border">
-                  
-              
-              <!-- /.box-header -->
-                              
-                 
-                    <div class="form-group" ng-class="{'has-error': Vehicles.$submitted  && Vehicles.admissionNo.$pristine}" >
-                      <label>Vehicle Name</label>
-                      <input type="text" name="admissionNo" ng-model="data.vehicle_name" class="form-control" placeholder="Enter ..." required>
-                    </div>
-                 
 
-                  
-                    <div class="form-group" ng-class="{'has-error': Vehicles.$submitted  && Vehicles.code.$pristine}" >
-                      <label>Vehicle Code</label>
-                      <input type="text" name="code" ng-model="data.vehicle_code" class="form-control" placeholder="Enter ..." required>
-                    </div>
-                  
-              
 
-              <div class="box-footer">
-                  <button type="submit" class="btn btn-primary pull-right" style= "background-color: #03104e;border-color: #03104e;">Add Vehicle</button>
-              </div>
-            </div>
-            </div>
-      </form>
+<div class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+        <li class="active" ng-show="showRole(['admin'])">
+            <a data-target="#tab_1" data-toggle="tab" aria-expanded="true">
+                <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Add Vehicle </a>
+        </li>
+        <li class="">
+            <a data-target="#tab_2" data-toggle="tab" aria-expanded="false">
+                <i class="fa fa-calendar-check-o" aria-hidden="true"></i> Vehicle List </a>
+        </li>
+    </ul>
+</div>
+<div class="tab-content">
+    <div class="tab-pane no-padding active" ng-show="showRole(['admin'])" id="tab_1">
 
-                    <!-- <div class="form-group">
+        <div class="container">
+            <div class="row">
+                <form name="AddVehicle" ng-submit="AddVehicle.$valid && addVehicleDetails(data)" novalidate>
+                    <div class="Addvehical1">
+                        <div class="addvehical1">
+                            <div class="col-md-12">
+                                <div class="backwhite">
+                                    <section class="details">
+                                        <h1>Vehical Details</h1>
+                                        <div class="col-md-4">
+                                            <div class="form-group" ng-class="{'has-error': AddVehicle.$submitted  && AddVehicle.name.$pristine}">
+                                                <label for="inputdefault">Name</label>
+                                                <input class="form-control" placeholder="Enter..." name="name" ng-model="data.name" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group" ng-class="{'has-error': AddVehicle.$submitted  && AddVehicle.number.$pristine}">
+                                                <label for="inputdefault">Number</label>
+                                                <input class="form-control" placeholder="Enter..." name="number" ng-model="data.number" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group" ng-class="{'has-error': AddVehicle.$submitted  && AddVehicle.chassis_no.$pristine}">
+                                                <label for="inputdefault">chassis No:</label>
+                                                <input class="form-control" placeholder="Enter..." name="chassis_no" ng-model="data.chassis_no" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group" ng-class="{'has-error': AddVehicle.$submitted  && AddVehicle.engine_no.$pristine}">
+                                                <label for="inputdefault">Engine No:</label>
+                                                <input class="form-control" placeholder="Enter..." name="engine_no" ng-model="data.engine_no" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group" ng-class="{'has-error': AddVehicle.$submitted  && AddVehicle.type.$pristine}">
+                                                <label>Vehical Type</label>
+                                                <select class="form-control" name="type" ng-model="data.type">
+                                                    <option selected value="">--select--</option>
+                                                    <option>Diesel</option>
+                                                    <option>Petrol</option>
+                                                    <option>Gass</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section class="finance">
+                                        <div class="col-md-3">
+                                            <p>Finance</p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="finance" value="true" ng-value="true" ng-model="data.finance">Yes
+                                            </label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="finance" value="false" ng-value="false" ng-model="data.finance">No
+                                            </label>
+                                        </div>
+                                    </section>
+                                    <div class="company" ng-show="data.finance == true">
+                                        <div class="col-md-12">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="inputdefault">Comapany Name</label>
+                                                    <input class="form-control" placeholder="Enter..." ng-model="data.company_name" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="inputdefault">Amount</label>
+                                                    <input class="form-control" placeholder="Enter..." ng-model="data.amount" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="inputdefault">From</label>
+                                                    <div class="input-group date">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <!--<input type="text"  ng-model="data.due_date" class="form-control pull-right" id="datepicker">-->
+                                                        <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="yyyy-MM-dd" style="z-index:999">
+                                                            <input class="form-control" name="selectDate" type="text" ng-model="data.from_date" ng-readonly="true" placeholder="Enter ..."
+                                                                required/>
+                                                        </datepicker>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="inputdefault">To</label>
+                                                    <div class="input-group date">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <!--<input type="text"  ng-model="data.due_date" class="form-control pull-right" id="datepicker">-->
+                                                        <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="yyyy-MM-dd" style="z-index:999">
+                                                            <input class="form-control" name="selectDate" type="text" ng-model="data.to_date" ng-readonly="true" placeholder="Enter ..."
+                                                                required/>
+                                                        </datepicker>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="inputdefault">EMI</label>
+                                                    <input class="form-control" placeholder="Enter..." ng-model="data.emi" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="inputdefault">Remind</label>
+                                                    <input class="form-control" placeholder="Enter..." ng-model="data.remind" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="inputdefault">Date</label>
+                                                    <div class="input-group date">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <!--<input type="text"  ng-model="data.due_date" class="form-control pull-right" id="datepicker">-->
+                                                        <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="yyyy-MM-dd" style="z-index:999">
+                                                            <input class="form-control" name="selectDate" type="text" ng-model="data.date" ng-readonly="true" placeholder="Enter ..."
+                                                                required/>
+                                                        </datepicker>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="backwhite">
+                                    <section class="finance">
+                                        <div class="col-md-3">
+                                            <p>Insurance</p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="insurance" value="true" ng-value="true" ng-model="data.insurance">Yes
+                                            </label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="insurance" value="false" ng-value="false" ng-model="data.insurance">No
+                                            </label>
+                                        </div>
+                                    </section>
+                                    <div class="company" ng-show="data.insurance == true">
+                                        <div class="col-md-12">
 
-                        <label for="inputdefault">Vehicle Name</label><br>
-                        <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
-                    </div>
-                    <div class="form-group">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="inputdefault">Number</label>
+                                                    <input class="form-control" placeholder="Enter..." ng-model="data.insurence_no" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="inputdefault">Company Name</label>
+                                                    <input class="form-control" placeholder="Enter..." ng-model="data.inc_name" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="inputdefault">Valid from</label>
+                                                    <div class="input-group date">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <!--<input type="text"  ng-model="data.due_date" class="form-control pull-right" id="datepicker">-->
+                                                        <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="yyyy-MM-dd" style="z-index:999">
+                                                            <input class="form-control" name="selectDate" type="text" ng-model="data.valid_date" ng-readonly="true" placeholder="Enter ..."
+                                                                required/>
+                                                        </datepicker>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="inputdefault">To</label>
+                                                    <div class="input-group date">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <!--<input type="text"  ng-model="data.due_date" class="form-control pull-right" id="datepicker">-->
+                                                        <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="yyyy-MM-dd" style="z-index:999">
+                                                            <input class="form-control" name="selectDate" type="text" ng-model="data.exp_date" ng-readonly="true" placeholder="Enter ..."
+                                                                required/>
+                                                        </datepicker>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                        <label for="inputdefault">Vehicle Code</label><br>
-                        <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
-                    </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="inputdefault">Amount</label>
+                                                    <input class="form-control" placeholder="Enter..." ng-model="data.inc_amount" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="form-group">
-                        <button>Add vehicle</button>
-                    </div> -->
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="backwhite">
-                    <h1>Vehicle List</h1>
-                    <table table export-table st-table="display_records" st-safe-src="vehicles" class="table rwd-table table-striped" style="width:100%">
-                        <tr>
-                            <th>#</th>
-                            <th>Vehicle name</th>
-                            <th>Vehicle code</th>
-                            <th class="pull-right">Action</th>
-                        </tr>
-                         <tbody>
-                    <tr st-select-row="row" st-select-mode="multiple" class="editable-row" ng-repeat="vehicle in display_records" class="editable-row">
-                      <td> {{$index+1}}</td>  
-                      <td><span editable-text="vehicle.vehicle_name" e-name="editdata.vehicle_name" onaftersave="EditVehicle($index)" e-form="rowform" e-required>{{vehicle.vehicle_name || 'empty' }}</span></td>
-                      <td><span editable-text="vehicle.vehicle_code" e-name="editdata.vehicle_code" onaftersave="EditVehicle($index)" e-form="rowform" e-required>{{vehicle.vehicle_code || 'empty' }}</span></td>                      
-                      <td class="pull-right">
-                        <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == vehicle">
-                          <button type="submit" ng-click="EditVehicle($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
-                          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
-                        </form>
+                            <div class="Maintenance">
+                                <div class="col-md-12">
+                                    <p>Maintenance</p>
 
-                        <div class="buttons" ng-show="!rowform.$visible">
-                          <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
-                          <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteVehicle($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                          <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Engine Oil</label>
+                                            <select class="form-control" ng-model="data.engine_oil">
+                                                <option selected value="">--select--</option>
+                                                <option>Servo</option>
+                                                <option>Castrol</option>
+                                                <option>Gold Finch</option>
+                                                <option>Veedol</option>
+                                                <!-- <option>for every 6months</option> -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Filled Date</label>
+                                            <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <!--<input type="text"  ng-model="data.due_date" class="form-control pull-right" id="datepicker">-->
+                                                <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="yyyy-MM-dd" style="z-index:999">
+                                                    <input class="form-control" name="selectDate" type="text" ng-model="data.filled_date" ng-readonly="true" placeholder="Enter ..."
+                                                        required/>
+                                                </datepicker>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Remind</label>
+                                            <select class="form-control" ng-model="data.oil_remind">
+                                                <option selected value="">--select--</option>
+                                                <option>for every 3weeks</option>
+                                                <option>for every 3months</option>
+                                                <option>for every 6months</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
                         </div>
-                      </td>  
-                    </tr>
-                </tbody>
-                 <tfoot>
-              <tr>
-                <td colspan="5" class="text-center">
-                  <div class="pull-right" st-pagination="" st-items-by-page="2" st-displayed-pages="5"></div>
-                </td>
-              </tr>
-            </tfoot>
-                    </table>
-                </div>
+                        <button type="submit" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;margin-right: 120px;">
+                            Add Vehicle </button>
+                    </div>
+                </form>
+
             </div>
         </div>
+
     </div>
-</div>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- <script src="js/scripts.js"></script>
-</body>
-</html> -->
+    <div class="tab-pane no-padding active" id="tab_2">
+
+        <div class="container">
+            <div class="row">
+                <div class="booklist">
+                    <div class="col-md-12">
+                        <div class="backwhite">
+                            <h1>Vehicle List</h1>
+                            <table table export-table st-table="display_records" st-safe-src="vehicles" class="table rwd-table table-striped" style="width:100%">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Vehicle name</th>
+                                    <th>Vehicle No</th>
+                                    <th>Chassis No</th>
+                                    <th>Engine No</th>
+                                    <th>Vehicle Type</th>
+                                    <th class="pull-right" ng-show="showRole(['admin'])">Action</th>
+                                </tr>
+                                <tbody>
+                                    <tr st-select-row="row" st-select-mode="multiple" class="editable-row" ng-repeat="vehicle in display_records" class="editable-row">
+                                        <td> {{vehicle.id+1}}</td>
+                                        <td>
+                                            <span editable-text="vehicle.vehicle_name" e-name="editdata.vehicle_name" onaftersave="EditVehicle(vehicle.id)" e-form="rowform"
+                                                e-required>{{vehicle.vehicle_name || 'empty' }}</span>
+                                        </td>
+                                        <td>
+                                            <span editable-text="vehicle.vehicle_number" e-name="editdata.vehicle_code" onaftersave="EditVehicle(vehicle.id)" e-form="rowform"
+                                                e-required>{{vehicle.vehicle_number || 'empty' }}</span>
+                                        </td>
+                                        <td>
+                                            <span editable-text="vehicle.chassis_number" e-name="editdata.vehicle_name" onaftersave="EditVehicle(vehicle.id)" e-form="rowform"
+                                                e-required>{{vehicle.chassis_number || 'empty' }}</span>
+                                        </td>
+                                        <td>
+                                            <span editable-text="vehicle.engine_number" e-name="editdata.vehicle_code" onaftersave="EditVehicle(vehicle.id)" e-form="rowform"
+                                                e-required>{{vehicle.engine_number || 'empty' }}</span>
+                                        </td>
+                                        <td class="select-td">
+                                                <span editable-select="vehicle.vehicle_type" e-name="vehicle.vehicle_type" e-form="rowform" onaftersave="EditVehicle(vehicle.id)"
+                                                  e-selectpicker e-ng-options="engine.id as engine.type for engine in engineType">
+                                                                                  {{vehicle.vehicle_type}}</span>
+                                              </td>
+                                        <td class="pull-right" ng-show="showRole(['admin'])">
+                                            <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == vehicle">
+                                                <button type="submit" ng-click="EditVehicle(vehicle.id)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                                                    <i class="fa fa-check"></i>
+                                                </button>
+                                                <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                                                    <i class="fa fa-remove"></i>
+                                                </button>
+                                            </form>
+
+                                            <div class="buttons" ng-show="!rowform.$visible">
+                                                <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">
+                                                    <i class="fa fa-pencil"></i>
+                                                </button>
+                                                <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteVehicle(vehicle.id)" ng-confirm-click="Are you sure you want to delete this item?">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                                <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5" class="text-center">
+                                            <div class="pull-right" st-pagination="" st-items-by-page="1" st-displayed-pages="5"></div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>

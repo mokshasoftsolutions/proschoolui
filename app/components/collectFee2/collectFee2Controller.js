@@ -3,12 +3,12 @@ angular.module('school_erp')
         $scope.feeTypeData = [];
         $scope.data = [];
 
-       
+
 
         globalServices.getClass()
 
             .success(function (data, status) {
-                console.log(JSON.stringify(data))
+                //  console.log(JSON.stringify(data))
                 $scope.classData = data.school_classes;// Api list-name
                 $scope.classId = $scope.classData[0].class_id;
                 $scope.populateSections($scope.classId)
@@ -38,8 +38,8 @@ angular.module('school_erp')
                 .success(function (data, status) {
                     $scope.studentData = data.students;
                     $scope.student_id = $scope.studentData[0].student_id;
-                    console.log(JSON.stringify(data));
-                    console.log($scope.student_id);
+                    //   console.log(JSON.stringify(data));
+                    //   console.log($scope.student_id);
                     $scope.getFee($scope.student_id);
                 })
                 .error(function (data, success) {
@@ -52,10 +52,10 @@ angular.module('school_erp')
         $scope.getFee = function (student_id) {
             collectFeeServices.getFee(student_id)
                 .success(function (data, status) {
-                     $scope.parseInt = parseInt;
+                    $scope.parseInt = parseInt;
                     // console.log(subId)
                     $scope.collectFeeData = data.student_fee_deatils;
-                    console.log(JSON.stringify(data))
+                    //  console.log(JSON.stringify(data))
 
                 })
                 .error(function (data, success) { });
@@ -214,11 +214,11 @@ angular.module('school_erp')
 
 
         $scope.save = function (data) {
-            console.log(JSON.stringify(data));
+            //   console.log(JSON.stringify(data));
 
             $http({
                 method: "POST",
-                url: globalServices.globalValue.baseURL + 'api/book/'+globalServices.globalValue.school_id,
+                url: globalServices.globalValue.baseURL + 'api/book/' + globalServices.globalValue.school_id,
                 data: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json'

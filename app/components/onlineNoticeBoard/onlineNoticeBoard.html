@@ -17,17 +17,16 @@
  <div class="container">
     <div class="row">
       <div class="onlinenoticeboard">
-        <div class="col-md-6">
-        <h1><strong>Notice Board</h1>
-          <div class="backwhite">
+        <div class="col-md-6" ng-if="showRole(['admin'])">
+          <div class="backwhite" >
            <h1>What happened?</h1>
         <div class="form-group">
                   
-                    <div class="input-group">
+                    <div class="input-group" ng-show="showRole(['admin'])">
                       <span class="input-group-addon">Subject:</span>
                         <input class="form-control" ng-model="data.subject" placeholder="Write something"/>
                     </div>  <br>
-                     <div class="input-group" ng-if="showRole(['admin'])">
+                     <div class="input-group" ng-show="showRole(['admin'])">
                       <span class="input-group-addon">Message:</span>
                         <input class="form-control" ng-model="data.message" placeholder="Write something"/>
                     </div>                                                                                       
@@ -35,7 +34,7 @@
                 </div>
              
                   
-                    <div class="box-footer">
+                    <div class="box-footer" ng-if="showRole(['admin'])">
                       <button class="btn btn-primary pull-right" ng-click="addNoticeBoard(data);" ><span class="fa fa-share" ></span> SEND</button>
                     </div>
                  
@@ -43,7 +42,8 @@
          </div>
          </div>
          <div class="col-md-6"  style="top:50px; ">
-           <div class="backwhite" style="overflow-y: scroll;height:500px;width:100%;" >
+            <h1 ng-show="showRole(['parent'])"><strong>Notice Board</h1>
+           <div class="backwhite" style="overflow-y: scroll;height:370px;width:100%;" >
            <!-- <div class="pongal"> -->
                 <div class="pongal" ng-repeat="board in NoticeBoardData"  >
           <!-- The time line -->
@@ -53,7 +53,7 @@
                 <span class="bg-red">
                  {{board.date}}
                 </span>
-                <button style="margin-left:96%" class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteNoticeBoard($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                <button ng-show="showRole(['admin'])" style="margin-left:96%" class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteNoticeBoard($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
             </li>
             
             <!-- /.timeline-label -->

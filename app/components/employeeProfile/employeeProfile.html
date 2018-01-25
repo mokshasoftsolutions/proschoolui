@@ -1,0 +1,716 @@
+<div class="row background">
+    <div class="container">
+        <h1>Staff Management</h1>
+        <ul class="links">
+            <!-- <li ui-sref-active="active">
+                <a ui-sref="main.employeeProfile">Employme Profile</a>
+            </li>/ -->
+            <li ui-sref-active="active">
+                <a ui-sref="main.employee">Details</a>
+            </li>
+            <li ui-sref-active="active" ng-show="showRole(['admin'])">
+                /<a ui-sref="main.employeeDetails">Employment</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-target="#tab_1" data-toggle="tab" aria-expanded="true">
+                <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Employee Profile</a>
+        </li>
+        <li class="">
+            <a data-target="#tab_2" data-toggle="tab" aria-expanded="false">
+                <i class="fa fa-calendar-check-o" aria-hidden="true"></i> Attendance Report</a>
+        </li>
+        <li class="">
+            <a data-target="#tab_3" data-toggle="tab" aria-expanded="false">
+                <i class="fa fa-calendar-check-o" aria-hidden="true"></i> Performance Report</a>
+        </li>
+    </ul>
+</div>
+<div class="tab-content">
+    <div class="tab-pane no-padding active" id="tab_1">
+        <div class="container" ng-repeat="employee in employeeData">
+            <div class="staffemppro">
+                <!-- <img id="view" class="img-thumbnail" ng-src="{{studentPhoto}}">
+                                    <span class="tooltiptext">Save</span> -->
+                <div class="col-md-12">
+                    <div class="col-md-3" id="emppic">
+
+                        <img id="view" ng-src="{{employeePhoto}}" alt="">
+                        <form editable-form name="rowformImage" ng-show="rowformImage.$visible" class="form-buttons form-inline" shown="inserted == employee">
+                         
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="file" name="file" ng-model="data.logo" ngf-select ngf-pattern="'image/*'" accept="image/*" ngf-max-size="5MB"
+                                                onchange="angular.element(this).scope().loadFile(this.files)">
+                                            <p style="color:#9e0707"> {{message}} </p>
+
+
+                                        </div>
+                                    </div>
+                                
+                                    <button type="submit" ng-click="editEmployeeImage()" ng-disabled="rowformImage.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                                        <i class="fa fa-check"></i>
+                                    </button>
+                                
+                                    <button type="button" ng-disabled="rowformImage.$waiting" ng-click="rowformImage.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                          
+
+                        </form>
+                        <div class="buttons" ng-show="!rowformImage.$visible">
+                            <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowformImage.$show()">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3" id="empinfo">
+                        <h1>{{employee.first_name}}</h1>
+                        <p>
+                            {{employee.job_category}} {{employee.employee_id}}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="staffempprodetails">
+
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <form editable-form name="rowform1" ng-show="rowform1.$visible" class="form-buttons form-inline" shown="inserted == employee">
+                            <button type="submit" ng-click="EditEmployee_details($index)" ng-disabled="rowform1.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                                <i class="fa fa-check"></i>
+                            </button>
+                            <button type="button" ng-disabled="rowform1.$waiting" ng-click="rowform1.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                                <i class="fa fa-remove"></i>
+                            </button>
+                        </form>
+                        <div class="buttons" ng-show="!rowform1.$visible">
+                            <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform1.$show()">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered" style="width:100">
+
+                                <thead>
+                                    <tr>
+                                        <th>Personal Info</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <b>ForeName :</b>
+                                            <span editable-text="employee.first_name" e-name="editdata.employee" onaftersave="EditEmployee_details($index)" e-form="rowform1"
+                                                e-required>{{employee.first_name || 'empty' }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>SurName :</b>
+                                            <span editable-text="employee.last_name" e-name="editdata.employee" onaftersave="EditEmployee_details($index)" e-form="rowform1"
+                                                e-required>{{employee.last_name || 'empty' }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Date of Birth :</b>
+                                            <span editable-text="employee.dob" e-name="editdata.employee" onaftersave="EditEmployee_details($index)" e-form="rowform1"
+                                                e-required>{{employee.dob || 'empty' }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Gender :</b>
+                                            <span editable-text="employee.gender" e-name="editdata.employee" onaftersave="EditEmployee_details($index)" e-form="rowform1"
+                                                e-required>{{employee.gender || 'empty' }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Marital status :</b>
+                                            <span editable-text="employee.martial_status" e-name="editdata.employee" onaftersave="EditEmployee_details($index)" e-form="rowform1"
+                                                e-required>{{employee.martial_status || 'empty' }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Spoken Languages :</b>
+                                            <span editable-text="employee.spoken_languages" e-name="editdata.employee" onaftersave="EditEmployee_details($index)" e-form="rowform1"
+                                                e-required>{{employee.spoken_languages || 'empty' }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Blood Group :</b>
+                                            <span editable-text="employee.blood_group" e-name="editdata.employee" onaftersave="EditEmployee_details($index)" e-form="rowform1"
+                                                e-required>{{employee.blood_group || 'empty' }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b> Experiance :</b>
+                                            <span editable-text="employee.experience" e-name="editdata.employee" onaftersave="EditEmployee_details($index)" e-form="rowform1"
+                                                e-required>{{employee.experience || 'empty' }}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6" id="down">
+                        <form editable-form name="rowform2" ng-show="rowform2.$visible" class="form-buttons form-inline" shown="inserted == employee">
+                            <button type="submit" ng-click="EditEmployee_details($index)" ng-disabled="rowform2.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                                <i class="fa fa-check"></i>
+                            </button>
+                            <button type="button" ng-disabled="rowform2.$waiting" ng-click="rowform2.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                                <i class="fa fa-remove"></i>
+                            </button>
+                        </form>
+                        <div class="buttons" ng-show="!rowform2.$visible">
+                            <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform2.$show()">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered" style="width:100">
+                                <thead>
+                                    <tr>
+                                        <th>Address</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <b>Permanent Address :</b>
+                                            <span editable-text="employee.permanent_address[0].perm_address" e-name="editdata.employee" onaftersave="EditEmployee_details($index)"
+                                                e-form="rowform2" e-required>{{employee.permanent_address[0].perm_address || 'empty' }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Permanent city :</b>
+                                            <span editable-text="employee.permanent_address[0].perm_city" e-name="editdata.employee" onaftersave="EditEmployee_details($index)"
+                                                e-form="rowform2" e-required>{{employee.permanent_address[0].perm_city || 'empty' }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Temporary Address :</b>
+                                            <span editable-text="employee.current_address[0].cur_address" e-name="editdata.employee" onaftersave="EditEmployee_details($index)"
+                                                e-form="rowform2" e-required>{{employee.current_address[0].cur_address|| 'empty' }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>State :</b>
+                                            <span editable-text="employee.state" e-name="editdata.employee" onaftersave="EditEmployee_details($index)" e-form="rowform2"
+                                                e-required>{{employee.state || 'empty' }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Postal Code :</b>
+                                            <span editable-text="employee.postal_code" e-name="editdata.employee" onaftersave="EditEmployee_details($index)" e-form="rowform2"
+                                                e-required>{{employee.postal_code || 'empty' }}</span>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <form editable-form name="rowform3" ng-show="rowform3.$visible" class="form-buttons form-inline" shown="inserted == employee">
+                            <button type="submit" ng-click="EditEmployee_details($index)" ng-disabled="rowform3.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                                <i class="fa fa-check"></i>
+                            </button>
+                            <button type="button" ng-disabled="rowform3.$waiting" ng-click="rowform3.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                                <i class="fa fa-remove"></i>
+                            </button>
+                        </form>
+                        <div class="buttons" ng-show="!rowform3.$visible">
+                            <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform3.$show()">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered" style="width:100">
+                                <thead>
+                                    <tr>
+                                        <th>Professional Info</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <b>Employee Type :</b>
+                                            <span editable-text="employee.job_category" e-name="editdata.employee" onaftersave="EditEmployee_details($index)" e-form="rowform3"
+                                                e-required>{{employee.job_category|| 'empty' }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Academic Qualification :</b>
+                                            <span editable-text="employee.qualification" e-name="editdata.employee" onaftersave="EditEmployee_details($index)" e-form="rowform3"
+                                                e-required>{{employee.qualification|| 'empty' }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Basic Pay :</b>
+                                            <span editable-text="employee.basic_pay" e-name="editdata.employee" onaftersave="EditEmployee_details($index)" e-form="rowform3"
+                                                e-required>{{employee.basic_pay|| 'empty' }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Salary Band :</b>
+                                            <span editable-text="employee.salary_band" e-name="editdata.employee" onaftersave="EditEmployee_details($index)" e-form="rowform3"
+                                                e-required>{{employee.salary_band|| 'empty' }}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <form editable-form name="rowform4" ng-show="rowform4.$visible" class="form-buttons form-inline" shown="inserted == employee">
+                            <button type="submit" ng-click="EditEmployee_details($index)" ng-disabled="rowform4.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                                <i class="fa fa-check"></i>
+                            </button>
+                            <button type="button" ng-disabled="rowform4.$waiting" ng-click="rowform4.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                                <i class="fa fa-remove"></i>
+                            </button>
+                        </form>
+                        <div class="buttons" ng-show="!rowform4.$visible">
+                            <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform4.$show()">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered" style="width:100">
+                                <thead>
+                                    <tr>
+                                        <th>Contact</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- <tr>
+                                                <td>
+                                                    <b>Mobile :</b>{{employeeData[0].mobile}}
+                                                    <span editable-text="employee.phone" e-name="editdata.employee" onaftersave="EditEmployee_details($index)" e-form="rowform2"
+                                            e-required>{{employeeData[0].mobile|| 'empty' }}</span> 
+                                                </td>
+                                            </tr> -->
+                                    <tr>
+                                        <td>
+                                            <b>Phone Number :</b>
+                                            <span editable-text="employee.phone" e-name="editdata.employee" onaftersave="EditEmployee_details($index)" e-form="rowform4"
+                                                e-required>{{employee.phone|| 'empty' }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Email :</b>
+                                            <span editable-text="employee.email" e-name="editdata.employee" onaftersave="EditEmployee_details($index)" e-form="rowform4"
+                                                e-required>{{employee.email|| 'empty' }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Alternate Email :</b>
+                                            <span editable-text="employee.alternate_email" e-name="editdata.employee" onaftersave="EditEmployee_details($index)" e-form="rowform4"
+                                                e-required>{{employee.alternate_email|| 'empty' }}</span>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="tab-pane no-padding " id="tab_2">
+        <div class="container">
+            <div class="row">
+                <div class="Examschedular">
+                    <div class="col-md-3">
+                        <div class="backwhite">
+
+                            <!-- <div class="form-group">
+                                <label>Select Emp Category</label>
+                                <select ng-model="job_category" ng-change="getEmployeeByCategory(job_category)" class="form-control select2" style="width: 100%;"
+                                    ng-options="empType.id as empType.type for empType in employeeType">
+                                    <option value="" selected="selected">--Select--</option>
+                                   
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label> Select Employee</label>
+                                <select ng-model="employeeId" class="form-control select2" style="width: 100%;" ng-options="employee.employee_id as employee.first_name for employee in employeeData">
+                                    <option value="" selected="selected">--Select--</option>
+                                    
+                                </select>
+                            </div> -->
+
+                            <div class="form-group">
+                                <label>Select Month</label>
+                                <select name="month" class="form-control select2" style="width: 100%;" ng-model="select_month" ng-options="monthData.id as monthData.name for monthData in months ">
+
+                                </select>
+                            </div>
+
+
+                            <div class="box-footer">
+                                <button type="button" class="btn btn-primary pull-right" ng-click="getAttendenceByMonth(select_month)">Select</button>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="col-md-9">
+                        <div class="backwhite">
+                            <div class="subjectlist">
+                                <div class="col-md-12">
+
+                                    <div class="col-xs-3 col-md-4">
+
+                                        <div class="tooltip">
+                                            <button>
+                                                <img src="../../../dist/img/images/pdf.jpg" ng-click="generatePDF();" class="img-responsive" width="30" height="30" alt="Responsive image">
+                                            </button>
+                                            <span ng-hide="pdf" class="tooltiptext">Download file</span>
+                                            <span ng-show="pdf" class="tooltiptext">Downloading....</span>
+
+                                        </div>
+                                        <p>Attendance List</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div id="exportthis">
+                                <div ng-show="pdf">
+                                    <div class="jumbotron">
+
+                                        <h2 align="center">Employee Attendance Monthly Report </h2>
+                                        <ul>
+
+                                            <li>
+                                                <b>School Name </b> :{{schoolDetails[0].name}}</li>
+
+                                        </ul>
+                                        <!-- <ul>
+                                                              <li class="schoolimage">
+                                            
+                                            
+                                                                <div class="tooltip">
+                                                                  <img style="margin-top: -70px;" ng-src="{{schoolImage}}" class="user-image" alt="User Image">
+                                                                 
+                                                                </div>
+                                            
+                                                              </li>
+                                            
+                                                            </ul> -->
+                                    </div>
+
+                                </div>
+                                <table export-table class="table rwd-table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>EmployeeId</th>
+                                            <th>Name</th>
+                                            <th>EmployeeType</th>
+                                            <th>Gender</th>
+                                            <th>Date</th>
+                                            <th>Attendance</th>
+                                            <!--<th class="pull-right">Action</th>-->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="attendance in attData " class="editable-row">
+                                            <td>
+                                                {{$index+1}}
+                                            </td>
+                                            <td>{{attendance.employee_id || 'empty' }}
+                                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                                            </td>
+                                            <td>
+                                                {{attendance.first_name || 'empty' }} {{attendance.last_name || 'empty' }}
+                                                <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
+                                                                            {{busRoute.vehicle_code}}</span>-->
+                                            </td>
+                                            <td>{{attendance.employee_type || 'empty' }}</td>
+                                            <td>{{attendance.gender || 'empty' }}
+                                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                                            </td>
+                                            <td>{{attendance.date | date }}
+                                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                                            </td>
+                                            <td>{{attendance.status || 'empty' }}
+                                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                                            </td>
+                                            <!--<td>
+                                                                            {{$index+1}}
+                                                                        </td>
+                                                                        <td class="select-td">
+                                                                            <span editable-select="busRoutes.station" e-name="station" onaftersave="EditBusRouteToStation($index)" onshow="loadGroups()"
+                                                                                e-form="rowform" e-selectpicker e-ng-options="Station.station_name as Station.station_name for Station in stations">
+                                                                        {{busRoutes.stations[0].station_name }}</span>
+                                                                        </td>
+                        
+                                                                        <td>
+                                                                            <span editable-text="busRoutes.pickup_time" e-name="pickup_time" onaftersave="EditBusRouteToStation($index)" e-form="rowform"
+                                                                                e-required>{{busRoutes.stations[0].pickup_time || 'empty' }}</span>
+                                                                        </td>
+                                                                        <td>
+                                                                            <span editable-text="busRoutes.drop_time" e-name="drop_time" onaftersave="EditBusRouteToStation($index)" e-form="rowform"
+                                                                                e-required>{{busRoutes.stations[0].drop_time || 'empty' }}</span>
+                                                                        </td>
+                        
+                                                                        <td>
+                                                                            <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == busRoutes">
+                                                                                <button type="submit" ng-click="EditBusRouteToStation($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
+                                                                                <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-check"></i></button>
+                                                                            </form>
+                        
+                                                                            <div class="buttons" ng-show="!rowform.$visible">
+                                                                                <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
+                                                                                <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBusRouteToStation($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                                               
+                                                                            </div>
+                                                                        </td>-->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="backwhite">
+
+                            <div class="box box-success" style="margin-top:10px">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Donut Chart</h3>
+
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-box-tool" data-widget="remove">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="box-body" pdf-save-content="idOneGraph">
+                                    <div class="chart" style="margin-left:130px">
+                                        <!--<div id='myChart'></div>-->
+                                        <zingchart id="myChartMonth" zc-values="chartdataMonth" zc-json="myJsonMonth" zc-height=400 zc-width=100%></zingchart>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane no-padding " id="tab_3">
+
+    </div>
+</div>
+
+
+<!-- 
+<div class="container">
+    <div class="staffemppro">
+        <div class="col-md-12">
+            <div class="col-md-3" id="emppic">
+                <img ng-src="{{employeePhoto}}" class="user-image" alt="User Image">
+            </div>
+            <div class="col-md-3" id="empinfo">
+                <h1>{{employeeData[0].first_name}} </h1>
+                <p>
+                    {{employeeData[0].job_category}} 
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="staffempprodetails">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="table-responsive">
+                    <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered" style="width:100">
+                        <thead>
+                            <tr>
+                                <th>Personal Info</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <b>First Name :</b> {{employeeData[0].first_name}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Last Name :</b> {{employeeData[0].last_name}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Date of Birth :</b> {{employeeData[0].dob}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Gender :</b> {{employeeData[0].gender}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Maritial Status :</b> {{employeeData[0].martial_status}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Spoken Languages :</b> {{employeeData[0].spoken_languages}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Blood Group :</b> {{employeeData[0].blood_group}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="table-responsive">
+                    <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered" style="width:100">
+                        <thead>
+                            <tr>
+                                <th>Address Info</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <b>Permenent Address :</b> {{employeeData[0].perm_address}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Permenent city :</b> {{employeeData[0].perm_city}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Country :</b> {{employeeData[0].nationality}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>State :</b> {{employeeData[0].state}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Postal Code :</b> {{employeeData[0].postal_code}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Temporary Address :</b> {{employeeData[0].cur_address}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Temporary city :</b> {{employeeData[0].cur_city}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Mobile :</b> {{employeeData[0].phone}}
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="table-responsive">
+                    <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered" style="width:100">
+                        <thead>
+                            <tr>
+                                <th>Professional Info</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Home Phone</td>
+                            </tr>
+                            <tr>
+                                <td>Work Phone Number</td>
+                            </tr>
+                            <tr>
+                                <td>Designation</td>
+                            </tr>
+                            <tr>
+                                <td>Salary Band</td>
+                            </tr>
+                            <tr>
+                                <td>BasicPay</td>
+                            </tr>
+                            <tr>
+                                <td>Mobile</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="table-responsive">
+                    <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered" style="width:100">
+                        <thead>
+                            <tr>
+                                <th>Contact Info</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Work Email</td>
+                            </tr>
+                            <tr>
+                                <td>Home Email</td>
+                            </tr>
+                            <tr>
+                                <td>Work Website</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

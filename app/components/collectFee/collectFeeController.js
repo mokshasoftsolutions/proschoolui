@@ -17,7 +17,7 @@ angular.module('school_erp')
                 .success(function (data, status) {
                     //$scope.parseInt = parseInt;
                     // console.log(subId)
-                    console.log(JSON.stringify(data))
+                    //   console.log(JSON.stringify(data))
                     $scope.collectFeeData = data.student_fee_deatils;
                     //  console.log(JSON.stringify(data))
 
@@ -108,7 +108,7 @@ angular.module('school_erp')
 
 
         }
-        $scope.getFeeType();
+
 
         // collectFeeServices.getFeeTypes($scope.data.classId)
         //     .success(function (data, status) {
@@ -129,17 +129,38 @@ angular.module('school_erp')
                 .success(function (data, status) {
                     $scope.parseInt = parseInt;
                     // console.log(subId)
-                    $scope.collectFeeData = data.student_fee_deatils;
-                    console.log(JSON.stringify(data))
+                    $scope.collectFee = data.student_fee_details;
+                    //    console.log(JSON.stringify(data))
+                    $scope.collectFeeData = [];
+                    index = 0;
+                    $scope.collectFee.forEach(function (element) {
+
+                        var obj = {
+                            id: index++,
+                            //fee_master_id: element.fee_master_id,
+                            fee_type: element.fee_type,
+                            fee_category: element.fee_category,
+                            payment_mode: element.payment_mode,
+                            fee_amount: element.fee_amount,
+                            fine: element.fine,
+                            discount: element.discount,
+                           
+                           
+
+                        }
+                        $scope.collectFeeData.push(obj);
+                        // console.log("mesaage for section");
+                       // console.log($scope.employeeData);
+                    })
 
                 })
                 .error(function (data, success) { });
         }
 
 
-        $scope.addFee = function (value,student_id) {
-            console.log("message");
-            console.log(student_id);
+        $scope.addFee = function (value, student_id) {
+            //   console.log("message");
+            //   console.log(student_id);
             //$scope.data = angular.copy($scope.collectFeeData[value]);
             //   $scope.student_id = $scope.data.student_id;
             // console.log($scope.student_id);
@@ -152,14 +173,14 @@ angular.module('school_erp')
                 discount: $scope.value.discount
 
             }
-            collectFeeServices.setFee(FeeDetails,student_id)
+            collectFeeServices.setFee(FeeDetails, student_id)
                 .success(function (data, status) {
                     ngDialog.open({
                         template: '<p>FeeType are Added Successfully.</p>',
                         plain: true
                     });
                     $scope.value = [];
-                 $scope.getFee(student_id);
+                    $scope.getFee(student_id);
                 })
                 .error(function (data, success) {
                     ngDialog.open({
@@ -293,11 +314,11 @@ angular.module('school_erp')
 
 
         $scope.save = function (data) {
-            console.log(JSON.stringify(data));
+            //   console.log(JSON.stringify(data));
 
             $http({
                 method: "POST",
-                url: globalServices.globalValue.baseURL + 'api/book/'+globalServices.globalValue.school_id,
+                url: globalServices.globalValue.baseURL + 'api/book/' + globalServices.globalValue.school_id,
                 data: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json'
@@ -330,4 +351,5 @@ angular.module('school_erp')
 
         // $scope.getFeeMaster();
         // $scope.getFeeType();
+        $scope.getFeeType();
     }])

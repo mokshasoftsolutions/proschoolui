@@ -1,18 +1,21 @@
 angular.module('school_erp')
-    .controller("evaluationsController", ['$http', '$scope', 'globalServices', 'examServices', 'subjectsServices', 'studentServices', 'ngDialog', function ($http, $scope, globalServices, examServices, subjectsServices, studentServices, ngDialog) {
+    .controller("evaluationsController", ['$http', '$scope', '$rootScope', 'globalServices', 'examServices', 'subjectsServices', 'studentServices', 'ngDialog', function ($http, $scope, $rootScope, globalServices, examServices, subjectsServices, studentServices, ngDialog) {
 
 
         $scope.marksBox = [];
         $scope.evalData = [];
         $scope.data = {};
         $scope.conduct = [{ type: "Poor", id: "Poor" }, { type: "Below Average", id: "Below Average" }, { type: "Average", id: "Average" }, { type: "Above Average", id: "Above Average" }, { type: "Good", id: "Good" }, { type: "Excellent", id: "Excellent" }];
-        globalServices.getClass()
-            .success(function (data, status) {
-                $scope.classDatanew = data.school_classes; // Api list-name
-                $scope.data.classId = data.school_classes[0].class_id;
-                $scope.populateSections($scope.data.classId);
-            })
-            .error(function (data, success) { })
+
+        $scope.getClassesInitalLoad = function () {
+            globalServices.getClass()
+                .success(function (data, status) {
+                    $scope.classDatanew = data.school_classes; // Api list-name
+                    $scope.data.classId = data.school_classes[0].class_id;
+                    $scope.populateSections($scope.data.classId);
+                })
+                .error(function (data, success) { })
+        }
 
         $scope.getExamSchedule = function () {
             examServices.getExamSchedule()
@@ -52,7 +55,7 @@ angular.module('school_erp')
         }
 
         $scope.getSubjects = function (secId) {
-            console.log("subjects");
+            //  console.log("subjects");
             subjectsServices.getSubjects(secId)
                 .success(function (data, status) {
                     $scope.subjectsData = data.subjects;
@@ -83,7 +86,7 @@ angular.module('school_erp')
                     $scope.papers = data.resultArray;
                     // $scope.paperId = $scope.papers[0].exam_paper_id;
                     $scope.data.paper_name = data.resultArray[0].exam_paper_id;
-                    console.log($scope.data.paper_name);
+                    //   console.log($scope.data.paper_name);
                     $scope.getEvaluation($scope.data.studentId, $scope.data.examSchedule_name);
 
                 })
@@ -96,9 +99,30 @@ angular.module('school_erp')
         $scope.getEvaluation = function (student, scheduleId) {
             examServices.getEvaluation(student, scheduleId)
                 .success(function (data, status) {
-                    console.log(JSON.stringify(data));
+                    //   console.log(JSON.stringify(data));
                     // $scope.evalData = data[examPaper+'-'+student]
-                    $scope.evalData = data.resultArray;
+                    $scope.eval = data.resultArray;
+                    $scope.evalData = [];
+                    index = 0;
+                    $scope.eval.forEach(function (element) {
+
+                        var obj = {
+                            id: index++,
+                            paper_result_id: element.paper_result_id,
+                            first_name: element.first_name,
+                            last_name:element.last_name,
+                            examschedule_name: element.examschedule_name,
+                            paper_name:element.paper_name,
+                            marks:element.marks,
+                            percentage:element.percentage,
+                            conduct:element.conduct
+
+
+                        }
+                        $scope.evalData.push(obj);
+                       // console.log($scope.examData);
+                    })
+
                 })
                 .error(function (data, success) { })
         }
@@ -130,6 +154,19 @@ angular.module('school_erp')
 
         }
 
+
+        // Mark bulk marks status
+        $scope.markBulkMarks = function (marks, percentage, conduct) {
+            $scope.marksBox.forEach(function (element) {
+                if (element.selected) {
+                    element.marks = marks;
+                    element.percentage = percentage;
+                    element.conduct = conduct;
+                }
+            });
+        }
+
+
         $scope.marksStatus = function () {
             $scope.students.forEach(function (element) {
                 var obj = {
@@ -139,7 +176,10 @@ angular.module('school_erp')
                     first_name: element.first_name, // remove
                     last_name: element.last_name, // remove
                     selected: false,
-                    status: "none"
+                    marks: "",
+                    percentage: "",
+                    conduct: ""
+
                 }
                 $scope.marksBox.push(obj);
             });
@@ -147,62 +187,56 @@ angular.module('school_erp')
 
 
 
-        // $scope.dataValue.marks = [];
-        // $scope.dataValue.percentage = [];
-        // $scope.dataValue.conduct = [];
 
-        $scope.sendMarkseHolder = [];
-        $scope.addBulkMarks = function (dataValue, examSchedule_name, paper_name, secId, classId) {
-            console.log("message");
-            // $scope.student = angular.copy($scope.students[value]);
+        $scope.sendMarksHolder = [];
+        $scope.addBulkMarks = function (examSchedule_name, paper_name, secId, classId) {
+            //   console.log("message1");
+
             var dataB = $scope.marksBox;
             var allowSubmission = false;
             var i = 0;
             var filterBox = dataB.filter(function (data) {
-                return data.status == 'none';
+                return data.marks == '' || data.percentage == '' || data.conduct == '';
             })
-            console.log($scope.marksBox);
+            //  console.log("m2")
+            //  console.log($scope.marksBox);
             if (filterBox.length == 0) {
-                // $scope.attendanceBox.forEach(function(element) {
-                //     var obj = {
-                //         student_id: element.student_id,
-                //         status: element.status
-                //     }
-                //     $scope.sendAttendanceHolder.push(obj);
 
-                // });
                 angular.forEach($scope.marksBox, function (value, key) {
                     var obj = {
                         student_id: value.student_id,
-                        marks:value.marks,
+                        marks: value.marks,
                         percentage: value.percentage,
                         conduct: value.conduct,
-                     //   status: value.status
+
                     }
                     $scope.sendMarksHolder.push(obj);
                 })
-                console.log($scope.sendMarksHolder);
+                //   console.log("m3")
+                //   console.log($scope.sendMarksHolder);
 
 
-                // var evalDetails = {
-                //     marks: $scope.dataValue.marks,
-                //     percentage: $scope.dataValue.percentage,
-                //     conduct: $scope.dataValue.conduct
-                // }
-                // console.log(evalDetails);
-                examServices.setEvaluation($scope.sendMarksHolder, examSchedule_name, paper_name, studentId, secId, classId)
+
+                examServices.setBulkMarks($scope.sendMarksHolder, examSchedule_name, paper_name, secId, classId)
                     .success(function (data, status) {
-                        ngDialog.open({
-                            template: '<p>ExamPapers are Added Successfully.</p>',
-                            plain: true
-                        });
-
+                        if (data == false || data == 'false') {
+                            ngDialog.open({
+                                template: '<p>Marks Already Added</p>',
+                                plain: true
+                            });
+                        }
+                        else {
+                            ngDialog.open({
+                                template: '<p>Marks Added successfully </p>',
+                                plain: true
+                            });
+                        }
                         $scope.sendMarkseHolder = [];
 
                         // $scope.dataValue.marks = [];
                         // $scope.dataValue.percentage = [];
                         // $scope.dataValue.conduct = [];
-                        // $scope.getEvaluation($scope.data.studentId, $scope.data.examSchedule_name);
+                        $scope.getEvaluation($scope.data.studentId, $scope.data.examSchedule_name);
                     })
                     .error(function (data, success) {
                         ngDialog.open({
@@ -213,7 +247,7 @@ angular.module('school_erp')
                     })
             } else {
                 ngDialog.open({
-                    template: '<p> Few students are not marked properly</p>',
+                    template: '<p> Few text boxes are not filled properly</p>',
                     plain: true
                 });
             }
@@ -223,160 +257,176 @@ angular.module('school_erp')
 
 
 
-            $scope.DeleteEvaluation = function (value) {
-                $scope.editdata = angular.copy($scope.evalData[value]);
-                $scope.paper_result_id = $scope.editdata.exam_paper_id;
-                console.log($scope.paper_result_id);
-                examServices.DeleteEvaluation($scope.paper_result_id)
-                    .success(function (data, status) {
-                        ngDialog.open({
-                            template: '<p>Evaluation data is Deleted Successfully.</p>',
-                            plain: true
-                        });
-                        $scope.editdata = [];
-                        $scope.getEvaluation($scope.data.studentId, $scope.data.examSchedule_name);
-                    })
-                    .error(function (data, success) {
-                        ngDialog.open({
-                            template: '<p>Some Error Occured!</p>',
-                            plain: true
-                        });
-                    })
+        $scope.DeleteEvaluation = function (value) {
+            $scope.editdata = angular.copy($scope.evalData[value]);
+            $scope.paper_result_id = $scope.editdata.paper_result_id;
+            //   console.log($scope.paper_result_id);
+            examServices.DeleteEvaluation($scope.paper_result_id)
+                .success(function (data, status) {
+                    ngDialog.open({
+                        template: '<p>Evaluation data is Deleted Successfully.</p>',
+                        plain: true
+                    });
+                    $scope.editdata = [];
+                    $scope.getEvaluation($scope.data.studentId, $scope.data.examSchedule_name);
+                })
+                .error(function (data, success) {
+                    ngDialog.open({
+                        template: '<p>Some Error Occured!</p>',
+                        plain: true
+                    });
+                })
+        }
+
+        $scope.EditEvaluation = function (value, evaluatievaluationsons) {
+
+            //     console.log("messsage");
+            $scope.evaluations = angular.copy($scope.evalData[value]);
+            $scope.paper_result_id = $scope.evaluations.paper_result_id;
+            //    console.log($scope.paper_result_id);
+            var EvaluationsDetails = {
+                student_name: $scope.evaluations.student_name,
+                exam_paper_title: $scope.evaluations.exam_paper_title,
+                student_name: $scope.evaluations.student_name,
+                student_name: $scope.evaluations.student_name,
+                marks: $scope.evaluations.marks,
+                percentage: $scope.evaluations.percentage,
+                conduct: $scope.evaluations.conduct,
             }
+            //    console.log(EvaluationsDetails);
 
-            $scope.EditEvaluation = function (value, evaluatievaluationsons) {
-
-                console.log("messsage");
-                $scope.evaluations = angular.copy($scope.evalData[value]);
-                $scope.paper_result_id = $scope.evaluations.exam_paper_id;
-                console.log($scope.paper_result_id);
-                var EvaluationsDetails = {
-                    student_name: $scope.evaluations.student_name,
-                    exam_paper_title: $scope.evaluations.exam_paper_title,
-                    student_name: $scope.evaluations.student_name,
-                    student_name: $scope.evaluations.student_name,
-                    marks: $scope.evaluations.marks,
-                    percentage: $scope.evaluations.percentage,
-                    conduct: $scope.evaluations.conduct,
-                }
-                console.log(EvaluationsDetails);
-
-                $scope.addEditEvaluation(EvaluationsDetails, $scope.paper_result_id);
-            }
+            $scope.addEditEvaluation(EvaluationsDetails, $scope.paper_result_id);
+        }
 
 
-            $scope.addEditEvaluation = function (EvaluationsDetails, paper_result_id) {
-                examServices.EditEvaluation(EvaluationsDetails, paper_result_id)
-                    .success(function (data, status) {
-                        //  ngDialog.open({
-                        //      template: '<p>Station is Edited Successfully.</p>',
-                        //      plain: true
-                        //  });
-                        $scope.editdata = [];
-                        $scope.getEvaluation($scope.data.studentId, $scope.data.examSchedule_name);
-                    })
-                    .error(function (data, success) {
-                        ngDialog.open({
-                            template: '<p>Some Error Occured!</p>',
-                            plain: true
-                        });
-                    })
-
-            }
-
-            $scope.showRole = function (role) {
-                return globalServices.fetchRoleAuth(role);
-            }
-
-            $scope.selectedFile = null;
-            $scope.msg = "";
-
-
-            $scope.loadFile = function (files) {
-
-                $scope.$apply(function () {
-
-                    $scope.selectedFile = files[0];
-
+        $scope.addEditEvaluation = function (EvaluationsDetails, paper_result_id) {
+            examServices.EditEvaluation(EvaluationsDetails, paper_result_id)
+                .success(function (data, status) {
+                    //  ngDialog.open({
+                    //      template: '<p>Station is Edited Successfully.</p>',
+                    //      plain: true
+                    //  });
+                    $scope.editdata = [];
+                    $scope.getEvaluation($scope.data.studentId, $scope.data.examSchedule_name);
+                })
+                .error(function (data, success) {
+                    ngDialog.open({
+                        template: '<p>Some Error Occured!</p>',
+                        plain: true
+                    });
                 })
 
-            }
+        }
 
-            $scope.handleFile = function () {
+        $scope.showRole = function (role) {
+            return globalServices.fetchRoleAuth(role);
+        }
 
-                var file = $scope.selectedFile;
-
-                if (file) {
-
-                    var reader = new FileReader();
-
-                    reader.onload = function (e) {
-
-                        var data = e.target.result;
-
-                        var workbook = XLSX.read(data, {
-                            type: 'binary'
-                        });
-
-                        var first_sheet_name = workbook.SheetNames[0];
-
-                        var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);
-
-                        //console.log(excelData);  
-
-                        if (dataObjects.length > 0) {
+        $scope.selectedFile = null;
+        $scope.msg = "";
 
 
-                            $scope.save(dataObjects);
+        $scope.loadFile = function (files) {
+
+            $scope.$apply(function () {
+
+                $scope.selectedFile = files[0];
+
+            })
+
+        }
+
+        $scope.handleFile = function () {
+
+            var file = $scope.selectedFile;
+
+            if (file) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+
+                    var data = e.target.result;
+
+                    var workbook = XLSX.read(data, {
+                        type: 'binary'
+                    });
+
+                    var first_sheet_name = workbook.SheetNames[0];
+
+                    var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);
+
+                    //console.log(excelData);  
+
+                    if (dataObjects.length > 0) {
 
 
-                        } else {
-                            $scope.msg = "Error : Something Wrong1 !";
-                        }
-
-                    }
-
-                    reader.onerror = function (ex) {
-
-                    }
-
-                    reader.readAsBinaryString(file);
-                }
-            }
+                        $scope.save(dataObjects);
 
 
-            $scope.save = function (data) {
-                console.log(JSON.stringify(data));
-
-                $http({
-                    method: "POST",
-                    url: globalServices.globalValue.baseURL + 'api/book/' + globalServices.globalValue.school_id,
-                    data: JSON.stringify(data),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-
-                }).then(function (data) {
-                    if (data.status) {
-                        $scope.msg = "Data has been inserted ! ";
                     } else {
-                        $scope.msg = "Error : Something Wrong2";
+                        $scope.msg = "Error : Something Wrong1 !";
                     }
-                }, function (error) {
-                    $scope.msg = "Error : Something Wrong3";
-                })
 
-            }
-            $scope.exportAction = function (option) {
-                switch (option) {
-                    case 'pdf':
-                        $scope.$broadcast('export-pdf', {});
-                        break;
-                    case 'excel':
-                        $scope.$broadcast('export-excel', {});
-                        break;
-                    default:
-                        console.log('no event caught');
                 }
+
+                reader.onerror = function (ex) {
+
+                }
+
+                reader.readAsBinaryString(file);
             }
-        }])
+        }
+
+
+        $scope.save = function (data) {
+            //   console.log(JSON.stringify(data));
+
+            $http({
+                method: "POST",
+                url: globalServices.globalValue.baseURL + 'api/book/' + globalServices.globalValue.school_id,
+                data: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+
+            }).then(function (data) {
+                if (data.status) {
+                    $scope.msg = "Data has been inserted ! ";
+                } else {
+                    $scope.msg = "Error : Something Wrong2";
+                }
+            }, function (error) {
+                $scope.msg = "Error : Something Wrong3";
+            })
+
+        }
+        $scope.exportAction = function (option) {
+            switch (option) {
+                case 'pdf':
+                    $scope.$broadcast('export-pdf', {});
+                    break;
+                case 'excel':
+                    $scope.$broadcast('export-excel', {});
+                    break;
+                default:
+                    console.log('no event caught');
+            }
+        }
+
+        if ($rootScope.role == 'parent') {
+
+            $scope.student_id = $rootScope.student.student_id;
+            examServices.getExamSchedule()
+                .success(function (data, status) {
+                    $scope.examSchedule = data.exam_schedules; // Api list-name
+                    $scope.data.examSchedule_name = data.exam_schedules[0].exam_sch_id;
+                    $scope.getEvaluation($scope.student_id, $scope.data.examSchedule_name);
+                    // $scope.getExamPapers(  $scope.subjectId, $scope.examScheduleId );
+                })
+                .error(function (data, success) { })
+
+        } else {
+            $scope.getClassesInitalLoad();
+        }
+    }])

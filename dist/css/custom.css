@@ -52,7 +52,7 @@ header .textright .year,.Date,.logout{padding: 0 10px;}
 	background-color: #03104e; 
 }
 #myNavbar .navbar-nav {
-  width: 85%;
+  width: 100%;
   margin:0 auto;
 	text-align: center;
 }
@@ -95,6 +95,20 @@ div.background div.container .links li>a{color:black;}
 
 .container{width:1200px;height:auto;margin: 0 auto;/*top:-120px;*/margin-top: 31px;}
 
+/*======================== student Acadamics =====================*/
+
+div.acadamicreport {height: 1100px;background-color: white; border: 2px solid red;border-radius: 10px;}
+.acadamicreport .col-md-12 .backwhite {height: 220px;padding-top: 25px;background-color: grey;border-radius: 10px;margin:15px;}
+.acadamicreport .col-md-12 .backwhite .col-md-4 h1{margin: 0px;}
+.acadamicreport .col-md-12 .backwhite  div#photo.col-md-4{height: 175px;}
+.acadamicreport .col-md-12 .backwhite  div#photo.col-md-4 .studentimage {height:160px;}
+.acadamicreport .col-md-12 .backwhite div#photo.col-md-4 .studentimage img{width:200px;height: 150px;border-radius: 5px;}
+.studentimage{width:100%;}
+.acadamicreport .col-md-12 h1{font-style: italic;font-size: x-large;color: red; margin: 0px;}
+.acadamicreport .col-md-12 .formative {height: 230px;background-color: cadetblue;margin: 15px;border-radius: 10px;}
+.acadamicreport .col-md-12 .formative .table-responsive{border: 0px;}
+.acadamicreport .col-md-12 .summative {height: 195px;background-color: darksalmon;margin: 15px;border-radius: 10px;}
+
 /*==============attendence styles==========*/
 
 .rollno div.hvr-bounce-in.transition{background-color: #4d79ff;}
@@ -130,6 +144,7 @@ span.glyphicon.glyphicon-th{padding-bottom: 6px;}
 				transform: translateZ(0px);
 				transition-duration: 0.5s;
         vertical-align: middle;
+        border-radius: 30px;
         width: 150px;
 		}
 		.hvr-bounce-in:hover, .hvr-bounce-in:focus, .hvr-bounce-in:active {
@@ -178,6 +193,21 @@ span.glyphicon.glyphicon-th{padding-bottom: 6px;}
 	visibility: visible;
 	transform: scaleX(1);
 }
+
+
+
+/*============schoolProfile===========*/
+/* div.Registration {height: 600px;background-color: darkgrey;}
+.schoolimage {height:125px;}
+.schoolimage img{width:100px;height: 100px;margin-right: 40px;margin-top: 20px;}
+.schoolimage{width:100%;}
+.tooltip{float:right;}
+.Registration div.table-responsive{overflow-x: hidden;}
+.Registration div.table-responsive table.table.table-bordered{border-collapse: separate;}
+.container h1{margin-top: 30px;} */
+
+
+
 /*==============studentinformation styles============*/
 
 .studentinfo{margin:0 auto;height:500px;}
@@ -204,6 +234,14 @@ span.glyphicon.glyphicon-th{padding-bottom: 6px;}
 .uploaddocuments div.col-md-6 .title2 section {margin-bottom: 20px;}
 .uploaddocuments div.col-md-6 .title1 section {margin-bottom: 20px;}
 
+/*============staffempprofile====*/
+div.staffemppro .col-md-12 #emppic img{width:180px;position: absolute;top:25px;border-radius: 10px;}
+div.staffemppro .col-md-12 #emppic img.double{border-style: double;}
+div.staffempprodetails .col-md-12{background-color: white;}
+div.staffempprodetails .col-md-12 .col-md-6 table.table.table-bordered thead tr th{color: crimson;}
+div.staffemppro .col-md-12 {background-color: #aae0b3;margin-bottom: 80px;border-radius: 10px;}
+div.staffemppro .col-md-12 #empinfo.col-md-3{right: 80px;}
+
 /*===================staffdetailsstyles=============*/
 
 .staffdetails .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
@@ -217,6 +255,27 @@ span.glyphicon.glyphicon-th{padding-bottom: 6px;}
 .staffemployment div.col-md-6 button.btn.btn-default{margin-top: 25px;}
 .staffemployment div.col-md-12{background-color: white;border:1px solid blue;border-radius: 10px;padding:10px;height:auto;}
 .staffemployment {margin:0 auto;height:500px;}
+
+/*=========== employee profile============= */
+
+div.staffemppro .col-md-12 #emppic img{width:150px;position: absolute;top:25px;border-radius: 10px;}
+div.staffemppro .col-md-12 #emppic img.double{border-style: double;}
+div.staffempprodetails .col-md-12{background-color: white;}
+div.staffempprodetails .col-md-12 .col-md-6 table.table.table-bordered thead tr th{color: crimson;}
+div.staffemppro .col-md-12 {margin-bottom: 80px;border-radius: 10px;}
+div.staffemppro .col-md-12 #empinfo.col-md-3{right: 80px;}
+
+/*====================Task Manager================*/
+
+/* .Assignments .col-md-4 {border:1px solid blue;border-radius: 10px;} 
+.Assignments .col-md-8 .backwhite {border:1px solid blue;border-radius: 10px;} */
+/*===================student attandancereport=============*/
+.Studentatt{height: 1000px;}
+.Studentatt .col-md-3 .backwhite {height: 200px;border:1px solid blue;border-radius:10px;}
+.Studentatt .col-md-3 .backwhite .form-group {margin-bottom: 0px;padding: 10px;}
+.Studentatt .col-md-3 .backwhite .form-group button.btn.btn-primary.pull-right{margin-top:30px;} 
+.Studentatt .col-md-9 .backwhite {border:1px solid blue;border-radius:10px;padding:10px;}
+.Studentatt .col-md-12 div#chart.col-md-9{margin-left:300px;margin-top:20px;}
 
 /*=================Studentattendance=============*/
 
@@ -257,6 +316,17 @@ div.subjectlist div.col-md-12 .tooltip{float:right;padding:0 8px;}
 .Assignsubjects .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;} 
 .Assignsubjects .col-md-9 {background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;}
 
+/*=============Lesson planer===============*/
+.Quiz .col-md-9 .backwhite1{background-color: white; padding: 10px;margin-top: 0px;}
+.Quiz .col-md-3 .backwhite{border:1px solid blue; border-radius: 15px;padding: 10px;}
+.Quiz .col-md-9 {background-color: white; height:550px;border:1px solid blue;border-radius: 10px;padding: 10px;margin-bottom: 20px;}
+.Quiz .col-md-9 .table-responsive{overflow-x: visible;border:0px; height: 70%;}
+ hr.style1{border-top: 2px solid blue; margin-left: -10px;width: 103%; margin-top: -26px;}
+
+/*=============Lesson tracker===============*/
+ .trackersearch .col-md-3 .backwhite{border:1px solid blue;border-radius:10px;padding: 10px;}
+.trackersearch .col-md-3{margin-top: 60px;}
+.trackerresult .col-md-9 .backwhite{border:1px solid blue;border-radius:10px;padding: 10px;}
 /*====================Assignmentstyles============*/
 
 .Assignments{margin:0 auto;height:900px;}
@@ -366,11 +436,21 @@ div.subjectlist div.col-md-12 .tooltip{float:right;padding:0 8px;}
 
 /*===============Addvehicle===============*/
 
-.Addvehicle{margin:0 auto;height:500px;}
+/* .Addvehicle{margin:0 auto;height:500px;}
 .Addvehicle .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
 .Addvehicle .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
 .Addvehicle .col-md-9 .backwhite .button{float: right;}
-.Addvehicle div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+.Addvehicle div.form-group input{border:1px solid lightgrey;border-radius: 2px;} */
+
+
+/*=====================Addvehical1styles===========*/
+.addvehical1 div.col-md-12 .backwhite section.details{height:200px;}
+.addvehical1 div.col-md-12 .backwhite section.finance{height:50px;}
+.addvehical1 div.col-md-12 .backwhite div.company{height:130px;}
+.addvehical1 div.Insurance{height:220px;padding-left: 20px;}
+div.Maintenance{height:100px;padding-left: 20px;}
+.Addvehical1 {height:1150px;background-color: white;border:1px solid blue;border-radius: 10px;} 
+
 
 /*================Addstationtobusstyles============*/
 
@@ -412,10 +492,22 @@ div.subjectlist div.col-md-12 .tooltip{float:right;padding:0 8px;}
 .FeeMaster .col-md-9 .backwhite .button{float: right;}
 .FeeMaster div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
 
+
+/*=====================collectfeestyles===========*/
+
+/* .collectfee{margin:0 auto;height:600px;}
+.collectfee .col-md-3 {background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+.collectfee .addsubject .backwhite form.ng-pristine.ng-invalid.ng-invalid-required{background-color: white;height:250px;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
+.collectfee .col-md-9 .button{float: right;}
+.collectfee .col-md-9 .backwhite div.listview.ng-binding{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
+.collectfee div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+.collectfee .col-md-8{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 40px;} */
+
 /*=====================collectfeestyles===========*/
 
 .collectfee{margin:0 auto;height:500px;}
 .collectfee .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+/* .collectfee .addsubject .backwhite form.ng-pristine.ng-invalid.ng-invalid-required{background-color: white;height:250px;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;} */
 .collectfee .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
 .collectfee .col-md-9 .backwhite .button{float: right;}
 .collectfee div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
@@ -520,8 +612,8 @@ div.subjectlist div.col-md-12 .tooltip{float:right;padding:0 8px;}
   height: 13px;
   cursor: pointer;
   position: absolute;
-  top: 0;
-  left: 0;
+  top:4px;
+  left:65px;
   border:1px solid;
   /*background: #fcfff4;
   background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
@@ -721,6 +813,144 @@ ul.panel-controls > li > .dropdown-menu:before {
 }
   
    /*==========dashboardstyles===========*/
+
+
+
+   div.staff div.col-md-12 #cal.col-md-6{background-color: #bd9696;}
+   div.messagebox div.col-md-12 div.col-md-6{background-color: darkgray;}
+   div.messagebox div.col-md-12 div.col-md-6 div.form-group button{float: right;margin-bottom: 10px;}
+   div.staff div.col-md-12 div.col-md-6 div.noticeboard{background-color: #e0eee1;}
+   div.staff div.col-md-12 div.col-md-6 div.staff div.backwhite{border:1px solid grey;border-radius:10px;background-color: #e7eef4;}
+   div.staff div.col-md-12 div.col-md-6 div.noticeboard div.backwhite{overflow-y: scroll;height:470px;width:100%;}
+   div.messagebox div.col-md-12 div.col-md-5 .noticemsg{margin-top: 40px;}
+   .acadamic_report div.col-md-12 div.table.table-responsive table tbody tr td div#piechart{width:200px;height:300px;}
+   .acadamic_report div.col-md-12 div.table.table-responsive table tbody tr th{text-align: center;}
+   .acadamic_report div.col-md-12 div.table.table-responsive div{overflow-x: hidden;overflow-y: hidden;overflow:none;}
+   .acadamic_report div.col-md-12 div.table.table-responsive table tbody tr td div.second-group{display: none;}
+   div.Timetable .col-md-12 .table-responsive table#tbl-timetable.table.table-bordered{background-color: darkslategrey;color: white;}
+   div.staff div.col-md-12 #cal.col-md-6 div.calander{margin-bottom: 20px;}
+   div.attendancetaken .col-md-12 .backwhite table.table thead tr th .col-md-9 button.btn.btn-primary.btn-responsive{margin-right: 30px;}
+   div.attendancetaken .col-md-12 .backwhite table.table thead tr th .col-md-9{width:100%;text-align: center;}
+     div.attendancetaken .col-md-12{border: 1px solid grey;
+    border-radius: 10px;
+    background-color: lightgray;
+}
+
+   div.messagebox div.col-md-12 div.noticemsg div.noticedetails img{width:40px;height:40px;}
+   div.messagebox div.col-md-12 div.noticemsg div.noticedetails img,#disnotice{display: inline-block;vertical-align: top;margin-top: 20px;}
+   div.messagebox div.col-md-12 div.noticemsg div.noticedetails div#disnotice.form-group{width:90%;}
+   div.messagebox div.col-md-12 div.noticemsg div.noticedetails div#disnotice.form-group textarea#comment.form-control{overflow-x: hidden;}
+   * {
+       box-sizing: border-box;    
+   }
+   .grafico {
+       height: 200px;
+       margin: 1rem auto;
+       position: relative;
+       width: 200px;
+       margin-right: 30px;
+         } 
+   .recorte {
+       border-radius: 50%;
+       clip: rect(0px, 200px, 200px, 100px);
+       height: 100%;
+       position: absolute;
+       width: 100%;
+        }
+   .quesito {
+       border-radius: 50%;
+       clip: rect(0px, 100px, 200px, 0px);
+       height: 100%;
+       position: absolute;
+       width: 100%;
+       font-family: monospace;
+       font-size: 1.5rem;
+        }
+   .sombra {
+       background-color: #fff;
+       border-radius: 50%;
+       box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);
+       border: 5px solid #000;
+       height: 100%;
+       position: absolute;
+       width: 100%;
+     }
+   
+   #porcion1 {
+       transform: rotate(0deg);
+        }
+   
+   #porcion1 .quesito {
+       background-color: #2d6596;
+       transform: rotate(70deg);
+        }
+   #porcion2 {
+       transform: rotate(70deg);
+        }
+   #porcion2 .quesito {
+       background-color: rgb(246,192,28);
+       transform: rotate(120deg);
+        }
+   #porcion3 {
+       transform: rotate(-170deg);
+        }
+   #porcion3 .quesito {
+       background-color: rgba(0,128,0,.7);
+       transform: rotate(35deg);
+        }
+   #porcionFin {
+       transform:rotate(-145deg);
+        }
+   #porcionFin .quesito {
+       background-color: rgb(63,141,203);
+       transform: rotate(145deg);
+        }
+     #porcionFan {
+       transform:rotate(-145deg);
+        }   
+   #porcionFan .quesito {
+       background-color: #f66c41;
+       transform: rotate(80deg);
+        }
+   #porcion1 .quesito:after {
+       content: attr(data-rel);
+       left: 20%;
+       line-height: 5;
+       position: absolute;
+       top: 0;
+       transform: rotate(-40deg);
+   }
+   #porcion2 .quesito:after {
+       content: attr(data-rel);
+       left: 10%;
+       position: absolute;
+       top: 30%;
+       transform: rotate(-190deg);
+   }
+   #porcion3 .quesito:after {
+       content: attr(data-rel);
+       right:60%;
+       bottom:50%;
+       position: absolute;
+       top: 10%;
+       left:10%;
+       transform: rotate(70deg);
+   }
+   #porcionFin .quesito:after {
+      content: attr(data-rel);
+      left: 30%;
+      position: absolute;
+      /*top: 30%;*/
+      bottom:80%;
+      right:50%;
+   }
+   #porcionFan .quesito:after {
+      content: attr(data-rel);
+      left: 10%;
+      position: absolute;
+      top: 30%;
+   }
+   
 /*===============dashboardstyles=========*/
   /* .Circulam{background-color: beige;border:1px solid grey;border-radius: 5px;}
   .Circulam h2{text-align: center;}
@@ -799,7 +1029,11 @@ ul {list-style-type: none;}
   .notices h1{text-align: center;height:150px;}
   .classalign h1 button{display: inline-block;}
   .classalign .col-md-9 {padding-top: 25px;}
-  .classalign .col-md-9 button{margin-right: 40px;background-color: blueviolet;width:40px;text-align: center;}
+  .classalign .col-md-9 button{margin-right: 40px;background-color: blueviolet;width:100px;text-align: center; border:groove;
+    float :left;}
+    /* .classalign .col-md-9 button.active{
+      background-color: rgb(43, 226, 119);
+    } */
  * {box-sizing: border-box;}
 ul {list-style-type: none;}
 .weekdays {
@@ -962,29 +1196,39 @@ div.navigation{
 }
 
 /*==============studentprofile============*/
-
-div.studentprofile {height: 1124px;background-color: lightgrey;}
+/* div.studentprofile {height: 1124px;background-color: white;}
 .studentimage {height:100px;}
-.studentimage img{width:100px;height: 100px;margin-right: 60px;margin-top:60px;}
+.studentimage img{width:200px;height: 200px;border-radius: 5px;}
 .studentimage{width:100%;}
+.studentprofile tr td{color: darkcyan;}
 .tooltip{float:right;}
-.studentprofile div .table-responsive{overflow-x: hidden;}
-.studentprofile div .table-responsive table.table.table-bordered{border-collapse: separate;}
-
+.studentprofile div.table-responsive{overflow-x: hidden;}
+.studentprofile div.table-responsive table.table.table-bordered{border-collapse: separate;}
+.container h1{margin-top: 30px;}
+.studentprofile .col-md-12 h1{color: crimson;}
+.studentprofile .col-md-12 div.admissiondetails{height: 400px;}
+.studentprofile .col-md-12 div.admissiondetails .col-md-3 h1#stupro{text-align: center;} */
 
   /*------student profile media queries------*/
-  @media screen and (max-width: 981px) {
+  /* @media screen and (max-width: 981px) {
     div .studentprofile {height: 1600px;background-color: lightgrey;}  
-}
+} */
 
         /*==========addClass&Section===========*/
-
+/* 
  .col-md-4 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
  .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
  .col-md-9 .backwhite .button{float: right;}
  div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
  #addclass{margin-left: 194px;}
- #addSection{margin-top: 10px;}
+ #addSection{margin-top: 10px;} */
+
+ /*============Addsectionstyles=======*/
+div.classinfo .col-md-3 .table-responsive{margin-top: 60px;} 
+div.classinfo .col-md-3 .addclass #addclasses{margin-top: 12%}
+div.classinfo .col-md-9 .table-responsive{margin-top: 120px;} 
+div.classinfo .col-md-3{background-color: white;border:1px solid blue;border-radius: 10px;}
+div.classinfo .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;}
 
 
   .btn.btn-primary{
@@ -1000,3 +1244,149 @@ div.studentprofile {height: 1124px;background-color: lightgrey;}
 .container div.row .col-md-9 .backwhite .table-responsive{overflow-x: visible;border:0px;}
    .container div.row .col-md-9 .backwhite .table-responsive table tbody tr th input{width:120px;}
   .container div.row .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;}
+
+ /*====================Quiz styles=============*/
+  .Quiz .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+  .Quiz .col-md-9 {background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
+  div.subjectlist div.col-md-12 div.col-xs-3.col-md-4 div.col-md-12 div.col-md-12 ul li{display:inline-block;}
+  div.subjectlist div.col-md-12 div.col-xs-3.col-md-4 div.col-md-12 div.col-md-12{text-align: right;}
+  div.subjectlist div.col-md-12 div.col-xs-3.col-md-4 div.col-md-12 div.col-md-12 ul li{background-color: #03104e ;border-color: #03104e ;color: white;}
+
+ /*====================Add class & section =============*/
+  div.classinfo .col-md-3 .table-responsive{margin-top: 60px;} 
+  div.classinfo .col-md-9 .table-responsive{margin-top: 120px;} 
+  div.classinfo .col-md-3{background-color: white;border:1px solid blue;border-radius: 10px;}
+  div.classinfo .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;}
+  
+  
+   .btn.btn-primary{
+     background-color: #03104e ;
+     border-color: #03104e ;
+   }
+
+
+   /*============schoolProfile===========*/
+.schoolprofile {height:1300px;border:1px solid #7a757b ;} 
+.schoolprofile .schoollogo div.col-md-12 {text-align: center;}
+.schoolprofile .schoollogo div.col-md-12 img{width:150px;margin-right: 30px;margin-top: 10px;}
+.schoolprofile .schoollogo div.col-md-12 img#sclogo{width:500px;height:200px;}
+.schoolprofile div.schooldetails .col-md-12 div.table-responsive{overflow-x: hidden;}
+.schoolprofile div.managementdetails .col-md-12 div.table-responsive{overflow-x: hidden;}
+.schoolprofile div.contactdetails .col-md-12 div.table-responsive{overflow-x: hidden;}
+.schoolprofile .col-md-12 h1{background-color: cadetblue;border-radius: 2px;}
+.schoolprofile h1{font-size: 25px;}
+.schoolprofile div.table-responsive table.table.table-bordered tbody{background-color: white;}
+.schoolprofile div.schooldetails .col-md-12 div.editbutton h1 {width:95%;}
+.schoolprofile div.schooldetails .col-md-12 div.editbutton h1{display: inline-block;margin-top: 40px;}
+.schoolprofile div.managementdetails .col-md-12 div.editbutton h1 {width:95%;}
+.schoolprofile div.managementdetails .col-md-12 div.editbutton h1{display: inline-block;margin-top: 40px;}
+.schoolprofile div.contactdetails .col-md-12 div.editbutton h1 {width:95%;}
+.schoolprofile div.contactdetails .col-md-12 div.editbutton h1{display: inline-block;margin-top: 40px;}
+.schoolprofile div.managementdetails .col-md-12 .col-md-12 div.table-responsive tbody tr td{width:50%;}
+.schoolprofile div.contactdetails .col-md-12 .col-md-12 div.table-responsive tbody tr td{width:50%;}
+.schoolprofile div.schooldetails .col-md-12 .col-md-12 div.table-responsive tbody table.table.table-bordered tr td.ng-binding{width:50%;}
+.schoolprofile div.schooldetails .col-md-12 .col-md-12 div.table-responsive tbody table.table.table-bordered tr td.ng-binding div.form-group{width:50%;}
+
+
+/*==============studentprofile============*/
+div.studentprofile {height: 1124px;background-color: white;}
+.studentimage {height:100px;}
+.studentimage img{width:200px;height: 200px;border-radius: 5px;}
+.studentimage{width:100%;}
+.studentprofile tr td{color: darkcyan;}
+/* .tooltip{float:right;} */
+.studentprofile div.table-responsive{overflow-x: hidden;}
+.studentprofile div.table-responsive table.table.table-bordered{border-collapse: separate;}
+/* .container h1{margin-top: 30px;} */
+.studentprofile .col-md-12 h1{color: crimson;}
+.studentprofile .col-md-12 div.admissiondetails{height: 400px;}
+.studentprofile .col-md-12 div.admissiondetails .col-md-3 h1#stupro{text-align: center;}
+
+ /*------student profile media queries------*/
+ @media screen and (max-width: 981px) {
+   div .studentprofile {height: 1600px;background-color: lightgrey;}  
+}
+
+
+
+
+/*=======mediaquery for dashboard=======*/
+@media screen and (max-width: 1024px) {
+   
+     
+}
+
+
+footer.main-footer.ng-scope{position:fixed;left:0px;bottom:0px;width:100%;height:60px;}
+.container div.col-md-9 .backwhite{margin-bottom: 100px;}
+@media screen and (max-width: 1024px) {
+	    div.row.background.ng-scope{width:90%;margin-top: 100px;}
+        section#myNavbar.navbar-collapse.collapse ul.nav.navbar-nav{height:120px;}
+    }
+ @media screen and (max-width: 768px) {
+        nav.navbar.navbar-inverse.ng-scope{margin-top: 70px;}
+        div.navbar-custom-menu{margin-right: 90px;}
+        div.row.background.ng-scope{margin-top: 170px;}
+    }
+ @media screen and (max-width: 425px) {
+        ul.nav.navbar-nav img.user-image{margin-left: 20px;}
+        a#date.dropdown-toggle{margin-left: 20px;}
+        a.dropdown-toggle.ng-binding{padding:0px;}
+        div.row.background.ng-scope{margin-top: 150px;}
+    }
+@media screen and (max-width: 375px) {
+        div.navbar-custom-menu{margin-right: 0px;}
+          div.row.background.ng-scope{margin-top: 160px;}
+    }
+    @media screen and (max-width: 320px) {
+        a#date.dropdown-toggle{margin-left: 0px;}
+        a.dropdown-toggle.ng-binding{padding:0px;}
+        div.row.background.ng-scope{margin-top: 160px;}
+    }
+
+
+  /*===============parentdashboardstyles============*/
+
+  div.parentdashboard div.parentstudentdetails{height:300px;}
+  div.parentstudentdetails div.col-md-12 div.studetails .col-md-4 h2{font-size: 20px;}
+  div.studetails .col-md-4 div.stuinfor{width:200px;}
+  div.studetails .col-md-4 .parimage,.stuinfor{display:inline-block;}
+  div.studetails .col-md-4 img{width:100px;height:100px;border-radius: 50px;/*margin-bottom: 70px;margin-right: 20px;margin-left: 15px;*/}
+  div.studetails .col-md-4 .backwhite{border:1px solid lightgrey;border-radius: 10px;background-color: lightcyan;}
+  div.parenttimings .col-md-4 table.table.table-bordered{background-color:lightgoldenrodyellow;}
+  div.parentquote .col-md-4 div.quote{height:65px;}
+  div.parentquote .col-md-4 div.word{height:65px;}
+  div.parentquote .col-md-4{background-color: lightgrey;border-radius: 10px;}
+  div.events_notices div.col-md-12 div#events.col-md-6{height:250px;border-radius: 10px;}
+  div.parattendance div.col-md-12 div.col-md-6 canvas#Canvas1{margin-left: 65px;margin-top:75px;}
+  div.studetails .col-md-4 .backwhite div.stuinfor{position:absolute;}
+  /*div.studetails .col-md-4 .parimage{margin-left: 30px;}*/
+  div.events_notices div.col-md-12 div#events.col-md-6 .backwhite{overflow-y: scroll;overflow-x: scroll;height:470px;width:100%;}
+  div.quote div.backwhite.ng-binding h1{background-color: #7bb0f5;border-radius: 5px;}
+  div.word div.backwhite.ng-binding h1{background-color: #7bb0f5;border-radius: 5px;}
+  div.events_notices div.col-md-12 div#calander.col-md-6 {background-color: #ccddab;}
+  div.parattendance .col-md-12 div#attreport.col-md-6{background-color: #e5cdd1;}
+  div.studetails .col-md-4 div.backwhite.ng-scope div.parimage img{position: relative;margin-left: 20px;margin-top: 10px;}
+  
+  /*======mediaqueries for parentdashbaord======*/
+  @media screen and (max-width: 1024px) {
+       div.studetails .col-md-4 div.backwhite.ng-scope div.stuinfor{width:120px;word-wrap: break-word;}
+      }
+   @media screen and (max-width: 768px) {
+     div.parentdashboard div.events_notices{margin-top: 900px;}
+         .register div.col-md-12 #top{top:0px;}
+         .register {width:500px;height:650px;}
+         .register div.col-md-12 div.col-md-12{text-align: right;margin-top: 0px;position:absolute;top:513px;margin-left: 130px;}
+         div.studetails .col-md-4 {margin-bottom: 20px;}
+         div.studetails .col-md-4 div.stuinfor{left:164px;width:200px;}
+        div.events_notices div.col-md-12 div#calander.col-md-6 {margin-top: 220px;}
+  
+  
+   }    
+   @media screen and (max-width: 320px) {
+      div.events_notices div.col-md-12 div#calander.col-md-6 {margin-top: 220px;}
+      div.studetails .col-md-4 div.parimage img{width:50px;height:50px;}
+        div.studetails .col-md-4 div.parimage h2{font-size: 15px;}
+         div.studetails .col-md-4 div.parimage {width:80px;}
+          div.studetails .col-md-4 div.stuinfor{width:100px;left:105px;word-wrap: break-word;}
+      }
