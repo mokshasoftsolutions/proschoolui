@@ -14,7 +14,7 @@
       <li ng-if="showRole(['admin','teacher'])">/
         <a ui-sref='main.lessonPlanner'>Lession Planner</a>
       </li>
-      <li ng-if="showRole(['admin','teacher'])">/
+      <li >/
         <a ui-sref='main.lessonTracker'>Lession Tracker</a>
       </li>
     </ul>
@@ -26,23 +26,23 @@
 <div class="container">
   <div class="row">
     <div class="trackersearch">
-      <div class="col-md-3">
+      <div class="col-md-3" ng-if="showRole(['admin','teacher'])">
         <div class="backwhite">
-          <div class="form-group">
+          <div class="form-group" ng-show="showRole(['admin','teacher'])">
             <label>Class</label>
             <select data-ng-change="populateSections(classId)" ng-options="class.class_id as class.name for class in classData" class="form-control select2"
               style="width: 100%;" ng-model="classId">
 
             </select>
           </div>
-          <div class="form-group">
+          <div class="form-group" ng-show="showRole(['admin','teacher'])">
             <label>Section</label>
             <select ng-options="sec.section_id as sec.name for sec in secData" data-ng-change="populateSubjects(secId)" class="form-control select2"
               style="width: 100%;" ng-model="secId">
 
             </select>
           </div>
-          <div class="row">
+          <div class="row" ng-if="showRole(['admin','teacher'])">
             <div class="col-md-12" ng-show="showRole(['admin','teacher','parent'])">
               <button type="submit" ng-click="getChapterResponse(secId);" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Select</button>
             </div>

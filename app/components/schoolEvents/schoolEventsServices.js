@@ -29,13 +29,15 @@ angular.module('school_erp')
             })
         };
 
+
         schoolEventsServices.getQuote = function () {
             return $http({
                 method: 'GET',
                 url: globalServices.globalValue.baseURL + 'api/quote_word/' + globalServices.globalValue.school_id
             })
         };
-
+      
+       
         //   classWiseServices.EditTimeTable = function(dataValue){
         //         console.log(dataValue);
         //         return $http({

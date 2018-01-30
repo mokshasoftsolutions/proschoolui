@@ -14,7 +14,7 @@
       <li ng-if="showRole(['admin','teacher'])">/
         <a ui-sref='main.lessonPlanner'>Lession Planner</a>
       </li>
-      <li ng-if="showRole(['admin','teacher'])">/
+      <li>/
           <a ui-sref='main.lessonTracker'>Lession Tracker</a>
         </li>
     </ul>
@@ -42,7 +42,7 @@
           <div class="col-md-12" ng-show="showRole(['admin'])">
             <button type="submit" ng-click="getTeacher(secId);" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Select</button>
           </div>
-          <form name="assignSubjects" ng-submit="assignSubjects.$valid && addTeacher(data)" novalidate>
+          <form name="assignSubjects" ng-submit="assignSubjects.$valid && addTeacher(data,secId)" novalidate>
             
             <div class="form-group" ng-show="showRole(['admin'])" ng-class="{'has-error': assignSubjects.$submitted  && assignSubjects.subject.$pristine}">
               <label>Subject Name</label>
@@ -60,7 +60,7 @@
             </div>
 
             <div class="box-footer" ng-if="showRole(['admin'])">
-              <button class="btn btn-primary pull-right" type="submit" value="add" style="background-color: #03104e;border-color: #03104e;">Add</button>
+              <button class="btn btn-primary pull-right" type="submit"  style="background-color: #03104e;border-color: #03104e;">Add</button>
             </div>
 
 
@@ -95,7 +95,7 @@
           </div>
         </div> -->
 
-        <table export-table st-table="display_records" st-safe-src="teacherData | filter:secId" class="table table-striped">
+        <table  class="table table-striped">
           <thead>
             <tr>
               <th>#</th>
@@ -115,7 +115,7 @@
                       </a>
                 </td>
               </tr>-->
-            <tr st-select-row="row" st-select-mode="multiple" ng-repeat="teachers in display_records" class="editable-row">
+            <tr  ng-repeat="teachers in teacherData | filter:secId" class="editable-row">
               <td>{{teachers.id+1}}</td>
               <td>
                 <!--<span editable-text="teachers.subject_name" e-name="subject_name" onaftersave="EditAssignSubjects($index)"
@@ -147,13 +147,13 @@
               </td>
             </tr>
           </tbody>
-          <tfoot>
+          <!-- <tfoot>
             <tr>
               <td colspan="5" class="text-center">
                 <div class="pull-right" st-pagination="" st-items-by-page="7" st-displayed-pages="5"></div>
               </td>
             </tr>
-          </tfoot>
+          </tfoot> -->
         </table>
       </div>
     </div>

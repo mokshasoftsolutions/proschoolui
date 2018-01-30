@@ -130,7 +130,7 @@ angular.module('school_erp')
             .state('main.messages', { // login Page
                 url: "messages",
                 templateUrl: "app/components/messages/messages.html",
-               // controller: "messagesController",
+                controller: "messagesController",
                 data: {
                     requireLogin: true
                 }

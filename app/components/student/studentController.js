@@ -61,7 +61,7 @@ angular.module('school_erp')
                             phone:element.phone,
                             class:element.school_classes[0].name,
                             section:element.sections[0].name,
-                            parent:element.parents[1].parent_name,
+                            parent:element.parents[0].parent_name,
                             image: element.studentImage[0].filename,
                             
                         }

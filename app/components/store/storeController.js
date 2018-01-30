@@ -5,9 +5,31 @@ angular.module('school_erp')
         $scope.getVendor = function () {
             storeServices.getVendor()
                 .success(function (data, status) {
-                    $scope.data = data.vendor;
-                    $scope.vendorDetails = $scope.data;
-                    console.log(JSON.stringify(data));
+                    //$scope.data = data.vendor;
+                    $scope.vendor = data.vendor;
+                    //console.log(JSON.stringify(data));
+
+                    $scope.vendorDetails = [];
+                    index = 0;
+                    $scope.vendor.forEach(function (element) {
+
+                        var obj = {
+                            id: index++,
+                            vendor_id: element.vendor_id,
+                            vendor_name: element.vendor_name,
+                            material: element.material,
+                            contact_no: element.contact_no,
+                            location: element.location,
+                            email: element.email,
+                            address: element.address,
+                           
+                           
+
+                        }
+                        $scope.vendorDetails.push(obj);
+                        // console.log("mesaage for section");
+                       // console.log($scope.employeeData);
+                    })
                     // $scope.station_id = $scope.data[].station_id;
                     // console.log($scope.station_id);
 
@@ -25,7 +47,7 @@ angular.module('school_erp')
                 location: $scope.data.location,
                 address: $scope.data.address,
             }
-            console.log(vendorDetails);
+            //console.log(vendorDetails);
             storeServices.setVendor(vendorDetails)
                 .success(function (data, status) {
                     ngDialog.open({
@@ -83,9 +105,9 @@ angular.module('school_erp')
 
 
         $scope.DeleteStore = function (value) {
-            $scope.editdata = angular.copy($scope.data[value]);
+            $scope.editdata = angular.copy($scope.vendorDetails[value]);
             $scope.vendor_id = $scope.editdata.vendor_id;
-            console.log($scope.vendor_id);
+          //  console.log($scope.vendor_id);
             storeServices.DeleteVendor($scope.vendor_id)
                 .success(function (data, status) {
                     ngDialog.open({

@@ -56,24 +56,23 @@ angular.module('school_erp')
         }
        
 
-        $scope.exportAction = function (option) {
-            switch (option) {
-                case 'pdf':
-                    $scope.$broadcast('export-pdf', {});
-                    break;
-                case 'excel':
-                    $scope.$broadcast('export-excel', {});
-                    break;
-                default:
-                    console.log('no event caught');
-            }
-        }
+        // $scope.exportAction = function (option) {
+        //     switch (option) {
+        //         case 'pdf':
+        //             $scope.$broadcast('export-pdf', {});
+        //             break;
+        //         case 'excel':
+        //             $scope.$broadcast('export-excel', {});
+        //             break;
+        //         default:
+        //             console.log('no event caught');
+        //     }
+        // }
 
         if ($rootScope.role == 'parent') {
 
             $scope.secId = $rootScope.student.section_id;
-            $scope.populateSubjects($scope.secId);
-
+            $scope.getChapterResponse($scope.secId)
 
         } else {
             $scope.getClassesInitalLoad();

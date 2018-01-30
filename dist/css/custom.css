@@ -222,7 +222,7 @@ span.glyphicon.glyphicon-th{padding-bottom: 6px;}
 
 /*================studentadmissionstyles=============*/
 
-.Admission{margin:0 auto;height:1300px;}
+.Admission{margin:0 auto;height:1300px;margin-bottom: 800px;}
 .Admission .col-md-12{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 10px;}
 .studentadmission {height:350px;}
 .parentdetails{height:400px;} 
@@ -249,7 +249,7 @@ div.staffemppro .col-md-12 #empinfo.col-md-3{right: 80px;}
 .staffdetails{margin:0 auto;height:500px;}
 
 /*=====================staffemployment================*/
-
+.staffemployment div.col-md-12{margin-bottom: 90px;}
 .staffemployment div.col-md-12 div.col-xs-3.col-md-4{width:100%;}
 .staffemployment div.col-md-12 .tooltip{float:right;padding:0 8px;}
 .staffemployment div.col-md-6 button.btn.btn-default{margin-top: 25px;}
@@ -1390,3 +1390,15 @@ footer.main-footer.ng-scope{position:fixed;left:0px;bottom:0px;width:100%;height
          div.studetails .col-md-4 div.parimage {width:80px;}
           div.studetails .col-md-4 div.stuinfor{width:100px;left:105px;word-wrap: break-word;}
       }
+
+
+
+
+      /*==================paybands============*/
+.Salary .col-md-12 .backwhite{ height:100px;border:1px solid black;border-radius: 10px;}
+.allowances .col-md-12 .backwhite{height:180px;border:1px solid black;border-radius: 10px;}
+.allowtable .col-md-12 .backwhite{height:60px;border:1px solid black;border-radius: 10px;}
+.allowtable .col-md-12 .backwhite{margin-bottom: 100px;}
+
+/*=======messagestyles====*/
+div.msgbox div.col-md-12 .backwhite{border:1px solid black;border-radius: 10px;}

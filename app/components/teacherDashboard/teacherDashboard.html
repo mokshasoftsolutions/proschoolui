@@ -72,13 +72,13 @@
                     </td>
                     <td>
                       <div class="progress">
-                        <div class="progress-bar progress-bar-success" ng-style="{width:(student.attendance.presentPercent)}">
+                        <div class="progress-bar progress-bar-success" ng-style="{width:(employee.attendance.presentPercent)}">
                           P:{{employee.attendance.present}}/{{employee.count}}
                         </div>
-                        <div class="progress-bar progress-bar-warning" ng-style="{width:(student.attendance.onLeavePercent)}">
+                        <div class="progress-bar progress-bar-warning" ng-style="{width:(employee.attendance.onLeavePercent)}">
                           L:{{employee.attendance.onLeave}}/{{employee.count}}
                         </div>
-                        <div class="progress-bar progress-bar-danger" ng-style="{width:(student.attendance.absentPercent)}">
+                        <div class="progress-bar progress-bar-danger" ng-style="{width:(employee.attendance.absentPercent)}">
                           A:{{employee.attendance.absent}}/{{employee.count}}
                         </div>
                       </div>
@@ -90,10 +90,19 @@
               </table>
             </div>
           </div>
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
             <h1>Performance</h1>
-            <canvas id="Canvas1" width="600" height="400"></canvas>
-          </div>
+            <canvas id="Canvas1"></canvas>
+          </div> -->
+          <div class="col-md-6" id="attreport">
+              <div class="backwhite">
+                <h1>Performance</h1>
+                <center style="margin-top:0px;color:brown">{{message}}</center>
+                <div zingchart id="chart-1" zc-json="myJson" zc-width="100%" zc-height="336px"></div>
+                <!-- <center style="margin-top:150px;color:brown">{{message}}</center> -->
+                <!-- <canvas id="Canvas1"></canvas> -->
+              </div>
+            </div>
         </div>
       </div>
     </div>
@@ -167,7 +176,7 @@
   </div>
 </div>
 
-<script>
+<!-- <script>
   //-------------------------------------------
   //-------------------------------------------
   //-------------------------------------------
@@ -358,4 +367,4 @@
 
 
 
-</script>
+</script> -->

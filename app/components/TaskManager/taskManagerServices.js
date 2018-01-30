@@ -36,5 +36,12 @@ angular.module('school_erp')
                 url: globalServices.globalValue.baseURL + 'api/delete_task_management/' + task_id,
             })
         };
+        taskManagerServices.getTaskByDay = function (date) {
+            return $http({
+                method: 'GET',
+                url: globalServices.globalValue.baseURL + 'api/currentDay_task/' +date+ '/'+ globalServices.globalValue.school_id
+            })
+        };
+
         return taskManagerServices;
     }]); 

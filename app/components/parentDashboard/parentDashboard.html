@@ -12,9 +12,9 @@
             <div class="backwhite" ng-repeat="stuData in studentData">
               <div class="parimage">
                 <img ng-src="{{globalServicesURL}}api/image/{{stuData.studentImage[0].filename}}">
-                
-                <h2>Admission No:   {{ stuData.Admission_no}}</h2>
-                <h2>Roll No:  {{stuData.roll_no}}</h2>
+
+                <h2>Admission No: {{ stuData.Admission_no}}</h2>
+                <h2>Roll No: {{stuData.roll_no}}</h2>
               </div>
               <div class="stuinfor">
                 <h1>{{stuData.student_name}}</h1>
@@ -38,7 +38,7 @@
                   <td>{{timetable.start_time}}</td>
                   <td>{{timetable.subject_name}}</td>
                 </tr>
-               
+
               </tbody>
             </table>
           </div>
@@ -85,93 +85,96 @@
                     </td>
 
                   </tr>
-                 
+
                 </tbody>
               </table>
             </div>
           </div>
-          <div class="col-md-6">
-            <h1>Performance</h1>
-            <canvas id="Canvas1"></canvas>
+          <div class="col-md-6" id="attreport">
+            <div class="backwhite">
+              <h1>Performance</h1>
+              <center style="margin-top:0px;color:brown">{{message}}</center>
+              <div zingchart id="chart-1" zc-json="myJson" zc-width="100%" zc-height="336px"></div>
+              <!-- <center style="margin-top:150px;color:brown">{{message}}</center> -->
+              <!-- <canvas id="Canvas1"></canvas> -->
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="events_notices">
-      <div class="col-md-12">
-        <div class="col-md-6" id="events">
-          <div class="backwhite">
-            <div class="events">
-              <h1>Notices</h1>
-          
-                <div  ng-repeat="board in NoticeBoardData">
-                  <!-- The time line -->
-                  <ul class="timeline" >
-                    <!-- timeline time label -->
-                    <li class="time-label">
-                      <span class="bg-red">
-                        {{board.date}}
-                      </span>
-                      <button ng-show="showRole(['admin'])" style="margin-left:96%" class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteNoticeBoard($index)"
-                        ng-confirm-click="Are you sure you want to delete this item?">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                      </button>
-                    </li>
+    <!-- </div>
+  </div> -->
+  <div class="events_notices">
+    <div class="col-md-12">
+      <div class="col-md-6" id="events">
+        <div class="backwhite">
+          <div class="events">
+            <h1>Notices</h1>
 
-                    <!-- /.timeline-label -->
-                    <!-- timeline item -->
-                    <li>
-                      <i class="fa fa-envelope bg-blue"></i>
+            <div ng-repeat="board in NoticeBoardData">
+              <!-- The time line -->
+              <ul class="timeline">
+                <!-- timeline time label -->
+                <li class="time-label">
+                  <span class="bg-red">
+                    {{board.date}}
+                  </span>
+                  <button ng-show="showRole(['admin'])" style="margin-left:96%" class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteNoticeBoard($index)"
+                    ng-confirm-click="Are you sure you want to delete this item?">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
+                </li>
 
-                      <div class="timeline-item">
-                        <span class="time">{{board.time}}</span>
+                <!-- /.timeline-label -->
+                <!-- timeline item -->
+                <li>
+                  <i class="fa fa-envelope bg-blue"></i>
 
-                        <h3 class="timeline-header">{{board.subject}}</h3>
+                  <div class="timeline-item">
+                    <span class="time">{{board.time}}</span>
 
-                        <div class="timeline-body">
-                          {{board.messages}}
-                        </div>
+                    <h3 class="timeline-header">{{board.subject}}</h3>
 
-                      </div>
-                    </li>
+                    <div class="timeline-body">
+                      {{board.messages}}
+                    </div>
+
+                  </div>
+                </li>
 
 
-                  </ul>
-                </div>
-              </div>
-            
-          </div>
-        </div>
-        <div class="col-md-6" id="calander">
-          <div class="backwhite">
-            <div class="calander">
-              <h1>Events</h1>
-              <div class="span8">
-                <tabset>
-
-                  <tab select="renderCalendar('myCalendar3');">
-                    <div class="calendar" ng-model="eventSources2" calendar="myCalendar3" ui-calendar="uiConfig.calendar"></div>
-                  </tab>
-                </tabset>
-              </div>
+              </ul>
             </div>
-
-
-
-
-
           </div>
+
+        </div>
+      </div>
+      <div class="col-md-6" id="calander">
+        <div class="backwhite">
+          <div class="calander">
+            <h1>Events</h1>
+            <div class="span8">
+              <tabset>
+
+                <tab select="renderCalendar('myCalendar3');">
+                  <div class="calendar" ng-model="eventSources2" calendar="myCalendar3" ui-calendar="uiConfig.calendar"></div>
+                </tab>
+              </tabset>
+            </div>
+          </div>
+
+
+
+
+
         </div>
       </div>
     </div>
   </div>
 </div>
-
+</div>
+<!-- 
 <script>
-  //-------------------------------------------
-  //-------------------------------------------
-  //-------------------------------------------
-  //values
+
   var items = [];
   items[0] = { value: 0, label: "1 jan" };
   items[1] = { value: 5.5, label: "2 may" };
@@ -184,7 +187,6 @@
   items[8] = { value: 6, label: "16 dec" };
   items[9] = { value: 4.5, label: "17 dec" };
 
-  //rectangle
   var box = {
     left: 40,
     top: 20,
@@ -358,4 +360,4 @@
 
 
 
-</script>
+</script> -->

@@ -23,7 +23,7 @@
                 <div class="backwhite">
                     <!-- <h1>Material In</h1> -->
                     <h1>Store Material </h1>
-                    <form name="MaterialIn" ng-submit="MaterialIn.$valid && addsetMaterialIn(data)" novalidate>                     
+                    <form name="MaterialIn" ng-submit="MaterialIn.$valid && addsetMaterialIn(data)" novalidate>
 
                         <div class="form-group" ng-class="{'has-error': MaterialIn.$submitted  && MaterialIn.materialName.$pristine}">
                             <label>Material</label>
@@ -49,11 +49,25 @@
                             <input name="price" type="text" ng-model="data.price" class="form-control" placeholder="Enter ..." required>
                         </div>
 
-                        <div class="form-group" ng-class="{'has-error': MaterialIn.$submitted && MaterialIn.purchased_date.$pristine}">
+                        <!-- <div class="form-group" ng-class="{'has-error': MaterialIn.$submitted && MaterialIn.purchased_date.$pristine}">
                             <label>Purchased_date</label>
                             <input name="purchased_date" type="text" ng-model="data.purchased_date" class="form-control" placeholder="Enter ..." required>
-                        </div>
+                        </div> -->
 
+
+                        <div class="form-group" ng-class="{'has-error': MaterialIn.$submitted && MaterialIn.purchased_date.$pristine}">
+                            <label>Purchased_date</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+
+                                <datepicker date-set="{{today1}}" date-set-hidden="true" date-format="dd-MM-yyyy" style="z-index:999">
+                                    <input class="form-control" name="purchased_date" type="text" ng-model="data.purchased_date" ng-readonly="true" placeholder="Enter ..."
+                                        required/>
+                                </datepicker>
+                            </div>
+                        </div>
 
 
 
@@ -67,29 +81,13 @@
 
 
 
-                    <!-- <div class="form-group">
-                        <label for="inputdefault">Station Name</label><br>
-                        <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
-                    </div>
-                    <div class="form-group">
 
-                        <label for="inputdefault">Station Code</label><br>
-                        <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
-                    </div>
-                    <div class="form-group">
-
-                        <label for="inputdefault">Station Geolocation</label><br>
-                        <input class="form-control" placeholder="Enter..." id="inputdefault" type="text">
-                    </div>
-                    <div class="form-group">
-                        <button>Add Station</button>
-                    </div> -->
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="backwhite">
                     <h1>Material-In List</h1>
-                    <table export-table st-table="display_records" st-safe-src="data" class="table rwd-table table-striped" style="width:100%">
+                    <table export-table st-table="display_records" st-safe-src="materialIn" class="table rwd-table table-striped" style="width:100%">
                         <tr>
                             <th>#</th>
                             <th>Material</th>
@@ -102,29 +100,32 @@
                         <tbody>
                             <tr st-select-row="row" st-select-mode="multiple" ng-repeat="material in display_records" class="editable-row">
                                 <td>
-                                    {{$index+1}}
+                                    {{material.id+1}}
                                 </td>
                                 <td>
-                                    <span editable-text="material.material" e-name="editdata.material" onaftersave="EditMaterialIn($index)" e-form="rowform" e-required>{{material.material || 'empty' }}</span>
+                                    <span editable-text="material.material" e-name="editdata.material" onaftersave="EditMaterialIn(material.id)" e-form="rowform"
+                                        e-required>{{material.material || 'empty' }}</span>
                                 </td>
                                 <td>
-                                    <span editable-text="material.vendor_name" e-name="editdata.vendor_name" onaftersave="EditMaterialIn($index)" e-form="rowform" e-required>{{material.vendor_name || 'empty' }}</span>
+                                    <span editable-text="material.vendor_name" e-name="editdata.vendor_name" onaftersave="EditMaterialIn(material.id)" e-form="rowform"
+                                        e-required>{{material.vendor_name || 'empty' }}</span>
                                 </td>
                                 <td>
-                                    <span editable-text="material.no_of_units" e-name="editdata.no_of_units" onaftersave="EditMaterialIn($index)" e-form="rowform" e-required>{{material.no_of_units || 'empty' }}</span>
+                                    <span editable-text="material.no_of_units" e-name="editdata.no_of_units" onaftersave="EditMaterialIn(material.id)" e-form="rowform"
+                                        e-required>{{material.no_of_units || 'empty' }}</span>
                                 </td>
                                 <td>
-                                    <span editable-text="material.price" e-name="editdata.price" onaftersave="EditMaterialIn($index)" e-form="rowform" e-required>{{material.price || 'empty' }}</span>
+                                    <span editable-text="material.price" e-name="editdata.price" onaftersave="EditMaterialIn(material.id)" e-form="rowform" e-required>{{material.price || 'empty' }}</span>
                                 </td>
                                 <td>
-                                    <span editable-text="material.purchased_date" e-name="editdata.purchased_date" onaftersave="EditMaterialIn($index)" e-form="rowform"
-                                        e-required>{{material.purchased_date || 'empty' }}</span>
+                                    <span editable-text="material.purchased_date" e-name="editdata.purchased_date" onaftersave="EditMaterialIn(material.id)"
+                                        e-form="rowform" e-required>{{material.purchased_date || 'empty' }}</span>
                                 </td>
 
 
                                 <td class="pull-right">
                                     <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == material">
-                                        <button type="submit" ng-click="EditMaterialIn($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                                        <button type="submit" ng-click="EditMaterialIn(material.id)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
                                             <i class="fa fa-check"></i>
                                         </button>
                                         <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">
@@ -136,7 +137,7 @@
                                         <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">
                                             <i class="fa fa-pencil"></i>
                                         </button>
-                                        <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteMaterialIn($index)" ng-confirm-click="Are you sure you want to delete this item?">
+                                        <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteMaterialIn(material.id)" ng-confirm-click="Are you sure you want to delete this item?">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </button>
 
@@ -157,8 +158,3 @@
         </div>
     </div>
 </div>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- <script src="js/scripts.js"></script>
-</body>
-</html> -->

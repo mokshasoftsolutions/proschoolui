@@ -5,11 +5,31 @@ angular.module('school_erp')
         $scope.getmaterialIn = function () {
             materialInServices.getMaterialIn()
                 .success(function (data, status) {
-                    $scope.data = data.material_in;
-                    console.log(JSON.stringify(data));
-                    $scope.materialIn = $scope.data;
+//$scope.data = data.material_in;
+                    //console.log(JSON.stringify(data));
+                    $scope.material = data.material_in;
                     // $scope.station_id = $scope.data[].station_id;
                     // console.log($scope.station_id);
+                    $scope.materialIn = [];
+                    index = 0;
+                    $scope.material.forEach(function (element) {
+
+                        var obj = {
+                            id: index++,
+                            material_in_id:element.material_in_id,
+                            price: element.price,
+                            vendor_name: element.vendor_name,
+                            material: element.material,
+                            no_of_units: element.no_of_units,
+                            purchased_date: element.purchased_date,
+                          
+                           
+
+                        }
+                        $scope.materialIn.push(obj);
+                        // console.log("mesaage for section");
+                       // console.log($scope.employeeData);
+                    })
 
                 })
                 .error(function (data, success) {
@@ -24,7 +44,7 @@ angular.module('school_erp')
                 price: $scope.data.price,
                 purchased_date: $scope.data.purchased_date,
             }
-            console.log(materialIn);
+           // console.log(materialIn);
             materialInServices.setMaterialIn(materialIn)
                 .success(function (data, status) {
                     ngDialog.open({
@@ -82,9 +102,9 @@ angular.module('school_erp')
 
 
         $scope.DeleteMaterialIn = function (value) {
-            $scope.editdata = angular.copy($scope.data[value]);
+            $scope.editdata = angular.copy($scope.materialIn[value]);
             $scope.material_in_id = $scope.editdata.material_in_id;
-            console.log($scope.material_in_id);
+         //   console.log($scope.material_in_id);
             materialInServices.DeleteMaterialIn($scope.material_in_id)
                 .success(function (data, status) {
                     ngDialog.open({

@@ -115,7 +115,7 @@
                                                 <th>Marks obtained</th>
                                                 <th>Percentage</th>
                                                 <th>Conduct</th>
-                                                <th class="pull-right">Action</th>
+                                                <th ng-show="showRole(['admin','teacher'])" class="pull-right">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -151,7 +151,7 @@
                                                         {{evaluations.conduct}}
                                                     </span>
                                                 </td>
-                                                <td class="pull-right">
+                                                <td ng-show="showRole(['admin','teacher'])" class="pull-right">
                                                     <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == evaluations">
                                                         <button type="submit" ng-click="EditEvaluation($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
                                                             <i class="fa fa-check"></i>

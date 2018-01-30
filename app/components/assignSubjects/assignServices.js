@@ -2,13 +2,13 @@ angular.module('school_erp')
     .factory('assignServices', ['$http', 'globalServices', function ($http, globalServices) {
         var assignServices = {};
 
-        assignServices.setTeacher = function (dataValue,secId) {
+        assignServices.setTeacher = function (dataValue, secId) {
             console.log(dataValue);
             return $http({
                 method: 'POST',
-                 url: globalServices.globalValue.baseURL + 'api/addorupdatesubjectstoteacher/'+globalServices.globalValue.school_id+'/'+secId,
+                url: globalServices.globalValue.baseURL + 'api/addorupdatesubjectstoteacher/' + globalServices.globalValue.school_id + '/' + secId,
                 //  url:globalServices.globalValue.baseURL +'api/add_subjects_to_teacher/'+teacher_id,
-             
+
                 data: $.param(dataValue),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             })
@@ -18,11 +18,19 @@ angular.module('school_erp')
             //console.log(dataValue,teacherId);
             return $http({
                 method: 'GET',
-                url: globalServices.globalValue.baseURL + 'api/listsubjectstoteacher/'+globalServices.globalValue.school_id
+                url: globalServices.globalValue.baseURL + 'api/listsubjectstoteacher/' + globalServices.globalValue.school_id
 
             })
         };
+        assignServices.getTeacherListBySubject = function (subjectId) {
+            //console.log(dataValue,teacherId);
+            return $http({
+                method: 'GET',
+                url: globalServices.globalValue.baseURL + 'api/listsubjectstoteacher_by_subjectId/'+subjectId 
+                //+'/'+ globalServices.globalValue.school_id
 
+            })
+        };
         // assignServices.EditAssignSubject = function (dataValue, teacher_id) {
         //     console.log(dataValue);
         //     console.log("hello");
@@ -35,11 +43,11 @@ angular.module('school_erp')
         //     })
         // };
 
-        assignServices.DeleteAssignSubject = function (teacher_id,subject_id) {
+        assignServices.DeleteAssignSubject = function (teacher_id, subject_id) {
 
             return $http({
                 method: 'PUT',
-                url: globalServices.globalValue.baseURL + 'api/delete_subject_teacher/' + teacher_id+'/'+subject_id
+                url: globalServices.globalValue.baseURL + 'api/delete_subject_teacher/' + teacher_id + '/' + subject_id
             })
         };
 

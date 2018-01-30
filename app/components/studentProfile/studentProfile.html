@@ -240,12 +240,12 @@
                       <td>
                         <b>Father Name :</b>
                         <span editable-text="student.parents[1].parent_name" e-name="editdata.student" onaftersave="EditStudent_details($index)"
-                          e-form="rowform1" e-required>{{student.parents[1].parent_name || 'empty' }}</span>
+                          e-form="rowform1" e-required>{{student.parents[0].parent_name || 'empty' }}</span>
                       </td>
                       <td>
                         <b>Mother Name :</b>
                         <span editable-text="student.parents[0].parent_name" e-name="editdata.student" onaftersave="EditStudent_details($index)"
-                          e-form="rowform1" e-required>{{student.parents[0].parent_name || 'empty' }}</span>
+                          e-form="rowform1" e-required>{{student.parents[1].parent_name || 'empty' }}</span>
                       </td>
                       <td>
                         <b>Guardian Name :</b>
@@ -258,12 +258,12 @@
                       <td>
                         <b>Father Occupation :</b>
                         <span editable-text="student.parents[1].occupation" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform1"
-                          e-required>{{student.parents[1].occupation || 'empty' }}</span>
+                          e-required>{{student.parents[0].occupation || 'empty' }}</span>
                       </td>
                       <td>
                         <b>Mother Occupation :</b>
                         <span editable-text="student.parents[0].occupation" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform1"
-                          e-required>{{student.parents[0].occupation || 'empty' }}</span>
+                          e-required>{{student.parents[1].occupation || 'empty' }}</span>
                       </td>
                       <td>
                         <b>Guardian Occupation :</b>
@@ -277,13 +277,13 @@
                       <td>
                         <b>Father Contact :</b>
                         <span editable-text="student.parents[1].parent_contact" e-name="editdata.student" onaftersave="EditStudent_details($index)"
-                          e-form="rowform1" e-required>{{student.parents[1].parent_contact || 'empty' }}</span>
+                          e-form="rowform1" e-required>{{student.parents[0].parent_contact || 'empty' }}</span>
                       </td>
 
                       <td>
                         <b>Mother Contact :</b>
                         <span editable-text="student.parents[0].parent_contact" e-name="editdata.student" onaftersave="EditStudent_details($index)"
-                          e-form="rowform1" e-required>{{student.parents[0].parent_contact || 'empty' }}</span>
+                          e-form="rowform1" e-required>{{student.parents[1].parent_contact || 'empty' }}</span>
                       </td>
                       <td>
                         <b>Guardian Contact :</b>

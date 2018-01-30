@@ -5,11 +5,30 @@ angular.module('school_erp')
         $scope.getMaterialOut = function () {
             materialOutServices.getMaterialOut()
                 .success(function (data, status) {
-                    $scope.data = data.material_out;
-                    console.log(JSON.stringify(data));
-                    $scope.materialOut = $scope.data;
+                   // $scope.data = data.material_out;
+                   // console.log(JSON.stringify(data));
+                    $scope.material = data.material_out;
                     // $scope.station_id = $scope.data[].station_id;
                     // console.log($scope.station_id);
+                    $scope.materialOut = [];
+                    index = 0;
+                    $scope.material.forEach(function (element) {
+
+                        var obj = {
+                            id: index++,
+                            material_out_id:element.material_out_id,
+                            name: element.name,
+                            material: element.material,
+                            no_of_units: element.no_of_units,
+                            out_date: element.out_date,
+                          
+                           
+
+                        }
+                        $scope.materialOut.push(obj);
+                        // console.log("mesaage for section");
+                       // console.log($scope.employeeData);
+                    })
 
                 })
                 .error(function (data, success) {
@@ -21,10 +40,10 @@ angular.module('school_erp')
                 material: $scope.data.material,
                 name: $scope.data.name,
                 no_of_units: $scope.data.no_of_units,
-                out_of_date: $scope.data.out_of_date,
+                out_date: $scope.data.out_of_date,
 
             }
-            console.log(materialOutDetails);
+          //  console.log(materialOutDetails);
             materialOutServices.setMaterialOut(materialOutDetails)
                 .success(function (data, status) {
                     ngDialog.open({
@@ -82,9 +101,9 @@ angular.module('school_erp')
 
 
         $scope.DeleteMaterialOut = function (value) {
-            $scope.editdata = angular.copy($scope.data[value]);
+            $scope.editdata = angular.copy($scope.materialOut[value]);
             $scope.material_out_id = $scope.editdata.material_out_id;
-            console.log($scope.material_out_id);
+            //console.log($scope.material_out_id);
             materialOutServices.DeleteMaterialOut($scope.material_out_id)
                 .success(function (data, status) {
                     ngDialog.open({

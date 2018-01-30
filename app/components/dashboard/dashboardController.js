@@ -1,5 +1,5 @@
 angular.module('school_erp')
-    .controller("dashboardController", ['$http', '$state', '$scope', '$compile', '$interval', 'studentServices', 'sessionServices', 'chaptersServices', 'employeeServices', 'examServices', 'globalServices', 'subjectsServices', 'classWiseServices', 'NoticeBoardServices', 'schoolEventsServices', 'addVehicleServices', 'barChartOneService', 'ngDialog', '$rootScope', 'ngProgressFactory', 'routeGeoLocationServices', function ($http, $state, $scope, $compile, $interval, studentServices, sessionServices, chaptersServices, employeeServices, examServices, globalServices, subjectsServices, classWiseServices, NoticeBoardServices, schoolEventsServices, addVehicleServices, barChartOneService, ngDialog, $rootScope, ngProgressFactory, routeGeoLocationServices) {
+    .controller("dashboardController", ['$http', '$state', '$scope', '$compile', '$interval', 'studentServices', 'sessionServices', 'chaptersServices', 'employeeServices', 'examServices', 'globalServices', 'subjectsServices', 'classWiseServices', 'NoticeBoardServices', 'schoolEventsServices', 'addVehicleServices', 'barChartOneService','taskManagerServices','ngDialog', '$rootScope', 'ngProgressFactory', 'routeGeoLocationServices','messagesServices', function ($http, $state, $scope, $compile, $interval, studentServices, sessionServices, chaptersServices, employeeServices, examServices, globalServices, subjectsServices, classWiseServices, NoticeBoardServices,schoolEventsServices, addVehicleServices, barChartOneService,taskManagerServices, ngDialog, $rootScope, ngProgressFactory, routeGeoLocationServices,messagesServices) {
 
         $scope.index = 'true';
         $scope.evalData = [];
@@ -33,7 +33,27 @@ angular.module('school_erp')
                 })
         }
 
+        $scope.addMessages = function (data) {
+            var Details = {
+                message: $scope.data.message,
+                subject: $scope.data.subject,
+                sent_to: $scope.data.sendto
 
+            }
+            messagesServices.setMessage(Details)
+                .success(function (data, status) {
+                    ngDialog.open({
+                        template: '<p>Quote are sended.</p>',
+                        plain: true
+                    });
+                    $scope.data = [];
+
+
+
+                })
+                .error(function (data, success) {
+                })
+        }
 
         $scope.getClassesInitalLoad = function () {
             globalServices.getClass()
@@ -98,7 +118,7 @@ angular.module('school_erp')
             // console.log(day);
             classWiseServices.getTimeTableDay(day, class_id)
                 .success(function (data, status) {
-                    //  console.log(JSON.stringify(data));
+                     console.log(JSON.stringify(data));
                     $scope.timeTableData = [];
                     $scope.timeTableDataDay = data.timetable;
 
@@ -305,6 +325,23 @@ angular.module('school_erp')
                 })
         }
 
+        $scope.getTaskByDay = function (date) {
+            taskManagerServices.getTaskByDay(date)
+                .success(function (data, status) {
+                       console.log("tasks..................");
+                console.log(JSON.stringify(data));
+                     $scope.taskData = data.tasks;
+
+                    // $scope.schoolsection = $scope.schoolAttData[0][0].className;
+                    // //console.log($scope.schoolsection);
+                    // $scope.schoolclass = $scope.schoolAttData[0][0].sections;
+
+
+
+                })
+                .error(function (data, success) {
+                })
+        }
 
 
         // staff attendance
@@ -1976,6 +2013,7 @@ angular.module('school_erp')
             $scope.getAttedanceByCategoryTeaching();
             $scope.getAttedanceByCategoryNonTeaching();
             $scope.getAttedanceByCategoryAdmin();
+            $scope.getTaskByDay($scope.select_date);
 
             // $scope.getAttendanceBySchool();
 

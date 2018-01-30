@@ -1,12 +1,12 @@
 <div style="overflow-y: scroll;height:660px;width:100%;">
-<div class="row background">
-  <div class="container">
-    <h1>Dashboard</h1>
+  <div class="row background">
+    <div class="container">
+      <h1>Dashboard</h1>
+    </div>
   </div>
-</div>
 
 
-  <div class="container" >
+  <div class="container">
     <div class="Circulam">
       <div class="col-md-12">
         <div class="classalign">
@@ -208,29 +208,29 @@
                 </table>
               </div>
             </div>
-          
+
           </div>
           <div class="col-md-6">
             <div class="staff">
               <div class="backwhite">
-                  <form name="Quote" ng-submit="Quote.$valid && addQuote(data)" novalidate>
-                      <div class="form-group" ng-class="{'has-error': Quote.$submitted  && Quote.quote.$pristine}">
-                        <label>Quote</label>
-                        <input type="text" name="quote" ng-model="data.quote" class="form-control" name="emailto" placeholder="Enter...">
-                      </div>
-                      <div class="form-group" ng-class="{'has-error': Quote.$submitted  && Quote.word.$pristine}">
-                          <label>Word</label>
-                        <input type="text" ng-model="data.word" name="word" class="form-control" name="subject" placeholder="Enter...">
-                      </div>
-                    
-  
-  
-                      <div class="box-footer clearfix">
-                        <button type="submit" class="pull-right btn btn-primary" id="sendEmail">Send
-                          <i class="fa fa-arrow-circle-right"></i>
-                        </button>
-                      </div>
-                    </form>
+                <form name="Quote" ng-submit="Quote.$valid && addQuote(data)" novalidate>
+                  <div class="form-group" ng-class="{'has-error': Quote.$submitted  && Quote.quote.$pristine}">
+                    <label>Quote</label>
+                    <input type="text" name="quote" ng-model="data.quote" class="form-control" name="emailto" placeholder="Enter...">
+                  </div>
+                  <div class="form-group" ng-class="{'has-error': Quote.$submitted  && Quote.word.$pristine}">
+                    <label>Word</label>
+                    <input type="text" ng-model="data.word" name="word" class="form-control" name="subject" placeholder="Enter...">
+                  </div>
+
+
+
+                  <div class="box-footer clearfix">
+                    <button type="submit" class="pull-right btn btn-primary" id="sendEmail">Send
+                      <i class="fa fa-arrow-circle-right"></i>
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
 
@@ -548,25 +548,48 @@
                   </button>
                 </div>
               </div>
+              <!-- <form name="Quote" ng-submit="Quote.$valid && addQuote(data)" novalidate>
+                <div class="form-group" ng-class="{'has-error': Quote.$submitted  && Quote.quote.$pristine}">
+                  <label>Quote</label>
+                  <input type="text" name="quote" ng-model="data.quote" class="form-control" name="emailto" placeholder="Enter...">
+                </div>
+                <div class="form-group" ng-class="{'has-error': Quote.$submitted  && Quote.word.$pristine}">
+                  <label>Word</label>
+                  <input type="text" ng-model="data.word" name="word" class="form-control" name="subject" placeholder="Enter...">
+                </div>
 
+
+
+                <div class="box-footer clearfix">
+                  <button type="submit" class="pull-right btn btn-primary" id="sendEmail">Send
+                    <i class="fa fa-arrow-circle-right"></i>
+                  </button>
+                </div>
+              </form> -->
+          
 
               <div class="box-body chart-responsive">
                 <div class="chart chart-responsive" style="height: 400px;">
 
-                  <form action="#" method="post" style="margin-top:50px;">
-                    <div class="form-group">
-                      <input type="email" class="form-control" name="emailto" placeholder="Message to:">
+                  <form name="Message" ng-submit="Message.$valid && addMessages(data)" novalidate style="margin-top:50px;">
+                    <div class="form-group" ng-class="{'has-error':Message.$submitted && Message.sendto.$pristine}">
+                      <select ng-model="data.sendto" class="form-control select2" name="sendto" style="width: 100%;">
+                        <option value="" selected="selected">--Select--</option>
+                        <option value="all">All</option>
+                        <option value="teachers">Teachers</option>
+                        <option value="parents">Parents</option>
+                      </select>
                     </div>
-                    <div class="form-group">
-                      <input type="text" class="form-control" name="subject" placeholder="Subject">
+                    <div class="form-group" ng-class="{'has-error':Message.$submitted && Message.subject.$pristine}">
+                      <input type="text" class="form-control" ng-model="data.subject" name="subject" placeholder="Subject">
                     </div>
-                    <div>
-                      <textarea class="textarea" placeholder="Message" style="width: 100%; height: 65px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                    <div class="form-group" ng-class="{'has-error':Message.$submitted && Message.message.$pristine}">
+                      <textarea class="textarea" ng-model="data.message" name="message" placeholder="Message" style="width: 100%; height: 65px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                     </div>
 
 
                     <div class="box-footer clearfix">
-                      <button type="button" class="pull-right btn btn-default" id="sendEmail">Send
+                      <button type="submit" class="pull-right btn btn-primary" id="sendEmail">Send
                         <i class="fa fa-arrow-circle-right"></i>
                       </button>
                     </div>
@@ -608,29 +631,33 @@
                               <th>#</th>
                               <th>Task</th>
                               <th>Priority</th>
-                              <th>Subject</th>
+                              <!-- <th>Subject</th> -->
                               <th>Due</th>
                               <th>Assigned</th>
+                              <th>Status</th>
 
                             </tr>
                           </thead>
                           <tbody>
-                            <tr ng-repeat="attendance in attDataEmp" class="editable-row">
+                            <tr ng-repeat="task in taskData" class="editable-row">
                               <td>
                                 {{$index+1}}
                               </td>
-                              <td>{{attendance.employee_id || 'empty' }}
+                              <td>{{task.task || 'empty' }}
 
                               </td>
                               <td>
-                                {{attendance.first_name || 'empty' }} {{attendance.last_name || 'empty' }}
+                                {{task.priority || 'empty' }}
 
                               </td>
-                              <td>{{attendance.employee_type || 'empty' }}</td>
-                              <td>{{attendance.gender || 'empty' }}
+                              <!-- <td>{{task.employee_type || 'empty' }}</td> -->
+                              <td>{{task.assigned_on | date }}
 
                               </td>
-                              <td>{{attendance.status || 'empty' }}
+                              <td>{{task.assigned_to || 'empty' }}
+
+                              </td>
+                              <td>{{task.status || 'empty' }}
 
                               </td>
 
@@ -651,20 +678,20 @@
       </div>
     </div>
   </div>
-  
+
 </div>
-  <script>
-    $(function () {
-      $('td').click(function () {
-        $(this).toggleClass('on');
-      })
-    }); 
-  </script>
+<script>
+  $(function () {
+    $('td').click(function () {
+      $(this).toggleClass('on');
+    })
+  }); 
+</script>
 
 
 
 
-  <!--<section class="content">
+<!--<section class="content">
 
     
     <div class="row">
@@ -860,4 +887,4 @@
     </div>
   </section>-->
 
-  <!--AdminLTE dashboard demo (This is only for demo purposes) -->
+<!--AdminLTE dashboard demo (This is only for demo purposes) -->

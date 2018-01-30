@@ -51,14 +51,14 @@ angular.module('school_erp')
                 });
         }
 
-        $scope.getSubName = function (subid) {
-            //  console.log(subid);
-            $scope.employeeData.forEach(function (ele) {
-                if (ele.subject_id == subid) {
-                    return ele.name;
-                }
-            });
-        };
+        // $scope.getSubName = function (subid) {
+        //     //  console.log(subid);
+        //     $scope.employeeData.forEach(function (ele) {
+        //         if (ele.subject_id == subid) {
+        //             return ele.name;
+        //         }
+        //     });
+        // };
 
 
 
@@ -344,15 +344,15 @@ angular.module('school_erp')
         }
 
 
-        $scope.exportAction = function (option) {
-            switch (option) {
-                case 'pdf': $scope.$broadcast('export-pdf', {});
-                    break;
-                case 'excel': $scope.$broadcast('export-excel', {});
-                    break;
-                default: console.log('no event caught');
-            }
-        }
+        // $scope.exportAction = function (option) {
+        //     switch (option) {
+        //         case 'pdf': $scope.$broadcast('export-pdf', {});
+        //             break;
+        //         case 'excel': $scope.$broadcast('export-excel', {});
+        //             break;
+        //         default: console.log('no event caught');
+        //     }
+        // }
         $scope.getTeacher($scope.secId);
 
     }])
