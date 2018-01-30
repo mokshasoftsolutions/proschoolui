@@ -297,50 +297,50 @@ angular.module('school_erp')
                     }
                 },
                 series: [
-                    //     {
-                    //     text: "All Sites",
-                    //     values: [2596, 2626, 4480, 
-                    //              6394, 7488, 14510, 
-                    //              7012, 10389, 20281, 
-                    //              25597, 23309, 22385, 
-                    //              25097, 20813, 20510],
-                    //     backgroundColor1: "#77d9f8",
-                    //     backgroundColor2: "#272822",
-                    //     lineColor: "#40beeb"
-                    // }, {
-                    //     text: "Site 1",
-                    //     values: [479, 199, 583, 
-                    //              1624, 2772, 7899, 
-                    //              3467, 3227, 12885, 
-                    //              17873, 14420, 12569, 
-                    //              17721, 11569, 7362],
-                    //     backgroundColor1: "#4AD8CC",
-                    //     backgroundColor2: "#272822",
-                    //     lineColor: "#4AD8CC"
-                    // }, {
-                    //     text: "Site 2",
-                    //     values: [989, 1364, 2161, 
-                    //              2644, 1754, 2015, 
-                    //              818, 77, 1260, 
-                    //              3912, 1671, 1836, 
-                    //              2589, 1706, 1161],
-                    //     backgroundColor1: "#1D8CD9",
-                    //     backgroundColor2: "#1D8CD9",
-                    //     lineColor: "#1D8CD9"
-                    // },
+                        {
+                        text: "Maths",
+                        values: [2596, 2626, 4480, 
+                                 6394, 7488, 14510, 
+                                 7012, 10389, 20281, 
+                                 25597, 23309, 22385, 
+                                 25097, 20813, 20510],
+                        backgroundColor1: "#77d9f8",
+                        backgroundColor2: "#272822",
+                        lineColor: "#40beeb"
+                    }, {
+                        text: "English",
+                        values: [479, 199, 583, 
+                                 1624, 2772, 7899, 
+                                 3467, 3227, 12885, 
+                                 17873, 14420, 12569, 
+                                 17721, 11569, 7362],
+                        backgroundColor1: "#4AD8CC",
+                        backgroundColor2: "#272822",
+                        lineColor: "#4AD8CC"
+                    }, {
+                        text: "Science",
+                        values: [989, 1364, 2161, 
+                                 2644, 1754, 2015, 
+                                 818, 77, 1260, 
+                                 3912, 1671, 1836, 
+                                 2589, 1706, 1161],
+                        backgroundColor1: "#1D8CD9",
+                        backgroundColor2: "#1D8CD9",
+                        lineColor: "#1D8CD9"
+                    },
                     {
-                        text: "Quantity",
+                        text: "Computer",
                         values: [408, 343, 410,
                             840, 1614, 3274,
                             2092, 914, 5709,
                             6317, 6633, 6720,
                             6504, 6821, 4565],
-                        // backgroundColor1: "#D8CD98",
-                        // backgroundColor2: "#272822",
-                        // lineColor: "#D8CD98"
-                        backgroundColor1: "#4AD8CC",
+                        backgroundColor1: "#D8CD98",
                         backgroundColor2: "#272822",
-                        lineColor: "#4AD8CC"
+                        lineColor: "#D8CD98"
+                        // backgroundColor1: "#4AD8CC",
+                        // backgroundColor2: "#272822",
+                        // lineColor: "#4AD8CC"
                     }]
             };
 
