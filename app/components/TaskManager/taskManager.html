@@ -18,6 +18,9 @@
             <li ui-sref-active="active" ng-show="showRole(['admin','teacher'])">
                 /<a ui-sref='main.taskManagement'>Task Management</a>
             </li>
+            <li ui-sref-active="active" ng-show="showRole(['admin'])">
+                /<a ui-sref='main.quote'>Quote & Word</a>
+            </li>
         </ul>
     </div>
 </div>
@@ -68,7 +71,7 @@
                         </div>
 
                         <div class="box-footer" ng-show="showRole(['admin'])">
-                            <button type="submit" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Add Task</button>
+                            <button type="submit" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;margin-top: 16px;">Add Task</button>
                         </div>
 
                     </form>
@@ -76,8 +79,8 @@
             </div>
             <div class="col-md-9">
 
-                <div class="table-responsive">
-                    <table export-table st-table="display_records" st-safe-src="taskBox" class="table rwd-table table-striped" style="width:100%;margin-top: 20px;">
+                <div class="table-responsive"  style="width:100%";>
+                    <table export-table st-table="display_records" st-safe-src="taskBox"  style="width:100%;margin-top: 20px;">
                         <tr>
                             <th>#</th>
                             <th>Task</th>

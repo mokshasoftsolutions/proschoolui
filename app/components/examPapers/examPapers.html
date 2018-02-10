@@ -20,7 +20,7 @@
 </div>
 <div class="container">
   <div class="row">
-    <div class="chapters">
+    <div class="Exampapers">
       <div class="col-md-3" ng-if="showRole(['admin','teacher','parent'])">
         <div class="backwhite">
 
@@ -59,14 +59,14 @@
         </div>
       </div>
       <div class="col-md-9"  ng-if="showRole(['admin','teacher'])">
-       
+          <div class="backwhite">
           <div class="addchapters">
             <form name="examPapers" ng-submit="examPapers.$valid && addExamPapers(data,data.subjectId,examScheduleId,classId,secId)"
               novalidate>
               <div class="row">
                 <div class="col-md-4" ng-if="showRole(['admin','teacher'])">
                   <div class="form-group" ng-class="{'has-error': examPapers.$submitted  && examPapers.subjects.$pristine}">
-                    <label>Select Subject</label>
+                    <label>Subject</label>
                     <select class="form-control select2" name="subjects" ng-model="data.subjectId" style="width: 100%;" ng-options="subjectD.subject_id as subjectD.name for subjectD in subjectsData ">
                   </select>
                   </div>
@@ -132,10 +132,11 @@
             </form>
 
           </div>
+          </div>
       
       </div>
       <div class="col-md-9">
-       
+          <div class="backwhite">
           <!-- <div class="subjectlist">
             <div class="col-md-12">
 
@@ -153,7 +154,8 @@
 
             </div>
           </div> -->
-          <table export-table st-table="display_records" st-safe-src="examData" class="table rwd-table table-striped" style="width:100%">
+          <div class="table-responsive">
+          <table export-table st-table="display_records" st-safe-src="examData"  style="width:100%">
             <tr>
               <th>#</th>
               <th>Subject</th>
@@ -169,8 +171,9 @@
                 <tr st-select-row="row" st-select-mode="multiple" ng-repeat="exam in display_records" class="editable-row">
                   <td>{{exam.id+1}}</td>
                   <td class="select-td">
-                    <span editable-select="exam.subject_name" e-name="subject" onaftersave="EditExamPapers(exam.id)" e-form="rowform" e-selectpicker
-                      e-ng-options="sub.name as sub.name for sub in subjectsData">{{ exam.subject_name}}</span>
+                    <!-- <span editable-select="exam.subject_name" e-name="subject" onaftersave="EditExamPapers(exam.id)" e-form="rowform" e-selectpicker
+                      e-ng-options="sub.name as sub.name for sub in subjectsData"></span> -->
+                      {{ exam.subject_name}}
                   </td>
                   <td><span editable-text="exam.exam_paper_title" e-name="editdata.exam_paper_title" onaftersave="EditExamPapers(exam.id)"
                       e-form="rowform" e-required>{{exam.exam_paper_title || 'empty' }}</span></td>
@@ -205,7 +208,8 @@
               </tfoot>
 
           </table>
-        
+          </div>
+        </div>
       </div>
     </div>
   </div>

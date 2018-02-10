@@ -20,7 +20,7 @@
 </div>
 <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
-        <li class="active" >
+        <li class="active">
             <a data-target="#tab_1" data-toggle="tab" aria-expanded="true">
                 <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>Marks List</a>
         </li>
@@ -31,80 +31,83 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane no-padding active" id="tab_1">
-           
-                <div class="container">
-                        <div class="row">
-                            <div class="Evaluations">
-                                <div class="col-md-3">
-                                    <div class="backwhite">
-        
-                                        <div class="form-group" ng-show="showRole(['admin','teacher'])"> 
-                                            <label>Select Class</label>
-                                            <select class="form-control select2" data-ng-change="populateSections(data.classId)" style="width: 100%;" ng-model="data.classId"
-                                                ng-options="class.class_id as class.name  for class in classDatanew">
-        
-                                                <!--<option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
-                                            </select>
-                                        </div>
-        
-        
-        
-                                        <div class="form-group" ng-show="showRole(['admin','teacher'])">
-                                            <label>Select Section</label>
-                                            <select class="form-control select2" ng-change="getExamPapers(data.examSchedule_name,data.secId);" style="width: 100%;" name="section"
-                                                ng-model="data.secId" ng-options="sec.section_id as sec.name  for sec in secData">
-                                                <!--                      
+
+            <div class="container">
+                <div class="row">
+                    <div class="Evaluations">
+                        <div class="col-md-3">
+                            <div class="backwhite">
+
+                                <div class="form-group" ng-show="showRole(['admin','teacher'])">
+                                    <label>Select Class</label>
+                                    <select class="form-control select2" data-ng-change="populateSections(data.classId)" style="width: 100%;" ng-model="data.classId"
+                                        ng-options="class.class_id as class.name  for class in classDatanew">
+
+                                        <!--<option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
+                                    </select>
+                                </div>
+
+
+
+                                <div class="form-group" ng-show="showRole(['admin','teacher'])">
+                                    <label>Select Section</label>
+                                    <select class="form-control select2" ng-change="getExamPapers(data.examSchedule_name,data.secId);populateStudentValue(data.secId)"
+                                        style="width: 100%;" name="section" ng-model="data.secId" ng-options="sec.section_id as sec.name  for sec in secData">
+                                        <!--                      
                                                  <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
-        
-                                            </select>
-                                        </div>
-        
-        
-                                        <div class="form-group">
-                                            <label>Exam Schedule</label>
-                                            <select id="sel1" class="form-control select2" ng-change="getExamPapers(data.examSchedule_name,data.secId)" style="width: 100%;"
-                                                ng-model="data.examSchedule_name" name="examSchedule" ng-options="examSch.exam_sch_id as examSch.exam_title for examSch in examSchedule ">
-        
-                                            </select>
-                                        </div>
-        
-                                        <!-- <div class="form-group">
+
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label>Exam Schedule</label>
+                                    <select id="sel1" class="form-control select2" ng-change="getExamPapers(data.examSchedule_name,data.secId)" style="width: 100%;"
+                                        ng-model="data.examSchedule_name" name="examSchedule" ng-options="examSch.exam_sch_id as examSch.exam_title for examSch in examSchedule ">
+
+                                    </select>
+                                </div>
+
+                                <!-- <div class="form-group">
                                             <label>Exam Papers</label>
                                             <select class="form-control select2" style="width: 100%;" name="paperId" ng-model="data.paper_name" ng-options="paper.exam_paper_id as paper.exam_paper_title for paper in papers ">
                                                 <option value="">--Select--</option>
         
                                             </select>
                                         </div> -->
-        
-                                        <div class="form-group" ng-show="showRole(['admin','teacher'])">
-                                      <label>Select Student</label>
-                                     <select class="form-control select2" style="width: 100%;" name="studentId" ng-change="getEvaluation(data.studentId,data.examSchedule_name)"
-                                      ng-model="data.studentId" ng-options="student.student_id as student.first_name+' '+student.last_name for student in students ">
-                                               
-                                      </select>
-                                    </div>
-        
-                                        <div class="box-footer">
-                                            <button  ng-show="showRole(['admin','teacher'])" type="button" ng-click="getEvaluation(data.studentId,data.examSchedule_name);" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Select</button>
-                                            <button  ng-show="showRole(['parent'])" type="button" ng-click="getEvaluation(student.student_id,data.examSchedule_name);" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Select</button>
+
+                                <div class="form-group" ng-show="showRole(['admin','teacher'])">
+                                    <label>Select Student</label>
+                                    <select class="form-control select2" style="width: 100%;" name="studentId" ng-change="getEvaluation(data.studentId,data.examSchedule_name)"
+                                        ng-model="data.studentId" ng-options="student.student_id as student.first_name+' '+student.last_name for student in students ">
+
+                                    </select>
+                                </div>
+
+                                <div class="box-footer">
+                                    <button ng-show="showRole(['admin','teacher'])" type="button" ng-click="getEvaluation(data.studentId,data.examSchedule_name);"
+                                        class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Select</button>
+                                    <button ng-show="showRole(['parent'])" type="button" ng-click="getEvaluation(student.student_id,data.examSchedule_name);"
+                                        class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Select</button>
+                                </div>
+
+
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-9">
+                            <div class="backwhite">
+                                <div class="subjectlist">
+                                    <div class="col-md-12">
+                                        <div class="col-xs-3 col-md-4">
                                         </div>
-        
-        
-        
-        
-        
                                     </div>
                                 </div>
-        
-                                <div class="col-md-9">
-                                    <!-- <div class="backwhite"> -->
-                                    <div class="subjectlist">
-                                        <div class="col-md-12">
-                                            <div class="col-xs-3 col-md-4">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <table export-table st-table="display_records" st-safe-src="evalData" class="table rwd-table table-striped">
+                                <div class="table-responsive">
+                                    <table export-table st-table="display_records" style="width:100%" st-safe-src="evalData">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -160,7 +163,7 @@
                                                             <i class="fa fa-remove"></i>
                                                         </button>
                                                     </form>
-        
+
                                                     <div class="buttons" ng-show="!rowform.$visible">
                                                         <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">
                                                             <i class="fa fa-pencil"></i>
@@ -181,120 +184,123 @@
                                             </tr>
                                         </tfoot>
                                     </table>
-        
                                 </div>
                             </div>
                         </div>
                     </div>
-        
-        
+                </div>
+            </div>
+
+
         </div>
 
         <div ng-show="showRole(['admin','teacher'])" class="tab-pane no-padding" id="tab_2">
-                <div class="container">
-                        <div class="row">
-                            <div class="Evaluations">
-                                <div class="col-md-3">
-                                    <div class="backwhite">      
-        
-        
-                                        <div class="form-group">
-                                            <label>Select Class</label>
-                                            <select class="form-control select2" data-ng-change="populateSections(data.classId)" style="width: 100%;" ng-model="data.classId"
-                                                ng-options="class.class_id as class.name  for class in classDatanew">
-        
-                                                <!--<option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
-                                            </select>
-                                        </div>
-        
-        
-        
-                                        <div class="form-group">
-                                            <label>Select Section</label>
-                                            <select class="form-control select2" ng-change="getExamPapers(data.examSchedule_name,data.secId);" style="width: 100%;" name="section"
-                                                ng-model="data.secId" ng-options="sec.section_id as sec.name  for sec in secData">
-                                                <!--                      
+            <div class="container">
+                <div class="row">
+                    <div class="Evaluations">
+                        <div class="col-md-3">
+                            <div class="backwhite">
+
+
+                                <div class="form-group">
+                                    <label>Select Class</label>
+                                    <select class="form-control select2" data-ng-change="populateSections(data.classId)" style="width: 100%;" ng-model="data.classId"
+                                        ng-options="class.class_id as class.name  for class in classDatanew">
+
+                                        <!--<option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
+                                    </select>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label>Select Section</label>
+                                    <select class="form-control select2" ng-change="getExamPapers(data.examSchedule_name,data.secId);populateStudentValue(data.secId)"
+                                        style="width: 100%;" name="section" ng-model="data.secId" ng-options="sec.section_id as sec.name  for sec in secData">
+                                        <!--                      
                                  <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
-        
-                                            </select>
-                                        </div>
-        
-        
-                                        <div class="form-group">
-                                            <label>Exam Schedule</label>
-                                            <select id="sel1" class="form-control select2" ng-change="getExamPapers(data.examSchedule_name,data.secId)" style="width: 100%;"
-                                                ng-model="data.examSchedule_name" name="examSchedule" ng-options="examSch.exam_sch_id as examSch.exam_title for examSch in examSchedule ">
-        
-                                            </select>
-                                        </div>
-        
-                                        <div class="form-group">
-                                            <label>Exam Papers</label>
-                                            <select class="form-control select2" style="width: 100%;" name="paperId" ng-model="data.paper_name" ng-options="paper.exam_paper_id as paper.exam_paper_title for paper in papers ">
-                                                <option value="">--Select--</option>
-        
-                                            </select>
-                                        </div>
-        
-                                        <!-- <div class="form-group">
+
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label>Exam Schedule</label>
+                                    <select id="sel1" class="form-control select2" ng-change="getExamPapers(data.examSchedule_name,data.secId)" style="width: 100%;"
+                                        ng-model="data.examSchedule_name" name="examSchedule" ng-options="examSch.exam_sch_id as examSch.exam_title for examSch in examSchedule ">
+
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Exam Papers</label>
+                                    <select class="form-control select2" style="width: 100%;" name="paperId" ng-model="data.paper_name" ng-options="paper.exam_paper_id as paper.exam_paper_title for paper in papers ">
+                                        <option value="">--Select--</option>
+
+                                    </select>
+                                </div>
+
+                                <!-- <div class="form-group">
                       <label>Select Student</label>
                      <select class="form-control select2" style="width: 100%;" name="studentId" ng-change="getEvaluation(data.studentId,data.examSchedule_name)"
                       ng-model="data.studentId" ng-options="student.student_id as student.first_name+' '+student.last_name for student in students ">
                                
                       </select>
                     </div> -->
-        
-                                        <div class="box-footer">
-                                            <button type="button" ng-click="" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Select</button>
+
+                                <div class="box-footer">
+                                    <button type="button" ng-click="" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Select</button>
+                                </div>
+
+
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-9">
+                            <div class="backwhite">
+                                <div class="subjectlist">
+                                    <div class="col-md-12">
+                                        <div class="col-xs-3 col-md-4">
+
                                         </div>
-        
-        
-        
-        
-        
                                     </div>
                                 </div>
-        
-                                <div class="col-md-9">
-                                    <!-- <div class="backwhite"> -->
-                                    <div class="subjectlist">
-                                        <div class="col-md-12">
-                                            <div class="col-xs-3 col-md-4">
-                                            
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="table-responsive">
                                     <table style="width:100%">
                                         <tr>
                                             <th>#</th>
                                             <th>student</th>
                                             <!-- <th>Examination Title</th>
                                     <th>Paper Title</th> -->
-        
+
                                             <th>
                                                 Marks Obtained
                                                 <!-- <input class="form-control" placeholder="Enter..." id="inputdefault" type="text" size="3"></div> -->
                                             </th>
                                             <th>Marks Percentage
                                                 <!-- <input class="form-control" placeholder="Enter..." id="inputdefault" type="text" size="3"> -->
-        
+
                                             </th>
                                             <th>
                                                 Conduct
                                                 <!-- <input class="form-control" placeholder="Enter..." id="inputdefault" type="text"> -->
-        
+
                                             </th>
                                             <!-- <th class="pull-right">Action</th> -->
-        
+
                                         </tr>
+
                                         <tr ng-repeat="evaluations in marksBox track by $index" class="editable-row">
                                             <td>
                                                 <div class="form-group">
                                                     {{$index+1}}
                                                 </div>
-        
+
                                             </td>
-        
+
                                             <td>
                                                 <div class="form-group">
                                                     {{evaluations.first_name || 'empty'}} {{evaluations.last_name || 'empty'}}
@@ -308,7 +314,7 @@
                                         <span editable-text="evaluations.paper_name" e-name="evaluations.exam_paper_title" onaftersave="EditEvaluation($index)"
                                             e-form="rowform" e-required>{{evaluations.paper_name || 'empty' }}</span>
                                         </th> -->
-        
+
                                             <td>
                                                 <div class="form-group">
                                                     <!-- <label for="inputdefault">Marks Obtained</label><br> -->
@@ -323,15 +329,15 @@
                                             </td>
                                             <td>
                                                 <div class="form-group">
-                                                        <select name="conduct" ng-model="evaluations.conduct" class="form-control select2" style="width: 100%;" ng-options="sub.type as sub.id for sub in conduct">
-                                                                <option selected="selected" value="">--Select--</option>
-                                                                <!-- <option>Poor</option>
+                                                    <select name="conduct" ng-model="evaluations.conduct" class="form-control select2" style="width: 100%;" ng-options="sub.type as sub.id for sub in conduct">
+                                                        <option selected="selected" value="">--Select--</option>
+                                                        <!-- <option>Poor</option>
                                                                 <option>Below Average</option>
                                                                 <option>Average</option>
                                                                 <option>Above Average</option>
                                                                 <option>Good</option>
                                                                 <option>Excellent</option> -->
-                                                              </select>
+                                                    </select>
                                                     <!-- <label for="inputdefault">Conduct</label><br> -->
                                                     <!-- <input class="form-control" ng-model="evaluations.conduct" placeholder="Enter..." id="inputdefault" type="text"> -->
                                                 </div>
@@ -348,21 +354,22 @@
                                                 
                                             </div>
                                         </td> -->
-        
+
                                         </tr>
                                     </table>
                                     <div class="box-footer">
                                         <button type="button" ng-click="addBulkMarks(data.examSchedule_name,data.paper_name,data.secId,data.classId)" class="btn btn-primary pull-right"
                                             style="background-color: #03104e;border-color: #03104e;">Submit</button>
                                     </div>
-        
                                 </div>
                             </div>
                         </div>
                     </div>
-        
+                </div>
+            </div>
 
-          
+
+
 
         </div>
     </div>

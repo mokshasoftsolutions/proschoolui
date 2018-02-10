@@ -24,9 +24,7 @@ angular.module('school_erp')
 
                         }
                         $scope.data.push(obj);
-                        // console.log(JSON.stringify(data));
-                        // $scope.station_id = $scope.data[].station_id;
-                        // console.log($scope.station_id);
+                      
                     })
 
                 })
@@ -124,9 +122,6 @@ angular.module('school_erp')
         $scope.getStation();
 
 
-        // editableOptions.theme = 'bs3';
-        // editableThemes['bs3'].submitTpl = '<button type="submit" class="btn btn-primary btn-with-icon"><i class="ion-checkmark-round"></i></button>';
-        // editableThemes['bs3'].cancelTpl = '<button type="button" ng-click="$form.$cancel()" class="btn btn-default btn-with-icon"><i class="ion-close-round"></i></button>';
-
+      
     }])
 

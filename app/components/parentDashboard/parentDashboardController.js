@@ -233,20 +233,21 @@ angular.module('school_erp')
 
                 },
                 scaleX: {
-                    maxItems: 8,
-                    transform: {
-                        type: 'date'
-                    },
+                    //maxItems: 0,
+                    // transform: {
+                    //     type: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+                    // },
+                    values:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
                     zooming: true,
-                    values: [
-                      1442905200000, 1442908800000, 
-                      1442912400000, 1442916000000, 
-                      1442919600000, 1442923200000, 
-                      1442926800000, 1442930400000, 
-                      1442934000000, 1442937600000, 
-                      1442941200000, 1442944800000, 
-                      1442948400000,1442948300000,
-                    ],
+                    // values: [
+                    //   1442905200000, 1442908800000, 
+                    //   1442912400000, 1442916000000, 
+                    //   1442919600000, 1442923200000, 
+                    //   1442926800000, 1442930400000, 
+                    //   1442934000000, 1442937600000, 
+                    //   1442941200000, 1442944800000, 
+                    //   1442948400000,1442948300000,
+                    // ],
                     lineColor: "white",
                     lineWidth: "1px",
                     tick: {
@@ -299,48 +300,73 @@ angular.module('school_erp')
                 series: [
                         {
                         text: "Maths",
-                        values: [2596, 2626, 4480, 
-                                 6394, 7488, 14510, 
-                                 7012, 10389, 20281, 
-                                 25597, 23309, 22385, 
-                                 25097, 20813, 20510],
+                        values: [96, 66, 80, 
+                                 94, 74, 51, 
+                                 70, 89, 81, 
+                                 55, 35, 85, 
+                                 97, 83, 50],
                         backgroundColor1: "#77d9f8",
                         backgroundColor2: "#272822",
                         lineColor: "#40beeb"
                     }, {
                         text: "English",
-                        values: [479, 199, 583, 
-                                 1624, 2772, 7899, 
-                                 3467, 3227, 12885, 
-                                 17873, 14420, 12569, 
-                                 17721, 11569, 7362],
+                        values: [79, 98, 58, 
+                                 40, 72, 78, 
+                                 67, 32, 55, 
+                                 73, 50, 69, 
+                                 74, 69, 73],
                         backgroundColor1: "#4AD8CC",
                         backgroundColor2: "#272822",
                         lineColor: "#4AD8CC"
                     }, {
                         text: "Science",
-                        values: [989, 1364, 2161, 
-                                 2644, 1754, 2015, 
-                                 818, 77, 1260, 
-                                 3912, 1671, 1836, 
-                                 2589, 1706, 1161],
+                        values: [89, 64, 61, 
+                                44,54, 25, 
+                                 88, 77, 60, 
+                                 39, 71, 36, 
+                                 89, 76, 61],
                         backgroundColor1: "#1D8CD9",
                         backgroundColor2: "#1D8CD9",
                         lineColor: "#1D8CD9"
                     },
                     {
                         text: "Computer",
-                        values: [408, 343, 410,
-                            840, 1614, 3274,
-                            2092, 914, 5709,
-                            6317, 6633, 6720,
-                            6504, 6821, 4565],
+                        values: [48, 43, 41,
+                            84, 64, 74,
+                            92, 94, 57,
+                            33, 63, 40,
+                            64, 62, 65],
                         backgroundColor1: "#D8CD98",
                         backgroundColor2: "#272822",
                         lineColor: "#D8CD98"
                         // backgroundColor1: "#4AD8CC",
                         // backgroundColor2: "#272822",
                         // lineColor: "#4AD8CC"
+                    },
+                    {
+                        text: "Social",
+                        values: [38, 43, 41,
+                            84, 64, 74,
+                            92, 45, 57,
+                            33, 63, 80,
+                            64, 42, 65],
+                        backgroundColor1: "#00a65a",
+                        backgroundColor2: "#00a65a",
+                        lineColor: "#00a65a"
+                        // backgroundColor1: "#4AD8CC",
+                        // backgroundColor2: "#272822",
+                        // lineColor: "#4AD8CC"
+                    },
+                    {
+                        text: "Telugu",
+                        values: [89, 64, 61, 
+                                44,54, 25, 
+                                 88, 77, 60, 
+                                 39, 71, 36, 
+                                 89, 76, 61],
+                        backgroundColor1: "#dd4b39",
+                        backgroundColor2: "#dd4b39",
+                        lineColor: "#dd4b39"
                     }]
             };
 

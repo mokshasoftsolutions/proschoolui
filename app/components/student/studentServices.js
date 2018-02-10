@@ -28,6 +28,15 @@ angular.module('school_erp')
             })
         };
 
+        studentServices.totalStudents = function () {           
+            return $http({
+                method: 'GET',
+                url: globalServices.globalValue.baseURL + 'api/totalStudents_in_school/' + globalServices.globalValue.school_id ,               
+                
+            })
+        };
+
+
         studentServices.setAttendance = function (dataValue, classToAdd) {
             return $http({
                 method: 'POST',
@@ -116,6 +125,17 @@ angular.module('school_erp')
                 url: globalServices.globalValue.baseURL + 'api/attendancechartbymonth/' + month + '/' + studentId
             })
         };
+
+        
+
+        studentServices.getAttendenceMonthBySection = function (month, secId) {
+            return $http({
+                method: 'GET',
+                // url: "http://192.168.1.13:4005/api/examevaluation/3/2347/34/45"
+                url: globalServices.globalValue.baseURL + 'api/section_monthly_attendence/' + month + '/' + secId
+            })
+        };
+
         studentServices.setBulkAttendance = function (dataValue, classVal, section) {
             var test = {
                 "students": dataValue,

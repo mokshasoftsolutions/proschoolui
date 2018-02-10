@@ -94,40 +94,6 @@ angular.module('school_erp')
             $scope.save(file);
 
 
-            // if (file) {
-
-            //     var reader = new FileReader();
-
-            //     reader.onload = function (e) {
-
-            //         var data = e.target.result;
-
-            //         var workbook = XLSX.read(data, { type: 'binary' });
-
-            //         var first_sheet_name = workbook.SheetNames[0];
-
-            //         var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);
-
-            //         //console.log(excelData);  
-
-            //         if (dataObjects.length > 0) {
-
-
-            //             $scope.save(dataObjects);
-
-
-            //         } else {
-            //             $scope.msg = "Error : Something Wrong1 !";
-            //         }
-
-            //     }
-
-            //     reader.onerror = function (ex) {
-
-            //     }
-
-            //     reader.readAsBinaryString(file);
-            // }
         }
 
 
@@ -158,6 +124,10 @@ angular.module('school_erp')
         }
            
 
+// Role based Display
+$scope.showRole = function (role) {
+    return globalServices.fetchRoleAuth(role);
+}
 
 
 

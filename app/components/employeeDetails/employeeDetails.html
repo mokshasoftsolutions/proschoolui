@@ -3,10 +3,10 @@
     <h1>Staff Management</h1>
     <ul class="links">
       <li ui-sref-active="active">
-        <a ui-sref="main.employee">Employment</a>
-      </li>/
-      <li ui-sref-active="active">
-        <a ui-sref="main.employeeDetails">Details</a>
+        <a ui-sref="main.employee">Details</a>
+      </li>
+      <li ui-sref-active="active" ng-show="showRole(['admin'])">
+       / <a ui-sref="main.employeeDetails">Employment</a>
       </li>
     </ul>
   </div>

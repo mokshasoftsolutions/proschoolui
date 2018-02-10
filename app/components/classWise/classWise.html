@@ -116,6 +116,7 @@
             <i class="fa fa-calendar" aria-hidden="true"></i>
             <h3 class="box-title">Class Timetable</h3>
           </div>
+          <div class="table-responsive">
           <table style="width:100%">
             <tr>
               <th>Sessions </th>
@@ -145,44 +146,45 @@
 
             <tbody>
               <tr ng-repeat="timetable in timeTableData">
-                <th>
+                <th style="padding-top:15px;">
                   <div class="attachment-block clearfix">
                     <strong class="text-blue">{{timetable.session}}({{timetable.start_time}}-{{timetable.end_time}})</strong>
                     <!--<b class="text text-center">-</b>
                                         <strong class="text-blue">{{timetable.end_time}}</strong>-->
                   </div>
                 </th>
-                <td class="text text-center">
-                  <strong class="text-blue">{{timetable.data.monday}}</strong><br>
+                <td style="padding-top:10px;" class="text text-center">
+                  <strong class="text-red">{{timetable.data.monday}}</strong><br>
                   <strong class="text-blue">({{timetable.teacher.mon}})</strong>
                 </td>
-                <td class="text text-center">
-                  <strong class="text-blue">{{timetable.data.tuesday}}</strong><br>
+                <td style="padding-top:10px;" class="text text-center">
+                  <strong class="text-red">{{timetable.data.tuesday}}</strong><br>
                   <strong class="text-blue">({{timetable.teacher.tues}})</strong>
                 </td>
-                <td class="text text-center">
-                  <strong class="text-blue">{{timetable.data.wednesday }}</strong><br>
+                <td style="padding-top:10px" class="text text-center">
+                  <strong class="text-red">{{timetable.data.wednesday }}</strong><br>
                   <strong class="text-blue">({{timetable.teacher.wednes}})</strong>
                 </td>
-                <td class="text text-center">
-                  <strong class="text-blue">{{timetable.data.thursday }}</strong><br>
+                <td style="padding-top:10px;" class="text text-center">
+                  <strong class="text-red">{{timetable.data.thursday }}</strong><br>
                   <strong class="text-blue">({{timetable.teacher.thurs}})</strong>
                 </td>
-                <td class="text text-center">
-                  <strong class="text-blue">{{timetable.data.friday}}</strong><br>
+                <td style="padding-top:10px;" class="text text-center">
+                  <strong class="text-red">{{timetable.data.friday}}</strong><br>
                   <strong class="text-blue">({{timetable.teacher.fri}})</strong>
                 </td>
-                <td class="text text-center">
-                  <strong class="text-blue">{{timetable.data.saturday }}</strong><br>
+                <td style="padding-top:10px;" class="text text-center">
+                  <strong class="text-red">{{timetable.data.saturday }}</strong><br>
                   <strong class="text-blue">({{timetable.teacher.satur}})</strong>
                 </td>
-                <td class="text text-center">
-                  <strong class="text-blue">{{timetable.data.sunday}}</strong><br>
+                <td style="padding-top:10px;" class="text text-center">
+                  <strong class="text-red">{{timetable.data.sunday}}</strong><br>
                   <strong class="text-blue">({{timetable.teacher.sun}})</strong>
                 </td>
               </tr>
             </tbody>
           </table>
+          </div>
         </div>
       </div>
 

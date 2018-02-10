@@ -1,31 +1,6 @@
 angular.module('school_erp')
-    .controller("messagesController", ['$http', '$scope', '$rootScope','globalServices','messagesServices', 'ngDialog', function ($http, $scope, $rootScope,globalServices , messagesServices, ngDialog) {
+    .controller("sentBoxController", ['$http', '$scope', '$rootScope','globalServices','messagesServices', 'ngDialog', function ($http, $scope, $rootScope,globalServices , messagesServices, ngDialog) {
         $scope.data = [];
-
-        $scope.addMessages = function (data) {
-            var Details = {
-                message: $scope.data.message,
-                subject: $scope.data.subject,
-                sent_to: $scope.data.sendto
-
-            }
-            messagesServices.setMessage(Details)
-                .success(function (data, status) {
-                    ngDialog.open({
-                        template: '<p>Message are sended.</p>',
-                        plain: true
-                    });
-                    $scope.data = [];
-
-
-
-                })
-                .error(function (data, success) {
-                })
-        }
-
-
-
 
         $scope.getmessages = function () {
             messagesServices.getmessages()

@@ -3,15 +3,7 @@ angular.module('school_erp')
         $scope.vehicles = [];
         $scope.data = [];
         $scope.engineType = [{ id: 'Diesel', type: 'Diesel' }, { id: 'Petrol', type: 'Petrol' }, { id: 'Gass', type: 'Gass' }]
-        //     $scope.getVehicle = function(){
-        //     addVehicleServices.getVehicle()
-        //     .success(function(data, status){
-        //         $scope.vehicles = data.vehicles;
-        //        console.log(JSON.stringify(data))
-        //     })
-        //     .error(function(data,success){
-        //     });
-        // }
+       
 
         $scope.getVehicleDetails = function () {
             addVehicleServices.getVehicleDetails()
@@ -46,29 +38,7 @@ angular.module('school_erp')
         }
 
 
-        //    $scope.addVehicle= function(data){
-        //     var VehicleDetails ={
-        //         vehicle_code:$scope.data.vehicle_code,
-        //         vehicle_name:$scope.data.vehicle_name,
-        //     }
-        //     addVehicleServices.setVehicle(VehicleDetails)   
-        //     .success(function(data, status){
-        //         ngDialog.open({
-        //         template: '<p>Vehicle is Added Successfully.</p>',
-        //         plain: true
-        //         });
-        //         $scope.data = [];
-        //         $scope.getVehicle();
-        //     })
-        //     .error(function(data,success){
-        //         ngDialog.open({
-        //         template: '<p>Some Error Occured!</p>',
-        //         plain: true
-        //         });
-        //     })
-
-        // }
-
+       
 
 
 

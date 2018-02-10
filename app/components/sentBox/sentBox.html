@@ -1,0 +1,55 @@
+<div class="row background">
+    <div class="container">
+        <h1>Messages</h1>
+        <ul class="links">
+            <li ui-sref-active="active">
+                <a ui-sref='main.messages'> Create Message</a>
+            </li>
+            <li ui-sref-active="active">
+                /<a ui-sref='main.sentbox'> Sentbox</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container">
+    <div class="msgbox">
+        <div class="col-md-12">
+            <div class="backwhite">
+                <div class="table-responsive">
+                    <table style="width:100%;margin-top: 20px;">
+                        <tr>
+                            <th>#</th>
+                            <th ng-show="showRole(['admin'])">Name</th>
+                            <th>Subject</th>
+                            <th>Message</th>
+                            <th>send on</th>
+                        </tr>
+                        <tbody>
+                            <tr ng-repeat="messages in messagesData" class="editable-row">
+                                <td>
+                                    {{$index+1}}
+                                </td>
+                                <td ng-show="showRole(['admin'])">{{messages.sent_to || 'empty' }}
+
+                                </td>
+                                <td>
+                                    {{messages.subject || 'empty' }}
+
+                                </td>
+
+                                <td>{{messages.message || 'empty'}}
+
+                                </td>
+                                <td>{{messages.posted_on | date }}
+
+                                </td>
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

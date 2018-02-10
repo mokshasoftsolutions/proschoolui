@@ -2,15 +2,19 @@ angular.module('school_erp')
     .controller("collectFeeController", ['$http', '$scope', 'collectFeeServices', 'feeTypeServices', 'feeMasterServices', 'globalServices', 'subjectsServices', 'studentServices', 'ngDialog', '$rootScope', function ($http, $scope, collectFeeServices, feeTypeServices, feeMasterServices, globalServices, subjectsServices, studentServices, ngDialog, $rootScope) {
         $scope.feeTypeData = [];
         $scope.data = {};
-
+       // $scope.box=true;
         globalServices.getClass()
             .success(function (data, status) {
                 $scope.classDatanew = data.school_classes; // Api list-name
                 $scope.data.classId = data.school_classes[0].class_id;
+                $scope.getFeeTypeByClassId($scope.data.classId);
                 $scope.populateSections($scope.data.classId);
+               
                 $scope.getFeeTypes($scope.data.classId);
             })
             .error(function (data, success) { })
+
+
         $scope.getFeeTypes = function (classId) {
 
             collectFeeServices.getFeeTypes(classId)
@@ -24,6 +28,8 @@ angular.module('school_erp')
                 })
                 .error(function (data, success) { });
         }
+
+
 
         $scope.populateSections = function (classId) {
             globalServices.getSections(classId)
@@ -95,13 +101,43 @@ angular.module('school_erp')
         //         })
         // }
 
-        $scope.getFeeType = function () {
+        $scope.getFeeTypeByClassId = function (class_id) {
 
-            feeTypeServices.getFeeType()
+            feeMasterServices.getFeeTypeByClassId(class_id)
+                .success(function (data, status) {
+                    console.log("message");
+                    console.log(JSON.stringify(data))
+                    $scope.feeTypeData = data.feeTypes;
+                   
+                    $scope.fee_type_id = $scope.feeTypeData[0].fee_types_id
+                    $scope.getFeeMaster($scope.fee_type_id,$scope.data.classId);
+                })
+                .error(function (data, success) { });
+
+
+        }
+
+        $scope.getFeeMaster = function (fee_type_id,classId) {
+
+            feeMasterServices.getFeeMasterById(fee_type_id,classId)
                 .success(function (data, status) {
                     // console.log(subId)
-                    $scope.feeTypeData = data.feetypes;
-                    //console.log(JSON.stringify(data))
+                    $scope.feemaster = data.feemaster;
+                    console.log(JSON.stringify(data))
+                    if ($scope.feemaster == 0) {
+                        $scope.value.amount = "";
+                       $scope.box=false;
+                        ngDialog.open({
+                            template: '<p>Please add amount to Feetype.</p>',
+                            plain: true
+                        });
+                    } else {
+                        //$scope.box=true;
+                        $scope.value.amount = $scope.feemaster[0].fee_amount;
+                    }
+
+
+                    // console.log($scope.amount);
 
                 })
                 .error(function (data, success) { });
@@ -130,7 +166,7 @@ angular.module('school_erp')
                     $scope.parseInt = parseInt;
                     // console.log(subId)
                     $scope.collectFee = data.student_fee_details;
-                    //    console.log(JSON.stringify(data))
+                    console.log(JSON.stringify(data))
                     $scope.collectFeeData = [];
                     index = 0;
                     $scope.collectFee.forEach(function (element) {
@@ -143,14 +179,16 @@ angular.module('school_erp')
                             payment_mode: element.payment_mode,
                             fee_amount: element.fee_amount,
                             fine: element.fine,
+                            fee_paid: element.fee_paid,
                             discount: element.discount,
-                           
-                           
+                            current_date:element.current_date
+
+
 
                         }
                         $scope.collectFeeData.push(obj);
                         // console.log("mesaage for section");
-                       // console.log($scope.employeeData);
+                        // console.log($scope.employeeData);
                     })
 
                 })
@@ -158,7 +196,7 @@ angular.module('school_erp')
         }
 
 
-        $scope.addFee = function (value, student_id) {
+        $scope.addFee = function (value, student_id,classId) {
             //   console.log("message");
             //   console.log(student_id);
             //$scope.data = angular.copy($scope.collectFeeData[value]);
@@ -166,13 +204,16 @@ angular.module('school_erp')
             // console.log($scope.student_id);
             var FeeDetails = {
                 date: $scope.value.date,
-
-                fee_type: $scope.value.fee_type,
+                fee_paid: $scope.value.fee_paid,
+                fee_types_id: $scope.value.fee_type,
                 payment_mode: $scope.value.payment_mode,
                 fine: $scope.value.fine,
-                discount: $scope.value.discount
+                discount: $scope.value.discount,
+                total_fee: $scope.value.fee_amount,
+                class_id:classId
 
             }
+            console.log(FeeDetails);
             collectFeeServices.setFee(FeeDetails, student_id)
                 .success(function (data, status) {
                     ngDialog.open({
@@ -256,100 +297,100 @@ angular.module('school_erp')
 
 
 
-        $scope.selectedFile = null;
-        $scope.msg = "";
+        // $scope.selectedFile = null;
+        // $scope.msg = "";
 
 
-        $scope.loadFile = function (files) {
+        // $scope.loadFile = function (files) {
 
-            $scope.$apply(function () {
+        //     $scope.$apply(function () {
 
-                $scope.selectedFile = files[0];
+        //         $scope.selectedFile = files[0];
 
-            })
+        //     })
 
-        }
+        // }
 
-        $scope.handleFile = function () {
+        // $scope.handleFile = function () {
 
-            var file = $scope.selectedFile;
+        //     var file = $scope.selectedFile;
 
-            if (file) {
+        //     if (file) {
 
-                var reader = new FileReader();
+        //         var reader = new FileReader();
 
-                reader.onload = function (e) {
+        //         reader.onload = function (e) {
 
-                    var data = e.target.result;
+        //             var data = e.target.result;
 
-                    var workbook = XLSX.read(data, {
-                        type: 'binary'
-                    });
+        //             var workbook = XLSX.read(data, {
+        //                 type: 'binary'
+        //             });
 
-                    var first_sheet_name = workbook.SheetNames[0];
+        //             var first_sheet_name = workbook.SheetNames[0];
 
-                    var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);
+        //             var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);
 
-                    //console.log(excelData);  
+        //             //console.log(excelData);  
 
-                    if (dataObjects.length > 0) {
-
-
-                        $scope.save(dataObjects);
+        //             if (dataObjects.length > 0) {
 
 
-                    } else {
-                        $scope.msg = "Error : Something Wrong1 !";
-                    }
-
-                }
-
-                reader.onerror = function (ex) {
-
-                }
-
-                reader.readAsBinaryString(file);
-            }
-        }
+        //                 $scope.save(dataObjects);
 
 
-        $scope.save = function (data) {
-            //   console.log(JSON.stringify(data));
+        //             } else {
+        //                 $scope.msg = "Error : Something Wrong1 !";
+        //             }
 
-            $http({
-                method: "POST",
-                url: globalServices.globalValue.baseURL + 'api/book/' + globalServices.globalValue.school_id,
-                data: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+        //         }
 
-            }).then(function (data) {
-                if (data.status) {
-                    $scope.msg = "Data has been inserted ! ";
-                } else {
-                    $scope.msg = "Error : Something Wrong2";
-                }
-            }, function (error) {
-                $scope.msg = "Error : Something Wrong3";
-            })
+        //         reader.onerror = function (ex) {
 
-        }
-        $scope.exportAction = function (option) {
-            switch (option) {
-                case 'pdf':
-                    $scope.$broadcast('export-pdf', {});
-                    break;
-                case 'excel':
-                    $scope.$broadcast('export-excel', {});
-                    break;
-                default:
-                    console.log('no event caught');
-            }
-        }
+        //         }
+
+        //         reader.readAsBinaryString(file);
+        //     }
+        // }
+
+
+        // $scope.save = function (data) {
+        //     //   console.log(JSON.stringify(data));
+
+        //     $http({
+        //         method: "POST",
+        //         url: globalServices.globalValue.baseURL + 'api/book/' + globalServices.globalValue.school_id,
+        //         data: JSON.stringify(data),
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         }
+
+        //     }).then(function (data) {
+        //         if (data.status) {
+        //             $scope.msg = "Data has been inserted ! ";
+        //         } else {
+        //             $scope.msg = "Error : Something Wrong2";
+        //         }
+        //     }, function (error) {
+        //         $scope.msg = "Error : Something Wrong3";
+        //     })
+
+        // }
+        // $scope.exportAction = function (option) {
+        //     switch (option) {
+        //         case 'pdf':
+        //             $scope.$broadcast('export-pdf', {});
+        //             break;
+        //         case 'excel':
+        //             $scope.$broadcast('export-excel', {});
+        //             break;
+        //         default:
+        //             console.log('no event caught');
+        //     }
+        // }
 
 
         // $scope.getFeeMaster();
         // $scope.getFeeType();
-        $scope.getFeeType();
+      
     }])

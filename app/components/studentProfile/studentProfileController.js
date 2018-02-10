@@ -624,20 +624,41 @@ angular.module('school_erp')
                 .error(function (data, success) { })
         }
 
+        // $scope.generatePDF = function () {
+        //     $scope.pdf = true;
+        //     console.log("pdf message1");
+        //     html2canvas(document.getElementById('exportthis'), {
+        //         onrendered: function (canvas) {
+        //             var zingchart=canvas.toDataURL("image/png");
+        //             var doc =new jsPDF();
+                    
+
+        //             doc.addImage(zingchart,'JPEG',20,20);
+        //            // var data = canvas.toDataURL();
+        //             var docDefinition = {
+        //                 content: [{
+        //                     image: doc,
+        //                     width: 480,
+        //                 }]
+        //             };
+        //             console.log("pdf message2");
+
+        //             pdfMake.createPdf(docDefinition).download("StudentAttendanceByMonth_Report.pdf");
+        //             $scope.getAttendenceByMonth($scope.select_month, $stateParams.student);
+
+        //         }
+        //     });
+        // }
+
         $scope.generatePDF = function () {
             $scope.pdf = true;
             console.log("pdf message1");
-            html2canvas(document.getElementById('chart'), {
+            html2canvas(document.getElementById('exportthis'), {
                 onrendered: function (canvas) {
-                    var zingchart=canvas.toDataURL("image/png");
-                    var doc =new jsPDF();
-                    
-
-                    doc.addImage(zingchart,'JPEG',20,20);
-                   // var data = canvas.toDataURL();
+                    var data = canvas.toDataURL();
                     var docDefinition = {
                         content: [{
-                            image: doc,
+                            image: data,
                             width: 480,
                         }]
                     };
@@ -651,32 +672,32 @@ angular.module('school_erp')
         }
 
 
-        $scope.generatePDF2 = function () {
-            $scope.pdf = true;
-            console.log("pdf message1");
-            html2canvas(document.getElementById('chart'), {
-                onrendered: function (canvas) {
-                    var img=canvas.toDataURL("image/png");
-                    var doc =new jsPDF();
+        // $scope.generatePDF2 = function () {
+        //     $scope.pdf = true;
+        //     console.log("pdf message1");
+        //     html2canvas(document.getElementById('chart'), {
+        //         onrendered: function (canvas) {
+        //             var img=canvas.toDataURL("image/png");
+        //             var doc =new jsPDF();
                     
 
-                    doc.addImage(img,'JPEG',20,20);
-                    // var docDefinition = {
-                    //     content: [{
-                    //         image: data,
-                    //         width: 480,
-                    //     }]
-                    // };
-                    console.log("pdf message2");
+        //             doc.addImage(img,'JPEG',20,20);
+        //             // var docDefinition = {
+        //             //     content: [{
+        //             //         image: data,
+        //             //         width: 480,
+        //             //     }]
+        //             // };
+        //             console.log("pdf message2");
 
-                   doc.save('test.pdf');
+        //            doc.save('test.pdf');
 
-                    pdfMake.createPdf(doc).download("StudentAttendanceByMonth_Report.pdf");
-                    $scope.getAttendenceByMonth($scope.select_month, $stateParams.student);
+        //             pdfMake.createPdf(doc).download("StudentAttendanceByMonth_Report.pdf");
+        //             $scope.getAttendenceByMonth($scope.select_month, $stateParams.student);
 
-                 }
-            });
-        }
+        //          }
+        //     });
+        // }
 
 
 

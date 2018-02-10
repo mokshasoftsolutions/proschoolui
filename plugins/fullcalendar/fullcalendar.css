@@ -515,6 +515,12 @@ be a descendant of the grid when it is being dragged.
 	font-weight: bold;
 }
 
+.fc-scroller .fc-day-grid-container {
+	overflow-x: hidden;
+    overflow-y: scroll;
+    height: 250px;
+}
+
 /* resize handle (outside of fc-content, so can go outside of bounds) */
 
 .fc-day-grid-event .fc-resizer {

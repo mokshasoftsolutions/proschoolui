@@ -16,7 +16,7 @@
 </div>
 <div class="container">
   <div class="row">
-    <div class="Evaluations">
+    <div class="Events">
       <div class="col-md-3" >
         <div class="backwhite">
           <form name="events" ng-submit="events.$valid && addEvent(data)" novalidate>
@@ -37,7 +37,7 @@
                   <i class="fa fa-calendar"></i>
                 </div>
                 <!--<input type="text" class="form-control pull-right" ng-model="data.exam_classes" id="datepicker">-->
-                <datepicker date-format="yyyy-MM-dd" style="z-index:999">
+                <datepicker date-format="y-M-d" style="z-index:999">
                   <input name="Date" class="form-control" type="text" ng-readonly="true" ng-model="data.date" placeholder="Enter ..." required/>
                 </datepicker>
               </div>

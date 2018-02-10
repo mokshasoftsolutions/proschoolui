@@ -21,7 +21,7 @@ angular.module('school_erp')
                         }
                 }
 
-                if ($rootScope.role == 'parent') {
+                if ($rootScope.role == 'parent') { 
 
                         $scope.studentSelection = $rootScope.student._id;
                         $scope.changeStudent = function (student) {

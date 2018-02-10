@@ -16,14 +16,17 @@
                / <a ui-sref='main.teacherInfo' >TeacherInfo</a>
             </li>
             <li ui-sref-active="active" ng-show="showRole(['admin','teacher'])">
-                /<a ui-sref='main.taskManagement'>TaskManagement</a>
+                /<a ui-sref='main.taskManagement'>Task Management</a>
+            </li>
+            <li ui-sref-active="active" ng-show="showRole(['admin'])">
+                /<a ui-sref='main.quote'>Quote & Word</a>
             </li>
         </ul>
     </div>
 </div>
 
 <div class="container">
-    <div class="row">
+    <div class="row" style="margin-left:0px">
         <div class="classinfo">
             <div class="col-md-3">
                 <div class="addclass" ng-show="showRole(['admin'])">
@@ -34,8 +37,8 @@
                         <button class="btn btn-primary active" ng-click="addClass(value)" style="background-color: #30104e;float: right;">Add class</button>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <table export-table st-table="display_records" st-safe-src="classBox" class="table rwd-table table-striped" style="width:100%;margin-top: 20px;">
+                <div class="table-responsive" style="width:100%">
+                    <table export-table st-table="display_records" st-safe-src="classBox" style="width:100%;margin-top: 20px;">
                         <tr>
                             <th>#</th>
                             <th>Class</th>
@@ -87,7 +90,7 @@
 
                 <div class="backwhite">
                     <form name="classDetails" ng-submit="classDetails.$valid && addSection(sectionName,sectionName.classId);" novalidate>
-                        <div class="addsection">
+                        <div class="addsection" style="margin-top: 25px;">
                             <div class="col-md-4">
                                 <div class="form-group" ng-class="{'has-error': classDetails.$submitted && classDetails.class.$invalid && classDetails.class.$pristine}">
                                     <label>Class</label>
@@ -119,12 +122,10 @@
                                 <button class="btn btn-primary pull-right " style="background-color: #30104e;">Add section</button>
                             </div>
                         </div>
-                        <!-- <div class="box-footer">
-                            <button ng-disabled="false" type="submit" class="btn btn-primary pull-right">Submit</button>
-                        </div> -->
+                       
                     </form>
-                    <div class="table-responsive">
-                        <table export-table st-table="Section_details" st-safe-src="sectionBox" class="table rwd-table table-striped" style="width:100%">
+                    <div class="table-responsive" style="width:100%">
+                        <table export-table st-table="Section_details" st-safe-src="sectionBox" style="width:100%">
                             <tr>
                                 <th>#</th>
                                 <th>class</th>

@@ -16,6 +16,19 @@ angular.module('school_erp')
                 })
     };
 
+    collectFeeServices.getFeeReports = function(secId,feeTypeId){
+        return $http({
+                    method: 'GET',
+                    url: globalServices.globalValue.baseURL + 'api/section_student_fee_paid_details/'+secId+'/'+feeTypeId
+                })
+    };
+    
+    collectFeeServices.getFeeByDay = function(select_date){
+        return $http({
+                    method: 'GET',
+                    url: globalServices.globalValue.baseURL + 'api/fee_by_Date/'+select_date+'/'+globalServices.globalValue.school_id
+                })
+    };
      collectFeeServices.setFee = function(dataValue,student_id){
          console.log(dataValue);
         return $http({

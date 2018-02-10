@@ -150,7 +150,7 @@
                   </div>
 
                   <div class="col-md-3">
-                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.email.$pristine||studentAdmission.email.$error.pattern}">
+                    <div class="form-group">
                       <label>Email</label>
                       <input type="text" name="email" ng-model="data.email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" class="form-control" placeholder="Enter ..."
                         required>
@@ -255,20 +255,20 @@
                   </div>
 
                   <div class="col-md-3">
-                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.motherphone.$pristine||studentAdmission.motherphone.$error.pattern}">
+                    <div class="form-group" >
                       <label>Mother Phone</label>
                       <input name="motherphone" type="text" ng-model="data.mother_contact" ng-pattern="/^(\+\d{1,3}[- ]?)?\d{10}$/" class="form-control" placeholder="Enter ...">
                     </div>
                   </div>
                   <div class="col-md-3">
-                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.motheremail.$pristine||studentAdmission.motheremail.$error.pattern}">
+                    <div class="form-group" >
                       <label>Mother Email</label>
                       <input type="email" name="motheremail" ng-model="data.motheremail" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" class="form-control"
                         placeholder="Enter ..." required>
                     </div>
                   </div>
                   <div class="col-md-3">
-                    <div class="form-group" ng-class="{'has-error': studentAdmission.$submitted  && studentAdmission.mother.$pristine}">
+                    <div class="form-group">
                       <label>Mother Occupation</label>
                       <input name="mother" type="text" ng-model="data.mother_occupation" class="form-control" placeholder="Enter ...">
                     </div>
@@ -413,7 +413,7 @@
                 </div> -->
                 <!-- <div class="row"> -->
 
-                  <h4 class="box-title">Upload Documents</h4>
+                  <!-- <h4 class="box-title">Upload Documents</h4>
                   <div class="col-md-4">
                       <fieldset data-ng-repeat="choice in choices">
                        <label>Title</label>
@@ -426,7 +426,7 @@
                       </fieldset>
                       
                       <button style="background: #C76868;margin-left:323px;" class="addfields" ng-click="addNewChoice()">+</button>
-                    </div>
+                    </div> -->
                   <!-- <div class="col-md-6">
                     <table class="table">
                       <tbody>

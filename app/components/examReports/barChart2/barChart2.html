@@ -37,7 +37,7 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="Examschedular">
+        <div class="Examreport">
             <div class="col-md-3" >
                 <div class="backwhite">
 
@@ -50,7 +50,7 @@
                     </div>
                     <div class="form-group" ng-show="showRole(['admin','teacher'])">
                         <label>Section</label>
-                        <select class="form-control select2" style="width: 100%;" ng-model="secId">
+                        <select class="form-control select2" data-ng-change="getStudentValue(secId)" style="width: 100%;" ng-model="secId">
                             <option selected="selected">--Select--</option>
                             <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>
 
@@ -87,7 +87,7 @@
 
                         </div>
                     </div>
-
+                    <div class="table-responsive">
                     <table style="width:100%">
                         <div class="box box-success" style="margin-top:10px">
                             <div class="box-header with-border">
@@ -103,13 +103,14 @@
                                 </div>
                             </div>
                             <div class="box-body" pdf-save-content="idOneGraph">
-                                <div class="chart" style="margin-left:37px">
+                                <div class="chart">
                                     <zingchart id="myChart" zc-values="chartdata" zc-json="myJson" zc-height=400 zc-width=800></zingchart>
                                 </div>
                             </div>
 
                         </div>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -6,7 +6,8 @@
         <a ui-sref="main.student">Information</a>
       </li>
       <li ui-sref-active="active" ng-show="showRole(['admin'])">
-       /<a ui-sref="main.studentAdmission">Admission</a>
+        /
+        <a ui-sref="main.studentAdmission">Admission</a>
       </li>
     </ul>
   </div>
@@ -98,7 +99,25 @@
               <div class="jumbotron">
 
                 <h2 align="center">Students Report</h2>
-                <ul>
+                <div class="table-responsive">
+                  <table style="width:100%">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <b>School Name </b> :{{schoolDetails[0].name}}</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <b>Class Name</b> : {{class_name}}</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <b>Section Name</b> : {{section_name}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- <ul>
 
                   <li>
                     <b>School Name </b> :{{schoolDetails[0].name}}</li>
@@ -107,7 +126,7 @@
                   <li>
                     <b>Section Name</b> : {{section_name}}</li>
 
-                </ul>
+                </ul> -->
                 <!-- <ul>
                   <li class="schoolimage">
 
@@ -123,7 +142,8 @@
               </div>
 
             </div>
-            <table table export-table st-table="display_records" st-safe-src="studentBox" class="table rwd-table table-striped" style="width:100%">
+            <div class="table-responsive">
+            <table table export-table st-table="display_records" st-safe-src="studentBox"  style="width:100%">
               <thead>
                 <tr>
                   <th>#</th>
@@ -158,14 +178,14 @@
                     <span editable-text="student.dob" e-name="student.dob" onaftersave="EditStudent(student.id)" e-form="rowform" e-required>{{student.dob || 'empty' }}</span>
                   </td>
 
-                  <td class="select-td"  >
+                  <td class="select-td">
                     <span editable-select="student.gender" e-name="student.gender" e-form="rowform" onaftersave="EditStudent(student.id)" e-selectpicker
                       e-ng-options="type.name as type.name for type in gender">
                       {{student.gender}}</span>
                   </td>
                   <td class="select-td">
-                    <span editable-select="student.category" e-name="student.category" e-form="rowform" onaftersave="EditStudent(student.id)" e-selectpicker
-                      e-ng-options="categories.type as categories.type for categories in category">
+                    <span editable-select="student.category" e-name="student.category" e-form="rowform" onaftersave="EditStudent(student.id)"
+                      e-selectpicker e-ng-options="categories.type as categories.type for categories in category">
                       {{student.category}}</span>
                   </td>
 
@@ -202,6 +222,7 @@
                 </tr>
               </tfoot>
             </table>
+            </div>
           </div>
         </div>
       </div>

@@ -500,6 +500,14 @@ temporary rendered events).
 }
 
 
+.fc-scroller .fc-day-grid-container {
+	overflow-x: hidden;
+    overflow-y: scroll;
+    height: 250px;
+}
+
+
+
 /* Global Event Styles
 --------------------------------------------------------------------------------------------------*/
 

@@ -41,7 +41,8 @@
                 </ul> -->
             </li>
             <li class="links" ng-show="showRole(['admin'])">
-                /<a ui-sref='main.employeeAttendance'>Employee</a>
+                /
+                <a ui-sref='main.employeeAttendance'>Employee</a>
                 <!-- <ul class="links">
                     <li>
                         <a ui-sref='main.attendenceListEmployee'>ReportByDay</a>
@@ -52,7 +53,8 @@
                 </ul> -->
             </li>
             <li class="links">
-                /<a ui-sref='main.attendenceListStudent'>Student Reports</a>
+                /
+                <a ui-sref='main.attendenceListStudent'>Student Reports</a>
                 <!-- <ul class="links">
                         <li>
                             <a ui-sref='main.attendenceListEmployee'>ReportByDay</a>
@@ -63,7 +65,8 @@
                     </ul> -->
             </li>
             <li class="links" ng-show="showRole(['admin'])">
-                /<a ui-sref='main.attendenceListEmployee'>Employee Reports</a>
+                /
+                <a ui-sref='main.attendenceListEmployee'>Employee Reports</a>
                 <!-- <ul class="links">
                             <li>
                                 <a ui-sref='main.attendenceListEmployee'>ReportByDay</a>
@@ -93,7 +96,7 @@
     <div class="tab-pane no-padding active" id="tab_1">
         <div class="container">
             <div class="row">
-                <div class="Examschedular">
+                <div class="Examschedular2">
                     <div class="col-md-3">
                         <div class="backwhite">
                             <!-- <h1>Examinations</h1> -->
@@ -164,81 +167,70 @@
                                     <div class="jumbotron">
 
                                         <h2 align="center">Students Attendance Daily Report</h2>
-                                        <ul>
-
-                                            <li>
-                                                <b>School Name </b> :{{schoolDetails[0].name}}</li>
-                                            <li>
-                                                <b>Class Name</b> : {{class_name}}</li>
-                                            <li>
-                                                <b>Section Name</b> : {{section_name}}</li>
-
-                                        </ul>
-                                        <!-- <ul>
-                                      <li class="schoolimage">
-                    
-                    
-                                        <div class="tooltip">
-                                          <img style="margin-top: -70px;" ng-src="{{schoolImage}}" class="user-image" alt="User Image">
-                                         
+                                        <div class="table-responsive">
+                                            <table style="width:100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <b>School Name </b> :{{schoolDetails[0].name}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <b>Class Name</b> : {{class_name}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <b>Section Name</b> : {{section_name}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
-                    
-                                      </li>
-                    
-                                    </ul> -->
+
                                     </div>
 
                                 </div>
-
-                                <table class="table rwd-table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Name</th>
-                                            <th>Admission No</th>
-                                            <th>Roll No</th>
-                                            <th>Class</th>
-                                            <th>Gender</th>
-                                            <th>Attendance</th>
-                                            <!--<th class="pull-right">Action</th>-->
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="attendance in attData" class="editable-row">
-                                            <td>
-                                                {{$index+1}}
-                                            </td>
-                                            <td>{{attendance.first_name || 'empty' }} {{attendance.last_name || 'empty' }}
-                                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                            </td>
-                                            <td>
-                                                {{attendance.admission_no || 'empty' }}
-                                                <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
+                                <div class="table-responsive">
+                                    <table style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Admission No</th>
+                                                <th>Roll No</th>
+                                                <th>Class</th>
+                                                <th>Gender</th>
+                                                <th>Attendance</th>
+                                                <!--<th class="pull-right">Action</th>-->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="attendance in attData" class="editable-row">
+                                                <td>
+                                                    {{$index+1}}
+                                                </td>
+                                                <td>{{attendance.first_name || 'empty' }} {{attendance.last_name || 'empty' }}
+                                                    <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                                                </td>
+                                                <td>
+                                                    {{attendance.admission_no || 'empty' }}
+                                                    <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
                                                     {{busRoute.vehicle_code}}</span>-->
-                                            </td>
-                                            <td>{{attendance.roll_no || 'empty' }}
-                                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                            </td>
-                                            <td>{{attendance.class_name || 'empty' }} ({{attendance.section_name || 'empty' }})</td>
-                                            <td>{{attendance.gender || 'empty' }}</td>
-                                            <td>{{attendance.status || 'empty' }}
-                                                <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                            </td>
-                                            <!--<td class="pull-right">
-                                                    <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == busRoute">
-                                                        <button type="submit" ng-click="EditBusRoute($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
-                                                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
-                                                    </form>
+                                                </td>
+                                                <td>{{attendance.roll_no || 'empty' }}
+                                                    <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                                                </td>
+                                                <td>{{attendance.class_name || 'empty' }} ({{attendance.section_name || 'empty'
+                                                    }})
+                                                </td>
+                                                <td>{{attendance.gender || 'empty' }}</td>
+                                                <td>{{attendance.status || 'empty' }}
+                                                    <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                                                </td>
 
-                                                    <div class="buttons" ng-show="!rowform.$visible">
-                                                        <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
-                                                        <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBusRoute($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                                        <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
-                                            <!--</div>
-                                                </td>-->
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
                             </div>
                         </div>
@@ -259,7 +251,7 @@
                                     </div>
                                 </div>
                                 <div class="box-body" pdf-save-content="idOneGraph">
-                                    <div class="chart" style="margin-left:130px">
+                                    <div class="chart">
                                         <zingchart id="myChart" zc-values="chartdata" zc-json="myJson" zc-height=400 zc-width=100%></zingchart>
                                     </div>
 
@@ -272,28 +264,6 @@
 
 
 
-                        <!-- <div class="box box-success" style="margin-top:10px">
-
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Donut Chart</h3>
-
-                                <div class="box-tools pull-right">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-box-tool" data-widget="remove">
-                                        <i class="fa fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="box-body" pdf-save-content="idOneGraph">
-                                <div class="chart" style="margin-left:130px">
-                                    <zingchart id="myChart" zc-values="chartdata" zc-json="myJson" zc-height=400 zc-width=100%></zingchart>
-                                </div>
-
-                            </div>
-
-                        </div> -->
 
                     </div>
 
@@ -304,18 +274,17 @@
     <div class="tab-pane no-padding" id="tab_2">
         <div class="container">
             <div class="row">
-                <div class="Examschedular">
+                <div class="Examschedular2">
                     <div class="col-md-3">
                         <div class="backwhite">
-                            <!-- <h1>Examinations</h1> -->
+
 
 
                             <div class="form-group" ng-show="showRole(['admin','teacher'])">
                                 <label>Select Class</label>
                                 <select class="form-control select2" name="classId" data-ng-change="populateSections(classId)" style="width: 100%;" ng-model="classId"
                                     ng-options="classData.class_id as classData.name for classData in classDatanew ">
-                                    <!--<option selected="selected">--Select--</option>
-                       <option ng-repeat="class in classDatanew" value="{{class.class_id}}">{{class.name}}</option>-->
+
                                 </select>
                             </div>
 
@@ -323,32 +292,25 @@
                                 <label>Select Section</label>
                                 <select class="form-control select2" name="sectionId" data-ng-change="getStudentValue(secId)" style="width: 100%;" ng-model="secId"
                                     ng-options="sectionData.section_id as sectionData.name for sectionData in secData ">
-                                    <!--<option selected="selected">--Select--</option>
-                       <option ng-repeat="sec in secData" value="{{sec.section_id}}">{{sec.name}}</option>-->
+
 
                                 </select>
                             </div>
 
 
 
-                            <!-- <div class="form-group" ng-show="showRole(['admin','teacher'])">
-                                <label>Select Student</label>
-                                <select class="form-control select2" style="width: 100%;" ng-model="studentId" ng-options="studentData.student_id as studentData.first_name for studentData in students ">
-                                    
-                                </select>
-                            </div> -->
 
                             <div class="form-group">
-                                    <label>Select Month</label>
-                                    <select name="month" class="form-control select2" style="width: 100%;" ng-model="select_month" ng-options="monthData.id as monthData.name for monthData in months ">
-                                        <!--<option selected="selected">--Select--</option>
-                                        <option ng-repeat="month in months " value="{{month.id}}">{{month.name}}</option>-->
-                                    </select>
-                                </div>
+                                <label>Select Month</label>
+                                <select name="month" class="form-control select2" style="width: 100%;" ng-model="select_month" ng-options="monthData.id as monthData.name for monthData in months ">
+
+                                </select>
+                            </div>
 
 
                             <div class="box-footer">
-                                <button ng-show="showRole(['admin','teacher'])" type="submit" ng-click="getAttendenceByDay(select_date,classId,secId)" class="btn btn-primary pull-right">Select</button>
+                                <button ng-show="showRole(['admin','teacher'])" type="submit" ng-click="getAttendenceMonthBySection(select_month,secId)"
+                                    class="btn btn-primary pull-right">Select</button>
                                 <button ng-show="showRole(['parent'])" type="submit" ng-click="getAttendenceByDayStudent(select_date,student.student_id);"
                                     class="btn btn-primary pull-right">Select</button>
                             </div>
@@ -359,108 +321,94 @@
 
 
                     <div class="col-md-9">
-                            <div class="backwhite">
-                                    <div class="subjectlist">
-                                        <div class="col-md-12">
-        
-                                            <div class="col-xs-3 col-md-4">
-        
-                                                <div class="tooltip">
-                                                    <button>
-                                                        <img src="../../../dist/img/images/pdf.jpg" ng-click="generatePDF();" class="img-responsive" width="30" height="30" alt="Responsive image">
-                                                    </button>
-                                                    <span ng-hide="pdf" class="tooltiptext">Download file</span>
-                                                    <span ng-show="pdf" class="tooltiptext">Downloading....</span>
-        
-                                                </div>
-                                                <p>Attendance List</p>
-                                            </div>
-        
+                        <div class="backwhite">
+                            <div class="subjectlist">
+                                <div class="col-md-12">
+
+                                    <div class="col-xs-3 col-md-4">
+
+                                        <div class="tooltip">
+                                            <button>
+                                                <img src="../../../dist/img/images/pdf.jpg" ng-click="generatePDFSection();" class="img-responsive" width="30" height="30"
+                                                    alt="Responsive image">
+                                            </button>
+                                            <span ng-hide="pdf" class="tooltiptext">Download file</span>
+                                            <span ng-show="pdf" class="tooltiptext">Downloading....</span>
+
                                         </div>
+                                        <p>Attendance List</p>
                                     </div>
-                                    <div id="exportthis">
-                                        <div ng-show="pdf">
-                                            <div class="jumbotron">
-        
-                                                <h2 align="center">Students Attendance Daily Report</h2>
-                                                <ul>
-        
-                                                    <li>
-                                                        <b>School Name </b> :{{schoolDetails[0].name}}</li>
-                                                    <li>
-                                                        <b>Class Name</b> : {{class_name}}</li>
-                                                    <li>
-                                                        <b>Section Name</b> : {{section_name}}</li>
-        
-                                                </ul>
-                                                <!-- <ul>
-                                              <li class="schoolimage">
-                            
-                            
-                                                <div class="tooltip">
-                                                  <img style="margin-top: -70px;" ng-src="{{schoolImage}}" class="user-image" alt="User Image">
-                                                 
-                                                </div>
-                            
-                                              </li>
-                            
-                                            </ul> -->
-                                            </div>
-        
-                                        </div>
-        
-                                        <table class="table rwd-table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Name</th>
-                                                    <th>Admission No</th>
-                                                    <th>Roll No</th>
-                                                    <th>Class</th>
-                                                    <th>Gender</th>
-                                                    <th>Attendance</th>
-                                                    <!--<th class="pull-right">Action</th>-->
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr ng-repeat="attendance in attData" class="editable-row">
-                                                    <td>
-                                                        {{$index+1}}
-                                                    </td>
-                                                    <td>{{attendance.first_name || 'empty' }} {{attendance.last_name || 'empty' }}
-                                                        <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                                    </td>
-                                                    <td>
-                                                        {{attendance.admission_no || 'empty' }}
-                                                        <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
-                                                            {{busRoute.vehicle_code}}</span>-->
-                                                    </td>
-                                                    <td>{{attendance.roll_no || 'empty' }}
-                                                        <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                                    </td>
-                                                    <td>{{attendance.class_name || 'empty' }} ({{attendance.section_name || 'empty' }})</td>
-                                                    <td>{{attendance.gender || 'empty' }}</td>
-                                                    <td>{{attendance.status || 'empty' }}
-                                                        <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                                                    </td>
-                                                    <!--<td class="pull-right">
-                                                            <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == busRoute">
-                                                                <button type="submit" ng-click="EditBusRoute($index)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
-                                                                <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
-                                                            </form>
-        
-                                                            <div class="buttons" ng-show="!rowform.$visible">
-                                                                <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button>
-                                                                <button class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteBusRoute($index)" ng-confirm-click="Are you sure you want to delete this item?"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                                                <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
-                                                    <!--</div>
-                                                        </td>-->
-                                                </tr>
-                                            </tbody>
-                                        </table>
-        
-                                    </div>
+
                                 </div>
+                            </div>
+                            <div id="exportthissection">
+                                <div ng-show="pdf">
+                                    <div class="jumbotron">
+
+                                        <h2 align="center">Students Attendance Daily Report</h2>
+                                        <div class="table-responsive">
+                                            <table style="width:100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <b>School Name </b> :{{schoolDetails[0].name}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <b>Class Name</b> : {{class_name}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <b>Section Name</b> : {{section_name}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+
+                                                <th>Attendance</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody ng-repeat="attendance in attDataMonth">
+                                            <tr ng-repeat="attendance in attendance.StudentAttendanceReport" class="editable-row">
+                                                <td>
+                                                    {{$index+1}}
+                                                </td>
+                                                <td>{{attendance.Name || 'empty' }}
+
+                                                </td>
+
+                                                <td>
+                                                    <div class="progress">
+                                                        <div class="progress-bar progress-bar-success" ng-style="{width:(attendance.attendance.presentPercent)}">
+                                                            P:{{attendance.attendance.present}}/{{attendance.count}}
+                                                        </div>
+                                                        <div class="progress-bar progress-bar-warning" ng-style="{width:(attendance.attendance.onLeavePercent)}">
+                                                            L:{{attendance.attendance.onLeave}}/{{attendance.count}}
+                                                        </div>
+                                                        <div class="progress-bar progress-bar-danger" ng-style="{width:(attendance.attendance.absentPercent)}">
+                                                            A:{{attendance.attendance.absent}}/{{attendance.count}}
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                         <div class="backwhite">
                             <div class="box box-success" style="margin-top:10px">
 
@@ -477,8 +425,8 @@
                                     </div>
                                 </div>
                                 <div class="box-body" pdf-save-content="idOneGraph">
-                                    <div class="chart" style="margin-left:130px">
-                                        <zingchart id="myChart" zc-values="chartdata" zc-json="myJson" zc-height=400 zc-width=100%></zingchart>
+                                    <div class="chart" >
+                                        <zingchart id="myChartMonth" zc-values="chartdataMonth" zc-json="myJsonMonth" zc-height=400 zc-width=100%></zingchart>
                                     </div>
 
                                 </div>

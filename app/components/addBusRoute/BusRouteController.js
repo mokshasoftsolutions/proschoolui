@@ -80,40 +80,10 @@ angular.module('school_erp')
 
     }
 
-    // $scope.conformDelete= function(){
-    //      ngDialog.open({
-    //                 template: '<p>Are you sure you want to delete this item?</p>',
-    //                 plain: true
-    //             });
-
-    // }
+ 
 
 
 
-    // $scope.addTime = function (data) {
-    //     var TimeDetails = {
-    //         pickup_time: $scope.data.pickup_time,
-    //         dropping_time: $scope.data.dropping_time
-    //     }
-
-
-    //     BusRouteServices.setTime(TimeDetails, $scope.routeId, $scope.stationId)
-    //         .success(function (data, status) {
-    //             ngDialog.open({
-    //                 template: '<p> BusRoutes are Added Successfully.</p>',
-    //                 plain: true
-    //             });
-    //             $scope.data = [];
-    //             $scope.getBusRoute();
-    //         })
-    //         .error(function (data, success) {
-    //             ngDialog.open({
-    //                 template: '<p>Some Error Occured!</p>',
-    //                 plain: true
-    //             });
-    //         })
-
-    // }
 
     $scope.showRole = function (role) {
         return globalServices.fetchRoleAuth(role);
@@ -212,16 +182,6 @@ angular.module('school_erp')
                 console.log($scope.busRoutesToStation[0].bus_route_id);
 
 
-                //     $scope.stationList = [];
-                //    //
-
-                //     $scope.busRoutesToStation.forEach(function (item) {
-                //         // $scope.stations = item.stations;
-                //         $scope.stationList.push(item.stations);
-
-                //     })
-                //     console.log($scope.stationList);
-              //  $scope.routeId = $scope.busRoutes[0].route_id;
             })
             .error(function (data, success) {
             })
@@ -296,49 +256,7 @@ angular.module('school_erp')
             })
     }
 
-    // // $scope.editdata = angular.copy($scope.data[value]);
-    // $scope.EditBusRouteToStation = function (value, busRoutes) {
-
-    //     console.log("messsage");
-    //     $scope.busRoutes = angular.copy($scope.busRoutesToStation[value]);
-    //     var BusRoutDetails = {
-    //         station: $scope.busRoutes.station_name,
-    //         pickup_time: $scope.busRoutes.pickup_time,
-    //         drop_time: $scope.busRoutes.drop_time
-    //     }
-    //     console.log(BusRoutDetails);
-    //     $scope.busRoute_id = $scope.busRoutes.bus_route_id;
-    //     console.log($scope.busRoute_id);
-    //     $scope.stations_name=$scope.busRoutes.station_name;
-    //     $scope.addEditBusRouteToStation(BusRoutDetails, $scope.busRoute_id, $scope.stations_name);
-    // }
-    // $scope.addEditBusRouteToStation = function (BusRoutDetails, busRoute_id,station_name) {
-    //     BusRouteServices.EditBusRouteToStation(BusRoutDetails, busRoute_id,station_name)
-    //         .success(function (data, status) {
-    //             // ngDialog.open({
-    //             //     template: '<p>Station is Edited Successfully.</p>',
-    //             //     plain: true
-    //             // });
-    //             $scope.editdata = [];
-    //             $scope.getBusRoute();
-    //             $scope.getBusRouteToStation($scope.routeId);
-    //         })
-    //         .error(function (data, success) {
-    //             ngDialog.open({
-    //                 template: '<p>Some Error Occured!</p>',
-    //                 plain: true
-    //             });
-    //         })
-
-    // }
-
-    // addStationServices.getStation()
-    // .success(function(data, status){
-    //     $scope.data = data.stations;
-    // })
-    // .error(function(data,success){
-    // });
-
+    
     $scope.getBusRoute();
     $scope.getStation();
 

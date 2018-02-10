@@ -1,5 +1,5 @@
 angular.module('school_erp')
-    .controller("dashboardController", ['$http', '$state', '$scope', '$compile', '$interval', 'studentServices', 'sessionServices', 'chaptersServices', 'employeeServices', 'examServices', 'globalServices', 'subjectsServices', 'classWiseServices', 'NoticeBoardServices', 'schoolEventsServices', 'addVehicleServices', 'barChartOneService','taskManagerServices','ngDialog', '$rootScope', 'ngProgressFactory', 'routeGeoLocationServices','messagesServices', function ($http, $state, $scope, $compile, $interval, studentServices, sessionServices, chaptersServices, employeeServices, examServices, globalServices, subjectsServices, classWiseServices, NoticeBoardServices,schoolEventsServices, addVehicleServices, barChartOneService,taskManagerServices, ngDialog, $rootScope, ngProgressFactory, routeGeoLocationServices,messagesServices) {
+    .controller("dashboardController", ['$http', '$state', '$scope', '$compile', '$interval', 'studentServices', 'sessionServices', 'chaptersServices', 'employeeServices', 'examServices', 'globalServices', 'subjectsServices', 'classWiseServices', 'NoticeBoardServices', 'schoolEventsServices', 'addVehicleServices', 'barChartOneService', 'taskManagerServices', 'ngDialog', '$rootScope', 'ngProgressFactory', 'routeGeoLocationServices', 'messagesServices', function ($http, $state, $scope, $compile, $interval, studentServices, sessionServices, chaptersServices, employeeServices, examServices, globalServices, subjectsServices, classWiseServices, NoticeBoardServices, schoolEventsServices, addVehicleServices, barChartOneService, taskManagerServices, ngDialog, $rootScope, ngProgressFactory, routeGeoLocationServices, messagesServices) {
 
         $scope.index = 'true';
         $scope.evalData = [];
@@ -11,49 +11,8 @@ angular.module('school_erp')
         $scope.isDisabled = false;
 
 
-        $scope.addQuote = function () {
-            var Details = {
-                quote: $scope.data.quote,
-                // chapter_name: $scope.data.chapter_name,
-                word: $scope.data.word,
-
-            }
-            schoolEventsServices.setQuote(Details)
-                .success(function (data, status) {
-                    ngDialog.open({
-                        template: '<p>Quote are sended.</p>',
-                        plain: true
-                    });
-                    $scope.data = [];
 
 
-
-                })
-                .error(function (data, success) {
-                })
-        }
-
-        $scope.addMessages = function (data) {
-            var Details = {
-                message: $scope.data.message,
-                subject: $scope.data.subject,
-                sent_to: $scope.data.sendto
-
-            }
-            messagesServices.setMessage(Details)
-                .success(function (data, status) {
-                    ngDialog.open({
-                        template: '<p>Quote are sended.</p>',
-                        plain: true
-                    });
-                    $scope.data = [];
-
-
-
-                })
-                .error(function (data, success) {
-                })
-        }
 
         $scope.getClassesInitalLoad = function () {
             globalServices.getClass()
@@ -65,6 +24,8 @@ angular.module('school_erp')
                     // console.log($scope.classDatanew[0].name.length);
                     // console.log($scope.classDatanew);
                     $scope.populateSections($scope.classId);
+                    $scope.totalStudents();
+                    $scope.getQuotes();
                     $scope.getTimeTableDay($scope.classId);
 
                     $scope.getAttendanceBySchool();
@@ -84,12 +45,28 @@ angular.module('school_erp')
             globalServices.getSections(classId)
                 .success(function (data, status) {
                     $scope.secData = data.class_sections; // Api list-name
+                })
+                .error(function (data, success) { })
+        }
+        $scope.totalStudents = function () {
 
+            studentServices.totalStudents()
+                .success(function (data, status) {
+                    $scope.studentCount = data.students; // Api list-name
+                    // $scope.totalStudents =$scope.studentCount[0]. 
+                })
+                .error(function (data, success) { })
+        }
 
+        $scope.getQuotes = function () {
 
-
-
-
+            schoolEventsServices.getQuote()
+                .success(function (data, status) {
+                    //  console.log(JSON.stringify(data));
+                    $scope.quotes = data.Quotes; // Api list-name
+                    // $scope.quoteforday = $scope.quotes[0].quote;
+                    // quoteWritten=$scope.quotes[0]
+                    // $scope.wordforday = $scope.quotes[0].word;
 
                 })
                 .error(function (data, success) { })
@@ -118,7 +95,7 @@ angular.module('school_erp')
             // console.log(day);
             classWiseServices.getTimeTableDay(day, class_id)
                 .success(function (data, status) {
-                     console.log(JSON.stringify(data));
+                    //console.log(JSON.stringify(data));
                     $scope.timeTableData = [];
                     $scope.timeTableDataDay = data.timetable;
 
@@ -325,12 +302,30 @@ angular.module('school_erp')
                 })
         }
 
-        $scope.getTaskByDay = function (date) {
-            taskManagerServices.getTaskByDay(date)
+        $scope.getTaskManager = function () {
+            taskManagerServices.getTaskManager()
                 .success(function (data, status) {
-                       console.log("tasks..................");
-                console.log(JSON.stringify(data));
-                     $scope.taskData = data.tasks;
+                    // console.log("tasks..................");
+                    //  console.log(JSON.stringify(data));
+                    $scope.taskDataStatus = data.tasks;
+                    $scope.taskData = [];
+                    index = 0;
+                    angular.forEach($scope.taskDataStatus, function (element) {
+                        if (element.status = 'pending') {
+                            var obj = {
+                                id: index++,
+                                task_id: element.task_id,
+                                task: element.task,
+                                department: element.department,
+                                assigned_to: element.assigned_to,
+                                priority: element.priority,
+                                assigned_on: element.assigned_on,
+                                status: element.status
+
+                            }
+                            $scope.taskData.push(obj);
+                        }
+                    })
 
                     // $scope.schoolsection = $scope.schoolAttData[0][0].className;
                     // //console.log($scope.schoolsection);
@@ -599,13 +594,17 @@ angular.module('school_erp')
 
         schoolEventsServices.getEvents()
             .success(function (data, status) {
-                // console.log(JSON.stringify(data));
+                console.log(JSON.stringify(data));
                 // $scope.eventData = data.school_events;
 
                 angular.forEach(data.school_events, function (value, key) {
 
 
                     $scope.eventsData.push({
+                        // title: 'Birthday Party',
+                        // start: new Date(y, m, d + 1, 19, 0),
+                        // end: new Date(y, m, d + 1, 22, 30),
+                        // allDay: false
                         title: value.event_title,
                         start: new Date(value.date),
                         end: new Date(value.date),
@@ -624,7 +623,7 @@ angular.module('school_erp')
         var m = date.getMonth();
         var y = date.getFullYear();
 
-        $scope.changeTo = 'Hungarian';
+        // $scope.changeTo = 'Hungarian';
 
         $scope.eventsF = function (start, end, timezone, callback) {
 
@@ -681,7 +680,7 @@ angular.module('school_erp')
         /* config object */
         $scope.uiConfig = {
             calendar: {
-                height: 450,
+                height: 340,
                 editable: true,
                 header: {
                     left: 'title',
@@ -2013,7 +2012,7 @@ angular.module('school_erp')
             $scope.getAttedanceByCategoryTeaching();
             $scope.getAttedanceByCategoryNonTeaching();
             $scope.getAttedanceByCategoryAdmin();
-            $scope.getTaskByDay($scope.select_date);
+            $scope.getTaskManager();
 
             // $scope.getAttendanceBySchool();
 

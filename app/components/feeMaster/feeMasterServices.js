@@ -9,6 +9,19 @@ angular.module('school_erp')
                 })
     };
 
+    feeMasterServices.getFeeMasterById = function(fee_type_id,classId){
+        return $http({
+                    method: 'GET',
+                    url: globalServices.globalValue.baseURL + 'api/fee_amount_by_fee_type/'+fee_type_id+'/'+classId
+                })
+    };
+    feeMasterServices.getFeeTypeByClassId = function(class_id){
+        return $http({
+                    method: 'GET',
+                    url: globalServices.globalValue.baseURL + 'api/feeTypes_by_classId/'+class_id
+                })
+    };
+
      feeMasterServices.setFeeMaster = function(dataValue){
        //  console.log(dataValue);
         return $http({

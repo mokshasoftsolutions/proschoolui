@@ -114,6 +114,13 @@ angular.module('school_erp')
             })
         };
        
+        employeeService.getAttendenceMonthByEmployee = function (month) {
+            return $http({
+                method: 'GET',
+                // url: "http://192.168.1.13:4005/api/examevaluation/3/2347/34/45"
+                url: globalServices.globalValue.baseURL + 'api/employee_monthly_attendence/' + month + '/' + globalServices.globalValue.school_id
+            })
+        };
         employeeService.getAttedanceByCategory = function (teaching, date) {
             return $http({
                 method: 'GET',

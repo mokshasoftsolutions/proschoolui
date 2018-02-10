@@ -9,7 +9,10 @@
         <a ui-sref='main.feeMaster'>FeeMaster</a>
       </li>
       <li>/
-        <a ui-sref='main.collectFee'>CollectFee</a>
+        <a ui-sref='main.collectFee'>Fee</a>
+      </li>
+      <li>/
+        <a ui-sref='main.collectFeeReports'>Fee Reports</a>
       </li>
 
     </ul>
@@ -57,8 +60,8 @@
 
             </div>
           </div> -->
-
-          <table export-table st-table="display_records" st-safe-src="feeTypeData" class="table rwd-table table-striped" style="width:100%">
+          <div class="table-responsive">
+          <table export-table st-table="display_records" st-safe-src="feeTypeData"  style="width:100%">
             <thead>
               <tr>
                 <th>Sl. No</th>
@@ -113,6 +116,7 @@
               </tr>
             </tfoot>
           </table>
+          </div>
         </div>
       </div>
 

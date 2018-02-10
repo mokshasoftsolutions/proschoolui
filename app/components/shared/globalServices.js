@@ -10,7 +10,7 @@ angular.module('school_erp')
         // };
 
         globalServices.globalValue = {
-            baseURL: 'http://192.168.1.2:4005/',
+            baseURL: 'http://192.168.1.3:4005/',
             schoolID: '',
             role: 'admin'
         }

@@ -69,31 +69,13 @@
 
                             </form>
 
-                            <!-- <form name="BusRoute" ng-submit="BusRoute.$valid && addBusRoute(data)" novalidate>
-                                <div class="form-group" ng-class="{'has-error': BusRoute.$submitted  && BusRoute.title.$pristine}">
-                                    <label>Route Title</label>
-                                    <input name="title" ng-model="data.route_title" type="text" class="form-control" placeholder="Enter ...">
-                                </div>
-                                <div class="form-group" ng-class="{'has-error': BusRoute.$submitted  && BusRoute.vehicle.$pristine}">
-                                    <label>Vehicle</label>
-                                    <select name="vehicle" ng-change="getBusRoute(data.vehicle_code);" ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles"
-                                        class="form-control select2" ng-model="data.vehicle_code" style="width: 100%;">
-                                        <option selected value="">--Select--</option>
-                                    </select>
-                                </div>
-                                <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e;">Add Bus Route </button>
-                                </div>
-
-
-                             
-                            </form> -->
                         </div>
                     </div>
                     <div class="col-md-9">
                         <div class="backwhite">
                             <h1>Station List</h1>
-                            <table export-table st-table="display_records1" st-safe-src="busRoutes" class="table rwd-table table-striped" style="width:100%">
+                            <div class="table-responsive">
+                            <table export-table st-table="display_records1" st-safe-src="busRoutes"  style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -146,6 +128,7 @@
                                     </tr>
                                 </tfoot>
                             </table>
+</div>
 
 
 
@@ -209,7 +192,7 @@
                         <div class="backwhite">
                             <h1>Station List</h1>
                             <div class="table-responsive mailbox-messages" ng-repeat="busRoute in busRoutesToStation">
-                                <table export-table class="table rwd-table table-striped">
+                                <table export-table style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -242,10 +225,7 @@
                                             </td>
 
                                             <td class="pull-right">
-                                                <!-- <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == busRoutes">
-                                                        <button type="submit" ng-click="EditBusRouteToStation($index,busRoutes)" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs"><i class="fa fa-check"></i></button>
-                                                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs"><i class="fa fa-remove"></i></button>
-                                                    </form> -->
+                                              
 
                                                 <div class="buttons" ng-show="showRole(['admin'])" ng-show="!rowform.$visible">
                                                     <!-- <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></button> -->

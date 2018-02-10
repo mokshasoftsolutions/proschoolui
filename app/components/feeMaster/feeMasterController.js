@@ -44,7 +44,9 @@ angular.module('school_erp')
                             class_name: element.class_name,
                             fee_type: element.fee_type,
                             fee_amount: element.fee_amount,
-                            fee_category: element.fee_doc[0].fee_category,
+                            fee_category: element.fee_category,
+                            due_date:element.due_date,
+                            class_id:element.class_id
                            
                            
 
@@ -63,11 +65,13 @@ angular.module('school_erp')
         $scope.addFeeMaster = function (data) {
             //    console.log("message");
             var FeeMasterDetails = {
-                class_name: $scope.data.class_name,
-                fee_type: $scope.data.fee_type,
-                fee_amount: $scope.data.amount
+                class_id: $scope.data.class_id,
+                fee_types_id: $scope.data.fee_type,
+                fee_amount: $scope.data.amount,
+                due_date:$scope.data.due_date
 
             }
+            console.log(FeeMasterDetails);
             feeMasterServices.setFeeMaster(FeeMasterDetails)
                 .success(function (data, status) {
                     ngDialog.open({

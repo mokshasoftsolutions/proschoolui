@@ -136,6 +136,15 @@ angular.module('school_erp')
                 }
             })
 
+            .state('main.sentbox', { // login Page
+                url: "sentbox",
+                templateUrl: "app/components/sentBox/sentBox.html",
+                controller: "sentBoxController",
+                data: {
+                    requireLogin: true
+                }
+            })
+
             .state('main.schoolProfile', { // login Page
                 url: "schoolProfile",
                 templateUrl: "app/components/schoolProfile/schoolProfile.html",
@@ -144,14 +153,14 @@ angular.module('school_erp')
                     requireLogin: true
                 }
             })
-            // .state('main.schoolInformation', {
-            //     url: "schoolInformation",
-            //     templateUrl: "app/components/schoolProfile/schoolInformation.html",
-            //     controller:"schoolInformationController",
-            //     date: {
-            //         requireLogin: true
-            //     }
-            // })
+            .state('main.quote', {
+                url: "quote",
+                templateUrl: "app/components/addWord/word.html",
+                controller:"addWordController",
+                date: {
+                    requireLogin: true
+                }
+            })
 
             .state('main.studentProfile', { // login Page
                 url: "student/studentProfile/:student",
@@ -443,10 +452,10 @@ angular.module('school_erp')
                 }
             })
 
-            .state('main.collectFee2', { // login Page
-                url: "fee/collectFee2",
-                templateUrl: "app/components/collectFee2/collectFee2.html",
-                controller: "collectFee2Controller",
+            .state('main.collectFeeReports', { // login Page
+                url: "fee/collectFeeReports",
+                templateUrl: "app/components/collectFeeReports/collectFeeReports.html",
+                controller: "collectFeeReportsController",
                 data: {
                     requireLogin: true
                 }

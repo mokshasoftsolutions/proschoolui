@@ -14,7 +14,7 @@
 }
 /*top navigation*/
 
-/*======headerstyles=======*/
+
 /*======headerstyles=======*/
 body,html,.content-wrapper{
 	margin:0px;
@@ -27,6 +27,7 @@ body,html,.content-wrapper{
 }
 /*.content-wrapper{background-image: url('../../../dist/img/images/background.jpg');background-blend-mode:screen;}*/
 body h1{font-size: 23px;}
+/* .container .col-md-12 .col-md-9{margin-bottom: 100px;} */
 body .container p{font-size: 23px;}
 div.logo img{ width:200px; }
 header .logo,.year,.Date,.logout{ display: inline-block; }
@@ -35,9 +36,7 @@ header .textright{float:right;padding-top: 25px;}
 header .textright .year,.Date,.logout{padding: 0 10px;}
 .student_link .links li{ display: inline-block; }
 .links li{ display: inline-block; }
-.links li> a {
-	color:white;
-}
+.links li> a {color:white;}
 .student_link {
 	width:700px;
 	height:200px;
@@ -93,21 +92,110 @@ div.background div.container .links li>a{color:black;}
 
 /*=====================container styles======================*/
 
-.container{width:1200px;height:auto;margin: 0 auto;/*top:-120px;*/margin-top: 31px;}
+.container{width:1200px;height:auto;margin: 0 auto; margin-bottom: 10%;/*top:-120px;*/margin-top: 31px;}
 
-/*======================== student Acadamics =====================*/
 
-div.acadamicreport {height: 1100px;background-color: white; border: 2px solid red;border-radius: 10px;}
-.acadamicreport .col-md-12 .backwhite {height: 220px;padding-top: 25px;background-color: grey;border-radius: 10px;margin:15px;}
-.acadamicreport .col-md-12 .backwhite .col-md-4 h1{margin: 0px;}
-.acadamicreport .col-md-12 .backwhite  div#photo.col-md-4{height: 175px;}
-.acadamicreport .col-md-12 .backwhite  div#photo.col-md-4 .studentimage {height:160px;}
-.acadamicreport .col-md-12 .backwhite div#photo.col-md-4 .studentimage img{width:200px;height: 150px;border-radius: 5px;}
+/*==========popupstyles for logout======*/
+   #tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+#tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    /* bottom: 125%; */
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+#tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom:100%;
+    left: 60%;
+    margin-left: -10px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+#tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+
+
+/*==============employeeattendancestyles================*/
+
+    .Examschedular div.chart{left: 76px;} 
+
+    @media screen and (max-width: 425px) {
+         .Examschedular div.chart{left: 0px;} 
+         .Examschedular div.chart div#myChartMonth-wrapper{right:139px;}
+
+}
+
+@media screen and (max-width: 375px) {
+       .Examschedular div.chart div#myChartMonth-wrapper{right:165px;}
+
+}
+@media screen and (max-width: 320px) {
+        .Examschedular div.chart div#myChartMonth-wrapper{right:192px;}
+
+}
+
+/*==================paybands============*/
+.Salary .col-md-12 .backwhite{ height:100px;border:1px solid black;border-radius: 10px;}
+ .allowances .col-md-12 .backwhite{height:180px;border:1px solid black;border-radius: 10px;}
+ .allowtable .col-md-12 .backwhite{height:60px;}
+ .allowtable .col-md-12 .backwhite .table-responsive{margin-bottom: 100px;border:1px solid black;border-radius: 10px;}
+ .allowtable .col-md-12{margin-top: 20px;}
+ .allowtable .col-md-12 .backwhite{margin-bottom: 100px;}
+ @media screen and (max-width: 768px) {
+    .Salary .col-md-12 .backwhite{ height:200px;}
+     .allowances .col-md-12 .backwhite{height:350px;}
+
+}
+
+
+
+
+
+/*=======messagestyles====*/
+div.msgbox div.col-md-12 .backwhite{border:1px solid black;border-radius: 10px;}
+/*=============studentprofileacadamicreport==========*/
+div.acadamicreportstudentprofile {height: 1100px;background-color: white; border: 2px solid red;border-radius: 10px;}
+.acadamicreportstudentprofile .col-md-12 .backwhite {height: 220px;padding-top: 25px;background-color: grey;border-radius: 10px;margin:15px;}
+.acadamicreportstudentprofile .col-md-12 .backwhite .col-md-4 h1{margin: 0px;}
+.acadamicreportstudentprofile .col-md-12 .backwhite  div#photo.col-md-4{height: 175px;}
+.acadamicreportstudentprofile .col-md-12 .backwhite  div#photo.col-md-4 .studentimage {height:160px;}
+.acadamicreportstudentprofile .col-md-12 .backwhite div#photo.col-md-4 .studentimage img{width:200px;height: 150px;border-radius: 5px;}
 .studentimage{width:100%;}
-.acadamicreport .col-md-12 h1{font-style: italic;font-size: x-large;color: red; margin: 0px;}
-.acadamicreport .col-md-12 .formative {height: 230px;background-color: cadetblue;margin: 15px;border-radius: 10px;}
-.acadamicreport .col-md-12 .formative .table-responsive{border: 0px;}
-.acadamicreport .col-md-12 .summative {height: 195px;background-color: darksalmon;margin: 15px;border-radius: 10px;}
+.acadamicreportstudentprofile .col-md-12 h1{font-style: italic;font-size: x-large;color: red; margin: 0px;}
+.acadamicreportstudentprofile .col-md-12 .formative {height: 230px;background-color: cadetblue;margin: 15px;border-radius: 10px;}
+.acadamicreportstudentprofile .col-md-12 .formative .table-responsive{border: 0px;}
+.acadamicreportstudentprofile .col-md-12 .summative {height: 195px;background-color: darksalmon;margin: 15px;border-radius: 10px;}
+
+/* @media screen and (max-width: 768px) {
+/* .acadamicreportstudentprofile div.col-md-12 div.backwhite div#stuinfor.col-md-4{margin-top: 115px;} */
+   /* .acadamicreportstudentprofile div#first12.col-md-12 .backwhite{height:430px;} */
+
+ */
+
 
 /*==============attendence styles==========*/
 
@@ -194,38 +282,27 @@ span.glyphicon.glyphicon-th{padding-bottom: 6px;}
 	transform: scaleX(1);
 }
 
-
-
-/*============schoolProfile===========*/
-/* div.Registration {height: 600px;background-color: darkgrey;}
-.schoolimage {height:125px;}
-.schoolimage img{width:100px;height: 100px;margin-right: 40px;margin-top: 20px;}
-.schoolimage{width:100%;}
-.tooltip{float:right;}
-.Registration div.table-responsive{overflow-x: hidden;}
-.Registration div.table-responsive table.table.table-bordered{border-collapse: separate;}
-.container h1{margin-top: 30px;} */
-
-
-
 /*==============studentinformation styles============*/
 
 .studentinfo{margin:0 auto;height:500px;}
-.studentinfo .col-md-3 div.form-group{width:250px;}
+/*.studentinfo .col-md-3 div.form-group{width:250px;}*/
 .studentinfo .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;margin-top: 0px;padding:10px;}
 .studentinfo .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;margin-left: 13px;padding:10px; }
-.studentinfo .row .col-md-3 div.form-group{display: inline-block;}
+/*.studentinfo .row .col-md-3 div.form-group{display: inline-block;}*/
 
 .studentinfo .col-md-9 table tbody tr th{width:90px;text-align: center;}
-.studentinfo .col-md-3 div.form-group input{width:250px;height:30px;border-radius: 5px;}
+.studentinfo .col-md-3 div.form-group input{height:30px;border-radius: 5px;}
 .studentinfo button.search{color:white;border-radius: 5px;margin-bottom: 20px;}
+@media screen and (max-width: 768px) {
+.studentinfo .col-md-9 {margin-bottom: 90px;}
+}
 
 /*================studentadmissionstyles=============*/
 
 .Admission{margin:0 auto;height:1300px;margin-bottom: 800px;}
 .Admission .col-md-12{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 10px;}
 .studentadmission {height:350px;}
-.parentdetails{height:400px;} 
+/* .parentdetails{height:400px;}  */
 .parentdetails .col-md-3{top:-60px;}
 .Studentaddress{padding-left: 10px;}
 .uploaddocuments .title,.title2{display:inline-block;width:500px;}
@@ -233,14 +310,12 @@ span.glyphicon.glyphicon-th{padding-bottom: 6px;}
 .uploaddocuments div.col-md-6 .title2 section .input,.button{display:inline-block;}
 .uploaddocuments div.col-md-6 .title2 section {margin-bottom: 20px;}
 .uploaddocuments div.col-md-6 .title1 section {margin-bottom: 20px;}
+@media screen and (max-width: 768px) {
+      .Admission .col-md-12{height:2980px;}
+}
 
-/*============staffempprofile====*/
-div.staffemppro .col-md-12 #emppic img{width:180px;position: absolute;top:25px;border-radius: 10px;}
-div.staffemppro .col-md-12 #emppic img.double{border-style: double;}
-div.staffempprodetails .col-md-12{background-color: white;}
-div.staffempprodetails .col-md-12 .col-md-6 table.table.table-bordered thead tr th{color: crimson;}
-div.staffemppro .col-md-12 {background-color: #aae0b3;margin-bottom: 80px;border-radius: 10px;}
-div.staffemppro .col-md-12 #empinfo.col-md-3{right: 80px;}
+
+
 
 /*===================staffdetailsstyles=============*/
 
@@ -249,6 +324,7 @@ div.staffemppro .col-md-12 #empinfo.col-md-3{right: 80px;}
 .staffdetails{margin:0 auto;height:500px;}
 
 /*=====================staffemployment================*/
+
 .staffemployment div.col-md-12{margin-bottom: 90px;}
 .staffemployment div.col-md-12 div.col-xs-3.col-md-4{width:100%;}
 .staffemployment div.col-md-12 .tooltip{float:right;padding:0 8px;}
@@ -261,21 +337,42 @@ div.staffemppro .col-md-12 #empinfo.col-md-3{right: 80px;}
 div.staffemppro .col-md-12 #emppic img{width:150px;position: absolute;top:25px;border-radius: 10px;}
 div.staffemppro .col-md-12 #emppic img.double{border-style: double;}
 div.staffempprodetails .col-md-12{background-color: white;}
+div.staffempprodetails div#professional.col-md-12{margin-bottom: 100px;}
 div.staffempprodetails .col-md-12 .col-md-6 table.table.table-bordered thead tr th{color: crimson;}
 div.staffemppro .col-md-12 {margin-bottom: 80px;border-radius: 10px;}
-div.staffemppro .col-md-12 #empinfo.col-md-3{right: 80px;}
+div.staffemppro .col-md-12 #empinfo.col-md-3{right: 80px;text-align: center;padding-left: 50px;}
 
+div.staffemppro .col-md-12 {background-color: #aae0b3;margin-bottom: 80px;border-radius: 10px;}
+@media screen and (max-width: 425px) {
+    div.staffemppro .col-md-12 #empinfo.col-md-3{right:0px;text-align: right;padding-left: 140px;}
+    } 
+  @media screen and (max-width: 375px) {
+    div.staffemppro .col-md-12 #empinfo.col-md-3{right:0px;text-align: right;padding-left: 160px;}
+    } 
+  @media screen and (max-width: 320px) {
+    div.staffemppro .col-md-12 #empinfo.col-md-3{right:0px;text-align: right;padding-left: 170px;}
+    } 
 /*====================Task Manager================*/
 
-/* .Assignments .col-md-4 {border:1px solid blue;border-radius: 10px;} 
+/*.Assignments .col-md-4 {border:1px solid blue;border-radius: 10px;} 
 .Assignments .col-md-8 .backwhite {border:1px solid blue;border-radius: 10px;} */
+
 /*===================student attandancereport=============*/
 .Studentatt{height: 1000px;}
 .Studentatt .col-md-3 .backwhite {height: 200px;border:1px solid blue;border-radius:10px;}
 .Studentatt .col-md-3 .backwhite .form-group {margin-bottom: 0px;padding: 10px;}
 .Studentatt .col-md-3 .backwhite .form-group button.btn.btn-primary.pull-right{margin-top:30px;} 
 .Studentatt .col-md-9 .backwhite {border:1px solid blue;border-radius:10px;padding:10px;}
-.Studentatt .col-md-12 div#chart.col-md-9{margin-left:300px;margin-top:20px;}
+/* .Studentatt .col-md-12 div#chart.col-md-9{margin-left:300px;margin-top:20px;} */
+@media screen and (max-width: 425px) {
+   .Studentatt div.chart div#myChartMonth-wrapper {right:156px;}
+    } 
+@media screen and (max-width: 375px) {
+    .Studentatt div.chart div#myChartMonth-wrapper {right:184px;}
+}
+@media screen and (max-width: 320px) {
+   .Studentatt div.chart div#myChartMonth-wrapper {right:204px;}
+}
 
 /*=================Studentattendance=============*/
 
@@ -283,12 +380,52 @@ div.staffemppro .col-md-12 #empinfo.col-md-3{right: 80px;}
 .studentattendance .col-md-3 div.form-group input{border:1px solid lightgrey;border-radius: 2px;border:1px solid lightgrey;}
 .studentattendance .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
 .studentattendance .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;}
+.studentattendance .col-md-9 .backwhite .rollno div.hvr-bounce-in.transition{background-color: #7777e0;}
 
 /*==================Employee Attendance====================*/
 
 .employeeattendance{margin:0 auto;height:500px;}
 .employeeattendance .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
 .employeeattendance .col-md-12 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;}
+@media screen and (max-width: 425px) {
+   .Studentatt div.chart div#myChartMonth-wrapper {right:156px;}
+    } 
+@media screen and (max-width: 375px) {
+    .Studentatt div.chart div#myChartMonth-wrapper {right:184px;}
+}
+@media screen and (max-width: 320px) {
+   .Studentatt div.chart div#myChartMonth-wrapper {right:204px;}
+}
+
+/*========employeereport=====*/
+
+.Examschedular1 div.col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;}
+.Examschedular1 div.col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-bottom: 20px;}
+@media screen and (max-width: 425px) {
+   .Examschedular1 div.chart div#myChartDay-wrapper {right:140px;}
+    } 
+@media screen and (max-width: 375px) {
+     .Examschedular1 div.chart div#myChartDay-wrapper {right:165px;}
+}
+@media screen and (max-width: 320px) {
+    .Examschedular1 div.chart div#myChartDay-wrapper {right:192px;}
+  }
+
+/*=========studentreport========*/
+
+.Examschedular2 div.chart{margin-left: 80px;}
+.Examschedular2 div.col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;}
+.Examschedular2 div.col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-bottom: 20px;}
+@media screen and (max-width: 425px) {
+      .Examschedular2 div.chart{margin-left: 0px;}
+      .Examschedular2 div.chart div#myChart-wrapper {right:140px;}
+    } 
+@media screen and (max-width: 375px) {
+     .Examschedular2 div.chart div#myChart-wrapper {right:165px;}
+ }
+@media screen and (max-width: 320px) {
+    .Examschedular2 div.chart div#myChart-wrapper {right:192px;}
+  }
 
 /*=========================subjectsstyles===============*/
 
@@ -308,25 +445,40 @@ div.subjectlist div.col-md-12 .tooltip{float:right;padding:0 8px;}
 .chapters .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;} 
 .chapters .col-md-9 {background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-bottom: 20px;}
 
+/*=====mediaquries for chapters=======*/
+
+@media screen and (max-width: 768px) {
+   div.chapters div.col-md-9 {margin-bottom: 60px;}
+   div.chapters div.col-md-9.ng-scope{width:100%;height:auto;}
+}
+
 /*====================Asignsubjectsstyles=========*/
 
 .Assignsubjects{margin:0 auto;height:500px;}
 .Assignsubjects div.col-md-12 div.col-xs-3.col-md-4{width:100%;}
 .Assignsubjects div.col-md-12 .tooltip{float:right;padding:0 8px;}
 .Assignsubjects .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;} 
-.Assignsubjects .col-md-9 {background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;}
+.Assignsubjects .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;}
 
 /*=============Lesson planer===============*/
-.Quiz .col-md-9 .backwhite1{background-color: white; padding: 10px;margin-top: 0px;}
+.Quiz .col-md-9 .backwhite{background-color: white; padding: 10px;margin-top: 0px;height:300px;}
 .Quiz .col-md-3 .backwhite{border:1px solid blue; border-radius: 15px;padding: 10px;}
-.Quiz .col-md-9 {background-color: white; height:550px;border:1px solid blue;border-radius: 10px;padding: 10px;margin-bottom: 20px;}
+
 .Quiz .col-md-9 .table-responsive{overflow-x: visible;border:0px; height: 70%;}
  hr.style1{border-top: 2px solid blue; margin-left: -10px;width: 103%; margin-top: -26px;}
+
+
+/*=====mediaquries for lessonplanner=======*/
+
+@media screen and (max-width: 768px) {
+   .Quiz .col-md-9 {margin-bottom: 60px;}
+}
 
 /*=============Lesson tracker===============*/
  .trackersearch .col-md-3 .backwhite{border:1px solid blue;border-radius:10px;padding: 10px;}
 .trackersearch .col-md-3{margin-top: 60px;}
 .trackerresult .col-md-9 .backwhite{border:1px solid blue;border-radius:10px;padding: 10px;}
+.trackerresult .col-md-9 {margin-bottom: 100px;}
 /*====================Assignmentstyles============*/
 
 .Assignments{margin:0 auto;height:900px;}
@@ -376,6 +528,7 @@ div.subjectlist div.col-md-12 .tooltip{float:right;padding:0 8px;}
 .Addbook .col-md-12 .backwhite .row1 div.form-group{display: inline-block;}
 .Addbook .col-md-12 .backwhite .row1 div.form-group input{border:1px solid lightgrey;}
 .Addbook .col-md-12 .backwhite {padding-left: 30px;}
+
 .Addbook .col-md-12 .backwhite .row2 div.form-group{display: inline-block;}
 .Addbook .col-md-12 .backwhite .row2 div.form-group input{border:1px solid lightgrey;}
 .Addbook .col-md-12 .backwhite .row3 div.form-group{display: inline-block;}
@@ -385,24 +538,30 @@ div.subjectlist div.col-md-12 .tooltip{float:right;padding:0 8px;}
 .Addbook .col-md-12 div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
 .Addbook div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
 .Addbook .col-md-12 .row5{text-align: right;}
+@media screen and (max-width: 768px) {
+  .Addbook .col-md-12{margin-bottom: 100px;}
+}
 
 /*==============bookliststyles========*/
 
 .Booklist div.col-md-12 div.col-xs-3.col-md-4{width:100%;}
 .Booklist div.col-md-12 .tooltip{float:right;padding:0 8px;}
 .booklist{margin:0 auto;height:500px;}
-.booklist .col-md-12 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
+.booklist .col-md-12 .backwhite{margin-bottom:100px;background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
 .booklist .col-md-12 .backwhite .button{float: right;}
-
+@media screen and (max-width: 425px) {
+  .booklist .col-md-12 .backwhite div.table-responsive{overflow-x: scroll;}
+}
 /*=============examschedularstyles========*/
 
 .Examschedular{margin:0 auto;height:500px;}
 .Examschedular div.col-md-12 div.col-xs-3.col-md-4{width:100%;}
 .Examschedular div.col-md-12 .tooltip{float:right;padding:0 8px;}
 .Examschedular .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
-.Examschedular .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
+.Examschedular .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;margin-bottom: 30px;}
 .Examschedular .col-md-9 .backwhite .button{float: right;}
 .Examschedular div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+
 
 /*==================Evaluationsstyles============*/
 
@@ -411,28 +570,50 @@ div.subjectlist div.col-md-12 .tooltip{float:right;padding:0 8px;}
 .Evaluations div.col-md-12 .tooltip{float:right;padding:0 8px;}
 .Evaluations .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
 .Evaluations .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px; }
-.Evaluations .col-md-9 {background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-bottom: 20px;}
+.Evaluations .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-bottom: 20px;}
 .Evaluations .col-md-9 .backwhite .button{float: right;}
 .Evaluations div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+div#tab_2 .Evaluations .col-md-9 {margin-bottom: 100px;}
+
+/*=====mediaquries for evaluations=======*/
+
+@media screen and (max-width: 768px) {.Evaluations .col-md-9 {margin-bottom: 100px;}}
+
 
 /*===================exampapers===========*/
 
 .Exampapers{margin:0 auto;height:500px;}
 .Exampapers div.col-md-12 div.col-xs-3.col-md-4{width:100%;}
 .Exampapers div.col-md-12 .tooltip{float:right;padding:0 8px;}
-.Exampapers .col-md-3{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;} 
-
-.Exampapers .col-md-9 {background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-bottom: 20px;}
+.Exampapers .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;} 
+.Exampapers div.col-md-9.ng-scope .backwhite{height:250px;}
+.Exampapers .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-bottom: 20px;}
 .Exampapers .col-md-9 .backwhite .button{float: right;}
 .Exampapers div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
 
-/*================Addstationstyles============*/
+/*=====mediaquries for exampapers=======*/
+
+@media screen and (max-width: 768px) {
+  .Exampapers .col-md-9 {margin-top: 300px;}
+  .Exampapers div.col-md-9.ng-scope .backwhite{height:500px;}
+}
+
+/*==============examreportstyles======*/
+
+.Examreport .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;} 
+.Examreport .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;} 
+.Examreport .col-md-9{margin-bottom: 100px;}
+
+/*================MaterialAddstationstyles============*/
 
 .Addstation{margin:0 auto;height:500px;}
 .Addstation .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
 .Addstation .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
 .Addstation .col-md-9 .backwhite .button{float: right;}
 .Addstation div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+@media screen and (max-width: 768px) {
+  .Addstation .col-md-9{margin-bottom: 90px;}
+}
 
 /*===============Addvehicle===============*/
 
@@ -449,7 +630,13 @@ div.subjectlist div.col-md-12 .tooltip{float:right;padding:0 8px;}
 .addvehical1 div.col-md-12 .backwhite div.company{height:130px;}
 .addvehical1 div.Insurance{height:220px;padding-left: 20px;}
 div.Maintenance{height:100px;padding-left: 20px;}
-.Addvehical1 {height:1150px;background-color: white;border:1px solid blue;border-radius: 10px;} 
+ .Addvehical1 {background-color: white;border:1px solid blue;border-radius: 10px;height:700px;}  
+/* .Addvehical1 .backwhite{height:600px;background-color: white;border:1px solid blue;border-radius: 10px;} */
+@media screen and (max-width: 768px) {
+     .addvehical1 div.col-md-12 .backwhite section.details {height:auto;}
+     .Addvehical1{height:900px;}
+     .Addvehicalbutton#addvehicalbutton.btn.btn-primary.pull-right{margin-top:160px;}
+}
 
 
 /*================Addstationtobusstyles============*/
@@ -459,6 +646,11 @@ div.Maintenance{height:100px;padding-left: 20px;}
 .Addstationtobus .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
 .Addstationtobus .col-md-9 .backwhite .button{float: right;}
 .Addstationtobus div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+
+@media screen and (max-width: 768px) {
+  .Addstationtobus .col-md-9 {margin-bottom:100px;}
+}
+
 /*================Addbusroutestyles============*/
 
 .Addbusroute{margin:0 auto;height:500px;}
@@ -468,13 +660,15 @@ div.Maintenance{height:100px;padding-left: 20px;}
 .Addbusroute div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
 .navigate{top:-120px;}
 .navigate ul li{display: inline-block;}
-
-
+@media screen and (max-width: 320px) {
+  .Addbusroute .col-md-9 {margin-bottom: 30px;}
+}
 /*==============routegeolocation============*/
 
 .RouteGeoLocation{margin:0 auto;height:500px;}
 .RouteGeoLocation .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
 .RouteGeoLocation div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+.RouteGeoLocation div.col-md-9{margin-bottom:80px;}
 
 /*=============feetypestyles===========*/
 
@@ -492,16 +686,10 @@ div.Maintenance{height:100px;padding-left: 20px;}
 .FeeMaster .col-md-9 .backwhite .button{float: right;}
 .FeeMaster div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
 
+@media screen and (max-width: 768px) {
+  div.FeeMaster div.col-md-9{margin-bottom: 90px;}
+}
 
-/*=====================collectfeestyles===========*/
-
-/* .collectfee{margin:0 auto;height:600px;}
-.collectfee .col-md-3 {background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
-.collectfee .addsubject .backwhite form.ng-pristine.ng-invalid.ng-invalid-required{background-color: white;height:250px;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
-.collectfee .col-md-9 .button{float: right;}
-.collectfee .col-md-9 .backwhite div.listview.ng-binding{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
-.collectfee div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
-.collectfee .col-md-8{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 40px;} */
 
 /*=====================collectfeestyles===========*/
 
@@ -510,7 +698,16 @@ div.Maintenance{height:100px;padding-left: 20px;}
 /* .collectfee .addsubject .backwhite form.ng-pristine.ng-invalid.ng-invalid-required{background-color: white;height:250px;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;} */
 .collectfee .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
 .collectfee .col-md-9 .backwhite .button{float: right;}
+.collectfee div#collect.col-md-9{margin-bottom: 10px;}
+.collectfee .col-md-9{margin-bottom: 90px;}
 .collectfee div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
+@media screen and (max-width: 1024px) {
+  /* .collectfee .col-md-9{margin-bottom: 90px;} */
+}
+
+
+
+
 
 /*===========================collectfee2===========*/
 
@@ -525,6 +722,12 @@ div.Maintenance{height:100px;padding-left: 20px;}
 .classwise .col-md-9 .backwhite .button{float: right;}
 .classwise  div.form-group input{border:1px solid lightgrey;border-radius: 2px;width:250px;height:34px;}
 
+/*=====mediaquries for classwisestyles=======*/
+
+@media screen and (max-width: 768px) {
+  div.classwise div.col-md-9{margin-bottom: 90px;}
+}
+
 /*===============onlinenoticeboardstyles=============*/
 
 .onlinenoticeboard{margin:0 auto;height:500px;}
@@ -532,6 +735,15 @@ div.Maintenance{height:100px;padding-left: 20px;}
 .onlinenoticeboard div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
 .onlinenoticeboard .col-md-6{vertical-align: top;}
 .onlinenoticeboard div.pongal,div.Dussara,div.diwali{background-color:bisque;border:1px solid blue;}
+@media screen and (max-width: 768px) {
+ .onlinenoticeboard .col-md-6{margin-top:10px;margin-bottom: 90px;}
+}
+/*================eventstyles=============*/
+
+div.Events div.col-md-9{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;background-color: #e8bfa2;}
+div.Events div.col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;}
+
+
 
 /*===============hovereffects===========*/
 
@@ -814,14 +1026,44 @@ ul.panel-controls > li > .dropdown-menu:before {
   
    /*==========dashboardstyles===========*/
 
+/*======calanderstyles=====*/
+.calander div.col-md-12 div#quote.col-md-4 div.quote{height:100px;background-color: lightgrey;}
+.calander div.col-md-12 div#quote.col-md-4 div.word{height:100px;background-color: lightgrey;}
+.calander div.col-md-12 div#queries.col-md-4 {height: 200px;background-color: #568dadcf;border-color: #367fa9;border-radius: 15px;}
+ div.Circulam .col-md-12 .classalign .col-md-10{text-align: right;} 
+ 
+ div.Circulam .col-md-12 .classalign .col-md-10 button#btn_class.btn.btn-primary.btn-responsive.ng-binding.ng-scope{margin-right: 10px;}
+.calander div.col-md-12 div#queries.col-md-4 div.queries div.queriey1 div.circulardiv{width: 50px;height: 50px;background-color:lightgrey;border-radius: 50px;}
+.calander div.col-md-12 div#queries.col-md-4 div.queries div.queriey1 .queh1{width:200px;position:absolute;}  
+.calander div.col-md-12 div#queries.col-md-4 div.queries div.queriey1{margin-bottom: 20px;}
+.calander div.col-md-12 div#queries.col-md-4 div.queries div.queriey1 div.circulardiv,.queh1{display:inline-block;}
 
 
-   div.staff div.col-md-12 #cal.col-md-6{background-color: #bd9696;}
+
+   div.staff div.col-md-12 #cal.col-md-6 .backwhite{background-color: #bd9696;} 
    div.messagebox div.col-md-12 div.col-md-6{background-color: darkgray;}
    div.messagebox div.col-md-12 div.col-md-6 div.form-group button{float: right;margin-bottom: 10px;}
    div.staff div.col-md-12 div.col-md-6 div.noticeboard{background-color: #e0eee1;}
-   div.staff div.col-md-12 div.col-md-6 div.staff div.backwhite{border:1px solid grey;border-radius:10px;background-color: #e7eef4;}
-   div.staff div.col-md-12 div.col-md-6 div.noticeboard div.backwhite{overflow-y: scroll;height:470px;width:100%;}
+   /* div.staff div.col-md-12 div.col-md-6 div.staff div.backwhite{border:1px solid grey;border-radius:10px;background-color: #e7eef4;} */
+   
+   div.staff div.col-md-12 div#staff1.col-md-6 {border: 1px solid grey; border-radius: 10px;margin-top: 30px;}
+   div.staff div.col-md-12 div#quo.col-md-6 .backwhite{border: 1px solid grey; border-radius: 10px;margin-top: 30px;}
+   div.staff div.col-md-12 div#quo.col-md-6 .backwhite .staff form.ng-pristine.ng-valid div.form-group{padding:10px;}
+   div.staff div.col-md-12 div#staff1.col-md-6 .staff{margin-top: 20px;}
+   div.staff div.col-md-12 div#staff1.col-md-6 .staff .table-responsive table.table tbody tr td{padding:10px 0px;}
+   div.staff div.col-md-12 div#staff1.col-md-6 .staff .table-responsive table.table tbody tr td div.progress{margin-top: 20px;}
+   div.staff div.col-md-12{margin-bottom: 10px;}
+   div.staff div.col-md-12 div#quo.col-md-6 .backwhite div.staff form.ng-pristine.ng-valid div.form-group div.ng-binding{
+        height: 60px;
+        border: 1px solid black;
+        border-radius: 5px;}
+   div.staff div.col-md-12 div#quo.col-md-6 .backwhite div.staff form.ng-pristine.ng-valid div.form-group div.ng-binding{
+        height: 60px;
+        border: 1px solid black;
+        border-radius: 5px;}
+    
+
+   div.staff div.col-md-12 div.col-md-6 div.noticeboard div.backwhite{overflow-y: scroll;height:287px;width:100%;}
    div.messagebox div.col-md-12 div.col-md-5 .noticemsg{margin-top: 40px;}
    .acadamic_report div.col-md-12 div.table.table-responsive table tbody tr td div#piechart{width:200px;height:300px;}
    .acadamic_report div.col-md-12 div.table.table-responsive table tbody tr th{text-align: center;}
@@ -831,11 +1073,11 @@ ul.panel-controls > li > .dropdown-menu:before {
    div.staff div.col-md-12 #cal.col-md-6 div.calander{margin-bottom: 20px;}
    div.attendancetaken .col-md-12 .backwhite table.table thead tr th .col-md-9 button.btn.btn-primary.btn-responsive{margin-right: 30px;}
    div.attendancetaken .col-md-12 .backwhite table.table thead tr th .col-md-9{width:100%;text-align: center;}
-     div.attendancetaken .col-md-12{border: 1px solid grey;
-    border-radius: 10px;
-    background-color: lightgray;
-}
-
+   div.attendancetaken .col-md-12 {border: 0px solid grey;border-radius: 10px;background-color:  #c1969c;}
+   .btn-primary {background-color: #2f3981;border-color: #367fa9;}
+   .classalign .col-md-9 button#btn_class.ng-binding.ng-scope {margin: 10px;}
+   div.box-header.with-border.btn-primary h3.box-title{color:white;}    
+   div.staff div.col-md-12 div.backwhite div#cal.col-md-6{background-color: #c1969c;}
    div.messagebox div.col-md-12 div.noticemsg div.noticedetails img{width:40px;height:40px;}
    div.messagebox div.col-md-12 div.noticemsg div.noticedetails img,#disnotice{display: inline-block;vertical-align: top;margin-top: 20px;}
    div.messagebox div.col-md-12 div.noticemsg div.noticedetails div#disnotice.form-group{width:90%;}
@@ -950,13 +1192,27 @@ ul.panel-controls > li > .dropdown-menu:before {
       position: absolute;
       top: 30%;
    }
+
+   	
+	  div.staff div.col-md-12 div#quo.col-md-6 .backwhite div.staff form.ng-pristine.ng-valid div.form-group div.ng-binding{			  height: 60px;border: 1px solid grey;border-radius: 15px;}		
+  	 div.staff div.col-md-12 div#quo.col-md-6 .backwhite div.staff form.ng-pristine.ng-valid div.form-group div.ng-binding{		
+  	    height: 60px;border: 1px solid grey;border-radius: 15px;}		
+  	   /* div.staff div.col-md-12 #cal.col-md-6{background-color: #568dadcf;} */		
+   div.messagebox div.col-md-12 div.col-md-6{background-color: darkgray;}		
+	   div.messagebox div.col-md-12 div.col-md-6 div.form-group button{float: right;margin-bottom: 10px;}		
+	   /* div.staff div.col-md-12 div.col-md-6 div.noticeboard{background-color: #e0eee1;} */		
+  	   /* div.staff div.col-md-12 div.col-md-6 div.staff div.backwhite{border:1px solid grey;border-radius:10px;background-color: #e7eef4;} */		
+  	   div.staff div.col-md-12 div.col-md-6 div.noticeboard div.backwhite{overflow-y: scroll;height:287px;width:100%;}		
+   div.staff div.col-md-12 div#staff1.col-md-6 {border: 0px solid grey; border-radius: 15px;background-color: #568dadcf;margin-top: 30px; width: 49%;}		
+  	   div.staff div.col-md-12 div#quo.col-md-6 .backwhite{border: 0px solid grey;background-color: #568dadcf; border-radius: 15px;margin-top: 30px;margin-left: 6px;
+        width: 102%;
+        height: 245px;}
    
 /*===============dashboardstyles=========*/
   /* .Circulam{background-color: beige;border:1px solid grey;border-radius: 5px;}
   .Circulam h2{text-align: center;}
   .Dashboard .col-md-12{background-color: cadetblue;}
   .Dashboard .col-md-12 h2{text-align: center;}
- 
   .col-md-12 .col-md-2{background-color: yellowgreen;}
   .col-md-12 .col-md-4 h1{font-size: 20px;}
   .acadamic .col-md-9{background-color: lightgrey;}
@@ -1005,32 +1261,31 @@ ul {list-style-type: none;}
     background: #1abc9c;
     color: white !important
 } */
-  .Circulam{background-color: beige;border:1px solid grey;border-radius: 5px;}
+  /* .Circulam{background-color: beige;border:1px solid grey;border-radius: 5px;} */
   .Circulam h2{text-align: center;}
   .Dashboard .col-md-12{background-color: cadetblue;}
   .Dashboard .col-md-12 h2{text-align: center;}
-  .col-md-12 .col-md-2{background-color: yellowgreen;}
+  /* .col-md-12 .col-md-2{background-color: yellowgreen;} */
   .col-md-12 .col-md-4 h1{font-size: 18px;}
   .col-md-12 .col-md-9 img{display: inline-block;}
   .col-md-12 .col-md-4 .staff{border:1px solid green;border-radius: 2px;}
-  .col-md-2{background-color: lightgrey;}
+  /* .col-md-2{background-color: lightgrey;} */
   .acadamic .col-md-12 .col-md-3{height:250px;background-color: darkkhaki;}
-  .col-md-12{margin-top: 30px;}
+   .Circulam .col-md-12{margin-top: 30px;}
   .col-md-6 .events h1{text-align: center;}
   .col-md-6 .events,.notices{background-color: cadetblue;}
   .col-md-6 .events h1,.notices h1{font-size: 20px;}
-  .col-md-12 .col-md-2{width:350px;height: 270px;} 
+  /* .col-md-12 .col-md-2{width:350px;height: 270px;}  */
   .attendancetaken .col-md-12 .col-md-8{border:1px solid green;border-radius: 2px;} 
   .attendancetaken .col-md-12 .col-md-4 div.staff{height:350px;}
   .attendancetaken .col-md-12 .col-md-4 div.staff div.backwhite table{height:350px;}
   .attendancetaken .col-md-12 .col-md-4  div.backwhite .calander{margin-top: 30px;}
-  .Circulam div h1{width:300px;}
-  .classalign h1{width:200px;}
+  /* .Circulam div h1{width:300px;} */
+  .classalign h1{width:200px;font-size: 20px;}
   .notices h1{text-align: center;height:150px;}
   .classalign h1 button{display: inline-block;}
   .classalign .col-md-9 {padding-top: 25px;}
-  .classalign .col-md-9 button{margin-right: 40px;background-color: blueviolet;width:100px;text-align: center; border:groove;
-    float :left;}
+  .classalign .col-md-9 button{margin-right: 40px;text-align: center; border:groove;float :left;}
     /* .classalign .col-md-9 button.active{
       background-color: rgb(43, 226, 119);
     } */
@@ -1229,25 +1484,37 @@ div.classinfo .col-md-3 .addclass #addclasses{margin-top: 12%}
 div.classinfo .col-md-9 .table-responsive{margin-top: 120px;} 
 div.classinfo .col-md-3{background-color: white;border:1px solid blue;border-radius: 10px;}
 div.classinfo .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;}
+     @media screen and (max-width: 768px) {
+                     div.classinfo .col-md-9 .backwhite .table-responsive{margin-bottom: 100px;}
+     }
 
-
-  .btn.btn-primary{
+  /* .btn.btn-primary{
  background-color: #03104e;
     border-color: #03104e;
-  }
+  } */
    /*====================marksstyles=============*/
 .Marks .col-md-9 .backwhite table tbody{vertical-align: top;}
 .Marks .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
 .Marks .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;}
-.Marks .col-md-9 .backwhite table tbody tr th div.form-group
+.Marks div.col-md-9{margin-bottom: 100px;}
+.Marks .col-md-3 {margin-bottom: 90px;}
+.marksobtained .col-md-9 {margin-bottom: 100px;background-color: white;border:1px solid blue;border-radius: 10px;}
+.marklist div.col-md-9 div.backwhite{background-color: white;border:1px solid blue;border-radius: 10px;}
+ @media screen and (max-width: 768px) {
+        .marklist div.col-md-9{margin-bottom: 100px;}           
+     }
+
+
 .container .row .col-md-9 .backwhite .table-responsive{overflow-x: visible;border:0px;}
 .container div.row .col-md-9 .backwhite .table-responsive{overflow-x: visible;border:0px;}
    .container div.row .col-md-9 .backwhite .table-responsive table tbody tr th input{width:120px;}
-  .container div.row .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;}
+ 
+ /*====================Add questions Quiz styles=============*/
 
- /*====================Quiz styles=============*/
   .Quiz .col-md-3 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;margin-top: 0px;}
-  .Quiz .col-md-9 {background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;}
+  .Quiz .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius:10px;padding: 10px;margin-top: 0px;height:550px;}
+    .Quiz .col-md-9 {margin-bottom: 100px;}
+    .Quiz .container div.row .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;padding: 10px;}
   div.subjectlist div.col-md-12 div.col-xs-3.col-md-4 div.col-md-12 div.col-md-12 ul li{display:inline-block;}
   div.subjectlist div.col-md-12 div.col-xs-3.col-md-4 div.col-md-12 div.col-md-12{text-align: right;}
   div.subjectlist div.col-md-12 div.col-xs-3.col-md-4 div.col-md-12 div.col-md-12 ul li{background-color: #03104e ;border-color: #03104e ;color: white;}
@@ -1259,18 +1526,17 @@ div.classinfo .col-md-9 .backwhite{background-color: white;border:1px solid blue
   div.classinfo .col-md-9 .backwhite{background-color: white;border:1px solid blue;border-radius: 10px;}
   
   
-   .btn.btn-primary{
+   /* .btn.btn-primary{
      background-color: #03104e ;
      border-color: #03104e ;
-   }
-
+   } */
 
    /*============schoolProfile===========*/
 .schoolprofile {height:1300px;border:1px solid #7a757b ;} 
 .schoolprofile .schoollogo div.col-md-12 {text-align: center;}
 .schoolprofile .schoollogo div.col-md-12 img{width:150px;margin-right: 30px;margin-top: 10px;}
 .schoolprofile .schoollogo div.col-md-12 img#sclogo{width:500px;height:200px;}
-.schoolprofile div.schooldetails .col-md-12 div.table-responsive{overflow-x: hidden;}
+ .schoolprofile div.schooldetails .col-md-12 div.table-responsive{overflow-x: hidden;} 
 .schoolprofile div.managementdetails .col-md-12 div.table-responsive{overflow-x: hidden;}
 .schoolprofile div.contactdetails .col-md-12 div.table-responsive{overflow-x: hidden;}
 .schoolprofile .col-md-12 h1{background-color: cadetblue;border-radius: 2px;}
@@ -1286,6 +1552,23 @@ div.classinfo .col-md-9 .backwhite{background-color: white;border:1px solid blue
 .schoolprofile div.contactdetails .col-md-12 .col-md-12 div.table-responsive tbody tr td{width:50%;}
 .schoolprofile div.schooldetails .col-md-12 .col-md-12 div.table-responsive tbody table.table.table-bordered tr td.ng-binding{width:50%;}
 .schoolprofile div.schooldetails .col-md-12 .col-md-12 div.table-responsive tbody table.table.table-bordered tr td.ng-binding div.form-group{width:50%;}
+    /*------school profile media queries------*/
+
+ @media screen and (max-width: 320px) {
+      .schoolprofile .schoollogo div.col-md-12 img#sclogo{width:160px;height:100px;}
+    }
+@media screen and (max-width: 425px) {
+      .schoolprofile .schoollogo div.col-md-12 img#sclogo{width:160px;height:100px;}
+      .schoolprofile div.schooldetails .col-md-12 div.table-responsive{overflow-x: scroll;} 
+      .schoolprofile div.managementdetails .col-md-12 div.table-responsive{overflow-x: scroll;}
+      .schoolprofile div.contactdetails .col-md-12 div.table-responsive{overflow-x: scroll;}
+    }
+ @media screen and (max-width: 375px) {
+      .schoolprofile .schoollogo div.col-md-12 img#sclogo{width:160px;height:100px;}
+    }   
+
+
+
 
 
 /*==============studentprofile============*/
@@ -1299,12 +1582,24 @@ div.studentprofile {height: 1124px;background-color: white;}
 .studentprofile div.table-responsive table.table.table-bordered{border-collapse: separate;}
 /* .container h1{margin-top: 30px;} */
 .studentprofile .col-md-12 h1{color: crimson;}
-.studentprofile .col-md-12 div.admissiondetails{height: 400px;}
+/* .studentprofile .col-md-12 div.admissiondetails{height: 400px;} */
+.studentprofile .col-md-12 div.admissiondetails .col-md-12 .col-md-3{position: absolute;bottom: 20px;left:-269px;}
+.studentprofile .col-md-12 div.admissiondetails .col-md-12 .col-md-3 .studentimage{width:200px;height:200px;}
 .studentprofile .col-md-12 div.admissiondetails .col-md-3 h1#stupro{text-align: center;}
-
+.studentprofile .col-md-12 div.admissiondetails .col-md-12{margin-left: 256px;}
  /*------student profile media queries------*/
- @media screen and (max-width: 981px) {
-   div .studentprofile {height: 1600px;background-color: lightgrey;}  
+ @media screen and (max-width: 425px) {
+   /* div .studentprofile {height: 1600px;background-color: lightgrey;}   */
+.studentprofile .col-md-12 div.admissiondetails .col-md-12 .col-md-3{bottom:254px;left:45px;}
+.studentprofile .col-md-12 div.admissiondetails .col-md-12 .col-md-9{margin-top: 300px;}
+.studentprofile .col-md-12 div.admissiondetails .col-md-12{margin-left: 0px;}
+.studentprofile div.table-responsive{overflow-x: scroll;}
+
+}
+
+ @media screen and (max-width: 320px) {
+   /* div .studentprofile {height: 1600px;background-color: lightgrey;}   */
+.studentprofile .col-md-12 div.admissiondetails .col-md-12 .col-md-3{bottom:254px;left:10px;}
 }
 
 
@@ -1318,7 +1613,7 @@ div.studentprofile {height: 1124px;background-color: white;}
 
 
 footer.main-footer.ng-scope{position:fixed;left:0px;bottom:0px;width:100%;height:60px;}
-.container div.col-md-9 .backwhite{margin-bottom: 100px;}
+/* .container div.col-md-9 .backwhite{margin-bottom: 100px;} */
 @media screen and (max-width: 1024px) {
 	    div.row.background.ng-scope{width:90%;margin-top: 100px;}
         section#myNavbar.navbar-collapse.collapse ul.nav.navbar-nav{height:120px;}
@@ -1333,6 +1628,7 @@ footer.main-footer.ng-scope{position:fixed;left:0px;bottom:0px;width:100%;height
         a#date.dropdown-toggle{margin-left: 20px;}
         a.dropdown-toggle.ng-binding{padding:0px;}
         div.row.background.ng-scope{margin-top: 150px;}
+         div.navbar-custom-menu{margin-right: 0px;}
     }
 @media screen and (max-width: 375px) {
         div.navbar-custom-menu{margin-right: 0px;}
@@ -1390,15 +1686,3 @@ footer.main-footer.ng-scope{position:fixed;left:0px;bottom:0px;width:100%;height
          div.studetails .col-md-4 div.parimage {width:80px;}
           div.studetails .col-md-4 div.stuinfor{width:100px;left:105px;word-wrap: break-word;}
       }
-
-
-
-
-      /*==================paybands============*/
-.Salary .col-md-12 .backwhite{ height:100px;border:1px solid black;border-radius: 10px;}
-.allowances .col-md-12 .backwhite{height:180px;border:1px solid black;border-radius: 10px;}
-.allowtable .col-md-12 .backwhite{height:60px;border:1px solid black;border-radius: 10px;}
-.allowtable .col-md-12 .backwhite{margin-bottom: 100px;}
-
-/*=======messagestyles====*/
-div.msgbox div.col-md-12 .backwhite{border:1px solid black;border-radius: 10px;}

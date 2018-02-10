@@ -21,6 +21,29 @@ angular.module('school_erp')
                 .success(function (data, status) {
                     //   $scope.attDataEmp = data.donutchart;
                     $scope.attData = data.donutchart;
+                    $scope.attDataList = [];
+                    index = 0;
+                    $scope.attData.forEach(function (element) {
+
+                        var obj = {
+                            id: index++,
+                            employee_id: element.employee_id,
+
+                            first_name: element.first_name,
+                            last_name: element.last_name,
+                            employee_type: element.employee_type,
+                            gender:element.gender,
+                            status:element.status
+
+
+                        }
+                        $scope.attDataList.push(obj);
+                        //console.log($scope.teacherData);
+                    })
+
+
+                    
+
                     if ($scope.attData == 0) {
                         // array empty or does not exist
                         $scope.chartdataDay = [
@@ -211,9 +234,91 @@ angular.module('school_erp')
         }
         ]
 
+        $scope.generatePDFEmployee = function () {
+            $scope.pdf = true;
+            console.log("pdf message1");
+            html2canvas(document.getElementById('exportthisemployee'), {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 480,
+                        }]
+                    };
+                    console.log("pdf message2");
+
+                    pdfMake.createPdf(docDefinition).download("EmployeesMonthlyAttendance_Report.pdf");
+                    $scope.getAttendenceMonthByEmployee($scope.select_month);
+                    
+                   
+                }
+            });
+        }
+        $scope.getAttendenceMonthByEmployee = function (select_month) {
+            $scope.initialLoadAttendence = true;
+            $scope.pdf = false;
+
+            employeeServices.getAttendenceMonthByEmployee(select_month)
+                .success(function (data, status) {
+                    console.log(JSON.stringify(data));
+                    $scope.attDataMonth = data.employeeMonthlyAttendence;
+                    $scope.present = $scope.attDataMonth[0].totalPresent;
+                    // console.log($scope.present);
+                    $scope.absent = $scope.attDataMonth[0].totaAbsent;
+                    $scope.leave = $scope.attDataMonth[0].totalOnLeave;
+                    $scope.chartdataMonth = [
+                        [$scope.leave],
+                        [$scope.absent],
+                        [$scope.present]
+                    ];
+                    $scope.myJsonMonth = {
+                        type: "ring",
+                        title: {
+                            text: 'Attendance Report'
+                        },
+                        plot: {
+                            slice: 60,
+                            detach: false,
+                            tooltip: {
+                                fontSize: 16,
+                                anchor: 'c',
+                                x: '50%',
+                                y: '48%',
+                                sticky: true,
+                                backgroundColor: 'none',
+                                text: '<span style="color:%color">%t</span><br><span style="color:%color">%v</span>'
+                            }
+                        },
+                        legend: {
+                            verticalAlign: "bottom",
+                            align: "center"
+                        },
+                        series: [{
+
+                            text: "leave"
+                        },
+                        {
+
+                            text: "absent"
+                        },
+                        {
+
+                            text: "present"
+                        }
+                        ]
+                    };
+
+                })
+                .error(function (data, success) { })
+        }
+
+
+
+
         $scope.getAttendenceByDay($scope.select_date);
 
-
+        $scope.getAttendenceMonthByEmployee($scope.select_month);
 
 
         $scope.showRole = function (role) {

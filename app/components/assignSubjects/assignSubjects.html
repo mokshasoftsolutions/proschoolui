@@ -69,6 +69,7 @@
         </div>
       </div>
       <div class="col-md-9">
+          <div class="backwhite">
 <!-- 
         <div class="subjectlist">
           <div class="col-md-12">
@@ -115,8 +116,8 @@
                       </a>
                 </td>
               </tr>-->
-            <tr  ng-repeat="teachers in teacherData | filter:secId" class="editable-row">
-              <td>{{teachers.id+1}}</td>
+            <tr  ng-repeat="teachers in teacherData | filter:secId | filter:data.teachId:true | filter:data.subjectObj:true " class="editable-row">
+              <td>{{$index+1}}</td>
               <td>
                 <!--<span editable-text="teachers.subject_name" e-name="subject_name" onaftersave="EditAssignSubjects($index)"
                     e-form="rowform" e-required>-->
@@ -156,6 +157,7 @@
           </tfoot> -->
         </table>
       </div>
+    </div>
     </div>
   </div>
 </div>

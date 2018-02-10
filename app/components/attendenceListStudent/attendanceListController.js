@@ -2,7 +2,7 @@ angular.module('school_erp')
     .controller("attendanceListController", ['$http', '$scope', '$rootScope', '$window', 'globalServices', 'examServices', 'subjectsServices', 'studentServices', 'ngDialog', function ($http, $scope, $rootScope, $window, globalServices, examServices, subjectsServices, studentServices, ngDialog) {
 
         var d = new Date();
-        var n = d.getMonth()+1;
+        var n = d.getMonth() + 1;
 
         $scope.select_month = n;
         $scope.months = [{
@@ -75,14 +75,36 @@ angular.module('school_erp')
                     $scope.secData = data.class_sections; // Api list-name
                     $scope.secId = data.class_sections[0].section_id;
                     // $scope.getStudentValue($scope.secId);
-                    if ($scope.initialLoadAttendence == false) {
-                        $scope.getAttendenceByDay($scope.select_date, $scope.classId, $scope.secId);
-                    }
+                    // if ($scope.initialLoadAttendence == false) {
+                    $scope.getAttendenceByDay($scope.select_date, $scope.classId, $scope.secId);
+                    $scope.getAttendenceMonthBySection($scope.select_month, $scope.secId);
+                    // }
 
                     // $scope.getAttendence($scope.classId,$scope.secId);
 
                 })
                 .error(function (data, success) { })
+        }
+
+        $scope.generatePDF = function () {
+            $scope.pdf = true;
+            console.log("pdf message1");
+            html2canvas(document.getElementById('exportthis'), {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 480,
+                        }]
+                    };
+                    console.log("pdf message2");
+
+                    pdfMake.createPdf(docDefinition).download("StudentsAttendance_Report.pdf");
+                    $scope.getAttendenceByDay($scope.select_date, $scope.classId, $scope.secId);
+
+                }
+            });
         }
         $scope.getAttendenceByDay = function (date, classId, secId) {
             $scope.initialLoadAttendence = true;
@@ -120,13 +142,14 @@ angular.module('school_erp')
                         $scope.class_name = $scope.attData[0].class_name;
                         $scope.section_name = $scope.attData[0].section_name;
 
-                        $scope.present = data.present;
-                        $scope.absent = data.absent;
                         $scope.leave = data.onleave;
+                        $scope.absent = data.absent;
+                     
+                        $scope.present = data.present;
                         $scope.chartdata = [
-                            [$scope.present],
+                            [$scope.leave],
                             [$scope.absent],
-                            [$scope.leave]
+                            [$scope.present]
                         ];
                     }
 
@@ -185,26 +208,7 @@ angular.module('school_erp')
 
 
 
-                    $scope.generatePDF = function () {
-                        $scope.pdf = true;
-                        console.log("pdf message1");
-                        html2canvas(document.getElementById('exportthis'), {
-                            onrendered: function (canvas) {
-                                var data = canvas.toDataURL();
-                                var docDefinition = {
-                                    content: [{
-                                        image: data,
-                                        width: 480,
-                                    }]
-                                };
-                                console.log("pdf message2");
 
-                                pdfMake.createPdf(docDefinition).download("StudentsAttendance_Report.pdf");
-                                $scope.getAttendenceByDay($scope.select_date, $scope.classId, $scope.secId);
-
-                            }
-                        });
-                    }
 
                     $scope.myJson = {
                         type: "ring",
@@ -238,6 +242,89 @@ angular.module('school_erp')
                         },
                         {
                             //values : [20],
+                            text: "present"
+                        }
+                        ]
+                    };
+
+                })
+                .error(function (data, success) { })
+        }
+
+
+
+ $scope.generatePDFSection = function () {
+            $scope.pdf = true;
+            console.log("pdf message1");
+            html2canvas(document.getElementById('exportthissection'), {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 480,
+                        }]
+                    };
+                    console.log("pdf message2");
+
+                    pdfMake.createPdf(docDefinition).download("SectionAttendance_Report.pdf");
+                    $scope.getAttendenceMonthBySection($scope.select_month, $scope.secId);
+
+                }
+            });
+        }
+
+
+
+        $scope.getAttendenceMonthBySection = function (select_month, secId) {
+            $scope.initialLoadAttendence = true;
+            $scope.pdf = false;
+
+            studentServices.getAttendenceMonthBySection(select_month, secId)
+                .success(function (data, status) {
+                    //console.log(JSON.stringify(data));
+                    $scope.attDataMonth = data.sectionMonthlyAttendence;
+                    $scope.present = $scope.attDataMonth[0].totalPresent;
+                    // console.log($scope.present);
+                    $scope.absent = $scope.attDataMonth[0].totaAbsent;
+                    $scope.leave = $scope.attDataMonth[0].totalOnLeave;
+                    $scope.chartdataMonth = [
+                        [$scope.leave],
+                        [$scope.absent],
+                        [$scope.present]
+                    ];
+                    $scope.myJsonMonth = {
+                        type: "ring",
+                        title: {
+                            text: 'Attendance Report'
+                        },
+                        plot: {
+                            slice: 60,
+                            detach: false,
+                            tooltip: {
+                                fontSize: 16,
+                                anchor: 'c',
+                                x: '50%',
+                                y: '48%',
+                                sticky: true,
+                                backgroundColor: 'none',
+                                text: '<span style="color:%color">%t</span><br><span style="color:%color">%v</span>'
+                            }
+                        },
+                        legend: {
+                            verticalAlign: "bottom",
+                            align: "center"
+                        },
+                        series: [{
+
+                            text: "leave"
+                        },
+                        {
+
+                            text: "absent"
+                        },
+                        {
+
                             text: "present"
                         }
                         ]

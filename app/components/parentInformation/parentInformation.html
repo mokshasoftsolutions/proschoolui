@@ -18,6 +18,9 @@
       <li ui-sref-active="active" ng-show="showRole(['admin','teacher'])">
           /<a ui-sref='main.taskManagement'>TaskManagement</a>
       </li>
+      <li ui-sref-active="active" ng-show="showRole(['admin'])">
+        /<a ui-sref='main.quote'>Quote & Word</a>
+    </li>
   </ul>
   </div>
 </div>
@@ -89,8 +92,8 @@
       
      
           <li class="col-md-6"> -->
-
-          <table export-table st-table="display_records" st-safe-src="parentBox" class="table rwd-table table-striped">
+            <div class="table-responsive" style="width:100%">
+              <table export-table st-table="display_records" st-safe-src="parentBox" style="width:100%">
             <thead>
               <tr>
                 <th>#</th>
@@ -134,6 +137,7 @@
             </tfoot>
           </table>
 
+          </div>
           <!-- </li> -->
           <!-- <li class="col-md-6">
          
