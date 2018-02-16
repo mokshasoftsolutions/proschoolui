@@ -17,7 +17,7 @@
 <div class="container">
   <div class="row">
     <div class="Events">
-      <div class="col-md-3" >
+      <div class="col-md-3">
         <div class="backwhite">
           <form name="events" ng-submit="events.$valid && addEvent(data)" novalidate>
 
@@ -79,7 +79,7 @@
 
           </form>
         </div>
-      </div> 
+      </div>
 
 
 
@@ -88,7 +88,12 @@
           <tabset>
 
             <tab select="renderCalendar('myCalendar3');">
-
+              <!-- <tab-heading>
+                    <i class="glyphicon glyphicon-bell"></i> 
+                   </tab-heading> -->
+              <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
+                <h4>{{alertMessage}}</h4>
+              </div>
               <div class="btn-toolbar">
 
                 <div class="btn-group" style="margin-top: 1%;">
@@ -100,6 +105,16 @@
               <div class="calendar" ng-model="eventSources" calendar="myCalendar3" ui-calendar="uiConfig.calendar"></div>
             </tab>
           </tabset>
+          <ul class="unstyled">
+              <li ng-repeat="e in eventsData">
+                  <div class="alert alert-warn">
+                      <a class="close" ng-click="remove($index)"><i class="fa fa-remove"></i></a>
+                      <b> <input ng-model="e.title"></b> 
+                      {{e.start | date:"MMM dd"}} - {{e.end | date:"MMM dd"}}
+                  </div>
+              </li>
+          </ul>
+
         </div>
 
 

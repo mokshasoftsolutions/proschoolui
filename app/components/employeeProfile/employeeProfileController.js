@@ -264,7 +264,7 @@ angular.module('school_erp')
                 .success(function (data, status) {
 
                     ngDialog.open({
-                        template: '<p> Registration submitted successfully </p>',
+                        template: '<p> Employee Image editted  successfully </p>',
                         plain: true
                     });
                     $scope.data = [];

@@ -38,20 +38,20 @@ angular.module('school_erp')
 
                     $scope.feeTypeData = data.feeTypes;
 
-                    if ($scope.feeTypeData == 0) {
-                        $scope.studentFeeReports = [];
-                        ngDialog.open({
-                            template: '<p>FeeType must be add to class.</p>',
-                            plain: true
-                        });
+                    // if ($scope.feeTypeData == 0) {
+                    //     $scope.studentFeeReports = [];
+                    //     ngDialog.open({
+                    //         template: '<p>FeeType must be add to class.</p>',
+                    //         plain: true
+                    //     });
 
 
-                    }
-                    else {
+                    // }
+                    // else {
                         $scope.feeTypeData = data.feeTypes; // Api list-name
                         $scope.data.fee_type_id = data.feeTypes[0].fee_types_id;
                         $scope.getFeeReports($scope.data.secId, $scope.data.fee_type_id);
-                    }
+                   // }
                 })
                 .error(function (data, success) { })
         }
@@ -68,15 +68,15 @@ angular.module('school_erp')
 
                     console.log(JSON.stringify(data))
 
-                    if (data == false || data == 'false') {
-                        ngDialog.open({
-                            template: '<p>FeeType must be add to class.</p>',
-                            plain: true
-                        });
-                        $scope.studentFeeReports = [];
+                    // if (data == false || data == 'false') {
+                    //     ngDialog.open({
+                    //         template: '<p>FeeType must be add to class.</p>',
+                    //         plain: true
+                    //     });
+                    //     $scope.studentFeeReports = [];
 
-                    }
-                    else {
+                    // }
+                    // else {
 
 
                         $scope.studentFeeReports = [];
@@ -100,7 +100,7 @@ angular.module('school_erp')
                             $scope.studentFeeReports.push(obj);
                             //console.log($scope.teacherData);
                         })
-                    }
+                    // }
                     //$scope.collectFeeData = data.student_fee_deatils;
 
                 })

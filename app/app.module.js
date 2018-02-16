@@ -3,10 +3,7 @@ angular.module('school_erp', ['ui.router','720kb.datepicker', 'ngDialog', 'zingc
   .run(function ($rootScope, $state, authService) {
     $rootScope.loginPage = false;
     $rootScope.role = 'teacher';
-    // $rootScope.role = 'parent';
-    // if($rootScope.role){
-
-    // }
+   
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
 
@@ -20,9 +17,3 @@ angular.module('school_erp', ['ui.router','720kb.datepicker', 'ngDialog', 'zingc
     });
   });
 
-
-  // "ngMaterial",
-  //     "ngAnimate",
-  //     "ngAria",
-  //     "ngMessages",
-  //     "mdPickers"

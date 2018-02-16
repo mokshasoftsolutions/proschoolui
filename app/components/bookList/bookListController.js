@@ -17,7 +17,7 @@ angular.module('school_erp')
             .success(function (data, status) {
 
                 $scope.bookList = data.books;
-                // console.log(JSON.stringify(data));
+                console.log(JSON.stringify(data));
                 $scope.data = [];
                 index = 0;
                 $scope.bookList.forEach(function (element) {
@@ -36,8 +36,8 @@ angular.module('school_erp')
 
                     }
                     $scope.data.push(obj);
-                    // console.log("mesaage for section");
-                   // console.log($scope.employeeData);
+                     // console.log("mesaage for section");
+                   console.log($scope.data);
                 })
 
 

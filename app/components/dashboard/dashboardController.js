@@ -1,6 +1,7 @@
 angular.module('school_erp')
-    .controller("dashboardController", ['$http', '$state', '$scope', '$compile', '$interval', 'studentServices', 'sessionServices', 'chaptersServices', 'employeeServices', 'examServices', 'globalServices', 'subjectsServices', 'classWiseServices', 'NoticeBoardServices', 'schoolEventsServices', 'addVehicleServices', 'barChartOneService', 'taskManagerServices', 'ngDialog', '$rootScope', 'ngProgressFactory', 'routeGeoLocationServices', 'messagesServices', function ($http, $state, $scope, $compile, $interval, studentServices, sessionServices, chaptersServices, employeeServices, examServices, globalServices, subjectsServices, classWiseServices, NoticeBoardServices, schoolEventsServices, addVehicleServices, barChartOneService, taskManagerServices, ngDialog, $rootScope, ngProgressFactory, routeGeoLocationServices, messagesServices) {
-
+    .controller("dashboardController", ['$http', '$state', '$scope', '$compile', '$interval', 'studentServices', 'sessionServices', 'chaptersServices', 'employeeServices', 'examServices', 'globalServices', 'subjectsServices', 'classWiseServices', 'NoticeBoardServices', 'schoolEventsServices', 'addVehicleServices', 'barChartOneService', 'taskManagerServices', 'ngDialog', '$rootScope', 'ngProgress', 'routeGeoLocationServices', 'messagesServices', function ($http, $state, $scope, $compile, $interval, studentServices, sessionServices, chaptersServices, employeeServices, examServices, globalServices, subjectsServices, classWiseServices, NoticeBoardServices, schoolEventsServices, addVehicleServices, barChartOneService, taskManagerServices, ngDialog, $rootScope, ngProgress, routeGeoLocationServices, messagesServices) {
+        // ngProgress.reset();
+        //ngProgress.complete();
         $scope.index = 'true';
         $scope.evalData = [];
         $scope.data = [];
@@ -25,6 +26,7 @@ angular.module('school_erp')
                     // console.log($scope.classDatanew);
                     $scope.populateSections($scope.classId);
                     $scope.totalStudents();
+                    $scope.totalNewStudents();
                     $scope.getQuotes();
                     $scope.getTimeTableDay($scope.classId);
 
@@ -53,6 +55,16 @@ angular.module('school_erp')
             studentServices.totalStudents()
                 .success(function (data, status) {
                     $scope.studentCount = data.students; // Api list-name
+                    // $scope.totalStudents =$scope.studentCount[0]. 
+                })
+                .error(function (data, success) { })
+        }
+
+        $scope.totalNewStudents = function () {
+
+            studentServices.totalNewStudents()
+                .success(function (data, status) {
+                    $scope.studentCountNew = data.students; // Api list-name
                     // $scope.totalStudents =$scope.studentCount[0]. 
                 })
                 .error(function (data, success) { })
@@ -403,18 +415,19 @@ angular.module('school_erp')
                     });
 
 
-                    //    $scope.present=data.present;
-                    //    $scope.leave=data.onleave;
-                    //    $scope.absent=data.absent;
+                    $scope.present = data.present;
+                    $scope.leave = data.onleave;
+                    $scope.absent = data.absent;
+                    $scope.count = data.count;
                     $scope.countTeacher = ($scope.presentTeacher + $scope.absentTeacher + $scope.leaveTeacher);
                     // console.log($scope.countTeacher)
                     // console.log($scope.present);
                     // console.log($scope.leave);
                     // console.log($scope.absent);
 
-                    $scope.presentPercentageTeacher = Math.round(($scope.presentTeacher * 100) / $scope.countTeacher) + '%';
-                    $scope.leavePercentageTeacher = Math.round(($scope.leaveTeacher * 100) / $scope.countTeacher) + '%';
-                    $scope.absentPercentageTeacher = Math.round(($scope.absentTeacher * 100) / $scope.countTeacher) + '%';
+                    $scope.presentPercentageTeacher = (($scope.present * 100) / $scope.count) + '%';
+                    $scope.leavePercentageTeacher = (($scope.leave * 100) / $scope.count) + '%';
+                    $scope.absentPercentageTeacher = (($scope.absent * 100) / $scope.count) + '%';
                     // console.log($scope.presentPercentageTeacher);
                     // console.log($scope.leavePercentageTeacher);
                     // console.log($scope.absentPercentageTeacher);
@@ -492,9 +505,9 @@ angular.module('school_erp')
                     //    console.log($scope.leave);
                     //    console.log($scope.absent);
 
-                    $scope.presentPercentageNonTeacher = Math.round(($scope.presentNonTeacher * 100) / $scope.countNonTeacher) + '%';
-                    $scope.leavePercentageNonTeacher = Math.round(($scope.leaveNonTeacher * 100) / $scope.countNonTeacher) + '%';
-                    $scope.absentPercentageNonTeacher = Math.round(($scope.absentNonTeacher * 100) / $scope.countNonTeacher) + '%';
+                    $scope.presentPercentageNonTeacher = (($scope.presentNonTeacher * 100) / $scope.countNonTeacher) + '%';
+                    $scope.leavePercentageNonTeacher = (($scope.leaveNonTeacher * 100) / $scope.countNonTeacher) + '%';
+                    $scope.absentPercentageNonTeacher = (($scope.absentNonTeacher * 100) / $scope.countNonTeacher) + '%';
                     //    console.log($scope.presentPercentageNonTeacher);
                     //    console.log($scope.leavePercentageNonTeacher);
                     //    console.log($scope.absentPercentageNonTeacher)
@@ -573,9 +586,9 @@ angular.module('school_erp')
                     //    console.log($scope.leave);
                     //    console.log($scope.absent);
 
-                    $scope.presentPercentageAdmin = Math.round(($scope.presentAdmin * 100) / $scope.countAdmin) + '%';
-                    $scope.leavePercentageAdmin = Math.round(($scope.leaveAdmin * 100) / $scope.countAdmin) + '%';
-                    $scope.absentPercentageAdmin = Math.round(($scope.absentAdmin * 100) / $scope.countAdmin) + '%';
+                    $scope.presentPercentageAdmin = (($scope.presentAdmin * 100) / $scope.countAdmin) + '%';
+                    $scope.leavePercentageAdmin = (($scope.leaveAdmin * 100) / $scope.countAdmin) + '%';
+                    $scope.absentPercentageAdmin = (($scope.absentAdmin * 100) / $scope.countAdmin) + '%';
                     //   console.log($scope.presentPercentageAdmin);
                     //   console.log($scope.leavePercentageAdmin);
                     //   console.log($scope.absentPercentageAdmin)
@@ -2008,6 +2021,7 @@ angular.module('school_erp')
         else {
             $scope.getClassesInitalLoad();
             $scope.sessionTimings();
+            $scope.getQuotes();
 
             $scope.getAttedanceByCategoryTeaching();
             $scope.getAttedanceByCategoryNonTeaching();

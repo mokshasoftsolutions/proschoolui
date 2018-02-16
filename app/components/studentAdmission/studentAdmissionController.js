@@ -3,6 +3,7 @@ angular.module('school_erp')
         $scope.classData = [];
         $scope.data = [];
         $scope.busRoutes = [];
+        $scope.data.admission_date = new Date().toDateString();
         BusRouteServices.getBusRoute()
             .success(function (data, status) {
                 //   console.log(JSON.stringify(data));
@@ -13,13 +14,6 @@ angular.module('school_erp')
             })
 
 
-        //   BusRouteServices.getTime('ROUTE-1','STN-1')
-        // .success(function(data, status){
-        //     $scope.busRoutes = data.station_bus_routes;
-        //     $scope.routeId = $scope.busRoutes[0].route_id;
-        // })
-        // .error(function(data,success){
-        // })
 
         globalServices.getClass()
             .success(function (data, status) {
@@ -52,166 +46,67 @@ angular.module('school_erp')
             })
 
 
-        // $scope.addStudent = function (data) {
-        //     var stdAdmission = {
-        //         surname: $scope.data.surname,
-        //         first_name: $scope.data.first_name,
-        //         last_name: $scope.data.last_name,
-        //         gender: $scope.data.gender,
-        //         religion: $scope.data.religion,
-        //         dob: $scope.data.dob,
-        //         aadhar_no: $scope.data.aadhar_no,
-        //         phone: $scope.data.phone,
-        //         email: $scope.data.email,
-        //         category: $scope.data.category,
-        //         admission_date: $scope.data.admission_date,
-        //         admission_no: $scope.data.admission_no,
-        //         roll_no: $scope.data.roll_no,
-        //         academic_year: $scope.data.academic_year,
-        //         bus_route_id: $scope.data.routeId,
-        //         cur_address: $scope.data.cur_address,
-        //         cur_city: $scope.data.cur_city,
-        //         cur_state: $scope.data.cur_state,
-        //         cur_pincode: $scope.data.cur_pincode,
-        //         cur_long: $scope.data.cur_long,
-        //         cur_lat: $scope.data.cur_lat,
-        //         perm_address: $scope.data.perm_address,
-        //         perm_city: $scope.data.perm_city,
-        //         perm_state: $scope.data.perm_state,
-        //         perm_pincode: $scope.data.perm_pincode,
-        //         perm_long: $scope.data.perm_long,
-        //         perm_lat: $scope.data.perm_lat,
-        //         father_name: $scope.data.father_name,
-        //         father_contact: $scope.data.father_contact,
-        //         father_occupation: $scope.data.father_occupation,
-        //         mother_name: $scope.data.mother_name,
-        //         mother_contact: $scope.data.mother_contact,
-        //         mother_occupation: $scope.data.mother_occupation,
-        //         gaurdian_name: $scope.data.gaurdian_name,
-        //         gaurdian_contact: $scope.data.gaurdian_contact,
-        //         gaurdian_relation: $scope.data.gaurdian_relation,
-        //         gaurdian_address: $scope.data.gaurdian_address,
-        //         gaurdian_occupation: $scope.data.gaurdian_occupation,
-        //         parent_account_create: $scope.data.parentAccount,
-        //         parent_account_new: $scope.data.parentAccountCreate,
-        //         parent_id: $scope.data.parentId
-
-        //     }
-        //         console.log(stdAdmission);
-        //     studentServices.setStudent(stdAdmission, $scope.secId)
-        //         .success(function (data, status) {
-        //             // $scope.addParent(data.id);
-        //             ngDialog.open({
-        //                 template: '<p> Student Information  submitted successfully </p>',
-        //                 plain: true
-        //             });
-        //             $scope.data = [];
-
-        //         })
-        //         .error(function (data, success) {
-        //             ngDialog.open({
-        //                 template: '<p>Some Error Occured!</p>',
-        //                 plain: true
-        //             });
-        //         })
-        // }
-
-
-        $scope.addParent = function (studentId) {
-            var parentDetails = {
-                parent_name: $scope.parent[0].parent_name,
-                parent_contact: $scope.parent[0].parent_contact,
-                parent_relation: $scope.parent[0].parent_relation
-            }
-
-            studentServices.setParent(parentDetails, studentId)
-                .success(function (data, status) {
-                    // ngDialog.open({
-                    // template: '<p>Student Information  submitted successfully </p>',
-                    // plain: true
-                    // });
-                    $scope.parent = [];
-                })
-                .error(function (data, success) {
-                    ngDialog.open({
-                        template: '<p>Some Error Occured!</p>',
-                        plain: true
-                    });
-                })
-
-        }
-
-        $scope.addStudentaddress = function (studentId) {
-            var parentDetails = {
-                cur_address: $scope.Studentaddress.cur_address,
-                perm_address: $scope.Studentaddress.perm_address,
-                bus_route_id: $scope.Studentaddress.bus_route_id,
-                Aadhaar_no: $scope.Studentaddress.Aadhaar_no
-            }
-
-            studentServices.setStudentaddress(Studentaddress, studentId)
-                .success(function (data, status) {
-                    ngDialog.open({
-                        template: '<p>Student Information  submitted successfully </p>',
-                        plain: true
-                    });
-                    $scope.parent = [];
-                })
-                .error(function (data, success) {
-                    ngDialog.open({
-                        template: '<p>Some Error Occured!</p>',
-                        plain: true
-                    });
-                })
-
-        }
-
         $scope.selectedFile = null;
 
         $scope.loadImage = function (files) {
 
-            //    console.log("messsage1");
+            
             $scope.$apply(function () {
 
                 $scope.selectedFile = files[0];
-                // console.log($scope.selectedFile);
+                
                 $scope.message = "";
                 if ($scope.selectedFile.type != "image/jpeg" && $scope.selectedFile.type != "image/png") {
-                    //     ngDialog.open({
-                    //         template: '<p> Not a Image File </p>',
-                    //         plain: true
-                    //     });
-                    //    $window.alert("Not a Image File");
+
                     $scope.message = "Not a Image File !..";
                 }
 
                 else if ($scope.selectedFile.size >= "1048576") {
                     $scope.message = "Image size exceed..(below 1MB)";
 
+                } else {
+                    $scope.handleFiles($scope.selectedFile);
                 }
             })
 
         }
-        $scope.handleImage = function (data) {
-            // console.log("messsage2");
-            var file = $scope.selectedFile;
-            //console.log(file);
-            $scope.saveImage(file, data, $scope.secId);
-
-
+        $scope.files = [];
+        $scope.handleFiles = function (file) {
+            $scope.files.push(file);
 
         }
+       
 
 
-        $scope.saveImage = function (file, data, secId) {
+        $scope.data.choices = [{ id: 'choice0' }];
+     
+        $scope.addNewChoice = function () {
+            var newItemNo = $scope.data.choices.length + 1;
 
-            // console.log(stdAdmission);
-            // console.log("messsage3");
-            // console.log(file);
+            $scope.data.choices.push({ 'id': 'choice' + newItemNo });
 
+        };
+
+        $scope.removeChoice = function () {
+            var lastItem = $scope.data.choices.length - 1;
+            $scope.data.choices.splice(lastItem);
+            $scope.files.splice(-1, 1);
+        
+            documentLength = $scope.files.length;
+            console.log(documentLength);
+        };
+
+        $scope.handleImage = function (data) {
+
+
+            console.log($scope.files);
             var fd = new FormData();
-            fd.append('file', file);
-            //fd.append('stdAdmission', stdAdmission);
+            for (var i in $scope.files) {
+                fd.append("files", $scope.files[i]);
+            }
+
+
+
             fd.append('first_name', $scope.data.first_name);
             fd.append('last_name', $scope.data.last_name);
             fd.append('gender', $scope.data.gender);
@@ -253,14 +148,8 @@ angular.module('school_erp')
             fd.append('mother_email', $scope.data.motheremail);
 
             fd.append('gaurdian_email', $scope.data.gaurdianemail);
-            // fd.append('parent_account_create', $scope.data.parentAccount);
-            // fd.append('parent_account_new', $scope.data.parentAccountCreate);
 
-            //     console.log($scope.data.parentAccount);
-            //     console.log($scope.data.parentAccountCreate);
-
-            //      console.log(JSON.stringify(fd));
-            $http.post(globalServices.globalValue.baseURL + 'api/students/' + secId, fd, {
+            $http.post(globalServices.globalValue.baseURL + 'api/students/' + $scope.secId, fd, {
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }
             })
@@ -270,7 +159,8 @@ angular.module('school_erp')
                         plain: true
                     });
                     $scope.data = [];
-                    $scope.selectedFile = null;
+                    $scope.files = [];
+                    $scope.choices = [{ id: 'choice0' }];
 
                 })
                 .error(function () {
@@ -282,95 +172,11 @@ angular.module('school_erp')
         }
 
 
-
-        $scope.selectedDoc = null;
-        $scope.loadDocument = function (files) {
-
-            //    console.log("messsage1");
-            $scope.$apply(function () {
-
-                $scope.selectedDoc = files[0];
-                console.log($scope.selectedDoc);
-                $scope.message = "";
-                if ($scope.selectedDoc.type != "image/jpeg" && $scope.selectedDoc.type != "image/png") {
-                    //     ngDialog.open({
-                    //         template: '<p> Not a Image File </p>',
-                    //         plain: true
-                    //     });
-                    //    $window.alert("Not a Image File");
-                    $scope.message = "Not a Image File !..";
-                }
-
-                else if ($scope.selectedDoc.size >= "1048576") {
-                    $scope.message = "Image size exceed..(below 1MB)";
-
-                }
-            })
-
-        }
-
-        $scope.choices = [{ id: 'choice0' }];
-        documents = [];
-
-        $scope.addNewChoice = function () {
-            var newItemNo = $scope.choices.length + 1;
-
-            $scope.choices.push({ 'id': 'choice' + newItemNo });
-            documents.push($scope.selectedDoc);
-            documentLength = documents.length;
-            // console.log(newItemNo);
-            // console.log(documents);
-            //console.log(documentLength);
-
-        };
-
-        $scope.removeChoice = function () {
-            var lastItem = $scope.choices.length - 1;
-            $scope.choices.splice(lastItem);
-            documents.splice(-1, 1);
-            // console.log(documents);
-            documentLength = documents.length;
-            //console.log(documentLength);
-        };
-
-
-        $scope.addDocuments = function () {
-
-            // $scope.addDocuments = function (documents, documentLength) {
-            //     //documents.push($scope.selectedDoc);
-            console.log(documents);
-            console.log(documentLength);
-
-            var fd = new FormData();
-            fd.append('file', documents);
-            fd.append('length', documentLength)
-            // fd.append('secId', 'string');
-            $http.post(globalServices.globalValue.baseURL + 'api/bulk_upload_students/', fd, {
-                transformRequest: angular.identity,
-                headers: { 'Content-Type': undefined }
-            })
-                .success(function () {
-                    ngDialog.open({
-                        template: '<p>File Added Successfully.</p>',
-                        plain: true
-                    });
-
-                })
-                .error(function () {
-                    ngDialog.open({
-                        template: '<p>Some Error Occured!.</p>',
-                        plain: true
-                    });
-                });
-        }
-
-
-        // }
-
+        // for Excel Upload
 
         $scope.loadFile = function (files) {
 
-            //   console.log("messsage1");
+       
             $scope.$apply(function () {
 
                 $scope.selectedFile = files[0];
@@ -380,11 +186,9 @@ angular.module('school_erp')
         }
 
         $scope.handleFile = function (secId) {
-            //   console.log("messsage2");
+          
             var file = $scope.selectedFile;
-            // console.log(file);
-            // console.log(file.name);
-            // console.log(file.type);
+
             if (file == undefined || file == null) {
                 ngDialog.open({
                     template: '<p>Please Select a File </p>',
@@ -404,50 +208,14 @@ angular.module('school_erp')
             }
 
 
-            // if (file) {
-
-            //     var reader = new FileReader();
-
-            //     reader.onload = function (e) {
-
-            //         var data = e.target.result;
-
-            //         var workbook = XLSX.read(data, { type: 'binary' });
-
-            //         var first_sheet_name = workbook.SheetNames[0];
-
-            //         var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);
-
-            //         //console.log(excelData);  
-
-            //         if (dataObjects.length > 0) {
-
-
-            //             $scope.save(dataObjects);
-
-
-            //         } else {
-            //             $scope.msg = "Error : Something Wrong1 !";
-            //         }
-
-            //     }
-
-            //     reader.onerror = function (ex) {
-
-            //     }
-
-            //     reader.readAsBinaryString(file);
-            // }
         }
 
 
         $scope.save = function (file, secId) {
-            //   console.log("messsage3");
-            //   console.log(file);
 
             var fd = new FormData();
             fd.append('file', file);
-            // fd.append('secId', 'string');
+            
             $http.post(globalServices.globalValue.baseURL + 'api/bulk_upload_students/' + secId, fd, {
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }
@@ -467,6 +235,8 @@ angular.module('school_erp')
                 });
         }
 
+
+        // for Role
 
         $scope.showRole = function (role) {
             return globalServices.fetchRoleAuth(role);

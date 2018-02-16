@@ -1,7 +1,7 @@
 angular.module('school_erp')
     .controller("studentProfileController", ['$http', '$scope', '$rootScope', '$stateParams', 'studentServices', 'globalServices', 'studentProfileServices', 'ngDialog', function ($http, $scope, $rootScope, $stateParams, studentServices, globalServices, studentProfileServices, ngDialog) {
         $scope.studentData = [];
-
+        $scope.globalServicesURL = globalServices.globalValue.baseURL;
         //$scope.editdata= [];
 
         //  $scope.getClassesInitalLoad = function () {
@@ -63,6 +63,16 @@ angular.module('school_erp')
         //         imageId.style.borderRadius = "97px";
         //     }
         // }
+        $scope.zoom = function (value) {
+            var imageId = document.getElementById('view'+value);
+            if (imageId.style.width == "400px") {
+                imageId.style.width = "50px";
+                imageId.style.height = "50px";
+            } else {
+                imageId.style.width = "400px";
+                imageId.style.height = "400px";
+            }
+        }
 
         $scope.studentDetails = [];
         // console.log(student);
@@ -83,6 +93,9 @@ angular.module('school_erp')
                     // $scope.section = $scope.studentDetails.section_id;
                     //$scope.studentPhoto=globalServices.globalValue.baseURL+$scope.studentDetails.studentImage[0].imagePath;
                     $rootScope.studentPhoto = globalServices.globalValue.baseURL + 'api/image/' + $scope.studentDetails[0].studentImage[0].filename;
+
+
+                    //   $rootScope.studentDocument = globalServices.globalValue.baseURL + 'api/image/' + $scope.studentDocuments[0][0].filename;
                     //$scope.studentPhoto=globalServices.globalValue.baseURL+"uploads"+'/'+"Jellyfish.jpg";
                     //   console.log($rootScope.studentPhoto);
                     // $scope.splited=$scope.studentPhoto.split('\\');
@@ -631,7 +644,7 @@ angular.module('school_erp')
         //         onrendered: function (canvas) {
         //             var zingchart=canvas.toDataURL("image/png");
         //             var doc =new jsPDF();
-                    
+
 
         //             doc.addImage(zingchart,'JPEG',20,20);
         //            // var data = canvas.toDataURL();
@@ -652,7 +665,7 @@ angular.module('school_erp')
 
         $scope.generatePDF = function () {
             $scope.pdf = true;
-            console.log("pdf message1");
+            // console.log("pdf message1");
             html2canvas(document.getElementById('exportthis'), {
                 onrendered: function (canvas) {
                     var data = canvas.toDataURL();
@@ -662,7 +675,7 @@ angular.module('school_erp')
                             width: 480,
                         }]
                     };
-                    console.log("pdf message2");
+                    // console.log("pdf message2");
 
                     pdfMake.createPdf(docDefinition).download("StudentAttendanceByMonth_Report.pdf");
                     $scope.getAttendenceByMonth($scope.select_month, $stateParams.student);
@@ -679,7 +692,7 @@ angular.module('school_erp')
         //         onrendered: function (canvas) {
         //             var img=canvas.toDataURL("image/png");
         //             var doc =new jsPDF();
-                    
+
 
         //             doc.addImage(img,'JPEG',20,20);
         //             // var docDefinition = {
@@ -709,8 +722,8 @@ angular.module('school_erp')
             $scope.$apply(function () {
 
                 $scope.selectedFile = files[0];
-                console.log($scope.selectedFile);
-                $scope.message="";
+                //   console.log($scope.selectedFile);
+                $scope.message = "";
                 if ($scope.selectedFile.type != "image/jpeg" && $scope.selectedFile.type != "image/png") {
                     //     ngDialog.open({
                     //         template: '<p> Not a Image File </p>',
@@ -719,8 +732,8 @@ angular.module('school_erp')
                     //    $window.alert("Not a Image File");
                     $scope.message = "Not a Image File !..";
                 }
-                                                     
-                else if($scope.selectedFile.size >= "1048576") {
+
+                else if ($scope.selectedFile.size >= "1048576") {
                     $scope.message = "Image size exceed..(below 1MB)";
 
                 }
@@ -728,9 +741,10 @@ angular.module('school_erp')
 
         }
 
-        // Add attendance single
-        $scope.editStudentImage = function () {
-            console.log($scope.selectedFile);
+
+
+        $scope.editStudentDocument = function (name) {
+            // console.log($scope.selectedFile);
             if ($rootScope.role == 'parent') {
                 //     console.log("parent login");
                 //   console.log($rootScope.student.student_id);
@@ -741,6 +755,44 @@ angular.module('school_erp')
                 $scope.student_id = $stateParams.student;
             }
             var file = $scope.selectedFile;
+            console.log(file);
+            var fd = new FormData();
+            fd.append('file', file);
+
+            studentProfileServices.editStudentDocument(fd, $scope.student_id,name)
+                .success(function (data, status) {
+
+                    ngDialog.open({
+                        template: '<p> Student Image editted successfully </p>',
+                        plain: true
+                    });
+                    $scope.data = [];
+                    $scope.selectedFile = null;
+                    $scope.getStudentById($scope.student_id);
+
+                })
+                .error(function (data, success) {
+                    ngDialog.open({
+                        template: '<p>Some Error Occured!</p>',
+                        plain: true
+                    });
+                })
+        }
+
+        // Add attendance single
+        $scope.editStudentImage = function () {
+            // console.log($scope.selectedFile);
+            if ($rootScope.role == 'parent') {
+                //     console.log("parent login");
+                //   console.log($rootScope.student.student_id);
+
+                $scope.student_id = $rootScope.student.student_id;
+            }
+            else {
+                $scope.student_id = $stateParams.student;
+            }
+            var file = $scope.selectedFile;
+            console.log(file);
             var fd = new FormData();
             fd.append('file', file);
 
@@ -768,17 +820,17 @@ angular.module('school_erp')
 
 
         $scope.EditStudent_details = function (value, student) {
-            console.log("edit_student")
+            //   console.log("edit_student")
             $scope.student = angular.copy($scope.studentDetails[value]);
             var student_details = {
                 admission_no: $scope.student.admission_no,
-                class_name:$scope.student.school_classes[0].name,
-                section_name:$scope.student.sections[0].name,
+                class_name: $scope.student.school_classes[0].name,
+                section_name: $scope.student.sections[0].name,
                 surname: $scope.student.surname,
                 first_name: $scope.student.first_name,
                 last_name: $scope.student.last_name,
                 gender: $scope.student.gender,
-                religion: $scope.student.religion,  
+                religion: $scope.student.religion,
                 dob: $scope.student.dob,
                 aadhar_no: $scope.student.aadhar_no,
                 phone: $scope.student.phone,
@@ -788,7 +840,7 @@ angular.module('school_erp')
                 roll_no: $scope.student.roll_no,
                 academic_year: $scope.student.academic_year,
                 // bus_route_id: $scope.student.routeId,
-                blood_group:$scope.student.blood_group,
+                blood_group: $scope.student.blood_group,
                 cur_address: $scope.student.current_address[0].cur_address,
                 // cur_city: $scope.student.cur_city,
                 // cur_state: $scope.student.cur_state,
@@ -820,7 +872,7 @@ angular.module('school_erp')
 
             }
             //  console.log(JSON.stringify($scope.student));
-            console.log(student_details);
+            //   console.log(student_details);
             $scope.student_id = $scope.student.student_id;
             //  console.log($scope.student_id);
 

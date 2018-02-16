@@ -140,14 +140,14 @@
 
                             </div>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label>Fee Type</label>
                                 <select class="form-control select2" style="width: 100%;" name="section" ng-model="feeTypeId" ng-options="type.fee_types_id as type.fee_type  for type in feeType">
                                     <option selected value="">--Select--</option>
 
                                 </select>
                                 
-                            </div>
+                            </div> -->
 
                             <div class="box-footer">
                                 <button type="button" ng-click="getFeeByDay(select_date)" class="btn btn-primary pull-right" style="background-color: #03104e;border-color: #03104e; margin-top:35px;">Search</button>
@@ -165,29 +165,29 @@
                                             <th>#</th>
                                             <th>Student</th>
                                             <th>Fee Type</th>
-                                            <th>Total Fee</th>
+                                            <!-- <th>Total Fee</th> -->
                                             <th>Fee Paid</th>
                                             <th>Payment Mode</th>                                        
                                             <th>Discount</th>
                                             <th>Fine</th>
-                                            <th>Due Date</th>
+                                            <!-- <th>Due Date</th> -->
                                             <th>Fee Paid Date</th>
                                           
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr st-select-row="row" st-select-mode="multiple" ng-repeat="collectFeeDate in display_recordsfee | filter:feeTypeId:true">
+                                        <tr st-select-row="row" st-select-mode="multiple" ng-repeat="collectFeeDate in display_recordsfee ">
                                             <td>{{collectFeeDate.id+1}}</td>
                                             <td>{{collectFeeDate.student_name }}</td>
                                             <td>{{collectFeeDate.fee_type}}</td>
-                                            <td>{{collectFeeDate.totalFee}}</td>
+                                            <!-- <td>{{collectFeeDate.totalFee}}</td> -->
                                             <td>{{collectFeeDate.fee_paid}}</td>
                                             <td>{{collectFeeDate.payment_mode}}</td>
                                           
                                             <td>{{collectFeeDate.discount}}</td>
                                             <td>{{collectFeeDate.fine}}</td>
-                                            <td>{{collectFeeDate.DueDate | date}}</td>
+                                            <!-- <td>{{collectFeeDate.DueDate | date}}</td> -->
                                             <td>{{collectFeeDate.current_date | date}}</td>
                                             <!-- <td>{{parseInt(collectFee.fee_amount)-((parseInt(collectFee.fee_paid)+parseInt(collectFee.fine))-(parseInt(collectFee.discount)))}}</td> -->
                                             <!--<td class="pull-right">

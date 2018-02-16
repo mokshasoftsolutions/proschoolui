@@ -3,25 +3,30 @@
     <h1>Admin Management</h1>
     <ul class="links">
       <li ui-sref-active="active">
-          <a ui-sref='main.schoolProfile'>School Profile</a>
+        <a ui-sref='main.schoolProfile'>School Profile</a>
       </li>
-      <li ui-sref-active="active" >
+      <li ui-sref-active="active">
 
-         / <a ui-sref='main.addClass&Section'>Class&Section</a>
+        /
+        <a ui-sref='main.addClass&Section'>Class&Section</a>
       </li>
       <li ui-sref-active="active" ng-show="showRole(['admin'])">
-          /<a ui-sref='main.parentInfo'>ParentInfo</a>
+        /
+        <a ui-sref='main.parentInfo'>ParentInfo</a>
       </li>
       <li ui-sref-active="active" ng-show="showRole(['admin'])">
-         / <a ui-sref='main.teacherInfo' >TeacherInfo</a>
+        /
+        <a ui-sref='main.teacherInfo'>TeacherInfo</a>
       </li>
       <li ui-sref-active="active" ng-show="showRole(['admin','teacher'])">
-          /<a ui-sref='main.taskManagement'>TaskManagement</a>
+        /
+        <a ui-sref='main.taskManagement'>TaskManagement</a>
       </li>
       <li ui-sref-active="active" ng-show="showRole(['admin'])">
-        /<a ui-sref='main.quote'>Quote & Word</a>
-    </li>
-  </ul>
+        /
+        <a ui-sref='main.quote'>Quote & Word</a>
+      </li>
+    </ul>
   </div>
 </div>
 
@@ -92,50 +97,52 @@
       
      
           <li class="col-md-6"> -->
-            <div class="table-responsive" style="width:100%">
-              <table export-table st-table="display_records" st-safe-src="parentBox" style="width:100%">
-            <thead>
-              <tr>
-                <th>#</th>
-                <!-- <th>ParentId</th> -->
-                <th>Student Name</th>
-                <th>Parent Name</th>
-                <!-- <th>SchoolId</th> -->
-                <th>User Name</th>
-                <th>Password</th>
+          <div class="table-responsive" style="width:100%">
+            <table export-table st-table="display_records" st-safe-src="parentBox" style="width:100%">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <!-- <th>ParentId</th> -->
+                  <th>Student Name</th>
+                  <th>Parent Name</th>
+                  <!-- <th>SchoolId</th> -->
+                  <th>User Name</th>
+                  <th>Password</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr st-select-row="row" st-select-mode="multiple" ng-repeat="parent in display_records">
+                  <td>{{parent.id+1}}</td>
+                  <td>
 
-              </tr>
-            </thead>
-            <tbody>
-              <tr st-select-row="row" st-select-mode="multiple" ng-repeat="parent in display_records">
-                <td>{{parent.id+1}}</td>
-                <td>
+                    {{parent.first_name}} {{parent.last_name}}
+                  </td>
 
-                  {{parent.first_name}} {{parent.last_name}}
-                </td>
-
-                <td>
-                  {{parent.parent_name}}
-                </td>
+                  <td>
+                    {{parent.parent_name}}
+                  </td>
 
 
-                <td>
-                  {{parent.parent_id | lowercase}}
-                </td>
-                <td>
-                  {{parent.parent_id | lowercase}}
-                </td>
-
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="5" class="text-center">
-                  <div class="pull-right" st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
-                </td>
-              </tr>
-            </tfoot>
-          </table>
+                  <td>
+                    {{parent.parent_id | lowercase}}
+                  </td>
+                  <td>
+                    {{parent.parent_id | lowercase}}
+                  </td>
+                  <td>
+                    <button class="btn btn-primary" type="submit">Send</button>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="5" class="text-center">
+                    <div class="pull-right" st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
 
           </div>
           <!-- </li> -->

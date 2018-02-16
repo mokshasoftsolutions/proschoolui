@@ -130,7 +130,7 @@ angular.module('school_erp')
             feeTypeServices.DeleteFeeType($scope.fee_types_id)
                 .success(function (data, status) {
                     ngDialog.open({
-                        template: '<p>Chapter is Deleted Successfully.</p>',
+                        template: '<p>FeeType is Deleted Successfully.</p>',
                         plain: true
                     });
                     $scope.editdata = [];

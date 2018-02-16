@@ -1,26 +1,6 @@
 angular.module('school_erp')
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
-        // $httpProvider.responseInterceptors.push(function ($q, $rootScope) {
 
-        //     return function (promise) {
-        //         $rootScope.$broadcast("event:startProgress");
-        //         return promise
-        //             .then(
-        //             function (response) {
-        //                 $rootScope.$broadcast("event:endProgress");
-        //                 return response;
-        //             },
-        //             function (response) { //on error
-        //                 $rootScope.$broadcast("event:endProgress");
-        //                 return $q.reject(response);
-        //             }
-        //             )
-
-        //     }
-        // })
-
-        // ChartJsProvider
-        // ChartJsProvider.setOptions({ colors : [ '#803690', '#00ADF9', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'] });
         $stateProvider
             // .state('login', { // login Page
             //     url: "/login",
@@ -112,7 +92,7 @@ angular.module('school_erp')
             .state('main.session_timings', {
                 url: "session_timings",
                 templateUrl: "app/components/session_timings/session_timings.html",
-                controller:"sessionController",
+                controller: "sessionController",
                 date: {
                     requireLogin: true
                 }
@@ -121,7 +101,7 @@ angular.module('school_erp')
             .state('main.pay_bands', {
                 url: "pay_bands",
                 templateUrl: "app/components/pay_bands/pay_bands.html",
-                controller:"PaybandController",
+                controller: "PaybandController",
                 date: {
                     requireLogin: true
                 }
@@ -156,7 +136,7 @@ angular.module('school_erp')
             .state('main.quote', {
                 url: "quote",
                 templateUrl: "app/components/addWord/word.html",
-                controller:"addWordController",
+                controller: "addWordController",
                 date: {
                     requireLogin: true
                 }
@@ -186,7 +166,7 @@ angular.module('school_erp')
                 data: {
                     requireLogin: true
                 }
-               
+
             })
             // .state('main.studentDetails', { // login Page
             //     url: "studentInfo/studentDetails",
@@ -271,7 +251,7 @@ angular.module('school_erp')
                 }
             })
 
-            
+
 
 
             .state('main.subjects', { // login Page
@@ -323,7 +303,7 @@ angular.module('school_erp')
                     requireLogin: true
                 }
             })
-               .state('main.marks', { // login Page
+            .state('main.marks', { // login Page
                 url: "assignments/marks",
                 templateUrl: "app/components/marks/marks.html",
                 controller: "marksController",
@@ -515,7 +495,7 @@ angular.module('school_erp')
             .state('main.payroll', {
                 url: "HR/payroll",
                 templateUrl: "app/components/payroll/payroll.html",
-               // controller: "payrollController",
+                // controller: "payrollController",
                 data: {
                     requireLogin: true
                 }
@@ -574,15 +554,3 @@ angular.module('school_erp')
         $urlRouterProvider.otherwise("/login_page");
 
     })
-//     .service("progress", ["$rootScope", "ngProgress", function($rootScope, ngProgress){
-//     $rootScope.$on("event:endProgress", function(){
-//       console.log("End progress");
-//       ngProgress.complete();
-//     // ngProgress.reset();
-//     });
-//     $rootScope.$on("event:startProgress", function(){
-//       console.log("Start progress");
-//       ngProgress.reset();
-//       ngProgress.start();
-//     })
-//   }])

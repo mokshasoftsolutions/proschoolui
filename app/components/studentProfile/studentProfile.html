@@ -36,180 +36,219 @@
   <div class="tab-pane no-padding active" id="tab_1" ng-repeat="student in studentDetails">
     <div class="container">
       <div class="studentprofile">
-        <h1>Admission details</h1>
-        <form editable-form name="rowform3" ng-show="rowform3.$visible" class="form-buttons form-inline" shown="inserted == student">
-          <button type="submit" ng-click="EditStudent_details($index)" ng-disabled="rowform3.$waiting" class="btn btn-primary editable-table-button btn-xs">
-            <i class="fa fa-check"></i>
-          </button>
-          <button type="button" ng-disabled="rowform3.$waiting" ng-click="rowform3.$cancel()" class="btn btn-default editable-table-button btn-xs">
-            <i class="fa fa-remove"></i>
-          </button>
-        </form>
-        <div class="buttons" ng-show="!rowform3.$visible" >
-          <button ng-show="showRole(['admin','parent'])" class="btn btn-primary editable-table-button btn-xs" ng-click="rowform3.$show()">
-            <i class="fa fa-pencil"></i>
-          </button>
-        </div>
+
+
         <div class="col-md-12">
           <div class="admissiondetails">
-            <div class="col-md-12">
+            <!-- <div class="col-md-12"> -->
+
+            <div class="col-md-3">
+              <h1 id="stupro">Student Profile</h1>
+              <!-- <div class="table-responsive">
+                <table class="table table-bordered" style="width:100">
+                  <thead>
+                    <tr>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="stu1 in student.studentImage">
+                      <td>
+                          <img  ng-src="{{studentPhoto}}" alt="">
+                          <form editable-form name="rowformImage" ng-show="rowformImage.$visible" class="form-buttons form-inline" shown="inserted == student">
+
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <input type="file" name="file" ng-model="data.logo" ngf-select ngf-pattern="'image/*'" accept="image/*" ngf-max-size="5MB"
+                                    onchange="angular.element(this).scope().loadFile(this.files)">
+                                  <p style="color:#9e0707"> {{message}} </p>
+          
+          
+                                </div>
+                              </div>
+                              <button type="submit" ng-click="editStudentImage()" ng-disabled="rowformImage.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                                <i class="fa fa-check"></i>
+                              </button>
+                              <button type="button" ng-disabled="rowformImage.$waiting" ng-click="rowformImage.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                                <i class="fa fa-remove"></i>
+                              </button>
+          
+                            </form>
+                            <div class="buttons" ng-show="!rowformImage.$visible">
+                              <button ng-show="showRole(['admin','parent'])" class="btn btn-primary editable-table-button btn-xs" ng-click="rowformImage.$show()">
+                                <i class="fa fa-pencil"></i>
+                              </button>
+                            </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div> -->
+              <div class="studentimage">
+                <div class="tooltip">
+                
+                  <span editable-text="student.image" e-name="editdata.student" e-form="rowformImage" e-required>
+                      <img  ng-src="{{studentPhoto}}" alt="">
+                  </span>
+                  <form editable-form name="rowformImage" ng-show="rowformImage.$visible" class="form-buttons form-inline" shown="inserted == student">
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input type="file" name="file" ng-model="data.logo" ngf-select ngf-pattern="'image/*'" accept="image/*" ngf-max-size="5MB"
+                          onchange="angular.element(this).scope().loadFile(this.files)">
+                        <p style="color:#9e0707"> {{message}} </p>
 
 
-
-              <div class="col-md-9">
-                <div class="table-responsive">
-                  <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered" style="width:100">
-                    <thead>
-                      <tr>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <b>Admission Number :</b>
-                          <span editable-text="student.admission_no" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
-                            e-required>{{student.admission_no || 'empty' }}</span>
-                        </td>
-
-                        <td>
-                          <b>Class :</b>
-                          <span editable-text="student.school_classes[0].name" e-name="editdata.student" onaftersave="EditStudent_details($index)"
-                            e-form="rowform3" e-required>{{student.school_classes[0].name || 'empty' }}</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <b>Roll No :</b>
-                          <span editable-text="student.roll_no" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
-                            e-required>{{student.roll_no || 'empty' }}</span>
-                        </td>
-
-                        <td>
-                          <b>First Name :</b>
-                          <span editable-text="student.first_name" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
-                            e-required>{{student.first_name || 'empty' }}</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <b>Gender :</b>
-                          <span editable-text="student.gender" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
-                            e-required>{{student.gender || 'empty' }}</span>
-                        </td>
-                        <td>
-                          <b>Surname :</b>
-                          <span editable-text="student.last_name" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
-                            e-required>{{student.last_name || 'empty' }}</span>
-                        </td>
-
-                      </tr>
-                      <tr>
-                        <td>
-                          <b>Contact :</b>
-                          <span editable-text="student.phone" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
-                            e-required>{{student.phone || 'empty' }}</span>
-                        </td>
-
-                        <td>
-                          <b>Blood Group :</b>
-                          <span editable-text="student.blood_group" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
-                            e-required>{{student.blood_group || 'empty' }}</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <b>Date of Admission :</b>
-                          <span editable-text="student.admission_date" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
-                            e-required>{{student.admission_date || 'empty' }}</span>
-                        </td>
-
-                        <td>
-                          <b>Section :</b>
-                          <span editable-text="student.sections[0].name" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
-                            e-required>{{student.sections[0].name || 'empty' }}</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <b>Aadhar No :</b>
-                          <span editable-text="student.aadhar_no" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
-                            e-required>{{student.aadhar_no || 'empty' }}</span>
-                        </td>
-
-                        <td>
-                          <b>Category :</b>
-                          <span editable-text="student.category" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
-                            e-required>{{student.category || 'empty' }}</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <b>DOB :</b>
-                          <span editable-text="student.dob" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3" e-required>{{student.dob || 'empty' }}</span>
-                        </td>
-
-                        <td>
-                          <b>Religion :</b>
-                          <span editable-text="student.religion" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
-                            e-required>{{student.religion || 'empty' }}</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <b>Email ID :</b>
-                          <span editable-text="student.email" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
-                            e-required>{{student.email || 'empty' }}</span>
-                        </td>
-
-                        <td>
-                          <b>Bus Route :</b>
-                          <span editable-text="student.bus_route_id" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
-                            e-required>{{student.bus_route_id || 'empty' }}</span>
-                        </td>
-                      </tr>
-
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <h1 id="stupro">Student Profile</h1>
-                <div class="studentimage">
-                  <div class="tooltip">
-                    <!-- <img id="view" class="img-thumbnail" ng-src="{{studentPhoto}}">
-                    <span class="tooltiptext">Save</span> -->
-
-                    <span editable-text="student.image" e-name="editdata.student" e-form="rowformImage" e-required>
-                      <img id="view" ng-src="{{studentPhoto}}" alt="">
-                    </span>
-                    <form editable-form name="rowformImage" ng-show="rowformImage.$visible" class="form-buttons form-inline" shown="inserted == student">
-
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <input type="file" name="file" ng-model="data.logo" ngf-select ngf-pattern="'image/*'" accept="image/*" ngf-max-size="5MB"
-                            onchange="angular.element(this).scope().loadFile(this.files)">
-                          <p style="color:#9e0707"> {{message}} </p>
-
-
-                        </div>
                       </div>
-                      <button type="submit" ng-click="editStudentImage()" ng-disabled="rowformImage.$waiting" class="btn btn-primary editable-table-button btn-xs">
-                        <i class="fa fa-check"></i>
-                      </button>
-                      <button type="button" ng-disabled="rowformImage.$waiting" ng-click="rowformImage.$cancel()" class="btn btn-default editable-table-button btn-xs">
-                        <i class="fa fa-remove"></i>
-                      </button>
-
-                    </form>
-                    <div class="buttons"  ng-show="!rowformImage.$visible" >
-                      <button  ng-show="showRole(['admin','parent'])" class="btn btn-primary editable-table-button btn-xs" ng-click="rowformImage.$show()">
-                        <i class="fa fa-pencil"></i>
-                      </button>
                     </div>
+                    <button type="submit" ng-click="editStudentImage()" ng-disabled="rowformImage.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                      <i class="fa fa-check"></i>
+                    </button>
+                    <button type="button" ng-disabled="rowformImage.$waiting" ng-click="rowformImage.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                      <i class="fa fa-remove"></i>
+                    </button>
+
+                  </form>
+                  <div class="buttons" ng-show="!rowformImage.$visible">
+                    <button ng-show="showRole(['admin','parent'])" class="btn btn-primary editable-table-button btn-xs" ng-click="rowformImage.$show()">
+                      <i class="fa fa-pencil"></i>
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
+
+            <div class="col-md-9">
+              <h1>Admission details</h1>
+              <form editable-form name="rowform3" ng-show="rowform3.$visible" class="form-buttons form-inline" shown="inserted == student">
+                <button type="submit" ng-click="EditStudent_details($index)" ng-disabled="rowform3.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                  <i class="fa fa-check"></i>
+                </button>
+                <button type="button" ng-disabled="rowform3.$waiting" ng-click="rowform3.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                  <i class="fa fa-remove"></i>
+                </button>
+              </form>
+              <div class="buttons" ng-show="!rowform3.$visible">
+                <button ng-show="showRole(['admin','parent'])" class="btn btn-primary editable-table-button btn-xs" ng-click="rowform3.$show()">
+                  <i class="fa fa-pencil"></i>
+                </button>
+              </div>
+              <div class="table-responsive">
+                <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered" style="width:100">
+                  <thead>
+                    <tr>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <b>Admission Number :</b>
+                        <span editable-text="student.admission_no" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                          e-required>{{student.admission_no || 'empty' }}</span>
+                      </td>
+
+                      <td>
+                        <b>Class :</b>
+                        <span editable-text="student.school_classes[0].name" e-name="editdata.student" onaftersave="EditStudent_details($index)"
+                          e-form="rowform3" e-required>{{student.school_classes[0].name || 'empty' }}</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <b>Roll No :</b>
+                        <span editable-text="student.roll_no" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                          e-required>{{student.roll_no || 'empty' }}</span>
+                      </td>
+
+                      <td>
+                        <b>First Name :</b>
+                        <span editable-text="student.first_name" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                          e-required>{{student.first_name || 'empty' }}</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <b>Gender :</b>
+                        <span editable-text="student.gender" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                          e-required>{{student.gender || 'empty' }}</span>
+                      </td>
+                      <td>
+                        <b>Surname :</b>
+                        <span editable-text="student.last_name" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                          e-required>{{student.last_name || 'empty' }}</span>
+                      </td>
+
+                    </tr>
+                    <tr>
+                      <td>
+                        <b>Contact :</b>
+                        <span editable-text="student.phone" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                          e-required>{{student.phone || 'empty' }}</span>
+                      </td>
+
+                      <td>
+                        <b>Blood Group :</b>
+                        <span editable-text="student.blood_group" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                          e-required>{{student.blood_group || 'empty' }}</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <b>Date of Admission :</b>
+                        <span editable-text="student.admission_date" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                          e-required>{{student.admission_date || 'empty' }}</span>
+                      </td>
+
+                      <td>
+                        <b>Section :</b>
+                        <span editable-text="student.sections[0].name" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                          e-required>{{student.sections[0].name || 'empty' }}</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <b>Aadhar No :</b>
+                        <span editable-text="student.aadhar_no" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                          e-required>{{student.aadhar_no || 'empty' }}</span>
+                      </td>
+
+                      <td>
+                        <b>Category :</b>
+                        <span editable-text="student.category" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                          e-required>{{student.category || 'empty' }}</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <b>DOB :</b>
+                        <span editable-text="student.dob" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3" e-required>{{student.dob || 'empty' }}</span>
+                      </td>
+
+                      <td>
+                        <b>Religion :</b>
+                        <span editable-text="student.religion" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                          e-required>{{student.religion || 'empty' }}</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <b>Email ID :</b>
+                        <span editable-text="student.email" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                          e-required>{{student.email || 'empty' }}</span>
+                      </td>
+
+                      <td>
+                        <b>Bus Route :</b>
+                        <span editable-text="student.bus_route_id" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform3"
+                          e-required>{{student.bus_route_id || 'empty' }}</span>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- </div> -->
           </div>
         </div>
         <div class="parentdetails">
@@ -239,12 +278,12 @@
                     <tr>
                       <td>
                         <b>Father Name :</b>
-                        <span editable-text="student.parents[1].parent_name" e-name="editdata.student" onaftersave="EditStudent_details($index)"
+                        <span editable-text="student.parents[0].parent_name" e-name="editdata.student" onaftersave="EditStudent_details($index)"
                           e-form="rowform1" e-required>{{student.parents[0].parent_name || 'empty' }}</span>
                       </td>
                       <td>
                         <b>Mother Name :</b>
-                        <span editable-text="student.parents[0].parent_name" e-name="editdata.student" onaftersave="EditStudent_details($index)"
+                        <span editable-text="student.parents[1].parent_name" e-name="editdata.student" onaftersave="EditStudent_details($index)"
                           e-form="rowform1" e-required>{{student.parents[1].parent_name || 'empty' }}</span>
                       </td>
                       <td>
@@ -257,12 +296,12 @@
                     <tr>
                       <td>
                         <b>Father Occupation :</b>
-                        <span editable-text="student.parents[1].occupation" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform1"
+                        <span editable-text="student.parents[0].occupation" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform1"
                           e-required>{{student.parents[0].occupation || 'empty' }}</span>
                       </td>
                       <td>
                         <b>Mother Occupation :</b>
-                        <span editable-text="student.parents[0].occupation" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform1"
+                        <span editable-text="student.parents[1].occupation" e-name="editdata.student" onaftersave="EditStudent_details($index)" e-form="rowform1"
                           e-required>{{student.parents[1].occupation || 'empty' }}</span>
                       </td>
                       <td>
@@ -276,13 +315,13 @@
 
                       <td>
                         <b>Father Contact :</b>
-                        <span editable-text="student.parents[1].parent_contact" e-name="editdata.student" onaftersave="EditStudent_details($index)"
+                        <span editable-text="student.parents[0].parent_contact" e-name="editdata.student" onaftersave="EditStudent_details($index)"
                           e-form="rowform1" e-required>{{student.parents[0].parent_contact || 'empty' }}</span>
                       </td>
 
                       <td>
                         <b>Mother Contact :</b>
-                        <span editable-text="student.parents[0].parent_contact" e-name="editdata.student" onaftersave="EditStudent_details($index)"
+                        <span editable-text="student.parents[1].parent_contact" e-name="editdata.student" onaftersave="EditStudent_details($index)"
                           e-form="rowform1" e-required>{{student.parents[1].parent_contact || 'empty' }}</span>
                       </td>
                       <td>
@@ -355,6 +394,57 @@
             </div>
           </div>
         </div>
+
+        <div class="Studentdetails">
+          <div class="col-md-12">
+            <h1>Student Documents</h1>
+
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table class="table table-bordered" style="width:100">
+                  <thead>
+                    <tr>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="stu in student.studentDocuments">
+                      <td>
+                        <b>{{$index+1}}.{{stu.originalname}} :</b>
+                        <img id="view{{$index}}" ng-src="{{globalServicesURL}}api/image/{{stu.filename}}" alt="Image" style="height: 50px;width: 50px;margin-right: 28px;margin-top: 7px;border-radius: 20px;" ng-click="zoom($index)">
+                        <form editable-form name="rowformDocument" ng-show="rowformDocument.$visible" class="form-buttons form-inline" shown="inserted == student">
+
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <input type="file" name="file" ng-model="data.logo" ngf-select ngf-pattern="'image/*'" accept="image/*" ngf-max-size="5MB"
+                                onchange="angular.element(this).scope().loadFile(this.files)">
+                              <p style="color:#9e0707"> {{message}} </p>
+
+
+                            </div>
+                          </div>
+                          <button type="submit" ng-click="editStudentDocument(stu.filename);" ng-disabled="rowformDocument.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                            <i class="fa fa-check"></i>
+                          </button>
+                          <button type="button" ng-disabled="rowformDocument.$waiting" ng-click="rowformDocument.$cancel()" class="btn btn-default editable-table-button btn-xs">
+                            <i class="fa fa-remove"></i>
+                          </button>
+
+                        </form>
+                        <div class="buttons" ng-show="!rowformDocument.$visible">
+                          <button ng-show="showRole(['admin','parent'])" class="btn btn-primary editable-table-button btn-xs" ng-click="rowformDocument.$show()">
+                            <i class="fa fa-pencil"></i>
+                          </button>
+                        </div>
+                      </td>
+
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -406,58 +496,74 @@
                       <div class="jumbotron">
 
                         <h2 align="center">Student Attendance Monthly Report </h2>
-                        <ul>
+                        <div class="table-responsive">
+                          <table style="width:100%">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <b>School Name </b> :{{schoolDetails[0].name}}</td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <b>Class Name</b> : {{class_name}}</td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <b>Section Name</b> : {{section_name}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
 
-                          <li>
-                            <b>School Name </b> :{{schoolDetails[0].name}}</li>
-                          <li>
-                            <b>Class Name</b> : {{class_name}}</li>
-                          <li>
-                            <b>Section Name</b> : {{section_name}}</li>
 
-                        </ul>
+
+
 
                       </div>
 
                     </div>
+                    <div class="table-responsive">
+                      <table style="width:100%">
+                        <thead>
+                          <tr>
 
-                    <table export-table class="table rwd-table table-striped">
-                      <thead>
-                        <tr>
-
-                          <th>Date</th>
-                          <th>Name</th>
-
-                          <th>Attendance</th>
-                          <!--<th class="pull-right">Action</th>-->
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr ng-repeat="attendance in attDataMonth  | filter:data.route_title:true" class="editable-row">
-                          <td>
-                            {{$index+1}}
-                          </td>
-                          <td>{{attendance.first_name || 'empty' }} {{attendance.last_name || 'empty' }}
-                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                          </td>
-                          <td>
-                            {{attendance.admission_no || 'empty' }}
-                            <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Admission No</th>
+                            <th>Roll No</th>
+                            <th>Class</th>
+                            <th>Gender</th>
+                            <th>Date</th>
+                            <th>Attendance</th>
+                            <!--<th class="pull-right">Action</th>-->
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="attendance in attDataMonth  | filter:data.route_title:true" class="editable-row">
+                            <td>
+                              {{$index+1}}
+                            </td>
+                            <td>{{attendance.first_name || 'empty' }} {{attendance.last_name || 'empty' }}
+                              <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                            </td>
+                            <td>
+                              {{attendance.admission_no || 'empty' }}
+                              <!--<span editable-select="busRoute.vehicle_code" e-name="vehicle_code" e-form="rowform" e-selectpicker e-ng-options="vehicle.vehicle_name as vehicle.vehicle_name for vehicle in vehicles">
                                                           {{busRoute.vehicle_code}}</span>-->
-                          </td>
-                          <td>{{attendance.roll_no || 'empty' }}
-                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                          </td>
-                          <td>{{attendance.class_name || 'empty' }} ({{attendance.section_name || 'empty' }})</td>
-                          <td>{{attendance.gender || 'empty' }}</td>
-                          <td>{{attendance.date | date }}</td>
-                          <td>{{attendance.status || 'empty' }}
-                            <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
-                          </td>
+                            </td>
+                            <td>{{attendance.roll_no || 'empty' }}
+                              <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                            </td>
+                            <td>{{attendance.class_name || 'empty' }} ({{attendance.section_name || 'empty' }})</td>
+                            <td>{{attendance.gender || 'empty' }}</td>
+                            <td>{{attendance.date | date }}</td>
+                            <td>{{attendance.status || 'empty' }}
+                              <!--<span editable-text="busRoute.route_title" e-name="route_title" onaftersave="EditBusRoute($index)" e-form="rowform" e-required>{{busRoute.route_title || 'empty' }}</span>-->
+                            </td>
 
 
 
-                          <!--<td>
+                            <!--<td>
                                                           {{$index+1}}
                                                       </td>
                                                       <td class="select-td">
@@ -487,9 +593,10 @@
                                                              
                                                           </div>
                                                       </td>-->
-                        </tr>
-                      </tbody>
-                    </table>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -530,8 +637,8 @@
   <div class="tab-pane no-padding " id="tab_3" ng-repeat="student in studentDetails">
 
     <div class="container">
-      <div class="acadamicreport">
-        <div class="col-md-12">
+      <div class="acadamicreportstudentprofile">
+        <div class="col-md-12" id="first12">
           <div class="backwhite">
             <div class="col-md-4" id="photo">
               <div class="studentimage">

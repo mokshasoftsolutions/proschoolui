@@ -166,14 +166,21 @@ angular.module('school_erp')
                                 template: '<p>Marks Already Added</p>',
                                 plain: true
                             });
+                            $scope.sendMarkseHolder = [];
+                            //$scope.student.marks='';
+                            //  $scope.marksBox = [];
                         }
                         else {
                             ngDialog.open({
                                 template: '<p> Marks  Added successfully </p>',
                                 plain: true
                             });
+                            $scope.sendMarkseHolder = [];
+                            $scope.marksBox.marks = "";
                         }
-                        $scope.sendMarkseHolder = [];
+                        //$scope.student.marks='';
+                       
+
 
 
 

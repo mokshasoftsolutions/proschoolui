@@ -80,7 +80,7 @@ angular.module('school_erp')
             taskManagerServices.setTaskManager(task_details)
                 .success(function (data, status) {
                     ngDialog.open({
-                        template: '<p>Vendor details is Added Successfully.</p>',
+                        template: '<p>Task details is Added Successfully.</p>',
                         plain: true
                     });
                     $scope.data = [];
@@ -142,7 +142,7 @@ angular.module('school_erp')
             taskManagerServices.DeleteTaskManager($scope.task_id)
                 .success(function (data, status) {
                     ngDialog.open({
-                        template: '<p>Station is Deleted Successfully.</p>',
+                        template: '<p>Task is Deleted Successfully.</p>',
                         plain: true
                     });
                     $scope.editdata = [];

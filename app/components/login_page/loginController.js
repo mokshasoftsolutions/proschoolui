@@ -1,15 +1,14 @@
 angular.module('school_erp')
-    .controller("loginController", ['$http', '$scope', '$rootScope', 'authService', '$state', 'ngDialog', '$window', 'ngProgressFactory', 'globalServices', function ($http, $scope, $rootScope, authService, $state, ngDialog, $window, ngProgressFactory, globalServices) {
+    .controller("loginController", ['$http', '$scope', '$rootScope', 'authService', '$state', 'ngDialog', '$window', 'ngProgress', 'globalServices', function ($http, $scope, $rootScope, authService, $state, ngDialog, $window, ngProgress, globalServices) {
 
-        $scope.progressbar = ngProgressFactory.createInstance();
-
+        //$scope.progressbar = ngProgressFactory.createInstance();
+        $scope.started = false;
         $scope.datab = [];
-        // $scope.image=[{
-        //    "url": "dist/img/school2.png"}]
-
+       
         $scope.login = function (data) {
-            // console.log("login  mesaage.....");
-            $scope.progressbar.start();
+            
+            ngProgress.start();
+            ngProgress.complete();
             var dataValue = {
                 email: $scope.datab.username,
                 password: $scope.datab.password
@@ -17,11 +16,10 @@ angular.module('school_erp')
             authService.login(dataValue)
                 .success(function (data, status) {
 
-                    //  console.log(data);
-
+                 
 
                     $scope.loginData = data.role;
-                    //    console.log($scope.loginData);
+                
                     if (status != 401) {
                         $window.localStorage["userInfo"] = JSON.stringify(data);
                         $rootScope.role = data.role;
@@ -38,16 +36,19 @@ angular.module('school_erp')
                 })
                 .error(function (data, success) {
                     $scope.datab = {};
-                    //  console.log(JSON.stringify(data));
+                   
                     ngDialog.open({
                         template: '<p>' + data + '</p>',
                         plain: true
                     });
+                    //ngProgress.reset();
+                    ngProgress.complete();
                 })
         };
 
         $scope.logout = function () {
-            $scope.progressbar.stop();
+            ngProgress.reset();
+          
             authService.logout();
             $state.go('login');
         };

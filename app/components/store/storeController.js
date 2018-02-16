@@ -111,7 +111,7 @@ angular.module('school_erp')
             storeServices.DeleteVendor($scope.vendor_id)
                 .success(function (data, status) {
                     ngDialog.open({
-                        template: '<p>Station is Deleted Successfully.</p>',
+                        template: '<p>Vendor is Deleted Successfully.</p>',
                         plain: true
                     });
                     $scope.editdata = [];

@@ -2,10 +2,10 @@ angular.module('school_erp')
     .factory('questionsServices', ['$http', 'globalServices', function ($http, globalServices) {
         var questionsServices = {};
 
-        questionsServices.getQuestionsForSubject = function (subId,classId) {
+        questionsServices.getQuestionsForSubject = function (subId, classId, lessionId) {
             return $http({
                 method: 'GET',
-                url: globalServices.globalValue.baseURL + 'api/questions/'+subId+'/'+ classId
+                url: globalServices.globalValue.baseURL + 'api/questions/' + subId + '/' + classId + '/' + lessionId
             })
         };
 

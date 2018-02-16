@@ -90,7 +90,7 @@
       <div class="col-md-12">
         <div class="backwhite">
           <div class="table-responsive" style="width:100%">
-          <table export-table st-table="display_records" st-safe-src="teacherBox" >
+          <table export-table st-table="display_records" st-safe-src="teacherBox" style="width:100%">
             <thead>
               <tr>
                 <th>#</th>
@@ -100,6 +100,7 @@
                 <!-- <th>SchoolId</th> -->
                 <th>User Name</th>
                 <th>Password</th>
+                <th>Action</th>
 
               </tr>
             </thead>
@@ -117,7 +118,9 @@
                 <td>
                   {{teachers.teacher_id | lowercase}}
                 </td>
-
+                <td>
+                  <button class="btn btn-primary" type="submit">Send</button>
+                </td>
 
               </tr>
             </tbody>

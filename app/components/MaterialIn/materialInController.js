@@ -48,7 +48,7 @@ angular.module('school_erp')
             materialInServices.setMaterialIn(materialIn)
                 .success(function (data, status) {
                     ngDialog.open({
-                        template: '<p>Vendor details is Added Successfully.</p>',
+                        template: '<p>Material details is Added Successfully.</p>',
                         plain: true
                     });
                     $scope.data = [];
@@ -108,7 +108,7 @@ angular.module('school_erp')
             materialInServices.DeleteMaterialIn($scope.material_in_id)
                 .success(function (data, status) {
                     ngDialog.open({
-                        template: '<p>Station is Deleted Successfully.</p>',
+                        template: '<p>Material is Deleted Successfully.</p>',
                         plain: true
                     });
                     $scope.editdata = [];

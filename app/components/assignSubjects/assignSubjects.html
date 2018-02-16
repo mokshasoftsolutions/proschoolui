@@ -116,7 +116,7 @@
                       </a>
                 </td>
               </tr>-->
-            <tr  ng-repeat="teachers in teacherData | filter:secId | filter:data.teachId:true | filter:data.subjectObj:true " class="editable-row">
+            <tr  ng-repeat="teachers in teacherData | filter:secId  | filter:data.subjectObj:true " class="editable-row">
               <td>{{$index+1}}</td>
               <td>
                 <!--<span editable-text="teachers.subject_name" e-name="subject_name" onaftersave="EditAssignSubjects($index)"

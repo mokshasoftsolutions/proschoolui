@@ -1,7 +1,7 @@
 angular.module('school_erp')
     .controller("addQuestionsController", ['$http', '$scope', '$rootScope', 'globalServices', 'questionsServices', 'subjectsServices', 'chaptersServices', 'ngDialog', function ($http, $scope, $rootScope, globalServices, questionsServices, subjectsServices, chaptersServices, ngDialog) {
-        $scope.data = [];
-        $scope.chapterId = '';
+       // $scope.data = [];
+      //  $scope.chapterId = '';
 
 
 
@@ -20,7 +20,7 @@ angular.module('school_erp')
 
 
         $scope.populateSections = function (classId) {
-            $scope.secData = [];
+            //$scope.secData = [];
             globalServices.getSections(classId)
                 .success(function (data, status) {
                     $scope.secData = data.class_sections; // Api list-name
@@ -32,47 +32,50 @@ angular.module('school_erp')
                 })
                 .error(function (data, success) {
 
-                    $scope.populateSubjects($scope.secId);
+                   // $scope.populateSubjects($scope.secId);
                 })
         }
 
         $scope.populateSubjects = function (secId) {
-            $scope.subData = [];
+           // $scope.subData = [];
             subjectsServices.getSubjects(secId)
                 .success(function (data, status) {
                     $scope.subData = data.subjects;
                     $scope.subId = $scope.subData[0].subject_id;
                     $scope.populateChapters($scope.subId);
-                    $scope.getQuestionsForSubject($scope.subId, $scope.classId);
+
                 })
                 .error(function (data, success) {
-                    $scope.getQuestionsForSubject($scope.subId, $scope.classId);
+                   // $scope.populateChapters($scope.subId);
+
+                    //$scope.getQuestionsForSubject($scope.subId, $scope.classId);
                 });
         }
         $scope.populateChapters = function (subId) {
-            //$scope.subId = subId;
-            //console.log(subId);
+          
             chaptersServices.getChapters(subId)
                 .success(function (data, status) {
-                    //    console.log(JSON.stringify(data))
-                    // console.log(subId)
-                    // console.log($scope.subId);
+                  
                     $scope.chaptersData = data.chapters;
+                    $scope.chapterId = $scope.chaptersData[0].lession_id;
+                    //console.log($scope.chapterId);
+
+                    $scope.getQuestionsForSubject($scope.subId, $scope.classId, $scope.chapterId);
                 })
                 .error(function (data, success) {
-
+                    //   $scope.getQuestionsForSubject($scope.subId, $scope.classId, $scope.chapterId);
                     //  $scope.populateSubjects($scope.secId);
                 });
         };
 
 
 
-        $scope.addQuestions = function (subId, data, classId) {
-            //console.log($scope.chapterId + "lesson");
+        $scope.addQuestions = function (subId, data, classId, lessionId) {
+            console.log(lessionId + "lesson");
             var questionDetails = {
                 question: $scope.data.question,
-                subject_id: $scope.subId,
-                lession_id: $scope.lessionId,
+                subject_id: subId,
+                lession_id: lessionId,
                 answer: $scope.data.answer,
                 option1: $scope.data.option1,
                 option2: $scope.data.option2,
@@ -80,6 +83,7 @@ angular.module('school_erp')
                 option4: $scope.data.option4
             }
             $scope.classId = $scope.classId;
+            $scope.lessionId = lessionId;
             questionsServices.setQuestions(questionDetails, $scope.classId)
                 .success(function (data, status) {
                     ngDialog.open({
@@ -87,7 +91,7 @@ angular.module('school_erp')
                         plain: true
                     });
                     $scope.data = [];
-                    $scope.getQuestionsForSubject($scope.subId, $scope.classId);
+                    $scope.getQuestionsForSubject($scope.subId, $scope.classId, $scope.lessionId);
                 })
                 .error(function (data, success) {
                     ngDialog.open({
@@ -97,9 +101,9 @@ angular.module('school_erp')
                 })
 
         }
-        $scope.getQuestionsForSubject = function (subId, classId) {
+        $scope.getQuestionsForSubject = function (subId, classId, lessionId) {
 
-            questionsServices.getQuestionsForSubject(subId, classId)
+            questionsServices.getQuestionsForSubject(subId, classId, lessionId)
                 .success(function (data, status) {
                     //   console.log(JSON.stringify(data));
 

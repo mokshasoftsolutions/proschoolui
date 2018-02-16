@@ -11,7 +11,6 @@
     <div class="col-md-12">
       <!-- <div class="col-md-4">
         <div class="calander">
-
           <ul class="weekdays">
             <li>Mo</li>
             <li>Tu</li>
@@ -78,7 +77,7 @@
           </div>
           <div class="queriey1">
             <div class="circulardiv" style="text-align:center">
-              <h1>{{0}}</h1>
+              <h1>{{studentCountNew}}</h1>
             </div>
             <div class="queh1">
               <h1>New Admissions</h1>
@@ -94,19 +93,12 @@
           </div>
         </div>
       </div>
-      <div class="col-md-8">
+      <!-- <div class="col-md-8">
         <div class="box box-primary" style="background-color: #568dadcf; border-radius: 15px;border:none">
           <div class="box-header with-border btn-primary" style="background-color: #568dadcf; border-radius: 15px;border:none">
             <h3 class="box-title">Task Manager</h3>
 
-            <!-- <div class="box-tools pull-right">
-              <button type="button" class="btn btn-info btn-box-tool" data-widget="collapse">
-                <i class="fa fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-danger btn-box-tool" data-widget="remove">
-                <i class="fa fa-times"></i>
-              </button>
-            </div> -->
+            
           </div>
 
 
@@ -124,12 +116,10 @@
                         <tr>
                           <th>#</th>
                           <th>Task</th>
-                          <th>Priority</th>
-                          <!-- <th>Subject</th> -->
+                          <th>Priority</th>                   
                           <th>Due</th>
                           <th>Assigned</th>
                           <th>Status</th>
-
                         </tr>
                       </thead>
                       <tbody>
@@ -144,7 +134,7 @@
                             {{task.priority || 'empty' }}
 
                           </td>
-                          <!-- <td>{{task.employee_type || 'empty' }}</td> -->
+                         
                           <td>{{task.assigned_on | date }}
 
                           </td>
@@ -162,8 +152,32 @@
                   </div>
                 </div>
               </div>
-              <!-- </div> -->
+             
             </div>
+          </div> -->
+        <!-- </div>
+      </div> -->
+     <div class="col-md-8" id="quo">
+        <div class="backwhite">
+          <div class="staff" ng-repeat="quote in quotes">
+            <form name="Quote" ng-submit="Quote.$valid && addQuote(data)" novalidate>
+              <div class="form-group" ng-class="{'has-error': Quote.$submitted  && Quote.quote.$pristine}">
+                <label>Quote</label>
+                <div>
+                  <b>"</b>{{quote.quote}}
+                  <b>"</b>
+                  <span class="pull-right" style="float:clear;color:#b93809">~ {{quote.quoteWritten}}</span>
+                </div>
+              </div>
+              <div class="form-group" ng-class="{'has-error': Quote.$submitted  && Quote.word.$pristine}">
+                <label>Word</label>
+                <div>
+                  <b>"</b>{{quote.word}}
+                  <b>"</b>
+                  <span class="pull-right" style="float:clear;color:#b93809">~ {{quote.wordWritten}}</span>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -173,12 +187,12 @@
   <div class="Circulam">
     <div class="col-md-12" style="margin-top: 0px"> 
       <div class="classalign" style="background-color: #c1969c;
-      height: 86px;
+    
       border-radius: 15px 15px 0 0;
       width: 99%;">
         <h1 style="font-family: 'Source Sans Pro',sans-serif;">Curriculum for the Day :</h1>
 
-        <div class="col-md-10" style="width:95%;margin-bottom:1%">
+        <div class="col-md-10" style="margin-bottom:1%">
           <button id="btn_class" class="btn btn-primary btn-responsive" ng-repeat="class in classDatanew" ng-click="populateSections(class.class_id);getTimeTableDay(class.class_id)"
             ng-disabled="!isDisabled">{{class.name}}</button>
 
@@ -240,16 +254,12 @@
       </div>
     </div>
   </div>
-
-
-
-
   <div class="attendancetaken" style="width: 96%;margin-left: 16px;border:none">
     <div class="col-md-12" style="margin-top: 12px;">
       <h3>Student Attendance Report</h3>
       <div class="backwhite" ng-repeat="data1 in schoolAttData">
         <div class="table-responsive">
-          <!-- {{data1}} -->
+     
           <div class="col-md-1" style="color:black">
             <table class="table-responsive">
               <thead>
@@ -317,13 +327,13 @@
                     <td>
                       <div class="progress">
                         <div class="progress-bar progress-bar-success" ng-style="{width:(presentPercentageTeacher)}">
-                          P:{{presentTeacher}}/{{countTeacher}}
+                          P:{{present}}/{{count}}
                         </div>
                         <div class="progress-bar progress-bar-warning" ng-style="{width:(leavePercentageTeacher)}">
-                          L:{{leaveTeacher}}/{{countTeacher}}
+                          L:{{leave}}/{{count}}
                         </div>
                         <div class="progress-bar progress-bar-danger" ng-style="{width:(absentPercentageTeacher)}">
-                          A:{{absentTeacher}}/{{countTeacher}}
+                          A:{{absent}}/{{count}}
                         </div>
                       </div>
                     </td>
@@ -369,7 +379,7 @@
         </div>
 
       </div>
-      <div class="col-md-6" id="quo">
+        <!-- <div class="col-md-6" id="quo">
         <div class="backwhite">
           <div class="staff" ng-repeat="quote in quotes">
 
@@ -393,27 +403,80 @@
                 </div>
 
               </div>
-
-
-
-
             </form>
           </div>
         </div>
 
-      </div>
+      </div>-->
+       <div class="col-md-6">
+        <div class="box box-primary" style="background-color: #568dadcf; border-radius: 15px;border:none;height:240px";>
+          <div class="box-header with-border btn-primary" style="background-color: #568dadcf; border-radius: 15px;padding:20px 10px;border:none">
+            <h3 class="box-title">Task Manager</h3>
+          </div>
+          <div class="box-body chart-responsive">
+            <div class="chart chart-responsive" style="height: 150px;">
 
+              <div class="tab-pane no-padding" id="taskManager">
+
+
+                <div class="tab-content">
+                  <div class="table-responsive mailbox-messages" style="overflow-y: scroll;height:150px;">
+
+                    <table style="width:100%";>
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Task</th>
+                          <th>Priority</th>                   
+                          <th>Due</th>
+                          <th>Assigned</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="task in taskData" class="editable-row">
+                          <td>
+                            {{task.id+1}}
+                          </td>
+                          <td>{{task.task || 'empty' }}
+
+                          </td>
+                          <td>
+                            {{task.priority || 'empty' }}
+
+                          </td>
+                         
+                          <td>{{task.assigned_on | date }}
+
+                          </td>
+                          <td>{{task.assigned_to || 'empty' }}
+
+                          </td>
+                          <td>{{task.status || 'empty' }}
+
+                          </td>
+
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+             
+            </div>
+          </div>
     </div>
   </div>
 
 
   <div class="staff">
-    <div class="col-md-12" style="margin-top:25px;">
+    <div class="col-md-12" >
       <div class="backwhite">
 
-        <div class="col-md-6" id="cal" style="background-color:  #c1969c;border-radius:25px;width:49%">
+        <div class="col-md-6" id="cal" style="background-color:  #c1969c;border-radius:25px;">
           <div class="calander">
-            <!-- <h1>Calender</h1> -->
+          
 
             <div class="span8">
               <tabset>
@@ -427,7 +490,7 @@
           </div>
         </div>
 
-        <div class="col-md-6" id="cal" style="height:360px;border-radius:25px;margin-left:2%;width:48%;border:1px solid grey">
+        <div class="col-md-6" id="cal" style="height:360px;border-radius:25px;margin-left:2%;border:1px solid grey">
           <div class="noticeboard">
             <h1>Notices</h1>
             <div class="backwhite">

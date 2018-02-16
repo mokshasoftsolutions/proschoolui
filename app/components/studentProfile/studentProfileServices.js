@@ -3,7 +3,7 @@ angular.module('school_erp')
         var studentProfileServices = {};
 
         studentProfileServices.EditStudent_details = function (dataValue, student_id) {
-            console.log(dataValue);
+            //console.log(dataValue);
             return $http({
                 method: 'PUT',
                 url: globalServices.globalValue.baseURL + 'api/edit_student_details/' + student_id,
@@ -20,6 +20,18 @@ angular.module('school_erp')
                 method: 'POST',
                 // url:'http://192.168.1.16:4005/api/schools',
                 url: globalServices.globalValue.baseURL + 'api/student_photo_edit/'+ student_id,
+                data: dataValue,
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            })
+        };
+
+        studentProfileServices.editStudentDocument = function (dataValue,student_id,name) {
+            //   console.log(student_id)
+            return $http({
+                method: 'POST',
+                // url:'http://192.168.1.16:4005/api/schools',
+                url: globalServices.globalValue.baseURL + 'api/student_Document_photo_edit/'+ student_id+'/'+name,
                 data: dataValue,
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }

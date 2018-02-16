@@ -95,14 +95,14 @@
                   {{feeMaster.id+1}}
                 </td>
                 <td class="select-td">
-                  <span editable-select="feeMaster.class_name" e-name="class_name" e-form="rowform" onaftersave="EditFeeMaster(feeMaster.id)"
-                    e-selectpicker e-ng-options="class.name as class.name for class in classData">
-                    {{ feeMaster.class_name}}</span>
+                  <!-- <span editable-select="feeMaster.class_name" e-name="class_name" e-form="rowform" onaftersave="EditFeeMaster(feeMaster.id)"
+                    e-selectpicker e-ng-options="class.name as class.name for class in classData"> </span> -->
+                    {{ feeMaster.class_name}}
                 </td>
                 <td class="select-td">
-                  <span editable-select="feeMaster.fee_type" e-name="fee_type" e-form="rowform" onaftersave="EditFeeMaster(feeMaster.id)" e-selectpicker
-                    e-ng-options="type.fee_type as type.fee_type for type in feeTypeData">
-                    {{ feeMaster.fee_type}}</span>
+                  <!-- <span editable-select="feeMaster.fee_type" e-name="fee_type" e-form="rowform" onaftersave="EditFeeMaster(feeMaster.id)" e-selectpicker
+                    e-ng-options="type.fee_type as type.fee_type for type in feeTypeData"></span> -->
+                    {{ feeMaster.fee_type}}
                 </td>
                 <td>
                   <a href="">{{feeMaster.fee_category}}</a>

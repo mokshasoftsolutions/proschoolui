@@ -1,7 +1,7 @@
 angular.module('school_erp')
     .controller("studentController", ['$http', '$scope', '$rootScope', 'studentServices', 'globalServices', 'ngDialog', function ($http, $scope, $rootScope, studentServices, globalServices, ngDialog) {
         $scope.studentData = [];
-        $scope.pdf=false;
+        $scope.pdf = false;
         //$scope.editdata= [];
         $scope.gender = [{ name: "Male", id: 1 }, { name: "Female", id: 2 }];
 
@@ -37,16 +37,18 @@ angular.module('school_erp')
             })
 
 
+     
+
         $scope.getStudentValue = function (secValue) {
-            $scope.pdf=false;
+            $scope.pdf = false;
             studentServices.getStudent(secValue)
                 .success(function (data, status) {
                     $scope.studentData = data.students;
                     $scope.studentBox = [];
-                    index=0;
+                    index = 0;
                     $scope.studentData.forEach(function (element) {
 
-                      
+
 
                         var obj = {
                             id: index++,
@@ -55,26 +57,26 @@ angular.module('school_erp')
                             roll_no: element.roll_no, // remove
                             first_name: element.first_name, // remove
                             last_name: element.last_name, // remove
-                            gender:element.gender,
-                            dob:element.dob,
-                            category:element.category,
-                            phone:element.phone,
-                            class:element.school_classes[0].name,
-                            section:element.sections[0].name,
-                            parent:element.parents[0].parent_name,
+                            gender: element.gender,
+                            dob: element.dob,
+                            category: element.category,
+                            phone: element.phone,
+                            class: element.school_classes[0].name,
+                            section: element.sections[0].name,
+                            parent: element.parents[0].parent_name,
                             image: element.studentImage[0].filename,
-                            
+
                         }
                         $scope.studentBox.push(obj);
                         //console.log($scope.studentBox);
                     })
-                      
-                     
 
-                    $scope.class_name=$scope.studentData[0].school_classes[0].name;
-                    $scope.section_name=$scope.studentData[0].sections[0].name;
-                 //   console.log( $scope.class_name);
-                 //   console.log(( $scope.section_name));
+
+
+                    $scope.class_name = $scope.studentData[0].school_classes[0].name;
+                    $scope.section_name = $scope.studentData[0].sections[0].name;
+                    //   console.log( $scope.class_name);
+                    //   console.log(( $scope.section_name));
                 })
                 .error(function (data, success) {
                 })
@@ -86,8 +88,8 @@ angular.module('school_erp')
 
 
         $scope.generatePDF = function () {
-            $scope.pdf=true;
-           // console.log("pdf message1");
+            $scope.pdf = true;
+            // console.log("pdf message1");
             html2canvas(document.getElementById('exportthis'), {
                 onrendered: function (canvas) {
                     var data = canvas.toDataURL();
@@ -97,8 +99,8 @@ angular.module('school_erp')
                             width: 480,
                         }]
                     };
-                   // console.log("pdf message2");
-                
+                    // console.log("pdf message2");
+
                     pdfMake.createPdf(docDefinition).download("Students_Report.pdf");
                     $scope.getStudentValue($scope.secId);
                 }
@@ -110,11 +112,11 @@ angular.module('school_erp')
 
         $scope.EditStudent = function (value, student) {
 
-               //console.log("messsage");
-               //console.log(value);
+            //console.log("messsage");
+            //console.log(value);
             $scope.student = angular.copy($scope.studentBox[value]);
             $scope.student_id = $scope.student.student_id;
-               //console.log($scope.student_id);
+            //console.log($scope.student_id);
             var StudentDetails = {
                 class_id: $scope.student.class_id,
                 //parent_name: $scope.parents[0].parent_name,
@@ -125,7 +127,7 @@ angular.module('school_erp')
                 phone: $scope.student.phone,
 
             }
-                //console.log(StudentDetails);
+            //console.log(StudentDetails);
 
             $scope.addEditStudent(StudentDetails, $scope.student_id);
         }

@@ -524,7 +524,8 @@ div.subjectlist div.col-md-12 .tooltip{float:right;padding:0 8px;}
 /*==================librarystyles============*/
 
 .Addbook{margin:0 auto;height:500px;}
-.Addbook .col-md-12 {height:auto;background-color: white;border:1px solid blue;border-radius: 5px; margin-top:3px;}
+.Addbook .col-md-12 {height:auto;background-color: white;
+  border:1px solid blue;border-radius: 5px; margin-top:3px;}
 .Addbook .col-md-12 .backwhite .row1 div.form-group{display: inline-block;}
 .Addbook .col-md-12 .backwhite .row1 div.form-group input{border:1px solid lightgrey;}
 .Addbook .col-md-12 .backwhite {padding-left: 30px;}
@@ -534,7 +535,7 @@ div.subjectlist div.col-md-12 .tooltip{float:right;padding:0 8px;}
 .Addbook .col-md-12 .backwhite .row3 div.form-group{display: inline-block;}
 .Addbook .col-md-12 .backwhite .row3 div.form-group input{border:1px solid lightgrey;}
 .Addbook textarea{border:1px solid lightgrey;border-radius: 2px;}
-.Addbook .col-md-12 .backwhite{background-color: white;border-radius: 10px;padding: 10px;}
+.Addbook .col-md-12 .backwhite{background-color: white;border-radius: 10px; margin-top: 10px; padding: 10px;}
 .Addbook .col-md-12 div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
 .Addbook div.form-group input{border:1px solid lightgrey;border-radius: 2px;}
 .Addbook .col-md-12 .row5{text-align: right;}
@@ -1023,10 +1024,225 @@ ul.panel-controls > li > .dropdown-menu:before {
   margin-left: auto;
   margin-right: -6px;
 }
+
+
+
+/*==========dashboardstyles===========*/
+
+/*======calanderstyles=====*/
+.calander div.col-md-12 div#quote.col-md-4 div.quote{height:100px;background-color: lightgrey;}
+.calander div.col-md-12 div#quote.col-md-4 div.word{height:100px;background-color: lightgrey;}
+.calander div.col-md-12 div#queries.col-md-4 {height: 218px;background-color: #568dadcf;border-color: #367fa9;border-radius: 15px;}
+ div.Circulam .col-md-12 .classalign .col-md-10{text-align: right;} 
+ 
+ div.Circulam .col-md-12 .classalign .col-md-10 button#btn_class.btn.btn-primary.btn-responsive.ng-binding.ng-scope{margin-right: 10px;margin-bottom: 10px;}
+.calander div.col-md-12 div#queries.col-md-4 div.queries div.queriey1 div.circulardiv{width: 50px;height: 50px;background-color:lightgrey;border-radius: 50px;}
+.calander div.col-md-12 div#queries.col-md-4 div.queries div.queriey1 .queh1{width:200px;position:absolute;}  
+.calander div.col-md-12 div#queries.col-md-4 div.queries div.queriey1{margin-bottom: 20px;}
+.calander div.col-md-12 div#queries.col-md-4 div.queries div.queriey1 div.circulardiv,.queh1{display:inline-block;}
+
+
+div.staff div.col-md-12 div.col-md-6 #taskManager div.tab-content table.table.rwd-table.table-striped{margin-top: 10px;}
+div.staff div.col-md-12 div.col-md-6{margin-top: 30px;}
+   div.staff div.col-md-12 #cal.col-md-6 .backwhite{background-color: #bd9696;} 
+   div.messagebox div.col-md-12 div.col-md-6{background-color: darkgray;}
+   div.messagebox div.col-md-12 div.col-md-6 div.form-group button{float: right;margin-bottom: 10px;}
+   div.staff div.col-md-12 div#staff1.col-md-6 {border: 1px solid grey; border-radius: 10px;margin-top: 30px;background-color: #568dadcf;
+    height: 240px;}
+   div.staff div.col-md-12 div#quo.col-md-6 .backwhite{border: 1px solid grey; border-radius: 10px;margin-top: 30px;}
+   div.staff div.col-md-12 div#quo.col-md-6 .backwhite .staff form.ng-pristine.ng-valid div.form-group{padding:10px;}
+   div.staff div.col-md-12 div#staff1.col-md-6 .staff{margin-top: 20px;}
+   div.staff div.col-md-12 div#staff1.col-md-6 .staff .table-responsive table.table tbody tr td{padding:10px 0px;}
+   div.staff div.col-md-12 div#staff1.col-md-6 .staff .table-responsive table.table tbody tr td div.progress{margin-top: 20px;}
+   div.staff div.col-md-12{margin-bottom: 10px;}
+   div.staff div.col-md-12 div#quo.col-md-6 .backwhite div.staff form.ng-pristine.ng-valid div.form-group div.ng-binding{
+        height: 60px;
+        border: 1px solid black;
+        border-radius: 5px;}
+   div.staff div.col-md-12 div#quo.col-md-6 .backwhite div.staff form.ng-pristine.ng-valid div.form-group div.ng-binding{
+        height: 60px;
+        border: 1px solid black;
+        border-radius: 5px;}
+    
+   div.calander div.col-md-12 div#quo.col-md-8 .backwhite{background-color: #75a2bc;padding: 10px;border-radius: 20px;} 
+   div.staff div.col-md-12 div.col-md-6 div.noticeboard div.backwhite{overflow-y: scroll;height:287px;width:100%;}
+   div.messagebox div.col-md-12 div.col-md-5 .noticemsg{margin-top: 40px;}
+   .acadamic_report div.col-md-12 div.table.table-responsive table tbody tr td div#piechart{width:200px;height:300px;}
+   .acadamic_report div.col-md-12 div.table.table-responsive table tbody tr th{text-align: center;}
+   .acadamic_report div.col-md-12 div.table.table-responsive div{overflow-x: hidden;overflow-y: hidden;overflow:none;}
+   .acadamic_report div.col-md-12 div.table.table-responsive table tbody tr td div.second-group{display: none;}
+   div.Timetable .col-md-12 .table-responsive table#tbl-timetable.table.table-bordered{background-color: darkslategrey;color: white;}
+   div.staff div.col-md-12 #cal.col-md-6 div.calander{margin-bottom: 20px;}
+   div.attendancetaken .col-md-12 .backwhite table.table thead tr th .col-md-9 button.btn.btn-primary.btn-responsive{margin-right: 30px;}
+   div.attendancetaken .col-md-12 .backwhite table.table thead tr th .col-md-9{width:100%;text-align: center;}
+   div.attendancetaken .col-md-12 {border: 0px solid grey;border-radius: 10px;background-color:  #c1969c;}
+   .btn-primary {background-color: #2f3981;border-color: #367fa9;}
+   .classalign .col-md-9 button#btn_class.ng-binding.ng-scope {margin: 10px;}
+   div.box-header.with-border.btn-primary h3.box-title{color:white;}    
+   div.staff div.col-md-12 div.backwhite div#cal.col-md-6{background-color: #c1969c;}
+   div.messagebox div.col-md-12 div.noticemsg div.noticedetails img{width:40px;height:40px;}
+   div.messagebox div.col-md-12 div.noticemsg div.noticedetails img,#disnotice{display: inline-block;vertical-align: top;margin-top: 20px;}
+   div.messagebox div.col-md-12 div.noticemsg div.noticedetails div#disnotice.form-group{width:90%;}
+   div.messagebox div.col-md-12 div.noticemsg div.noticedetails div#disnotice.form-group textarea#comment.form-control{overflow-x: hidden;}
+   * {
+       box-sizing: border-box;    
+   }
+   .grafico {
+       height: 200px;
+       margin: 1rem auto;
+       position: relative;
+       width: 200px;
+       margin-right: 30px;
+         } 
+   .recorte {
+       border-radius: 50%;
+       clip: rect(0px, 200px, 200px, 100px);
+       height: 100%;
+       position: absolute;
+       width: 100%;
+        }
+   .quesito {
+       border-radius: 50%;
+       clip: rect(0px, 100px, 200px, 0px);
+       height: 100%;
+       position: absolute;
+       width: 100%;
+       font-family: monospace;
+       font-size: 1.5rem;
+        }
+   .sombra {
+       background-color: #fff;
+       border-radius: 50%;
+       box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);
+       border: 5px solid #000;
+       height: 100%;
+       position: absolute;
+       width: 100%;
+     }
+   
+   #porcion1 {
+       transform: rotate(0deg);
+        }
+   
+   #porcion1 .quesito {
+       background-color: #2d6596;
+       transform: rotate(70deg);
+        }
+   #porcion2 {
+       transform: rotate(70deg);
+        }
+   #porcion2 .quesito {
+       background-color: rgb(246,192,28);
+       transform: rotate(120deg);
+        }
+   #porcion3 {
+       transform: rotate(-170deg);
+        }
+   #porcion3 .quesito {
+       background-color: rgba(0,128,0,.7);
+       transform: rotate(35deg);
+        }
+   #porcionFin {
+       transform:rotate(-145deg);
+        }
+   #porcionFin .quesito {
+       background-color: rgb(63,141,203);
+       transform: rotate(145deg);
+        }
+     #porcionFan {
+       transform:rotate(-145deg);
+        }   
+   #porcionFan .quesito {
+       background-color: #f66c41;
+       transform: rotate(80deg);
+        }
+   #porcion1 .quesito:after {
+       content: attr(data-rel);
+       left: 20%;
+       line-height: 5;
+       position: absolute;
+       top: 0;
+       transform: rotate(-40deg);
+   }
+   #porcion2 .quesito:after {
+       content: attr(data-rel);
+       left: 10%;
+       position: absolute;
+       top: 30%;
+       transform: rotate(-190deg);
+   }
+   #porcion3 .quesito:after {
+       content: attr(data-rel);
+       right:60%;
+       bottom:50%;
+       position: absolute;
+       top: 10%;
+       left:10%;
+       transform: rotate(70deg);
+   }
+   #porcionFin .quesito:after {
+      content: attr(data-rel);
+      left: 30%;
+      position: absolute;
+      /*top: 30%;*/
+      bottom:80%;
+      right:50%;
+   }
+   #porcionFan .quesito:after {
+      content: attr(data-rel);
+      left: 10%;
+      position: absolute;
+      top: 30%;
+   }
+      div.staff div.col-md-12 div.backwhite div#cal.col-md-6{width:49%;}
+     div.Circulam .col-md-12 .classalign{height:86px;}
+    div.Circulam .col-md-12 .classalign div.col-md-10{width:95%;}
+    div.calander div.col-md-12 div#quo.col-md-8 .backwhite{background-color: #75a2bc;padding: 10px;border-radius: 20px;}
+   	div.calander div.col-md-12 div#quo.col-md-8 .backwhite div.staff.ng-scope div.form-group div.ng-binding{border: 1px solid darkred;border-radius: 20px;padding: 20px;}
+	  div.staff div.col-md-12 div#quo.col-md-6 .backwhite div.staff form.ng-pristine.ng-valid div.form-group div.ng-binding{height: 60px;border: 1px solid grey;border-radius: 15px;}		
+    div.staff div.col-md-12 div#quo.col-md-6 .backwhite div.staff form.ng-pristine.ng-valid div.form-group div.ng-binding{height: 60px;border: 1px solid grey;border-radius: 15px;}			
+   div.messagebox div.col-md-12 div.col-md-6{background-color: darkgray;}		
+	 div.messagebox div.col-md-12 div.col-md-6 div.form-group button{float: right;margin-bottom: 10px;}				
+   div.staff div.col-md-12 div.col-md-6 div.noticeboard div.backwhite{overflow-y: scroll;height:287px;width:100%;}		
+   /* div.staff div.col-md-12 div#staff1.col-md-6 {border: 0px solid grey; border-radius: 15px;background-color: #568dadcf;margin-top:30px; width:49%;}		 */
+   div.staff div.col-md-12 div#quo.col-md-6 .backwhite{border: 0px solid grey;background-color: #568dadcf; border-radius:15px;margin-top: 30px;margin-left: 6px; width: 102%;height: 245px;}
+
+@media screen and (max-width: 1024px) {
+  div.Circulam .col-md-12 .classalign div.col-md-10{width:100%;}
+}
+@media screen and (max-width: 768px) {
+  div.calander div.col-md-12 div#quo.col-md-8{margin-top: 20px;}
+  div.Circulam .col-md-12 .classalign{height:120px;}
+  div.attendancetaken div.col-md-12 .table-responsive table{width:100%;}
+  div.staff div.col-md-12 div#staff1.col-md-6 {width:100%;}
+  div.staff div.col-md-12 div.backwhite div#cal.col-md-6{width:100%;}
+  div.staff div.col-md-12 div.staff div.col-md-12 div.backwhite div#cal.col-md-6{width:100%;}
+}
+@media screen and (max-width: 425px) {
+  div.Circulam .col-md-12 .classalign{height:200px;}
+  div.Circulam .col-md-12 .classalign .col-md-10{text-align:left;} 
+  div.staff div.col-md-12 .acadamic_report div.col-md-12{margin-bottom: 30px;}
+  div.staff div.col-md-12 #taskManager div.tab-conten div.table-responsive.mailbox-messages{overflow-x: scroll;}
+  div.Circulam .col-md-12 .classalign .col-md-10 button#btn_class.btn.btn-primary.btn-responsive.ng-binding.ng-scope{margin-right: 5px;}
+}
+@media screen and (max-width: 320px) {
+   div.Circulam .col-md-12 .classalign{height:250px;}
+}
+@media screen and (max-width: 1200px) {
+
+   .row.background{width:100%;}
+   .container{width:100%;}
+}
+@media screen and (max-width: 768px) {
+   .acadamic .col-md-12 .col-md-9 img.img-responsive{width:150;height: 150px;margin-left: 25px;}
+}
+@media screen and (max-width: 1024px) {
+   .acadamic .col-md-12 .col-md-9 img.img-responsive{width:150;height: 150px;margin-left: 25px;}
+}   
   
    /*==========dashboardstyles===========*/
 
-/*======calanderstyles=====*/
+/* 
 .calander div.col-md-12 div#quote.col-md-4 div.quote{height:100px;background-color: lightgrey;}
 .calander div.col-md-12 div#quote.col-md-4 div.word{height:100px;background-color: lightgrey;}
 .calander div.col-md-12 div#queries.col-md-4 {height: 200px;background-color: #568dadcf;border-color: #367fa9;border-radius: 15px;}
@@ -1043,8 +1259,7 @@ ul.panel-controls > li > .dropdown-menu:before {
    div.staff div.col-md-12 #cal.col-md-6 .backwhite{background-color: #bd9696;} 
    div.messagebox div.col-md-12 div.col-md-6{background-color: darkgray;}
    div.messagebox div.col-md-12 div.col-md-6 div.form-group button{float: right;margin-bottom: 10px;}
-   div.staff div.col-md-12 div.col-md-6 div.noticeboard{background-color: #e0eee1;}
-   /* div.staff div.col-md-12 div.col-md-6 div.staff div.backwhite{border:1px solid grey;border-radius:10px;background-color: #e7eef4;} */
+ 
    
    div.staff div.col-md-12 div#staff1.col-md-6 {border: 1px solid grey; border-radius: 10px;margin-top: 30px;}
    div.staff div.col-md-12 div#quo.col-md-6 .backwhite{border: 1px solid grey; border-radius: 10px;margin-top: 30px;}
@@ -1182,7 +1397,7 @@ ul.panel-controls > li > .dropdown-menu:before {
       content: attr(data-rel);
       left: 30%;
       position: absolute;
-      /*top: 30%;*/
+  
       bottom:80%;
       right:50%;
    }
@@ -1197,17 +1412,16 @@ ul.panel-controls > li > .dropdown-menu:before {
 	  div.staff div.col-md-12 div#quo.col-md-6 .backwhite div.staff form.ng-pristine.ng-valid div.form-group div.ng-binding{			  height: 60px;border: 1px solid grey;border-radius: 15px;}		
   	 div.staff div.col-md-12 div#quo.col-md-6 .backwhite div.staff form.ng-pristine.ng-valid div.form-group div.ng-binding{		
   	    height: 60px;border: 1px solid grey;border-radius: 15px;}		
-  	   /* div.staff div.col-md-12 #cal.col-md-6{background-color: #568dadcf;} */		
+  	   
    div.messagebox div.col-md-12 div.col-md-6{background-color: darkgray;}		
 	   div.messagebox div.col-md-12 div.col-md-6 div.form-group button{float: right;margin-bottom: 10px;}		
-	   /* div.staff div.col-md-12 div.col-md-6 div.noticeboard{background-color: #e0eee1;} */		
-  	   /* div.staff div.col-md-12 div.col-md-6 div.staff div.backwhite{border:1px solid grey;border-radius:10px;background-color: #e7eef4;} */		
+	   
   	   div.staff div.col-md-12 div.col-md-6 div.noticeboard div.backwhite{overflow-y: scroll;height:287px;width:100%;}		
    div.staff div.col-md-12 div#staff1.col-md-6 {border: 0px solid grey; border-radius: 15px;background-color: #568dadcf;margin-top: 30px; width: 49%;}		
   	   div.staff div.col-md-12 div#quo.col-md-6 .backwhite{border: 0px solid grey;background-color: #568dadcf; border-radius: 15px;margin-top: 30px;margin-left: 6px;
         width: 102%;
         height: 245px;}
-   
+    */
 /*===============dashboardstyles=========*/
   /* .Circulam{background-color: beige;border:1px solid grey;border-radius: 5px;}
   .Circulam h2{text-align: center;}
@@ -1262,33 +1476,31 @@ ul {list-style-type: none;}
     color: white !important
 } */
   /* .Circulam{background-color: beige;border:1px solid grey;border-radius: 5px;} */
-  .Circulam h2{text-align: center;}
+  /* .Circulam h2{text-align: center;}
   .Dashboard .col-md-12{background-color: cadetblue;}
   .Dashboard .col-md-12 h2{text-align: center;}
-  /* .col-md-12 .col-md-2{background-color: yellowgreen;} */
+  
   .col-md-12 .col-md-4 h1{font-size: 18px;}
   .col-md-12 .col-md-9 img{display: inline-block;}
   .col-md-12 .col-md-4 .staff{border:1px solid green;border-radius: 2px;}
-  /* .col-md-2{background-color: lightgrey;} */
+  
   .acadamic .col-md-12 .col-md-3{height:250px;background-color: darkkhaki;}
    .Circulam .col-md-12{margin-top: 30px;}
   .col-md-6 .events h1{text-align: center;}
   .col-md-6 .events,.notices{background-color: cadetblue;}
   .col-md-6 .events h1,.notices h1{font-size: 20px;}
-  /* .col-md-12 .col-md-2{width:350px;height: 270px;}  */
+  
   .attendancetaken .col-md-12 .col-md-8{border:1px solid green;border-radius: 2px;} 
   .attendancetaken .col-md-12 .col-md-4 div.staff{height:350px;}
   .attendancetaken .col-md-12 .col-md-4 div.staff div.backwhite table{height:350px;}
   .attendancetaken .col-md-12 .col-md-4  div.backwhite .calander{margin-top: 30px;}
-  /* .Circulam div h1{width:300px;} */
+  
   .classalign h1{width:200px;font-size: 20px;}
   .notices h1{text-align: center;height:150px;}
   .classalign h1 button{display: inline-block;}
   .classalign .col-md-9 {padding-top: 25px;}
   .classalign .col-md-9 button{margin-right: 40px;text-align: center; border:groove;float :left;}
-    /* .classalign .col-md-9 button.active{
-      background-color: rgb(43, 226, 119);
-    } */
+   
  * {box-sizing: border-box;}
 ul {list-style-type: none;}
 .weekdays {
@@ -1323,7 +1535,7 @@ ul {list-style-type: none;}
     color: white !important
 }
 
-/* Add media queries for smaller screens */
+
 @media screen and (max-width:720px) {
     .weekdays li, .days li {width: 13.1%;}
 }
@@ -1342,7 +1554,7 @@ ul {list-style-type: none;}
    .acadamic .col-md-12 .col-md-9 img.img-responsive{width:150;height: 150px;margin-left: 25px;}
    .classalign .col-md-9 button{margin-right: 10px;}
    .classalign .col-md-9 {text-align: center;}
-}
+} */
 
 
 /*===============hovereffects===========*/
@@ -1532,7 +1744,8 @@ div.classinfo .col-md-9 .backwhite{background-color: white;border:1px solid blue
    } */
 
    /*============schoolProfile===========*/
-.schoolprofile {height:1300px;border:1px solid #7a757b ;} 
+.schoolprofile {height:1000px;border: 1px solid #35a9cc;
+  border-radius: 10px;;} 
 .schoolprofile .schoollogo div.col-md-12 {text-align: center;}
 .schoolprofile .schoollogo div.col-md-12 img{width:150px;margin-right: 30px;margin-top: 10px;}
 .schoolprofile .schoollogo div.col-md-12 img#sclogo{width:500px;height:200px;}
@@ -1686,3 +1899,9 @@ footer.main-footer.ng-scope{position:fixed;left:0px;bottom:0px;width:100%;height
          div.studetails .col-md-4 div.parimage {width:80px;}
           div.studetails .col-md-4 div.stuinfor{width:100px;left:105px;word-wrap: break-word;}
       }
+
+
+
+
+
+
