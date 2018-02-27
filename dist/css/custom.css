@@ -14,6 +14,12 @@
 }
 /*top navigation*/
 
+#color{
+  color:red;font-size: 18px;
+}
+#left{
+  float:left;
+}
 
 /*======headerstyles=======*/
 body,html,.content-wrapper{
@@ -99,8 +105,7 @@ div.background div.container .links li>a{color:black;}
    #tooltip {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black;
-}
+   }
 
 #tooltip .tooltiptext {
     visibility: hidden;
@@ -176,7 +181,7 @@ div.background div.container .links li>a{color:black;}
 
 
 /*=======messagestyles====*/
-div.msgbox div.col-md-12 .backwhite{border:1px solid black;border-radius: 10px;}
+div.msgbox div.col-md-12 .backwhite{border:1px solid #2daae6;border-radius: 10px;}
 /*=============studentprofileacadamicreport==========*/
 div.acadamicreportstudentprofile {height: 1100px;background-color: white; border: 2px solid red;border-radius: 10px;}
 .acadamicreportstudentprofile .col-md-12 .backwhite {height: 220px;padding-top: 25px;background-color: grey;border-radius: 10px;margin:15px;}
@@ -1032,22 +1037,27 @@ ul.panel-controls > li > .dropdown-menu:before {
 /*======calanderstyles=====*/
 .calander div.col-md-12 div#quote.col-md-4 div.quote{height:100px;background-color: lightgrey;}
 .calander div.col-md-12 div#quote.col-md-4 div.word{height:100px;background-color: lightgrey;}
-.calander div.col-md-12 div#queries.col-md-4 {height: 218px;background-color: #568dadcf;border-color: #367fa9;border-radius: 15px;}
+.calander div.col-md-12 div#queries.col-md-3 {height: 218px;background-color: white;border-color: #367fa9;border-radius: 15px;}
  div.Circulam .col-md-12 .classalign .col-md-10{text-align: right;} 
  
- div.Circulam .col-md-12 .classalign .col-md-10 button#btn_class.btn.btn-primary.btn-responsive.ng-binding.ng-scope{margin-right: 10px;margin-bottom: 10px;}
-.calander div.col-md-12 div#queries.col-md-4 div.queries div.queriey1 div.circulardiv{width: 50px;height: 50px;background-color:lightgrey;border-radius: 50px;}
+ div.Circulam .col-md-12 .classalign .col-md-10 button#btn_class.btn.btn-primary.btn-responsive.ng-binding.ng-scope{margin-right: 2px;margin-bottom: 10px;margin-top: 160px;
+  margin-left: -6px;}
+.calander div.col-md-12 div#queries.col-md-3 div.queries div.queriey1 div.circulardiv1{width: 50px;height: 50px;background-color:#eca430cc;border-radius: 50px;}
+.calander div.col-md-12 div#queries.col-md-3 div.queries div.queriey1 div.circulardiv2{width: 50px;height: 50px;background-color:#4ebee0b0;border-radius: 50px;}
+.calander div.col-md-12 div#queries.col-md-3 div.queries div.queriey1 div.circulardiv3{width: 50px;height: 50px;background-color:#51e895b0;border-radius: 50px;}
 .calander div.col-md-12 div#queries.col-md-4 div.queries div.queriey1 .queh1{width:200px;position:absolute;}  
 .calander div.col-md-12 div#queries.col-md-4 div.queries div.queriey1{margin-bottom: 20px;}
-.calander div.col-md-12 div#queries.col-md-4 div.queries div.queriey1 div.circulardiv,.queh1{display:inline-block;}
 
+.calander div.col-md-12 div#queries.col-md-3 div.queries div.queriey1 div.circulardiv1,.queh1{display:inline-block;}
+.calander div.col-md-12 div#queries.col-md-3 div.queries div.queriey1 div.circulardiv2,.queh1{display:inline-block;}
+.calander div.col-md-12 div#queries.col-md-3 div.queries div.queriey1 div.circulardiv3,.queh1{display:inline-block;}
 
 div.staff div.col-md-12 div.col-md-6 #taskManager div.tab-content table.table.rwd-table.table-striped{margin-top: 10px;}
 div.staff div.col-md-12 div.col-md-6{margin-top: 30px;}
-   div.staff div.col-md-12 #cal.col-md-6 .backwhite{background-color: #bd9696;} 
+   /* div.staff div.col-md-12 #cal.col-md-6 .backwhite{background-color: #51e895b0;}  */
    div.messagebox div.col-md-12 div.col-md-6{background-color: darkgray;}
    div.messagebox div.col-md-12 div.col-md-6 div.form-group button{float: right;margin-bottom: 10px;}
-   div.staff div.col-md-12 div#staff1.col-md-6 {border: 1px solid grey; border-radius: 10px;margin-top: 30px;background-color: #568dadcf;
+   div.staff div.col-md-12 div#staff1.col-md-6 {border: 1px solid grey; border-radius: 10px;margin-top: 30px;background-color: #4ebee0b0;
     height: 240px;}
    div.staff div.col-md-12 div#quo.col-md-6 .backwhite{border: 1px solid grey; border-radius: 10px;margin-top: 30px;}
    div.staff div.col-md-12 div#quo.col-md-6 .backwhite .staff form.ng-pristine.ng-valid div.form-group{padding:10px;}
@@ -1075,11 +1085,11 @@ div.staff div.col-md-12 div.col-md-6{margin-top: 30px;}
    div.staff div.col-md-12 #cal.col-md-6 div.calander{margin-bottom: 20px;}
    div.attendancetaken .col-md-12 .backwhite table.table thead tr th .col-md-9 button.btn.btn-primary.btn-responsive{margin-right: 30px;}
    div.attendancetaken .col-md-12 .backwhite table.table thead tr th .col-md-9{width:100%;text-align: center;}
-   div.attendancetaken .col-md-12 {border: 0px solid grey;border-radius: 10px;background-color:  #c1969c;}
+   div.attendancetaken .col-md-12 {border: 0px solid grey;border-radius: 10px;background-color:  #4ebee0b0;}
    .btn-primary {background-color: #2f3981;border-color: #367fa9;}
    .classalign .col-md-9 button#btn_class.ng-binding.ng-scope {margin: 10px;}
    div.box-header.with-border.btn-primary h3.box-title{color:white;}    
-   div.staff div.col-md-12 div.backwhite div#cal.col-md-6{background-color: #c1969c;}
+   div.staff div.col-md-12 div.backwhite div#cal.col-md-6{background-color: #51e895b0;}
    div.messagebox div.col-md-12 div.noticemsg div.noticedetails img{width:40px;height:40px;}
    div.messagebox div.col-md-12 div.noticemsg div.noticedetails img,#disnotice{display: inline-block;vertical-align: top;margin-top: 20px;}
    div.messagebox div.col-md-12 div.noticemsg div.noticedetails div#disnotice.form-group{width:90%;}
@@ -1195,7 +1205,7 @@ div.staff div.col-md-12 div.col-md-6{margin-top: 30px;}
       top: 30%;
    }
       div.staff div.col-md-12 div.backwhite div#cal.col-md-6{width:49%;}
-     div.Circulam .col-md-12 .classalign{height:86px;}
+     div.Circulam .col-md-12 .classalign{height:55px;}
     div.Circulam .col-md-12 .classalign div.col-md-10{width:95%;}
     div.calander div.col-md-12 div#quo.col-md-8 .backwhite{background-color: #75a2bc;padding: 10px;border-radius: 20px;}
    	div.calander div.col-md-12 div#quo.col-md-8 .backwhite div.staff.ng-scope div.form-group div.ng-binding{border: 1px solid darkred;border-radius: 20px;padding: 20px;}
@@ -1206,7 +1216,7 @@ div.staff div.col-md-12 div.col-md-6{margin-top: 30px;}
    div.staff div.col-md-12 div.col-md-6 div.noticeboard div.backwhite{overflow-y: scroll;height:287px;width:100%;}		
    /* div.staff div.col-md-12 div#staff1.col-md-6 {border: 0px solid grey; border-radius: 15px;background-color: #568dadcf;margin-top:30px; width:49%;}		 */
    div.staff div.col-md-12 div#quo.col-md-6 .backwhite{border: 0px solid grey;background-color: #568dadcf; border-radius:15px;margin-top: 30px;margin-left: 6px; width: 102%;height: 245px;}
-
+   
 @media screen and (max-width: 1024px) {
   div.Circulam .col-md-12 .classalign div.col-md-10{width:100%;}
 }
@@ -1239,6 +1249,10 @@ div.staff div.col-md-12 div.col-md-6{margin-top: 30px;}
 @media screen and (max-width: 1024px) {
    .acadamic .col-md-12 .col-md-9 img.img-responsive{width:150;height: 150px;margin-left: 25px;}
 }   
+
+@media screen and (max-width: 425px) {
+  #myNavbar a#dashboard.hvr-pop.transition{margin-left: 40px;}
+}
   
    /*==========dashboardstyles===========*/
 
@@ -1853,54 +1867,74 @@ footer.main-footer.ng-scope{position:fixed;left:0px;bottom:0px;width:100%;height
         div.row.background.ng-scope{margin-top: 160px;}
     }
 
+/*===============parentdashboardstyles============*/
 
-  /*===============parentdashboardstyles============*/
-
-  div.parentdashboard div.parentstudentdetails{height:300px;}
-  div.parentstudentdetails div.col-md-12 div.studetails .col-md-4 h2{font-size: 20px;}
-  div.studetails .col-md-4 div.stuinfor{width:200px;}
-  div.studetails .col-md-4 .parimage,.stuinfor{display:inline-block;}
-  div.studetails .col-md-4 img{width:100px;height:100px;border-radius: 50px;/*margin-bottom: 70px;margin-right: 20px;margin-left: 15px;*/}
-  div.studetails .col-md-4 .backwhite{border:1px solid lightgrey;border-radius: 10px;background-color: lightcyan;}
-  div.parenttimings .col-md-4 table.table.table-bordered{background-color:lightgoldenrodyellow;}
-  div.parentquote .col-md-4 div.quote{height:65px;}
-  div.parentquote .col-md-4 div.word{height:65px;}
-  div.parentquote .col-md-4{background-color: lightgrey;border-radius: 10px;}
-  div.events_notices div.col-md-12 div#events.col-md-6{height:250px;border-radius: 10px;}
-  div.parattendance div.col-md-12 div.col-md-6 canvas#Canvas1{margin-left: 65px;margin-top:75px;}
-  div.studetails .col-md-4 .backwhite div.stuinfor{position:absolute;}
-  /*div.studetails .col-md-4 .parimage{margin-left: 30px;}*/
-  div.events_notices div.col-md-12 div#events.col-md-6 .backwhite{overflow-y: scroll;overflow-x: scroll;height:470px;width:100%;}
-  div.quote div.backwhite.ng-binding h1{background-color: #7bb0f5;border-radius: 5px;}
-  div.word div.backwhite.ng-binding h1{background-color: #7bb0f5;border-radius: 5px;}
-  div.events_notices div.col-md-12 div#calander.col-md-6 {background-color: #ccddab;}
-  div.parattendance .col-md-12 div#attreport.col-md-6{background-color: #e5cdd1;}
-  div.studetails .col-md-4 div.backwhite.ng-scope div.parimage img{position: relative;margin-left: 20px;margin-top: 10px;}
-  
-  /*======mediaqueries for parentdashbaord======*/
-  @media screen and (max-width: 1024px) {
-       div.studetails .col-md-4 div.backwhite.ng-scope div.stuinfor{width:120px;word-wrap: break-word;}
-      }
-   @media screen and (max-width: 768px) {
-     div.parentdashboard div.events_notices{margin-top: 900px;}
-         .register div.col-md-12 #top{top:0px;}
-         .register {width:500px;height:650px;}
-         .register div.col-md-12 div.col-md-12{text-align: right;margin-top: 0px;position:absolute;top:513px;margin-left: 130px;}
-         div.studetails .col-md-4 {margin-bottom: 20px;}
-         div.studetails .col-md-4 div.stuinfor{left:164px;width:200px;}
-        div.events_notices div.col-md-12 div#calander.col-md-6 {margin-top: 220px;}
-  
-  
-   }    
-   @media screen and (max-width: 320px) {
-      div.events_notices div.col-md-12 div#calander.col-md-6 {margin-top: 220px;}
-      div.studetails .col-md-4 div.parimage img{width:50px;height:50px;}
-        div.studetails .col-md-4 div.parimage h2{font-size: 15px;}
-         div.studetails .col-md-4 div.parimage {width:80px;}
-          div.studetails .col-md-4 div.stuinfor{width:100px;left:105px;word-wrap: break-word;}
-      }
+div.parentdashboard div.parentstudentdetails div.col-md-12{margin-bottom: 30px;}
+div.parentstudentdetails div.col-md-12 div.studetails .col-md-4 h2{font-size: 20px;}
+div.studetails .col-md-4 div.stuinfor{width:350px;}
+div.studetails .col-md-4 .parimage,.stuinfor{display:inline-block;}
+div.studetails .col-md-4 img{width:100px;height:100px;border-radius: 50px;/*margin-bottom: 70px;margin-right: 20px;margin-left: 15px;*/}
+/* div.studetails .col-md-4 .backwhite{border:1px solid lightgrey;border-radius: 10px;background-color: lightcyan;} */
+/* div.parenttimings .col-md-4 table.table.table-bordered{background-color:lightgoldenrodyellow;} */
+div.parentquote .col-md-4 div.quote{height:auto;}
+div.parentquote .col-md-4 div.word{height:auto;}
+/* div.parentquote .col-md-4{background-color: lightgrey;border-radius: 10px;} */
+div.events_notices div.col-md-12 div#events.col-md-6{height:250px;border-radius: 10px;}
+div.parattendance div.col-md-12 div.col-md-6 canvas#Canvas1{margin-left: 65px;margin-top:75px;}
+div.studetails .col-md-4 .backwhite div.stuinfor{position:absolute;}
+div.events_notices div.col-md-12 div#events.col-md-6 .backwhite{border-radius:10px;overflow-y: scroll;overflow-x: scroll;height:508px;width:100%;background-color: #dfd5ec;}
+/* div.quote div.backwhite.ng-binding h1{background-color: #7bb0f5;border-radius: 5px;} */
+/* div.word div.backwhite.ng-binding h1{background-color: #7bb0f5;border-radius: 5px;} */
+div.events_notices div.col-md-12 div#calander.col-md-6 {background-color: #ccddab;border-radius:10px;}
+/* div.parattendance .col-md-12 div#attreport.col-md-6{background-color: #e5cdd1;} */
+div.studetails .col-md-4 div.backwhite.ng-scope div.parimage img{position: relative;margin-left: 20px;margin-top: 10px;bottom:40px;}
+div.parenttimings .col-md-4 .backwhite{height:220px;background-color: lightblue;border-radius:10px;}
+div.parentquote .col-md-4 div.quote.ng-binding{background-color: darkgrey;border-radius:10px;}
+div.parentquote .col-md-4 div.word.ng-binding{background-color: darkgrey;border-radius:10px;}
+div.parattendance div.col-md-12 div#attreport.col-md-6{background-color: #e7e89a;margin-top: 20px;border-radius:10px;}
+div.parattendance div.col-md-12 div#attreport1.col-md-6 .backwhite{background-color: #a0dea0;border-radius:10px;}
+div.events_notices div#events.col-md-6 .backwhite div.events div.ng-scope ul.timeline{padding:10px;}
+div.studetails .col-md-4 div.backwhite.ng-scope div.parimage{width: 350px;height:100px;}
+div.studetails .col-md-4 div.backwhite.ng-scope div.parimage .stuimagedetails{width:160px;}
+div.studetails .col-md-4 div.backwhite.ng-scope div.parimage img,.stuimagedetails{display:inline-block;} 
+div.studetails .col-md-4 .stuinfor div.adm{width:210px;}
+div.studetails .col-md-4 .stuinfor div.cls{width:100px;}
+div.studetails .col-md-4 div.stuinfor div.adm,div.cls{display:inline-block;}
+div.studetails .col-md-4 div.backwhite.ng-scope{height: 220px;background-color: #e89a8e;;border-radius: 10px;}
 
 
+
+
+/*======mediaqueries for parentdashbaord======*/
+
+@media screen and (max-width: 1024px) {
+     div.studetails .col-md-4 div.backwhite.ng-scope div.stuinfor{width:px;word-wrap: break-word;}
+    }
+ @media screen and (max-width: 768px) {
+       /* div.parentdashboard div.events_notices{margin-top: 900px;} */
+       .register div.col-md-12 #top{top:0px;}
+       .register {width:500px;height:650px;}
+       .register div.col-md-12 div.col-md-12{text-align: right;margin-top: 0px;position:absolute;top:513px;margin-left: 130px;}
+       div.studetails .col-md-4 {margin-bottom: 20px;}
+       div.studetails .col-md-4 div.stuinfor{left:164px;width:200px;}
+        div.studetails .col-md-4 .stuinfor{margin-left: 200px;}
+       div.events_notices div.col-md-12 div#calander.col-md-6 {margin-top: 290px;}
+ }    
+ @media screen and (max-width: 320px) {
+    div.events_notices div.col-md-12 div#calander.col-md-6 {margin-top: 298px;}
+    div.studetails .col-md-4 div.parimage img{width:50px;height:50px;}
+    div.studetails .col-md-4 div.parimage h2{font-size: 15px;}
+    div.studetails .col-md-4 div.parimage {width:80px;}
+    div.studetails .col-md-4 div.stuinfor{width:100px;left:105px;word-wrap: break-word;}
+    }
+
+@media screen and (max-width: 425px) {
+div.parentstudentdetails div.events_notices div.col-md-12 div#calander.col-md-6{margin-bottom: 40px;}
+div.studetails .col-md-4 div.backwhite.ng-scope{height:300px;}
+div.studetails .col-md-4 div.stuinfor{margin-left: 0px;position:absolute;left:24px;}
+
+
+}
 
 
 

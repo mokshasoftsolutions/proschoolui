@@ -1,0 +1,77 @@
+<head>
+	<title>PROSchool Log</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+	<link rel="stylesheet" href="../../../dist/login/web/css/style.css" type="text/css" media="all" />
+
+</head>
+
+<body>
+	<div>
+		<div class="center-container">
+
+			<div class="header-w3l">
+
+			</div>
+
+			<div class="main-content-agile">
+				<div class="wthree-pro">
+					<h2>PROSchool Query</h2>
+				</div>
+
+
+				<div class="sub-main-w3">
+					<form name="queryDetails" ng-submit="queryDetails.$valid && sendQuery(data);" novalidate>
+						<div class="box-body">
+							<div class="row">
+								<div class="col-md-3">
+									<div class="form-group" ng-class="{'has-error': queryDetails.$submitted && queryDetails.user.$invalid && queryDetails.user.$pristine}">
+										<select name="user" class="form-control select2" id="Selectid" data-style="btn btn-lg" ng-model="data.user">
+											<option selected value="">--Select--</option>
+											<option>Admin</option>
+											<option>Teacher</option>
+											<option>Parent</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-md-12">
+									<div class="form-group" ng-class="{'has-error': queryDetails.$submitted  && queryDetails.query1.$invalid && queryDetails.query1.$pristine}">
+										<textarea class="form-control" name="query1" rows="5" ng-model="data.query" placeholder="Description" id="comment"></textarea>
+									</div>
+								</div>
+							</div>
+
+
+							<!-- <button type="submit" class="btn btn-lg ">Submit</button> -->
+
+
+
+							<button type="submit" class="btn btn-primary">Submit</button>
+
+
+
+							<button ui-sref='login_page' class="btn btn-primary"> Back</button>
+
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="footer"> </div>
+
+		</div>
+	</div>
+	<script type="text/javascript" src="../../../dist/login/web/js/jquery-2.1.4.min.js"></script>
+
+
+</body>

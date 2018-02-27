@@ -6,7 +6,8 @@
         <a ui-sref="main.employee">Details</a>
       </li>
       <li ui-sref-active="active" ng-show="showRole(['admin'])">
-       / <a ui-sref="main.employeeDetails">Employment</a>
+        /
+        <a ui-sref="main.employeeDetails">Employment</a>
       </li>
     </ul>
   </div>
@@ -20,8 +21,20 @@
           <div class="box-header with-border">
             <ul class="panel-controls">
               <li>
-                <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)"
-                />
+
+                <div class="tooltip" style="margin-right: 615px;">
+                  <!-- <label>Download Excel Format</label> -->
+                  <button class="btn btn-primary pull-right">
+                    <img src="../../../dist/img/images/xlsx6.png" data-ng-click="export()" class="img-responsive" width="30" height="30" alt="Responsive image">
+                  </button>
+
+                  <span ng-hide="excel" class="tooltiptext">Download Excel Format file</span>
+                  <span ng-show="excel" class="tooltiptext">Downloading....</span>
+                </div>
+
+              </li>
+               <li>
+                <input type="file" name="file" class="form-control" onchange="angular.element(this).scope().loadFile(this.files)" />
               </li>
               <li>
                 <input type="button" value="Import" class="btn btn-primary" ng-click="handleFile()" style="background-color: #03104e;border-color: #03104e;"

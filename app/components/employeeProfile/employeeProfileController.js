@@ -58,10 +58,11 @@ angular.module('school_erp')
 
             employeeServices.getEmployeeById(employee_id)
                 .success(function (data, status) {
-                     console.log(JSON.stringify(data));
+                   //  console.log(JSON.stringify(data));
                     $scope.employeeData = data.employee;
                     $scope.employeePhoto = globalServices.globalValue.baseURL + 'api/image/' + $scope.employeeData[0].employeeImage[0].filename;
-
+                    $scope.photoName=$scope.employeeData[0].employeeImage[0].filename;
+                   // console.log( $scope.photoName);
                 })
                 .error(function (data, success) {
                 })
@@ -203,7 +204,7 @@ angular.module('school_erp')
 
         $scope.generatePDF = function () {
             $scope.pdf = true;
-            console.log("pdf message1");
+         //   console.log("pdf message1");
             html2canvas(document.getElementById('exportthis'), {
                 onrendered: function (canvas) {
                     var data = canvas.toDataURL();
@@ -213,7 +214,7 @@ angular.module('school_erp')
                             width: 480,
                         }]
                     };
-                    console.log("pdf message2");
+                   // console.log("pdf message2");
 
                     pdfMake.createPdf(docDefinition).download("EmployeeAttendanceByMonth_Report.pdf");
                     $scope.getAttendenceByMonth($scope.select_month, $stateParams.employee);
@@ -251,7 +252,7 @@ angular.module('school_erp')
         }
 
         // Add attendance single
-        $scope.editEmployeeImage = function () {
+        $scope.editEmployeeImage = function ( ) {
             console.log($scope.selectedFile);
 
             $scope.employee_id = $stateParams.employee;
@@ -260,7 +261,7 @@ angular.module('school_erp')
             var fd = new FormData();
             fd.append('file', file);
 
-            employeeProfileServices.editEmployeeImage(fd, $scope.employee_id)
+            employeeProfileServices.editEmployeeImage(fd, $scope.employee_id,$scope.photoName)
                 .success(function (data, status) {
 
                     ngDialog.open({

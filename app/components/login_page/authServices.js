@@ -58,6 +58,11 @@ angular.module('school_erp')
       return userInfo;
     };
 
+
+
+
+
+    
     return authService;
 
   }]);

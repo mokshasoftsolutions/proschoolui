@@ -92,7 +92,9 @@
                         <div class="progress-bar progress-bar-success" ng-style="{width:(chapter.percent)}">
                           C:{{chapter.completed_topics}}/{{chapter.no_of_topics}}
                         </div>
-
+                        <div class="progress-bar progress-bar-warning" ng-style="{width:(chapter.remaining_percent)}">
+                          P:{{chapter.remaining_topics}}/{{chapter.no_of_topics}}
+                        </div>
                       </div>
                     </th>
 

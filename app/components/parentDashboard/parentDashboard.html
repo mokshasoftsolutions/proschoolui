@@ -12,20 +12,27 @@
             <div class="backwhite" ng-repeat="stuData in studentData">
               <div class="parimage">
                 <img ng-src="{{globalServicesURL}}api/image/{{stuData.studentImage[0].filename}}">
-
-                <h2>Admission No: {{ stuData.Admission_no}}</h2>
-                <h2>Roll No: {{stuData.roll_no}}</h2>
+                <div class="stuimagedetails">
+                <h1>{{stuData.student_name}}</h1>
+                <h2>{{stuData.status}}</h2> 
+                </div> 
               </div>
               <div class="stuinfor">
-                <h1>{{stuData.student_name}}</h1>
-                <h2>{{stuData.status}}</h2>
-
+              <div class="adm">  
+               <h2>Admission No: {{ stuData.Admission_no}}</h2>
+               <h2>Roll No: {{stuData.roll_no}}</h2>
+              </div>
+              <div class="cls">
+               <h2>class</h2>
+               <h2>section</h2> 
+              </div>
               </div>
             </div>
           </div>
         </div>
         <div class="parenttimings">
           <div class="col-md-4">
+            <div class="backwhite">
             <table class="table table-bordered">
               <thead>
                 <tr>
@@ -38,9 +45,9 @@
                   <td>{{timetable.start_time}}</td>
                   <td>{{timetable.subject_name}}</td>
                 </tr>
-
               </tbody>
             </table>
+            </div>
           </div>
         </div>
         <div class="parentquote">
@@ -92,7 +99,7 @@
               </table>
             </div>
           </div>
-          <div class="col-md-6" id="attreport">
+          <div class="col-md-6" id="attreport1">
             <div class="backwhite">
               <h1>Performance</h1>
               <center style="margin-top:0px;color:brown">{{message}}</center>

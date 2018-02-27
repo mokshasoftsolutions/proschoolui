@@ -33,9 +33,24 @@ angular.module('school_erp')
                 })
         }
 
+
+        $scope.getQuotes = function () {
+
+            schoolEventsServices.getQuote()
+                .success(function (data, status) {
+                      console.log(JSON.stringify(data));
+                    $scope.quotes = data.Quotes; // Api list-name
+                    // $scope.quoteforday = $scope.quotes[0].quote;
+                    // quoteWritten=$scope.quotes[0]
+                    // $scope.wordforday = $scope.quotes[0].word;
+
+                })
+                .error(function (data, success) { })
+        }
+
         // Role based Display
         $scope.showRole = function (role) {
             return globalServices.fetchRoleAuth(role);
         }
-
+        $scope.getQuotes(); 
     }])

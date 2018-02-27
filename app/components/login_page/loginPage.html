@@ -24,28 +24,31 @@
                 </div>
                 <form name=loginform ng-submit="loginform.$valid && login(datab)" novalidate>
                     <div class="input-group" ng-class="{'has-error': loginform.$submitted  && loginform.mail.$pristine}">
-                        <span style="color:red;margin-left:33px;"  ng-show=" loginform.$submitted && loginform.mail.$dirty && loginform.mail.$error.required">username is required</span>
+                        <span style="color:red;margin-left:33px;" ng-show=" loginform.$submitted && loginform.mail.$dirty && loginform.mail.$error.required">username is required</span>
                         <i class="glyphicon glyphicon-user"></i>
-                        <input class="input-lg"  ng-model="datab.username"
-                             placeholder="Username" name="mail" type="text" required>
-                             
+                        <input class="input-lg" ng-model="datab.username" placeholder="Username" name="mail" type="text" required>
+
                     </div>
-                   
+
                     <div class="input-group" ng-class="{'has-error': loginform.$submitted  && loginform.passsword.$pristine}">
                         <span style="color:red;margin-left:33px;" ng-show=" loginform.$submitted && loginform.passsword.$dirty && loginform.passsword.$error.required">passsword is required</span>
                         <i class="glyphicon glyphicon-lock"></i>
-                        <input class="input-lg"  ng-model="datab.password"
-                            name="passsword" placeholder="Password"  type="password" required>
-                           
+                        <input class="input-lg" ng-model="datab.password" name="passsword" placeholder="Password" type="password" required>
+
                     </div>
-                    <input type="checkbox" id="checkbox">
-                    <span>Remember me</span>
-                    <span id="right">Forgot Password</span>
+                    <label style=" margin-left: 20px;">
+                        <input data-ng-click="rememberMe(remember)" data-ng-model="remember" name="remember" type="checkbox"> Remember Me
+                    </label>
+                    <!-- <input type="checkbox" id="checkbox">
+
+                    <span>Remember me</span> -->
+                    <label><span style="color:#f81333" id="right">Forgot Password</span></label>
+                    
                     <div class="butt">
                         <button class="btn btn-primary" type="submit">Login </button>
-                        <a href="../../../dist/login/web/query.html">
-                            <button class="btn btn-primary" type="button">Query </button>
-                        </a>
+
+                        <button ui-sref='query_page' class="btn btn-primary" type="button">Query </button>
+
                     </div>
                 </form>
             </div>

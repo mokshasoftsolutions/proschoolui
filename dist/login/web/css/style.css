@@ -85,28 +85,30 @@ div.login{
   }
   @media screen and (max-width: 425px) { 
            div#logo img.img-responsive{top: 65px;position: absolute; z-index: 1;left:50%;transform: translateX(-50%);} 
-           div.login {width: 400px;margin-left: 0px;margin-top: 140px;}
+           div.login {width: 385px;margin-left: 0px;margin-top: 140px;}
            div.login div.row div.col-md-12.textContainer img.img-responsive{margin-left: 70px;}
            input.input-lg{width:350px;}
-           span#right{margin-right: 20px;margin-left: 120px;}
-           div.login div.butt {width: 130px;margin-left: 30px;}
+           span#right{margin-right: 20px;margin-left: 85px;}
+           div.login div.butt {width: 130px;margin-left: 25px;margin-top: 20px;}
            button.btn.btn-primary{margin-left: 100px;}
   }
   @media screen and (max-width: 375px) {  
-           div.login {width: 345px;margin-left: 0px;}
-           div#logo img.img-responsive{top: 65px;position: absolute; z-index: 1;left: 50%;transform: translateX(-50%);}
+           div.login {width: 328px;margin-left: 0px;}
+           div#logo img.img-responsive{top: 65px;position: absolute; z-index: 1;left: 48%;transform: translateX(-50%);}
            div.login div.row div.col-md-12.textContainer img.img-responsive{margin-left: 50px;}
-           input.input-lg{width:300px;}
-           span#right{margin-right: 20px;margin-left: 0px;}
+           input.input-lg{width:270px;}
+           span#right{margin-right: 20px;margin-left: 30px;}
            button.btn.btn-primary{margin-left: 100px;}
+            div.login div.butt{margin-left: 0px;margin-top: 20px;} 
   }
   @media screen and (max-width: 320px) {  
-           div.login {width: 290px;margin-left: 0px;}
-           div.login div.row div.col-md-12.textContainer img.img-responsive{margin-left: 30px;}
-           div#logo img.img-responsive{left: 50%;transform: translateX(-50%);top: 65px;position: absolute; z-index: 1;}
-           input.input-lg{width:240px;}
-           span#right{margin-right: 20px;margin-left: 20px;}
-           button.btn.btn-primary{margin-left: 50px;}
+            div.login {width: 280px;margin-left: 0px;}
+            div.login div.butt{margin-top: 20px;margin-left: 26px;}
+            div.login div.row div.col-md-12.textContainer img.img-responsive{margin-left: 30px;}
+            div#logo img.img-responsive{left: 45%;transform: translateX(-50%);top: 65px;position: absolute; z-index: 1;}
+            input.input-lg{width:240px;}
+            span#right{margin-right: 20px;margin-left: 3px;} 
+            button.btn.btn-primary{margin-left: 50px;}
   }
   @media screen and (max-width: 768px) {  
   
@@ -125,7 +127,6 @@ div.login{
    div.col-md-12{ background-color:lightgrey; padding-top:30px;}
    div.register{width:500px; height:300px;margin:0 auto; background-color:lightgrey;}
    .register div.col-md-12 div.col-md-12{text-align:right;}
-  
   .register div.col-md-12 .col-md-6{margin-bottom:10px;}
   .register .backwhite .schlo{width:210px;margin:0 auto;}
   .regback div.img{margin:0 auto;}
@@ -138,7 +139,7 @@ div.login{
 
   @media screen and (max-width: 768px) {  
       div.register .backwhite .col-md-12 div#top.col-md-6{top:-1px;}
-      div.register .backwhite .col-md-12{margin-top: 0px;}
+      div.register .backwhite .col-md-12{margin-top: 0px;margin-bottom: 45px;}
       div.register div.backwhite .col-md-12 {height:675px;background-color: lightgrey;}
       div.register div.backwhite .col-md-12 div#Next.col-md-6{width:130px;margin:0 auto;}
       div.register .backwhite .schlo img.img-responsive{left: 50%;transform: translateX(-50%);}
@@ -147,28 +148,25 @@ div.login{
   @media screen and (max-width: 425px) {
    div.regback.ng-scope div.img img.img-responsive{position: absolute;left: 114%;transform: translateX(-107%); }
    div.register .backwhite .col-md-12 div#Next.col-md-6 div button.btn.btn-primary{margin-left: 10px;float:none;width:100px;}
-   div.register {width: 400px;margin-left: 15px;}
+   div.register {width: 370px;margin-left: 15px;}
    div.register .backwhite .col-md-12 div#Next.col-md-6{padding-left: 125px;}
    div.register .backwhite h2{text-align: center;padding-left: 0px;}
    div.register .backwhite img.img-responsive{margin-left: 90px;}
-   div.register div.backwhite .col-md-12 div#Next.col-md-6{width:130px;margin-left: 10px;}
+   div.register div.backwhite .col-md-12 div#Next.col-md-6{width:130px;margin-left: -8px;}
    div.register .backwhite .schlo img.img-responsive{left: 9%;transform: translateX(-50%);}
   }  
    @media screen and (max-width: 375px) {  
-       div.register {width: 350px;}
+       div.register {width: 335px;}
        div.regback.ng-scope div.img img.img-responsive{position: absolute; right: 80px;}
        div.register .backwhite .col-md-12 div#Next.col-md-6{padding-left: 100px;}
   }
       @media screen and (max-width: 320px) {  
-       div.register {width: 300px;}
-       div.regback.ng-scope div.img img.img-responsive{position: absolute;left: 127%;transform: translateX(-120%);}
+       div.register {width: 275px;}
+       div.register .backwhite .col-md-12{margin-bottom: 60px;}
+       div.regback.ng-scope div.img img.img-responsive{position: absolute;left: 118%;transform: translateX(-120%);}
        div.register .backwhite .col-md-12 div#Next.col-md-6{padding-left: 80px;}
   }
     
-
-  
-  
-  
   
   /* 
   

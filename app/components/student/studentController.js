@@ -37,7 +37,7 @@ angular.module('school_erp')
             })
 
 
-     
+
 
         $scope.getStudentValue = function (secValue) {
             $scope.pdf = false;
@@ -65,7 +65,8 @@ angular.module('school_erp')
                             section: element.sections[0].name,
                             parent: element.parents[0].parent_name,
                             image: element.studentImage[0].filename,
-
+                            selected: false,
+                          //  status: "none"
                         }
                         $scope.studentBox.push(obj);
                         //console.log($scope.studentBox);
@@ -80,6 +81,72 @@ angular.module('school_erp')
                 })
                 .error(function (data, success) {
                 })
+        }
+
+
+        $scope.students = [];
+
+        // To Select All for Bulk Attendance report
+        $scope.tickAll = function (status) {
+            $scope.studentBox.forEach(function (element) {
+                if (status) {
+                    element.selected = true;
+                } else {
+                    element.selected = false;
+                }
+            });
+        }
+
+
+
+
+
+
+        $scope.sendStudentHolder = [];
+        $scope.submitBulkDelete = function () {
+            var dataB = $scope.studentBox;
+            
+            angular.forEach(dataB, function (element){
+                if (element.selected == true || element.selected == 'true') {
+                   // console.log(element.student_id)
+                    var obj = {
+                        student_id: element.student_id,
+                       // status: value.status
+                    }
+                    $scope.sendStudentHolder.push(obj);
+                }
+            }); 
+
+
+           
+            studentServices.setBulkDeleteStudents($scope.sendStudentHolder, $scope.classId, $scope.secId)
+                .success(function (data, status) {
+                    $scope.sendStudentHolder = [];
+                    if (data == false || data == 'false') {
+                        ngDialog.open({
+                            template: '<p>Students deleted successfully</p>',
+                            plain: true
+                        });
+                        $scope.getStudentValue($scope.secId);
+                    }
+                    else {
+                        ngDialog.open({
+                            template: '<p>Students deleted successfully</p>',
+                            plain: true
+                        });
+                        $scope.getStudentValue($scope.secId);
+                    }
+
+                })
+                .error(function (data, success) {
+                    ngDialog.open({
+                        template: '<p>Some Error Occured!</p>',
+                        plain: true
+                    });
+                    $scope.sendStudentHolder = [];
+                })
+          
+
         }
 
         $scope.showRole = function (role) {

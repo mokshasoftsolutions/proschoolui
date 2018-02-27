@@ -12,14 +12,14 @@ angular.module('school_erp')
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             })
         };
-       
 
-        employeeProfileServices.editEmployeeImage = function (dataValue,employee_id) {
+
+        employeeProfileServices.editEmployeeImage = function (dataValue, employee_id, photoName) {
             //   console.log(student_id)
             return $http({
                 method: 'POST',
                 // url:'http://192.168.1.16:4005/api/schools',
-                url: globalServices.globalValue.baseURL + 'api/employee_photo_edit/'+ employee_id,
+                url: globalServices.globalValue.baseURL + 'api/employee_photo_edit/' + employee_id + '/' + photoName,
                 data: dataValue,
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }

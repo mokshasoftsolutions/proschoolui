@@ -3,7 +3,7 @@ angular.module('school_erp')
         $scope.employeeDetailsData = [];
         $scope.data = [];
         $scope.today1 = '01/01/1975';
-
+        $scope.excel = false;
         $scope.selectedFile = null;
 
         $scope.loadImage = function (files) {
@@ -242,6 +242,28 @@ angular.module('school_erp')
                 });
         }
 
+
+        $scope.export = function () {
+            $scope.excel = true;
+            $http.get(globalServices.globalValue.baseURL + 'api/image/employeeExcel.xlsx',{responseType: 'arraybuffer'}
+            ).then(function (response) {
+              //  console.log(response);
+                    // var header = response.headers('application/json')
+                     var fileName = 'employeeExcel';
+                  //  console.log(fileName);
+     
+                    var blob = new Blob([response.data],
+                        {type : "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                    var objectUrl = (window.URL || window.webkitURL).createObjectURL(blob);
+                    var link = angular.element('<a/>');
+                    link.attr({
+                        href : objectUrl,
+                        download : fileName
+                    })[0].click();
+                })
+                $scope.excel = false;
+        };
+        // for Role
 
 
 

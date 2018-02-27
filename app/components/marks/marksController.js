@@ -161,12 +161,13 @@ angular.module('school_erp')
 
                 marksServices.setBulkMarks($scope.sendMarksHolder, secId, subId, chapterId, assignId)
                     .success(function (data, status) {
+                        $scope.sendMarksHolder = [];
                         if (data == false || data == 'false') {
                             ngDialog.open({
                                 template: '<p>Marks Already Added</p>',
                                 plain: true
                             });
-                            $scope.sendMarkseHolder = [];
+                            $scope.sendMarksHolder = [];
                             //$scope.student.marks='';
                             //  $scope.marksBox = [];
                         }
@@ -175,7 +176,7 @@ angular.module('school_erp')
                                 template: '<p> Marks  Added successfully </p>',
                                 plain: true
                             });
-                            $scope.sendMarkseHolder = [];
+                           
                             $scope.marksBox.marks = "";
                         }
                         //$scope.student.marks='';
@@ -191,7 +192,7 @@ angular.module('school_erp')
                             template: '<p>Some Error Occured!</p>',
                             plain: true
                         });
-                        $scope.sendMarkseHolder = [];
+                        $scope.sendMarksHolder = [];
                     })
             } else {
                 ngDialog.open({

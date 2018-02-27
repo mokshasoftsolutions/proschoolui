@@ -3,26 +3,31 @@
     <h1>Admin Management</h1>
     <ul class="links">
       <li ui-sref-active="active">
-          <a ui-sref='main.schoolProfile'>School Profile</a>
+        <a ui-sref='main.schoolProfile'>School Profile</a>
       </li>
-      <li ui-sref-active="active" >
+      <li ui-sref-active="active">
 
-         / <a ui-sref='main.addClass&Section'>Class&Section</a>
+        /
+        <a ui-sref='main.addClass&Section'>Class&Section</a>
       </li>
       <li ui-sref-active="active" ng-show="showRole(['admin'])">
-          /<a ui-sref='main.parentInfo'>ParentInfo</a>
+        /
+        <a ui-sref='main.parentInfo'>ParentInfo</a>
       </li>
       <li ui-sref-active="active" ng-show="showRole(['admin'])">
-         / <a ui-sref='main.teacherInfo' >TeacherInfo</a>
+        /
+        <a ui-sref='main.teacherInfo'>TeacherInfo</a>
       </li>
       <li ui-sref-active="active" ng-show="showRole(['admin','teacher'])">
-          /<a ui-sref='main.taskManagement'>TaskManagement</a>
-          
+        /
+        <a ui-sref='main.taskManagement'>TaskManagement</a>
+
       </li>
       <li ui-sref-active="active" ng-show="showRole(['admin'])">
-        /<a ui-sref='main.quote'>Quote & Word</a>
-    </li>
-  </ul>
+        /
+        <a ui-sref='main.quote'>Quote & Word</a>
+      </li>
+    </ul>
   </div>
 </div>
 
@@ -90,48 +95,63 @@
       <div class="col-md-12">
         <div class="backwhite">
           <div class="table-responsive" style="width:100%">
-          <table export-table st-table="display_records" st-safe-src="teacherBox" style="width:100%">
-            <thead>
-              <tr>
-                <th>#</th>
-                <!-- <th>ParentId</th> -->
-                <th>Teacher Name</th>
-                <!-- <th>Parent Name</th> -->
-                <!-- <th>SchoolId</th> -->
-                <th>User Name</th>
-                <th>Password</th>
-                <th>Action</th>
+            <table export-table st-table="display_records" st-safe-src="teacherBox" style="width:100%">
+              <thead>
+                <tr>
+                  <button style="height: 35px;width: 83px;margin-right: 40px;" type="button" class="btn btn-primary pull-right" ng-click="sendAllUser(teacher_id)">
 
-              </tr>
-            </thead>
-            <tbody>
-              <tr st-select-row="row" st-select-mode="multiple" ng-repeat="teachers in display_records">
-                <td>{{teachers.id+1}}</td>
-                <td>
-                  <!--  -->
-                  {{teachers.teacher_name}}
-                </td>
+                    Send All
+                  </button>
+                  <th>#</th>
+                  <th>
+                    <input type="checkbox" value="None" id="squaredFour" data-ng-change="tickAll(check)" ng-model="check" name="check"
+                    />TickAll
+                    <label for="squaredFour"></label>
+                  </th>
+                  <th>Teacher Name</th>
+                  <!-- <th>Parent Name</th> -->
+                  <!-- <th>SchoolId</th> -->
+                  <th>User Name</th>
+                  <th>Password</th>
+                  <th>Action</th>
 
-                <td>
-                  {{teachers.teacher_id | lowercase}}
-                </td>
-                <td>
-                  {{teachers.teacher_id | lowercase}}
-                </td>
-                <td>
-                  <button class="btn btn-primary" type="submit">Send</button>
-                </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr st-select-row="row" st-select-mode="multiple" ng-repeat="teachers in display_records">
+                  <td>{{teachers.id+1}}</td>
 
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="5" class="text-center">
-                  <div class="pull-right" st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
-                </td>
-              </tr>
-            </tfoot>
-          </table>
+                  <td>
+
+                    <input type="checkbox" value="None" id="squaredFour{{$index}}" name="check" ng-model="teachers.selected" />
+                    <label for="squaredFour{{$index}}">
+
+                  </td>
+                  <td>
+                    <!--  -->
+                    {{teachers.teacher_name}}
+                  </td>
+
+                  <td>
+                    {{teachers.teacher_id | lowercase}}
+                  </td>
+                  <td>
+                    {{teachers.teacher_id | lowercase}}
+                  </td>
+                  <td>
+                    <button class="btn btn-primary" ng-click="sendAllUser(teachers.teacher_id)"> <i class="fa fa-send-o"></i></button>
+                  </td>
+
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="5" class="text-center">
+                    <div class="pull-right" st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
           </div>
         </div>
       </div>

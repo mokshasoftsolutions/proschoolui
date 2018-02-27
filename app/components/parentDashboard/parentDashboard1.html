@@ -1,0 +1,365 @@
+<div class="row background">
+  <div class="container">
+    <h1>Parent Dashboard</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="parentdashboard">
+    <div class="parentstudentdetails">
+      <div class="col-md-12">
+        <div class="studetails">
+          <div class="col-md-4">
+            <div class="backwhite" ng-repeat="stuData in studentData">
+              <div class="parimage">
+                <img ng-src="{{globalServicesURL}}api/image/{{stuData.studentImage[0].filename}}">
+
+                <h2>Admission No: {{ stuData.Admission_no}}</h2>
+                <h2>Roll No: {{stuData.roll_no}}</h2>
+              </div>
+              <div class="stuinfor">
+                <h1>{{stuData.student_name}}</h1>
+                <h2>{{stuData.status}}</h2>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="parenttimings">
+          <div class="col-md-4">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Sessions</th>
+                  <th>Class</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="timetable in timeTableDataDay">
+                  <td>{{timetable.start_time}}</td>
+                  <td>{{timetable.subject_name}}</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="parentquote">
+          <div class="col-md-4" ng-repeat="data in quote">
+            <div class="quote">
+              <div class="backwhite">
+                <h1>Quote</h1>
+                {{data.quote}}
+              </div>
+              {{data.quoteWritten}}
+            </div>
+            <div class="word">
+              <div class="backwhite">
+                <h1>Word</h1>
+                {{data.word}}
+              </div>
+              {{data.wordWritten}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="parattendance">
+        <div class="col-md-12">
+          <div class="col-md-6" id="attreport">
+            <div class="backwhite">
+              <h3>Attendance Report</h3>
+              <table class="table">
+                <tbody>
+                  <tr ng-repeat="student in studentAttData">
+                    <td>{{student.monthName}}
+                    </td>
+                    <td>
+                      <div class="progress">
+                        <div class="progress-bar progress-bar-success" ng-style="{width:(student.attendance.presentPercent)}">
+                          P:{{student.attendance.present}}/{{student.count}}
+                        </div>
+                        <div class="progress-bar progress-bar-warning" ng-style="{width:(student.attendance.onLeavePercent)}">
+                          L:{{student.attendance.onLeave}}/{{student.count}}
+                        </div>
+                        <div class="progress-bar progress-bar-danger" ng-style="{width:(student.attendance.absentPercent)}">
+                          A:{{student.attendance.absent}}/{{student.count}}
+                        </div>
+                      </div>
+                    </td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-md-6" id="attreport">
+            <div class="backwhite">
+              <h1>Performance</h1>
+              <center style="margin-top:0px;color:brown">{{message}}</center>
+              <div zingchart id="chart-1" zc-json="myJson" zc-width="100%" zc-height="336px"></div>
+              <!-- <center style="margin-top:150px;color:brown">{{message}}</center> -->
+              <!-- <canvas id="Canvas1"></canvas> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- </div>
+  </div> -->
+  <div class="events_notices">
+    <div class="col-md-12">
+      <div class="col-md-6" id="events">
+        <div class="backwhite">
+          <div class="events">
+            <h1>Notices</h1>
+
+            <div ng-repeat="board in NoticeBoardData">
+              <!-- The time line -->
+              <ul class="timeline">
+                <!-- timeline time label -->
+                <li class="time-label">
+                  <span class="bg-red">
+                    {{board.date}}
+                  </span>
+                  <button ng-show="showRole(['admin'])" style="margin-left:96%" class="btn btn-default btn-xs" data-toggle="tooltip" confirmed-click="DeleteNoticeBoard($index)"
+                    ng-confirm-click="Are you sure you want to delete this item?">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
+                </li>
+
+                <!-- /.timeline-label -->
+                <!-- timeline item -->
+                <li>
+                  <i class="fa fa-envelope bg-blue"></i>
+
+                  <div class="timeline-item">
+                    <span class="time">{{board.time}}</span>
+
+                    <h3 class="timeline-header">{{board.subject}}</h3>
+
+                    <div class="timeline-body">
+                      {{board.messages}}
+                    </div>
+
+                  </div>
+                </li>
+
+
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-6" id="calander">
+        <div class="backwhite">
+          <div class="calander">
+            <h1>Events</h1>
+            <div class="span8">
+              <tabset>
+
+                <tab select="renderCalendar('myCalendar3');">
+                  <div class="calendar" ng-model="eventSources2" calendar="myCalendar3" ui-calendar="uiConfig.calendar"></div>
+                </tab>
+              </tabset>
+            </div>
+          </div>
+
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- 
+<script>
+
+  var items = [];
+  items[0] = { value: 0, label: "1 jan" };
+  items[1] = { value: 5.5, label: "2 may" };
+  items[2] = { value: 3, label: "1 jun" };
+  items[3] = { value: 9, label: "1 dec" };
+  items[4] = { value: 5.5, label: "5 dec" };
+  items[5] = { value: 6.5, label: "12 dec" };
+  items[6] = { value: 6, label: "14 dec" };
+  items[7] = { value: 6.5, label: "15 dec" };
+  items[8] = { value: 6, label: "16 dec" };
+  items[9] = { value: 4.5, label: "17 dec" };
+
+  var box = {
+    left: 40,
+    top: 20,
+    width: 300,
+    height: 200
+  };
+  //Y axe
+  var Yaxe = {
+    offset: 2,
+    font: "10px Arial",
+    color: '#000000'
+  };
+  var Xaxe = {
+    offset: -15,
+    font: "10px Arial",
+    color: '#000000',
+    jump: 'true'
+  };
+
+  //Labels
+  var XLabel = {
+    offset: 10,
+    text: "Date",
+    font: "bold 14px Georgia",
+    color: '#0000ff'
+  };
+
+  var YLabel = {
+    offset: 20,
+    text: "Quantity",
+    font: "bold 14px Georgia",
+    color: '#0000ff'
+  };
+
+  //grid
+  var grid = { color: '#cccccc' };
+  var elements = items.length;
+
+  var c = document.getElementById("Canvas1");
+  var ctx = c.getContext("2d");
+
+  var ValuesYoffset = -box.height / 10 / 2;
+  var ValuesXoffset = box.width / elements / 2;
+
+  //rectangle
+  ctx.moveTo(box.left, box.top);
+  ctx.lineTo(box.left, box.top + box.height);
+  ctx.moveTo(box.left, box.top + box.height);
+  ctx.lineTo(box.left + box.width, box.top + box.height);
+  ctx.strokeStyle = '#888888';//style color
+  ctx.lineWidth = 2;//style
+  ctx.stroke();
+
+  // ------------------ Y - Axe ----------------
+
+  for (var y = 0; y < 10; y++) {
+    Yscaled = box.height / 10 * y;
+    Ypos = ValuesYoffset + box.top + box.height - Yscaled;
+    ctx.beginPath();
+    ctx.moveTo(box.left - 5, Ypos);
+    ctx.lineTo(box.left, Ypos);
+    ctx.strokeStyle = '#000000';//style color
+    ctx.lineWidth = 1;//style 
+    ctx.stroke();
+    ctx.font = Yaxe.font;
+    ctx.fillStyle = Yaxe.color;//style color
+    ctx.fillText(y, box.left - 20, Ypos + Yaxe.offset);
+    ctx.stroke();
+
+    ctx.beginPath();//Grid Vertical
+    ctx.moveTo(box.left, Ypos);
+
+    ctx.lineTo(box.left + box.width, Ypos);
+    ctx.strokeStyle = grid.color;//style color
+    ctx.lineWidth = 1;//style 
+    ctx.stroke();
+  }
+
+
+  //  ------------------ X - Axe -------------------
+  var jump = 0;
+  for (var x = 0; x < elements; x++) {
+    Xscaled = box.width / elements * x;
+    Xpos = box.left + Xscaled + ValuesXoffset;
+    ctx.beginPath();
+    ctx.moveTo(Xpos, box.top + box.height);
+    ctx.lineTo(Xpos, box.top + box.height + 5);
+    ctx.lineWidth = 1;//style 
+    ctx.strokeStyle = '#000000';//style color
+    ctx.stroke();
+    ctx.font = Xaxe.font;
+    ctx.fillStyle = Xaxe.color;//style color
+    ctx.fillText(items[x].label, Xpos + Xaxe.offset, box.top + box.height + 14 + jump * 12);
+
+    ctx.beginPath();//Grid horizontal
+    ctx.moveTo(Xpos, box.top);
+    ctx.lineTo(Xpos, box.top + box.height);
+    ctx.strokeStyle = grid.color;//style color
+    ctx.lineWidth = 1;//style 
+    ctx.stroke();
+    if (Xaxe.jump == 'true') { jump = 1 - jump; }
+  }
+
+  //X axe label
+  var step = 0;
+  if (Xaxe.jump == 'true') { step = 15; }
+  ctx.font = XLabel.font;
+  ctx.fillStyle = XLabel.color;//style color
+  ctx.fillText(XLabel.text, box.left + box.width / 2 - XLabel.offset, box.top + box.height + 30 + step);
+  ctx.stroke();
+
+
+  //Y Axe label
+  ctx.font = YLabel.font;
+  ctx.fillStyle = YLabel.color;//style color
+  ctx.rotate(Math.PI / 2 + Math.PI);
+  ctx.fillText(YLabel.text, -(box.top + box.height / 2 + YLabel.offset), 10);
+  ctx.stroke();
+  ctx.rotate(-Math.PI / 2 + Math.PI);
+
+
+
+  //-------------------- lines 1-----------------------------------
+  ctx.beginPath();
+  Yscaled = box.height / 10 * items[0].value;
+  ctx.moveTo(box.left + ValuesXoffset, ValuesYoffset + box.top + box.height - Yscaled);
+  for (var x = 0; x < elements; x++) {
+    Xscaled = box.width / elements * x;
+    Yscaled = box.height / 10 * items[x].value;
+    ctx.lineTo(box.left + Xscaled + ValuesXoffset, ValuesYoffset + box.top + box.height - Yscaled);
+  }
+  ctx.lineWidth = 2;//style 
+  ctx.strokeStyle = '#ff0000'; //style color
+  ctx.stroke();
+  //------------------------------------dots on line 1-------------
+
+  for (var x = 0; x < elements; x++) {
+    ctx.beginPath();
+    ctx.fillStyle = '#ffffff';//style color
+    Xscaled = box.width / elements * x;
+    Yscaled = box.height / 10 * items[x].value;
+    ctx.arc(box.left + Xscaled + ValuesXoffset, ValuesYoffset + box.top + box.height - Yscaled, 5, 0, Math.PI * 2, true);
+    ctx.closePath();
+    ctx.fill();
+
+
+    ctx.beginPath();
+    ctx.fillStyle = '#0000ff';//style color
+    Xscaled = box.width / elements * x;
+    Yscaled = box.height / 10 * items[x].value;
+    ctx.arc(box.left + Xscaled + ValuesXoffset, ValuesYoffset + box.top + box.height - Yscaled, 3, 0, Math.PI * 2, true);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+
+ //  ctx.rotate(-Math.PI/4+Math.PI);
+ //  ctx.beginPath();
+ //  ctx.fillStyle = '#ffff00';//style color
+ //  ctx.strokeStyle = '#000000'; //style color
+ //  ctx.moveTo(0,0-100);
+ //  ctx.lineTo(20,0-100);
+ //  ctx.lineTo(30,5-100);
+ //  ctx.lineTo(20,10-100);
+ //  ctx.lineTo(0,10-100);
+ //  ctx.closePath();
+ //  ctx.fill();
+ //  ctx.stroke();
+
+
+
+
+
+</script> -->

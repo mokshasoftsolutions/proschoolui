@@ -157,18 +157,18 @@ angular.module('school_erp')
             })
         };
 
-        // studentServices.setBulkAttendance = function (dataValue, classVal, section) {
-        //     var test = {
-        //         "employees": dataValue,
-        //     };
-        //     console.log(dataValue);
-        //     return $http({
-        //         method: 'POST',
-        //         url: globalServices.globalValue.baseURL + 'api/attendancebulk/' + classVal + '/' + section + '/' + globalServices.globalValue.school_id,
-        //         data: $.param(test),
-        //         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        //     })
-        // };
+        studentServices.setBulkDeleteStudents = function (dataValue, classVal, section) {
+            var testData = {
+                "students": dataValue,
+            };
+            console.log(testData);
+            return $http({
+                method: 'POST',
+                url: globalServices.globalValue.baseURL + 'api/student_delete_bulk/' + classVal + '/' + section + '/' + globalServices.globalValue.school_id,
+                data: testData,
+                headers: { 'Content-Type': 'application/json' },
+            })
+        };
 
         studentServices.EditStudent = function (dataValue, student_id) {
             //     console.log(dataValue);
@@ -203,7 +203,51 @@ angular.module('school_erp')
                 url: globalServices.globalValue.baseURL + 'api/teachers/' + globalServices.globalValue.school_id
             })
         };
-
+        // studentServices.sendUserMail = function (teacherId) {
+        //     //console.log(secId);
+        //     return $http({
+        //         method: 'POST',
+        //         // url: "http://192.168.1.13:4005/api/examevaluation/3/2347/34/45"
+        //         url: globalServices.globalValue.baseURL + 'api/Email_to_Teacher/' + teacherId + '/' + globalServices.globalValue.school_id,
+        //         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        //     })
+        // };
+        studentServices.sendAllUserMail = function (teacherIds) {
+           
+            var testData={
+                'teachers':teacherIds
+            }
+            console.log(testData);
+            return $http({
+                method: 'POST',
+                url: globalServices.globalValue.baseURL + 'api/Email_to_all_Teachers/'+ globalServices.globalValue.school_id,
+                data: testData,
+                headers: { 'Content-Type': 'application/json' },
+            })
+        };
+        // studentServices.sendUserMailParent = function (parentId) {
+        //     //console.log(secId);
+        //     return $http({
+        //         method: 'POST',
+        //         // url: "http://192.168.1.13:4005/api/examevaluation/3/2347/34/45"
+        //         url: globalServices.globalValue.baseURL + 'api/Email_to_Parents/' + parentId + '/' + globalServices.globalValue.school_id,
+        //         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        //     })
+        // };
+        studentServices.sendAllUserMailParent = function (parentIds) {
+           
+            var testData={
+                'parents':parentIds
+            }
+            console.log(testData);
+            return $http({
+                method: 'POST',
+                // url: "http://192.168.1.13:4005/api/examevaluation/3/2347/34/45"
+                url: globalServices.globalValue.baseURL + 'api/Email_to_all_Parents/'+ globalServices.globalValue.school_id,
+                data: testData,
+                headers: { 'Content-Type': 'application/json' },
+            })
+        };
         return studentServices;
 
     }]);

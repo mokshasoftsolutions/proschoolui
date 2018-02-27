@@ -61,5 +61,25 @@ angular.module('school_erp')
                 })
       };
 
+
+    //   collectFeeServices.todayFee = function(select_date){
+    //     return $http({
+    //                 method: 'GET',
+    //                 url: globalServices.globalValue.baseURL + 'api/today_fee_amount/'+select_date+'/'+globalServices.globalValue.school_id
+    //             })
+    // };
+    collectFeeServices.yesterdayFee = function(select_date){
+        return $http({
+                    method: 'GET',
+                    url: globalServices.globalValue.baseURL + 'api/yesterday_fee_amount/'+select_date+'/'+globalServices.globalValue.school_id
+                })
+    };
+    collectFeeServices.lastweekFee = function(select_date){
+        return $http({
+                    method: 'GET',
+                    url: globalServices.globalValue.baseURL + 'api/lastweek_fee_amount/'+select_date+'/'+globalServices.globalValue.school_id
+                })
+    };
+
        return collectFeeServices;
     }]);  

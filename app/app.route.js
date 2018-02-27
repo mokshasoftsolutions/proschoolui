@@ -15,7 +15,7 @@ angular.module('school_erp')
                 views: {
                     '': { templateUrl: "app/components/shared/main.html" },
                     'header@main': { templateUrl: "app/components/shared/header.html", controller: 'headController' },
-                    'sidebar@main': { templateUrl: "app/components/shared/sidebar.html", controller: 'sideController' },
+                    // 'sidebar@main': { templateUrl: "app/components/shared/sidebar.html", controller: 'sideController' },
                     'footer@main': { templateUrl: "app/components/shared/footer.html" }
                 },
                 data: {
@@ -538,6 +538,17 @@ angular.module('school_erp')
                 url: "/login_page",
                 templateUrl: "app/components/login_page/loginPage.html",
                 controller: "loginController",
+                data: {
+                    requireLogin: false
+                }
+            })
+
+
+            .state('query_page', { // login Page
+
+                url: "/query_page",
+                templateUrl: "app/components/queries/query.html",
+                controller: "queryController",
                 data: {
                     requireLogin: false
                 }

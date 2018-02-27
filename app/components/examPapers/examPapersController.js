@@ -86,6 +86,7 @@ angular.module('school_erp')
 
 
         $scope.addExamPapers = function (data, subjectId, examScheduleId, classId, secId) {
+            console.log(secId);
             var examDetails = {
                 subject_name: $scope.data.subject_name,
                 exam_paper_title: $scope.data.exam_paper_title,
@@ -103,7 +104,7 @@ angular.module('school_erp')
                         plain: true
                     });
                     $scope.data = {};
-                    $scope.getExamPapersbySectionAndSchedule($scope.examScheduleId, $scope.secId);
+                    $scope.getExamPapersbySectionAndSchedule(examScheduleId,secId);
                 })
                 .error(function (data, success) {
                     ngDialog.open({

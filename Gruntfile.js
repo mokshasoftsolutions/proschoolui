@@ -14,6 +14,7 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         copy: {
+
             boot: { cwd: '', src: path.src.boot, dest: 'build', expand: true },
             css: { cwd: '', src: ['dist/css/*.min.css', 'dist/css/skins/_all-skins.min.css','dist/css/custom.css','dist/css/gsdk-bootstrap-wizard.css'], dest: 'build', expand: true },
             img: { cwd: '', src: ['dist/img/**/*.*', 'dist/login/**/*.*'], dest: 'build', expand: true },
@@ -21,7 +22,14 @@ module.exports = function(grunt) {
             plugins: { cwd: '', src: path.src.external_css, dest: 'build', expand: true },
             js: { cwd: '', src: 'dist/js/**/*.*', dest: 'build', expand: true },
             lib: { cwd: '', src: 'dist/lib/**/**', dest: 'build', expand: true },
-            component: { cwd: '', src: ['app/components/**/*.html', 'index.html'], dest: 'build', expand: true }
+
+            css1: { cwd: '', src: ['assets/css/*.min.css','assets/css/*.css', 'assets/css/fonticons.css','assets/css/style.css','assets/css/responsive.css','assets/css/font-awesome.min.css'], dest: 'build', expand: true },
+            images: { cwd: '', src: ['assets/images/*.*', 'assets/font-awesome/css/font-awesome.min.css*','assets/font-awesome/fonts/*.png,gif,jpg,ico,psd,svg,ttf,otf,woff,woff2,eot'], dest: 'build', expand: true },
+            //  html:{ cwd: '', src: ['pages/**/*.html'], dest: 'build', expand: true},                     
+           // plugins: { cwd: '', src: path.src.external_css, dest: 'build', expand: true },
+            js1: { cwd: '', src: 'assets/js/**/*.*', dest: 'build', expand: true },
+             fonts: { cwd: '', src: ['assets/fonts/*.css*','assets/fonts/*.png,gif,jpg,ico,psd,svg,ttf,otf,woff,woff2,eot'], dest: 'build', expand: true },
+            component: { cwd: '', src: ['app/components/**/*.html', 'index.html','home.html'], dest: 'build', expand: true }
             // index:{ cwd: 'src', src: '*.html', dest: 'build', expand: true},
             // angular:{ cwd: 'src', src: path.src.angular_src, dest: 'build', expand: true}
         },
@@ -87,7 +95,7 @@ module.exports = function(grunt) {
             // for stylesheets, watch css and less files
             // only run less and cssmin
             stylesheets: {
-                files: ['app/components/**/*.html', 'dist/css/*.*', 'dist/css/**/*.*', 'dist/img', 'index.html', 'dist/**/**/*.*'],
+                files: ['app/components/**/*.html', 'assets/css1/*.*','assets/images','assets/fonts/*.*', 'dist/css/*.*', 'dist/css/**/*.*', 'dist/img', 'index.html','home.html',  'assets/**/**/*.*','dist/**/**/*.*'],
                 tasks: ['copy']
             },
             // for scripts, run jshint and uglify

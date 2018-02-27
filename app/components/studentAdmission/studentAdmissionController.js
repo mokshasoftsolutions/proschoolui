@@ -3,6 +3,7 @@ angular.module('school_erp')
         $scope.classData = [];
         $scope.data = [];
         $scope.busRoutes = [];
+        $scope.excel = false;
         $scope.data.admission_date = new Date().toDateString();
         BusRouteServices.getBusRoute()
             .success(function (data, status) {
@@ -26,6 +27,7 @@ angular.module('school_erp')
             })
 
         $scope.populateSections = function (classId) {
+            //$scope.excel = false;
             globalServices.getSections(classId)
                 .success(function (data, status) {
                     $scope.secData = data.class_sections;// Api list-name
@@ -50,11 +52,11 @@ angular.module('school_erp')
 
         $scope.loadImage = function (files) {
 
-            
+
             $scope.$apply(function () {
 
                 $scope.selectedFile = files[0];
-                
+
                 $scope.message = "";
                 if ($scope.selectedFile.type != "image/jpeg" && $scope.selectedFile.type != "image/png") {
 
@@ -75,11 +77,11 @@ angular.module('school_erp')
             $scope.files.push(file);
 
         }
-       
+
 
 
         $scope.data.choices = [{ id: 'choice0' }];
-     
+
         $scope.addNewChoice = function () {
             var newItemNo = $scope.data.choices.length + 1;
 
@@ -91,7 +93,7 @@ angular.module('school_erp')
             var lastItem = $scope.data.choices.length - 1;
             $scope.data.choices.splice(lastItem);
             $scope.files.splice(-1, 1);
-        
+
             documentLength = $scope.files.length;
             console.log(documentLength);
         };
@@ -153,15 +155,22 @@ angular.module('school_erp')
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }
             })
-                .success(function () {
-                    ngDialog.open({
-                        template: '<p>Student Information  submitted successfully.</p>',
-                        plain: true
-                    });
-                    $scope.data = [];
-                    $scope.files = [];
-                    $scope.choices = [{ id: 'choice0' }];
+                .success(function (data) {
 
+                    if (data == 'null' | data == null) {
+                        ngDialog.open({
+                            template: '<p style="color:red;">Please fill the mandatory feilds.</p>',
+                            plain: true
+                        });
+                    } else {
+                        ngDialog.open({
+                            template: '<p>Student Information  submitted successfully.</p>',
+                            plain: true
+                        });
+                        $scope.data = [];
+                        $scope.files = [];
+                        $scope.data.choices = [{ id: 'choice0' }];
+                    }
                 })
                 .error(function () {
                     ngDialog.open({
@@ -176,7 +185,7 @@ angular.module('school_erp')
 
         $scope.loadFile = function (files) {
 
-       
+
             $scope.$apply(function () {
 
                 $scope.selectedFile = files[0];
@@ -186,7 +195,7 @@ angular.module('school_erp')
         }
 
         $scope.handleFile = function (secId) {
-          
+
             var file = $scope.selectedFile;
 
             if (file == undefined || file == null) {
@@ -215,7 +224,7 @@ angular.module('school_erp')
 
             var fd = new FormData();
             fd.append('file', file);
-            
+
             $http.post(globalServices.globalValue.baseURL + 'api/bulk_upload_students/' + secId, fd, {
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }
@@ -236,6 +245,48 @@ angular.module('school_erp')
         }
 
 
+
+
+        // $scope.generateExcel = function () {
+        //     $scope.excel = true;
+        //     //  console.log("pdf message1");
+        //     html2canvas(document.getElementById('exportthis'), {
+        //         onrendered: function (canvas) {
+        //             var data = canvas.toDataURL();
+        //             var docDefinition = {
+        //                 content: [{
+        //                     image: data,
+        //                     width: 480,
+        //                 }]
+        //             };
+        //             // console.log("pdf message2");
+
+        //             pdfMake.createPdf(docDefinition).download("Students_Report.pdf");
+        //             $scope.getStudentValue($scope.secId);
+        //         }
+        //     });
+        // }
+
+        $scope.export = function () {
+            $scope.excel = true;
+            $http.get(globalServices.globalValue.baseURL + 'api/image/studentExcel.xlsx', { responseType: 'arraybuffer' }
+            ).then(function (response) {
+                //  console.log(response);
+                // var header = response.headers('application/json')
+                var fileName = 'studentExcel';
+                //  console.log(fileName);
+
+                var blob = new Blob([response.data],
+                    { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+                var objectUrl = (window.URL || window.webkitURL).createObjectURL(blob);
+                var link = angular.element('<a/>');
+                link.attr({
+                    href: objectUrl,
+                    download: fileName
+                })[0].click();
+            })
+            $scope.excel = false;
+        };
         // for Role
 
         $scope.showRole = function (role) {

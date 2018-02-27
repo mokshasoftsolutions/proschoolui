@@ -1,5 +1,5 @@
 angular.module('school_erp')
-    .controller("dashboardController", ['$http', '$state', '$scope', '$compile', '$interval', 'studentServices', 'sessionServices', 'chaptersServices', 'employeeServices', 'examServices', 'globalServices', 'subjectsServices', 'classWiseServices', 'NoticeBoardServices', 'schoolEventsServices', 'addVehicleServices', 'barChartOneService', 'taskManagerServices', 'ngDialog', '$rootScope', 'ngProgress', 'routeGeoLocationServices', 'messagesServices', function ($http, $state, $scope, $compile, $interval, studentServices, sessionServices, chaptersServices, employeeServices, examServices, globalServices, subjectsServices, classWiseServices, NoticeBoardServices, schoolEventsServices, addVehicleServices, barChartOneService, taskManagerServices, ngDialog, $rootScope, ngProgress, routeGeoLocationServices, messagesServices) {
+    .controller("dashboardController", ['$http', '$state', '$scope', '$compile', '$interval', 'studentServices', 'sessionServices', 'chaptersServices', 'employeeServices', 'examServices', 'globalServices', 'subjectsServices', 'classWiseServices', 'NoticeBoardServices', 'schoolEventsServices', 'addVehicleServices', 'barChartOneService', 'taskManagerServices', 'ngDialog', '$rootScope', 'ngProgress', 'routeGeoLocationServices','collectFeeServices','messagesServices', function ($http, $state, $scope, $compile, $interval, studentServices, sessionServices, chaptersServices, employeeServices, examServices, globalServices, subjectsServices, classWiseServices, NoticeBoardServices, schoolEventsServices, addVehicleServices, barChartOneService, taskManagerServices, ngDialog, $rootScope, ngProgress, routeGeoLocationServices,collectFeeServices, messagesServices) {
         // ngProgress.reset();
         //ngProgress.complete();
         $scope.index = 'true';
@@ -80,6 +80,37 @@ angular.module('school_erp')
                     // quoteWritten=$scope.quotes[0]
                     // $scope.wordforday = $scope.quotes[0].word;
 
+                })
+                .error(function (data, success) { })
+        }
+
+        $scope.todayFee = function (select_date) {
+
+            collectFeeServices.getFeeByDay(select_date)
+                .success(function (data, status) {
+                       // console.log(JSON.stringify(data));
+                    //$scope.feeDay = data.fee; // Api list-name
+                     $scope.todayfee =data.feePaid 
+                })
+                .error(function (data, success) { })
+        }
+        $scope.yesterdayFee = function (select_date) {
+
+            collectFeeServices.yesterdayFee(select_date)
+                .success(function (data, status) {
+                      //   console.log(JSON.stringify(data));
+                    $scope.yesterdayFee = data.yesterDayfeePaid; // Api list-name
+                    // $scope.totalStudents =$scope.studentCount[0]. 
+                })
+                .error(function (data, success) { })
+        }
+        $scope.lastweekFee = function (select_date) {
+
+            collectFeeServices.lastweekFee(select_date)
+                .success(function (data, status) {
+                     //  console.log(JSON.stringify(data));
+                    $scope.lastweekFee = data.lastweekfeePaid; // Api list-name
+                    // $scope.totalStudents =$scope.studentCount[0]. 
                 })
                 .error(function (data, success) { })
         }
@@ -607,7 +638,7 @@ angular.module('school_erp')
 
         schoolEventsServices.getEvents()
             .success(function (data, status) {
-                console.log(JSON.stringify(data));
+                //console.log(JSON.stringify(data));
                 // $scope.eventData = data.school_events;
 
                 angular.forEach(data.school_events, function (value, key) {
@@ -2019,6 +2050,7 @@ angular.module('school_erp')
             $state.go('main.teacherDashboard');
         }
         else {
+           // $scope.select_date = new Date().toDateString();
             $scope.getClassesInitalLoad();
             $scope.sessionTimings();
             $scope.getQuotes();
@@ -2027,7 +2059,9 @@ angular.module('school_erp')
             $scope.getAttedanceByCategoryNonTeaching();
             $scope.getAttedanceByCategoryAdmin();
             $scope.getTaskManager();
-
+            $scope.todayFee($scope.select_date);
+            $scope.yesterdayFee($scope.select_date);
+            $scope.lastweekFee($scope.select_date);
             // $scope.getAttendanceBySchool();
 
             // $scope.getAllDevicesDetails();

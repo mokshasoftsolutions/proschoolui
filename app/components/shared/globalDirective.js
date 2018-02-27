@@ -7,12 +7,7 @@ angular.module('school_erp')
             $scope.$on('export-excel', function (e, d) {
                 elm.tableExport({ type: 'excel', escape: false });
             });
-            // $scope.$on('export-doc', function (e, d) {
-            //     elm.tableExport({ type: 'doc', escape: false });
-            // });
-            // $scope.$on('export-csv', function (e, d) {
-            //     elm.tableExport({ type: 'csv', escape: false });
-            // });
+          
         }
         return {
             

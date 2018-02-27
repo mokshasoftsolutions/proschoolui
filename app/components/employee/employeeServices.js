@@ -53,15 +53,18 @@ angular.module('school_erp')
         };
 
 
-        // employeeService.setAttendance = function (dataValue, Attendance) {
-        //     console.log(dataValue);
-        //     return $http({
-        //         method: 'POST',
-        //         url: globalServices.globalValue.baseURL + 'api/employee_attendance/'+globalServices.globalValue.school_id+'/' + Attendance,
-        //         data: $.param(dataValue),
-        //         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        //     })
-        // };
+        employeeService.setBulkDeleteEmployess = function (dataValue) {
+            var testData = {
+                "employees": dataValue,
+            };
+            console.log(testData);
+            return $http({
+                method: 'POST',
+                url: globalServices.globalValue.baseURL + 'api/employee_delete_bulk/'+globalServices.globalValue.school_id,
+                data:testData,
+                headers: { 'Content-Type':'application/json' },
+            })
+        };
 
 
          employeeService.setAttendance = function(dataValue, Attendance) {

@@ -95,13 +95,34 @@ angular.module('school_erp')
 
 
 
-
+       
         $scope.getEvaluation = function (student, scheduleId) {
+            
             examServices.getEvaluation(student, scheduleId)
                 .success(function (data, status) {
-                    //   console.log(JSON.stringify(data));
+                     // console.log(JSON.stringify(data));
                     // $scope.evalData = data[examPaper+'-'+student]
-                    $scope.evalData = data.resultArray;
+                    $scope.eval = data.resultArray;
+                    $scope.evalData=[]; 
+                    index = 0;
+                    $scope.eval.forEach(function (element) {
+                        var obj = {
+                             id: index++,
+                             paper_result_id:element.paper_result_id,
+                            first_name: element.first_name, // remove
+                            last_name: element.last_name, // remove
+                            examschedule_name: element.examschedule_name,
+                            paper_name: element.paper_name, // remove
+                            marks: element.marks, // remove
+                            percentage: element.percentage, // remove
+                            conduct: element.conduct, // remove
+                           //  marks: element.marks, // remove
+
+                        }
+                        $scope.evalData.push(obj);
+                    });
+
+
                 })
                 .error(function (data, success) { })
         }
@@ -145,10 +166,12 @@ angular.module('school_erp')
             });
         }
 
-
         $scope.marksStatus = function () {
+
+            // index = 0;
             $scope.students.forEach(function (element) {
                 var obj = {
+                    // id: index++,
                     student_id: element.student_id,
                     admission_no: element.admission_no, // remove
                     roll_no: element.roll_no, // remove
@@ -169,7 +192,7 @@ angular.module('school_erp')
 
         $scope.sendMarksHolder = [];
         $scope.addBulkMarks = function (examSchedule_name, paper_name, secId, classId) {
-            //   console.log("message1");
+               console.log("message1");
 
             var dataB = $scope.marksBox;
             var allowSubmission = false;
@@ -192,12 +215,14 @@ angular.module('school_erp')
                     $scope.sendMarksHolder.push(obj);
                 })
                 //   console.log("m3")
-                //   console.log($scope.sendMarksHolder);
+                 // console.log($scope.sendMarksHolder);
 
 
 
                 examServices.setBulkMarks($scope.sendMarksHolder, examSchedule_name, paper_name, secId, classId)
                     .success(function (data, status) {
+                        $scope.sendMarksHolder = [];
+                       // console.log($scope.sendMarksHolder);
                         if (data == false || data == 'false') {
                             ngDialog.open({
                                 template: '<p>Marks Already Added</p>',
@@ -210,8 +235,7 @@ angular.module('school_erp')
                                 plain: true
                             });
                         }
-                        $scope.sendMarkseHolder = [];
-
+                      
                         // $scope.dataValue.marks = [];
                         // $scope.dataValue.percentage = [];
                         // $scope.dataValue.conduct = [];
@@ -222,7 +246,7 @@ angular.module('school_erp')
                             template: '<p>Some Error Occured!</p>',
                             plain: true
                         });
-                        $scope.sendMarkseHolder = [];
+                        $scope.sendMarksHolder = [];
                     })
             } else {
                 ngDialog.open({
@@ -237,10 +261,10 @@ angular.module('school_erp')
 
 
         $scope.DeleteEvaluation = function (value) {
-            $scope.editdata = angular.copy($scope.evalData[value]);
-            $scope.paper_result_id = $scope.editdata.paper_result_id;
+          //  $scope.editdata = angular.copy($scope.evalData[value]);
+          //  $scope.paper_result_id = $scope.editdata.paper_result_id;
             //   console.log($scope.paper_result_id);
-            examServices.DeleteEvaluation($scope.paper_result_id)
+            examServices.DeleteEvaluation(value)
                 .success(function (data, status) {
                     ngDialog.open({
                         template: '<p>Evaluation data is Deleted Successfully.</p>',
@@ -257,24 +281,24 @@ angular.module('school_erp')
                 })
         }
 
-        $scope.EditEvaluation = function (value, evaluatievaluationsons) {
+        $scope.EditEvaluation = function (value, evaluations) {
 
-            //     console.log("messsage");
-            $scope.evaluations = angular.copy($scope.evalData[value]);
-            $scope.paper_result_id = $scope.evaluations.paper_result_id;
+               console.log(value);
+            //$scope.evaluations = angular.copy($scope.evalData[value]);
+           // $scope.paper_result_id = $scope.evaluations.paper_result_id;
             //    console.log($scope.paper_result_id);
             var EvaluationsDetails = {
-                student_name: $scope.evaluations.student_name,
-                exam_paper_title: $scope.evaluations.exam_paper_title,
-                student_name: $scope.evaluations.student_name,
-                student_name: $scope.evaluations.student_name,
-                marks: $scope.evaluations.marks,
-                percentage: $scope.evaluations.percentage,
-                conduct: $scope.evaluations.conduct,
+              //  student_name: $scope.evaluations.student_name,
+             //   exam_paper_title: $scope.evaluations.exam_paper_title,
+               // student_name: $scope.evaluations.student_name,
+             //   student_name: $scope.evaluations.student_name,
+                marks: evaluations.marks,
+                percentage: evaluations.percentage,
+                conduct:evaluations.conduct,
             }
-            //    console.log(EvaluationsDetails);
+               console.log(EvaluationsDetails);
 
-            $scope.addEditEvaluation(EvaluationsDetails, $scope.paper_result_id);
+            $scope.addEditEvaluation(EvaluationsDetails,value);
         }
 
 

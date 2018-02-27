@@ -2,12 +2,12 @@ angular.module('school_erp')
     .controller("employeeController", ['$http', '$scope', '$rootScope', 'employeeServices', 'ngDialog', 'globalServices', function ($http, $scope, $rootScope, employeeServices, ngDialog, globalServices) {
         //$scope.employeeData = [];
         $scope.editdata = [];
-        $scope.pdf=false;
+        $scope.pdf = false;
         $scope.gender = [{ name: "Male", id: "male" }, { name: "Female", id: "female" }];
 
         $scope.employeeType = [{ type: "Teaching", id: "teaching" }, { type: "Non-Teaching", id: "non-teaching" }, { type: "Administrative", id: "administrative" }];
         $scope.getEmployee = function () {
-            $scope.pdf=false;
+            $scope.pdf = false;
             employeeServices.getEmployee()
                 .success(function (data, status) {
 
@@ -26,8 +26,8 @@ angular.module('school_erp')
                             experience: element.experience,
                             joined_on: element.joined_on,
                             email: element.email,
-                            phone: element.phone
-
+                            phone: element.phone,
+                            selected: false,
 
                         }
                         $scope.employeeData.push(obj);
@@ -38,15 +38,75 @@ angular.module('school_erp')
                 .error(function (data, success) {
                 })
         }
+
+        // To Select All for Bulk Attendance report
+        $scope.tickAll = function (status) {
+            $scope.employeeData.forEach(function (element) {
+                if (status) {
+                    element.selected = true;
+                } else {
+                    element.selected = false;
+                }
+            });
+        }
+
+
+
+
+
+
+        $scope.sendEmployeeHolder = [];
+        $scope.submitBulkDelete = function () {
+            var dataB = $scope.employeeData;
+
+            angular.forEach(dataB, function (element) {
+                if (element.selected == true || element.selected == 'true') {
+                    // console.log(element.student_id)
+                    var obj = {
+                        employee_id: element.employee_id,
+                        // status: value.status
+                    }
+                    $scope.sendEmployeeHolder.push(obj);
+                }
+            });
+
+
+
+            employeeServices.setBulkDeleteEmployess($scope.sendEmployeeHolder )
+                .success(function (data, status) {
+                    $scope.sendEmployeeHolder = [];
+                    if (data == false || data == 'false') {
+                        ngDialog.open({
+                            template: '<p>Employees deleted successfully</p>',
+                            plain: true
+                        });
+                        $scope.getEmployee();
+
+                    }
+                    else {
+                        ngDialog.open({
+                            template: '<p> Employees deleted  successfully </p>',
+                            plain: true
+                        });
+                        $scope.getEmployee();
+
+                    }
+
+                })
+                .error(function (data, success) {
+                    $scope.sendEmployeeHolder = [];
+                })
+
+
+        }
+
+
+
+
+
         $scope.EditEmployee = function (value, employee) {
 
-           // console.log("messsage");
-            //console.log(value);
-            // $scope.employee = angular.copy($scope.employeeData[value]);
-            // // $scope.employee_id = $scope.employee.employee_id;
-            // $scope.employee_id=$scope.employee.employee_id
-            // console.log(employee);
-           // console.log(employee.gender);
+
             $scope.employee_id = value;
             var EmployeeDetails = {
                 gender: employee.gender,
@@ -57,7 +117,7 @@ angular.module('school_erp')
                 phone: employee.phone,
                 school_id: employee.school_id,
             }
-           // console.log(EmployeeDetails);
+            // console.log(EmployeeDetails);
 
             $scope.addEditEmployee(EmployeeDetails, $scope.employee_id);
         }
@@ -71,7 +131,7 @@ angular.module('school_erp')
                     // });
                     $scope.editdata = [];
                     $scope.getEmployee();
-                   
+
                 })
                 .error(function (data, success) {
                     ngDialog.open({
@@ -83,7 +143,7 @@ angular.module('school_erp')
         }
         $scope.generatePDF = function () {
             $scope.pdf = true;
-           // console.log("pdf message1");
+            // console.log("pdf message1");
             html2canvas(document.getElementById('exportthis'), {
                 onrendered: function (canvas) {
                     var data = canvas.toDataURL();
@@ -93,7 +153,7 @@ angular.module('school_erp')
                             width: 480,
                         }]
                     };
-                  //  console.log("pdf message2");
+                    //  console.log("pdf message2");
 
                     pdfMake.createPdf(docDefinition).download("Employees_Report.pdf");
                     $scope.getEmployee();
